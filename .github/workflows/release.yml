@@ -1,0 +1,124 @@
+name: Release addon
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing annotated vX.Y.Z tag on main to publish or resume
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+  validate:
+    if: github.repository == 'elithrar/QuestBrief'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      commit: ${{ steps.metadata.outputs.commit }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+      - name: Check out pinned Forever API contracts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Gethe/wow-ui-source
+          ref: 943764493e6b16d63ded3ab304150d1f05e58b57 # Forever 1.60.1.70338
+          path: .work/blizzard
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Interface/AddOns/Blizzard_UIPanels_Game/Mainline/QuestFrame.lua
+      - name: Check out current Forever comparison and map contracts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Gethe/wow-ui-source
+          ref: 735496de78ebd30ce816a0637982c556987f258c # Forever 1.60.1.70374
+          path: .work/current-api
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /version.txt
+            /Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua
+            /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua
+      - name: Install offline Lua runtime
+        run: python -m pip install --target .work/pydeps lupa==2.8
+      - name: Test and package exact payload
+        run: python tools/verify.py
+      - name: Verify annotated tag, main ancestry, version and exact build
+        id: metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/release.py
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: release-package
+          path: |
+            dist/QuestBrief-*.zip
+            dist/SHA256SUMS
+            dist/package-receipt.json
+            dist/release.json
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.validate.outputs.commit }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+      - name: Install offline Lua runtime
+        run: python -m pip install --target .work/pydeps lupa==2.8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: release-package
+          path: dist
+          digest-mismatch: error
+      - name: Refresh main ancestry and reject moved tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/release.py --verify
+      - name: Prepare and confirm exact GitHub draft assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python tools/publish_github.py
+      - name: Upload exact Forever package when CurseForge is configured
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+        run: python tools/publish_curseforge.py
+      - name: Publish completed GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+        run: python tools/publish_github.py --finalize

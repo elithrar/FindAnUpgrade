@@ -1,0 +1,47 @@
+name: Check addon
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+      - name: Check out pinned Forever API contracts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Gethe/wow-ui-source
+          ref: 943764493e6b16d63ded3ab304150d1f05e58b57 # Forever 1.60.1.70338
+          path: .work/blizzard
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Interface/AddOns/Blizzard_UIPanels_Game/Mainline/QuestFrame.lua
+      - name: Check out current Forever comparison and map contracts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Gethe/wow-ui-source
+          ref: 735496de78ebd30ce816a0637982c556987f258c # Forever 1.60.1.70374
+          path: .work/current-api
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /version.txt
+            /Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua
+            /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua
+      - name: Install offline Lua runtime
+        run: python -m pip install --target .work/pydeps lupa==2.8
+      - name: Test and package exact payload
+        run: python tools/verify.py
