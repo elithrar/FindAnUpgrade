@@ -1,0 +1,19 @@
+## Interface: 16001
+## Title: QuestBrief
+## Notes: Compact quest previews and subtle Forever quest classification cues.
+## Author: Matt
+## Version: 0.1.0
+## SavedVariables: QuestBriefDB
+## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB, QuestTint
+Model.lua
+Data/Quests.lua
+Adapter.lua
+UI.lua
+Rewards.lua
+Providers.lua
+Questie.lua
+Sources.lua
+Stack.lua
+Hover.lua
+Options.lua
+Core.lua
