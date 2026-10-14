@@ -1,6 +1,8 @@
+> Historical 0.1.1 finder review. Current 0.1.2 correction and pending live checks are recorded in UI-REGRESSION-* and VALIDATION.md.
+
 # Reward finder packaging and release review
 
-## Current 0.1.1 candidate
+## Historical 0.1.1 candidate
 
 The unpublished finder iteration now uses **0.1.1** in its TOC, runtime metadata
 and README. The earlier **0.2.0** label and review below are superseded. The user

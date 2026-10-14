@@ -277,9 +277,10 @@ function S:Fill(card,row)
     for i=limit+1,#card.icons do local b=card.icons[i]; b.row=nil; b:Hide(); b.name:Hide(); b.group:Hide() end
     card.more:SetShown(#items>4); card.more.text:SetText(self.expanded[row.id] and "Fewer rewards" or "+"..math.max(0,#items-4).." rewards")
     local uncertain=false; for _,entry in ipairs(items) do uncertain=uncertain or entry.item.usable==nil end
-    if uncertain then card.evidence:SetText(row.evidence.." · usability unconfirmed") end
+    if uncertain then card.evidence:SetText((row.evidence and row.evidence.." · " or "").."Item usability unconfirmed") end
     local footerY=87+math.max(0,math.ceil(limit/columns)-1)*44; local height=footerY+18
-    local money=reward.money.state=="ready" and (M.Text(A.Call(GetCoinTextureString,reward.money.value)) or tostring(reward.money.value).." copper") or "Gold unavailable"
+    local money=reward.money.state=="ready" and N.Rewards.Money(reward.money.value) or ""
+    money=money or ""
     local currencies={}; for _,currency in ipairs(reward.currencies.items or {}) do currencies[#currencies+1]=(currency.isChoice and "Choice " or "")..currency.name.." "..currency.amount end
     if #currencies>0 then money=money.." · "..table.concat(currencies,", ") end
     local reputation={}; for _,entry in ipairs(reward.reputation.items or {}) do reputation[#reputation+1]="Faction "..entry.factionID..": "..entry.amount end

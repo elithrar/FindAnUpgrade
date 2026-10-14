@@ -1,10 +1,38 @@
 # Validation
 
-QuestBrief **0.1.1** is the current candidate for official WoW Forever, interface
+QuestBrief **0.1.2** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
+
+## Live regression correction, 0.1.2
+
+The user supplied six actual 0.1.1 screenshots showing oversized hover panels,
+blank settings and discarded current provider availability. Those screenshots
+are failure evidence for the previous build. Its passing source/mocks did not
+establish native layout or successful first-open settings construction.
+
+The correction uses content-height native tooltip frames, native tooltip fonts,
+inline coin/XP values, omitted unavailable fields, bounded long stacks and
+structured current availability with fresh proof checks. Options now follow the
+byte-current installed XPIsland 0.6.3 rather than an earlier recollection.
+Regression diagnosis and review are in `UI-REGRESSION-OPTIONS.md`,
+`UI-REGRESSION-ELIGIBILITY.md` and `UI-REGRESSION-LAYOUT.md`.
+
+`dist/hover-layout-fixture.png` executes shipped Lua with real Georgia substitute
+glyph metrics and approximate borders/icons. It is an offline layout fixture,
+not WoW pixels or native rendering acceptance. Its JSON explicitly records
+`nativeRenderingVerified=false`. No in-game control tools were exposed for this
+iteration. The game is not closed or forcibly reloaded by the installation.
+
+The corrected patch records **259 Lua 5.1 scenarios** plus **69 Python tests** (5 classification, 22 catalog, 11 packaging, 31 release), deterministic generation/build and no trailing whitespace. Exact final-commit and installation receipts remain the authority for built bytes.
+
+Native first-open/reopen settings, mouse/keyboard controls, tooltip transit,
+scroll clipping, reward comparisons, current availability, combat/taint and
+coexistence remain live checks after the user chooses to reload the corrected
+build. Do not treat older review verdicts or 0.1.1 offline counts as acceptance of
+this new build.
 
 ## Current verification evidence
 
@@ -25,7 +53,7 @@ Independent cross-checks are in `REVIEW-LOOP-DATA-CROSS.md`,
 After corrections, run the full verifier and rebuild both archives before
 merging, sharing or an authorized installation.
 
-The final corrected 0.1.1 code passed `python tools/verify.py`: **193 Lua 5.1
+The historical 0.1.1 code passed `python tools/verify.py`: **193 Lua 5.1
 scenarios**, **five classification tests**, **22 catalog tests**, **11 package
 tests** and **31 release tests**, with deterministic generation/build and no
 trailing whitespace. The native-source scenarios include the pinned tooltip
@@ -39,7 +67,7 @@ from merge and installation outcomes.
 
 The completed verifier at the superseded 0.2.0 snapshot recorded the following
 results. These remain historical evidence rather than counts or acceptance of
-the current 0.1.1 candidate:
+that historical 0.1.1 candidate:
 
 - **150 Lua 5.1 scenarios**: 10 model, 38 runtime, 6 earlier independent tint
   regressions, 41 inspection, 9 Questie, 6 font, 2 current native-source cases
@@ -83,7 +111,7 @@ interaction stays consistent across surfaces and preserves native game bindings.
 | Persistent inspection | Shift held before hover or pressed during hover; Ctrl/Alt/None; release persists; frozen position; Escape suppression and 200 ms leave grace | Physical pointer movement, Escape ordering, both physical modifier keys, focus switching |
 | Rewards and comparison | Guaranteed versus choose-one groups, overflow expansion, native exact-ID item data rendering, separate owned comparison state/frames | Actual item variants, native comparison rules and cleanup isolation alongside other tooltip addons |
 | Long stacks | Wheel and scrollbar, all identified cards reachable, capped viewport, narrow-screen fitting, clipped-icon rejection | Native clipping, scrollbar appearance, wheel/map-zoom behavior, screen edges and fractional scales |
-| NPCs | Current gossip exact IDs tied to the NPC session; optional Forever QuestieDB contract 3 reciprocal starters with availability-unconfirmed labels | Current NPC token/gossip payloads, availability, provider coverage and multiple-quest NPCs |
+| NPCs | Current gossip exact IDs tied to the NPC session; bundled exact starter IDs; optional Forever QuestieDB reciprocal starters; fresh native/Questie availability proofs | Current NPC token/gossip payloads, availability, provider coverage and multiple-quest NPCs |
 | World map | Native objective/offer exact-ID callbacks and hub tooltip construction | Real offers/active/hub payloads, teardown and pin-pool timing |
 | Questie | Installed 12.1.0 source inspected; fresh rendered quest IDs on both surfaces; no icons created; pooled/reassigned/faded/early-return guards | Actual enabled/disabled, visibility, grouped pins, load order and coexistence |
 | Native minimap | Unsupported payloads leave native UI unchanged; Questie markers can supply identified quests | Native isolated/overlapping marker payloads have no proved exact-ID contract |

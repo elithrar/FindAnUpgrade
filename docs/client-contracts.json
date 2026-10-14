@@ -70,6 +70,10 @@
         "path": "version.txt",
         "blobSha1": "b944e6fedddb7879bb507b71a28cafd5337e4d87",
         "sha256": "699a8cbf250c9487eff3fd17d0e8675765905bbd61be36c39607cba124355d63"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyInfoDocumentation.lua",
+        "sha256": "4469ef929c58223c45371876e4364478be0397578f72cc24415f31fa060b47a1"
       }
     ]
   },

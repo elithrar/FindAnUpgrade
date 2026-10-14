@@ -39,7 +39,8 @@ function H:Tick(now)
     if self.lastModifier ~= down then self.lastModifier=down; self:Modifier() end
     if self.open then
         if not self.source.valid() then self:Dismiss("source"); return end
-        if self.source.over() or N.Stack:Contains() then self.outsideAt = nil
+        local inside=N.Stack:Contains(now)
+        if self.source.over() or inside then self.outsideAt = nil
         else self.outsideAt = self.outsideAt or now; if now-self.outsideAt >= self.grace then self:Dismiss("leave") end end
         N.Stack:ItemTransit(now)
         N.Stack:Compare() -- Reconcile native Shift comparison after missed focus events.

@@ -23,8 +23,8 @@ function U:Apply(profile, status)
     end
 end
 
--- Owned settings text follows the same checked Expressway/SharedMedia fallback
--- as XPIsland and ATCF. Blizzard's quest fonts remain entirely native.
+-- Match current XPIsland's default: use the native tooltip family. Installing
+-- SharedMedia must not silently select a different face for owned controls.
 local function samePath(a, b)
     return type(a) == "string" and type(b) == "string" and a:gsub("/", "\\"):lower() == b:gsub("/", "\\"):lower()
 end
@@ -37,12 +37,11 @@ end
 function U:Font(object, size)
     self.fontSizes = self.fontSizes or {}; self.fontSizes[object]=size
     local fallback = STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF"
-    local lsm = self:Media()
-    local requested = fallback
-    if lsm and A.Call(lsm.IsValid,lsm,"font","Expressway") == true then requested = M.Text(A.Call(lsm.Fetch,lsm,"font","Expressway")) or fallback end
+    local tooltip=GameTooltipTextLeft2 or GameTooltipText
+    local requested=tooltip and M.Text(A.Call(tooltip.GetFont,tooltip)) or fallback
     if not self.fontProbe then self.fontProbe = UIParent:CreateFontString(nil, "OVERLAY"); self.fontProbe:Hide() end
-    if not self.fontState or self.fontState.requested ~= requested or self.fontState.library ~= lsm then
-        self.fontState = { requested = requested, library = lsm, path = setFont(self.fontProbe, requested, 12) and requested or fallback }
+    if not self.fontState or self.fontState.requested ~= requested then
+        self.fontState = { requested = requested, path = setFont(self.fontProbe, requested, 12) and requested or fallback }
         self.fontRevision=(self.fontRevision or 0)+1
     end
     self.fontApplications = self.fontApplications or {}
@@ -57,6 +56,26 @@ function U:Font(object, size)
     end
     path, height, flags = object:GetFont()
     self.fontApplications[object] = { path = self.fontState.path, size = size, actual = path, height = height, flags = flags }
+end
+-- XPIsland's bounded controls account for native rounding at effective scale.
+function U:Measure(text)
+    local path,size,flags=text:GetFont(); local scale=text:GetEffectiveScale()
+    local key=tostring(path)..":"..size..":"..tostring(flags)..":"..scale..":"..(text:GetText() or "")
+    if text.qMeasureKey~=key then
+        text.qMeasureKey=key
+        text.qTextWidth=(math.ceil(text:GetUnboundedStringWidth()*scale)+4)/scale
+        text.qTextHeight=(math.ceil(text:GetStringHeight()*scale)+2)/scale
+    end
+    return text.qTextWidth,text.qTextHeight
+end
+function U:FitText(text,available)
+    local fit=math.min(1,available/math.max(1,text.qNaturalWidth))
+    text:SetScale(fit); text.qFitScale=fit; text:SetWidth(available/fit)
+    return fit
+end
+function U:AnchorText(text,point,parent,relativePoint,x,y)
+    local fit=text.qFitScale or 1
+    text:SetPoint(point,parent,relativePoint,(x or 0)/fit,(y or 0)/fit)
 end
 local function getMedia() return LibStub and LibStub("LibSharedMedia-3.0",true) end
 function U:Media()

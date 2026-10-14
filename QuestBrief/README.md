@@ -1,6 +1,6 @@
 # QuestBrief
 
-Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.1** adds the finder and minimap launcher.
+Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.2** repairs options construction, follows current XPIsland settings patterns, and replaces oversized hover panels with compact native tooltip cards.
 
 - Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
 - Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.
@@ -30,9 +30,9 @@ Classification uses exact quest variants from a verified 2026-10-14 snapshot: **
 
 The catalog's source build **1.60.1.69893** predates the current **70374** API contracts. Locations and reward coverage still need live verification. The source checkout's `data/catalog-coverage.json` records the measured subset; this is not a complete Forever quest database or an upgrade-score calculation.
 
-NPC previews require current gossip quest IDs or reciprocal starter records from an optional compatible Forever QuestieDB. Database associations are labelled **availability unconfirmed**. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no quest map icons. These optional preview providers are separate from the bundled reward finder.
+NPC previews use exact bundled starter records, current gossip IDs, or reciprocal starter records from an optional compatible Forever QuestieDB. Exact identity is separate from current availability: native quest log/gossip/available map offers and freshly rendered Questie markers can establish a current state. Static associations cannot establish availability; known completed, disabled or ineligible rows are excluded, and specific recorded chain links can be shown without claiming a server requirement. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no quest map icons.
 
-Money, XP and currencies appear when the client supplies usable reward data. Missing data is shown as unavailable, never assumed to be zero. Ambiguous mixed item/currency choices are withheld. Ordinary faction reputation amounts remain unavailable. Native quest contrast mode takes priority over dialog tint.
+Money, XP and currencies appear when the client supplies usable reward data. Hover cards omit unavailable fields and empty rows; missing data never becomes zero. Money uses the current native coin renderer. Ambiguous mixed item/currency choices are withheld. Ordinary faction reputation amounts remain unverified and are omitted. Native quest contrast mode takes priority over dialog tint.
 
 ## Development
 

@@ -14,7 +14,7 @@ local function open(id)
 end
 local function geometry(N)
     N.Stack.frame.x=730;N.Stack.frame.y=400;N.Stack.frame.width=320;N.Stack.frame.height=400
-    N.Stack.scroll.x=736;N.Stack.scroll.y=408;N.Stack.scroll.width=292;N.Stack.scroll.height=362
+    N.Stack.scroll.x=736;N.Stack.scroll.y=690;N.Stack.scroll.width=292;N.Stack.scroll.height=362
 end
 test("native callback opens held Shift and avoids warm data requests",function()
     local N,f=open(9); assert(W.rewardRequests[9]==nil and W.metadataRequests[9]==nil)
@@ -63,12 +63,13 @@ test("map close and pin pool reuse invalidate their own stack",function()
     N,f=open();WorldMapFrame:Hide();assert(not N.Hover.open and not N.Sources.current)
 end)
 test("mixed quest statuses stay exact and cards scroll without map zoom",function()
-    local N=W.Init();W.shift=true;local f=pin(9);local rows={}
+    local N=W.Init();W.shift=true;local f=pin(9);local rows={};C_QuestLog.IsOnQuest=function()return true end
     for _,id in ipairs({2,9,98189,286,14,921,932,422,356,99156,98046,98065}) do rows[#rows+1]={id=id,evidence="Map quest"} end
     f.related={};for _,row in ipairs(rows) do f.related[row.id]={} end;f.GetRelatedQuests=function(self)return self.related end
     N.Sources:Pin(f,nil,rows)
     assert(#N.Stack.cards==12 and N.Stack.maximum>0)
-    assert(N.Stack.cards[1].border[1]==.4 and N.Stack.cards[2].border[2]==.6 and N.Stack.cards[3].border[1]==.65)
+    assert(N.Stack.cards[1].backdropColor[1]==.09 and N.Stack.cards[2].backdropColor[2]>.09 and N.Stack.cards[3].backdropColor[1]>.09)
+    for _,card in ipairs(N.Stack.cards) do assert(card.nativeTooltipArt and card.border[1]==.6) end
     N.Stack.scroll:Fire("OnMouseWheel",-10000);assert(N.Stack.offset==N.Stack.maximum)
     N.Stack.scroll:Fire("OnMouseWheel",10000);assert(N.Stack.offset==0)
 end)
@@ -247,7 +248,8 @@ end)
 test("provider requires Forever contract and reciprocal exact starter IDs",function()
     local N=W.Init();local quests={[9]={startedBy={{54}},name="A"},[14]={startedBy={{55}},name="A"}}
     LibQuestieDB={flavor={name="Forever"},RequireContract=function(v)return v==3 end,Npc={Get=function()return {9,14,9,"bogus"}end},Quest={Get=function(id,key)return quests[id] and quests[id][key]end}}
-    local rows=N.Providers.ForNPC(54);assert(#rows==1 and rows[1].id==9 and rows[1].evidence:find("unconfirmed"))
+    N.CatalogData={schemaVersion=1,quests={}}
+    local rows=N.Providers.ForNPC(54);assert(#rows==1 and rows[1].id==9 and rows[1].availability.state=="unknown" and rows[1].evidence==nil)
     LibQuestieDB.flavor.name="Era";assert(#N.Providers.ForNPC(54)==0)
 end)
 test("gossip exact IDs require matching current NPC and are cleared on close",function()

@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.1" }; N.Core = C
+local C = { version = "0.1.2" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -69,7 +69,7 @@ function C:Slash(input)
     elseif command == "status" then
         self:Print((self.supported and (self.profile.enabled and "Enabled" or "Disabled") or "Unsupported client") .. "; " .. N.Data.newCount .. " verified new IDs. Data: " .. N.Data.collectedAt .. ".")
     elseif command == "" or command == "options" or command == "opts" then
-        if InCombatLockdown() then self:Print("Open settings after combat.") else N.Options:Toggle(self) end
+        N.Options:Toggle(self)
     else self:Print("/questbrief search | minimap | opts | on | off | status") end
 end
 function C:Initialize()

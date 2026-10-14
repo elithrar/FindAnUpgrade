@@ -1,6 +1,17 @@
 local _, N = ...
 local M, A = N.Model, N.Adapter
 local R = {}; N.Rewards = R
+function R.Money(value)
+    if not M.Number(value) or value<=0 or value~=math.floor(value) then return nil end
+    local native=M.Text(A.Call(C_CurrencyInfo and C_CurrencyInfo.GetCoinTextureString,value,12))
+    if native then return native end
+    local gold,silver,copper=math.floor(value/10000),math.floor(value/100)%100,value%100
+    local parts={}
+    if gold>0 then parts[#parts+1]=gold.."g" end
+    if silver>0 then parts[#parts+1]=silver.."s" end
+    if copper>0 then parts[#parts+1]=copper.."c" end
+    return table.concat(parts," ")
+end
 local function field(fn,id)
     if type(fn) ~= "function" then return { state="unavailable" } end
     local ok,value=pcall(fn,id)

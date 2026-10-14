@@ -80,7 +80,7 @@ end
 
 test("matching registered tooltip updates cannot restart pointer departure",function()
     local N,S,b=setup(); b:Fire("OnEnter"); assert(S.inspector.item)
-    W.mouseX=700; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=S.inspector.itemOutsideAt
+    W.mouseX,W.mouseY=700,450; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=S.inspector.itemOutsideAt
     for _,now in ipairs({.45,.5,.55}) do
         W.time=now; W.Event("TOOLTIP_DATA_UPDATE",123); S.frame:Fire("OnUpdate",.05)
         assert(S.inspector.item and S.inspector.itemOutsideAt==outside)
@@ -195,7 +195,7 @@ test("comparison-only native updates refresh the whole owned inspection without 
     end
     W.shift=true; b:Fire("OnEnter"); local i=S.inspector
     assert(i.item and contains(i.tooltip.shoppingTooltips[1],"Item 124 old") and i:HasTooltipData(1124))
-    W.mouseX=700; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=i.itemOutsideAt
+    W.mouseX,W.mouseY=700,450; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=i.itemOutsideAt
     fresh=true; W.time=.45; W.Event("TOOLTIP_DATA_UPDATE",1124)
     assert(i.item and i.itemOutsideAt==outside and contains(i.tooltip,"Item 123 fresh"))
     assert(contains(i.tooltip.shoppingTooltips[1],"Item 124 fresh") and contains(i.tooltip.shoppingTooltips[2],"Item 125 fresh"))
@@ -266,7 +266,7 @@ end)
 test("cold comparison retries stop on modifier release or inspection invalidation",function()
     for _,stop in ipairs({
         function(N,S,b)W.shift=false end,
-        function(N,S,b)W.mouseX=700; W.mouseY=510 end,
+        function(N,S,b)W.mouseX=700; W.mouseY=450 end,
         function(N,S,b)S.frame:Hide()end,
         function(N,S,b)S.inspector.generation=S.inspector.generation+1 end,
         function(N,S,b)b.row={itemID=123,state="ready"}end,
@@ -288,7 +288,7 @@ test("comparison recovery preserves departure grace and handles reentrant teardo
         local cold=true; local get=C_TooltipInfo.GetHyperlink
         C_TooltipInfo.GetHyperlink=function(link)if cold and link=="item:124" then return end; return get(link)end
         W.shift=true; b:Fire("OnEnter"); local i=S.inspector
-        W.mouseX=700; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=i.itemOutsideAt
+        W.mouseX,W.mouseY=700,450; W.time=.4; S.frame:Fire("OnUpdate",.1); local outside=i.itemOutsideAt
         cold=false; W.time=.51; S.frame:Fire("OnUpdate",.11)
         if teardown then assert(hidden(i) and not S:Visible())
         else
@@ -331,7 +331,7 @@ end)
 
 test("pending primary data cannot show after departure or getter and frame teardown",function()
     for _,duringGetter in ipairs({false,true}) do for _,stop in ipairs({
-        function(N,S,b)W.mouseX=700; W.mouseY=510 end,
+        function(N,S,b)W.mouseX=700; W.mouseY=450 end,
         function(N,S,b)S.frame:Hide()end,
         function(N,S,b)S.inspector.generation=S.inspector.generation+1 end,
         function(N,S,b)b.row={itemID=123,state="ready"}end,

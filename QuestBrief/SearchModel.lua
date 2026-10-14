@@ -8,61 +8,14 @@ local function returns(fn,...)
     local values=pack(pcall(fn,...)); if values[1] then return unpack(values,2,values.n) end
 end
 function S:Context()
-    local _,token,class=returns(UnitClass,"player"); local _,_,race=returns(UnitRace,"player")
-    return {level=A.Call(UnitLevel,"player"),classID=M.QuestId(class),classToken=M.Text(token),raceID=M.QuestId(race),faction=M.Text(A.Call(UnitFactionGroup,"player"))}
+    return N.Providers.Context()
 end
 function S:Eligibility(row,context)
-    if A.Call(C_QuestLog and C_QuestLog.IsOnQuest,row.id)==true then return true,"In quest log" end
-    local source=row.source or {}; local unknown=source.eligibilityUnknown
-    if source.faction and context.faction and source.faction~=context.faction then return false end
-    if source.classTokens and #source.classTokens>0 then
-        local matched=false; for _,token in ipairs(source.classTokens) do if token==context.classToken then matched=true end end
-        if context.classToken and not matched then return false end
-        if not context.classToken then unknown=true end
-    end
-    for _,pair in ipairs({{source.classes,context.classID},{source.races,context.raceID}}) do
-        if type(pair[1])=="table" and #pair[1]>0 then
-            local matched=false; for _,id in ipairs(pair[1]) do if id==pair[2] then matched=true end end
-            if pair[2] and not matched then return false end
-            if not pair[2] then unknown=true end
-        end
-    end
-    local complete=A.Call(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted,row.id)
-    local repeatable=A.Call(C_QuestLog and C_QuestLog.IsRepeatableQuest,row.id)
-    if complete==true and repeatable==false then return false end
-    if complete==true and repeatable~=true then return false end
-    if A.Call(C_QuestLog and C_QuestLog.IsQuestDisabledForSession,row.id)==true then return false end
-    local low,high=source.minimum,source.maximum
-    if M.Number(context.level) and M.Number(low) and low>context.level then return true,"Recorded minimum level "..low end
-    if M.Number(context.level) and M.Number(high) and high>0 and high<context.level then return false end
-    local function completed(id)
-        id=M.Number(id) and M.QuestId(math.abs(id)); if not id then return nil end
-        return A.Call(C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted,id)
-    end
-    local group,single=source.prerequisites,source.prerequisiteAlternatives
-    if single==nil and M.Readable(group) and type(group)=="table" and #group<=128 then
-        local doneCount,unreadable=0,0
-        for _,id in ipairs(group) do
-            local done=completed(id)
-            if done==false then
-                local previous=M.QuestId(id) and N.Catalog.records[id]; local alternatives=previous and previous.source.exclusive; local alternate=false
-                if M.Readable(alternatives) and type(alternatives)=="table" and #alternatives<=128 then for _,other in ipairs(alternatives) do if completed(other)==true then alternate=true end end end
-                if alternate then doneCount=doneCount+1 end
-            elseif done==true then doneCount=doneCount+1 else unreadable=unreadable+1 end
-        end
-        local required=source.prerequisiteCount or #group
-        if doneCount+unreadable<required then return true,"Prerequisites unconfirmed" end
-        unknown=unknown or unreadable>0
-    elseif single==nil and group~=nil then unknown=true end
-    if M.Readable(single) and type(single)=="table" and #single>0 and #single<=128 then
-        local any,unreadable=false,false
-        for _,id in ipairs(single) do local done=completed(id); any=any or done==true; unreadable=unreadable or done==nil end
-        if not any and not unreadable then return true,"Prerequisites unconfirmed" end
-        unknown=unknown or unreadable
-    elseif single~=nil then unknown=true end
-    -- The catalogue is not an authoritative server availability API. Profession,
-    -- reputation, phases and special chains require later native confirmation.
-    return true,complete==true and "Repeatable - availability unconfirmed" or unknown and "Availability unconfirmed" or "Availability unconfirmed"
+    local availability=N.Providers.Availability(row,context)
+    -- The finder can inspect a recorded reward above the player's current
+    -- minimum level, with the actual recorded requirement kept visible.
+    if availability.authority=="recorded-level" then return true,availability.label end
+    return availability.state~="blocked" and availability.state~="completed",availability.label
 end
 function S:Item(meta)
     local id=meta.itemID

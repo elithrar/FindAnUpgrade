@@ -13,39 +13,33 @@ local function media()
     LibStub=function()return lib end
     return callbacks,lib
 end
-test("late media refreshes all pooled owned text and dismisses before relayout",function()
+test("optional media never replaces the current native tooltip default",function()
     local N=setup();local callbacks=media();W.Event("ADDON_LOADED","SharedMedia")
-    for object in pairs(N.UI.fontSizes) do assert(object:GetFont()=="Expressway.ttf") end
-    assert(not N.Hover.open and callbacks.LibSharedMedia_Registered and callbacks.LibSharedMedia_SetGlobal)
+    for object in pairs(N.UI.fontSizes) do assert(object:GetFont()==GameTooltipText:GetFont()) end
+    assert(N.Hover.open and callbacks.LibSharedMedia_Registered and callbacks.LibSharedMedia_SetGlobal)
     local registered=callbacks.LibSharedMedia_Registered;W.Event("ADDON_LOADED","SharedMedia");assert(callbacks.LibSharedMedia_Registered==registered)
 end)
-test("late control rejection replays every owned object to one fallback",function()
+test("late native-family control rejection replays every owned object to one fallback",function()
     local N=setup();local bad=N.Options.texts[#N.Options.texts].object;local original=bad.SetFont
-    bad.SetFont=function(self,path,...)if path=="Expressway.ttf"then return false end;return original(self,path,...)end
+    GameTooltipText.font={"locale-tooltip.ttf",12,""}
+    bad.SetFont=function(self,path,...)if path=="locale-tooltip.ttf"then return false end;return original(self,path,...)end
     media();W.Event("ADDON_LOADED","SharedMedia")
     for object in pairs(N.UI.fontSizes) do assert(object:GetFont()==STANDARD_TEXT_FONT) end
 end)
-test("same media path recovers after an explicit registration signal",function()
-    local N=setup();local callbacks=media();W.missingFont="Expressway.ttf";W.Event("ADDON_LOADED","SharedMedia")
+test("native family recovers after an explicit font registration signal",function()
+    local N=setup();local callbacks=media();GameTooltipText.font={"locale-tooltip.ttf",12,""};W.missingFont="locale-tooltip.ttf";W.Event("ADDON_LOADED","SharedMedia")
     assert(N.Options.texts[1].object:GetFont()==STANDARD_TEXT_FONT)
     W.missingFont=nil;callbacks.LibSharedMedia_Registered()
-    for object in pairs(N.UI.fontSizes) do assert(object:GetFont()=="Expressway.ttf") end
+    for object in pairs(N.UI.fontSizes) do assert(object:GetFont()=="locale-tooltip.ttf") end
 end)
-test("late card fallback replays wrapped measurement before final scroll layout",function()
-    local N=setup();media();W.Event("ADDON_LOADED","SharedMedia")
-    local title=N.Stack.cards[1].title
-    title.GetStringHeight=function(self)return self:GetFont()==STANDARD_TEXT_FONT and 74 or 14 end
-    local original=N.UI.Font
-    N.UI.Font=function(self,object,size)
-        if size==13 and N.Stack.cards[2] then
-            local setter=object.SetFont;object.SetFont=function(f,path,...)if path=="Expressway.ttf"then return false end;return setter(f,path,...)end
-        end
-        return original(self,object,size)
-    end
-    N.Hover.blocked=nil;local f=W.Object();f.x=690;f.y=690;f.width=30;f.height=30;f.related={[9]={},[14]={}};f.GetRelatedQuests=function(self)return self.related end
-    N.Sources:Pin(f,nil,{{id=9},{id=14}})
-    local measured=N.Stack.cards[1]:GetHeight();N.Stack:Refresh()
-    assert(title:GetFont()==STANDARD_TEXT_FONT and N.Stack.cards[1]:GetHeight()==measured and measured>=150)
+test("hover uses native fonts and remeasures wrapped title on refresh",function()
+    local N=setup();local title=N.Stack.cards[1].title
+    assert(title.fontObject==GameTooltipHeaderText and not N.UI.fontSizes[title])
+    title.GetStringHeight=function()return 74 end
+    media();W.Event("ADDON_LOADED","SharedMedia")
+    N.Hover.blocked=nil;local f=W.Object();f.x=690;f.y=690;f.width=30;f.height=30;f.questID=9;f.GetQuestID=function()return 9 end
+    N.Sources:Pin(f,9);N.Stack:Refresh();local measured=N.Stack.cards[1]:GetHeight();N.Stack:Refresh()
+    assert(title.fontObject==GameTooltipHeaderText and N.Stack.cards[1]:GetHeight()==measured and measured>=90)
 end)
 test("fractional reported font height is accepted without idle font mutation",function()
     local N=setup();local total=0

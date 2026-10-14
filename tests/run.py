@@ -10,7 +10,7 @@ report = {"runtime": "Lua 5.1 via Lupa 2.8", "suites": []}
 contracts = json.loads((ROOT / "docs/client-contracts.json").read_bytes())
 native = ROOT / ".work/blizzard/Interface/AddOns/Blizzard_UIPanels_Game/Mainline/QuestFrame.lua"
 report["pinnedNativeSourceIntegration"] = native.is_file()
-current_paths = ["Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua", "Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua", "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua"]
+current_paths = ["Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua", "Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua", "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua", "Interface/AddOns/Blizzard_SharedXML/SharedTooltipTemplates.xml", "Interface/AddOns/Blizzard_SharedXML/SharedTooltipTemplates.lua", "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyInfoDocumentation.lua"]
 report["currentNativeSourceIntegration"] = all((ROOT / ".work/current-api" / path).is_file() for path in current_paths)
 if report["currentNativeSourceIntegration"]:
     for path in current_paths:
@@ -26,7 +26,7 @@ if native.is_file():
     report["nativeSourceBlobSha1"] = blob
 else:
     report["limitation"] = "Pinned native source fixture absent; portable mocks only"
-for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "native_contract_test.lua", "search_test.lua", "search_runtime_test.lua", "search_lifecycle_test.lua"]:
+for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "options_test.lua", "eligibility_test.lua", "stack_layout_test.lua", "native_contract_test.lua", "search_test.lua", "search_runtime_test.lua", "search_lifecycle_test.lua"]:
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().ROOT = str(ROOT).replace("\\", "/")
     lua.execute((ROOT / "tests" / filename).read_text(encoding="utf-8"))
