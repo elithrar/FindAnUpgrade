@@ -2,11 +2,12 @@
 ## Title: QuestBrief
 ## Notes: Compact quest previews and subtle Forever quest classification cues.
 ## Author: Matt
-## Version: 0.1.0
+## Version: 0.1.1
 ## SavedVariables: QuestBriefDB
 ## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB, QuestTint
 Model.lua
 Data/Quests.lua
+Data/Catalog.lua
 Adapter.lua
 UI.lua
 Rewards.lua
@@ -15,5 +16,9 @@ Questie.lua
 Sources.lua
 Stack.lua
 Hover.lua
+Catalog.lua
+SearchModel.lua
+Search.lua
+Launcher.lua
 Options.lua
 Core.lua

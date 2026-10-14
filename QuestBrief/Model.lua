@@ -5,9 +5,10 @@ M.presets = {
     blue = { .88, .95, 1 },
     amber = { 1, .94, .82 },
 }
-M.defaults = { version = 2, enabled = true, preset = "blue", strength = .55,
+M.defaults = { version = 3, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
-    accents = true, dialogTint = true, rewards = true, scale = 1 }
+    accents = true, dialogTint = true, rewards = true, scale = 1,
+    launcher = true, launcherAngle = 200 }
 
 function M.Readable(value)
     if not issecretvalue then return true end
@@ -29,7 +30,7 @@ end
 function M.Load(saved)
     local profile = M.Copy(M.defaults)
     if not M.Readable(saved) or type(saved) ~= "table" then return profile, false end
-    if M.Number(saved.version) and saved.version > 2 then
+    if M.Number(saved.version) and saved.version > 3 then
         -- Preserve an explicit opt-out even when the newer schema is read-only.
         if M.Readable(saved.enabled) and saved.enabled == false then profile.enabled = false end
         return profile, true
@@ -37,11 +38,12 @@ function M.Load(saved)
     if M.Readable(saved.enabled) and type(saved.enabled) == "boolean" then profile.enabled = saved.enabled end
     if M.Readable(saved.preset) and type(saved.preset) == "string" and M.presets[saved.preset] then profile.preset = saved.preset end
     if M.Number(saved.strength) then profile.strength = math.max(.1, math.min(1, saved.strength)) end
-    for _, key in ipairs({ "npc", "worldmap", "minimap", "accents", "dialogTint", "rewards" }) do
+    for _, key in ipairs({ "npc", "worldmap", "minimap", "accents", "dialogTint", "rewards", "launcher" }) do
         if M.Readable(saved[key]) and type(saved[key]) == "boolean" then profile[key] = saved[key] end
     end
     if M.Readable(saved.modifier) and (saved.modifier == "SHIFT" or saved.modifier == "CTRL" or saved.modifier == "ALT" or saved.modifier == "NONE") then profile.modifier = saved.modifier end
     if M.Number(saved.scale) then profile.scale = math.max(.8, math.min(1.2, saved.scale)) end
+    if M.Number(saved.launcherAngle) then profile.launcherAngle=saved.launcherAngle%360 end
     return profile, false
 end
 function M.Status(id)

@@ -83,6 +83,7 @@ function U:WatchFonts()
         self.fontState=nil
         if self:RefreshFonts() and N.Hover.open then N.Hover:Dismiss("font") end
         if N.Options.frame then N.Options:Refresh() end
+        if N.Search and N.Search:Visible() then N.Search:Changed() end
     end
     local a=pcall(lib.RegisterCallback,self,"LibSharedMedia_Registered",self.fontChanged)
     local b=pcall(lib.RegisterCallback,self,"LibSharedMedia_SetGlobal",self.fontChanged)

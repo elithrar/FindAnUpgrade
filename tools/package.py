@@ -10,10 +10,12 @@ SHIPPED = {
     "QuestBrief.toc", "Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
     "Options.lua", "Core.lua", "README.md", "NOTICES.md", "XPISLAND-LICENSE.txt",
     "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "Hover.lua", "LICENSE",
+    "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Data/Catalog.lua", "Data/ATT-LICENSE.txt",
 }
-RUNTIME = ["Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "Hover.lua", "Options.lua", "Core.lua"]
+RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "Hover.lua", "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
 SOURCE_DIRS = ["QuestBrief", "data", "docs", "tests", "tools", ".github"]
 SOURCE_ROOT = ["AGENTS.md", "README.md", "LICENSE", ".gitignore", ".gitattributes"]
+ATT_LICENSE_SHA256 = "955281b9174e0f66b08c8e83d31e0f38b2fcaa247ca3af92d1723d81a13cddfb"
 
 def digest(data): return hashlib.sha256(data).hexdigest()
 
@@ -22,13 +24,18 @@ def validate(root=ROOT):
     actual = {p.relative_to(addon).as_posix() for p in addon.rglob("*") if p.is_file()}
     if actual != SHIPPED: raise ValueError(f"Unexpected addon manifest: extra={actual - SHIPPED}, missing={SHIPPED - actual}")
     toc = (addon / "QuestBrief.toc").read_text(encoding="utf-8")
-    if not re.search(r"^## Interface: 16001$", toc, re.M): raise ValueError("Wrong supported interface")
-    if not re.search(r"^## SavedVariables: QuestBriefDB$", toc, re.M): raise ValueError("SavedVariables ownership changed")
+    metadata={}
+    for line in toc.splitlines():
+        match=re.fullmatch(r"##\s*([^:]+):\s*(.*)",line)
+        if match: metadata.setdefault(match[1].strip().lower(),[]).append(match[2].strip())
+    if metadata.get("interface")!=["16001"] or any(key.startswith("interface-") for key in metadata): raise ValueError("Wrong or duplicate supported interface")
+    if metadata.get("savedvariables")!=["QuestBriefDB"] or "savedvariablespercharacter" in metadata: raise ValueError("SavedVariables ownership changed")
     entries = [line for line in toc.splitlines() if line and not line.startswith("#")]
     if entries != RUNTIME: raise ValueError("Incorrect TOC prerequisites/load order")
     version = re.search(r"^## Version: (\d+\.\d+\.\d+)$", toc, re.M)
     if not version: raise ValueError("Missing semantic version")
     version = version[1]
+    if metadata.get("version")!=[version]: raise ValueError("Duplicate semantic version")
     core = (addon / "Core.lua").read_text(encoding="utf-8")
     if f'version = "{version}"' not in core: raise ValueError("Core/TOC version mismatch")
     if (addon / "README.md").read_bytes() != (root / "README.md").read_bytes(): raise ValueError("Shipped README is stale")
@@ -42,6 +49,17 @@ def validate(root=ROOT):
     generator = importlib.util.module_from_spec(spec); spec.loader.exec_module(generator)
     expected = generator.render(json.loads((root / "data/primary-statuses.json").read_bytes())).encode()
     if (addon / "Data/Quests.lua").read_bytes() != expected: raise ValueError("Generated data is stale")
+    spec = importlib.util.spec_from_file_location("questbrief_catalog_generator", root / "tools/generate_catalog.py")
+    catalog = importlib.util.module_from_spec(spec); spec.loader.exec_module(catalog)
+    source = json.loads((root / "data/catalog-source.json").read_bytes())
+    provenance = json.loads((root / "data/catalog-sources.json").read_bytes())
+    expected = catalog.render(source, provenance)
+    if (addon / "Data/Catalog.lua").read_bytes() != expected: raise ValueError("Generated catalog is stale")
+    coverage = (json.dumps(catalog.coverage(source, expected), indent=2) + "\n").encode()
+    if (root / "data/catalog-coverage.json").read_bytes() != coverage: raise ValueError("Catalog coverage is stale")
+    license_rows = [row for row in provenance["files"] if row["path"] == "LICENSE"]
+    if len(license_rows) != 1 or license_rows[0]["sha256"] != ATT_LICENSE_SHA256 or digest((addon / "Data/ATT-LICENSE.txt").read_bytes()) != ATT_LICENSE_SHA256:
+        raise ValueError("ATT copyright, MIT permission and disclaimer must be retained unchanged")
     return version
 
 def archive(path, files, root, prefix=""):

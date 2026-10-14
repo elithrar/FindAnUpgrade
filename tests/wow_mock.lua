@@ -9,6 +9,7 @@ function Methods:GetVertexColor() if self.colorSecret then return W.secret, 1, 1
 function Methods:SetVertexColor(r,g,b,a) if self.failWrite then error("blocked region") end; W.writes = W.writes + 1; self.color = {r,g,b,a} end
 function Methods:HookScript(name, fn) if W.combat and self.native then error("hook in combat") end; self.hooks[name] = self.hooks[name] or {}; table.insert(self.hooks[name], fn) end
 function Methods:SetScript(name, fn) if self.native then error("native script replaced") end; self.scripts[name] = fn end
+function Methods:GetScript(name) return self.scripts[name] end
 function Methods:Fire(name, ...) if self.scripts[name] then self.scripts[name](self, ...) end; for _, fn in ipairs(self.hooks[name] or {}) do fn(self, ...) end end
 function Methods:Show() layout(self); if not self.shown then self.shown = true; self:Fire("OnShow") end end
 function Methods:Hide() layout(self); if self.shown then self.shown = false; self:Fire("OnHide") end end
@@ -42,6 +43,11 @@ function Methods:SetFont(path,size,flags) self.fontWrites = (self.fontWrites or 
 function Methods:GetFont() return unpack(self.font or {"Fonts\\FRIZQT__.TTF",12,""}) end
 function Methods:SetFontObject(font) self.fontObject = font end
 function Methods:SetText(t) self.text = t end
+function Methods:GetText() return self.text or "" end
+function Methods:GetCenter() return self.x or 200,self.y or 200 end
+function Methods:SetDefaultText(value) self.defaultText=value end
+function Methods:SetupMenu(fn) self.menuGenerator=fn end
+function Methods:AddLine(value) self.lines=self.lines or {}; table.insert(self.lines,value) end
 function Methods:SetTextColor(...) self.textColor = {...} end
 function Methods:SetChecked(v) self.checked = v end
 function Methods:GetChecked() return self.checked end
@@ -52,7 +58,7 @@ function Methods:SetBackdrop(v) self.backdrop = v end
 function Methods:CreateFontString() return W.Object() end
 function Methods:SetAtlas(atlas) self.atlas = atlas end
 function Methods:SetTexture(tex) self.texture = tex end
-for _,name in ipairs({"SetJustifyH","SetJustifyV","SetWordWrap","SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","StartMoving","StopMovingOrSizing","SetHitRectInsets","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient","Disable","Enable"}) do Methods[name] = function() end end
+for _,name in ipairs({"SetJustifyH","SetJustifyV","SetWordWrap","SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetResizeBounds","SetAutoFocus","SetNumeric","SetMaxLetters","SetTextInsets","SetFocus","ClearFocus","HighlightText","SetTexCoord","SetHitRectInsets","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient","Disable","Enable"}) do Methods[name] = function() end end
 function W.Object(native)
     return setmetatable({native = native, shown = true, scripts = {}, hooks = {}, events = {}}, {__index = Methods})
 end
@@ -91,6 +97,9 @@ function W.Reset(config)
     InCombatLockdown = function() return W.combat end
     GetQuestID = function() return W.quest end
     UIParent = W.Object(); UIParent.width = 1920; UIParent.height = 1080
+    Minimap=nil; C_Item=nil; ItemLocation=nil; GetInventorySlotInfo=nil; C_Map=nil; UiMapPoint=nil; C_SuperTrack=nil
+    UnitLevel=function() return 20 end; UnitClass=function() return "Warrior","WARRIOR",1 end; UnitRace=function() return "Human","Human",1 end; UnitFactionGroup=function() return "Alliance" end
+    CreateFont=function() return W.Object() end
     STANDARD_TEXT_FONT = "Fonts\\FRIZQT__.TTF"; GameFontNormal = {}; UISpecialFrames = {}; SlashCmdList = {}; LibStub = nil
     QuestTextContrast = {IsEnabled = function() return W.contrast end, GetDefaultBackgroundAtlas = function() return "QuestBG-Parchment" end}
     DEFAULT_CHAT_FRAME = {AddMessage = function(_, text) table.insert(W.messages, text) end}
@@ -98,7 +107,7 @@ function W.Reset(config)
         local f = W.Object(); f.name = name; f.parent = parent; f.template = template
         if template == "SharedTooltipTemplate" then f.shown = false end
         if template == "UISliderTemplate" then f.thumb=W.Object();f.thumb.width=32;f.thumb.height=32 end
-        if kind == "CheckButton" then f.Text = W.Object() end
+        if kind == "CheckButton" or kind=="DropdownButton" then f.Text = W.Object() end
         table.insert(W.frames, f); if name then _G[name] = f end; return f
     end
     QuestFrame = W.Object(true); QuestFrame.shown = true
@@ -118,7 +127,7 @@ function W.Reset(config)
     QuestBriefDB = config.saved
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Data/Quests.lua","Adapter.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","Hover.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/QuestBrief/" .. file))("QuestBrief", N) end
+    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","Hover.lua","Catalog.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/QuestBrief/" .. file))("QuestBrief", N) end
     W.N = N
     return N
 end

@@ -62,6 +62,11 @@
         "sha256": "5734a4f0270f47b5d8c858d6f9d355d2850fc258687d75a372631369f3420727"
       },
       {
+        "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua",
+        "blobSha1": "90c60103b3ed34e08e283b209820f6bea200719d",
+        "sha256": "05a86b963b518a589cfebf22dec825507a5b1f564f66eb64fd7caead919f0642"
+      },
+      {
         "path": "version.txt",
         "blobSha1": "b944e6fedddb7879bb507b71a28cafd5337e4d87",
         "sha256": "699a8cbf250c9487eff3fd17d0e8675765905bbd61be36c39607cba124355d63"
