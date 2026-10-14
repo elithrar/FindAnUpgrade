@@ -1,0 +1,817 @@
+{
+  "revision": "d75383ccdbff1208b87cf4024fa425c0825a7ad6",
+  "sourceBuild": "1.60.1.69893",
+  "targetBuild": "1.60.1.70374",
+  "files": [
+    {
+      "path": ".contrib/.db/forever/.config/constants/maps.lua",
+      "gitBlob": "10e9b852e7a67f8538ba38a368a2b61c0c149b5a",
+      "sha256": "755fc0c543ccc076f207f5ea1c2f84d84720a1c1c350fbb8a1593873ead39ebc",
+      "bytes": 3062,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/.config/constants/maps.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/.config/forever.config",
+      "gitBlob": "59f6b967fc7869eed339857bf75e94e5575cd6f6",
+      "sha256": "d587a015b5e9cd3185d9e2e97efa63a4752402eeb0361eb27236dd8bbcc8d909",
+      "bytes": 383,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/.config/forever.config"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/0.5 - dungeon sets.lua",
+      "gitBlob": "9355cbf263185478229494a059d4709f49721972",
+      "sha256": "9cff42eb3d716448fe46435cd2055262c85a7aa26076d6857408d8a88ebec1a6",
+      "bytes": 62866,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/0.5%20-%20dungeon%20sets.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+      "gitBlob": "79d80eb05403b0a61e248bd9c771d4184ad1d10f",
+      "sha256": "97f0a97e2d18045c72a985414f074efa8e31e22d7c0c3f6e749ff19efe65bd48",
+      "bytes": 12986,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/1.0%20-%20onyxia's%20lair.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/blackfathom deeps.lua",
+      "gitBlob": "b8904a15df7b38aa7ecc25b7b1e64daec0e8f0b5",
+      "sha256": "4082637b0cab180100191e657a4f382c261a1875ba5a1c1ce170b3e333666c99",
+      "bytes": 9877,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/blackfathom%20deeps.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/blackrock depths.lua",
+      "gitBlob": "06450a19f49029504f870fc11216f66a462792fa",
+      "sha256": "d86962a0c3c28e1eeb9db0ce16f4428de79fb7e4c6d1261541fa607ed657b3cd",
+      "bytes": 47983,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/blackrock%20depths.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/city of dalaran.lua",
+      "gitBlob": "97445dc1b3c425f9119a65320d850ff174a5f0bb",
+      "sha256": "139185dff119b3309d549daa6c9ecedb57233ad63bcc81f5879a1105945b8ba1",
+      "bytes": 9081,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/city%20of%20dalaran.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+      "gitBlob": "534e9ec45cf17b47d07e7b2164d7e5f7349bd879",
+      "sha256": "86fc87c94e4dbc9479799bafea03f5eeecefcef47cfb3ed26cb9dfd28ac58ec3",
+      "bytes": 40950,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/dire%20maul.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/excavation site - wetlands.lua",
+      "gitBlob": "ec0193ab42b71c8fcd6aabc9be69ee3018380c2d",
+      "sha256": "1a9cb8cc1243c4b64097fed3dd03667d9dcc284d9d3a269243ea919566baff3e",
+      "bytes": 6320,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/excavation%20site%20-%20wetlands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/gnomeregan.lua",
+      "gitBlob": "cca4fc7f30ae0502d6eee79a6440549f50ef4017",
+      "sha256": "7370899026f28f38f4125f2df28f94c6853fd889c55216a82040dd3c9bcda00f",
+      "bytes": 22344,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/gnomeregan.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/hall of thanes.lua",
+      "gitBlob": "ddab276bc2ec6d43bbb7d73fb716f00f3ba4cb74",
+      "sha256": "a2aadc87ba72ed91dafc69b61f1a3049a2917a7c4cf612b2ff0c90e19e047f1d",
+      "bytes": 3845,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/hall%20of%20thanes.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/ragefire chasm.lua",
+      "gitBlob": "eee3b911ec10c580f78b8a037dfa88607acf0e48",
+      "sha256": "6a680865d2fcf3531fbc37e934418de6dac01d80e72dab77f3531030807a411e",
+      "bytes": 5336,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/ragefire%20chasm.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/razorfen kraul.lua",
+      "gitBlob": "a0811f96f065c50c3831496a16044fb2979a1f17",
+      "sha256": "a124bba700543b3cefe87585572686cb73d8b79f164f8f1e1687286e07944d51",
+      "bytes": 7708,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/razorfen%20kraul.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/ruins of lordaeron.lua",
+      "gitBlob": "5ba924ec06dd9766ef0fe3f1e42eed58c21fe050",
+      "sha256": "a52807f14f56bd0dc0a548822e96938bde6a34dc5f626aaabc88b66eb87bd45e",
+      "bytes": 7736,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/ruins%20of%20lordaeron.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/shadowfang keep.lua",
+      "gitBlob": "3d9677f1988ceac9e309a89b532fcca0126c44ba",
+      "sha256": "beeaba1e43f097401db449fe1ea6becc1fbab87e191cd17293ba6a88007a75f4",
+      "bytes": 6610,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/shadowfang%20keep.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/the deadmines.lua",
+      "gitBlob": "c5abc27e2bc03c5fed16ec02e0e7c8d317555210",
+      "sha256": "84ad7a3a2e8a21970d3e8341cb0bb5c05712f5620351c9fdc0262e208a6070b8",
+      "bytes": 10193,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/the%20deadmines.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/the stockade.lua",
+      "gitBlob": "f7d11131b785eb2b690a825d656c2312677263bb",
+      "sha256": "30d1f5924e53192a861a3e16fb8d1cc28d229be9265cc7422bf1d5c29a7c7909",
+      "bytes": 5921,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/the%20stockade.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/dungeons & raids/wailing caverns.lua",
+      "gitBlob": "87e48c07a873d0802fdf53e8165fd82c66e9d254",
+      "sha256": "d57dd021830df85c72f37f5d99124060fd9dad8f6e1e8e0366e238cceec5ea7b",
+      "bytes": 10076,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/dungeons%20&%20raids/wailing%20caverns.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/expansion features/library books.lua",
+      "gitBlob": "d0e497aa73f1dacad823297edb75c77e8c9117be",
+      "sha256": "eae3a288e6808ff1da6c0092783b73c755e0407f038fce8ac5a395afeef54c1a",
+      "bytes": 5734,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/expansion%20features/library%20books.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/children's week.lua",
+      "gitBlob": "b4dab5bdb0a81a21b8650cf445c1e8eda1af4cdb",
+      "sha256": "11ff52e6626cb3074d5212e7f35d109e70534f5037a50fec2b5bfb08c1b1a835",
+      "bytes": 8421,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/children's%20week.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/darkmoon faire.lua",
+      "gitBlob": "85462b706fd50c7fbca17797041c88c9f21d865c",
+      "sha256": "693a8b143a8a6f785f3b402394d5ea98fc3bec930f303a9379faae886b324349",
+      "bytes": 25318,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/darkmoon%20faire.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/feast of the winter veil.lua",
+      "gitBlob": "f482ac0990bf6c6740bbb966351e106ddb59a265",
+      "sha256": "82842b9bd8f774a8f75cbc06dd16056902b72b0e4f274e5361e15a1a7deb5509",
+      "bytes": 18678,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/feast%20of%20the%20winter%20veil.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/hallow's end.lua",
+      "gitBlob": "85de9f366462a2cebd12da5aab98c3216f994281",
+      "sha256": "a5bf2d853a44d0cbc818e6c36d6547c39bbf5219f16e3af183d930d2755aea5e",
+      "bytes": 8006,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/hallow's%20end.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/harvest festival.lua",
+      "gitBlob": "78b492123d8a28b7f400ca71685c7259d30b8f54",
+      "sha256": "4a3496c7027c20367f12b94b2e997f0147d4f6021d6205a92b2b390c375f1327",
+      "bytes": 2444,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/harvest%20festival.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/love is in the air.lua",
+      "gitBlob": "8ec7807fd0ff6602096bc8b3bedcc97f530e4cd2",
+      "sha256": "8ad57e3a0bba85424a75e7673d2e6147aeeb305691c25df7bafb89f98f679e1c",
+      "bytes": 22232,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/love%20is%20in%20the%20air.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/lunar festival.lua",
+      "gitBlob": "85797d4de3265fd774f0a1fc2204be6c9ec4f5bd",
+      "sha256": "3ac8122f3d8b18fb32729fceff3f0b8fe73760f44729c7a382f597c2f743034a",
+      "bytes": 20293,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/lunar%20festival.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+      "gitBlob": "58e971acefa3ed95ba1f3c480900ef7c3f2478ee",
+      "sha256": "8f98f9dede897b176be46b737f6cb8eccb245de6141f66f505453a4558670565",
+      "bytes": 11722,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/midsummer%20fire%20festival.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/holidays/stranglethorn fishing extravaganza.lua",
+      "gitBlob": "120d090c31056a5a814ede8c8b7d2eab957944aa",
+      "sha256": "240ce8c4b925eab73160e87090eafee2ae058dd9bd374c3fe1b82a199ad7d311",
+      "bytes": 3722,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/holidays/stranglethorn%20fishing%20extravaganza.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/pvp/battlegrounds/alterac valley.lua",
+      "gitBlob": "366dbd0261330003fb628274867b0f749573f6b8",
+      "sha256": "8d2685651e17c5379d2da1b5cd4a377d74db4028a346ba75990548d5dbbfdedc",
+      "bytes": 26174,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/pvp/battlegrounds/alterac%20valley.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/pvp/battlegrounds/arathi basin.lua",
+      "gitBlob": "fcfdba02debfc667220c2259aa5321dfba3808b3",
+      "sha256": "107db4eebda5b2e04207b0739de18ac83a488446d5cfe0d05af99a218554ce9c",
+      "bytes": 31256,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/pvp/battlegrounds/arathi%20basin.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/pvp/battlegrounds/warsong gulch.lua",
+      "gitBlob": "188bf6feb0493ccbaaccfa0e0bd341ed92fd0440",
+      "sha256": "d5ff0068a3ad61dc565790d17aa740fe458c921e076acd67cca6a3ae975951bf",
+      "bytes": 17969,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/pvp/battlegrounds/warsong%20gulch.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - ironforge.lua",
+      "gitBlob": "60993305cb17582846ab3e9a333d4304d4953a8a",
+      "sha256": "5947a00b56833b8543cf5547017629f13a366b9d289f94d8deb9569f9435b384",
+      "bytes": 45552,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20ironforge.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+      "gitBlob": "dc5cb75485c2ccfe045285aafe09d92c90e7ee9d",
+      "sha256": "fa52ef6500549d5948711e3f88ee42a72fa8660e8e693825f2746ba5fde2b24b",
+      "bytes": 90739,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/1%20-%20stormwind%20city.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/alterac mountains.lua",
+      "gitBlob": "cb05733a10107ffa7ca520a168674ee8b52b9474",
+      "sha256": "95d4e97806b62baaa654c597cc628c6349018b4b651d1e3de6ea249dbdcc576d",
+      "bytes": 24967,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/alterac%20mountains.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/arathi highlands.lua",
+      "gitBlob": "ab3ce212871dcde8b9c66b1b0c2a743338396162",
+      "sha256": "adee9b7a26dd0781d387faef0bab3b5fb16badb5e58d25931e92edfffed50aed",
+      "bytes": 35028,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/arathi%20highlands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "gitBlob": "300f86c9c5e78b7eda6fc873b903c8491c65cc08",
+      "sha256": "91a6ef5ec8c1e7655b7d706540ffc2ae33ce5e705d1fae55c280423b6a382988",
+      "bytes": 29085,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/badlands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/dun morogh.lua",
+      "gitBlob": "22ec8d0c8c5c0f7cc74cf1b3fcf960e2f648ebb4",
+      "sha256": "52871ac01c3703406ad30321b1bf7e9f304971f35f399b5a165208698d125f55",
+      "bytes": 57792,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/dun%20morogh.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/elwynn forest.lua",
+      "gitBlob": "e733056baaad4228f3011f41f1a9fa221cfddae8",
+      "sha256": "0027c69fd4f6abf5ab4ba39d062eb5b8efa20362bb357e10039bb43c8c871e3b",
+      "bytes": 52866,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/elwynn%20forest.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/loch modan.lua",
+      "gitBlob": "1c9f9fb67bfa0bdaff3260dd6e606cd2e2452995",
+      "sha256": "0f65564d6b520212d216857278612001b2c82a620c53a168048d8ac75da15206",
+      "bytes": 32022,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/loch%20modan.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/redridge mountains.lua",
+      "gitBlob": "5e838a7bffa21915ba29f65220863d16f24a7e97",
+      "sha256": "37ad5b6157e5e457d15b91a6f2da719e14f9b4c568ab4d3fbb9601f74b6cd681",
+      "bytes": 38779,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/redridge%20mountains.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+      "gitBlob": "b627ef4d7567f1585ce2ba047be8f5a4f81e47b0",
+      "sha256": "7465ec536d9583f400973f3e9f6ddb2b4fa61ceabdeedb40a7ad01fbd0eea824",
+      "bytes": 76807,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/stranglethorn%20vale.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/westfall.lua",
+      "gitBlob": "69c63628dd093ff9bf66d096195bfbad4e756d45",
+      "sha256": "9cda3ad83d40c0e9a7fb8399f549efa444716bda12b43d153be089f7a44fb4a7",
+      "bytes": 35377,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/westfall.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/wetlands.lua",
+      "gitBlob": "09a0fa7435069f0de96cdb255286519f59acdea0",
+      "sha256": "11c32ae38addeebac5e10744612add74fd585da66742e55400d5616fb66a7160",
+      "bytes": 40773,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/eastern%20kingdoms/wetlands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/1 - darnassus.lua",
+      "gitBlob": "b09108bd2e27e487276a80f57709d46e2ebf2fec",
+      "sha256": "2b4d5c7aabd10d1383bfc09c39e0d49e3da2f244218429cdd60eda0768d30cc8",
+      "bytes": 33738,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/1%20-%20darnassus.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+      "gitBlob": "f0e58fd939cec8541a73ab8cfee2b7638c94af38",
+      "sha256": "02fbbc68a4615e244ac4c890e934b394cf136e64866f641ed0ae95d943a073f2",
+      "bytes": 34436,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/darkshore.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "gitBlob": "eee64d824504de50ad553d863dd5cd91aa415b41",
+      "sha256": "bd76efc169e129baede5a1ab1bc6a8a7cb93675a36c6a0fe96740c85c24b9d2f",
+      "bytes": 48379,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/durotar.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/mulgore.lua",
+      "gitBlob": "31cc06d205ad6183147058b59d5d7015df9a9c14",
+      "sha256": "c65cafbf293e558d0fa1a2e1d1fba6debcee75d841edd84e2bdd974b5fc5d836",
+      "bytes": 44193,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/mulgore.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/teldrassil.lua",
+      "gitBlob": "97b149b1013d43e5ca0c50fb592f6e56b0d04ab3",
+      "sha256": "08ea689ba3c6b18365a6e08cd7a1a34f1342b4b52902d4cd7b0e044a7534632e",
+      "bytes": 49354,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/teldrassil.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+      "gitBlob": "8718c9ee4927da355ceab8369896f7aaad133c95",
+      "sha256": "f3af8a6c6c45a5f653b701d0ccb83c74854c163873fd2bc550514932a2284308",
+      "bytes": 103029,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/kalimdor/the%20barrens.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zones/zephras isle.lua",
+      "gitBlob": "53e6b9016cfb5f10775897804adc4ca55f26759e",
+      "sha256": "ddb7781647cba3c6667e901d73492e6314e4ead909abeeefc472089c2df9dddd",
+      "bytes": 60234,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zones/zephras%20isle.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "gitBlob": "90e0582af41cf5be3a24bc354f6980cf362cc384",
+      "sha256": "940d6efa5d29fb4b57e5d73d8b2fd714e71d23f629a655e323885419dd225d79",
+      "bytes": 47289,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/1.6%20Blackwing%20Lair.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "gitBlob": "f22864a01554fed41e3cfba385cc0b89447ef770",
+      "sha256": "b2f8193e28e8b5ff9b69ad5ab6d384365af917e201e2989657a86630bc236fc3",
+      "bytes": 56454,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/1.7%20Zul'Gurub.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "gitBlob": "2c478828e6682d2abfdb5cbc3a258f0b8c86cf2b",
+      "sha256": "af12f9f6e59667e4e33d0d0b7e1128df8ef48b2e6fdce848c94fc6a378b119fe",
+      "bytes": 56109,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/2.5%20Ruins%20of%20Ahn'Qiraj.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "gitBlob": "7ec6afcc2d9bced82533e82463845f1c91eef8c9",
+      "sha256": "a30c056d7e9d014d378f1a5593b7ec78589580c5a6d86be1dee080ca7e052eb5",
+      "bytes": 89340,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/2.6%20Temple%20of%20Ahn'Qiraj.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "gitBlob": "57c87f4ea29ebd551cd23b68dae9c8ba82ca6e3d",
+      "sha256": "7f01e11b74d04f52924157e9f33d43fc47e7c08ce6a4325c7a7bf11e9ab758d4",
+      "bytes": 168695,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/3.0%20Naxxramas.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "gitBlob": "096670b2be81d158894197ece38e868f4de45029",
+      "sha256": "85bf95be225d8bc92db56c59096d61bfef7009eee2274d949be08908f82799c3",
+      "bytes": 98000,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Blackrock%20Spire.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "gitBlob": "ff94681d908dd8dbda4dce2efc9e65ea17e7c6e8",
+      "sha256": "1f03dfc35e576e5a54beb1de1958518144dd380b0080793db01a87f589a03735",
+      "bytes": 18432,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Maraudon.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "gitBlob": "38fc76c2503802e908886a6fea4b84642ccc2ffc",
+      "sha256": "caa15fb86fa3632c20800707d01628a0a70a9e16f6399575f20e4933cfa91a99",
+      "bytes": 16990,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Razorfen%20Downs.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "gitBlob": "6a0d930cc9213a9793fb9ef8401a0d46bf23d3c1",
+      "sha256": "266af7e7a92fdc08c5ed53e37a7b4d24f7d45b721590ce4e599e480f51f478b2",
+      "bytes": 46389,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Scarlet%20Monastery.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "gitBlob": "f663e24cd70f16517da3102ab864279d219a37d8",
+      "sha256": "d7725c0d14f2b1968f11c16a08364194cb39ed975eb19d0e3f0733d3b410d807",
+      "bytes": 86862,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Scholomance.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "gitBlob": "70219219d372cecf6a2f93348cb0c21e3391ce66",
+      "sha256": "84d836b77fc2827d8a409b09cf0d1105af9d80dd5528ef19935185ca98e4fc48",
+      "bytes": 64628,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Stratholme.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "gitBlob": "d4b2c179d95eccca54dd7cac803526203ef0d7c3",
+      "sha256": "3c8d7faaaed6d825f92e74f34064125fed36bce3e1aa820ff61d826802765fda",
+      "bytes": 59235,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/The%20Temple%20of%20Atal'hakkar.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+      "gitBlob": "06e6bdbb53d9b0a716a9e5eedae41336778d87fd",
+      "sha256": "80d913c4a65edc414a94d23140a386e9a017fabb0cf997bf6ec24defa8e04854",
+      "bytes": 29771,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Uldaman.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "gitBlob": "c50eaf95448d584f29949eb22d4c6d71be9d27dc",
+      "sha256": "cc03b4182b27795cfb4c9c842461dc6ce4f292be4f8300666ae9140a92712fb6",
+      "bytes": 19563,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/01%20-%20Dungeons%20Raids/01%20-%20Classic/Zul'Farrak.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/2 - Orgrimmar.lua",
+      "gitBlob": "b63a164182a4533aad2d944b5b4b98fc8a8b562b",
+      "sha256": "4ad9ffcac181d75e5f107db1a8619f483b7604a83470ce5a57ae61c9185c7e8a",
+      "bytes": 64531,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/2%20-%20Orgrimmar.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/4 - Thunder Bluff.lua",
+      "gitBlob": "c124ae02a75ffd5826f808d42b4da1dd20d54020",
+      "sha256": "0ad3b5025006f152f22b32bd004bbe710be064ecf6248c1f51d9ed3f43b51d13",
+      "bytes": 26210,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/4%20-%20Thunder%20Bluff.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Ashenvale.lua",
+      "gitBlob": "499c00da938d7ec992f558fda1ef0f43f4f96327",
+      "sha256": "9116d0b8803bda9be512ab0a978b2c22ad69eca3d32be217b04c6785f8923665",
+      "bytes": 44729,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Ashenvale.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Azshara.lua",
+      "gitBlob": "9ac80d098e3e20fe0546d0b006b5ff853fa9698c",
+      "sha256": "4ff6f1f74a8b5bef7c9284bb8e51a8c72683b34ed55d9fced45bcb81a9a9cd34",
+      "bytes": 23583,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Azshara.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Desolace.lua",
+      "gitBlob": "c87059d8991cc85725f468174d7a0b7e98ac9011",
+      "sha256": "a7e8868f5440d88646ed77b4815a50d844e44c4f6713aa652e012a34f685a28b",
+      "bytes": 39482,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Desolace.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Dustwallow Marsh.lua",
+      "gitBlob": "630eb529c8471975a8c2ca1bf039973e25084a05",
+      "sha256": "b4ce836c63ae1be01903ce574349d28c5d547a94bb56a3e8f68c5dd13e932123",
+      "bytes": 36260,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Dustwallow%20Marsh.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Felwood.lua",
+      "gitBlob": "c64e5638cc16c8171c47d6583fe58335675c642d",
+      "sha256": "999f55ffc874808aad5c8953b0e02c3fc94566c46279194a3843fbe5946c472d",
+      "bytes": 43305,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Felwood.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "gitBlob": "318c18019789386e9ff71c6b1593de4010ddeed4",
+      "sha256": "f2a23b76cacd76f247f3f7a1824fae8c852c2a895669706f7f7613dbadfedb12",
+      "bytes": 47437,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Feralas.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Moonglade.lua",
+      "gitBlob": "3a9118d97c7259d7583ff685ecbe2acf241dc08c",
+      "sha256": "23bc23e03cc3b41eeeed73787bd3f834e8a560b170d683d8f03573c859e0f306",
+      "bytes": 17797,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Moonglade.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Silithus.lua",
+      "gitBlob": "0b599a50b6f66ed766c8ee7cc8fd45900d09253d",
+      "sha256": "88c50627acd6188a0eb2efeddb57e4090256f81b8a21bfbfed73beca73eaedd9",
+      "bytes": 74565,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Silithus.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Stonetalon Mountains.lua",
+      "gitBlob": "4a963a73de2b0a410db9580cac07a40fac01095a",
+      "sha256": "ce43580651e2a6f93f1d23357968548f636048305415072516ceb937c011d170",
+      "bytes": 27759,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Stonetalon%20Mountains.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Tanaris.lua",
+      "gitBlob": "9b5e73cccc620a9aa2569ff24b639d254a13dfdf",
+      "sha256": "0c7c5311c087a42ceb63ad1756ff1e91078fcd633febe8f0c81bc005f5b6215e",
+      "bytes": 42984,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Tanaris.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Thousand Needles.lua",
+      "gitBlob": "d69c8f15f289786206b2244d499c90317e6e541c",
+      "sha256": "03ab3c3a67c71ce3715458bf2b2ffe3e18e7b287e4b52c0268e808e38e188474",
+      "bytes": 31603,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Thousand%20Needles.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Timbermaw Hold.lua",
+      "gitBlob": "feefabdd26548108268e944e2494c05bc77c6536",
+      "sha256": "49607bee51991bbb58b60648f13fc72d1848cc3663c03278d6aad69e72197b01",
+      "bytes": 11979,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Timbermaw%20Hold.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Un'goro Crater.lua",
+      "gitBlob": "59cad87a0b3593756db4eee0b53384a218144fd0",
+      "sha256": "41031992acdacc371b8dcb34e1d6e6e35e875dfa68902a6685e135272c577bb3",
+      "bytes": 25384,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Un'goro%20Crater.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Winterspring.lua",
+      "gitBlob": "affc03640a3670d52f2ac63c869d1f8bc1bc43f9",
+      "sha256": "b44e65da57eb31dc6e773d1e398e642b010fa987828f33378bf7478c05d8c79d",
+      "bytes": 35386,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/01%20Kalimdor/Winterspring.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+      "gitBlob": "5e05180e5ac5fcbae0c8a4eb5f1c8eb6d5724f60",
+      "sha256": "e9348620df0e4c64b51b8cff517c4256b22bd26d1601c7ac41f3b954c51c0b32",
+      "bytes": 46205,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/1%20-%20Undercity.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Blasted Lands.lua",
+      "gitBlob": "61bc62319b4bca90e5e4ba1f0f79fe48909799fe",
+      "sha256": "53c9b1a631462892f402681d8cc77570f93da600e5bb89329806eae4e89ee24f",
+      "bytes": 14614,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Blasted%20Lands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Burning Steppes.lua",
+      "gitBlob": "f0b53be2579b69af826e0f883f52522297bc7316",
+      "sha256": "334ec582bb5c678c023175494bdfa0ee24d3254709b476188ce8ea1faa67be57",
+      "bytes": 17724,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Burning%20Steppes.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Deeprun Tram.lua",
+      "gitBlob": "a089f065743de3b7e6f007e383b434d5f99a4cff",
+      "sha256": "98efeccb0cdd08d588b6d5be86509e37f7386bba247d40da5685b6c3a7979012",
+      "bytes": 1560,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Deeprun%20Tram.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Duskwood.lua",
+      "gitBlob": "3d9232ef8b13e099c6f6da9f318248d1f3919dd6",
+      "sha256": "eaea55986e55bbea3005b0bbaef0d28ffe1709980e5cf3aa4155b586566e3cee",
+      "bytes": 46525,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Duskwood.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
+      "gitBlob": "a139cc649bfd5b96833c94491b2df01fd739f8f3",
+      "sha256": "b8adc3f8ec49a346f5b45bd388581bd81ca4b5a3e0336cb7448c2cb3156f36c6",
+      "bytes": 54795,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Eastern%20Plaguelands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Hillsbrad Foothills.lua",
+      "gitBlob": "982851afda52b053bd387105c307e896a109dbe9",
+      "sha256": "b42422560b5d73afe602f4fe00a0be372dc04cf28dd42b6ca6f8888eeeac0e45",
+      "bytes": 38517,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Hillsbrad%20Foothills.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Searing Gorge.lua",
+      "gitBlob": "3bdc9a168be9017a71c3047c966fee871b05be77",
+      "sha256": "bbb04e27290590e53a310911b975e846ede9e08ae8f43e300130f7e2d7bf9f74",
+      "bytes": 23516,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Searing%20Gorge.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Silverpine Forest.lua",
+      "gitBlob": "710127eb425d582ef89e960eddd6443fb0db7e3b",
+      "sha256": "d744d03f6df3d9515113035b119bf0a1ef934af306b9d79dc9d5d03683cc06fb",
+      "bytes": 26862,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Silverpine%20Forest.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Swamp of Sorrows.lua",
+      "gitBlob": "38449feb01dd33b330c1727da0c90a7448ee808d",
+      "sha256": "a52a66dc596aa5e6c0d278082f7996f774071589d1b721815ff5f7b19f8287e8",
+      "bytes": 22557,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Swamp%20of%20Sorrows.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/The Hinterlands.lua",
+      "gitBlob": "b8c751e4dd15f8fb67151369eb8af356d4519bac",
+      "sha256": "ce363bf09f014dbf73172abbbc3105c993eaaa3f950a0ed9a2c2b783c8b6d072",
+      "bytes": 31193,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/The%20Hinterlands.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Tirisfal Glades.lua",
+      "gitBlob": "c21e79871e554a04f5e66bc0e6a0f10c476bfbeb",
+      "sha256": "1f592fb7e7a456c71b5ca4d8181ca49ec6d5068a1ef8bc13d44ed6b816317f09",
+      "bytes": 57393,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Tirisfal%20Glades.lua"
+    },
+    {
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Western Plaguelands.lua",
+      "gitBlob": "f2364d123fbed30a8d602ca80c7057b476f4299b",
+      "sha256": "6bcbcb010212b8e29c2e23623366b00d0e4972052671c495033a12bdbf8845d5",
+      "bytes": 45718,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/zzOLD/02%20-%20Outdoor%20Zones/02%20Eastern%20Kingdoms/Western%20Plaguelands.lua"
+    },
+    {
+      "path": ".contrib/.db/shared/constants/raceIDs.lua",
+      "gitBlob": "51305639d43e099054fbb26274d4cf96ce828ca2",
+      "sha256": "003e1b0933aabf6f0646b63b7ac96f2dabf3e5fc87489aeae40587308e8ef4f3",
+      "bytes": 7655,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/shared/constants/raceIDs.lua"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "8c87dc3b43c3fa36652093b325fbbc0910cd57d8",
+      "sha256": "955281b9174e0f66b08c8e83d31e0f38b2fcaa247ca3af92d1723d81a13cddfb",
+      "bytes": 1079,
+      "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/LICENSE"
+    }
+  ],
+  "omissions": [
+    {
+      "id": 78150,
+      "path": ".contrib/.db/forever/expansion features/library books.lua",
+      "line": 101,
+      "field": "sourceQuests",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 79536,
+      "path": ".contrib/.db/forever/expansion features/library books.lua",
+      "line": 123,
+      "field": "sourceQuests",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 82208,
+      "path": ".contrib/.db/forever/expansion features/library books.lua",
+      "line": 132,
+      "field": "sourceQuests",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 8767,
+      "path": ".contrib/.db/forever/holidays/feast of the winter veil.lua",
+      "line": 125,
+      "field": "classes",
+      "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 9389,
+      "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+      "line": 161,
+      "field": "coords",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 9388,
+      "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+      "line": 193,
+      "field": "coords",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 9272,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+      "line": 533,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 92110,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/westfall.lua",
+      "line": 81,
+      "field": "coord",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 792,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 298,
+      "field": "classes",
+      "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 3522,
+      "path": ".contrib/.db/forever/zones/kalimdor/teldrassil.lua",
+      "line": 128,
+      "field": "prerequisites",
+      "reason": "invalid, unsupported or self-referential"
+    },
+    {
+      "id": 27440,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 1073,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27022,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 186,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27009,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 1049,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 305,
+      "field": "races",
+      "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 31516,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27208,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "line": 428,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27605,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 236,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27070,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 27068,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 57,
+      "field": "lvl",
+      "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 4112,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Felwood.lua",
+      "line": 715,
+      "field": "prerequisites",
+      "reason": "invalid, unsupported or self-referential"
+    }
+  ],
+  "membershipSha256": "eb58d691560e6bf265ed77b16afe9e08e529de828860a6a153eb4da1c1e3147e",
+  "questsAbsentCompiledMembership": 296,
+  "rule": "Direct authored q groups i() associations intersected with pinned compiled Forever output. No assumed quantity or guaranteed/choice membership. lvl is minimum level; displayed quest levels hydrate natively."
+}

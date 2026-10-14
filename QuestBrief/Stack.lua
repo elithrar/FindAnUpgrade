@@ -175,8 +175,9 @@ function V:Tooltips()
         t:HookScript("OnHide",function() t:ClearHandlerInfo() end)
         return t
     end
-    self.tooltip=create("QuestBriefItemTooltip")
-    self.tooltip.shoppingTooltips={create("QuestBriefComparison1"),create("QuestBriefComparison2")}
+    local prefix=self.tooltipPrefix or "QuestBrief"
+    self.tooltip=create(prefix.."ItemTooltip")
+    self.tooltip.shoppingTooltips={create(prefix.."Comparison1"),create(prefix.."Comparison2")}
     for _,t in ipairs(self.tooltip.shoppingTooltips) do
         t.CompareHeader=CreateFrame("Frame",nil,t); t.CompareHeader:SetPoint("BOTTOMLEFT",t,"TOPLEFT",0,0); t.CompareHeader:SetHeight(20)
         t.CompareHeader.Label=t.CompareHeader:CreateFontString(nil,"OVERLAY","GameTooltipText"); t.CompareHeader.Label:SetPoint("CENTER"); t.CompareHeader:Hide()
@@ -189,13 +190,17 @@ function V:Tooltips()
 end
 function V:Inspect(button,row,refresh)
     self:ClearItem()
-    if not N.Hover.open or not refresh and (not A.Over(self.scroll) or not A.Over(button)) or row.state~="ready" or not self:Tooltips() then return end
-    local data=A.Call(C_TooltipInfo and C_TooltipInfo.GetQuestLogItem,row.kind,row.index,row.questID)
+    local open=N.Hover.open
+    if self.isOpen then open=self:isOpen() end
+    if not open or not refresh and (not A.Over(self.scroll) or not A.Over(button)) or row.state~="ready" or not self:Tooltips() then return end
+    local data
+    if row.kind=="catalog" then data=A.Call(C_TooltipInfo and C_TooltipInfo.GetHyperlink,row.link)
+    else data=A.Call(C_TooltipInfo and C_TooltipInfo.GetQuestLogItem,row.kind,row.index,row.questID) end
     if not M.Readable(data) or type(data)~="table" then return end
     if type(canaccessallvalues)=="function" and A.Call(canaccessallvalues,data)~=true then return end
     if not M.Readable(data.type) or not M.QuestId(data.id) or data.id~=row.itemID then return end
     if not Enum or not Enum.TooltipDataType or data.type~=Enum.TooltipDataType.Item then return end
-    self.item={ button=button,row=row,generation=N.Hover.generation,data=data }
+    self.item={ button=button,row=row,generation=self.generation or N.Hover.generation,data=data }
     local t=self.tooltip; t:SetOwner(button,"ANCHOR_NONE"); t:ClearAllPoints()
     local rect=A.Rect(self.frame); local screenWidth=A.Call(UIParent.GetWidth,UIParent); local parentScale=A.Call(UIParent.GetEffectiveScale,UIParent)
     local right=rect and M.Number(screenWidth) and M.Number(parentScale) and screenWidth*parentScale-rect.x-rect.w>300
@@ -228,8 +233,11 @@ function V:ItemContains()
 end
 function V:ItemTransit(now)
     if not self.item then return end
-    if self.item.generation~=N.Hover.generation then self:ClearItem(); return end
+    if self.item.generation~=(self.generation or N.Hover.generation) then self:ClearItem(); return end
     if self:ItemContains() then self.itemOutsideAt=nil
     else self.itemOutsideAt=self.itemOutsideAt or now; if now-self.itemOutsideAt>=N.Hover.grace then self:ClearItem() end end
 end
 function V:Contains() return A.Over(self.frame) or self:ItemContains() end
+function V.NewInspector(frame,scroll,isOpen)
+    return setmetatable({frame=frame,scroll=scroll,isOpen=isOpen,tooltipPrefix="QuestBriefSearch",generation=0},{__index=V})
+end

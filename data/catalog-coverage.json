@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "d75383ccdbff1208b87cf4024fa425c0825a7ad6",
+  "sourceBuild": "1.60.1.69893",
+  "targetBuild": "1.60.1.70374",
+  "questCount": 1267,
+  "itemCount": 1977,
+  "associationCount": 2311,
+  "questsWithNpc": 1051,
+  "questsWithCoordinates": 1006,
+  "questsWithMinimumLevel": 1145,
+  "questsWithStaticDifficultyLevel": 0,
+  "knownQuantities": 0,
+  "knownRewardGroups": 0,
+  "staticMoneyXpCurrencyReputationAmounts": 0,
+  "classifiedQuests": 363,
+  "classifiedNewQuests": 48,
+  "classificationCounts": {
+    "New": 48,
+    "Updated": 60,
+    "Unchanged": 255,
+    "Unknown": 904
+  },
+  "factionCounts": {
+    "Alliance": 409,
+    "Horde": 362,
+    "Unknown": 496
+  },
+  "minimumLevelBands": {
+    "1-10": 256,
+    "11-20": 192,
+    "21-30": 177,
+    "31-40": 144,
+    "41-50": 199,
+    "51-60": 177,
+    "61-200": 0
+  },
+  "luaSha256": "049647dcc5e5ab7419f8d280a2ff7157fe3391f7c6224b14adc9e157ac9fea55",
+  "sourceSha256": "38922860008a8b123157ebc6b5c95d4e07eb970b8b8957a8d73c7cfc8d1e5316",
+  "liveClientVerified": false
+}

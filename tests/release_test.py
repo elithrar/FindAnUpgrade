@@ -201,7 +201,19 @@ class ArtifactTests(unittest.TestCase):
     def test_exact_payload_passes(self):
         data = release.verify_artifacts(self.root)
         self.assertEqual(data["archive"], "QuestBrief-0.1.0.zip")
-        self.assertIn("QuestBrief/LICENSE", {p["path"] for p in json.loads((self.root / "dist/package-receipt.json").read_text())["payload"]})
+        payload = {p["path"] for p in json.loads((self.root / "dist/package-receipt.json").read_text())["payload"]}
+        for name in ["QuestBrief/LICENSE", "QuestBrief/Data/Catalog.lua", "QuestBrief/Data/ATT-LICENSE.txt"]:
+            self.assertIn(name, payload)
+
+    def test_catalog_license_cannot_be_replaced_by_rewriting_provenance(self):
+        path = self.root / "QuestBrief/Data/ATT-LICENSE.txt"
+        path.write_bytes(b"MIT label without the required grant or disclaimer")
+        provenance = self.root / "data/catalog-sources.json"
+        data = json.loads(provenance.read_bytes())
+        for row in data["files"]:
+            if row["path"] == "LICENSE": row["sha256"] = release.sha(path)
+        provenance.write_text(json.dumps(data))
+        with self.assertRaisesRegex(ValueError, "MIT permission"): release.verify_artifacts(self.root)
 
     def test_real_notes_and_version_bump_do_not_break_fixed_fixture(self):
         # The source already includes its first real notes directory/file.

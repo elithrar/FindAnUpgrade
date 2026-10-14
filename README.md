@@ -1,11 +1,20 @@
 # QuestBrief
 
-Compact quest previews for **World of Warcraft: Forever**, interface **16001**.
+Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.2.0** adds the finder and minimap launcher.
 
+- Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
 - Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.
 - See verified new quests in orange, modified quests in green, and existing quests without a tint. Text labels accompany the colors.
 - Browse guaranteed and choose-one rewards separately, with small item icons, rarity borders and native item tooltips. Shift retains equipment comparison behavior.
 - Adjust the reveal key, individual surfaces, reward details, quest colors, dialog tint and panel scale in settings.
+
+## Reward finder
+
+Open with `/questbrief search` or `/questbrief s`, or click the book icon on the minimap. Drag the icon to reposition it; `/questbrief minimap` or `/questbrief mm` toggles its visibility. Sort results by level fit or quest level. Expand cards to inspect rewards and recorded givers; their menus offer location and quest-page copy actions where data is available.
+
+The finder ships its own partial catalog derived from MIT-licensed AllTheThings Forever authoring data. Search does not require Questie or QuestieDB. The catalog records exact quest/item associations and selected giver/restriction metadata; it does not establish current availability, reward quantities or guaranteed-versus-choice groups. Native data supplies those details when available. Missing names, levels, usability or rewards can limit results and are never treated as zero.
+
+## Hover previews and settings
 
 Hold **Shift** while hovering, or press it after hovering, to reveal a stack. Release Shift to inspect rewards; the stack stays in place. **Escape** or moving away closes it, with a short grace interval for pointer travel. Long stacks scroll. Ctrl, Alt and hover without a modifier are available alternatives.
 
@@ -19,7 +28,9 @@ Build the candidate ZIP using the development commands below. Copy its `QuestBri
 
 Classification uses exact quest variants from a verified 2026-10-14 snapshot: **1,194 IDs**, including **218 new IDs**. Unknown IDs remain untinted. Titles and group-level classifications are never used to infer a variant's status.
 
-NPC previews require current gossip quest IDs or reciprocal starter records from a compatible Forever QuestieDB. Database associations are labelled **availability unconfirmed**. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no map icons.
+The catalog's source build **1.60.1.69893** predates the current **70374** API contracts. Locations and reward coverage still need live verification. The source checkout's `data/catalog-coverage.json` records the measured subset; this is not a complete Forever quest database or an upgrade-score calculation.
+
+NPC previews require current gossip quest IDs or reciprocal starter records from an optional compatible Forever QuestieDB. Database associations are labelled **availability unconfirmed**. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no quest map icons. These optional preview providers are separate from the bundled reward finder.
 
 Money, XP and currencies appear when the client supplies usable reward data. Missing data is shown as unavailable, never assumed to be zero. Ambiguous mixed item/currency choices are withheld. Ordinary faction reputation amounts remain unavailable. Native quest contrast mode takes priority over dialog tint.
 
@@ -32,10 +43,10 @@ python -m pip install --target .work/pydeps lupa==2.8
 python tools/verify.py
 ```
 
-The builder writes addon and source ZIPs, hashes and a receipt to `dist/`. It does not install or publish them. In the source checkout, `docs/VALIDATION.md` records checks and pending live scenarios, `docs/PROVENANCE.md` records data and API evidence, and `docs/RELEASING.md` documents CurseForge setup.
+The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `data/catalog-sources.json` for catalog provenance, and `docs/RELEASING.md` for CurseForge setup.
 
-Source inspection and offline tests do not establish native rendering, event timing or combat/taint safety. In-game hover, reward comparison, scrolling and coexistence checks remain pending; no game installation or release has been performed.
+Source inspection and offline tests do not establish native rendering, event timing or combat/taint safety. In-game finder, hover, reward comparison, scrolling and coexistence checks remain pending.
 
 ## License
 
-Original code and documentation: BSD 3-Clause. See [LICENSE](LICENSE); third-party attribution is retained in the addon's `NOTICES.md` and `XPISLAND-LICENSE.txt`.
+Original code and documentation: BSD 3-Clause. See [LICENSE](LICENSE). The ATT-derived catalog retains its separate MIT grant in the addon's `Data/ATT-LICENSE.txt`; other attribution remains in `NOTICES.md` and `XPISLAND-LICENSE.txt`.

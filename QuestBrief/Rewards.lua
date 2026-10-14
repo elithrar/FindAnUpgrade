@@ -14,6 +14,8 @@ local function metadata(getter,index,id,row)
     if type(getter)=="function" then ok,name,texture,quantity,quality,usable,itemID=pcall(getter,index,id) end
     if ok and M.Text(name) and M.Number(quantity) and quantity>=1 and quantity==math.floor(quantity) and M.Number(quality) and quality>=0 and quality<=8 and quality==math.floor(quality) and M.QuestId(itemID) and (M.Text(texture) or M.Number(texture)) then
         row.name,row.texture,row.quantity,row.quality,row.itemID,row.state=name,texture,quantity,quality,itemID,"ready"
+        row.usable=M.Readable(usable) and type(usable)=="boolean" and usable or nil
+        if M.Readable(usable) and usable==false then row.usable=false end
         return true
     end
 end

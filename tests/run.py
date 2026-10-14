@@ -26,7 +26,7 @@ if native.is_file():
     report["nativeSourceBlobSha1"] = blob
 else:
     report["limitation"] = "Pinned native source fixture absent; portable mocks only"
-for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "native_contract_test.lua"]:
+for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "native_contract_test.lua", "search_test.lua"]:
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().ROOT = str(ROOT).replace("\\", "/")
     lua.execute((ROOT / "tests" / filename).read_text(encoding="utf-8"))

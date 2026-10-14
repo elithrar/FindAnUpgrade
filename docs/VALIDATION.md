@@ -13,15 +13,18 @@ receipt is `dist/validation-evidence.json`; Lua counts are in
 `dist/test-results.json`, and payload/archive hashes are in
 `dist/package-receipt.json` and `dist/SHA256SUMS`.
 
-- **112 Lua 5.1 scenarios**: 10 model, 38 runtime, 6 earlier independent tint
-  regressions, 41 inspection, 9 Questie, 6 font and 2 current native-source cases.
+- **150 Lua 5.1 scenarios**: 10 model, 38 runtime, 6 earlier independent tint
+  regressions, 41 inspection, 9 Questie, 6 font, 2 current native-source cases
+  and 38 reward-finder cases.
 - **Five data tests** verify all 1,194 exact ID/status records, the frozen source
   checksum, 998 title groups, 18 zones and 218 new IDs. The snapshot contains
   880 unchanged, 96 modified and 218 new variants; no title status propagation.
-- **Six package tests** check deterministic bytes, exact addon/source payload,
+- **12 catalogue tests** check conservative authoring parsing, source/license
+  hashes, exact compiled membership, unknown counts/groups and deterministic data.
+- **Eight package tests** check deterministic bytes, exact addon/source payload,
   licenses, exclusions, interface/load order, versions, Lua syntax and generated
   data freshness.
-- **30 release tests** use disposable Git repositories and mocked HTTP/GitHub calls.
+- **31 release tests** use disposable Git repositories and mocked HTTP/GitHub calls.
   They do not publish a release or contact CurseForge.
 
 The older native detail renderer/material setter is executed against pinned
@@ -60,8 +63,10 @@ interaction stays consistent across surfaces and preserves native game bindings.
 
 ## Remaining live acceptance
 
-No game files or user configuration were changed, and no in-game observations
-were made. This session exposes browser control with native Windows control
+The 0.2.0 finder work has changed no game files or user configuration, and no
+in-game observations were made. The earlier 0.1.0 PR was separately merged and
+installed with user authorization; its receipt is retained in `dist/`.
+This session exposes browser control with native Windows control
 disabled; the native JavaScript entry point required by Computer Use is not
 available. No native action was attempted or denied, and screen lock state was
 not observed. Run the checklist manually with the candidate, or use a session
@@ -84,3 +89,26 @@ with native Windows control enabled.
 The release workflow is prepared but no release/tag/CurseForge upload has run.
 CurseForge project ID and API token are still required for a future approved
 upload. Acceptance remains pending where the table above names live checks.
+# Reward finder 0.2.0
+
+The standalone finder and bundled source pipeline pass offline checks with
+Questie and QuestieDB absent, including representative low-, mid- and high-level
+queries using simulated native difficulty levels. Source coordinates and rewards
+are a partial ATT snapshot; no current-client observation is implied.
+
+Pending live checks on official Forever 1.60.1.70374/interface 16001:
+
+- Cold exact-ID quest requests must populate native difficulty levels, item
+  metadata and reward groups; invalid levels remain excluded. Verify failure and
+  successful callbacks, cache timing, large-catalog request cost and recovery.
+- Inspect default 560×600 layout, fractional UI scale, long names, four complete
+  cards, resizing, expansion/collapse, wheel/bar scrolling and small screens.
+- Confirm native item/comparison tooltips and safe pointer transit; data arriving
+  for other rows must not dismiss inspection. Check menu/dropdown/copy-dialog
+  Escape order and right-click hit clipping.
+- Compare recorded questgiver coordinates against current native map geometry
+  and actual NPC positions. Check unavailable/dungeon maps and waypoint failures.
+- Exercise class training, equipment/level changes, completed/repeatable quests,
+  missing prerequisite facts, minimap drag-release and persistent launcher hide.
+- Check combat transitions, taint logs, native tooltips, Questie, XPIsland and
+  AsTheCrowFlies together. This feature has not been installed or merged.

@@ -11,7 +11,7 @@ function H:Dismiss(reason)
 end
 function H:Consider(source)
     local c = N.Core
-    if not c.ready or not c.supported or not c.profile.enabled or self.open or not source or not c.profile[source.surface] then return end
+    if not c.ready or not c.supported or not c.profile.enabled or self.open or N.Search and N.Search:Visible() or not source or not c.profile[source.surface] then return end
     if self.blocked and self.blocked ~= source.key then self.blocked = nil end
     if self.blocked == source.key or not A.Modifier(c.profile.modifier) or not source.valid() or not source.over() then return end
     self.generation = self.generation+1

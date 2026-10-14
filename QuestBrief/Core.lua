@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.0" }; N.Core = C
+local C = { version = "0.2.0" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -25,6 +25,8 @@ function C:Change(key, value)
     N.Hover:Dismiss("settings"); N.Sources.current = nil
     self:Refresh()
     if N.Options.frame then N.Options:Refresh() end
+    N.Launcher:Refresh()
+    if not self.profile.enabled and N.Search.frame then N.Search.frame:Hide() end
     return true
 end
 function C:Defaults()
@@ -32,6 +34,7 @@ function C:Defaults()
     self.profile = M.Copy(M.defaults); QuestBriefDB = self.profile
     N.Hover:Dismiss("settings"); N.Sources.current = nil
     self:Refresh(); if N.Options.frame then N.Options:Refresh() end
+    N.Launcher:Refresh()
     return true
 end
 function C:Attach()
@@ -55,13 +58,17 @@ function C:Print(text)
 end
 function C:Slash(input)
     local command = (input or ""):match("^%s*(.-)%s*$"):lower()
-    if command == "on" or command == "off" then
+    if command=="search" or command=="s" then
+        N.Search:Toggle()
+    elseif command=="minimap" or command=="mm" then
+        if not self:Change("launcher",not self.profile.launcher) then self:Print("Settings are read-only.") end
+    elseif command == "on" or command == "off" then
         if not self:Change("enabled", command == "on") then self:Print("Settings are read-only.") end
     elseif command == "status" then
         self:Print((self.supported and (self.profile.enabled and "Enabled" or "Disabled") or "Unsupported client") .. "; " .. N.Data.newCount .. " verified new IDs. Data: " .. N.Data.collectedAt .. ".")
     elseif command == "" or command == "options" or command == "opts" then
         if InCombatLockdown() then self:Print("Open settings after combat.") else N.Options:Toggle(self) end
-    else self:Print("/questbrief opts | on | off | status") end
+    else self:Print("/questbrief search | minimap | opts | on | off | status") end
 end
 function C:Initialize()
     if self.ready then return end
@@ -73,6 +80,7 @@ function C:Initialize()
     self:Attach()
     N.Sources:Attach()
     U:WatchFonts()
+    N.Launcher:Refresh()
 end
 function C:StartHoverUpdate()
     if self.updating then return end
@@ -95,6 +103,7 @@ events:SetScript("OnEvent", function(_, event, name)
     elseif not C.ready then return
     elseif event == "PLAYER_LOGIN" or event == "PLAYER_REGEN_ENABLED" then
         C:Attach(); N.Sources:Attach(); C:Refresh()
+        N.Launcher:Refresh()
     elseif event == "UPDATE_MOUSEOVER_UNIT" then
         local source = C.supported and N.Sources:NPC()
         if source then N.Sources:Set(source) elseif N.Sources.current and N.Sources.current.surface == "npc" then N.Sources.current=nil end
