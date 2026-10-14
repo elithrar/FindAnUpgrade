@@ -1,17 +1,45 @@
 # Validation
 
-QuestBrief is a review candidate for official WoW Forever, interface **16001**.
+QuestBrief **0.1.1** is the current candidate for official WoW Forever, interface
+**16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Checks performed
+## Current verification evidence
 
 `python tools/verify.py` runs the Lua, classification, packaging and release
 tests, builds reproducible archives, and checks source whitespace. Its full
 receipt is `dist/validation-evidence.json`; Lua counts are in
 `dist/test-results.json`, and payload/archive hashes are in
 `dist/package-receipt.json` and `dist/SHA256SUMS`.
+
+Use those receipts for the exact current snapshot's test counts and result.
+Catalog coverage is authoritative in `data/catalog-coverage.json`; its source and
+output hashes bind each measurement to the generated table. Earlier counts do
+not establish that a changed candidate passed. Fresh review reports are
+`REVIEW-LOOP-RELEASE.md`, `REVIEW-LOOP-DATA.md`, `REVIEW-LOOP-RUNTIME.md`,
+`REVIEW-LOOP-LIFECYCLE.md`, `REVIEW-LOOP-SEARCH.md` and `REVIEW-LOOP-UI.md`.
+Independent cross-checks are in `REVIEW-LOOP-DATA-CROSS.md`,
+`REVIEW-LOOP-CROSS.md` and `REVIEW-LOOP-ADVERSARIAL.md`.
+After corrections, run the full verifier and rebuild both archives before
+merging, sharing or an authorized installation.
+
+The final corrected 0.1.1 code passed `python tools/verify.py`: **193 Lua 5.1
+scenarios**, **five classification tests**, **22 catalog tests**, **11 package
+tests** and **31 release tests**, with deterministic generation/build and no
+trailing whitespace. The native-source scenarios include the pinned tooltip
+handler's callback/render ordering; engine services remain mocked. The catalog
+contains **1,250 quests, 1,934 items and 2,266 recorded associations**. Independent
+compiled reproduction verified **2,742 pairs and 988 constraints** without
+executing upstream Lua. Current receipts bind the final build bytes separately
+from merge and installation outcomes.
+
+## Historical 0.2.0 snapshot
+
+The completed verifier at the superseded 0.2.0 snapshot recorded the following
+results. These remain historical evidence rather than counts or acceptance of
+the current 0.1.1 candidate:
 
 - **150 Lua 5.1 scenarios**: 10 model, 38 runtime, 6 earlier independent tint
   regressions, 41 inspection, 9 Questie, 6 font, 2 current native-source cases
@@ -35,8 +63,9 @@ are checked against `client-contracts.json` before execution. Missing fixtures
 are explicitly reported by the portable runner; GitHub Actions checks out both
 pinned sources. Surrounding client services remain mocked.
 
-Independent reviewers examined UI against XPIsland, XPIsland/ATCF commit history,
-API/performance and lifecycle, README, licensing, and release handling. Findings
+At that earlier snapshot, independent reviewers examined UI against XPIsland,
+XPIsland/ATCF commit history, API/performance and lifecycle, README, licensing,
+and release handling. Findings
 were fixed and re-reviewed; see `REVIEW.md` and its linked reports.
 
 ## Implemented behavior and empirical limits
@@ -63,14 +92,17 @@ interaction stays consistent across surfaces and preserves native game bindings.
 
 ## Remaining live acceptance
 
-The 0.2.0 finder work has changed no game files or user configuration, and no
-in-game observations were made. The earlier 0.1.0 PR was separately merged and
-installed with user authorization; its receipt is retained in `dist/`.
-This session exposes browser control with native Windows control
-disabled; the native JavaScript entry point required by Computer Use is not
-available. No native action was attempted or denied, and screen lock state was
-not observed. Run the checklist manually with the candidate, or use a session
-with native Windows control enabled.
+The user has authorized merging PR #2 and then installing the verified 0.1.1
+candidate. This authorization does not establish that either action occurred;
+the merge result and installation receipt must record their outcomes separately.
+The earlier 0.1.0 PR was separately merged and installed with user authorization.
+Copying a package into the game directory is distinct from observing it in the
+running client, and does not complete the acceptance checks below.
+
+The current session exposes browser control with native Windows control disabled.
+No native action or current-candidate in-game observation was made by this
+packaging review, and screen lock state was not observed. Run the checklist
+manually with the candidate, or use a session with native Windows control enabled.
 
 1. Compare one unaccepted offer, guaranteed-item quest, choice quest and cold/warm
    query against the same character's native rewards. Check money/XP/currencies,
@@ -89,12 +121,14 @@ with native Windows control enabled.
 The release workflow is prepared but no release/tag/CurseForge upload has run.
 CurseForge project ID and API token are still required for a future approved
 upload. Acceptance remains pending where the table above names live checks.
-# Reward finder 0.2.0
+## Reward finder 0.1.1
 
-The standalone finder and bundled source pipeline pass offline checks with
+The standalone finder and bundled source pipeline have offline scenarios with
 Questie and QuestieDB absent, including representative low-, mid- and high-level
-queries using simulated native difficulty levels. Source coordinates and rewards
-are a partial ATT snapshot; no current-client observation is implied.
+queries using simulated native difficulty levels. The current verification
+receipts record which scenarios passed after the fresh-review fixes. Source
+coordinates and rewards are a partial ATT snapshot; no current-client observation
+is implied.
 
 Pending live checks on official Forever 1.60.1.70374/interface 16001:
 
@@ -111,4 +145,5 @@ Pending live checks on official Forever 1.60.1.70374/interface 16001:
 - Exercise class training, equipment/level changes, completed/repeatable quests,
   missing prerequisite facts, minimap drag-release and persistent launcher hide.
 - Check combat transitions, taint logs, native tooltips, Questie, XPIsland and
-  AsTheCrowFlies together. This feature has not been installed or merged.
+  AsTheCrowFlies together. Installation and merge receipts do not establish
+  these live outcomes.

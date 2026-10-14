@@ -77,6 +77,49 @@ class PackageTest(unittest.TestCase):
         path = self.root / "QuestBrief/Core.lua"; path.write_text(path.read_text().replace(f'version = "{self.version}"', 'version = "999.999.999"'))
         with self.assertRaisesRegex(ValueError, "version mismatch"): package.validate(self.root)
 
+    def test_saved_variables_cannot_add_duplicate_or_foreign_owners(self):
+        path = self.root / "QuestBrief/QuestBrief.toc"; original = path.read_text(encoding="utf-8")
+        for declaration in [
+            "## SavedVariables: QuestBriefDB", "## SavedVariables: QuestieDB",
+            "## savedvariables : QuestieDB", "## SavedVariablesPerCharacter: QuestBriefDB",
+            "## SavedVariablesPerCharacter: QuestieDB", "## savedvariablespercharacter: ",
+        ]:
+            with self.subTest(declaration=declaration):
+                path.write_text(original + "\n" + declaration + "\n", encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "SavedVariables ownership"):
+                    package.build(self.root)
+                self.assertFalse((self.root / "dist").exists(), "Invalid metadata produced package output")
+        path.write_text(original, encoding="utf-8")
+        self.assertEqual(package.validate(self.root), self.version)
+
+    def test_duplicate_and_flavored_interface_metadata_cannot_package(self):
+        path = self.root / "QuestBrief/QuestBrief.toc"; original = path.read_text(encoding="utf-8")
+        for declaration in [
+            "## Interface: 16001", "## Interface: 120001",
+            "## interface : 16001", "## Interface-Camelot: 16001",
+        ]:
+            with self.subTest(declaration=declaration):
+                path.write_text(original + "\n" + declaration + "\n", encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "interface"):
+                    package.build(self.root)
+                self.assertFalse((self.root / "dist").exists(), "Invalid metadata produced package output")
+        path.write_text(original, encoding="utf-8")
+        self.assertEqual(package.validate(self.root), self.version)
+
+    def test_duplicate_version_metadata_cannot_package(self):
+        path = self.root / "QuestBrief/QuestBrief.toc"; original = path.read_text(encoding="utf-8")
+        for declaration in [
+            "## Version: " + self.version, "## Version: 999.999.999",
+            "## version : " + self.version, "## Version: invalid",
+        ]:
+            with self.subTest(declaration=declaration):
+                path.write_text(original + "\n" + declaration + "\n", encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "semantic version"):
+                    package.build(self.root)
+                self.assertFalse((self.root / "dist").exists(), "Invalid metadata produced package output")
+        path.write_text(original, encoding="utf-8")
+        self.assertEqual(package.validate(self.root), self.version)
+
     def test_syntax_and_stale_classification_are_rejected(self):
         path = self.root / "QuestBrief/Model.lua"; original = path.read_text(); path.write_text("this is not lua")
         with self.assertRaisesRegex(ValueError, "syntax"): package.validate(self.root)

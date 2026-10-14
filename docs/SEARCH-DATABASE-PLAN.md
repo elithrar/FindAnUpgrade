@@ -2,7 +2,8 @@
 
 The reward finder will read QuestBrief's bundled catalogue without Questie or
 QuestieDB. Questie's optional marker integration remains separate. The installed
-0.1.0 build is not changed by this development branch.
+0.1.0 build is replaced only by a separately authorized installation of the
+verified merged package. Installation receipts record that outcome.
 
 ## Sources and boundaries
 
@@ -53,6 +54,12 @@ QuestieDB. Questie's optional marker integration remains separate. The installed
   proves quantity and guaranteed versus choose-one status, leave both unknown.
   Do not default a reward quantity to one, synthesize zero money/XP/reputation,
   treat all alternatives as guaranteed, or sum exclusive choices.
+- Direct item children can also document inputs and intermediate components.
+  Exclude objective/provider/cost references, issued items, transitive acquisition
+  components and item nodes with acquisition facts before the compiled gate.
+  Preserve per-pair exclusions so a repeated occurrence cannot reintroduce them.
+  Unresolved class/race restrictions reject the entire exact quest across source
+  occurrences. Unsupported prerequisite thresholds leave the group unknown.
 - Per-record source references permit later correction. Preserve conflicting
   locations separately; disable waypoint actions for unverified map/coordinates.
 - Normal updates select a new pinned revision, review its source/license changes,
@@ -60,9 +67,9 @@ QuestieDB. Questie's optional marker integration remains separate. The installed
   captured native facts must identify the exact client build, quest ID and
   observation context before enriching the snapshot.
 
-Current guarded coverage is 1,267 quests, 1,977 distinct items and 2,311
-associations. `data/catalog-coverage.json` owns the exact counts. Unsupported
-class/race expressions exclude three records; unsupported optional metadata stays
+Current guarded coverage is recorded in `data/catalog-coverage.json`, and
+`data/catalog-sources.json` records each exclusion and source receipt. Unsupported
+class/race expressions exclude exact quests; unsupported optional metadata stays
 unknown with explicit omission records. There are no static reward quantities,
 choice groups, money, XP, currency or reputation amounts in this source.
 
@@ -82,5 +89,5 @@ data/license, API, UX, adversarial and package reviews precede the PR.
 
 Native appearance, input coexistence, current reward amounts, NPC coordinates
 and combat/taint behavior remain pending in-client checks until actually observed
-in the official Forever client. Do not merge, release or install this new feature
-without further user authorization.
+in the official Forever client. The current user authorization permits reviewed
+merge and installation; it does not authorize a release, tag or publication.

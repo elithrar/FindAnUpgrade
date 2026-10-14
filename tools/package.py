@@ -24,13 +24,18 @@ def validate(root=ROOT):
     actual = {p.relative_to(addon).as_posix() for p in addon.rglob("*") if p.is_file()}
     if actual != SHIPPED: raise ValueError(f"Unexpected addon manifest: extra={actual - SHIPPED}, missing={SHIPPED - actual}")
     toc = (addon / "QuestBrief.toc").read_text(encoding="utf-8")
-    if not re.search(r"^## Interface: 16001$", toc, re.M): raise ValueError("Wrong supported interface")
-    if not re.search(r"^## SavedVariables: QuestBriefDB$", toc, re.M): raise ValueError("SavedVariables ownership changed")
+    metadata={}
+    for line in toc.splitlines():
+        match=re.fullmatch(r"##\s*([^:]+):\s*(.*)",line)
+        if match: metadata.setdefault(match[1].strip().lower(),[]).append(match[2].strip())
+    if metadata.get("interface")!=["16001"] or any(key.startswith("interface-") for key in metadata): raise ValueError("Wrong or duplicate supported interface")
+    if metadata.get("savedvariables")!=["QuestBriefDB"] or "savedvariablespercharacter" in metadata: raise ValueError("SavedVariables ownership changed")
     entries = [line for line in toc.splitlines() if line and not line.startswith("#")]
     if entries != RUNTIME: raise ValueError("Incorrect TOC prerequisites/load order")
     version = re.search(r"^## Version: (\d+\.\d+\.\d+)$", toc, re.M)
     if not version: raise ValueError("Missing semantic version")
     version = version[1]
+    if metadata.get("version")!=[version]: raise ValueError("Duplicate semantic version")
     core = (addon / "Core.lua").read_text(encoding="utf-8")
     if f'version = "{version}"' not in core: raise ValueError("Core/TOC version mismatch")
     if (addon / "README.md").read_bytes() != (root / "README.md").read_bytes(): raise ValueError("Shipped README is stale")

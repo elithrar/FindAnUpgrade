@@ -12,6 +12,21 @@ local function height(f, width, value, minimum)
     local measured = A.Call(f.GetStringHeight, f)
     return M.Number(measured) and math.max(minimum or 16, measured+2) or minimum or 16
 end
+local function cycleHints()
+    local hints={}
+    local binding=M.Text(A.Call(GetBindingKeyForAction,"ITEMCOMPARISONCYCLING"))
+    local function add(text)
+        if M.Text(text) then hints[text]=true end
+    end
+    add(ITEM_COMPARISON_CYCLING_DISABLED_MSG_MAINHAND); add(ITEM_COMPARISON_CYCLING_DISABLED_MSG_OFFHAND)
+    if binding then
+        local function formatted(format)
+            if M.Text(format) then add(A.Call(string.format,format,binding)) end
+        end
+        formatted(ITEM_COMPARISON_SWAP_ITEM_MAINHAND_DESCRIPTION); formatted(ITEM_COMPARISON_SWAP_ITEM_OFFHAND_DESCRIPTION)
+    end
+    return hints
+end
 function V:Create()
     if self.frame then return end
     local f = CreateFrame("Frame", "QuestBriefStack", UIParent, "BackdropTemplate"); self.frame = f
@@ -179,6 +194,22 @@ function V:Tooltips()
     self.tooltip=create(prefix.."ItemTooltip")
     self.tooltip.shoppingTooltips={create(prefix.."Comparison1"),create(prefix.."Comparison2")}
     for _,t in ipairs(self.tooltip.shoppingTooltips) do
+        local addLine=t.AddLine
+        local processInfo=t.ProcessInfo
+        t.ProcessInfo=function(tooltip,...)
+            local previous=tooltip.questBriefItemData
+            tooltip.questBriefItemData=true
+            local ok,result=pcall(processInfo,tooltip,...)
+            tooltip.questBriefItemData=previous
+            if not ok then error(result,0) end
+            return result
+        end
+        -- Native comparison cycling is owned by the global manager. Omit only
+        -- its unsupported instruction while rendering our comparison frames.
+        t.AddLine=function(tooltip,value,...)
+            if self.cycleHints and not tooltip.questBriefItemData and M.Text(value) and self.cycleHints[value] then return end
+            return addLine(tooltip,value,...)
+        end
         t.CompareHeader=CreateFrame("Frame",nil,t); t.CompareHeader:SetPoint("BOTTOMLEFT",t,"TOPLEFT",0,0); t.CompareHeader:SetHeight(20)
         t.CompareHeader.Label=t.CompareHeader:CreateFontString(nil,"OVERLAY","GameTooltipText"); t.CompareHeader.Label:SetPoint("CENTER"); t.CompareHeader:Hide()
     end
@@ -186,42 +217,115 @@ function V:Tooltips()
     if type(TooltipComparisonManager)=="table" then
         for key,fn in pairs(TooltipComparisonManager) do if type(fn)=="function" then self.comparison[key]=fn end end
     end
+    local getData=self.comparison.GetComparisonItemData
+    if type(getData)=="function" then
+        self.comparison.GetComparisonItemData=function(manager,displayedItem)
+            local data=getData(manager,displayedItem)
+            if M.Readable(displayedItem) and displayedItem~=nil and M.Readable(data) and data==nil then self.comparisonCold=true end
+            return data
+        end
+        self.comparisonRetries=true
+    end
     return true
 end
+function V:InspectionOpen()
+    if self.isOpen then return self:isOpen() end
+    return N.Hover.open
+end
+function V:InspectionCurrent(item)
+    return item~=nil and self.item==item and item.button.row==item.row and item.generation==(self.generation or N.Hover.generation) and self:InspectionOpen()
+end
+function V:HasTooltipData(id)
+    if not self:InspectionCurrent(self.item) or not M.Readable(id) or id~=nil and not M.Number(id) then return false end
+    local function matches(t)
+        return A.Visible(t) and (id==nil or A.Call(t.HasDataInstanceID,t,id)==true)
+    end
+    if matches(self.tooltip) then return true end
+    for _,t in ipairs(self.tooltip.shoppingTooltips) do if matches(t) then return true end end
+    return false
+end
 function V:Inspect(button,row,refresh)
+    local previous,outside=self.item,self.itemOutsideAt
+    if refresh and previous and not self:InspectionCurrent(previous) then self:ClearItem(); return end
+    local preserve=refresh and previous and previous.button==button and previous.row.itemID==row.itemID and previous.generation==(self.generation or N.Hover.generation)
     self:ClearItem()
     local open=N.Hover.open
     if self.isOpen then open=self:isOpen() end
-    if not open or not refresh and (not A.Over(self.scroll) or not A.Over(button)) or row.state~="ready" or not self:Tooltips() then return end
-    local data
-    if row.kind=="catalog" then data=A.Call(C_TooltipInfo and C_TooltipInfo.GetHyperlink,row.link)
-    else data=A.Call(C_TooltipInfo and C_TooltipInfo.GetQuestLogItem,row.kind,row.index,row.questID) end
-    if not M.Readable(data) or type(data)~="table" then return end
-    if type(canaccessallvalues)=="function" and A.Call(canaccessallvalues,data)~=true then return end
-    if not M.Readable(data.type) or not M.QuestId(data.id) or data.id~=row.itemID then return end
-    if not Enum or not Enum.TooltipDataType or data.type~=Enum.TooltipDataType.Item then return end
-    self.item={ button=button,row=row,generation=self.generation or N.Hover.generation,data=data }
+    if not open or not refresh and (not A.Over(self.scroll) or not A.Over(button)) or row.state~="ready" or not M.QuestId(row.itemID) or not self:Tooltips() then return end
+    self.item={ button=button,row=row,generation=self.generation or N.Hover.generation,pending=true }
+    local inspection=self.item
+    if preserve then
+        self.itemOutsideAt=outside
+        inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=previous.compareDeadline,previous.compareRetryAt,previous.compareTimedOut
+        inspection.primaryDeadline,inspection.primaryRetryAt=previous.primaryDeadline,previous.primaryRetryAt
+    end
+    local getter=C_TooltipInfo and C_TooltipInfo.GetQuestLogItem
+    if row.kind=="catalog" then getter=C_TooltipInfo and C_TooltipInfo.GetHyperlink end
+    if type(getter)~="function" then self:ClearItem(); return end
+    local ok,data
+    if row.kind=="catalog" then ok,data=pcall(getter,row.link)
+    else ok,data=pcall(getter,row.kind,row.index,row.questID) end
+    if not ok or not M.Readable(data) or not self:InspectionCurrent(inspection) then self:ClearItem(); return end
+    if data==nil then
+        local now=A.Call(GetTime) or 0
+        inspection.primaryDeadline=inspection.primaryDeadline or now+5
+        inspection.primaryRetryAt=now+.2
+        return
+    end
+    if type(data)~="table" or type(canaccessallvalues)=="function" and A.Call(canaccessallvalues,data)~=true
+        or not M.Readable(data.type) or not M.QuestId(data.id) or data.id~=row.itemID
+        or not Enum or not Enum.TooltipDataType or data.type~=Enum.TooltipDataType.Item then self:ClearItem(); return end
+    inspection.pending,inspection.primaryDeadline,inspection.primaryRetryAt=false,nil,nil
+    inspection.data=data
     local t=self.tooltip; t:SetOwner(button,"ANCHOR_NONE"); t:ClearAllPoints()
     local rect=A.Rect(self.frame); local screenWidth=A.Call(UIParent.GetWidth,UIParent); local parentScale=A.Call(UIParent.GetEffectiveScale,UIParent)
     local right=rect and M.Number(screenWidth) and M.Number(parentScale) and screenWidth*parentScale-rect.x-rect.w>300
     t:SetPoint(right and "TOPLEFT" or "TOPRIGHT",self.frame,right and "TOPRIGHT" or "TOPLEFT",right and 6 or -6,0)
     local ok,result=pcall(t.ProcessInfo,t,{tooltipData=data})
-    if not ok or result~=true then self:ClearItem(); return end
+    if not ok or result~=true or not self:InspectionCurrent(inspection) then self:ClearItem(); return end
     self:Compare()
 end
 function V:Compare()
     if not self.item or not self.comparison or not self.comparison.CompareItem then return end
+    if not self:InspectionCurrent(self.item) then self:ClearItem(); return end
+    if self.item.pending then return end
     local should=TooltipUtil and A.Call(TooltipUtil.ShouldDoItemComparison,self.tooltip) == true or false
-    if self.compareState==should then return end
-    self.compareState=should
+    local inspection=self.item; local now=A.Call(GetTime) or 0
+    if not should then
+        inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=nil,nil,nil
+        if self.compareState==false then return end
+        self.compareState=false; if self.comparison.Clear then self.comparison:Clear(self.tooltip) end; return
+    end
+    if inspection.compareDeadline and now>=inspection.compareDeadline then
+        inspection.compareRetryAt=nil; inspection.compareTimedOut=true
+    end
+    if inspection.compareTimedOut or inspection.compareRetryAt and now<inspection.compareRetryAt then self.compareState=true; return end
+    if self.compareState==true and not inspection.compareRetryAt then return end
+    self.compareState=true
     local comparisonItem=A.Call(self.comparison.CreateComparisonItem,self.comparison,self.item.data)
-    if should and comparisonItem then
+    if comparisonItem then
+        -- The native manager caches a nil comparison result by item identity.
+        -- Clear only our clone before retrying so it asks for current metadata.
+        if self.comparisonRetries and self.comparison.comparisonItem and self.comparison.compareInfo==nil then self.comparison:Clear(self.tooltip) end
+        self.comparisonCold=false
+        self.cycleHints=cycleHints()
         local ok=pcall(self.comparison.CompareItem,self.comparison,comparisonItem,self.tooltip,self.tooltip)
-        if not ok then self.comparison:Clear(self.tooltip) end
-    elseif self.comparison.Clear then self.comparison:Clear(self.tooltip) end
+        self.cycleHints=nil
+        if not ok or not self:InspectionCurrent(inspection) then self:ClearItem(); return end
+        if self.comparisonRetries and (self.comparisonCold or self.comparison.compareInfo==nil) then
+            inspection.compareDeadline=inspection.compareDeadline or now+5
+            inspection.compareRetryAt=now+.2
+        else
+            inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=nil,nil,nil
+        end
+    else
+        inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=nil,nil,nil
+        if self.comparison.Clear then self.comparison:Clear(self.tooltip) end
+    end
 end
 function V:ClearItem()
     self.item,self.itemOutsideAt,self.compareState=nil,nil,nil
+    self.comparisonCold=nil
     if self.comparison and self.comparison.Clear then self.comparison:Clear(self.tooltip) end
     if self.tooltip then self.tooltip:Hide(); for _,t in ipairs(self.tooltip.shoppingTooltips) do t:Hide() end end
 end
@@ -233,9 +337,14 @@ function V:ItemContains()
 end
 function V:ItemTransit(now)
     if not self.item then return end
-    if self.item.generation~=(self.generation or N.Hover.generation) then self:ClearItem(); return end
+    if not self:InspectionCurrent(self.item) then self:ClearItem(); return end
     if self:ItemContains() then self.itemOutsideAt=nil
-    else self.itemOutsideAt=self.itemOutsideAt or now; if now-self.itemOutsideAt>=N.Hover.grace then self:ClearItem() end end
+    else self.itemOutsideAt=self.itemOutsideAt or now; if now-self.itemOutsideAt>=N.Hover.grace then self:ClearItem(); return end end
+    local item=self.item
+    if item and item.pending then
+        if now>=item.primaryDeadline then self:ClearItem()
+        elseif now>=item.primaryRetryAt then self:Inspect(item.button,item.row,true) end
+    end
 end
 function V:Contains() return A.Over(self.frame) or self:ItemContains() end
 function V.NewInspector(frame,scroll,isOpen)

@@ -10,6 +10,23 @@ Validation runs with read-only permissions, Python 3.12 and Lupa 2.8. It checks 
 
 GitHub receives the addon ZIP, source ZIP, SHA256SUMS, package receipt and release metadata. Existing asset bytes are verified and never replaced. The package receipt describes the local build; it does not claim an upload or installation. The draft is published after the optional CurseForge step completes or explicitly reports it was skipped.
 
+## Development before publication
+
+Before the first CurseForge publication, subsequent user-authorized iterations
+primarily use direct `main` commits and patch bumps (for example, `0.1.0` to
+`0.1.1`). Complete independent review when requested, fix findings and pass
+`python tools/verify.py` before committing and pushing; verify main CI afterward.
+Use a reviewed PR when branch protection requires one and never bypass required
+checks. An existing PR still needs applicable merge authorization. This iteration
+workflow does not authorize publication, credentials, release tags or installation.
+PR #2's unpublished finder candidate uses `0.1.1`; its earlier `0.2.0` build label
+was replaced before merge to follow this workflow.
+
+Merge and installation may be authorized separately from this default workflow.
+An authorized installation must use the final validated package and record the
+copied payload separately from pending in-game acceptance. Neither action
+authorizes a release, tag, CurseForge publication or credential setup.
+
 ## CurseForge setup
 
 Create or use the QuestBrief WoW project, then configure these in the repository's **Settings → Secrets and variables → Actions**:

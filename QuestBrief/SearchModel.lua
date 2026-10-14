@@ -12,6 +12,7 @@ function S:Context()
     return {level=A.Call(UnitLevel,"player"),classID=M.QuestId(class),classToken=M.Text(token),raceID=M.QuestId(race),faction=M.Text(A.Call(UnitFactionGroup,"player"))}
 end
 function S:Eligibility(row,context)
+    if A.Call(C_QuestLog and C_QuestLog.IsOnQuest,row.id)==true then return true,"In quest log" end
     local source=row.source or {}; local unknown=source.eligibilityUnknown
     if source.faction and context.faction and source.faction~=context.faction then return false end
     if source.classTokens and #source.classTokens>0 then
@@ -31,9 +32,8 @@ function S:Eligibility(row,context)
     if complete==true and repeatable==false then return false end
     if complete==true and repeatable~=true then return false end
     if A.Call(C_QuestLog and C_QuestLog.IsQuestDisabledForSession,row.id)==true then return false end
-    if A.Call(C_QuestLog and C_QuestLog.IsOnQuest,row.id)==true then return true,"In quest log" end
     local low,high=source.minimum,source.maximum
-    if M.Number(context.level) and M.Number(low) and low>context.level then return true,"Requires level "..low end
+    if M.Number(context.level) and M.Number(low) and low>context.level then return true,"Recorded minimum level "..low end
     if M.Number(context.level) and M.Number(high) and high>0 and high<context.level then return false end
     local function completed(id)
         id=M.Number(id) and M.QuestId(math.abs(id)); if not id then return nil end
@@ -51,13 +51,13 @@ function S:Eligibility(row,context)
             elseif done==true then doneCount=doneCount+1 else unreadable=unreadable+1 end
         end
         local required=source.prerequisiteCount or #group
-        if doneCount+unreadable<required then return true,"Requires earlier quests" end
+        if doneCount+unreadable<required then return true,"Prerequisites unconfirmed" end
         unknown=unknown or unreadable>0
     elseif single==nil and group~=nil then unknown=true end
     if M.Readable(single) and type(single)=="table" and #single>0 and #single<=128 then
         local any,unreadable=false,false
         for _,id in ipairs(single) do local done=completed(id); any=any or done==true; unreadable=unreadable or done==nil end
-        if not any and not unreadable then return true,"Requires earlier quests" end
+        if not any and not unreadable then return true,"Prerequisites unconfirmed" end
         unknown=unknown or unreadable
     elseif single~=nil then unknown=true end
     -- The catalogue is not an authoritative server availability API. Profession,
@@ -65,7 +65,8 @@ function S:Eligibility(row,context)
     return true,complete==true and "Repeatable - availability unconfirmed" or unknown and "Availability unconfirmed" or "Availability unconfirmed"
 end
 function S:Item(meta)
-    local id=meta.itemID; if self.cache[id] then return self.cache[id] end
+    local id=meta.itemID
+    if self.cache[id] and (self.cache[id].state=="ready" or A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true) then return self.cache[id] end
     local row={itemID=id,name=meta.name,kind="catalog",state="pending",catalog=true,quantity=meta.quantity,group=meta.group}
     local fn=C_Item and C_Item.GetItemInfo or GetItemInfo
     local name,link,quality,level,minimum,slot,texture
@@ -105,16 +106,17 @@ function S:Query(filter)
     local out={}; self.needed={}; self.questNeeded={}; self.unknownLevels=0; local needSet={}; local context=self:Context(); local query=(filter.query or ""):lower()
     if not M.Number(context.level) or context.level<1 then return out,"Player level unavailable" end
     for _,record in ipairs(N.Catalog.order) do
-        if not N.Catalog:Metadata(record) then self.questNeeded[#self.questNeeded+1]=record.id end
+        if not N.Catalog:Metadata(record,context.level) then self.questNeeded[#self.questNeeded+1]=record.id end
         if not M.Number(record.level) or record.level<1 then self.unknownLevels=self.unknownLevels+1 end
         if M.Number(record.level) and record.level>=filter.minimum and record.level<=filter.maximum then
             local eligible,note=self:Eligibility(record,context)
             if eligible then
+                if not self.currentItems[record.id] and A.Call(HaveQuestRewardData,record.id)==true then self:Reward(record) end
                 local match=query=="" or (record.title or ""):lower():find(query,1,true) or tostring(record.id):find(query,1,true)
                 local items={}
                 for _,meta in ipairs(self.currentItems[record.id] or record.items) do
                     local item=self:Item(meta)
-                    if item.state~="ready" and not needSet[item.itemID] and #self.needed<128 then needSet[item.itemID]=true; self.needed[#self.needed+1]=item.itemID end
+                    if item.state~="ready" and not needSet[item.itemID] then needSet[item.itemID]=true; self.needed[#self.needed+1]=item.itemID end
                     local usable=self.usability[record.id] and self.usability[record.id][item.itemID]
                     if S.SlotMatch(item.slot,filter.slot) and (not filter.usable or usable~=false and (not item.minimum or item.minimum<=context.level)) then
                         items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)

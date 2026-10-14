@@ -1,5 +1,11 @@
 # Reward finder independent API and data review
 
+Historical review of the candidate captured at
+`75e88b03b6e8e97500af5ccbd3e7d28ea3424235`. Its counts and verdict describe that
+snapshot. The subsequent extensive review found additional defects; current
+fixes and independent checks are in the `REVIEW-LOOP-*.md` reports. Current
+coverage is recorded in `data/catalog-coverage.json`.
+
 Final source and mock re-review found no remaining concrete blocker in the reviewed finder interactions. The findings below were corrected by the implementation agent and independently exercised again. This verdict supports a reviewable development PR; it does not establish live rendering, quest cache coverage, taint safety or current server reward correctness.
 
 The review covered `Catalog.lua`, `SearchModel.lua`, `Search.lua`, `Launcher.lua`, their reward/tooltip integration, the importer/generator and bundled data. It followed repository `AGENTS.md` and the user's WoW addon development skill's client, ownership, layout, UI and validation references. The reviewer did not edit runtime, tools or tests, operate the game, install the candidate, change game configuration or publish anything.

@@ -20,17 +20,76 @@ function S:CloseMenu()
     self.menu=nil
     for _,dropdown in ipairs({self.slot,self.sort}) do if type(dropdown.CloseMenu)=="function" then dropdown:CloseMenu() end end
     if self.footerTooltip then self.footerTooltip:Hide() end
+    self:CloseTextTip()
+end
+function S:CloseTextTip()
+    if self.textTooltip then self.textTooltip:Hide() end
+end
+function S:TextTip(owner,value)
+    self:CloseTextTip()
+    if not M.Text(value) or not self:Visible() or not A.Over(self.scroll) or not A.Over(owner) or self:MenuOpen() or self.copyFrame and self.copyFrame:IsShown() then return end
+    self.inspector:ClearItem(); self.footerTooltip:Hide()
+    if not self.textTooltip then self.textTooltip=CreateFrame("GameTooltip","QuestBriefSearchTextTooltip",self.frame,"SharedTooltipTemplate") end
+    self.textTooltip:SetOwner(owner,"ANCHOR_TOP"); self.textTooltip:SetText(value); self.textTooltip:Show()
 end
 function S:Changed(reset)
     self:CloseMenu(); self.inspector:ClearItem()
     self.dirty=true; self.changeAt=(A.Call(GetTime) or 0)+.15
-    if reset then self.offset=0 end
+    if reset then self.offset=0; self.bottomTarget=nil end
+    self:Wake()
+end
+function S:Wake()
+    if self:Visible() and not self.frame:GetScript("OnUpdate") then self.frame:SetScript("OnUpdate",function(_,elapsed) self:Tick(elapsed) end) end
+end
+function S:DataChanged()
+    self.dirty=true
+    local deadline=(A.Call(GetTime) or 0)+.15
+    self.changeAt=math.min(self.changeAt or deadline,deadline)
+    self:Wake()
+end
+function S:Enqueue(kind,ids)
+    self.queues=self.queues or {}; self.queued=self.queued or {}; self.cursors=self.cursors or {}
+    local queue=self.queues[kind] or {}; self.queues[kind]=queue
+    local queued=self.queued[kind] or {}; self.queued[kind]=queued
+    local requested=kind=="item" and self.itemRequests or kind=="reward" and self.rewardRequests or self.questRequests
+    for _,id in ipairs(ids) do if not requested[id] and not queued[id] then queue[#queue+1]=id; queued[id]=true end end
+    self:Wake()
+end
+function S:NextRequest(kind)
+    local queue=self.queues and self.queues[kind]; local cursor=self.cursors[kind] or 1
+    local id=queue and queue[cursor]
+    if id then self.cursors[kind]=cursor+1 end
+    return id
+end
+function S:HasRequests()
+    for kind,queue in pairs(self.queues or {}) do if queue[self.cursors[kind] or 1] then return true end end
+    return false
+end
+function S:RequestStep(now)
+    if now<(self.nextRequestAt or 0) then return end
+    self.nextRequestAt=now+.1
+    for _=1,2 do
+        local id=self:NextRequest("item"); if not id then break end
+        self.itemRequests[id]=true; A.Call(C_Item and C_Item.RequestLoadItemDataByID,id)
+        if not self:Visible() then return end
+    end
+    for _=1,2 do
+        local kind=self.requestTurn or "reward"; local other=kind=="reward" and "quest" or "reward"
+        local id=self:NextRequest(kind)
+        if not id then kind=other; id=self:NextRequest(kind) end
+        self.requestTurn=kind=="reward" and "quest" or "reward"
+        if id and kind=="quest" then self.questRequests[id]=true; A.Call(C_QuestLog and C_QuestLog.RequestLoadQuestByID,id)
+        elseif id then self.rewardRequests[id]=true; if A.Call(HaveQuestRewardData,id)~=true then A.Call(C_TaskQuest and C_TaskQuest.RequestPreloadRewardData,id) end end
+        if not self:Visible() then return end
+        if not id then break end
+    end
 end
 function S:Dropdown(parent,width,entries,get,choose)
     local d=CreateFrame("DropdownButton",nil,parent,"WowStyle1DropdownTemplate"); d:SetSize(width,24)
     d.Text:ClearAllPoints(); d.Text:SetPoint("LEFT",d,"LEFT",9,0); d.Text:SetWidth(width-31); d.Text:SetHeight(24); d.Text:SetJustifyH("LEFT"); d.Text:SetJustifyV("MIDDLE"); d.Text:SetWordWrap(false); U:Font(d.Text,12)
     d:SetupMenu(function(_,root)
-        if self.inspector then self.inspector:ClearItem() end; root:SetScrollMode(220)
+        if self.inspector then self.inspector:ClearItem() end; if self.CloseTextTip then self:CloseTextTip() end; root:SetScrollMode(220)
+        root:AddMenuReleasedCallback(function() self:Wake() end)
         for _,entry in ipairs(entries) do
             local value,label=entry[1],entry[2]
             local row=root:CreateRadio(label,function(v) return get()==v end,function(v) choose(v); d:SetDefaultText(label) end,value)
@@ -54,6 +113,7 @@ function S:Create()
     self.placeholder=text(self.search,11,{.7,.7,.72}); self.placeholder:SetPoint("LEFT",7,0); self.placeholder:SetText("Quest or reward")
     self.search:SetScript("OnTextChanged",function(e,user) self.placeholder:SetShown(e:GetText()==""); if user then self.filter.query=e:GetText():sub(1,100); self:Changed(true) end end)
     self.search:SetScript("OnEscapePressed",function(e) e:ClearFocus(); f:Hide() end)
+    self.search:SetScript("OnEnterPressed",function(e) e:ClearFocus() end)
     self.usable=CreateFrame("CheckButton",nil,f,"UICheckButtonTemplate"); self.usable:SetPoint("TOPLEFT",12,-77); self.usable:SetSize(24,24); self.usable.Text:SetText("Usable for my class"); self.usable.Text:SetWidth(142); U:Font(self.usable.Text,12); self.usable:SetHitRectInsets(0,-144,0,0)
     self.usable:SetScript("OnClick",function(b) self.filter.usable=b:GetChecked()==true; self:Changed(true) end)
     self.levelLabel=text(f,11); self.levelLabel:SetPoint("TOPLEFT",194,-83); self.levelLabel:SetText("Quest level")
@@ -81,20 +141,30 @@ function S:Create()
     f:SetScript("OnSizeChanged",function() if self.inspector then self:Fit(); self:Changed() end end)
     f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self.minimumInput:ClearFocus(); self.maximumInput:ClearFocus(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if self.copyFrame then self.copyFrame:Hide() end end)
     f:SetScript("OnEvent",function(_,event,id)
+        if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" then
+            id=M.QuestId(id); if not id or not (N.SearchModel.cache[id] or self.itemRequests and self.itemRequests[id]) then return end
+            N.SearchModel.cache[id]=nil
+        elseif event=="QUEST_DATA_LOAD_RESULT" then
+            id=M.QuestId(id); if not id or not N.Catalog.records[id] then return end
+            N.Catalog:Invalidate(id); N.SearchModel.currentItems[id],N.SearchModel.currentStamp[id],N.SearchModel.usability[id]=nil,nil,nil
+        elseif event=="QUEST_LOG_UPDATE" or event=="QUEST_TURNED_IN" or event=="PLAYER_LEVEL_UP" or event=="PLAYER_ENTERING_WORLD" then N.Catalog:Invalidate()
+        end
+        if event=="PLAYER_LEVEL_UP" or event=="PLAYER_EQUIPMENT_CHANGED" or event=="QUEST_LOG_UPDATE" or event=="QUEST_TURNED_IN" or event=="PLAYER_ENTERING_WORLD" or event=="SPELLS_CHANGED" or event=="SKILL_LINES_CHANGED" then N.SearchModel.usability,N.SearchModel.currentItems,N.SearchModel.currentStamp={},{},{} end
         if not self:Visible() then return end
-        if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" then if not self.itemRequests[id] then return end; N.SearchModel.cache[id]=nil
-        elseif event=="QUEST_DATA_LOAD_RESULT" then if not self.questRequests[id] and not self.rewardRequests[id] then return end
-        elseif event=="TOOLTIP_DATA_UPDATE" then local i=self.inspector; if i.item and A.Call(i.tooltip.HasDataInstanceID,i.tooltip,id)==true then i:Inspect(i.item.button,i.item.row,true) end; return
+        if event=="TOOLTIP_DATA_UPDATE" then
+            local i=self.inspector
+            if i.item and not i:InspectionCurrent(i.item) then i:ClearItem()
+            elseif i.item and i:HasTooltipData(id) then i:Inspect(i.item.button,i.item.row,true); self:Wake() end
+            return
         elseif event=="UI_SCALE_CHANGED" or event=="DISPLAY_SIZE_CHANGED" then self:Fit()
         elseif event=="PLAYER_LEVEL_UP" and not self.manualRange then self:DefaultRange(id)
         elseif event=="ADDON_LOADED" then N.Catalog:Begin() end
-        if event=="PLAYER_LEVEL_UP" or event=="PLAYER_EQUIPMENT_CHANGED" or event=="QUEST_LOG_UPDATE" or event=="SPELLS_CHANGED" or event=="SKILL_LINES_CHANGED" then N.SearchModel.usability,N.SearchModel.currentItems,N.SearchModel.currentStamp={},{},{} end
         if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" or event=="QUEST_DATA_LOAD_RESULT" then
-            self.dirty=true; self.changeAt=(A.Call(GetTime) or 0)+.15; return
+            self:DataChanged(); return
         end
         self:Changed()
     end)
-    for _,event in ipairs({"ITEM_DATA_LOAD_RESULT","GET_ITEM_INFO_RECEIVED","QUEST_DATA_LOAD_RESULT","QUEST_LOG_UPDATE","QUEST_TURNED_IN","PLAYER_EQUIPMENT_CHANGED","PLAYER_LEVEL_UP","UI_SCALE_CHANGED","DISPLAY_SIZE_CHANGED","ADDON_LOADED","TOOLTIP_DATA_UPDATE"}) do f:RegisterEvent(event) end
+    for _,event in ipairs({"ITEM_DATA_LOAD_RESULT","GET_ITEM_INFO_RECEIVED","QUEST_DATA_LOAD_RESULT","QUEST_LOG_UPDATE","QUEST_TURNED_IN","PLAYER_ENTERING_WORLD","PLAYER_EQUIPMENT_CHANGED","PLAYER_LEVEL_UP","UI_SCALE_CHANGED","DISPLAY_SIZE_CHANGED","ADDON_LOADED","TOOLTIP_DATA_UPDATE"}) do f:RegisterEvent(event) end
     for _,event in ipairs({"SPELLS_CHANGED","SKILL_LINES_CHANGED"}) do pcall(f.RegisterEvent,f,event) end
     UISpecialFrames=UISpecialFrames or {}; table.insert(UISpecialFrames,"QuestBriefSearch")
 end
@@ -106,41 +176,36 @@ function S:DefaultRange(level)
 end
 function S:Fit()
     local w,h=A.Call(UIParent.GetWidth,UIParent),A.Call(UIParent.GetHeight,UIParent)
-    if M.Number(w) and M.Number(h) then self.frame:SetScale(math.min(1,(w-24)/self.frame:GetWidth(),(h-24)/self.frame:GetHeight())) end
+    if M.Number(w) and M.Number(h) then self.frame:SetScale(math.min(N.Core.profile.scale,(w-24)/self.frame:GetWidth(),(h-24)/self.frame:GetHeight())) end
 end
 function S:Toggle()
     if not N.Core.supported or not N.Core.profile.enabled then N.Core:Print("Enable QuestBrief to search rewards."); return end
     self:Create(); if self:Visible() then self.frame:Hide(); return end
     N.Hover:Dismiss("search"); self.questRequests,self.rewardRequests,self.itemRequests,self.pending={}, {},{},false
+    self.queues,self.queued,self.cursors,self.nextRequestAt,self.requestTurn={},{},{},nil,nil
     N.SearchModel.usability,N.SearchModel.currentItems,N.SearchModel.currentStamp={},{},{}
     self.dataDeadline=(A.Call(GetTime) or 0)+5; if not self.manualRange then self:DefaultRange() end
     self.usable:SetChecked(self.filter.usable); N.Catalog:Begin(); self:Fit(); self.frame:Show(); self.search:SetFocus(); self:Changed(true)
-    self.frame:SetScript("OnUpdate",function(_,elapsed) self:Tick(elapsed) end)
+    self:Wake()
 end
 function S:Tick()
     if not self:Visible() then return end
     local now=A.Call(GetTime) or 0
-    if self:MenuOpen() then self.inspector:ClearItem(); return end
+    if now<(self.menuCheckAt or 0) then return end
+    if self:MenuOpen() then self.inspector:ClearItem(); self.menuCheckAt=now+.1; return end
+    self.menuCheckAt=nil
     self.inspector:ItemTransit(now); self.inspector:Compare()
     if self.inspector.item then return end
     if N.Catalog:Step() then self.dirty=true; self.changeAt=self.changeAt or now+.2 end
     if self.dirty and now>=(self.changeAt or 0) then self:Refresh(); self.changeAt=nil end
-    for _=1,2 do
-        local quest=self.questQueue and self.questQueue[self.questCursor or 1]
-        if quest then
-            self.questCursor=(self.questCursor or 1)+1
-            if not self.questRequests[quest] then self.questRequests[quest]=true; A.Call(C_QuestLog and C_QuestLog.RequestLoadQuestByID,quest) end
-        end
-        local id=self.itemQueue and self.itemQueue[self.itemCursor or 1]
-        if not id then break end
-        self.itemCursor=(self.itemCursor or 1)+1
-        if not self.itemRequests[id] then self.itemRequests[id]=true; A.Call(C_Item and C_Item.RequestLoadItemDataByID,id) end
-    end
+    self:RequestStep(now)
+    if not self:Visible() then return end
     if self.pending and now>=self.dataDeadline then self.pending=false; self:Render() end
+    if not self.dirty and not self.pending and not self.inspector.item and (N.Catalog.done or not N.Catalog.ids) and not self:HasRequests() then self.frame:SetScript("OnUpdate",nil) end
 end
 function S:Refresh()
     self.dirty=false; self.inspector:ClearItem(); self.inspector.generation=self.inspector.generation+1
-    self.results,self.error=N.SearchModel:Query(self.filter); self.itemQueue=N.SearchModel.needed; self.itemCursor=1; self.questQueue=N.SearchModel.questNeeded; self.questCursor=1; self:LayoutResults()
+    self.results,self.error=N.SearchModel:Query(self.filter); self:Enqueue("item",N.SearchModel.needed); self:Enqueue("quest",N.SearchModel.questNeeded); self:LayoutResults()
     local count=#self.results.." quests"
     if N.Catalog.ids and not N.Catalog.done then count="Indexing rewards - "..math.floor((N.Catalog.cursor-1)/math.max(1,#N.Catalog.ids)*100).."% · "..count end
     if N.SearchModel.unknownLevels>0 then count=count.." · "..N.SearchModel.unknownLevels.." levels unavailable" end
@@ -152,17 +217,25 @@ function S:LayoutResults()
     for i,row in ipairs(self.results) do self.positions[i]=y; y=y+(self.heights and self.heights[row.id] or 116)+5 end
     self.contentHeight=y; self.child:SetWidth(self.frame:GetWidth()-38); self.child:SetHeight(math.max(y,1))
     self.maximum=math.max(0,y-(self.frame:GetHeight()-158)); self.refreshing=true; self.bar:SetMinMaxValues(0,self.maximum); self.bar:SetShown(self.maximum>0); self.refreshing=false
-    if self.offset>self.maximum then self.offset=self.maximum; self.scroll:SetVerticalScroll(self.offset); self.refreshing=true; self.bar:SetValue(self.offset); self.refreshing=false end
+    if self.bottomTarget or self.offset>self.maximum then self.offset=self.maximum; self.scroll:SetVerticalScroll(self.offset); self.refreshing=true; self.bar:SetValue(self.offset); self.refreshing=false end
 end
 function S:Card(index)
     if self.cards[index] then return self.cards[index] end
     local c=CreateFrame("Frame",nil,self.child,"BackdropTemplate"); self.cards[index]=c; surface(c); c:EnableMouse(true)
     c.title,c.tag,c.location,c.evidence=text(c,13),text(c,10,{.7,.7,.72}),text(c,11,{.7,.7,.72}),text(c,10,{.7,.7,.72})
     c.title:SetPoint("TOPLEFT",8,-7); c.tag:SetPoint("TOPRIGHT",-8,-9); c.tag:SetJustifyH("RIGHT"); c.location:SetPoint("TOPLEFT",8,-27); c.evidence:SetPoint("TOPLEFT",8,-42)
+    c.titleHit=CreateFrame("Frame",nil,c); c.titleHit:SetPoint("TOPLEFT",8,-5); c.titleHit:SetHeight(18); c.titleHit:EnableMouse(true)
+    c.titleHit:SetScript("OnEnter",function() if c.row then self:TextTip(c.titleHit,c.title:GetText()) end end); c.titleHit:SetScript("OnLeave",function() self:CloseTextTip() end)
+    c.titleHit:SetScript("OnMouseUp",function(_,button) if button=="RightButton" and c.row and A.Over(self.scroll) and A.Over(c.titleHit) then self:ContextMenu(c.row,c) end end)
+    c.locationHit=CreateFrame("Frame",nil,c); c.locationHit:SetPoint("TOPLEFT",8,-25); c.locationHit:SetHeight(16); c.locationHit:EnableMouse(true)
+    c.locationHit:SetScript("OnEnter",function() if c.row then self:TextTip(c.locationHit,c.location:GetText()) end end); c.locationHit:SetScript("OnLeave",function() self:CloseTextTip() end)
+    c.locationHit:SetScript("OnMouseUp",function(_,button) if button=="RightButton" and c.row and A.Over(self.scroll) and A.Over(c.locationHit) then self:ContextMenu(c.row,c) end end)
+    c.giver=CreateFrame("Button",nil,c); c.giver:SetPoint("TOPRIGHT",-8,-26); c.giver:SetSize(80,16); c.giver.text=text(c.giver,10,{1,.82,.2}); c.giver.text:SetAllPoints(); c.giver.text:SetJustifyH("RIGHT")
+    c.giver:SetScript("OnClick",function() if c.row and A.Over(self.scroll) and A.Over(c.giver) then self:LocationMenu(c.row,c.giver) end end)
     c.icons={}; c.footer={text(c,11),text(c,11),text(c,11)}; c.footerHits={}
     for i=1,3 do
         local hit=CreateFrame("Frame",nil,c); c.footerHits[i]=hit; hit:EnableMouse(true); hit:SetHeight(18)
-        hit:SetScript("OnEnter",function() if A.Over(self.scroll) and A.Over(hit) and not self:MenuOpen() and hit.value then self.inspector:ClearItem(); self.footerTooltip:SetOwner(hit,"ANCHOR_TOP"); self.footerTooltip:SetText(hit.value); self.footerTooltip:Show() end end)
+        hit:SetScript("OnEnter",function() if A.Over(self.scroll) and A.Over(hit) and not self:MenuOpen() and hit.value then self:CloseTextTip(); self.inspector:ClearItem(); self.footerTooltip:SetOwner(hit,"ANCHOR_TOP"); self.footerTooltip:SetText(hit.value); self.footerTooltip:Show() end end)
         hit:SetScript("OnLeave",function() self.footerTooltip:Hide() end)
     end
     c.more=CreateFrame("Button",nil,c); c.more:SetSize(80,16); c.more.text=text(c.more,10); c.more.text:SetAllPoints(); c.more:SetPoint("TOPRIGHT",-8,-42)
@@ -174,20 +247,22 @@ function S:Icon(card,index)
     if card.icons[index] then return card.icons[index] end
     local b=CreateFrame("Button",nil,card); card.icons[index]=b; b:SetSize(28,28); b.icon=b:CreateTexture(nil,"ARTWORK"); b.icon:SetAllPoints(); b.border=b:CreateTexture(nil,"OVERLAY"); b.border:SetAllPoints(); b.border:SetTexture("Interface\\Common\\WhiteIconFrame")
     b.name,b.group,b.count=text(card,11),text(card,10,{.7,.7,.72}),text(b,10); b.count:SetPoint("BOTTOMRIGHT",-1,1)
-    b:SetScript("OnEnter",function() self.footerTooltip:Hide(); if b.row then self.inspector:Inspect(b,b.row) end end); b:SetScript("OnLeave",function() self.inspector.itemOutsideAt=nil end)
+    b:SetScript("OnEnter",function() self.footerTooltip:Hide(); self:CloseTextTip(); if b.row then self.inspector:Inspect(b,b.row) end; self:Wake() end); b:SetScript("OnLeave",function() self.inspector.itemOutsideAt=nil end)
     b:RegisterForClicks("RightButtonUp"); b:SetScript("OnClick",function() if A.Over(self.scroll) and A.Over(b) then self:ContextMenu(card.row,card) end end)
     return b
 end
 function S:Fill(card,row)
-    card.row=row; local width=self.child:GetWidth(); card:SetWidth(width); card.title:SetWidth(width-155); card.title:SetText("["..row.level.."] "..(row.title or ("Quest "..row.id)))
+    card.row=row; local width=self.child:GetWidth(); card:SetWidth(width); card.title:SetWidth(width-155); card.titleHit:SetWidth(width-155); card.title:SetText("["..row.level.."] "..(row.title or ("Quest "..row.id)))
     local status=M.Status(row.id); card.tag:SetText(status=="verifiedNew" and "New" or status=="verifiedUpdated" and "Modified" or "")
-    card:SetBackdropColor(.06+(status=="verifiedNew" and .045 or 0),.06+(status=="verifiedUpdated" and .045 or 0),.07,.97)
+    local accent=N.Core.profile.accents and status; local strength=N.Core.profile.strength
+    card:SetBackdropColor(.06+(accent=="verifiedNew" and .08*strength or 0),.06+(accent=="verifiedUpdated" and .08*strength or 0),.07,.97)
     local location=self.locationChoice[row.id] or N.Catalog:Location(row.id); row.location=location
-    local place=location and ((location.zone and location.zone.." · " or "")..location.name..(N.SearchModel.Coordinates(location) and " · "..string.format("%.1f, %.1f",location.x*100,location.y*100) or "")) or "Quest giver unavailable"
-    card.location:SetWidth(width-16); card.location:SetText(place); card.evidence:SetWidth(width-100); card.evidence:SetText(row.evidence)
+    local place=self:LocationLabel(location); local locations=N.Catalog:Locations(row.id); local locationWidth=width-(#locations>1 and 100 or 16)
+    card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
+    card.location:SetWidth(locationWidth); card.locationHit:SetWidth(locationWidth); card.location:SetText(place); card.evidence:SetWidth(width-100); card.evidence:SetText(row.evidence)
     local reward,catalog,usabilityChanged=N.SearchModel:Reward(row); local items={}; local matching={}
     for _,item in ipairs(row.items) do matching[item.itemID]=true end
-    if usabilityChanged then self.dirty=true; self.changeAt=(A.Call(GetTime) or 0)+.15 end
+    if usabilityChanged then self:DataChanged() end
     for _,group in ipairs({{reward.items,"Guaranteed"},{reward.choices,"Choose one"}}) do for _,item in ipairs(group[1].items or {}) do if matching[item.itemID] and (not self.filter.usable or item.usable~=false) then items[#items+1]={item=item,label=group[2]} end end end
     for _,item in ipairs(catalog) do items[#items+1]={item=item,label="Recorded reward"} end
     local limit=self.expanded[row.id] and #items or math.min(4,#items); local columns=math.max(1,math.floor((width-16)/118)); local chip=(width-16)/columns
@@ -215,21 +290,35 @@ function S:Fill(card,row)
     end
     card:SetHeight(height); self.heights=self.heights or {}; local resized=self.heights[row.id]~=height; self.heights[row.id]=height
     if reward.state=="pending" and (A.Call(GetTime) or 0)<self.dataDeadline then self.pending=true end
-    N.Rewards.Request(row.id,self.rewardRequests,true)
+    self:Enqueue("reward",{row.id})
     return height,resized
 end
 function S:Render()
     if not self.results then return end
-    self.inspector:ClearItem(); local first,last=1,0; local bottom=self.offset+self.frame:GetHeight()-158
-    for i,row in ipairs(self.results) do if self.positions[i]+(self.heights and self.heights[row.id] or 116)>=self.offset and self.positions[i]<=bottom then if last==0 then first=i end; last=i end end
-    local count,resized=0,false
-    for i=first,last do count=count+1; local c=self:Card(count); c:ClearAllPoints(); c:SetPoint("TOPLEFT",0,-self.positions[i]); local _,changed=self:Fill(c,self.results[i]); resized=resized or changed; c:Show() end
-    for i=count+1,#self.cards do self.cards[i].row=nil; self.cards[i]:Hide() end
-    if resized and not self.measuring then self.measuring=true; self:LayoutResults(); self:Render(); self.measuring=false end
+    self:CloseTextTip(); self.footerTooltip:Hide(); self.inspector:ClearItem()
+    for _=1,4 do
+        local first,last=1,0; local bottom=self.offset+self.frame:GetHeight()-158
+        for i,row in ipairs(self.results) do if self.positions[i]+(self.heights and self.heights[row.id] or 116)>=self.offset and self.positions[i]<=bottom then if last==0 then first=i end; last=i end end
+        local count,resized=0,false
+        for i=first,last do count=count+1; local c=self:Card(count); c.resultIndex=i; c:ClearAllPoints(); c:SetPoint("TOPLEFT",0,-self.positions[i]); local _,changed=self:Fill(c,self.results[i]); resized=resized or changed; c:Show() end
+        for i=count+1,#self.cards do self.cards[i].row=nil; self.cards[i]:Hide() end
+        if not resized then return end
+        self:LayoutResults()
+    end
+    -- Keep final anchors and range coherent even if old estimates reveal more
+    -- rows than four passes can settle. The scheduler finishes that work later.
+    local bottom=self.offset+self.frame:GetHeight()-158
+    for _,card in ipairs(self.cards) do
+        local y=card.row and self.positions[card.resultIndex]
+        if y and y+card:GetHeight()>=self.offset and y<=bottom then card:ClearAllPoints(); card:SetPoint("TOPLEFT",0,-y)
+        else card.row=nil; card:Hide() end
+    end
+    self:DataChanged()
 end
 function S:Scroll(value)
     if not M.Number(value) then return end
-    self:CloseMenu(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self.offset=math.max(0,math.min(self.maximum or 0,value)); self.scroll:SetVerticalScroll(self.offset); self.refreshing=true; self.bar:SetValue(self.offset); self.refreshing=false; self:Render()
+    local maximum=self.maximum or 0; self.bottomTarget=maximum>0 and value>=maximum
+    self:CloseMenu(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self.offset=math.max(0,math.min(maximum,value)); self.scroll:SetVerticalScroll(self.offset); self.refreshing=true; self.bar:SetValue(self.offset); self.refreshing=false; self:Render()
 end
 function S:Copy(value)
     if not M.Text(value) then return end
@@ -246,16 +335,52 @@ function S:ContextMenu(row,owner)
     if not row or not self:Visible() or not MenuUtil or type(MenuUtil.CreateContextMenu)~="function" then return end
     self:CloseMenu(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self.search:ClearFocus()
     local location=row.location; local coordinates=N.SearchModel.Coordinates(location); local wowhead=N.SearchModel.Wowhead(row.id)
+    local waypointReason=not coordinates and "Recorded coordinates unavailable." or location.phase and "Recorded location depends on phase or conflicts with other records." or A.Call(C_Map and C_Map.CanSetUserWaypointOnMap,location.mapID)~=true and "This map cannot accept a user waypoint." or nil
+    local npcName=location and location.nameKnown==true and M.Text(location.name) or nil
     self.menu=MenuUtil.CreateContextMenu(owner,function(_,root)
-        root:AddMenuReleasedCallback(function(menu) if self.menu==menu then self.menu=nil end end)
-        local function button(label,callback,enabled)
-            local entry=root:CreateButton(label,callback); entry:SetEnabled(enabled~=false); entry:AddInitializer(function(b) b.fontString:SetFontObject(self.menuFont) end); return entry
+        self:MenuLifetime(root)
+        local function button(label,callback,enabled,reason)
+            local entry=root:CreateButton(label,callback); entry:SetEnabled(enabled~=false); self:MenuFont(entry)
+            if reason then entry:SetTooltip(function(t) t:SetText(reason) end) end; return entry
         end
-        button("Set waypoint",function() if not N.SearchModel.Waypoint(location) then N.Core:Print("Waypoint unavailable.") end end,coordinates~=nil and not location.phase and A.Call(C_Map and C_Map.CanSetUserWaypointOnMap,location.mapID)==true)
-        button("Copy coordinates",function() self:Copy(coordinates) end,coordinates~=nil)
+        button("Set waypoint",function() if not N.SearchModel.Waypoint(location) then N.Core:Print("Waypoint unavailable.") end end,waypointReason==nil,waypointReason)
+        button("Copy coordinates",function() self:Copy(coordinates) end,coordinates~=nil,not coordinates and "Recorded coordinates unavailable." or nil)
         button("Copy quest ID",function() self:Copy(tostring(row.id)) end)
-        button("Copy NPC name",function() self:Copy(location and location.name) end,location~=nil)
+        button("Copy NPC name",function() self:Copy(npcName) end,npcName~=nil,not npcName and "Recorded NPC name unavailable." or nil)
         local link=button("Copy Wowhead link",function() self:Copy(wowhead) end,wowhead~=nil)
         link:SetTooltip(function(t) t:SetText(wowhead and "Forever quest reference" or "No catalogue reference for this variant.") end)
+        if #N.Catalog:Locations(row.id)>1 then local giver=button("Choose location"); self:GiverChoices(giver,row) end
     end)
+end
+function S:MenuFont(entry)
+    entry:AddInitializer(function(button) button.fontString:SetFontObject(self.menuFont) end)
+end
+function S:MenuLifetime(root)
+    root:AddMenuReleasedCallback(function(menu) if self.menu==menu then self.menu=nil end; self:Wake() end)
+end
+function S:LocationLabel(location)
+    if not location then return "Quest giver unavailable" end
+    local label=(location.zone and location.zone.." · " or "")..location.name
+    if N.SearchModel.Coordinates(location) then label=label.." · "..string.format("%.1f, %.1f",location.x*100,location.y*100) end
+    return label
+end
+function S:GiverChoices(root,row)
+    root:SetScrollMode(220)
+    for _,location in ipairs(N.Catalog:Locations(row.id)) do
+        local entry=root:CreateRadio(self:LocationLabel(location),function(value) return (self.locationChoice[row.id] or N.Catalog:Location(row.id))==value end,function(value)
+            self.locationChoice[row.id]=value; row.location=value; self:Changed()
+        end,location)
+        self:MenuFont(entry)
+        entry:SetTooltip(function(t)
+            t:SetText(self:LocationLabel(location))
+            if location.phase then t:AddLine("Recorded location depends on phase or conflicts with other records.",.7,.7,.72,true)
+            elseif location.mobile then t:AddLine("This giver may move from its recorded location.",.7,.7,.72,true)
+            elseif not N.SearchModel.Coordinates(location) then t:AddLine("Recorded coordinates unavailable.",.7,.7,.72,true) end
+        end)
+    end
+end
+function S:LocationMenu(row,owner)
+    if not row or not self:Visible() or not MenuUtil or type(MenuUtil.CreateContextMenu)~="function" then return end
+    self:CloseMenu(); self.inspector:ClearItem(); self.search:ClearFocus()
+    self.menu=MenuUtil.CreateContextMenu(owner,function(_,root) self:MenuLifetime(root); self:GiverChoices(root,row) end)
 end

@@ -12,12 +12,19 @@ function C:Begin()
     if N.SearchModel then N.SearchModel.cache,N.SearchModel.usability,N.SearchModel.currentItems,N.SearchModel.currentStamp={},{},{},{} end
     return true
 end
-function C:Metadata(row)
+function C:Invalidate(id)
+    if id then local row=self.records[id]; if row then row.metadataReady=nil end
+    else for _,row in ipairs(self.order) do row.metadataReady=nil end end
+end
+function C:Metadata(row,playerLevel)
+    playerLevel=playerLevel or A.Call(UnitLevel,"player")
+    if row.metadataReady and row.metadataPlayerLevel==playerLevel then return true end
     local title=M.Text(A.Call(C_QuestLog and C_QuestLog.GetTitleForQuestID,row.id))
     local level=A.Call(C_QuestLog and C_QuestLog.GetQuestDifficultyLevel,row.id)
     if title then row.title=title end
     if M.Number(level) and level>=1 and level<=200 and level==math.floor(level) then row.level=level else row.level=nil end
-    return title~=nil and row.level~=nil
+    row.metadataReady=title~=nil and row.level~=nil; row.metadataPlayerLevel=playerLevel
+    return row.metadataReady
 end
 function C:Step()
     if not self.ids or self.done then return false end
@@ -36,7 +43,8 @@ function C:Locations(id)
     local source=self.records[id] and self.records[id].source; local out={}
     self.locations[id]=out
     for _,location in ipairs(source and source.locations or {}) do
-        local row={npcID=location.npcID,name=location.name or (location.npcID and "NPC "..location.npcID or "Quest giver")}
+        local name=M.Text(location.name)
+        local row={npcID=location.npcID,name=name or (location.npcID and "NPC "..location.npcID or "Quest giver"),nameKnown=name~=nil}
         local map=M.QuestId(location.mapID); local info=map and A.Call(C_Map and C_Map.GetMapInfo,map)
         -- Only recorded native-map coordinates on a current native zone map.
         if M.Readable(info) and type(info)=="table" and Enum and Enum.UIMapType and M.Readable(info.mapType) and info.mapType==Enum.UIMapType.Zone

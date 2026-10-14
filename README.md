@@ -1,6 +1,6 @@
 # QuestBrief
 
-Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.2.0** adds the finder and minimap launcher.
+Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.1** adds the finder and minimap launcher.
 
 - Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
 - Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.
@@ -10,7 +10,7 @@ Quest previews and a reward finder for **World of Warcraft: Forever**, interface
 
 ## Reward finder
 
-Open with `/questbrief search` or `/questbrief s`, or click the book icon on the minimap. Drag the icon to reposition it; `/questbrief minimap` or `/questbrief mm` toggles its visibility. Sort results by level fit or quest level. Expand cards to inspect rewards and recorded givers; their menus offer location and quest-page copy actions where data is available.
+Open with `/questbrief search` or `/questbrief s`, or click the book icon on the minimap. Drag the icon to reposition it; `/questbrief minimap` or `/questbrief mm` toggles its visibility. Sort results by level fit or quest level. Expand cards to inspect rewards and choose among recorded giver locations when available; their menus offer location and quest-page copy actions.
 
 The finder ships its own partial catalog derived from MIT-licensed AllTheThings Forever authoring data. Search does not require Questie or QuestieDB. The catalog records exact quest/item associations and selected giver/restriction metadata; it does not establish current availability, reward quantities or guaranteed-versus-choice groups. Native data supplies those details when available. Missing names, levels, usability or rewards can limit results and are never treated as zero.
 
@@ -43,7 +43,9 @@ python -m pip install --target .work/pydeps lupa==2.8
 python tools/verify.py
 ```
 
-The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `data/catalog-sources.json` for catalog provenance, and `docs/RELEASING.md` for CurseForge setup.
+The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `data/catalog-sources.json` for catalog provenance, and `docs/RELEASING.md` for development/release workflow and CurseForge setup.
+
+Before the first CurseForge publication, user-authorized iterations primarily use patch version bumps and direct commits to `main` after the required review and checks. Branch protections still apply; use a reviewed PR when required. Publication, release tags, credentials and game installation need their own authorization.
 
 Source inspection and offline tests do not establish native rendering, event timing or combat/taint safety. In-game finder, hover, reward comparison, scrolling and coexistence checks remain pending.
 

@@ -25,6 +25,14 @@ def validate(source, provenance):
     for row in provenance["files"]:
         assert re.fullmatch(r"[a-f0-9]{64}", row["sha256"]) and re.fullmatch(r"[a-f0-9]{40}", row["gitBlob"])
         assert row["url"].startswith("https://github.com/ATTWoWAddon/AllTheThings/blob/"+PIN+"/")
+    excluded = set()
+    for omission in provenance["omissions"]:
+        assert omission["path"] in paths and isinstance(omission["reason"], str)
+        if "itemID" in omission:
+            positive(omission["id"]); positive(omission["itemID"])
+            assert type(omission["line"]) is int and omission["line"] > 0
+            excluded.add((omission["id"], omission["itemID"]))
+    assert provenance["excludedRewardPairCount"] == len(excluded)
     ids = set()
     for row in source["quests"]:
         assert set(row) <= {"id", "title", "minimum", "maximum", "faction", "classTokens", "races", "eligibilityUnknown", "prerequisites", "prerequisiteCount", "items", "locations", "locationConflict", "sources"}, "Unexpected quest field"
@@ -32,12 +40,17 @@ def validate(source, provenance):
         if "title" in row: text(row["title"])
         for key in ("minimum", "maximum"):
             if key in row: assert type(row[key]) is int and 1 <= row[key] <= 200
+        if "minimum" in row and "maximum" in row: assert row["minimum"] <= row["maximum"], "Inverted level constraint"
         if "faction" in row: assert row["faction"] in ("Alliance", "Horde")
-        if "classTokens" in row: assert row["classTokens"] and all(c in ("WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID") for c in row["classTokens"])
+        if "classTokens" in row:
+            assert isinstance(row["classTokens"], list) and row["classTokens"] and all(isinstance(c, str) and c in ("WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK", "DRUID") for c in row["classTokens"])
+            assert len(set(row["classTokens"])) == len(row["classTokens"]), "Duplicate class constraint"
         if "eligibilityUnknown" in row: assert type(row["eligibilityUnknown"]) is bool
         if "locationConflict" in row: assert type(row["locationConflict"]) is bool
         for key in ("prerequisites", "races"):
+            if key in row: assert isinstance(row[key], list) and row[key], "Invalid constraint array"
             for value in row.get(key, []): positive(value); assert key != "prerequisites" or value != row["id"]
+            assert len(set(row.get(key, []))) == len(row.get(key, [])), "Duplicate constraint ID"
         if "prerequisiteCount" in row: assert type(row["prerequisiteCount"]) is int and 1 <= row["prerequisiteCount"] <= len(row["prerequisites"])
         assert row["sources"] and all(s["path"] in paths and type(s["line"]) is int and s["line"] > 0 for s in row["sources"])
         assert row["items"] and len(row["items"]) <= 512; item_ids = set()
@@ -45,6 +58,7 @@ def validate(source, provenance):
             assert set(item) <= {"itemID", "name", "quantity", "group"}
             positive(item["itemID"]); assert item["itemID"] not in item_ids; item_ids.add(item["itemID"])
             assert (row["id"],item["itemID"]) in allowed, "Association absent from pinned compiled cross-check"
+            assert (row["id"],item["itemID"]) not in excluded, "Excluded input/acquisition pair reintroduced"
             if "name" in item: text(item["name"])
             if "quantity" in item: positive(item["quantity"])
             if "group" in item: assert item["group"] in ("guaranteed", "choice")

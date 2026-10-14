@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.2.0" }; N.Core = C
+local C = { version = "0.1.1" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -27,6 +27,7 @@ function C:Change(key, value)
     if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
     if not self.profile.enabled and N.Search.frame then N.Search.frame:Hide() end
+    if N.Search:Visible() and (key=="accents" or key=="strength" or key=="scale") then N.Search:Fit(); N.Search:Changed() end
     return true
 end
 function C:Defaults()
@@ -35,6 +36,7 @@ function C:Defaults()
     N.Hover:Dismiss("settings"); N.Sources.current = nil
     self:Refresh(); if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
+    if N.Search:Visible() then N.Search:Fit(); N.Search:Changed() end
     return true
 end
 function C:Attach()
@@ -112,7 +114,8 @@ events:SetScript("OnEvent", function(_, event, name)
     elseif event == "QUEST_LOG_UPDATE" then N.Hover:Refresh()
     elseif event == "TOOLTIP_DATA_UPDATE" then
         local v = N.Stack
-        if v.item and A.Call(v.tooltip.HasDataInstanceID,v.tooltip,name) == true then
+        if v.item and not v:InspectionCurrent(v.item) then v:ClearItem()
+        elseif v.item and v:HasTooltipData(name) then
             local item = v.item
             v:Inspect(item.button,item.row,true)
         end

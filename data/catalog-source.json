@@ -43,7 +43,8 @@
           "x": 0.48100000000000004,
           "y": 0.429
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9,
@@ -112,7 +113,8 @@
           "x": 0.242,
           "y": 0.745
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 14,
@@ -154,7 +156,8 @@
           "x": 0.563,
           "y": 0.47600000000000003
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 16,
@@ -180,7 +183,8 @@
           "x": 0.43,
           "y": 0.856
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 18,
@@ -291,7 +295,8 @@
           "x": 0.489,
           "y": 0.41600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 22,
@@ -355,7 +360,8 @@
           "x": 0.489,
           "y": 0.401
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 34,
@@ -424,7 +430,8 @@
           "x": 0.564,
           "y": 0.306
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 46,
@@ -466,7 +473,8 @@
           "x": 0.74,
           "y": 0.723
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 47,
@@ -523,7 +531,8 @@
           "x": 0.446,
           "y": 0.802
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 54,
@@ -552,7 +561,8 @@
           "x": 0.489,
           "y": 0.41600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 55,
@@ -594,7 +604,8 @@
           "x": 0.078,
           "y": 0.34
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 58,
@@ -632,7 +643,8 @@
           "x": 0.736,
           "y": 0.469
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 59,
@@ -666,7 +678,8 @@
           "x": 0.42200000000000004,
           "y": 0.6579999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 60,
@@ -731,7 +744,8 @@
           "x": 0.43200000000000005,
           "y": 0.6579999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 83,
@@ -792,7 +806,8 @@
           "x": 0.431,
           "y": 0.857
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 88,
@@ -954,7 +969,8 @@
           "x": 0.738,
           "y": 0.435
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 96,
@@ -987,7 +1003,8 @@
           "x": 0.386,
           "y": 0.446
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 98,
@@ -1025,7 +1042,8 @@
           "x": 0.736,
           "y": 0.469
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 99,
@@ -1063,7 +1081,8 @@
           "x": 0.442,
           "y": 0.39799999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 101,
@@ -1212,7 +1231,8 @@
           "x": 0.446,
           "y": 0.802
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 122,
@@ -1246,7 +1266,8 @@
           "x": 0.259,
           "y": 0.473
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 125,
@@ -1307,7 +1328,8 @@
           "x": 0.259,
           "y": 0.473
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 127,
@@ -1372,7 +1394,8 @@
           "x": 0.168,
           "y": 0.46299999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 140,
@@ -1404,7 +1427,8 @@
       "minimum": 10,
       "prerequisites": [
         139
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 147,
@@ -1438,7 +1462,8 @@
           "x": 0.42100000000000004,
           "y": 0.659
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 150,
@@ -1569,7 +1594,8 @@
           "x": 0.563,
           "y": 0.475
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 167,
@@ -1676,7 +1702,8 @@
           "x": 0.29600000000000004,
           "y": 0.7120000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 172,
@@ -1737,7 +1764,8 @@
       "faction": "Alliance",
       "prerequisites": [
         239
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 178,
@@ -1823,7 +1851,8 @@
           "x": 0.7979999999999999,
           "y": 0.48
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 182,
@@ -1946,7 +1975,8 @@
           "x": 0.35600000000000004,
           "y": 0.106
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 189,
@@ -2001,7 +2031,8 @@
           "x": 0.35600000000000004,
           "y": 0.106
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 197,
@@ -2026,7 +2057,8 @@
         {
           "npcID": 715
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 202,
@@ -2056,7 +2088,8 @@
           "x": 0.38,
           "y": 0.03
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 204,
@@ -2118,7 +2151,8 @@
           "x": 0.37799999999999995,
           "y": 0.036000000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 208,
@@ -2152,7 +2186,8 @@
           "x": 0.35700000000000004,
           "y": 0.10800000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 213,
@@ -2221,7 +2256,8 @@
           "x": 0.5670000000000001,
           "y": 0.474
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 217,
@@ -2260,7 +2296,8 @@
           "x": 0.23199999999999998,
           "y": 0.738
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 218,
@@ -2293,7 +2330,8 @@
           "x": 0.25,
           "y": 0.758
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 219,
@@ -2361,7 +2399,8 @@
           "x": 0.434,
           "y": 0.774
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 223,
@@ -2390,7 +2429,8 @@
       "faction": "Alliance",
       "prerequisites": [
         222
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 226,
@@ -2447,7 +2487,8 @@
           "x": 0.726,
           "y": 0.47700000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 231,
@@ -2472,7 +2513,8 @@
       "faction": "Alliance",
       "prerequisites": [
         229
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 234,
@@ -2509,7 +2551,8 @@
           "x": 0.226,
           "y": 0.7140000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 245,
@@ -2568,7 +2611,8 @@
           "x": 0.736,
           "y": 0.614
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 249,
@@ -2597,7 +2641,8 @@
       "faction": "Alliance",
       "prerequisites": [
         248
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 252,
@@ -2618,7 +2663,8 @@
       "faction": "Alliance",
       "prerequisites": [
         401
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 253,
@@ -2656,7 +2702,8 @@
           "x": 0.7190000000000001,
           "y": 0.465
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 256,
@@ -2751,7 +2798,8 @@
           "x": 0.8340000000000001,
           "y": 0.652
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 263,
@@ -2781,7 +2829,8 @@
           "x": 0.23399999999999999,
           "y": 0.746
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 275,
@@ -2819,7 +2868,8 @@
           "x": 0.563,
           "y": 0.40399999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 283,
@@ -2844,7 +2894,8 @@
       "faction": "Alliance",
       "prerequisites": [
         280
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 286,
@@ -2869,7 +2920,8 @@
       "faction": "Alliance",
       "prerequisites": [
         285
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 287,
@@ -2903,7 +2955,8 @@
           "x": 0.466,
           "y": 0.5379999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 292,
@@ -2924,7 +2977,8 @@
       "faction": "Alliance",
       "prerequisites": [
         290
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 293,
@@ -2954,7 +3008,8 @@
           "x": 0.106,
           "y": 0.605
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 296,
@@ -3000,7 +3055,8 @@
           "x": 0.38,
           "y": 0.512
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 297,
@@ -3038,7 +3094,8 @@
           "x": 0.649,
           "y": 0.667
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 299,
@@ -3169,7 +3226,8 @@
           "x": 0.522,
           "y": 0.6940000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 312,
@@ -3304,7 +3362,8 @@
           "x": 0.302,
           "y": 0.45799999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 321,
@@ -3334,7 +3393,8 @@
           "x": 0.106,
           "y": 0.605
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 325,
@@ -3364,7 +3424,8 @@
           "x": 0.597,
           "y": 0.33799999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 328,
@@ -3385,7 +3446,8 @@
       "faction": "Alliance",
       "prerequisites": [
         200
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 331,
@@ -3419,7 +3481,8 @@
           "x": 0.377,
           "y": 0.034
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 332,
@@ -3486,7 +3549,8 @@
           "x": 0.35700000000000004,
           "y": 0.105
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 339,
@@ -3620,7 +3684,8 @@
           "x": 0.496,
           "y": 0.40399999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 348,
@@ -3710,7 +3775,8 @@
           "x": 0.308,
           "y": 0.662
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 367,
@@ -3767,7 +3833,8 @@
           "x": 0.595,
           "y": 0.524
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 369,
@@ -3797,7 +3864,8 @@
           "x": 0.595,
           "y": 0.524
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 372,
@@ -3831,7 +3899,8 @@
           "x": 0.606,
           "y": 0.518
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 374,
@@ -3869,7 +3938,8 @@
           "x": 0.608,
           "y": 0.52
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 375,
@@ -4004,7 +4074,8 @@
           "x": 0.498,
           "y": 0.182
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 379,
@@ -4034,7 +4105,8 @@
           "x": 0.524,
           "y": 0.284
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 380,
@@ -4071,7 +4143,8 @@
           "x": 0.322,
           "y": 0.66
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 381,
@@ -4113,7 +4186,8 @@
           "x": 0.322,
           "y": 0.66
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 382,
@@ -4147,7 +4221,8 @@
           "x": 0.322,
           "y": 0.66
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 384,
@@ -4274,7 +4349,8 @@
           "x": 0.5770000000000001,
           "y": 0.479
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 397,
@@ -4307,7 +4383,8 @@
           "x": 0.401,
           "y": 0.853
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 398,
@@ -4363,7 +4440,8 @@
           "x": 0.612,
           "y": 0.508
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 411,
@@ -4384,7 +4462,8 @@
       "faction": "Horde",
       "prerequisites": [
         409
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 412,
@@ -4441,7 +4520,8 @@
         {
           "npcID": 1872
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 416,
@@ -4497,7 +4577,8 @@
       "faction": "Alliance",
       "prerequisites": [
         419
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 418,
@@ -4589,7 +4670,8 @@
           "x": 0.534,
           "y": 0.134
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 426,
@@ -4623,7 +4705,8 @@
           "x": 0.5821000000000001,
           "y": 0.5145000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 429,
@@ -4657,7 +4740,8 @@
           "x": 0.534,
           "y": 0.134
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 431,
@@ -4675,7 +4759,8 @@
       ],
       "title": "Candles of Beckoning",
       "minimum": 5,
-      "faction": "Horde"
+      "faction": "Horde",
+      "eligibilityUnknown": true
     },
     {
       "id": 435,
@@ -4763,7 +4848,8 @@
           "x": 0.434,
           "y": 0.408
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 446,
@@ -4784,7 +4870,8 @@
       "faction": "Horde",
       "prerequisites": [
         444
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 447,
@@ -4849,7 +4936,8 @@
           "x": 0.434,
           "y": 0.408
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 451,
@@ -4891,7 +4979,8 @@
           "x": 0.434,
           "y": 0.408
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 452,
@@ -4989,7 +5078,8 @@
           "x": 0.586,
           "y": 0.442
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 458,
@@ -5060,7 +5150,8 @@
           "x": 0.578,
           "y": 0.45
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 466,
@@ -5090,7 +5181,8 @@
           "x": 0.496,
           "y": 0.484
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 470,
@@ -5155,7 +5247,8 @@
           "x": 0.085,
           "y": 0.557
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 474,
@@ -5180,7 +5273,8 @@
       "faction": "Alliance",
       "prerequisites": [
         465
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 480,
@@ -5214,7 +5308,8 @@
           "x": 0.44,
           "y": 0.41
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 483,
@@ -5248,7 +5343,8 @@
           "x": 0.56,
           "y": 0.574
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 486,
@@ -5282,7 +5378,8 @@
           "x": 0.56,
           "y": 0.574
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 488,
@@ -5338,7 +5435,8 @@
       "faction": "Horde",
       "prerequisites": [
         461
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 498,
@@ -5415,7 +5513,8 @@
           "x": 0.6145,
           "y": 0.1905
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 504,
@@ -5449,7 +5548,8 @@
           "x": 0.496,
           "y": 0.586
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 505,
@@ -5514,7 +5614,8 @@
           "x": 0.39299999999999996,
           "y": 0.14300000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 509,
@@ -5544,7 +5645,8 @@
           "x": 0.6145,
           "y": 0.1905
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 515,
@@ -5569,7 +5671,8 @@
       "faction": "Horde",
       "prerequisites": [
         513
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 516,
@@ -5626,7 +5729,8 @@
           "x": 0.6261,
           "y": 0.2064
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 530,
@@ -5656,7 +5760,8 @@
           "x": 0.62,
           "y": 0.43
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 531,
@@ -5694,7 +5799,8 @@
           "x": 0.8340000000000001,
           "y": 0.652
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 535,
@@ -5752,7 +5858,8 @@
           "x": 0.6212,
           "y": 0.1972
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 547,
@@ -5816,7 +5923,8 @@
       "faction": "Horde",
       "prerequisites": [
         541
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 562,
@@ -5846,7 +5954,8 @@
           "x": 0.514,
           "y": 0.584
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 564,
@@ -5933,7 +6042,8 @@
       "faction": "Horde",
       "prerequisites": [
         549
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 567,
@@ -5993,7 +6103,8 @@
           "x": 0.322,
           "y": 0.28800000000000003
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 573,
@@ -6023,7 +6134,8 @@
           "x": 0.32,
           "y": 0.292
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 576,
@@ -6052,7 +6164,8 @@
           "x": 0.28600000000000003,
           "y": 0.759
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 579,
@@ -6082,7 +6195,8 @@
           "x": 0.846,
           "y": 0.242
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 580,
@@ -6142,7 +6256,8 @@
           "x": 0.322,
           "y": 0.278
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 592,
@@ -6176,7 +6291,8 @@
           "x": 0.322,
           "y": 0.278
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 596,
@@ -6238,7 +6354,8 @@
           "x": 0.322,
           "y": 0.278
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 600,
@@ -6271,7 +6388,8 @@
           "x": 0.271,
           "y": 0.772
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 608,
@@ -6300,7 +6418,8 @@
           "x": 0.272,
           "y": 0.77
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 611,
@@ -6330,7 +6449,8 @@
           "x": 0.273,
           "y": 0.775
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 613,
@@ -6359,7 +6479,8 @@
           "x": 0.278,
           "y": 0.7709999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 617,
@@ -6441,27 +6562,8 @@
           "x": 0.2695,
           "y": 0.7720999999999999
         }
-      ]
-    },
-    {
-      "id": 626,
-      "items": [
-        {
-          "itemID": 11324,
-          "name": "Explorer's Knapsack"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
-          "line": 475
-        }
-      ],
-      "title": "Cortello's Riddle",
-      "minimum": 35,
-      "prerequisites": [
-        625
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 628,
@@ -6490,7 +6592,8 @@
           "x": 0.282,
           "y": 0.7759999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 630,
@@ -6519,7 +6622,8 @@
           "x": 0.384,
           "y": 0.8059999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 633,
@@ -6553,7 +6657,8 @@
           "x": 0.499,
           "y": 0.182
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 646,
@@ -6578,7 +6683,8 @@
       "faction": "Horde",
       "prerequisites": [
         645
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 648,
@@ -6611,7 +6717,8 @@
           "x": 0.602,
           "y": 0.6459999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 656,
@@ -6640,7 +6747,8 @@
           "x": 0.514,
           "y": 0.768
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 661,
@@ -6674,7 +6782,8 @@
           "x": 0.602,
           "y": 0.5379999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 662,
@@ -6703,7 +6812,8 @@
           "x": 0.326,
           "y": 0.8140000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 664,
@@ -6765,7 +6875,8 @@
           "x": 0.33799999999999997,
           "y": 0.804
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 667,
@@ -6798,7 +6909,8 @@
           "x": 0.322,
           "y": 0.816
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 673,
@@ -6832,7 +6944,8 @@
           "x": 0.746,
           "y": 0.364
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 679,
@@ -6866,7 +6979,8 @@
           "x": 0.7424,
           "y": 0.33909999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 680,
@@ -6900,7 +7014,8 @@
           "x": 0.74,
           "y": 0.332
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 682,
@@ -6930,7 +7045,8 @@
           "x": 0.45899999999999996,
           "y": 0.475
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 684,
@@ -7004,7 +7120,8 @@
           "x": 0.466,
           "y": 0.47
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 700,
@@ -7034,7 +7151,8 @@
           "x": 0.386,
           "y": 0.87
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 703,
@@ -7094,7 +7212,8 @@
           "x": 0.659,
           "y": 0.6559999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 705,
@@ -7215,7 +7334,8 @@
           "x": 0.258,
           "y": 0.442
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 716,
@@ -7245,7 +7365,8 @@
           "x": 0.258,
           "y": 0.444
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 717,
@@ -7287,7 +7408,8 @@
           "x": 0.618,
           "y": 0.542
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 719,
@@ -7348,7 +7470,8 @@
           "x": 0.5379999999999999,
           "y": 0.433
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 738,
@@ -7386,7 +7509,8 @@
           "x": 0.6593000000000001,
           "y": 0.6562
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 739,
@@ -7407,7 +7531,8 @@
       "faction": "Alliance",
       "prerequisites": [
         738
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 741,
@@ -7445,7 +7570,8 @@
           "x": 0.374,
           "y": 0.418
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 744,
@@ -7596,7 +7722,8 @@
           "x": 0.449,
           "y": 0.7709999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 752,
@@ -7679,7 +7806,8 @@
           "x": 0.426,
           "y": 0.92
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 758,
@@ -7711,7 +7839,8 @@
           "x": 0.485,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 760,
@@ -7747,7 +7876,8 @@
           "x": 0.485,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 762,
@@ -7777,7 +7907,8 @@
           "x": 0.775,
           "y": 0.11800000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 765,
@@ -7811,7 +7942,8 @@
           "x": 0.544,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 766,
@@ -7958,7 +8090,8 @@
           "x": 0.478,
           "y": 0.575
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 776,
@@ -7988,7 +8121,8 @@
           "x": 0.598,
           "y": 0.516
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 778,
@@ -8017,28 +8151,8 @@
           "x": 0.258,
           "y": 0.45
         }
-      ]
-    },
-    {
-      "id": 779,
-      "items": [
-        {
-          "itemID": 4615,
-          "name": "Blacklash's Bindings"
-        },
-        {
-          "itemID": 4645,
-          "name": "Chains of Hematus"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
-          "line": 544
-        }
-      ],
-      "title": "Seal of the Earth",
-      "minimum": 40
+      "eligibilityUnknown": true
     },
     {
       "id": 780,
@@ -8067,7 +8181,8 @@
           "x": 0.449,
           "y": 0.7709999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 781,
@@ -8148,7 +8263,8 @@
           "x": 0.42,
           "y": 0.684
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 789,
@@ -8181,7 +8297,8 @@
           "x": 0.42,
           "y": 0.684
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 791,
@@ -8250,7 +8367,8 @@
           "x": 0.027999999999999997,
           "y": 0.45799999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 794,
@@ -8288,28 +8406,8 @@
           "x": 0.428,
           "y": 0.69
         }
-      ]
-    },
-    {
-      "id": 795,
-      "items": [
-        {
-          "itemID": 4615,
-          "name": "Blacklash's Bindings"
-        },
-        {
-          "itemID": 4645,
-          "name": "Chains of Hematus"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
-          "line": 523
-        }
-      ],
-      "title": "Seal of the Earth",
-      "minimum": 40
+      "eligibilityUnknown": true
     },
     {
       "id": 804,
@@ -8342,7 +8440,8 @@
           "x": 0.406,
           "y": 0.626
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 806,
@@ -8372,7 +8471,8 @@
           "x": 0.522,
           "y": 0.43200000000000005
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 808,
@@ -8402,7 +8502,8 @@
           "x": 0.56,
           "y": 0.746
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 812,
@@ -8517,7 +8618,8 @@
           "x": 0.6227,
           "y": 0.3839
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 822,
@@ -8547,7 +8649,8 @@
           "x": 0.6227,
           "y": 0.3839
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 824,
@@ -8576,7 +8679,8 @@
       "faction": "Horde",
       "prerequisites": [
         1918
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 825,
@@ -8614,7 +8718,8 @@
           "x": 0.52,
           "y": 0.434
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 826,
@@ -8648,7 +8753,8 @@
           "x": 0.56,
           "y": 0.746
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 827,
@@ -8686,7 +8792,8 @@
           "x": 0.564,
           "y": 0.2
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 835,
@@ -8723,7 +8830,8 @@
           "x": 0.46399999999999997,
           "y": 0.23
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 836,
@@ -8756,7 +8864,8 @@
           "x": 0.494,
           "y": 0.376
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 841,
@@ -8783,7 +8892,8 @@
           "x": 0.524,
           "y": 0.284
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 847,
@@ -8813,7 +8923,8 @@
           "x": 0.726,
           "y": 0.34
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 849,
@@ -8843,7 +8954,8 @@
           "x": 0.4608,
           "y": 0.7637
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 852,
@@ -8873,7 +8985,8 @@
           "x": 0.4534,
           "y": 0.2842
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 853,
@@ -8919,7 +9032,8 @@
           "x": 0.5144,
           "y": 0.3015
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 855,
@@ -9023,7 +9137,8 @@
           "x": 0.5652,
           "y": 0.0745
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 864,
@@ -9052,7 +9167,8 @@
       "faction": "Horde",
       "prerequisites": [
         654
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 865,
@@ -9171,7 +9287,8 @@
           "x": 0.515,
           "y": 0.3086
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 873,
@@ -9209,7 +9326,8 @@
           "x": 0.6583,
           "y": 0.4385
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 876,
@@ -9247,37 +9365,8 @@
           "x": 0.5162,
           "y": 0.309
         }
-      ]
-    },
-    {
-      "id": 882,
-      "items": [
-        {
-          "itemID": 10338,
-          "name": "Fresh Zhevra Carcass"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
-          "line": 1291
-        }
-      ],
-      "title": "Ishamuhale",
-      "minimum": 10,
-      "faction": "Horde",
-      "prerequisites": [
-        3261
-      ],
-      "locations": [
-        {
-          "npcID": 3387,
-          "name": "Jorn Skyseer",
-          "mapID": 1413,
-          "x": 0.4486,
-          "y": 0.5913
-        }
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 888,
@@ -9310,7 +9399,8 @@
           "x": 0.6268,
           "y": 0.3624
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 891,
@@ -9484,7 +9574,8 @@
       "minimum": 10,
       "prerequisites": [
         901
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 906,
@@ -9518,7 +9609,8 @@
           "x": 0.44549999999999995,
           "y": 0.5926
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 913,
@@ -9556,7 +9648,8 @@
           "x": 0.4486,
           "y": 0.5913
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 914,
@@ -9594,7 +9687,8 @@
           "x": 0.7559999999999999,
           "y": 0.312
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 916,
@@ -9674,7 +9768,8 @@
           "x": 0.578,
           "y": 0.41600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 919,
@@ -9708,7 +9803,8 @@
           "x": 0.608,
           "y": 0.684
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 923,
@@ -9737,7 +9833,8 @@
           "x": 0.382,
           "y": 0.21600000000000003
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 924,
@@ -9767,7 +9864,8 @@
           "x": 0.624,
           "y": 0.2
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 932,
@@ -9830,7 +9928,8 @@
           "x": 0.562,
           "y": 0.617
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 937,
@@ -9917,7 +10016,8 @@
       "faction": "Alliance",
       "prerequisites": [
         98398
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 941,
@@ -9947,7 +10047,8 @@
           "x": 0.608,
           "y": 0.684
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 943,
@@ -9981,7 +10082,8 @@
           "x": 0.10800000000000001,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 947,
@@ -10042,7 +10144,8 @@
           "x": 0.435,
           "y": 0.763
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 957,
@@ -10080,7 +10183,8 @@
           "x": 0.442,
           "y": 0.363
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 958,
@@ -10136,7 +10240,8 @@
           "x": 0.435,
           "y": 0.763
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 961,
@@ -10165,7 +10270,8 @@
           "x": 0.435,
           "y": 0.763
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 962,
@@ -10257,7 +10363,8 @@
           "x": 0.508,
           "y": 0.055999999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 972,
@@ -10290,7 +10397,8 @@
           "x": 0.6579999999999999,
           "y": 0.43799999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 973,
@@ -10324,7 +10432,8 @@
           "x": 0.262,
           "y": 0.386
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 975,
@@ -10353,7 +10462,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 976,
@@ -10387,7 +10497,8 @@
           "x": 0.262,
           "y": 0.389
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 981,
@@ -10421,7 +10532,8 @@
           "x": 0.55,
           "y": 0.249
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 982,
@@ -10482,7 +10594,8 @@
           "x": 0.39399999999999996,
           "y": 0.435
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 994,
@@ -10561,7 +10674,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 998,
@@ -10578,7 +10692,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 1003,
@@ -10603,7 +10718,8 @@
       "faction": "Alliance",
       "prerequisites": [
         1002
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1009,
@@ -10633,7 +10749,8 @@
           "x": 0.14800000000000002,
           "y": 0.313
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1012,
@@ -10663,7 +10780,8 @@
           "x": 0.853,
           "y": 0.447
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1013,
@@ -10724,36 +10842,6 @@
       ]
     },
     {
-      "id": 1016,
-      "items": [
-        {
-          "itemID": 5456,
-          "name": "Divining Scroll"
-        },
-        {
-          "itemID": 12220,
-          "name": "Intact Elemental Bracer"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Ashenvale.lua",
-          "line": 239
-        }
-      ],
-      "minimum": 20,
-      "faction": "Alliance",
-      "locations": [
-        {
-          "npcID": 3885,
-          "name": "Sentinel Velene Starstrike",
-          "mapID": 1440,
-          "x": 0.498,
-          "y": 0.672
-        }
-      ]
-    },
-    {
       "id": 1017,
       "items": [
         {
@@ -10781,7 +10869,8 @@
           "x": 0.498,
           "y": 0.672
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1028,
@@ -10802,7 +10891,8 @@
       "faction": "Alliance",
       "prerequisites": [
         1027
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1031,
@@ -10836,7 +10926,8 @@
           "x": 0.7829999999999999,
           "y": 0.44799999999999995
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1035,
@@ -10874,7 +10965,8 @@
           "x": 0.373,
           "y": 0.518
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1044,
@@ -10908,7 +11000,8 @@
           "x": 0.753,
           "y": 0.49200000000000005
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1046,
@@ -10945,7 +11038,8 @@
           "x": 0.508,
           "y": 0.75
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1048,
@@ -11177,7 +11271,8 @@
           "x": 0.371,
           "y": 0.081
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1078,
@@ -11246,7 +11341,8 @@
           "x": 0.348,
           "y": 0.498
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1089,
@@ -11275,7 +11371,8 @@
       "faction": "Horde",
       "prerequisites": [
         1088
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1092,
@@ -11295,7 +11392,8 @@
       "minimum": 17,
       "prerequisites": [
         1090
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1096,
@@ -11328,7 +11426,8 @@
           "x": 0.59,
           "y": 0.6253
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1098,
@@ -11397,7 +11496,8 @@
           "x": 0.8959999999999999,
           "y": 0.466
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1102,
@@ -11465,7 +11565,8 @@
           "x": 0.373,
           "y": 0.441
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1135,
@@ -11498,10 +11599,6 @@
       "id": 1136,
       "items": [
         {
-          "itemID": 5810,
-          "name": "Fresh Carcass"
-        },
-        {
           "itemID": 6720,
           "name": "Spirit Hunter Headdress"
         }
@@ -11517,7 +11614,8 @@
       "faction": "Horde",
       "prerequisites": [
         1131
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1137,
@@ -11550,7 +11648,8 @@
           "x": 0.42219999999999996,
           "y": 0.5268999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1138,
@@ -11732,7 +11831,8 @@
           "x": 0.451,
           "y": 0.5769
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1164,
@@ -11886,7 +11986,8 @@
           "x": 0.37,
           "y": 0.33
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1173,
@@ -11920,7 +12021,8 @@
           "x": 0.36200000000000004,
           "y": 0.314
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1177,
@@ -11949,35 +12051,6 @@
           "mapID": 1445,
           "x": 0.35200000000000004,
           "y": 0.38299999999999995
-        }
-      ]
-    },
-    {
-      "id": 1182,
-      "items": [
-        {
-          "itemID": 5851,
-          "name": "Cozzle's Key"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Thousand Needles.lua",
-          "line": 281
-        }
-      ],
-      "title": "Goblin Sponsorship",
-      "minimum": 29,
-      "prerequisites": [
-        1181
-      ],
-      "locations": [
-        {
-          "npcID": 2496,
-          "name": "Baron Revilgaz",
-          "mapID": 1434,
-          "x": 0.272,
-          "y": 0.769
         }
       ]
     },
@@ -12013,7 +12086,8 @@
           "x": 0.51,
           "y": 0.29600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1189,
@@ -12037,34 +12111,8 @@
       "minimum": 29,
       "prerequisites": [
         1188
-      ]
-    },
-    {
-      "id": 1195,
-      "items": [
-        {
-          "itemID": 5867,
-          "name": "Etched Phial"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/4 - Thunder Bluff.lua",
-          "line": 314
-        }
-      ],
-      "title": "The Sacred Flame",
-      "minimum": 20,
-      "faction": "Horde",
-      "locations": [
-        {
-          "npcID": 4721,
-          "name": "Zangen Stonehoof",
-          "mapID": 1456,
-          "x": 0.5497,
-          "y": 0.5132
-        }
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 1197,
@@ -12089,7 +12137,8 @@
       "faction": "Horde",
       "prerequisites": [
         1196
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1199,
@@ -12159,7 +12208,8 @@
           "npcID": 4787,
           "name": "Argent Guard Thaelrid"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1203,
@@ -12192,7 +12242,8 @@
           "x": 0.5539999999999999,
           "y": 0.262
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1218,
@@ -12273,7 +12324,8 @@
           "x": 0.664,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1267,
@@ -12303,7 +12355,8 @@
           "x": 0.452,
           "y": 0.242
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1271,
@@ -12334,7 +12387,8 @@
           "x": 0.518,
           "y": 0.937
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1273,
@@ -12368,7 +12422,8 @@
           "x": 0.408,
           "y": 0.366
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1275,
@@ -12406,7 +12461,8 @@
           "x": 0.38299999999999995,
           "y": 0.43
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1358,
@@ -12431,7 +12487,8 @@
       "faction": "Horde",
       "prerequisites": [
         1359
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1364,
@@ -12465,7 +12522,8 @@
           "x": 0.514,
           "y": 0.738
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1366,
@@ -12499,7 +12557,8 @@
           "x": 0.562,
           "y": 0.594
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1370,
@@ -12672,7 +12731,8 @@
           "x": 0.8740000000000001,
           "y": 0.354
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1387,
@@ -12750,7 +12810,8 @@
           "x": 0.5775,
           "y": 0.6539
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1423,
@@ -12768,7 +12829,8 @@
       ],
       "title": "The Lost Supplies",
       "minimum": 30,
-      "faction": "Alliance"
+      "faction": "Alliance",
+      "eligibilityUnknown": true
     },
     {
       "id": 1427,
@@ -12806,7 +12868,8 @@
           "x": 0.838,
           "y": 0.804
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1430,
@@ -12872,7 +12935,8 @@
           "x": 0.526,
           "y": 0.542
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1440,
@@ -12914,7 +12978,8 @@
           "x": 0.5479999999999999,
           "y": 0.262
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1445,
@@ -13001,7 +13066,8 @@
       "faction": "Alliance",
       "prerequisites": [
         1456
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1462,
@@ -13068,7 +13134,8 @@
           "x": 0.424,
           "y": 0.69
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1464,
@@ -13101,7 +13168,8 @@
           "x": 0.386,
           "y": 0.588
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1467,
@@ -13125,7 +13193,8 @@
       "faction": "Alliance",
       "prerequisites": [
         1466
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1474,
@@ -13288,7 +13357,8 @@
           "x": 0.526,
           "y": 0.542
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1499,
@@ -13324,7 +13394,8 @@
           "x": 0.426,
           "y": 0.69
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1503,
@@ -13369,7 +13440,8 @@
           "x": 0.5722999999999999,
           "y": 0.3034
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1513,
@@ -13420,7 +13492,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 1518,
@@ -13524,7 +13597,8 @@
           "x": 0.5579999999999999,
           "y": 0.2
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1525,
@@ -13557,7 +13631,8 @@
           "x": 0.386,
           "y": 0.588
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1527,
@@ -13585,7 +13660,8 @@
       ],
       "prerequisites": [
         1526
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1531,
@@ -13889,7 +13965,8 @@
           "x": 0.505,
           "y": 0.475
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1657,
@@ -13916,7 +13993,8 @@
           "x": 0.556,
           "y": 0.6990000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1658,
@@ -13943,7 +14021,8 @@
           "x": 0.5,
           "y": 0.5720000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1667,
@@ -13988,7 +14067,8 @@
           "x": 0.846,
           "y": 0.6940000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1682,
@@ -14033,7 +14113,8 @@
           "x": 0.49,
           "y": 0.426
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1693,
@@ -14078,7 +14159,8 @@
           "x": 0.5920000000000001,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1702,
@@ -14111,7 +14193,8 @@
           "x": 0.215,
           "y": 0.447
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1706,
@@ -14144,7 +14227,8 @@
           "x": 0.597,
           "y": 0.33799999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1707,
@@ -14203,7 +14287,8 @@
           "x": 0.682,
           "y": 0.462
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1711,
@@ -14236,7 +14321,8 @@
           "x": 0.5920000000000001,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1739,
@@ -14272,7 +14358,8 @@
           "x": 0.392,
           "y": 0.852
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1740,
@@ -14338,7 +14425,8 @@
           "x": 0.6459999999999999,
           "y": 0.37200000000000005
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1792,
@@ -14378,7 +14466,8 @@
           "x": 0.805,
           "y": 0.669
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1806,
@@ -14411,7 +14500,8 @@
           "x": 0.526,
           "y": 0.368
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1822,
@@ -14456,7 +14546,8 @@
           "x": 0.6173,
           "y": 0.523
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1824,
@@ -14489,7 +14580,8 @@
           "x": 0.4468,
           "y": 0.5942000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1843,
@@ -14522,7 +14614,8 @@
           "x": 0.562,
           "y": 0.7440000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1845,
@@ -14555,7 +14648,8 @@
           "x": 0.39,
           "y": 0.5579999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1847,
@@ -14588,7 +14682,8 @@
           "x": 0.624,
           "y": 0.392
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1848,
@@ -14621,7 +14716,8 @@
           "x": 0.5722999999999999,
           "y": 0.3034
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1858,
@@ -14657,7 +14753,8 @@
           "x": 0.4274,
           "y": 0.5352
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1861,
@@ -14724,7 +14821,8 @@
           "x": 0.524,
           "y": 0.284
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1880,
@@ -14803,7 +14901,8 @@
           "x": 0.85,
           "y": 0.102
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1884,
@@ -14844,7 +14943,8 @@
           "x": 0.562,
           "y": 0.75
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1941,
@@ -14880,7 +14980,8 @@
           "x": 0.52,
           "y": 0.836
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1942,
@@ -14917,7 +15018,8 @@
           "x": 0.52,
           "y": 0.836
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1946,
@@ -14957,7 +15059,8 @@
           "x": 0.522,
           "y": 0.316
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1952,
@@ -14997,7 +15100,8 @@
           "x": 0.46,
           "y": 0.57
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1958,
@@ -15033,7 +15137,8 @@
           "x": 0.46,
           "y": 0.57
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1962,
@@ -15066,7 +15171,8 @@
           "x": 0.7020000000000001,
           "y": 0.302
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 1978,
@@ -15092,7 +15198,8 @@
       ],
       "prerequisites": [
         1899
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2038,
@@ -15122,7 +15229,8 @@
           "x": 0.636,
           "y": 0.478
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2040,
@@ -15164,7 +15272,8 @@
           "x": 0.628,
           "y": 0.348
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2078,
@@ -15194,7 +15303,8 @@
           "x": 0.5670000000000001,
           "y": 0.135
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2098,
@@ -15255,7 +15365,8 @@
           "x": 0.38799999999999996,
           "y": 0.434
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2178,
@@ -15382,7 +15493,8 @@
           "x": 0.7829999999999999,
           "y": 0.7070000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2239,
@@ -15415,7 +15527,8 @@
           "x": 0.252,
           "y": 0.444
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2240,
@@ -15480,7 +15593,8 @@
           "x": 0.37,
           "y": 0.21899999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2282,
@@ -15513,7 +15627,8 @@
           "x": 0.23,
           "y": 0.52
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2341,
@@ -15581,7 +15696,8 @@
           "x": 0.685,
           "y": 0.7020000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2361,
@@ -15649,7 +15765,8 @@
           "x": 0.63,
           "y": 0.364
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2418,
@@ -15778,7 +15895,8 @@
           "x": 0.5539999999999999,
           "y": 0.055999999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2480,
@@ -15811,7 +15929,8 @@
           "x": 0.616,
           "y": 0.192
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2499,
@@ -15845,7 +15964,8 @@
           "x": 0.608,
           "y": 0.684
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2501,
@@ -15910,7 +16030,8 @@
           "x": 0.364,
           "y": 0.86
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2521,
@@ -15965,7 +16086,8 @@
           "x": 0.518,
           "y": 0.35600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2561,
@@ -16000,7 +16122,8 @@
           "npcID": 7317,
           "name": "Oben Rageclaw"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2581,
@@ -16055,7 +16178,8 @@
           "x": 0.506,
           "y": 0.142
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2583,
@@ -16110,7 +16234,8 @@
           "x": 0.506,
           "y": 0.142
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2585,
@@ -16165,7 +16290,8 @@
           "x": 0.506,
           "y": 0.142
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2601,
@@ -16217,7 +16343,8 @@
           "x": 0.506,
           "y": 0.14300000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2603,
@@ -16269,7 +16396,8 @@
           "x": 0.506,
           "y": 0.14300000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2609,
@@ -16302,7 +16430,8 @@
           "x": 0.8009999999999999,
           "y": 0.6990000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2662,
@@ -16331,7 +16460,8 @@
           "x": 0.518,
           "y": 0.28600000000000003
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2701,
@@ -16350,7 +16480,8 @@
       "minimum": 45,
       "prerequisites": [
         2702
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2741,
@@ -16396,7 +16527,8 @@
           "x": 0.522,
           "y": 0.268
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2748,
@@ -16425,7 +16557,8 @@
           "x": 0.522,
           "y": 0.268
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2749,
@@ -16454,7 +16587,8 @@
           "x": 0.522,
           "y": 0.268
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2751,
@@ -16789,7 +16923,8 @@
           "x": 0.534,
           "y": 0.556
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2768,
@@ -16951,7 +17086,8 @@
           "x": 0.758,
           "y": 0.252
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2843,
@@ -16981,7 +17117,8 @@
           "x": 0.276,
           "y": 0.774
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2845,
@@ -17015,7 +17152,8 @@
           "x": 0.382,
           "y": 0.10300000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2846,
@@ -17074,7 +17212,8 @@
       "faction": "Alliance",
       "prerequisites": [
         2870
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2874,
@@ -17098,49 +17237,8 @@
       "minimum": 40,
       "prerequisites": [
         2873
-      ]
-    },
-    {
-      "id": 2879,
-      "items": [
-        {
-          "itemID": 9255,
-          "name": "Lahassa Essence"
-        },
-        {
-          "itemID": 9256,
-          "name": "Imbel Essence"
-        },
-        {
-          "itemID": 9257,
-          "name": "Samha Essence"
-        },
-        {
-          "itemID": 9258,
-          "name": "Byltan Essence"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
-          "line": 938
-        }
-      ],
-      "title": "The Stave of Equinex",
-      "minimum": 42,
-      "faction": "Alliance",
-      "prerequisites": [
-        2943
-      ],
-      "locations": [
-        {
-          "npcID": 7764,
-          "name": "Troyas Moonbreeze",
-          "mapID": 1444,
-          "x": 0.318,
-          "y": 0.45399999999999996
-        }
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 2882,
@@ -17157,7 +17255,8 @@
         }
       ],
       "title": "Cuergo's Gold",
-      "minimum": 40
+      "minimum": 40,
+      "eligibilityUnknown": true
     },
     {
       "id": 2903,
@@ -17182,7 +17281,8 @@
       "faction": "Horde",
       "prerequisites": [
         2902
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2904,
@@ -17317,34 +17417,8 @@
           "x": 0.7020000000000001,
           "y": 0.484
         }
-      ]
-    },
-    {
-      "id": 2932,
-      "items": [
-        {
-          "itemID": 9320,
-          "name": "Witherbark Skull"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
-          "line": 649
-        }
-      ],
-      "title": "Grim Message",
-      "minimum": 35,
-      "faction": "Horde",
-      "locations": [
-        {
-          "npcID": 2497,
-          "name": "Nimboya",
-          "mapID": 1434,
-          "x": 0.322,
-          "y": 0.278
-        }
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 2938,
@@ -17373,7 +17447,8 @@
       "faction": "Horde",
       "prerequisites": [
         2937
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2942,
@@ -17398,7 +17473,8 @@
       "faction": "Alliance",
       "prerequisites": [
         2879
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2945,
@@ -17436,7 +17512,8 @@
       "faction": "Alliance",
       "prerequisites": [
         2945
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2948,
@@ -17466,7 +17543,8 @@
           "x": 0.36200000000000004,
           "y": 0.038
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2949,
@@ -17487,7 +17565,8 @@
       "faction": "Horde",
       "prerequisites": [
         2945
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2950,
@@ -17517,7 +17596,8 @@
           "x": 0.758,
           "y": 0.252
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2952,
@@ -17536,7 +17616,8 @@
       "title": "The Sparklematic 5200!",
       "prerequisites": [
         2951
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2953,
@@ -17555,7 +17636,8 @@
       "title": "More Sparklematic Action",
       "prerequisites": [
         2952
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2972,
@@ -17580,7 +17662,8 @@
       "faction": "Alliance",
       "prerequisites": [
         2970
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2976,
@@ -17605,7 +17688,8 @@
       "faction": "Horde",
       "prerequisites": [
         2974
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 2987,
@@ -17642,10 +17726,6 @@
       "id": 2994,
       "items": [
         {
-          "itemID": 9472,
-          "name": "Hexx's Key"
-        },
-        {
           "itemID": 9651,
           "name": "Gryphon Rider's Stormhammer"
         },
@@ -17674,15 +17754,12 @@
           "x": 0.098,
           "y": 0.445
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3062,
       "items": [
-        {
-          "itemID": 9530,
-          "name": "Horn of Hatetalon"
-        },
         {
           "itemID": 9665,
           "name": "Wingcrest Gloves"
@@ -17752,7 +17829,8 @@
           "x": 0.7440000000000001,
           "y": 0.434
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3161,
@@ -17807,7 +17885,8 @@
       "faction": "Alliance",
       "prerequisites": [
         3182
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3281,
@@ -17841,7 +17920,8 @@
           "x": 0.5193,
           "y": 0.3032
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3301,
@@ -17875,7 +17955,8 @@
           "x": 0.5226,
           "y": 0.31920000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3321,
@@ -17973,7 +18054,8 @@
           "x": 0.48200000000000004,
           "y": 0.32799999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3370,
@@ -18007,7 +18089,8 @@
           "x": 0.48200000000000004,
           "y": 0.32799999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3373,
@@ -18121,7 +18204,8 @@
           "x": 0.29600000000000004,
           "y": 0.266
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3379,
@@ -18267,7 +18351,8 @@
           "x": 0.778,
           "y": 0.914
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3463,
@@ -18304,7 +18389,8 @@
           "x": 0.391,
           "y": 0.391
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3481,
@@ -18324,7 +18410,8 @@
       "minimum": 40,
       "prerequisites": [
         3463
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3501,
@@ -18379,7 +18466,8 @@
           "x": 0.518,
           "y": 0.35600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3507,
@@ -18404,7 +18492,8 @@
       "faction": "Horde",
       "prerequisites": [
         3506
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3514,
@@ -18438,7 +18527,8 @@
           "x": 0.48119999999999996,
           "y": 0.0542
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3522,
@@ -18567,7 +18657,8 @@
           "x": 0.41200000000000003,
           "y": 0.256
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3568,
@@ -18649,7 +18740,8 @@
           "x": 0.608,
           "y": 0.664
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3625,
@@ -18686,7 +18778,8 @@
           "x": 0.506,
           "y": 0.204
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3628,
@@ -18723,7 +18816,8 @@
           "x": 0.34299999999999997,
           "y": 0.662
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3636,
@@ -18969,7 +19063,8 @@
           "x": 0.3837,
           "y": 0.5531
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3721,
@@ -19000,7 +19095,8 @@
           "x": 0.282,
           "y": 0.762
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3781,
@@ -19030,7 +19126,8 @@
           "x": 0.348,
           "y": 0.08800000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3785,
@@ -19060,7 +19157,8 @@
           "x": 0.35200000000000004,
           "y": 0.08
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3786,
@@ -19090,7 +19188,8 @@
           "x": 0.708,
           "y": 0.33799999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3791,
@@ -19125,7 +19224,8 @@
           "x": 0.324,
           "y": 0.43799999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3802,
@@ -19145,7 +19245,8 @@
       "minimum": 48,
       "prerequisites": [
         3801
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3803,
@@ -19175,7 +19276,8 @@
           "x": 0.35200000000000004,
           "y": 0.08
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3804,
@@ -19205,7 +19307,8 @@
           "x": 0.708,
           "y": 0.33799999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3822,
@@ -19235,7 +19338,8 @@
           "x": 0.7979999999999999,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3825,
@@ -19268,7 +19372,8 @@
           "x": 0.846,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3845,
@@ -19292,7 +19397,8 @@
       "minimum": 47,
       "prerequisites": [
         3844
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3861,
@@ -19315,7 +19421,8 @@
           "npcID": 620,
           "name": "Chicken"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3882,
@@ -19382,7 +19489,8 @@
           "x": 0.308,
           "y": 0.662
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3902,
@@ -19420,7 +19528,8 @@
           "x": 0.316,
           "y": 0.6559999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3905,
@@ -19454,7 +19563,8 @@
           "x": 0.507,
           "y": 0.39299999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3907,
@@ -19496,19 +19606,12 @@
           "x": 0.033,
           "y": 0.483
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3924,
       "items": [
-        {
-          "itemID": 11147,
-          "name": "Samophlange Manual Cover"
-        },
-        {
-          "itemID": 11148,
-          "name": "Samophlange Manual Page"
-        },
         {
           "itemID": 11854,
           "name": "Samophlange Screwdriver"
@@ -19538,7 +19641,8 @@
           "x": 0.7648999999999999,
           "y": 0.2447
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 3962,
@@ -19575,7 +19679,8 @@
           "x": 0.446,
           "y": 0.08199999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4004,
@@ -19606,15 +19711,12 @@
           "npcID": 8929,
           "name": "Princess Moira Bronzebeard"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4005,
       "items": [
-        {
-          "itemID": 11522,
-          "name": "Silver Totem of Aquementas"
-        },
         {
           "itemID": 11617,
           "name": "Eridan's Supplies"
@@ -19639,7 +19741,8 @@
           "x": 0.512,
           "y": 0.816
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4024,
@@ -19676,7 +19779,8 @@
           "x": 0.9509000000000001,
           "y": 0.3156
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4063,
@@ -19718,7 +19822,8 @@
           "x": 0.2595,
           "y": 0.4487
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4103,
@@ -19748,7 +19853,8 @@
           "x": 0.542,
           "y": 0.867
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4104,
@@ -19902,7 +20008,8 @@
           "x": 0.46799999999999997,
           "y": 0.83
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4109,
@@ -20040,7 +20147,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4117,
@@ -20057,7 +20165,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4119,
@@ -20074,7 +20183,8 @@
         }
       ],
       "title": "Corrupted Night Dragon",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4126,
@@ -20112,7 +20222,8 @@
           "x": 0.46799999999999997,
           "y": 0.524
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4132,
@@ -20142,7 +20253,8 @@
           "x": 0.057999999999999996,
           "y": 0.475
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4134,
@@ -20176,7 +20288,8 @@
           "x": 0.028999999999999998,
           "y": 0.478
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4136,
@@ -20213,7 +20326,8 @@
           "x": 0.6609999999999999,
           "y": 0.21899999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4148,
@@ -20234,7 +20348,8 @@
       "faction": "Horde",
       "prerequisites": [
         4146
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4161,
@@ -20305,7 +20420,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4222,
@@ -20322,7 +20438,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4242,
@@ -20356,7 +20473,8 @@
           "npcID": 9023,
           "name": "Marshal Windsor"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4261,
@@ -20381,7 +20499,8 @@
       "faction": "Alliance",
       "prerequisites": [
         4442
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4263,
@@ -20423,7 +20542,8 @@
           "x": 0.8540000000000001,
           "y": 0.701
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4266,
@@ -20457,7 +20577,8 @@
           "x": 0.318,
           "y": 0.452
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4286,
@@ -20508,61 +20629,8 @@
       "minimum": 48,
       "prerequisites": [
         4291
-      ]
-    },
-    {
-      "id": 4293,
-      "items": [
-        {
-          "itemID": 12230,
-          "name": "Felwood Slime Sample"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
-          "line": 110
-        }
-      ],
-      "title": "A Sample of Slime...",
-      "minimum": 48,
-      "faction": "Horde",
-      "locations": [
-        {
-          "npcID": 10136,
-          "name": "Chemist Fuely",
-          "mapID": 1458,
-          "x": 0.47600000000000003,
-          "y": 0.73
-        }
-      ]
-    },
-    {
-      "id": 4294,
-      "items": [
-        {
-          "itemID": 12235,
-          "name": "Un'Goro Slime Sample"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
-          "line": 46
-        }
-      ],
-      "title": "... and a Batch of Ooze",
-      "minimum": 48,
-      "faction": "Horde",
-      "locations": [
-        {
-          "npcID": 10136,
-          "name": "Chemist Fuely",
-          "mapID": 1458,
-          "x": 0.47600000000000003,
-          "y": 0.73
-        }
-      ]
+      "eligibilityUnknown": true
     },
     {
       "id": 4298,
@@ -20592,7 +20660,8 @@
           "x": 0.141,
           "y": 0.436
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4300,
@@ -20660,7 +20729,8 @@
           "x": 0.716,
           "y": 0.76
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4321,
@@ -20691,7 +20761,8 @@
           "x": 0.418,
           "y": 0.026000000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4322,
@@ -20726,7 +20797,8 @@
           "npcID": 9023,
           "name": "Marshal Windsor"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4343,
@@ -20743,7 +20815,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4363,
@@ -20774,7 +20847,8 @@
           "npcID": 8929,
           "name": "Princess Moira Bronzebeard"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4381,
@@ -20794,7 +20868,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4382,
@@ -20814,7 +20889,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4383,
@@ -20834,7 +20910,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4384,
@@ -20854,7 +20931,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4385,
@@ -20874,7 +20952,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4386,
@@ -20894,7 +20973,8 @@
       "minimum": 47,
       "prerequisites": [
         4321
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4402,
@@ -20935,7 +21015,8 @@
           "x": 0.426,
           "y": 0.672
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4403,
@@ -20952,7 +21033,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4443,
@@ -20969,7 +21051,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4444,
@@ -20986,7 +21069,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4445,
@@ -21003,7 +21087,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4446,
@@ -21020,7 +21105,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4447,
@@ -21037,7 +21123,8 @@
         }
       ],
       "title": "Corrupted Night Dragon",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4448,
@@ -21054,7 +21141,8 @@
         }
       ],
       "title": "Corrupted Night Dragon",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4450,
@@ -21078,7 +21166,8 @@
       "minimum": 43,
       "prerequisites": [
         4449
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4461,
@@ -21095,7 +21184,8 @@
         }
       ],
       "title": "Corrupted Whipper Root",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4462,
@@ -21112,7 +21202,8 @@
         }
       ],
       "title": "Corrupted Night Dragon",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4463,
@@ -21138,7 +21229,8 @@
           "x": 0.65,
           "y": 0.23600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4466,
@@ -21155,7 +21247,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4467,
@@ -21172,7 +21265,8 @@
         }
       ],
       "title": "Corrupted Windblossom",
-      "minimum": 48
+      "minimum": 48,
+      "eligibilityUnknown": true
     },
     {
       "id": 4481,
@@ -21198,7 +21292,8 @@
           "x": 0.65,
           "y": 0.23600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4482,
@@ -21224,7 +21319,8 @@
           "x": 0.65,
           "y": 0.23600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4483,
@@ -21250,7 +21346,8 @@
           "x": 0.65,
           "y": 0.23600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4484,
@@ -21292,7 +21389,8 @@
           "x": 0.65,
           "y": 0.23600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4491,
@@ -21329,7 +21427,8 @@
           "x": 0.52,
           "y": 0.5
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4501,
@@ -21422,7 +21521,8 @@
           "x": 0.42,
           "y": 0.858
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4511,
@@ -21460,7 +21560,8 @@
           "x": 0.564,
           "y": 0.466
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4512,
@@ -21525,7 +21626,8 @@
           "x": 0.754,
           "y": 0.23399999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4561,
@@ -21543,7 +21645,8 @@
       ],
       "title": "Testing for Impurities - Un'Goro Crater",
       "minimum": 48,
-      "faction": "Horde"
+      "faction": "Horde",
+      "eligibilityUnknown": true
     },
     {
       "id": 4603,
@@ -21562,7 +21665,8 @@
       "title": "More Sparklematic Action",
       "prerequisites": [
         4605
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4604,
@@ -21581,7 +21685,8 @@
       "title": "More Sparklematic Action",
       "prerequisites": [
         4606
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4605,
@@ -21600,7 +21705,8 @@
       "title": "The Sparklematic 5200!",
       "prerequisites": [
         4601
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4606,
@@ -21619,7 +21725,8 @@
       "title": "The Sparklematic 5200!",
       "prerequisites": [
         4602
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4621,
@@ -21684,7 +21791,8 @@
           "x": 0.47600000000000003,
           "y": 0.73
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4661,
@@ -21702,7 +21810,8 @@
       ],
       "title": "Testing for Corruption - Felwood",
       "minimum": 48,
-      "faction": "Horde"
+      "faction": "Horde",
+      "eligibilityUnknown": true
     },
     {
       "id": 4681,
@@ -21740,7 +21849,8 @@
           "x": 0.366,
           "y": 0.456
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4701,
@@ -21932,22 +22042,6 @@
       "id": 4763,
       "items": [
         {
-          "itemID": 12341,
-          "name": "Blackwood Fruit Sample"
-        },
-        {
-          "itemID": 12342,
-          "name": "Blackwood Grain Sample"
-        },
-        {
-          "itemID": 12343,
-          "name": "Blackwood Nut Sample"
-        },
-        {
-          "itemID": 12347,
-          "name": "Filled Cleansing Bowl"
-        },
-        {
           "itemID": 15202,
           "name": "Wildkeeper Leggings"
         },
@@ -22128,7 +22222,8 @@
           "x": 0.28600000000000003,
           "y": 0.768
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4786,
@@ -22160,7 +22255,8 @@
           "x": 0.624,
           "y": 0.354
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4801,
@@ -22189,7 +22285,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4802,
@@ -22218,7 +22315,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4803,
@@ -22247,7 +22345,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4804,
@@ -22276,7 +22375,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4805,
@@ -22305,7 +22405,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4806,
@@ -22334,7 +22435,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4807,
@@ -22363,7 +22465,8 @@
           "x": 0.618,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4810,
@@ -22387,7 +22490,8 @@
       "minimum": 50,
       "prerequisites": [
         4809
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4813,
@@ -22416,7 +22520,8 @@
       "faction": "Alliance",
       "prerequisites": [
         4812
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4842,
@@ -22445,7 +22550,8 @@
           "x": 0.312,
           "y": 0.452
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4862,
@@ -22542,7 +22648,8 @@
       "faction": "Horde",
       "prerequisites": [
         4882
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4902,
@@ -22576,7 +22683,8 @@
           "x": 0.555,
           "y": 0.9209999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4903,
@@ -22672,7 +22780,8 @@
           "x": 0.514,
           "y": 0.815
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4964,
@@ -22709,7 +22818,8 @@
           "x": 0.624,
           "y": 0.354
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4966,
@@ -22747,7 +22857,8 @@
           "x": 0.2127,
           "y": 0.32030000000000003
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4971,
@@ -22806,7 +22917,8 @@
           "x": 0.39399999999999996,
           "y": 0.6679999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4973,
@@ -22835,7 +22947,8 @@
           "x": 0.39399999999999996,
           "y": 0.6679999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4974,
@@ -22911,7 +23024,8 @@
           "x": 0.624,
           "y": 0.354
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 4983,
@@ -22966,15 +23080,12 @@
           "x": 0.384,
           "y": 0.54
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5056,
       "items": [
-        {
-          "itemID": 12733,
-          "name": "Sacred Frostsaber Meat"
-        },
         {
           "itemID": 15782,
           "name": "Beaststalker Blade"
@@ -23004,7 +23115,8 @@
           "x": 0.618,
           "y": 0.384
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5057,
@@ -23034,24 +23146,8 @@
           "x": 0.618,
           "y": 0.384
         }
-      ]
-    },
-    {
-      "id": 5059,
-      "items": [
-        {
-          "itemID": 12739,
-          "name": "Dalson Cabinet Key"
-        }
       ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Western Plaguelands.lua",
-          "line": 522
-        }
-      ],
-      "title": "Locked Away",
-      "minimum": 52
+      "eligibilityUnknown": true
     },
     {
       "id": 5060,
@@ -23140,7 +23236,8 @@
           "x": 0.45649999999999996,
           "y": 0.508
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5067,
@@ -23285,7 +23382,8 @@
           "x": 0.6984999999999999,
           "y": 0.309
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5102,
@@ -23327,24 +23425,6 @@
       "eligibilityUnknown": true
     },
     {
-      "id": 5103,
-      "items": [
-        {
-          "itemID": 12812,
-          "name": "Unfired Plate Gauntlets"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
-          "line": 507
-        }
-      ],
-      "title": "Hot Fiery Death",
-      "minimum": 55,
-      "eligibilityUnknown": true
-    },
-    {
       "id": 5121,
       "items": [
         {
@@ -23379,7 +23459,8 @@
           "x": 0.312,
           "y": 0.452
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5124,
@@ -23510,7 +23591,8 @@
           "x": 0.312,
           "y": 0.452
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5147,
@@ -23549,7 +23631,8 @@
         }
       ],
       "title": "Dadanga is Hungry!",
-      "minimum": 47
+      "minimum": 47,
+      "eligibilityUnknown": true
     },
     {
       "id": 5151,
@@ -23605,7 +23688,8 @@
           "x": 0.608,
           "y": 0.376
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5166,
@@ -23682,7 +23766,8 @@
           "x": 0.8140000000000001,
           "y": 0.598
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5213,
@@ -23780,7 +23865,8 @@
           "x": 0.512,
           "y": 0.8220000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5243,
@@ -23848,7 +23934,8 @@
       "faction": "Alliance",
       "prerequisites": [
         5252
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5265,
@@ -24109,7 +24196,8 @@
       "minimum": 49,
       "prerequisites": [
         5204
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5386,
@@ -24171,7 +24259,8 @@
           "x": 0.22399999999999998,
           "y": 0.73
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5466,
@@ -24282,7 +24371,8 @@
           "x": 0.8140000000000001,
           "y": 0.598
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5509,
@@ -24308,7 +24398,8 @@
           "x": 0.8140000000000001,
           "y": 0.598
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5510,
@@ -24334,7 +24425,8 @@
           "x": 0.8140000000000001,
           "y": 0.598
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5517,
@@ -24447,7 +24539,8 @@
           "x": 0.517,
           "y": 0.451
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5528,
@@ -24534,7 +24627,8 @@
         {
           "npcID": 11624
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5621,
@@ -24569,7 +24663,8 @@
           "x": 0.556,
           "y": 0.568
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5624,
@@ -24604,7 +24699,8 @@
           "x": 0.434,
           "y": 0.6559999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5625,
@@ -24639,7 +24735,8 @@
           "x": 0.47200000000000003,
           "y": 0.522
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5648,
@@ -24674,7 +24771,8 @@
           "x": 0.542,
           "y": 0.428
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5650,
@@ -24709,7 +24807,8 @@
           "x": 0.616,
           "y": 0.522
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5721,
@@ -24738,7 +24837,8 @@
           "x": 0.39399999999999996,
           "y": 0.6679999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5724,
@@ -24769,7 +24869,8 @@
           "npcID": 11834,
           "name": "Maur Grimtotem"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5725,
@@ -24846,7 +24947,8 @@
           "x": 0.496,
           "y": 0.506
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5821,
@@ -24932,7 +25034,8 @@
           "x": 0.542,
           "y": 0.867
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5883,
@@ -25086,7 +25189,8 @@
           "x": 0.46799999999999997,
           "y": 0.83
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5888,
@@ -25238,7 +25342,8 @@
       "minimum": 50,
       "prerequisites": [
         5721
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 5943,
@@ -25321,41 +25426,6 @@
       "eligibilityUnknown": true
     },
     {
-      "id": 6022,
-      "items": [
-        {
-          "itemID": 15447,
-          "name": "Living Rot"
-        },
-        {
-          "itemID": 15448,
-          "name": "Coagulated Rot"
-        },
-        {
-          "itemID": 15454,
-          "name": "Mortar and Pestle"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
-          "line": 916
-        }
-      ],
-      "title": "To Kill With Purpose",
-      "minimum": 54,
-      "faction": "Horde",
-      "locations": [
-        {
-          "npcID": 11878,
-          "name": "Nathanos Blightcaller",
-          "mapID": 1423,
-          "x": 0.266,
-          "y": 0.748
-        }
-      ]
-    },
-    {
       "id": 6024,
       "items": [
         {
@@ -25407,7 +25477,8 @@
           "x": 0.38799999999999996,
           "y": 0.272
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6031,
@@ -25479,7 +25550,8 @@
           "x": 0.8059999999999999,
           "y": 0.58
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6124,
@@ -25512,7 +25584,8 @@
           "x": 0.376,
           "y": 0.406
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6129,
@@ -25545,7 +25618,8 @@
           "x": 0.522,
           "y": 0.318
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6134,
@@ -25611,7 +25685,8 @@
           "x": 0.266,
           "y": 0.748
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6136,
@@ -25649,7 +25724,8 @@
           "x": 0.266,
           "y": 0.748
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6142,
@@ -25714,7 +25790,8 @@
           "x": 0.266,
           "y": 0.748
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6148,
@@ -25752,7 +25829,8 @@
           "x": 0.266,
           "y": 0.748
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6161,
@@ -25846,7 +25924,8 @@
           "x": 0.7979999999999999,
           "y": 0.386
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6283,
@@ -25880,7 +25959,8 @@
           "x": 0.4717,
           "y": 0.6108
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6284,
@@ -25936,7 +26016,8 @@
           "x": 0.4744,
           "y": 0.5847
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6395,
@@ -25974,7 +26055,8 @@
           "x": 0.309,
           "y": 0.6609999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6481,
@@ -26008,7 +26090,8 @@
           "x": 0.4717,
           "y": 0.6409999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6502,
@@ -26197,27 +26280,6 @@
           "x": 0.11599999999999999,
           "y": 0.34299999999999997
         }
-      ]
-    },
-    {
-      "id": 6570,
-      "items": [
-        {
-          "itemID": 16787,
-          "name": "Amulet of Draconic Subversion"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
-          "line": 359
-        }
-      ],
-      "title": "Emberstrife",
-      "minimum": 55,
-      "faction": "Horde",
-      "prerequisites": [
-        6569
       ],
       "eligibilityUnknown": true
     },
@@ -26389,7 +26451,8 @@
         {
           "npcID": 12757
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6641,
@@ -26437,7 +26500,8 @@
       "faction": "Alliance",
       "prerequisites": [
         6661
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6845,
@@ -26470,7 +26534,8 @@
           "x": 0.44880000000000003,
           "y": 0.35600000000000004
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 6922,
@@ -26519,7 +26584,8 @@
           "x": 0.51,
           "y": 0.711
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7003,
@@ -26638,35 +26704,12 @@
           "x": 0.302,
           "y": 0.598
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7067,
       "items": [
-        {
-          "itemID": 17757,
-          "name": "Amulet of Spirits"
-        },
-        {
-          "itemID": 17761,
-          "name": "Gem of the First Khan"
-        },
-        {
-          "itemID": 17762,
-          "name": "Gem of the Second Kahn"
-        },
-        {
-          "itemID": 17763,
-          "name": "Gem of the Third Kahn"
-        },
-        {
-          "itemID": 17764,
-          "name": "Gem of the Fourth Kahn"
-        },
-        {
-          "itemID": 17765,
-          "name": "Gem of the Fifth Kahn"
-        },
         {
           "itemID": 17774,
           "name": "Mark of the Chosen"
@@ -26713,7 +26756,8 @@
           "x": 0.622,
           "y": 0.59
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7162,
@@ -26746,7 +26790,8 @@
           "x": 0.396,
           "y": 0.81
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7163,
@@ -27076,7 +27121,8 @@
           "x": 0.028999999999999998,
           "y": 0.47759999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7341,
@@ -27103,7 +27149,8 @@
           "x": 0.7440000000000001,
           "y": 0.264
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7342,
@@ -27130,7 +27177,8 @@
           "x": 0.196,
           "y": 0.522
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7441,
@@ -27274,7 +27322,8 @@
           "x": 0.304,
           "y": 0.462
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7489,
@@ -27304,7 +27353,8 @@
           "x": 0.762,
           "y": 0.43799999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7491,
@@ -27342,7 +27392,8 @@
           "x": 0.32,
           "y": 0.37799999999999995
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7496,
@@ -27380,7 +27431,8 @@
           "x": 0.672,
           "y": 0.851
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7498,
@@ -27589,14 +27641,6 @@
         {
           "itemID": 18348,
           "name": "Quel'Serrar"
-        },
-        {
-          "itemID": 18488,
-          "name": "Heated Ancient Blade"
-        },
-        {
-          "itemID": 18489,
-          "name": "Unfired Ancient Blade"
         }
       ],
       "sources": [
@@ -27619,7 +27663,8 @@
           "npcID": 14368,
           "name": "Lorekeeper Lydros"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7541,
@@ -27653,7 +27698,8 @@
           "x": 0.39,
           "y": 0.38
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7583,
@@ -27686,7 +27732,8 @@
           "x": 0.34,
           "y": 0.502
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7603,
@@ -27718,7 +27765,8 @@
           "x": 0.41600000000000004,
           "y": 0.45
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7622,
@@ -27745,7 +27793,8 @@
       ],
       "prerequisites": [
         7621
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7634,
@@ -27803,30 +27852,6 @@
           "x": 0.47,
           "y": 0.24480000000000002
         }
-      ]
-    },
-    {
-      "id": 7636,
-      "items": [
-        {
-          "itemID": 18707,
-          "name": "Ancient Rune Etched Stave"
-        },
-        {
-          "itemID": 18715,
-          "name": "Lok'delar, Stave of the Ancient Keepers"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
-          "line": 87
-        }
-      ],
-      "title": "Stave of the Ancients",
-      "minimum": 60,
-      "classTokens": [
-        "HUNTER"
       ]
     },
     {
@@ -28278,7 +28303,8 @@
       "prerequisites": [
         7730,
         7731
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7733,
@@ -28308,7 +28334,8 @@
           "x": 0.306,
           "y": 0.42700000000000005
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7734,
@@ -28338,7 +28365,8 @@
           "x": 0.7440000000000001,
           "y": 0.428
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7815,
@@ -28393,7 +28421,8 @@
           "x": 0.29600000000000004,
           "y": 0.474
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7840,
@@ -28450,7 +28479,8 @@
           "x": 0.792,
           "y": 0.79
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7847,
@@ -28484,7 +28514,8 @@
           "x": 0.596,
           "y": 0.778
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7849,
@@ -28782,7 +28813,8 @@
       "minimum": 57,
       "prerequisites": [
         7461
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7930,
@@ -28815,7 +28847,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7931,
@@ -28848,7 +28881,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7932,
@@ -28880,7 +28914,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7933,
@@ -28912,7 +28947,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7934,
@@ -28944,7 +28980,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7935,
@@ -28976,7 +29013,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7936,
@@ -29008,7 +29046,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7937,
@@ -29025,7 +29064,8 @@
         }
       ],
       "title": "Your Fortune Awaits You...",
-      "minimum": 10
+      "minimum": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 7938,
@@ -29042,7 +29082,8 @@
         }
       ],
       "title": "Your Fortune Awaits You...",
-      "minimum": 10
+      "minimum": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 7940,
@@ -29074,7 +29115,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7944,
@@ -29091,7 +29133,8 @@
         }
       ],
       "title": "Your Fortune Awaits You...",
-      "minimum": 10
+      "minimum": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 7945,
@@ -29108,7 +29151,8 @@
         }
       ],
       "title": "Your Fortune Awaits You...",
-      "minimum": 10
+      "minimum": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 7946,
@@ -29141,7 +29185,8 @@
           "x": 0.359,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 7981,
@@ -29173,7 +29218,8 @@
           "x": 0.41600000000000004,
           "y": 0.688
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8115,
@@ -29960,7 +30006,8 @@
           "x": 0.41,
           "y": 0.7959999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8272,
@@ -30001,7 +30048,8 @@
           "x": 0.636,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8273,
@@ -30035,7 +30083,8 @@
           "x": 0.7340000000000001,
           "y": 0.324
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8282,
@@ -30068,7 +30117,8 @@
           "x": 0.516,
           "y": 0.385
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8283,
@@ -30109,7 +30159,8 @@
       "minimum": 40,
       "prerequisites": [
         8279
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8306,
@@ -30138,7 +30189,8 @@
           "x": 0.49200000000000005,
           "y": 0.342
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8308,
@@ -30247,7 +30299,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8321,
@@ -30280,7 +30333,8 @@
           "x": 0.48700000000000004,
           "y": 0.379
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8332,
@@ -30339,7 +30393,8 @@
           "x": 0.52,
           "y": 0.382
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8341,
@@ -30514,7 +30569,8 @@
           "x": 0.486,
           "y": 0.37799999999999995
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8363,
@@ -30631,7 +30687,8 @@
           "x": 0.5,
           "y": 0.5720000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8376,
@@ -30667,7 +30724,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8377,
@@ -30703,7 +30761,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8378,
@@ -30739,7 +30798,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8379,
@@ -30775,7 +30835,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8380,
@@ -30811,7 +30872,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8381,
@@ -30847,7 +30909,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8382,
@@ -30883,7 +30946,8 @@
           "x": 0.49700000000000005,
           "y": 0.375
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8409,
@@ -30904,7 +30968,8 @@
       "faction": "Horde",
       "prerequisites": [
         8322
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8413,
@@ -31227,7 +31292,8 @@
           "x": 0.5,
           "y": 0.364
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8538,
@@ -31244,7 +31310,8 @@
         }
       ],
       "title": "The Four Dukes",
-      "minimum": 60
+      "minimum": 60,
+      "eligibilityUnknown": true
     },
     {
       "id": 8548,
@@ -31484,7 +31551,8 @@
           "x": 0.5,
           "y": 0.364
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8744,
@@ -31500,7 +31568,8 @@
           "line": 77
         }
       ],
-      "title": "A Carefully Wrapped Present"
+      "title": "A Carefully Wrapped Present",
+      "eligibilityUnknown": true
     },
     {
       "id": 8746,
@@ -31531,7 +31600,8 @@
           "x": 0.532,
           "y": 0.6659999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8762,
@@ -31562,7 +31632,8 @@
           "x": 0.33399999999999996,
           "y": 0.67
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8763,
@@ -31622,7 +31693,8 @@
         }
       ],
       "title": "A Gaily Wrapped Present",
-      "minimum": 20
+      "minimum": 20,
+      "eligibilityUnknown": true
     },
     {
       "id": 8769,
@@ -31667,7 +31739,8 @@
         }
       ],
       "title": "A Ticking Present",
-      "minimum": 40
+      "minimum": 40,
+      "eligibilityUnknown": true
     },
     {
       "id": 8788,
@@ -31690,7 +31763,8 @@
         "PRIEST",
         "SHAMAN",
         "WARLOCK"
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8799,
@@ -31738,7 +31812,8 @@
         }
       ],
       "title": "A Festive Gift",
-      "minimum": 10
+      "minimum": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 8829,
@@ -31755,7 +31830,8 @@
         }
       ],
       "title": "The Ultimate Deception",
-      "minimum": 60
+      "minimum": 60,
+      "eligibilityUnknown": true
     },
     {
       "id": 8862,
@@ -31785,7 +31861,8 @@
           "x": 0.536,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8863,
@@ -31810,7 +31887,8 @@
           "x": 0.536,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8864,
@@ -31847,7 +31925,8 @@
           "x": 0.536,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8865,
@@ -31884,7 +31963,8 @@
           "x": 0.536,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8867,
@@ -31952,7 +32032,8 @@
           "x": 0.386,
           "y": 0.303
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8868,
@@ -31985,7 +32066,8 @@
           "x": 0.536,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8876,
@@ -32015,7 +32097,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8877,
@@ -32045,7 +32128,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8878,
@@ -32079,7 +32163,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8879,
@@ -32109,7 +32194,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8880,
@@ -32139,7 +32225,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8881,
@@ -32169,7 +32256,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8882,
@@ -32199,7 +32287,8 @@
           "x": 0.5379999999999999,
           "y": 0.353
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8893,
@@ -32219,7 +32308,8 @@
       "minimum": 42,
       "prerequisites": [
         2741
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8921,
@@ -32253,7 +32343,8 @@
           "x": 0.524,
           "y": 0.272
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8945,
@@ -32283,7 +32374,8 @@
           "x": 0.3085,
           "y": 0.1675
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8949,
@@ -32313,7 +32405,8 @@
           "npcID": 16032,
           "name": "Falrin Treeshaper"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8980,
@@ -32346,7 +32439,8 @@
           "x": 0.5,
           "y": 0.6859999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8981,
@@ -32394,7 +32488,8 @@
           "x": 0.5479999999999999,
           "y": 0.9
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8985,
@@ -32428,7 +32523,8 @@
           "npcID": 16033,
           "name": "Bodley"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8986,
@@ -32463,7 +32559,8 @@
           "npcID": 16033,
           "name": "Bodley"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8987,
@@ -32497,7 +32594,8 @@
           "npcID": 16033,
           "name": "Bodley"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8988,
@@ -32531,7 +32629,8 @@
           "npcID": 16033,
           "name": "Bodley"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8993,
@@ -32579,7 +32678,8 @@
           "x": 0.7859999999999999,
           "y": 0.17600000000000002
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 8996,
@@ -32609,7 +32709,8 @@
           "npcID": 16073,
           "name": "Spirit of Lord Valthalak"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9023,
@@ -32688,7 +32789,8 @@
           "x": 0.562,
           "y": 0.648
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9029,
@@ -32728,7 +32830,8 @@
       "prerequisites": [
         8984,
         9028
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9053,
@@ -32824,7 +32927,8 @@
           "x": 0.825,
           "y": 0.586
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9126,
@@ -32879,7 +32983,8 @@
           "x": 0.8140000000000001,
           "y": 0.585
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9128,
@@ -32934,7 +33039,8 @@
           "x": 0.815,
           "y": 0.583
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9131,
@@ -32989,7 +33095,8 @@
           "x": 0.818,
           "y": 0.581
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9136,
@@ -33052,7 +33159,8 @@
           "x": 0.812,
           "y": 0.59
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9141,
@@ -33107,7 +33215,8 @@
           "x": 0.8109999999999999,
           "y": 0.575
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9165,
@@ -33137,7 +33246,8 @@
           "x": 0.8,
           "y": 0.58
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9211,
@@ -33163,7 +33273,8 @@
           "x": 0.8140000000000001,
           "y": 0.5820000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9213,
@@ -33189,7 +33300,8 @@
           "x": 0.8140000000000001,
           "y": 0.5820000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9221,
@@ -33668,7 +33780,46 @@
         }
       ],
       "title": "A Light in Dark Places",
-      "minimum": 50
+      "minimum": 50,
+      "locations": [
+        {
+          "npcID": 16788,
+          "mapID": 1453,
+          "x": 0.385,
+          "y": 0.611
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1455,
+          "x": 0.636,
+          "y": 0.247
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1438,
+          "x": 0.565,
+          "y": 0.92
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1456,
+          "x": 0.21600000000000003,
+          "y": 0.262
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1420,
+          "x": 0.621,
+          "y": 0.6679999999999999
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1454,
+          "x": 0.462,
+          "y": 0.377
+        }
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9322,
@@ -33684,7 +33835,46 @@
           "line": 338
         }
       ],
-      "title": "Wild Fires in Kalimdor"
+      "title": "Wild Fires in Kalimdor",
+      "locations": [
+        {
+          "npcID": 16788,
+          "mapID": 1453,
+          "x": 0.385,
+          "y": 0.611
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1455,
+          "x": 0.636,
+          "y": 0.247
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1438,
+          "x": 0.565,
+          "y": 0.92
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1456,
+          "x": 0.21600000000000003,
+          "y": 0.262
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1420,
+          "x": 0.621,
+          "y": 0.6679999999999999
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1454,
+          "x": 0.462,
+          "y": 0.377
+        }
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9323,
@@ -33700,7 +33890,46 @@
           "line": 366
         }
       ],
-      "title": "Wild Fires in the Eastern Kingdoms"
+      "title": "Wild Fires in the Eastern Kingdoms",
+      "locations": [
+        {
+          "npcID": 16788,
+          "mapID": 1453,
+          "x": 0.385,
+          "y": 0.611
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1455,
+          "x": 0.636,
+          "y": 0.247
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1438,
+          "x": 0.565,
+          "y": 0.92
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1456,
+          "x": 0.21600000000000003,
+          "y": 0.262
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1420,
+          "x": 0.621,
+          "y": 0.6679999999999999
+        },
+        {
+          "npcID": 16788,
+          "mapID": 1454,
+          "x": 0.462,
+          "y": 0.377
+        }
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9339,
@@ -33723,7 +33952,8 @@
         9330,
         9331,
         9332
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9365,
@@ -33746,7 +33976,8 @@
         9324,
         9325,
         9326
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9367,
@@ -33763,7 +33994,8 @@
         }
       ],
       "title": "The Festival of Fire",
-      "faction": "Alliance"
+      "faction": "Alliance",
+      "eligibilityUnknown": true
     },
     {
       "id": 9368,
@@ -33780,7 +34012,8 @@
         }
       ],
       "title": "The Festival of Fire",
-      "faction": "Alliance"
+      "faction": "Alliance",
+      "eligibilityUnknown": true
     },
     {
       "id": 9388,
@@ -33872,7 +34105,8 @@
           "x": 0.33299999999999996,
           "y": 0.511
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9422,
@@ -33906,7 +34140,8 @@
           "x": 0.508,
           "y": 0.695
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9522,
@@ -33944,7 +34179,8 @@
           "x": 0.865,
           "y": 0.442
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 9536,
@@ -33982,7 +34218,8 @@
           "x": 0.732,
           "y": 0.604
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 65597,
@@ -34019,39 +34256,6 @@
       "eligibilityUnknown": true
     },
     {
-      "id": 65602,
-      "items": [
-        {
-          "itemID": 190308,
-          "name": "0/1 Burning Torch"
-        }
-      ],
-      "sources": [
-        {
-          "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
-          "line": 1779
-        }
-      ],
-      "title": "What Is Love?",
-      "minimum": 20,
-      "faction": "Alliance",
-      "classTokens": [
-        "WARLOCK"
-      ],
-      "prerequisites": [
-        1716
-      ],
-      "locations": [
-        {
-          "npcID": 6122,
-          "name": "Gakin the Darkbinder",
-          "mapID": 1453,
-          "x": 0.392,
-          "y": 0.852
-        }
-      ]
-    },
-    {
       "id": 65603,
       "items": [
         {
@@ -34082,7 +34286,8 @@
           "x": 0.392,
           "y": 0.852
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 65604,
@@ -34356,8 +34561,27 @@
           "line": 101
         }
       ],
-      "eligibilityUnknown": true,
-      "title": "Friend of the Library"
+      "title": "Friend of the Library",
+      "prerequisites": [
+        78124,
+        78127,
+        78142,
+        78143,
+        78145,
+        78146,
+        78147,
+        78148,
+        78149,
+        79091,
+        79092,
+        79093,
+        79094,
+        79095,
+        79096,
+        79097
+      ],
+      "prerequisiteCount": 10,
+      "eligibilityUnknown": true
     },
     {
       "id": 79007,
@@ -34566,9 +34790,9 @@
           "line": 123
         }
       ],
-      "eligibilityUnknown": true,
       "title": "Greater Friend of the Library",
-      "minimum": 20
+      "minimum": 20,
+      "eligibilityUnknown": true
     },
     {
       "id": 79974,
@@ -34683,9 +34907,9 @@
           "line": 132
         }
       ],
-      "eligibilityUnknown": true,
       "title": "Greater Friend of the Library",
-      "minimum": 30
+      "minimum": 30,
+      "eligibilityUnknown": true
     },
     {
       "id": 86585,
@@ -35290,7 +35514,8 @@
           "x": 0.42100000000000004,
           "y": 0.235
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92463,
@@ -35327,7 +35552,8 @@
           "x": 0.434,
           "y": 0.248
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92468,
@@ -35360,7 +35586,8 @@
           "x": 0.496,
           "y": 0.24
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92469,
@@ -35393,7 +35620,8 @@
           "x": 0.47200000000000003,
           "y": 0.218
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92470,
@@ -35438,7 +35666,8 @@
           "x": 0.428,
           "y": 0.237
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92473,
@@ -35475,7 +35704,8 @@
           "x": 0.424,
           "y": 0.252
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92481,
@@ -35508,7 +35738,8 @@
           "x": 0.42100000000000004,
           "y": 0.235
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92489,
@@ -35570,7 +35801,8 @@
           "x": 0.446,
           "y": 0.444
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92517,
@@ -35608,7 +35840,8 @@
           "x": 0.456,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92528,
@@ -35645,7 +35878,8 @@
           "x": 0.46799999999999997,
           "y": 0.562
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92550,
@@ -35682,7 +35916,8 @@
           "x": 0.456,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92553,
@@ -35717,7 +35952,8 @@
           "x": 0.43799999999999994,
           "y": 0.43799999999999994
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92579,
@@ -35755,7 +35991,8 @@
           "x": 0.456,
           "y": 0.45399999999999996
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92640,
@@ -35792,7 +36029,8 @@
           "x": 0.662,
           "y": 0.7659999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92644,
@@ -35829,7 +36067,8 @@
           "x": 0.56,
           "y": 0.588
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92645,
@@ -35866,7 +36105,8 @@
           "x": 0.696,
           "y": 0.67
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92646,
@@ -35908,7 +36148,8 @@
           "x": 0.652,
           "y": 0.504
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92682,
@@ -35937,7 +36178,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92683,
@@ -35970,7 +36212,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92684,
@@ -36011,7 +36254,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92685,
@@ -36042,7 +36286,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92693,
@@ -36071,7 +36316,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92703,
@@ -36108,7 +36354,8 @@
           "x": 0.466,
           "y": 0.818
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92834,
@@ -36146,7 +36393,8 @@
           "x": 0.6659999999999999,
           "y": 0.7979999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92840,
@@ -36180,7 +36428,8 @@
           "x": 0.6659999999999999,
           "y": 0.7979999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92880,
@@ -36218,7 +36467,8 @@
           "x": 0.696,
           "y": 0.67
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 92911,
@@ -36290,7 +36540,8 @@
           "x": 0.638,
           "y": 0.36
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93172,
@@ -36327,7 +36578,8 @@
           "x": 0.54,
           "y": 0.39
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93317,
@@ -36383,7 +36635,8 @@
         92514,
         93461
       ],
-      "prerequisiteCount": 1
+      "prerequisiteCount": 1,
+      "eligibilityUnknown": true
     },
     {
       "id": 93320,
@@ -36422,7 +36675,8 @@
           "x": 0.662,
           "y": 0.7659999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93552,
@@ -36463,7 +36717,8 @@
           "x": 0.434,
           "y": 0.24
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93739,
@@ -36495,7 +36750,8 @@
           "x": 0.32,
           "y": 0.37799999999999995
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93746,
@@ -36529,7 +36785,8 @@
           "x": 0.59,
           "y": 0.7959999999999999
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93797,
@@ -36604,7 +36861,8 @@
         {
           "npcID": 253590
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 93963,
@@ -36622,7 +36880,9 @@
       ],
       "title": "Exploring the Alliance",
       "minimum": 7,
-      "eligibilityUnknown": true,
+      "races": [
+        95
+      ],
       "prerequisites": [
         94947
       ],
@@ -36634,7 +36894,8 @@
           "x": 0.8009999999999999,
           "y": 0.384
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 94003,
@@ -36737,7 +36998,8 @@
           "x": 0.436,
           "y": 0.44799999999999995
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 94413,
@@ -36771,7 +37033,8 @@
           "x": 0.45,
           "y": 0.46399999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 95065,
@@ -36833,7 +37096,8 @@
           "x": 0.562,
           "y": 0.542
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 95189,
@@ -37064,7 +37328,8 @@
           "x": 0.514,
           "y": 0.5920000000000001
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 95697,
@@ -37134,7 +37399,8 @@
           "npcID": 262465,
           "name": "Daewyn Songblade"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 95805,
@@ -37200,7 +37466,8 @@
           "npcID": 262681,
           "name": "Ardin Grassman"
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 95999,
@@ -37413,7 +37680,8 @@
           "x": 0.648,
           "y": 0.584
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 96394,
@@ -37967,7 +38235,8 @@
           "x": 0.512,
           "y": 0.86
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 97277,
@@ -38064,7 +38333,8 @@
           "x": 0.462,
           "y": 0.63
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 97558,
@@ -38776,7 +39046,8 @@
           "x": 0.708,
           "y": 0.33799999999999997
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 98824,
@@ -38814,7 +39085,8 @@
           "x": 0.38799999999999996,
           "y": 0.522
         }
-      ]
+      ],
+      "eligibilityUnknown": true
     },
     {
       "id": 99052,

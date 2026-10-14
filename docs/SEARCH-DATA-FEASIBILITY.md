@@ -1,10 +1,17 @@
 # Reward finder data feasibility
 
+Historical source assessment captured at
+`75e88b03b6e8e97500af5ccbd3e7d28ea3424235`. The counts below predate the fresh
+input/component exclusions and restriction guards. Current coverage and
+exclusions are in `data/catalog-coverage.json` and `data/catalog-sources.json`;
+the corrections are reviewed in `REVIEW-LOOP-DATA.md` and
+`REVIEW-LOOP-DATA-CROSS.md`.
+
 Reviewed 2026-10-14. The user requires a **bundled, addon-owned Forever catalog without a Questie dependency**. The selected source is a narrow numeric extract from the MIT-licensed **AllTheThings Forever authoring data**, pinned at `d75383ccdbff1208b87cf4024fa425c0825a7ad6`. Neither the earlier Wowhead captures nor a Questie export is the selected bundled input. Their investigations below are retained as comparison evidence.
 
 This investigator changed this document and, after explicit delegation, the numeric `data/catalog-compiled-membership.json` cross-check; no runtime or README was changed during the data investigation. The selected authoring files support a curated association catalog and source-reported metadata, but do not establish every reward quantity/group, quest difficulty level, current availability, player usability or an upgrade score. Native observations remain distinct. QuestBrief's existing exact classifications continue to come only from `data/primary-statuses.json`.
 
-## Final guarded catalogue audit
+## Historical guarded catalogue audit
 
 The final guarded importer snapshot contains **1,267 quests, 1,977 item IDs and 2,311 quest/item associations**. Every shipped pair independently appears in direct authoring `q`→`i` evidence and the frozen compiled membership cross-check. All 95 provenance file receipts were independently checked against retained exact bytes, including Git blob and SHA-256 hashes. `tools/check_membership.py` reproduces the compiled facts without executing upstream Lua. The investigation's `.work/final-catalog-audit.py` also checks canonical pair boundaries, class/faction constraints, representative objective exclusions and unknown prerequisites. The implementation owner's generator records the same final scope in `data/catalog-coverage.json`.
 

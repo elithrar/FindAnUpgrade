@@ -671,25 +671,46 @@
   ],
   "omissions": [
     {
-      "id": 78150,
-      "path": ".contrib/.db/forever/expansion features/library books.lua",
-      "line": 101,
-      "field": "sourceQuests",
-      "reason": "field omitted: unsupported selected expression"
+      "id": 7636,
+      "itemID": 18707,
+      "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+      "line": 135,
+      "reason": "reward pair omitted: item acquisition fields: cost"
+    },
+    {
+      "id": 7636,
+      "itemID": 18715,
+      "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+      "line": 141,
+      "reason": "reward pair omitted: item acquisition fields: sourceQuests"
+    },
+    {
+      "id": 7509,
+      "itemID": 18488,
+      "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+      "line": 175,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7509,
+      "itemID": 18489,
+      "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+      "line": 180,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
     },
     {
       "id": 79536,
       "path": ".contrib/.db/forever/expansion features/library books.lua",
       "line": 123,
-      "field": "sourceQuests",
-      "reason": "field omitted: unsupported selected expression"
+      "field": "prerequisites",
+      "reason": "group omitted: invalid prerequisite threshold"
     },
     {
       "id": 82208,
       "path": ".contrib/.db/forever/expansion features/library books.lua",
       "line": 132,
-      "field": "sourceQuests",
-      "reason": "field omitted: unsupported selected expression"
+      "field": "prerequisites",
+      "reason": "group omitted: invalid prerequisite threshold"
     },
     {
       "id": 8767,
@@ -697,6 +718,13 @@
       "line": 125,
       "field": "classes",
       "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 8767,
+      "itemID": 21235,
+      "path": ".contrib/.db/forever/holidays/feast of the winter veil.lua",
+      "line": 136,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
     },
     {
       "id": 9389,
@@ -713,11 +741,60 @@
       "reason": "field omitted: unsupported selected expression"
     },
     {
+      "id": 65602,
+      "itemID": 190308,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+      "line": 1812,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 795,
+      "itemID": 4615,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "line": 534,
+      "reason": "reward pair omitted: item acquisition fields: coord, cr"
+    },
+    {
+      "id": 795,
+      "itemID": 4645,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "line": 538,
+      "reason": "reward pair omitted: item acquisition fields: coord, cr"
+    },
+    {
+      "id": 779,
+      "itemID": 4615,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "line": 555,
+      "reason": "reward pair omitted: item acquisition fields: coord, cr"
+    },
+    {
+      "id": 779,
+      "itemID": 4645,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "line": 559,
+      "reason": "reward pair omitted: item acquisition fields: coord, cr"
+    },
+    {
+      "id": 626,
+      "itemID": 11324,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+      "line": 487,
+      "reason": "reward pair omitted: item acquisition fields: coord"
+    },
+    {
       "id": 9272,
       "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
       "line": 533,
       "field": "lvl",
       "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 2932,
+      "itemID": 9320,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+      "line": 664,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
     },
     {
       "id": 92110,
@@ -727,11 +804,74 @@
       "reason": "field omitted: unsupported selected expression"
     },
     {
+      "id": 4763,
+      "itemID": 12347,
+      "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+      "line": 722,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4763,
+      "itemID": 12341,
+      "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+      "line": 726,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4763,
+      "itemID": 12342,
+      "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+      "line": 731,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4763,
+      "itemID": 12343,
+      "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+      "line": 736,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
       "id": 792,
       "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
       "line": 298,
       "field": "classes",
       "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 792,
+      "itemID": 12449,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 308,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
+    },
+    {
+      "id": 792,
+      "itemID": 4924,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 311,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
+    },
+    {
+      "id": 792,
+      "itemID": 4925,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 312,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
+    },
+    {
+      "id": 792,
+      "itemID": 4923,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 313,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
+    },
+    {
+      "id": 792,
+      "itemID": 5778,
+      "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+      "line": 314,
+      "reason": "reward pair omitted: unresolved quest classes restriction"
     },
     {
       "id": 3522,
@@ -741,11 +881,88 @@
       "reason": "invalid, unsupported or self-referential"
     },
     {
+      "id": 882,
+      "itemID": 10338,
+      "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+      "line": 1304,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 3924,
+      "itemID": 11147,
+      "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+      "line": 1915,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 3924,
+      "itemID": 11148,
+      "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+      "line": 1919,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 6570,
+      "itemID": 16787,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 371,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 5103,
+      "itemID": 12812,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 519,
+      "reason": "reward pair omitted: item acquisition fields: provider"
+    },
+    {
       "id": 27440,
       "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
       "line": 1073,
       "field": "lvl",
       "reason": "field omitted: unsupported selected expression"
+    },
+    {
+      "id": 7067,
+      "itemID": 17757,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 146,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7067,
+      "itemID": 17761,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 150,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7067,
+      "itemID": 17762,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 158,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7067,
+      "itemID": 17763,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 166,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7067,
+      "itemID": 17764,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 174,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 7067,
+      "itemID": 17765,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+      "line": 181,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
     },
     {
       "id": 27022,
@@ -767,6 +984,27 @@
       "line": 305,
       "field": "races",
       "reason": "record omitted: unsupported selected expression"
+    },
+    {
+      "id": 1049,
+      "itemID": 17508,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 319,
+      "reason": "reward pair omitted: unresolved quest races restriction"
+    },
+    {
+      "id": 1049,
+      "itemID": 7749,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 322,
+      "reason": "reward pair omitted: unresolved quest races restriction"
+    },
+    {
+      "id": 1049,
+      "itemID": 7747,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 325,
+      "reason": "reward pair omitted: unresolved quest races restriction"
     },
     {
       "id": 31516,
@@ -804,14 +1042,2815 @@
       "reason": "field omitted: unsupported selected expression"
     },
     {
+      "id": 1136,
+      "itemID": 5810,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/4 - Thunder Bluff.lua",
+      "line": 169,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 1195,
+      "itemID": 5867,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/4 - Thunder Bluff.lua",
+      "line": 326,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 1016,
+      "itemID": 5456,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Ashenvale.lua",
+      "line": 252,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 1016,
+      "itemID": 12220,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Ashenvale.lua",
+      "line": 253,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4005,
+      "itemID": 11522,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Felwood.lua",
+      "line": 150,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
       "id": 4112,
       "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Felwood.lua",
       "line": 715,
       "field": "prerequisites",
       "reason": "invalid, unsupported or self-referential"
+    },
+    {
+      "id": 3062,
+      "itemID": 9530,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "line": 287,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 2879,
+      "itemID": 9258,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "line": 955,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 2879,
+      "itemID": 9256,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "line": 960,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 2879,
+      "itemID": 9255,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "line": 965,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 2879,
+      "itemID": 9257,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+      "line": 970,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 1182,
+      "itemID": 5851,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Thousand Needles.lua",
+      "line": 295,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 5056,
+      "itemID": 12733,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Winterspring.lua",
+      "line": 489,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4294,
+      "itemID": 12235,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+      "line": 72,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 4293,
+      "itemID": 12230,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+      "line": 136,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 6022,
+      "itemID": 15448,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
+      "line": 936,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 6022,
+      "itemID": 15454,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
+      "line": 940,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 6022,
+      "itemID": 15447,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
+      "line": 941,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 2994,
+      "itemID": 9472,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/The Hinterlands.lua",
+      "line": 491,
+      "reason": "reward pair omitted: objective, issued-item or acquisition component"
+    },
+    {
+      "id": 5059,
+      "itemID": 12739,
+      "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Western Plaguelands.lua",
+      "line": 531,
+      "reason": "reward pair omitted: item acquisition fields: coord, cr"
+    },
+    {
+      "id": 737,
+      "itemID": 4984,
+      "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+      "line": 274,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 1795,
+      "itemID": 22244,
+      "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+      "line": 2250,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7782,
+      "itemID": 19366,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 76,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7782,
+      "itemID": 19383,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 76,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7782,
+      "itemID": 19384,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 76,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7784,
+      "itemID": 19366,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 110,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7784,
+      "itemID": 19383,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 110,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 7784,
+      "itemID": 19384,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.6 Blackwing Lair.lua",
+      "line": 110,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8192,
+      "itemID": 19790,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 38,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8065,
+      "itemID": 19838,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 47,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8057,
+      "itemID": 19840,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 54,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8064,
+      "itemID": 19839,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 61,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8110,
+      "itemID": 19610,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 68,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8111,
+      "itemID": 19611,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 74,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8112,
+      "itemID": 19612,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 81,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8113,
+      "itemID": 19613,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 88,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8187,
+      "itemID": 19785,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 97,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8067,
+      "itemID": 19831,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 106,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8062,
+      "itemID": 19833,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 113,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8066,
+      "itemID": 19832,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 120,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8145,
+      "itemID": 19618,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 127,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8146,
+      "itemID": 19619,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 133,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8147,
+      "itemID": 19620,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 140,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8148,
+      "itemID": 19621,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 147,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8189,
+      "itemID": 19787,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 156,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8068,
+      "itemID": 19845,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 165,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8069,
+      "itemID": 20034,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 172,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8060,
+      "itemID": 19846,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 179,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8101,
+      "itemID": 19598,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 186,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8102,
+      "itemID": 19599,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 192,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8103,
+      "itemID": 19600,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 199,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8104,
+      "itemID": 19601,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 206,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8185,
+      "itemID": 19783,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 215,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8055,
+      "itemID": 19825,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 224,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8053,
+      "itemID": 19827,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 231,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8054,
+      "itemID": 19826,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 238,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8045,
+      "itemID": 19579,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 245,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8046,
+      "itemID": 19585,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8047,
+      "itemID": 19586,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 258,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8048,
+      "itemID": 19588,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 265,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8191,
+      "itemID": 19789,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 274,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8071,
+      "itemID": 19841,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 283,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8061,
+      "itemID": 19843,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 290,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8070,
+      "itemID": 19842,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 297,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8049,
+      "itemID": 19591,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 304,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8050,
+      "itemID": 19592,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 310,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8051,
+      "itemID": 19593,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 317,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8052,
+      "itemID": 19594,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 324,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8186,
+      "itemID": 19784,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 333,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8072,
+      "itemID": 19835,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 342,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8073,
+      "itemID": 19834,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 349,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8063,
+      "itemID": 19836,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 356,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8141,
+      "itemID": 19614,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 363,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8142,
+      "itemID": 19615,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 369,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8143,
+      "itemID": 19616,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 376,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8144,
+      "itemID": 19617,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 383,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8188,
+      "itemID": 19786,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 392,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8075,
+      "itemID": 19828,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 401,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8056,
+      "itemID": 19830,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 408,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8074,
+      "itemID": 19829,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 415,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8116,
+      "itemID": 19606,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 422,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8117,
+      "itemID": 19607,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 428,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8118,
+      "itemID": 19608,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 435,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8119,
+      "itemID": 19609,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 442,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8190,
+      "itemID": 19788,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 451,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8076,
+      "itemID": 19849,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 460,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8077,
+      "itemID": 20033,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 467,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8059,
+      "itemID": 19848,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 474,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8106,
+      "itemID": 19602,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 481,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8107,
+      "itemID": 19603,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 487,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8108,
+      "itemID": 19604,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 494,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8109,
+      "itemID": 19605,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 501,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8184,
+      "itemID": 19782,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 510,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8079,
+      "itemID": 19822,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 519,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8058,
+      "itemID": 19824,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 526,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8078,
+      "itemID": 19823,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 533,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8041,
+      "itemID": 19574,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 540,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8042,
+      "itemID": 19575,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 546,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8043,
+      "itemID": 19576,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 553,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8044,
+      "itemID": 19577,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 560,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8240,
+      "itemID": 19858,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 568,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8201,
+      "itemID": 20213,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 587,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8201,
+      "itemID": 20215,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 587,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8201,
+      "itemID": 20216,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 587,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8201,
+      "itemID": 20217,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 587,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8196,
+      "itemID": 20031,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 606,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8238,
+      "itemID": 19858,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 616,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8239,
+      "itemID": 19858,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 635,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8246,
+      "itemID": 20076,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 647,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8246,
+      "itemID": 20077,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 647,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8246,
+      "itemID": 20078,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 647,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8183,
+      "itemID": 19948,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 660,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8183,
+      "itemID": 19949,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 660,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8183,
+      "itemID": 19950,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 660,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9210,
+      "itemID": 22635,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 671,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9208,
+      "itemID": 22635,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 678,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9209,
+      "itemID": 22635,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 685,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8243,
+      "itemID": 20079,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 692,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8243,
+      "itemID": 20080,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 692,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8243,
+      "itemID": 20081,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 692,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8195,
+      "itemID": 19858,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/1.7 Zul'Gurub.lua",
+      "line": 705,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8700,
+      "itemID": 21408,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 61,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8692,
+      "itemID": 21409,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 76,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8708,
+      "itemID": 21407,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 91,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8704,
+      "itemID": 21402,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 108,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8696,
+      "itemID": 21403,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 123,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8712,
+      "itemID": 21401,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 138,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8699,
+      "itemID": 21414,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 155,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8691,
+      "itemID": 21415,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 170,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8707,
+      "itemID": 21413,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 185,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8703,
+      "itemID": 21396,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 202,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8695,
+      "itemID": 21397,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 217,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8711,
+      "itemID": 21395,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 232,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8697,
+      "itemID": 21411,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 249,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8689,
+      "itemID": 21412,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 264,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8705,
+      "itemID": 21410,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 279,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8701,
+      "itemID": 21405,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 296,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8693,
+      "itemID": 21406,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 311,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8709,
+      "itemID": 21404,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 326,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8698,
+      "itemID": 21399,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 343,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8690,
+      "itemID": 21400,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 358,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8706,
+      "itemID": 21398,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 373,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8702,
+      "itemID": 21417,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 390,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8694,
+      "itemID": 21418,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 405,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8710,
+      "itemID": 21416,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 420,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8556,
+      "itemID": 21393,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 437,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8557,
+      "itemID": 21394,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 452,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8558,
+      "itemID": 21392,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 467,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8791,
+      "itemID": 21504,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 483,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8791,
+      "itemID": 21505,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 483,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8791,
+      "itemID": 21506,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 483,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8791,
+      "itemID": 21507,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.5 Ruins of Ahn'Qiraj.lua",
+      "line": 483,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8667,
+      "itemID": 21353,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 66,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8669,
+      "itemID": 21354,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 80,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8666,
+      "itemID": 21357,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 94,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8668,
+      "itemID": 21356,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 108,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8665,
+      "itemID": 21355,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 122,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8657,
+      "itemID": 21366,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 138,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8659,
+      "itemID": 21367,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 152,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8656,
+      "itemID": 21370,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 166,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8658,
+      "itemID": 21368,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 180,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8626,
+      "itemID": 21365,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 194,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8632,
+      "itemID": 21347,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 210,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8625,
+      "itemID": 21345,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 224,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8633,
+      "itemID": 21343,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 238,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8631,
+      "itemID": 21346,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 252,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8634,
+      "itemID": 21344,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 266,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8628,
+      "itemID": 21387,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 282,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8630,
+      "itemID": 21391,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 296,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8627,
+      "itemID": 21389,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 310,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8629,
+      "itemID": 21390,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 324,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8655,
+      "itemID": 21388,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 338,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8592,
+      "itemID": 21348,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 354,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8594,
+      "itemID": 21350,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 368,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8603,
+      "itemID": 21351,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 382,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8593,
+      "itemID": 21352,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 396,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8596,
+      "itemID": 21349,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 410,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8639,
+      "itemID": 21360,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 426,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8641,
+      "itemID": 21361,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 440,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8638,
+      "itemID": 21364,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 454,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8640,
+      "itemID": 21362,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 468,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8637,
+      "itemID": 21359,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 482,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8623,
+      "itemID": 21372,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 498,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8602,
+      "itemID": 21376,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 512,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8622,
+      "itemID": 21374,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 526,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8624,
+      "itemID": 21375,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 540,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8621,
+      "itemID": 21373,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 554,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8662,
+      "itemID": 21337,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 570,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8664,
+      "itemID": 21335,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 584,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8661,
+      "itemID": 21334,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 598,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8663,
+      "itemID": 21336,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 612,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8660,
+      "itemID": 21338,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 626,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8561,
+      "itemID": 21329,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 642,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8544,
+      "itemID": 21330,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 656,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8562,
+      "itemID": 21331,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 670,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8560,
+      "itemID": 21332,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 684,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8559,
+      "itemID": 21333,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 698,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8789,
+      "itemID": 21242,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 716,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8789,
+      "itemID": 21244,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 716,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8789,
+      "itemID": 21269,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 716,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8789,
+      "itemID": 21272,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 716,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8790,
+      "itemID": 21268,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 734,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8790,
+      "itemID": 21273,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 734,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8790,
+      "itemID": 21275,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 734,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8766,
+      "itemID": 21200,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 764,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8766,
+      "itemID": 21210,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 764,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8765,
+      "itemID": 21200,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 784,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8765,
+      "itemID": 21205,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 784,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8764,
+      "itemID": 21205,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 804,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8764,
+      "itemID": 21210,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 804,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8761,
+      "itemID": 21210,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 824,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8752,
+      "itemID": 21201,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 841,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8753,
+      "itemID": 21202,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 854,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8754,
+      "itemID": 21203,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 871,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8755,
+      "itemID": 21204,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 888,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8757,
+      "itemID": 21206,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 905,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8758,
+      "itemID": 21207,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 918,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8759,
+      "itemID": 21208,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 935,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8760,
+      "itemID": 21209,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 952,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8747,
+      "itemID": 21196,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 969,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8748,
+      "itemID": 21197,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 982,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8749,
+      "itemID": 21198,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 999,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8750,
+      "itemID": 21199,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1016,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8751,
+      "itemID": 21200,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1033,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8756,
+      "itemID": 21205,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1050,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8802,
+      "itemID": 21709,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1067,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8802,
+      "itemID": 21710,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1067,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 8802,
+      "itemID": 21712,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+      "line": 1067,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9257,
+      "itemID": 22631,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 152,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9270,
+      "itemID": 22589,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 164,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9271,
+      "itemID": 22630,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 176,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9269,
+      "itemID": 22632,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 188,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9037,
+      "itemID": 22418,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 228,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9038,
+      "itemID": 22419,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 244,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9034,
+      "itemID": 22416,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 260,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9042,
+      "itemID": 22423,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 276,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9040,
+      "itemID": 22421,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 292,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9041,
+      "itemID": 22422,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 308,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9036,
+      "itemID": 22417,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 324,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9039,
+      "itemID": 22420,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 340,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9045,
+      "itemID": 22428,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 358,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9046,
+      "itemID": 22429,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 374,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9043,
+      "itemID": 22425,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 390,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9050,
+      "itemID": 22424,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 406,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9048,
+      "itemID": 22426,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 422,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9049,
+      "itemID": 22431,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 438,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9044,
+      "itemID": 22427,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 454,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9047,
+      "itemID": 22430,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 470,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9056,
+      "itemID": 22438,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 488,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9057,
+      "itemID": 22439,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 504,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9054,
+      "itemID": 22436,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 520,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9061,
+      "itemID": 22443,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 536,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9059,
+      "itemID": 22441,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 552,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9060,
+      "itemID": 22442,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 568,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9055,
+      "itemID": 22437,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 584,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9058,
+      "itemID": 22440,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 600,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9079,
+      "itemID": 22478,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 618,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9080,
+      "itemID": 22479,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 635,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9077,
+      "itemID": 22476,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 652,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9084,
+      "itemID": 22483,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 668,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9082,
+      "itemID": 22481,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 685,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9083,
+      "itemID": 22482,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 701,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9078,
+      "itemID": 22477,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 718,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9081,
+      "itemID": 22480,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 735,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9113,
+      "itemID": 22514,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 754,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9114,
+      "itemID": 22515,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 770,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9111,
+      "itemID": 22512,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 786,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9118,
+      "itemID": 22519,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 802,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9116,
+      "itemID": 22517,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 818,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9117,
+      "itemID": 22518,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 832,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9112,
+      "itemID": 22513,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 848,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9115,
+      "itemID": 22516,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 864,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9070,
+      "itemID": 22466,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 882,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9071,
+      "itemID": 22467,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 898,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9068,
+      "itemID": 22464,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 914,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9075,
+      "itemID": 22471,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 930,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9073,
+      "itemID": 22469,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 946,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9074,
+      "itemID": 22470,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 962,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9069,
+      "itemID": 22465,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 978,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9072,
+      "itemID": 22468,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 994,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9097,
+      "itemID": 22498,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1012,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9098,
+      "itemID": 22499,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1028,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9095,
+      "itemID": 22496,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1044,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9102,
+      "itemID": 22503,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1060,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9100,
+      "itemID": 22501,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1076,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9101,
+      "itemID": 22502,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1091,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9096,
+      "itemID": 22497,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1107,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9099,
+      "itemID": 22500,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1123,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9105,
+      "itemID": 22506,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1141,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9106,
+      "itemID": 22507,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1157,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9103,
+      "itemID": 22504,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1173,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9110,
+      "itemID": 22511,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1189,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9108,
+      "itemID": 22509,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1205,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9109,
+      "itemID": 22510,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1220,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9104,
+      "itemID": 22505,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1236,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9107,
+      "itemID": 22508,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1252,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9088,
+      "itemID": 22490,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1270,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9089,
+      "itemID": 22491,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1286,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9086,
+      "itemID": 22488,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1302,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9093,
+      "itemID": 22495,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1318,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9091,
+      "itemID": 22493,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1334,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9092,
+      "itemID": 22494,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1350,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9087,
+      "itemID": 22489,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1366,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9090,
+      "itemID": 22492,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1382,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9237,
+      "itemID": 22658,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1423,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9239,
+      "itemID": 22654,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1443,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9240,
+      "itemID": 22652,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1463,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9238,
+      "itemID": 22655,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1484,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9235,
+      "itemID": 22671,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1504,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9236,
+      "itemID": 22669,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1524,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9234,
+      "itemID": 22670,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1545,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9244,
+      "itemID": 22665,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1565,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9246,
+      "itemID": 22664,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1585,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9245,
+      "itemID": 22666,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1606,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9241,
+      "itemID": 22663,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1635,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9242,
+      "itemID": 22662,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1655,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9243,
+      "itemID": 22661,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1675,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9230,
+      "itemID": 22707,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1696,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9120,
+      "itemID": 23206,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1755,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9120,
+      "itemID": 23207,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1755,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9232,
+      "itemID": 22699,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1774,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9232,
+      "itemID": 22700,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1774,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9232,
+      "itemID": 22701,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1774,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9232,
+      "itemID": 22702,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+      "line": 1774,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27445,
+      "itemID": 65934,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 480,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27445,
+      "itemID": 65958,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 480,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27445,
+      "itemID": 65982,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 480,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27445,
+      "itemID": 66001,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 480,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27440,
+      "itemID": 65933,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 1073,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27440,
+      "itemID": 65957,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 1073,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27440,
+      "itemID": 65981,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 1073,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27440,
+      "itemID": 66000,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+      "line": 1073,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14353,
+      "itemID": 17039,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 70,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14353,
+      "itemID": 17042,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 70,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14353,
+      "itemID": 17043,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 70,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27022,
+      "itemID": 10710,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 186,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27009,
+      "itemID": 65926,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27009,
+      "itemID": 65951,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27009,
+      "itemID": 65975,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27009,
+      "itemID": 65996,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27009,
+      "itemID": 66009,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 251,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 33514,
+      "itemID": 65926,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 275,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 33514,
+      "itemID": 65951,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 275,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 33514,
+      "itemID": 65975,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 275,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 33514,
+      "itemID": 65996,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 275,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 33514,
+      "itemID": 66009,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+      "line": 275,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26972,
+      "itemID": 65914,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 100,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26972,
+      "itemID": 65940,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 100,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26972,
+      "itemID": 65964,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 100,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26972,
+      "itemID": 65988,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 100,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26972,
+      "itemID": 66005,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 100,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26950,
+      "itemID": 66014,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 130,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26950,
+      "itemID": 66023,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 130,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26950,
+      "itemID": 66032,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 130,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26950,
+      "itemID": 66041,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 130,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26950,
+      "itemID": 66046,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 130,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26959,
+      "itemID": 66015,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 363,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26959,
+      "itemID": 66024,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 363,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26959,
+      "itemID": 66033,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 363,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26973,
+      "itemID": 65916,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 404,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26973,
+      "itemID": 65942,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 404,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 26973,
+      "itemID": 65966,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 404,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14355,
+      "itemID": 6802,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 824,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14355,
+      "itemID": 6803,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 824,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 14355,
+      "itemID": 10711,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 824,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87361,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87362,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87363,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87364,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87365,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87366,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87367,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87368,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 31516,
+      "itemID": 87369,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scarlet Monastery.lua",
+      "line": 1014,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27143,
+      "itemID": 65923,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 173,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 76257,
+      "itemID": 12844,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 219,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27148,
+      "itemID": 65925,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 498,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27148,
+      "itemID": 65950,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 498,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27148,
+      "itemID": 65974,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 498,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27148,
+      "itemID": 65995,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+      "line": 498,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27208,
+      "itemID": 65928,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "line": 428,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27208,
+      "itemID": 65953,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "line": 428,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27208,
+      "itemID": 65977,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "line": 428,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27208,
+      "itemID": 65998,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Stratholme.lua",
+      "line": 428,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9053,
+      "itemID": 53560,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 111,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9053,
+      "itemID": 53561,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 111,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 9053,
+      "itemID": 53562,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 111,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 10593,
+      "itemID": 30696,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 142,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27605,
+      "itemID": 65931,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+      "line": 236,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 2964,
+      "itemID": 34418,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+      "line": 36,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 2964,
+      "itemID": 34419,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+      "line": 36,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 2968,
+      "itemID": 34421,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+      "line": 60,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 2968,
+      "itemID": 34422,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+      "line": 60,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27070,
+      "itemID": 65929,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27070,
+      "itemID": 65954,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27070,
+      "itemID": 65978,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27070,
+      "itemID": 65999,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27070,
+      "itemID": 66010,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 22,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27068,
+      "itemID": 65930,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 57,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27068,
+      "itemID": 65955,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 57,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
+    },
+    {
+      "id": 27068,
+      "itemID": 65979,
+      "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+      "line": 57,
+      "reason": "reward pair omitted: absent from pinned compiled membership"
     }
   ],
   "membershipSha256": "eb58d691560e6bf265ed77b16afe9e08e529de828860a6a153eb4da1c1e3147e",
   "questsAbsentCompiledMembership": 296,
-  "rule": "Direct authored q groups i() associations intersected with pinned compiled Forever output. No assumed quantity or guaranteed/choice membership. lvl is minimum level; displayed quest levels hydrate natively."
+  "excludedRewardPairCount": 435,
+  "rule": "Direct authored q groups i() candidates excluding objective/issued-item/acquisition components and acquisition-bearing item nodes, intersected with pinned compiled Forever output. Each excluded pair is diagnosed. Source prerequisite links remain unconfirmed. No assumed quantity or guaranteed/choice membership. lvl is recorded minimum level; displayed quest levels hydrate natively."
 }

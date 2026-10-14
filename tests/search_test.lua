@@ -19,7 +19,7 @@ local function setup(config)
     C_Map={GetMapInfo=function(id)return {name="Zone "..id,mapType=3}end,GetBestMapForUnit=function()return 100 end,CanSetUserWaypointOnMap=function()return true end,SetUserWaypoint=function(point)W.waypoint=point;return W.waypointSuccess~=false end}
     UiMapPoint={CreateFromCoordinates=function(map,x,y)return {uiMapID=map,x=x,y=y}end}; C_SuperTrack={SetSuperTrackedUserWaypoint=function()W.tracked=true end}
     local rootMethods={}
-    function rootMethods:CreateButton(label,fn)local e=setmetatable({label=label,callback=fn}, {__index=rootMethods});self.entries[#self.entries+1]=e;return e end
+    function rootMethods:CreateButton(label,fn)local e=setmetatable({label=label,callback=fn}, {__index=rootMethods});self.entries=self.entries or {};self.entries[#self.entries+1]=e;return e end
     function rootMethods:CreateRadio(label,checked,fn,value)local e=self:CreateButton(label,function()fn(value)end);e.checked=checked;return e end
     function rootMethods:AddInitializer(fn) local f=W.Object(); f.SetFont=function()error("compositor font setter")end;fn({fontString=f});self.fontObject=f.fontObject end
     function rootMethods:SetEnabled(v)self.enabled=v end
@@ -149,6 +149,7 @@ end)
 
 test("production low mid and high catalogue searches work with Questie absent",function()
     local N=W.Init();assert(LibQuestieDB==nil and QuestieLoader==nil and #N.CatalogData.quests==N.CatalogData.questCount)
+    W.rewardReady=false
     local selected={};for _,q in ipairs(N.CatalogData.quests) do
         local band=q.minimum and (q.minimum<=10 and 1 or q.minimum>=25 and q.minimum<=35 and 2 or q.minimum>=50 and 3)
         if band and not selected[band] and not q.classTokens and not q.races then selected[band]=q end
@@ -213,4 +214,101 @@ end)
 test("new inspection sessions discard old point in time usability exclusions",function()
     local N=open();N.SearchModel.usability[9]={[123]=false,[125]=false};N.Search.frame:Hide();N.Search:Toggle();assert(next(N.SearchModel.usability)==nil)
     N.SearchModel.usability[9]={[123]=false};W.Event("SKILL_LINES_CHANGED");assert(next(N.SearchModel.usability)==nil)
+end)
+
+test("giver button and native submenu select the location used by copy and waypoint",function()
+    local N=setup();W.quests[9].locations[2]={npcID=55,name="Other giver",mapID=101,x=.25,y=.3}
+    N.Search:Toggle();W.time=.3;N.Search:Tick();local S=N.Search;local c=S.cards[1]
+    assert(c.giver:IsShown() and c.giver.text.text=="2 locations")
+    N.Adapter.Over=function(frame)return frame==S.scroll or frame==c.giver end;c.giver:Fire("OnClick")
+    assert(#W.openMenu.root.entries==2 and W.openMenu.root.entries[2].fontObject==S.menuFont)
+    W.openMenu.root.entries[2].callback();W.time=.6;S:Tick();c=S.cards[1]
+    assert(c.row.location.name=="Other giver" and c.location.text:find("Zone 101",1,true) and S.locationChoice[9]==c.row.location)
+    S:ContextMenu(c.row,c);local root=W.openMenu.root;assert(root.entries[6].label=="Choose location" and #root.entries[6].entries==2)
+    root.entries[1].callback();assert(W.waypoint.uiMapID==101 and W.waypoint.x==.25 and W.waypoint.y==.3)
+    root.entries[4].callback();assert(S.copyEdit.text=="Other giver")
+end)
+
+test("single giver cards do not add a chooser or shrink the location allocation",function()
+    local N=open();local S=N.Search;local c=S.cards[1]
+    assert(not c.giver:IsShown() and c.location:GetWidth()==S.child:GetWidth()-16)
+    S:ContextMenu(c.row,c);assert(#W.openMenu.root.entries==5)
+end)
+
+test("long title and location tips honor viewport and menu ownership",function()
+    local N=open();local S=N.Search;local c=S.cards[1];local blocked=true
+    N.Adapter.Over=function(frame)return not (blocked and frame==S.scroll) end
+    c.titleHit:Fire("OnEnter");assert(not S.textTooltip)
+    blocked=false;c.row.title="A long native quest title with a distinctive final phrase";S:Fill(c,c.row)
+    c.titleHit:Fire("OnEnter");assert(S.textTooltip:IsShown() and S.textTooltip.text:find("distinctive final phrase",1,true))
+    c.titleHit:Fire("OnLeave");assert(not S.textTooltip:IsShown())
+    c.locationHit:Fire("OnEnter");assert(S.textTooltip:IsShown() and S.textTooltip.text==c.location.text)
+    S:ContextMenu(c.row,c);assert(not S.textTooltip:IsShown());c.titleHit:Fire("OnEnter");assert(not S.textTooltip:IsShown())
+    S:CloseMenu();c.titleHit:Fire("OnEnter");S.frame:Hide();assert(not S.textTooltip:IsShown())
+end)
+
+test("disabled location actions expose distinct reasons and never copy a fabricated NPC name",function()
+    local N=open();local S=N.Search;local c=S.cards[1];local tip=W.Object()
+    c.row.location={name="NPC 99",nameKnown=false};S:ContextMenu(c.row,c);local entries=W.openMenu.root.entries
+    assert(entries[1].enabled==false and entries[2].enabled==false and entries[4].enabled==false)
+    entries[1].tooltip(tip);assert(tip.text:find("coordinates unavailable",1,true));entries[4].tooltip(tip);assert(tip.text:find("NPC name unavailable",1,true))
+    c.row.location={name="Phased giver",nameKnown=true,mapID=100,x=.2,y=.3,phase=true};S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
+    assert(entries[1].enabled==false and entries[2].enabled and entries[4].enabled);entries[1].tooltip(tip);assert(tip.text:find("phase",1,true))
+    c.row.location.phase=false;C_Map.CanSetUserWaypointOnMap=function()return false end;S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
+    assert(entries[1].enabled==false);entries[1].tooltip(tip);assert(tip.text:find("cannot accept",1,true))
+end)
+
+test("bottom scrolling survives unseen height growth after narrowing and filter resets",function()
+    local N=open();local S=N.Search;local rows={}
+    for id=1,12 do
+        N.Catalog.records[id]={id=id,source={locations={}}}
+        local items={};for i=1,8 do items[i]={itemID=122+i} end
+        rows[id]={id=id,title="Fixture "..id,level=20,evidence="Availability unconfirmed",items=items}
+    end
+    N.SearchModel.Reward=function(_,row)
+        local items={};for i=1,8 do items[i]={itemID=122+i,name="Reward "..i,state="ready",usable=true,texture=100,quality=2} end
+        return {state="ready",items={items={}},choices={items=items},money={state="ready",value=0},xp={state="ready",value=0},currencies={items={}},reputation={items={}}},{},false
+    end
+    S.results=rows;S.expanded[1]=true;S.heights={};S:LayoutResults();S:Scroll(0)
+    S.frame:SetSize(520,400);S:LayoutResults();S:Scroll(1e9)
+    assert(S.bottomTarget and S.offset==S.maximum and S.scroll.scrollValue==S.maximum and S.bar.value==S.maximum)
+    local last;for _,card in ipairs(S.cards)do if card:IsShown() and card.row.id==12 then last=card end end
+    assert(last and S.positions[12]+last:GetHeight()<=S.offset+S.frame:GetHeight()-158)
+    S.expanded[12]=true;S:Render();assert(S.offset==S.maximum)
+    S.expanded[12]=false;S.frame:SetSize(560,600);S:LayoutResults();S:Render();assert(S.offset==S.maximum)
+    S:Scroll(S.offset-40);assert(not S.bottomTarget);local offset=S.offset;S:LayoutResults();assert(S.offset==offset)
+    S:Scroll(1e9);S:Changed(true);assert(S.offset==0 and not S.bottomTarget)
+end)
+
+test("mixed old row heights settle newly visible third pass rows and final geometry",function()
+    local N=open();local S=N.Search;local rows={}
+    for id=1,8 do
+        N.Catalog.records[id]={id=id,source={locations={}}}
+        local items={};for i=1,8 do items[i]={itemID=122+i} end
+        rows[id]={id=id,title="Fixture "..id,level=20,evidence="Availability unconfirmed",items=items}
+    end
+    N.SearchModel.Reward=function(_,row)
+        local count=row.id==1 and 1 or row.id==2 and 4 or 8;local items={}
+        for i=1,count do items[i]={itemID=122+i,name="Reward "..i,state="ready",usable=true,texture=100,quality=2} end
+        return {state="ready",items={items={}},choices={items=items},money={state="ready",value=0},xp={state="ready",value=0},currencies={items={}},reputation={items={}}},{},false
+    end
+    local filled={};local fill=S.Fill;S.Fill=function(self,card,row)filled[row.id]=true;return fill(self,card,row)end
+    S.results=rows;S.expanded[3]=true;S.heights={[1]=250,[2]=350,[3]=190,[4]=149,[5]=105,[6]=193,[7]=105,[8]=149}
+    S.frame:SetSize(560,400);S:LayoutResults();S:Scroll(0)
+    assert(filled[3] and S.heights[1]==105 and S.heights[2]==105 and S.heights[3]==149)
+    local y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
+    assert(S.contentHeight==y and S.child:GetHeight()==y and S.maximum==y-242)
+    for _,card in ipairs(S.cards)do if card:IsShown()then assert(card.point[3]==-S.positions[card.resultIndex])end end
+    -- A wider viewport needs more than four passes through stale tall estimates.
+    S.frame:SetSize(560,900);for id=1,8 do S.heights[id]=1000 end;S.expanded={};filled={};S.dirty=false
+    S:LayoutResults();S:Scroll(0);assert(S.dirty)
+    y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
+    assert(S.child:GetHeight()==y and S.contentHeight==y and S.maximum==y-742 and S.offset==0 and S.bar.value==0 and S.scroll.scrollValue==0)
+    for _,card in ipairs(S.cards)do if card:IsShown()then assert(card.point[3]==-S.positions[card.resultIndex])end end
+end)
+
+test("pool refresh closes owned full text and footer tips before row reuse",function()
+    local N=open();local S=N.Search;local c=S.cards[1];N.Adapter.Over=function()return true end
+    c.titleHit:Fire("OnEnter");assert(S.textTooltip:IsShown());S:Render();assert(not S.textTooltip:IsShown())
+    c.footerHits[1]:Fire("OnEnter");assert(S.footerTooltip:IsShown());S:Render();assert(not S.footerTooltip:IsShown())
 end)

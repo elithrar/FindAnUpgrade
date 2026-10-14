@@ -9,6 +9,7 @@ function Methods:GetVertexColor() if self.colorSecret then return W.secret, 1, 1
 function Methods:SetVertexColor(r,g,b,a) if self.failWrite then error("blocked region") end; W.writes = W.writes + 1; self.color = {r,g,b,a} end
 function Methods:HookScript(name, fn) if W.combat and self.native then error("hook in combat") end; self.hooks[name] = self.hooks[name] or {}; table.insert(self.hooks[name], fn) end
 function Methods:SetScript(name, fn) if self.native then error("native script replaced") end; self.scripts[name] = fn end
+function Methods:GetScript(name) return self.scripts[name] end
 function Methods:Fire(name, ...) if self.scripts[name] then self.scripts[name](self, ...) end; for _, fn in ipairs(self.hooks[name] or {}) do fn(self, ...) end end
 function Methods:Show() layout(self); if not self.shown then self.shown = true; self:Fire("OnShow") end end
 function Methods:Hide() layout(self); if self.shown then self.shown = false; self:Fire("OnHide") end end
