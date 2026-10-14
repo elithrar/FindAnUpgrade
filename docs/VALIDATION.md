@@ -1,10 +1,20 @@
 # Validation
 
-QuestBrief **0.1.2** is the current candidate for official WoW Forever, interface
+QuestBrief **0.1.3** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
+
+## Current source review, 0.1.3
+
+The current patch compares actual working installed sources against every
+material construction difference. `SOURCE-UI-REVIEW.md` and its three independent
+reports contain concrete evidence, explained functional adaptations, defects,
+corrections and re-review results. Source construction and meaningful regression
+coverage are the primary confidence basis; live testing is supplementary.
+The corrected candidate records 279 Lua 5.1 scenarios and 69 Python tests. Use the
+exact-commit build, main CI and installation receipts for final byte identity.
 
 ## Live regression correction, 0.1.2
 

@@ -58,6 +58,12 @@ function M.Tint(profile, base, status)
     result[4] = base[4]
     return result
 end
+function M.AccentFill(profile,status,r,g,b)
+    local target=profile.accents and (status=="verifiedNew" and {.20,.14,.025} or status=="verifiedUpdated" and {.055,.18,.055})
+    if not target then return r,g,b end
+    local strength=profile.strength
+    return r+(target[1]-r)*strength,g+(target[2]-g)*strength,b+(target[3]-b)*strength
+end
 function M.Label(id)
     local status = M.Status(id)
     return status == "verifiedNew" and "New in Forever" or status == "verifiedUpdated" and "Modified in Forever" or not status and "Status not verified" or ""

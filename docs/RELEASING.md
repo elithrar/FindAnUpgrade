@@ -14,7 +14,7 @@ GitHub receives the addon ZIP, source ZIP, SHA256SUMS, package receipt and relea
 
 Before the first CurseForge publication, subsequent user-authorized iterations
 primarily use direct `main` commits and patch bumps (for example, `0.1.0` to
-`0.1.2`). Complete independent review when requested, fix findings and pass
+`0.1.3`). Complete independent review when requested, fix findings and pass
 `python tools/verify.py` before committing and pushing; verify main CI afterward.
 Use a reviewed PR when branch protection requires one and never bypass required
 checks. An existing PR still needs applicable merge authorization. This iteration

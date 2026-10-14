@@ -59,6 +59,7 @@ function Methods:GetOwner() return self.owner end
 function Methods:ClearLines() self.lines={} end
 function Methods:NumLines() return #(self.lines or {}) end
 function Methods:GetThumbTexture() return self.thumb end
+function Methods:SetThumbTexture(value) self.thumb=self.thumb or W.Object();self.thumb:SetTexture(value) end
 function Methods:SetWidth(w) layout(self); self.width = w end
 function Methods:GetWidth() return self.width or 1920 end
 function Methods:GetHeight() return self.height or 1080 end
@@ -158,7 +159,11 @@ function W.Reset(config)
     C_TooltipInfo={GetQuestLogItem=function(kind,index,id) W.tooltipRoute={kind,index,id}; local item=(kind=='choice' and W.choices or W.items)[index]; return item and {id=item[6],type=0,hyperlink='item:'..item[6],lines={},dataInstanceID=123} end}
     canaccessallvalues=function() return true end
     Enum={TooltipDataType={Item=0}}
-    TooltipUtil={ShouldDoItemComparison=function() return W.shift end}
+    W.alwaysCompare=false; W.compareClick=nil
+    GetCVarBool=function(name)return name=="alwaysCompareItems" and W.alwaysCompare or false end
+    IsModifiedClick=function(action)return action=="COMPAREITEMS" and (W.compareClick==nil and W.shift or W.compareClick) or false end
+    -- Matches the pinned native helper's automatic-manager guard.
+    TooltipUtil={ShouldDoItemComparison=function(tooltip)return (not tooltip.suppressAutomaticCompareItem and GetCVarBool("alwaysCompareItems")) or IsModifiedClick("COMPAREITEMS") end}
     TooltipComparisonManager={Clear=function(manager,tip) assert(manager~=TooltipComparisonManager,'global comparison touched'); manager.clears=(manager.clears or 0)+1 end,CreateComparisonItem=function(_,data) return {hyperlink=data.hyperlink} end,CompareItem=function(manager) assert(manager~=TooltipComparisonManager,'global comparison touched'); manager.calls=(manager.calls or 0)+1 end}
     issecretvalue = function(value) return value == W.secret end
     GetBuildInfo = function() return "1.60.1", "70338", "2026-10-01", W.interface end
@@ -171,6 +176,8 @@ function W.Reset(config)
     STANDARD_TEXT_FONT = "Fonts\\FRIZQT__.TTF"; GameFontNormal = W.Object(); GameFontNormal.font={STANDARD_TEXT_FONT,12,""}
     GameTooltipTextLeft2=nil; GameTooltipText=W.Object(); GameTooltipText.font={STANDARD_TEXT_FONT,12,""}
     GameTooltipHeaderText=W.Object(); GameTooltipHeaderText.font={STANDARD_TEXT_FONT,14,""}
+    NumberFontNormalSmall=W.Object(); NumberFontNormalSmall.font={"Fonts\\ARIALN.TTF",10,"OUTLINE"}
+    NORMAL_FONT_COLOR={r=1,g=.82,b=0,GetRGB=function(self)return self.r,self.g,self.b end}
     UISpecialFrames = {}; SlashCmdList = {}; LibStub = nil
     QuestTextContrast = {IsEnabled = function() return W.contrast end, GetDefaultBackgroundAtlas = function() return "QuestBG-Parchment" end}
     DEFAULT_CHAT_FRAME = {AddMessage = function(_, text) table.insert(W.messages, text) end}

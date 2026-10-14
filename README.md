@@ -1,6 +1,6 @@
 # QuestBrief
 
-Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.2** repairs options construction, follows current XPIsland settings patterns, and replaces oversized hover panels with compact native tooltip cards.
+Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.3** follows the installed working UI references, fixes native comparison preferences and styling, vertical scrollbars, cancelled range edits, bounded options retries and classification fill hues.
 
 - Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
 - Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.

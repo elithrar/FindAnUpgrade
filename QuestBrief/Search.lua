@@ -98,11 +98,16 @@ function S:Dropdown(parent,width,entries,get,choose)
     end)
     return d
 end
+function S:CancelRange()
+    self.minimumInput:SetText(tostring(self.filter.minimum or ""))
+    self.maximumInput:SetText(tostring(self.filter.maximum or ""))
+    self.minimumInput:ClearFocus(); self.maximumInput:ClearFocus()
+end
 function S:Create()
     if self.frame then return end
     self.filter={query="",usable=true,slot="ALL",sort="FIT"}
     local f=CreateFrame("Frame","QuestBriefSearch",UIParent,"BackdropTemplate"); self.frame=f; f:Hide()
-    f:SetSize(560,600); f:SetPoint("CENTER"); f:SetFrameStrata("DIALOG"); f:SetClampedToScreen(true); f:EnableMouse(true); f:SetMovable(true); f:SetResizable(true); f:SetResizeBounds(520,400,900,900); surface(f)
+    f:SetSize(560,600); f:SetPoint("CENTER"); f:SetFrameStrata("DIALOG"); f:SetClampedToScreen(true); f:EnableMouse(true); f:SetMovable(true); f:SetResizable(true); f:SetResizeBounds(520,400,900,900); U:Dialog(f)
     self.menuFont=CreateFont("QuestBriefSearchMenuFont"); U:Font(self.menuFont,12)
     self.footerTooltip=CreateFrame("GameTooltip","QuestBriefSearchFooterTooltip",f,"SharedTooltipTemplate"); self.footerTooltip:Hide()
     self.title=text(f,16,{1,.82,.2}); self.title:SetPoint("TOPLEFT",16,-14); self.title:SetText("QuestBrief")
@@ -124,14 +129,14 @@ function S:Create()
         if M.Number(lo) and M.Number(hi) and lo>=1 and hi<=200 and lo<=hi and lo==math.floor(lo) and hi==math.floor(hi) then self.filter.minimum,self.filter.maximum,self.manualRange=lo,hi,true; self:Changed(true)
         else self.minimumInput:SetText(self.filter.minimum or ""); self.maximumInput:SetText(self.filter.maximum or "") end
     end
-    for _,e in ipairs({self.minimumInput,self.maximumInput}) do e:SetNumeric(true); e:SetMaxLetters(3); e:SetScript("OnEnterPressed",function(b) range(); b:ClearFocus() end); e:SetScript("OnEditFocusLost",range); e:SetScript("OnEscapePressed",function(b) b:ClearFocus() end) end
+    for _,e in ipairs({self.minimumInput,self.maximumInput}) do e:SetNumeric(true); e:SetMaxLetters(3); e:SetScript("OnEnterPressed",function(b) range(); b:ClearFocus() end); e:SetScript("OnEscapePressed",function() self:CancelRange() end) end
     self.slot=self:Dropdown(f,144,N.SearchModel.slots,function() return self.filter.slot end,function(value) self.filter.slot=value; self:Changed(true) end); self.slot:SetPoint("TOPRIGHT",-16,-78); self.slot:SetDefaultText("All slots")
     self.count=text(f,11,{.7,.7,.72}); self.count:SetPoint("TOPLEFT",16,-115); self.count:SetWidth(310)
     self.sort=self:Dropdown(f,144,{{"FIT","Level fit"},{"LEVEL","Quest level"}},function() return self.filter.sort end,function(value) self.filter.sort=value; self:Changed(true) end); self.sort:SetPoint("TOPRIGHT",-16,-109); self.sort:SetDefaultText("Level fit")
     local scroll=CreateFrame("ScrollFrame",nil,f); self.scroll=scroll; scroll:SetPoint("TOPLEFT",12,-142); scroll:SetPoint("BOTTOMRIGHT",-26,16); scroll:EnableMouse(true); scroll:EnableMouseWheel(true)
     self.child=CreateFrame("Frame",nil,scroll); self.child:SetSize(512,1); scroll:SetScrollChild(self.child)
     self.inspector=N.Stack.NewInspector(f,scroll,function() return self:Visible() and not self:MenuOpen() and not (self.copyFrame and self.copyFrame:IsShown()) end)
-    self.bar=CreateFrame("Slider",nil,f,"UISliderTemplate"); self.bar:SetPoint("TOPRIGHT",-6,-144); self.bar:SetPoint("BOTTOMRIGHT",-6,18); self.bar:SetWidth(12); self.bar:SetOrientation("VERTICAL"); self.bar:SetValueStep(1)
+    self.bar=U:VerticalBar(f); self.bar:SetPoint("TOPRIGHT",-6,-144); self.bar:SetPoint("BOTTOMRIGHT",-6,18); self.bar:SetWidth(12); self.bar:SetOrientation("VERTICAL"); self.bar:SetValueStep(1)
     local thumb=A.Call(self.bar.GetThumbTexture,self.bar); if thumb then thumb:SetSize(12,22) end
     self.bar:SetScript("OnValueChanged",function(_,value) if not self.refreshing then self:Scroll(value) end end)
     scroll:SetScript("OnMouseWheel",function(_,delta) if M.Number(delta) then self:Scroll(self.offset-delta*40) end end)
@@ -139,7 +144,7 @@ function S:Create()
     local resize=CreateFrame("Button",nil,f); resize:SetPoint("BOTTOMRIGHT",-2,2); resize:SetSize(18,18); resize.texture=resize:CreateTexture(nil,"ARTWORK"); resize.texture:SetAllPoints(); resize.texture:SetTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
     resize:SetScript("OnMouseDown",function(_,button) if button=="LeftButton" then self:CloseMenu(); self.inspector:ClearItem(); f:StartSizing("BOTTOMRIGHT") end end); resize:SetScript("OnMouseUp",function() f:StopMovingOrSizing(); self:Changed() end)
     f:SetScript("OnSizeChanged",function() if self.inspector then self:Fit(); self:Changed() end end)
-    f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self.minimumInput:ClearFocus(); self.maximumInput:ClearFocus(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if self.copyFrame then self.copyFrame:Hide() end end)
+    f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self:CancelRange(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if self.copyFrame then self.copyFrame:Hide() end end)
     f:SetScript("OnEvent",function(_,event,id)
         if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" then
             id=M.QuestId(id); if not id or not (N.SearchModel.cache[id] or self.itemRequests and self.itemRequests[id]) then return end
@@ -246,7 +251,8 @@ end
 function S:Icon(card,index)
     if card.icons[index] then return card.icons[index] end
     local b=CreateFrame("Button",nil,card); card.icons[index]=b; b:SetSize(28,28); b.icon=b:CreateTexture(nil,"ARTWORK"); b.icon:SetAllPoints(); b.border=b:CreateTexture(nil,"OVERLAY"); b.border:SetAllPoints(); b.border:SetTexture("Interface\\Common\\WhiteIconFrame")
-    b.name,b.group,b.count=text(card,11),text(card,10,{.7,.7,.72}),text(b,10); b.count:SetPoint("BOTTOMRIGHT",-1,1)
+    b.name,b.group=text(card,11),text(card,10,{.7,.7,.72})
+    b.count=b:CreateFontString(nil,"OVERLAY","NumberFontNormalSmall"); b.count:SetPoint("BOTTOMRIGHT",-1,1); b.count:SetJustifyH("RIGHT")
     b:SetScript("OnEnter",function() self.footerTooltip:Hide(); self:CloseTextTip(); if b.row then self.inspector:Inspect(b,b.row) end; self:Wake() end); b:SetScript("OnLeave",function() self.inspector.itemOutsideAt=nil end)
     b:RegisterForClicks("RightButtonUp"); b:SetScript("OnClick",function() if A.Over(self.scroll) and A.Over(b) then self:ContextMenu(card.row,card) end end)
     return b
@@ -255,7 +261,8 @@ function S:Fill(card,row)
     card.row=row; local width=self.child:GetWidth(); card:SetWidth(width); card.title:SetWidth(width-155); card.titleHit:SetWidth(width-155); card.title:SetText("["..row.level.."] "..(row.title or ("Quest "..row.id)))
     local status=M.Status(row.id); card.tag:SetText(status=="verifiedNew" and "New" or status=="verifiedUpdated" and "Modified" or "")
     local accent=N.Core.profile.accents and status; local strength=N.Core.profile.strength
-    card:SetBackdropColor(.06+(accent=="verifiedNew" and .08*strength or 0),.06+(accent=="verifiedUpdated" and .08*strength or 0),.07,.97)
+    local r,g,b=M.AccentFill(N.Core.profile,accent,.06,.06,.07)
+    card:SetBackdropColor(r,g,b,.97)
     local location=self.locationChoice[row.id] or N.Catalog:Location(row.id); row.location=location
     local place=self:LocationLabel(location); local locations=N.Catalog:Locations(row.id); local locationWidth=width-(#locations>1 and 100 or 16)
     card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
@@ -325,7 +332,7 @@ function S:Copy(value)
     if not M.Text(value) then return end
     self:CloseMenu(); self.inspector:ClearItem()
     if not self.copyFrame then
-        local f=CreateFrame("Frame","QuestBriefCopy",self.frame,"BackdropTemplate"); self.copyFrame=f; f:SetSize(380,90); f:SetPoint("CENTER"); f:SetFrameStrata("FULLSCREEN_DIALOG"); surface(f)
+        local f=CreateFrame("Frame","QuestBriefCopy",self.frame,"BackdropTemplate"); self.copyFrame=f; f:SetSize(380,90); f:SetPoint("CENTER"); f:SetFrameStrata("FULLSCREEN_DIALOG"); U:Dialog(f)
         local label=text(f,12); label:SetPoint("TOPLEFT",12,-12); label:SetText("Copy - Ctrl+C")
         self.copyEdit=edit(f,350); self.copyEdit:SetPoint("TOPLEFT",15,-42); self.copyEdit:SetMaxLetters(1024); self.copyEdit:SetScript("OnEscapePressed",function() f:Hide() end); self.copyEdit:SetScript("OnEnterPressed",function() f:Hide() end)
         f:SetScript("OnHide",function() self.copyEdit:ClearFocus() end); UISpecialFrames[#UISpecialFrames+1]="QuestBriefCopy"

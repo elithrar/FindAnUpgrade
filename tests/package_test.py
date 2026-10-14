@@ -39,7 +39,11 @@ class PackageTest(unittest.TestCase):
 
     def test_catalog_load_order_staleness_and_license_loss_are_rejected(self):
         toc = self.root / "QuestBrief/QuestBrief.toc"; original = toc.read_bytes()
-        toc.write_bytes(original.replace(b"Data/Quests.lua\nData/Catalog.lua", b"Data/Catalog.lua\nData/Quests.lua"))
+        canonical = original.replace(b"\r\n", b"\n")
+        self.assertIn(b"Data/Quests.lua\nData/Catalog.lua", canonical)
+        reordered = canonical.replace(b"Data/Quests.lua\nData/Catalog.lua", b"Data/Catalog.lua\nData/Quests.lua")
+        self.assertNotEqual(reordered, canonical)
+        toc.write_bytes(reordered)
         with self.assertRaisesRegex(ValueError, "load order"): package.validate(self.root)
         toc.write_bytes(original)
         path = self.root / "QuestBrief/Data/Catalog.lua"; original = path.read_bytes()

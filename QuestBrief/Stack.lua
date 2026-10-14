@@ -44,7 +44,7 @@ function V:Create()
     local scroll = CreateFrame("ScrollFrame", nil, f); self.scroll = scroll
     scroll:SetPoint("TOPLEFT",0,0); scroll:EnableMouse(true); scroll:EnableMouseWheel(true)
     self.child = CreateFrame("Frame", nil, scroll); self.child:SetSize(292,1); scroll:SetScrollChild(self.child)
-    self.bar = CreateFrame("Slider", nil, f, "UISliderTemplate"); self.bar:SetPoint("TOPRIGHT",-2,-18); self.bar:SetPoint("BOTTOMRIGHT",-2,0)
+    self.bar = U:VerticalBar(f); self.bar:SetPoint("TOPRIGHT",-2,-18); self.bar:SetPoint("BOTTOMRIGHT",-2,0)
     self.bar:SetWidth(12); self.bar:SetOrientation("VERTICAL"); self.bar:SetValueStep(1); self.bar:SetMinMaxValues(0,0)
     local thumb=A.Call(self.bar.GetThumbTexture,self.bar)
     if thumb and not A.Forbidden(thumb) then thumb:SetSize(12,22) end
@@ -68,7 +68,7 @@ function V:Icon(c,index)
     local b = CreateFrame("Button",nil,c); c.icons[index] = b; b:SetSize(28,28)
     b.icon = b:CreateTexture(nil,"ARTWORK"); b.icon:SetAllPoints()
     b.border = b:CreateTexture(nil,"OVERLAY"); b.border:SetAllPoints(); b.border:SetTexture("Interface\\Common\\WhiteIconFrame")
-    b.count = text(b,10); b.count:SetPoint("BOTTOMRIGHT",-1,1); b.count:SetJustifyH("RIGHT")
+    b.count = b:CreateFontString(nil,"OVERLAY","NumberFontNormalSmall"); b.count:SetPoint("BOTTOMRIGHT",-1,1); b.count:SetJustifyH("RIGHT")
     b:SetScript("OnEnter",function() if b.row then self:Inspect(b,b.row) end end)
     -- The icon's leave event starts a grace interval; tooltip geometry keeps it alive.
     b:SetScript("OnLeave",function() self.itemOutsideAt = nil end)
@@ -145,8 +145,8 @@ function V:Fill(c,row,profile)
     if TOOLTIP_DEFAULT_BACKGROUND_COLOR and type(TOOLTIP_DEFAULT_BACKGROUND_COLOR.GetRGB)=="function" then
         r,g,b=TOOLTIP_DEFAULT_BACKGROUND_COLOR:GetRGB()
     end
-    local strength=profile.strength
-    c:SetBackdropColor(r+(new and .09*strength or 0),g+(modified and .07*strength or 0),b,.8)
+    r,g,b=M.AccentFill(profile,classification,r,g,b)
+    c:SetBackdropColor(r,g,b,.8)
     -- The native silver border is retained for every classification.
     return y
 end
@@ -246,6 +246,9 @@ function V:Tooltips()
         -- SharedTooltipTemplate has isolated cleanup. GameTooltipTemplate's
         -- OnLoad/OnHide mutate global battle-pet/comparison state.
         local t=CreateFrame("GameTooltip",name,UIParent,"SharedTooltipTemplate")
+        -- Above this inspector's own card/button subtree when screen clamping
+        -- causes overlap; comparison headers remain one level below their tip.
+        t:SetFrameLevel((self.frame or UIParent):GetFrameLevel()+6)
         Mixin(t,TooltipDataHandlerMixin); t.suppressAutomaticCompareItem=true
         t:HookScript("OnHide",function() t:ClearHandlerInfo() end)
         return t
@@ -270,8 +273,10 @@ function V:Tooltips()
             if self.cycleHints and not tooltip.questBriefItemData and M.Text(value) and self.cycleHints[value] then return end
             return addLine(tooltip,value,...)
         end
-        t.CompareHeader=CreateFrame("Frame",nil,t); t.CompareHeader:SetPoint("BOTTOMLEFT",t,"TOPLEFT",0,0); t.CompareHeader:SetHeight(20)
-        t.CompareHeader.Label=t.CompareHeader:CreateFontString(nil,"OVERLAY","GameTooltipText"); t.CompareHeader.Label:SetPoint("CENTER"); t.CompareHeader:Hide()
+        t.CompareHeader=CreateFrame("Frame",nil,t); t.CompareHeader:SetPoint("BOTTOMLEFT",t,"TOPLEFT",0,-1); t.CompareHeader:SetSize(100,22)
+        t.CompareHeader:SetFrameLevel(t:GetFrameLevel()-1)
+        t.CompareHeader.Background=t.CompareHeader:CreateTexture(nil,"BACKGROUND"); t.CompareHeader.Background:SetAllPoints(); t.CompareHeader.Background:SetAtlas("tooltip-compare-label")
+        t.CompareHeader.Label=t.CompareHeader:CreateFontString(nil,"ARTWORK","GameTooltipText"); t.CompareHeader.Label:SetPoint("CENTER"); t.CompareHeader.Label:SetTextColor(NORMAL_FONT_COLOR:GetRGB()); t.CompareHeader:Hide()
     end
     self.comparison={}
     if type(TooltipComparisonManager)=="table" then
@@ -356,7 +361,10 @@ function V:Compare()
     if not self.item or not self.comparison or not self.comparison.CompareItem then return end
     if not self:InspectionCurrent(self.item) then self:ClearItem(); return end
     if self.item.pending then return end
-    local should=TooltipUtil and A.Call(TooltipUtil.ShouldDoItemComparison,self.tooltip) == true or false
+    -- Native ShouldDoItemComparison gates the CVar on automatic comparison.
+    -- Our isolated manager owns that work, so honor both native inputs without
+    -- handing the private tooltip back to the global manager.
+    local should=A.Call(GetCVarBool,"alwaysCompareItems")==true or A.Call(IsModifiedClick,"COMPAREITEMS")==true
     local inspection=self.item; local now=A.Call(GetTime) or 0
     if not should then
         inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=nil,nil,nil
@@ -399,7 +407,9 @@ end
 function V:ItemContains(now)
     if not self.item then return false end
     if A.Over(self.scroll) and A.Over(self.item.button) or A.Over(self.tooltip) then self.item.bridgeAt=nil; return true end
-    for _,t in ipairs(self.tooltip.shoppingTooltips) do if A.Over(t) then self.item.bridgeAt=nil; return true end end
+    for _,t in ipairs(self.tooltip.shoppingTooltips) do
+        if A.Over(t) or A.Visible(t) and A.Over(t.CompareHeader) then self.item.bridgeAt=nil; return true end
+    end
     local button,tip=A.Rect(self.item.button),A.Rect(self.tooltip)
     local x,y=A.Cursor()
     if button and tip and x and A.Over(self.scroll) then

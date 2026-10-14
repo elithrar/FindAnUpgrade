@@ -74,6 +74,18 @@
       {
         "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyInfoDocumentation.lua",
         "sha256": "4469ef929c58223c45371876e4364478be0397578f72cc24415f31fa060b47a1"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_Menu/DropdownButton.lua",
+        "sha256": "3700afff438469414654a0293c0f18aef52f5e4bca11e0c12ee1d9a4a8dc55d6"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml",
+        "sha256": "bf75b8abb059718aec61356f2d16b283d384c360541890413ec960b4b9d55052"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua",
+        "sha256": "4825bac4057b4002e630ffa7a6104add204f1164c0910e73bfe7b84ea6b31ec8"
       }
     ]
   },

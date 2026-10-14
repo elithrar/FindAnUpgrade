@@ -4,7 +4,6 @@ local U = N.UI
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
 local panelWidth,panelHeight=620,398
 local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
-local dialogBackdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",tile=true,tileSize=8,edgeSize=16,insets={left=4,right=4,top=4,bottom=4}}
 
 -- Reuse current XPIsland's bounded native controls and scale-aware text fitting.
 local function bounded(text,width,height)
@@ -19,8 +18,30 @@ local function fitBounded(text)
     text:SetSize(text.qOptionsWidth/scale,text.qOptionsHeight/scale)
     if text.qOptionsAnchor then U:AnchorText(text,unpack(text.qOptionsAnchor)) end
 end
+-- WoW objects are permanent. Reuse deterministic constructor slots after a
+-- transient failure rather than abandoning a new subtree on every retry.
+function O:Frame(kind,parent,template)
+    self.frameSlot=self.frameSlot+1
+    local entry=self.framePool[self.frameSlot]
+    if not entry then
+        entry={object=CreateFrame(kind,nil,parent,template),kind=kind,parent=parent,template=template}
+        self.framePool[self.frameSlot]=entry
+    end
+    assert(entry.kind==kind and entry.parent==parent and entry.template==template,"Options constructor order changed")
+    return entry.object
+end
+function O:Text(parent)
+    self.textSlot=self.textSlot+1
+    local entry=self.textPool[self.textSlot]
+    if not entry then
+        entry={object=parent:CreateFontString(nil,"OVERLAY","GameFontNormal"),parent=parent}
+        self.textPool[self.textSlot]=entry
+    end
+    assert(entry.parent==parent,"Options text owner changed")
+    return entry.object
+end
 function O:Label(parent,value,x,y,width,size,color)
-    local t=parent:CreateFontString(nil,"OVERLAY","GameFontNormal")
+    local t=self:Text(parent)
     self.texts[#self.texts+1]={object=t,size=size or 12}; U:Font(t,size or 12)
     t:SetPoint("TOPLEFT",x,y); t:SetJustifyH("LEFT"); t:SetJustifyV("MIDDLE")
     t:SetShadowColor(0,0,0,.8); t:SetShadowOffset(1,-1); t:SetTextColor(unpack(color or ink))
@@ -28,7 +49,7 @@ function O:Label(parent,value,x,y,width,size,color)
     t:SetText(value); return t
 end
 function O:Button(parent,value,x,y,width,callback)
-    local b=CreateFrame("Button",nil,parent,"BackdropTemplate"); b:SetPoint("TOPLEFT",x,y); b:SetSize(width,22)
+    local b=self:Frame("Button",parent,"BackdropTemplate"); b:SetPoint("TOPLEFT",x,y); b:SetSize(width,22)
     b:SetBackdrop(backdrop); b:SetBackdropColor(.06,.06,.065,.8); b:SetBackdropBorderColor(.45,.45,.45,.65)
     b.text=self:Label(b,value,0,0,width-12,12); b.text:ClearAllPoints(); b.text:SetPoint("CENTER")
     b:SetScript("OnEnter",function() b:SetBackdropBorderColor(.9,.8,.5,.9) end)
@@ -36,14 +57,14 @@ function O:Button(parent,value,x,y,width,callback)
     b:SetScript("OnClick",callback); self.controls[#self.controls+1]=b; return b
 end
 function O:Section(parent,value,x,y,width,height)
-    local box=CreateFrame("Frame",nil,parent,"BackdropTemplate")
+    local box=self:Frame("Frame",parent,"BackdropTemplate")
     box:SetFrameLevel(parent:GetFrameLevel()-1); box:SetPoint("TOPLEFT",x,y-9); box:SetSize(width,height)
     box:SetBackdrop(backdrop); box:SetBackdropColor(.035,.035,.04,.35); box:SetBackdropBorderColor(.35,.35,.35,.5)
     self:Label(parent,value,x+10,y,width-20,12,gold)
     self.sections[#self.sections+1]=box; return box
 end
 function O:Dropdown(parent,x,y,width,entries,get,choose)
-    local d=CreateFrame("DropdownButton",nil,parent,"WowStyle1DropdownTemplate")
+    local d=self:Frame("DropdownButton",parent,"WowStyle1DropdownTemplate")
     d:SetPoint("TOPLEFT",x,y); d:SetSize(width,24)
     self.texts[#self.texts+1]={object=d.Text,size=12}; U:Font(d.Text,12)
     d:SetDefaultText("Choose"); d.Text:ClearAllPoints(); d.Text:SetPoint("LEFT",d,"LEFT",9,0)
@@ -65,7 +86,7 @@ function O:CloseMenu()
     for _,d in ipairs(self.dropdowns or {}) do d:CloseMenu() end
 end
 function O:Check(parent,key,value,x,y)
-    local b=CreateFrame("CheckButton",nil,parent,"UICheckButtonTemplate")
+    local b=self:Frame("CheckButton",parent,"UICheckButtonTemplate")
     b:SetPoint("TOPLEFT",x-4,y); b:SetSize(24,24); b.key,b.caption=key,value; b.text=b.Text
     self.texts[#self.texts+1]={object=b.Text,size=12}; U:Font(b.Text,12)
     b.Text:SetJustifyH("LEFT"); b.Text:SetTextColor(unpack(ink)); bounded(b.Text,250,24)
@@ -75,10 +96,10 @@ function O:Check(parent,key,value,x,y)
 end
 function O:Slider(parent,key,value,x,y,low,high,step)
     self:Label(parent,value,x,y,260,12)
-    local b=CreateFrame("Slider",nil,parent,"UISliderTemplate")
+    local b=self:Frame("Slider",parent,"UISliderTemplate")
     b:SetPoint("TOPLEFT",x,y-25); b:SetSize(180,16); b:SetOrientation("HORIZONTAL")
     b:SetMinMaxValues(low,high); b:SetValueStep(step); b:SetObeyStepOnDrag(true)
-    local e=CreateFrame("EditBox",nil,parent,"InputBoxTemplate")
+    local e=self:Frame("EditBox",parent,"InputBoxTemplate")
     self.texts[#self.texts+1]={object=e,size=12}
     e:SetPoint("TOPLEFT",x+202,y-20); e:SetSize(58,22); U:Font(e,12)
     e:SetTextInsets(6,6,0,0); e:SetAutoFocus(false); e:SetMaxLetters(48)
@@ -98,12 +119,12 @@ end
 function O:Build(owner,f,parent)
     parent:SetAllPoints(f)
     f:SetSize(panelWidth,panelHeight); f:SetPoint("CENTER"); f:SetFrameStrata("DIALOG")
-    f:SetBackdrop(dialogBackdrop); f:SetBackdropColor(.045,.045,.05,.94); f:SetBackdropBorderColor(.65,.65,.65,1)
+    U:Dialog(f)
     f:EnableMouse(true); f:SetClampedToScreen(true); f:SetMovable(true); f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart",function() f:StartMoving() end); f:SetScript("OnDragStop",function() f:StopMovingOrSizing() end)
     self.menuFont=self.menuFont or CreateFont("QuestBriefMenuFont"); U:Font(self.menuFont,12)
     self:Label(parent,"QuestBrief",20,-15,560,16,gold)
-    self.close=CreateFrame("Button",nil,parent,"UIPanelCloseButton")
+    self.close=self:Frame("Button",parent,"UIPanelCloseButton")
     self.close:SetSize(24,24); self.close:SetPoint("TOPRIGHT",-8,-8); self.close:SetScript("OnClick",function() f:Hide() end)
     self:Section(parent,"Appearance",16,-58,288,270); self:Section(parent,"Behavior",316,-58,288,270)
     self:Check(parent,"accents","Quest colors",28,-82)
@@ -135,7 +156,10 @@ function O:Create(owner)
     -- Publish only complete controls. A failed construction leaves a hidden
     -- shell that the next slash invocation can reuse, never a cached blank UI.
     local f=self.shell or CreateFrame("Frame","QuestBriefOptions",UIParent,"BackdropTemplate"); self.shell=f; f:Hide()
-    local parent=CreateFrame("Frame",nil,f)
+    local parent=self.content or CreateFrame("Frame",nil,f); self.content=parent
+    self.framePool,self.textPool=self.framePool or {},self.textPool or {}
+    self.frameSlot,self.textSlot=0,0
+    parent:Show()
     local ok,err=pcall(self.Build,self,owner,f,parent)
     if not ok then
         parent:Hide(); f:Hide(); f:UnregisterAllEvents(); self:CloseMenu()

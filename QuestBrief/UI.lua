@@ -2,6 +2,21 @@ local _, N = ...
 local M, A = N.Model, N.Adapter
 local U = { owned = {} }; N.UI = U
 
+-- Shared shell matches the installed XPIsland/ATCF dialog constructors.
+function U:Dialog(frame)
+    frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",tile=true,tileSize=8,edgeSize=16,insets={left=4,right=4,top=4,bottom=4}})
+    frame:SetBackdropColor(.045,.045,.05,.94); frame:SetBackdropBorderColor(.65,.65,.65,1)
+end
+function U:VerticalBar(parent)
+    -- Same native vertical asset/backdrop pattern as installed Questie/AceGUI.
+    -- UISliderTemplate supplies horizontal NineSlice and thumb art.
+    local bar=CreateFrame("Slider",nil,parent,"BackdropTemplate")
+    bar:SetOrientation("VERTICAL"); bar:EnableMouse(true); bar:SetHitRectInsets(0,0,-10,0)
+    bar:SetBackdrop({bgFile="Interface\\Buttons\\UI-SliderBar-Background",edgeFile="Interface\\Buttons\\UI-SliderBar-Border",tile=true,tileSize=8,edgeSize=8,insets={left=3,right=3,top=3,bottom=3}})
+    bar:SetWidth(12); bar:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Vertical")
+    local thumb=bar:GetThumbTexture(); thumb:SetSize(12,22)
+    return bar
+end
 function U:Restore()
     for region, edit in pairs(self.owned) do
         -- Another skin may have changed the same texture after our post-hook.
