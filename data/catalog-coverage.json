@@ -51,13 +51,13 @@
       "recorded": 4488
     },
     "coordinates": {
-      "unknown": 1655,
-      "recorded": 4017
+      "unknown": 1653,
+      "recorded": 4019
     }
   },
   "questsWithGivers": 4488,
   "questsWithNpc": 4040,
-  "questsWithCoordinates": 4017,
+  "questsWithCoordinates": 4019,
   "knownQuantities": 3606,
   "knownRewardGroups": 3606,
   "classificationCounts": {
@@ -67,7 +67,7 @@
     "Unknown": 4478
   },
   "reconciliationReport": "data/catalog-reconciliation.json",
-  "luaSha256": "8362f4302d5f24fbeb7cce078fb57b0f53ef4dfeda5b6ea2942e5bf1a6cb93a7",
-  "sourceSha256": "5a27d323fee0cc5ea7005bade919eae992d0f97ebb7a1ea73679236d775020ba",
+  "luaSha256": "34765370512ea28f8df501a0432f665d465ecc7623750a6efc4b00bddd416e6b",
+  "sourceSha256": "f39ccf629d4d8dc42cb075bd375f78c190b3cdae350ccf89e16b794e84ced01a",
   "liveClientVerified": false
 }

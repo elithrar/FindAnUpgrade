@@ -8,7 +8,7 @@
     },
     "metadata": {
       "path": "data/catalog-metadata-records.json",
-      "sha256": "d07b03750ba0d7689c46f5c9b6ce2446ea9fdbe31aaae521bcb7affcbd16e325"
+      "sha256": "1dfcd4dde4e845ccdf20e6b7e8febdc70e8fd546a6c43f4b1f4a61bce2ee1b66"
     },
     "compiled": {
       "path": "data/catalog-compiled-quests.json",

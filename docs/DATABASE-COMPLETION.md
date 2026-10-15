@@ -1,4 +1,4 @@
-# Quest inventory and reward reconciliation, 0.1.5
+# Quest inventory and reward reconciliation, 0.1.6
 
 The old 1,250-quest catalog was a reward-association subset, not a quest
 inventory. Its importer required a nonempty direct authored item list and a
@@ -10,6 +10,16 @@ The 0.1.5 recovery adds 134 source-backed starter records and 628 coordinate
 records to the 0.1.4 baseline. It preserves faction-specific resolver branches,
 explicit starting items and coordinate ownership. A standalone incremental
 acquisition/import/sync workflow is documented in `DATABASE-SYNC.md`.
+
+The 0.1.6 patch audits all 106 previously mixed-starter coordinate gaps and
+recovers two exact quests, 9388/9389, with six owned points each. Singleton
+quest declarations bind each immutable coordinate alias to its NPC; the target
+quests reference those same aliases in fresh-destination appendGroups calls.
+The other 104 cases remain unknown: 60 unpaired literal lists, six ambiguous
+faction branches and 38 without direct coordinate fields. Source expressions,
+anchor lines, frozen scope and dispositions are retained in the hashed metadata
+and reconciliation report. This supersedes the earlier review conclusion that
+no actionable coordinate recovery remained. See `COORDINATE-BINDING-REVIEW.md`.
 
 ## Acquired scope
 
@@ -53,7 +63,7 @@ and now remain explicitly unknown rather than retaining unverified items.
 | Money base amount | 1,130 | 4,542 |
 | Named reputation base amounts | 3,218 | 2,454 |
 | Giver identity of any explicit type | 4,488 | 1,184 |
-| Giver coordinates | 4,017 | 1,655 |
+| Giver coordinates | 4,019 | 1,653 |
 | Complete currency list | 0 | 5,672 |
 
 Giver records include 4,040 quests with NPC starters, 295 with object starters

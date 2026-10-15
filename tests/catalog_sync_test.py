@@ -19,6 +19,7 @@ import sync_catalog as sync
 from import_catalog import tokenize,bounds,literal
 from import_complete_catalog import compiled_quest_variants,compiled_locations,compiled_ids,source_bytes
 from complete_catalog import enrich_locations
+from coordinate_bindings import recover_file
 
 
 class Response:
@@ -168,6 +169,70 @@ class SyncTests(unittest.TestCase):
 
     def test_receipt_cannot_read_outside_the_acquisition_root(self):
         with self.assertRaisesRegex(ValueError,'outside cache'):source_bytes(self.root,{'file':'../private.html'})
+
+
+class CoordinateBindingTests(unittest.TestCase):
+    prefix='local LEFT={{10,20,MAP.A}};local RIGHT={{30,40,MAP.B}};\n'
+    anchors='q(1,{qg=22,coords=LEFT});q(2,{qg=11,coords=RIGHT});\n'
+    target='q(9,{qgs={11,22},coords=appendGroups(RIGHT,appendGroups(LEFT,{}))})'
+    scope={9:{('npcID',11),('npcID',22)}}
+    maps={'MAP.A':100,'MAP.B':101}
+
+    def recover(self,text,scope=None):return recover_file(text,'fixture',self.maps,scope or self.scope)[0]
+
+    def test_explicit_anchors_override_alias_names_and_list_order(self):
+        rows=self.recover(self.prefix+self.anchors+self.target)[9]
+        self.assertEqual({(row['npcID'],row['mapID'],row['x'],row['y']) for row in rows},{(22,100,.1,.2),(11,101,.3,.4)})
+
+    def test_mutated_escaped_or_nonfresh_coordinate_arrays_remain_unknown(self):
+        for extra in ('LEFT[1][1]=90;','Mutate(LEFT);','local ESCAPE=LEFT;'):
+            self.assertEqual(self.recover(self.prefix+self.anchors+self.target+';'+extra),{})
+        for expression in ('appendGroups(LEFT,RIGHT)','appendGroups(LEFT,appendGroups(LEFT,RIGHT))'):
+            self.assertEqual(self.recover(self.prefix+self.anchors+'q(9,{qgs={11,22},coords='+expression+'})'),{})
+
+    def test_helper_rebinding_and_expression_suffixes_cannot_borrow_contracts(self):
+        for extra in ('_G.appendGroups=function()return {} end;','function _G.appendGroups(a,b)return {} end;','local appendGroups=function()return {} end;'):
+            self.assertEqual(self.recover(self.prefix+extra+self.anchors+self.target),{})
+        for suffix in ('.other','[1]',' and {}',' or {}'):
+            self.assertEqual(self.recover(self.prefix+self.anchors+'q(9,{qgs={11,22},coords=appendGroups(LEFT,{})'+suffix+'})'),{})
+
+    def test_conflicting_or_missing_owners_do_not_establish_locations(self):
+        self.assertEqual(self.recover(self.prefix+self.target),{})
+        self.assertEqual(self.recover(self.prefix+self.anchors+'q(3,{qg=11,coords=LEFT});'+self.target),{})
+        self.assertEqual(self.recover(self.prefix+self.anchors+'q(9,{qg=11,qgs={22},coords=appendGroups(RIGHT,{})})'),{})
+
+    def test_target_identity_and_entity_namespace_must_already_match(self):
+        self.assertEqual(self.recover(self.prefix+self.anchors+self.target.replace('qgs={11,22}','qgs={22,33}')),{})
+        self.assertEqual(self.recover(self.prefix+self.anchors+self.target,{9:{('itemID',11),('objectID',22)}}),{})
+
+    def test_equal_inline_points_and_objectives_do_not_prove_alias_ownership(self):
+        self.assertEqual(self.recover(self.prefix+self.anchors+'q(9,{qgs={11,22},coords={{10,20,MAP.A},{30,40,MAP.B}}})'),{})
+        self.assertEqual(self.recover(self.prefix+self.anchors+'q(9,{qgs={11,22},coord={10,20,MAP.A},coords=appendGroups(LEFT,{})})'),{})
+        anchors='q(1,{coords=LEFT,groups={objective(1,{provider={"n",22}})}});q(2,{qg=11,coords=RIGHT});'
+        self.assertEqual(self.recover(self.prefix+anchors+self.target),{})
+
+    def test_frozen_106_audit_and_two_quest_recovery_preserve_all_starter_identities(self):
+        metadata=json.loads((ROOT/'data/catalog-metadata-records.json').read_bytes())
+        recovery=metadata['coordinateRecovery'];self.assertEqual(len(recovery['quests']),106)
+        self.assertEqual(recovery['recoveredIDs'],[9388,9389])
+        output={row['id']:row for row in json.loads((ROOT/'data/catalog-complete-source.json').read_bytes())['quests']}
+        for quest in recovery['quests']:
+            expected={(key,point[key]) for point in quest['starters'] for key in ('npcID','objectID','itemID') if key in point}
+            actual={(key,point[key]) for point in output[quest['id']].get('locations',[]) for key in ('npcID','objectID','itemID') if key in point}
+            self.assertEqual(actual,expected)
+        report=json.loads((ROOT/'data/catalog-reconciliation.json').read_bytes())
+        self.assertEqual(report['coordinateOwnershipAuditCounts'],{'recovered-explicit-coordinate-alias-ownership':2,'unassigned-literal-coordinate-list':60,'unassigned-faction-branch':6,'no-direct-coordinate-field':38})
+
+    def test_recovered_midsummer_points_have_exact_npc_ownership_and_provenance(self):
+        metadata=json.loads((ROOT/'data/catalog-metadata-records.json').read_bytes());sources={row['path'] for row in metadata['sources']}
+        output={row['id']:row for row in json.loads((ROOT/'data/catalog-complete-source.json').read_bytes())['quests']}
+        expected={(16817,1453,38.5,61.1),(16817,1455,63.6,24.7),(16817,1438,56.6,92.3),(16818,1454,46.8,38.0),(16818,1456,21.3,26.4),(16818,1458,67.6,8.3)}
+        for quest in (9388,9389):
+            points=output[quest]['locations']
+            self.assertEqual({(point['npcID'],point['mapID'],round(point['x']*100,1),round(point['y']*100,1)) for point in points},expected)
+            proof=next(row for row in metadata['coordinateRecovery']['audit'] if row['id']==quest)
+            self.assertEqual(len(proof['proofs']),2)
+            self.assertTrue(all(anchor['path'] in sources and anchor['line']>0 for item in proof['proofs'] for anchor in item['anchors']))
 
 
 if __name__=='__main__':unittest.main()

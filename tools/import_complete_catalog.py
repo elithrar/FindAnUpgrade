@@ -59,7 +59,7 @@ def native_ids(path):
     return {"build": BUILD, "sha256": digest(raw), "bytes": len(raw), "questIDs": sorted(records), "verifiedFields": ["exact quest identity", "client build", "record framing"], "rewardLayoutVerified": False}
 
 
-def authoring_metadata(source_root):
+def authoring_metadata(source_root, coordinate_scope=None):
     acquisition = json.loads((source_root/"ACQUISITION.json").read_bytes())
     if acquisition["commit"] != PIN:
         raise ValueError("Unexpected ATT source revision")
@@ -73,6 +73,9 @@ def authoring_metadata(source_root):
     raw = (source_root/dependencies[1]).read_text(encoding="utf-8")
     races = {key: int(value) for key, value in re.findall(r"^\s*([A-Z][A-Z_0-9]*)\s*=\s*(\d+)\s*;", raw, re.M)}
     records, sources, omissions, conflicts, rejected = {}, [receipts[path] for path in dependencies], [], [], set()
+    recovery=dict(coordinate_scope or {},audit=[],recoveredIDs=[])
+    scope={row["id"]:{(key,location[key]) for location in row["starters"] for key in ("npcID","objectID","itemID") if key in location} for row in recovery.get("quests",[])}
+    recovered={}
     for source in sorted(acquisition["files"], key=lambda row: row["path"]):
         path = source["path"]
         if not path.startswith(PREFIX) or not path.endswith(".lua") or "/.config/" in path or path.endswith((".main.lua", ".metadata.lua")):
@@ -81,6 +84,11 @@ def authoring_metadata(source_root):
         if digest(raw) != source["sha256"]:
             raise ValueError("Authoring input hash changed: "+path)
         rows, skipped = parse(raw.decode("utf-8"), path, maps, races, include_empty=True)
+        if scope:
+            from coordinate_bindings import recover_file
+            locations,audit=recover_file(raw.decode("utf-8"),path,maps,scope)
+            recovery["audit"].extend(audit)
+            for quest,places in locations.items():recovered.setdefault(quest,[]).extend(places)
         sources.append(source)
         omissions.extend(skipped)
         for row in rows:
@@ -105,7 +113,21 @@ def authoring_metadata(source_root):
                 records.pop(row["id"], None)
     for quest in rejected:
         records.pop(quest, None)
-    return {"sourceRevision": PIN, "sourceBuild": "1.60.1.69893", "records": sorted(records.values(), key=lambda row: row["id"]), "sources": sources, "omissions": omissions, "conflicts": conflicts, "rejectedIDs": sorted(rejected)}
+    for quest,places in recovered.items():
+        if quest not in records:continue
+        original=records[quest].get("locations",[])
+        # Never overwrite a direct recorded point or introduce a new starter.
+        if any("mapID" in point for point in original):continue
+        places=list({tuple(sorted(point.items())):point for point in places}.values())
+        known={(key,point[key]) for point in places for key in ("npcID","objectID","itemID") if key in point}
+        records[quest]["locations"]=[point for point in original if not any((key,point.get(key)) in known for key in ("npcID","objectID","itemID"))]+places
+        recovery["recoveredIDs"].append(quest)
+    recovery["recoveredIDs"].sort()
+    for omission in omissions:
+        if omission.get("id") in recovery["recoveredIDs"] and omission.get("field") in ("coord","coords"):
+            omission["resolvedBy"]="explicit-coordinate-alias-ownership"
+    recovery["audit"].sort(key=lambda row:(row["id"],row["path"],row["line"]))
+    return {"sourceRevision": PIN, "sourceBuild": "1.60.1.69893", "records": sorted(records.values(), key=lambda row: row["id"]), "sources": sources, "omissions": omissions, "conflicts": conflicts, "rejectedIDs": sorted(rejected),"coordinateRecovery":recovery}
 
 
 def compiled_coordinates(tokens, ends, span):
@@ -303,6 +325,12 @@ def main():
     args = parser.parse_args()
     from complete_catalog import read_inputs
     _,prior_inputs=read_inputs(ROOT)
+    coordinate_scope={key:value for key,value in prior_inputs["metadata"].get("coordinateRecovery",{}).items() if key not in ("audit","recoveredIDs")}
+    if not coordinate_scope:
+        from complete_catalog import build_complete
+        prior_source,prior_report=build_complete(ROOT)
+        ids={row["id"] for row in prior_report["missingFields"] if row["causes"].get("coordinates")=="multiple-or-mixed-starters-without-owned-point"}
+        coordinate_scope={"baselineSourceSha256":digest((ROOT/"data/catalog-complete-source.json").read_bytes()),"baselineReportSha256":digest((ROOT/"data/catalog-reconciliation.json").read_bytes()),"rule":"Bounded audit of the 106 mixed-starter coordinate gaps from 0.1.5; explicit immutable alias ownership only, never inferred by name, point equality or list order.","quests":[{"id":row["id"],"starters":[{key:point[key] for key in ("npcID","objectID","itemID") if key in point} for point in row.get("locations",[])]} for row in prior_source["quests"] if row["id"] in ids]}
     compiled_data=compiled_ids(args.compiled_root)
     index = json.loads((args.source_root/"index-manifest.json").read_bytes())
     manifest = json.loads((args.source_root/"quest-manifest.json").read_bytes())
@@ -345,7 +373,7 @@ def main():
     primary = primary_records(args.primary_cache) if args.primary_cache else prior_inputs["primary"]
     client = native_ids(args.client_cache) if args.client_cache else prior_inputs["client"]
     if args.primary_cache and not primary["records"]: raise ValueError("Explicit primary cache contains no verified exact pages")
-    for key, name, value in (("public", "catalog-public-records.json", public), ("metadata", "catalog-metadata-records.json", authoring_metadata(args.att_source_root)), ("compiled", "catalog-compiled-quests.json", compiled_data), ("primary", "catalog-primary-records.json", primary), ("client", "catalog-client-evidence.json", client)):
+    for key, name, value in (("public", "catalog-public-records.json", public), ("metadata", "catalog-metadata-records.json", authoring_metadata(args.att_source_root,coordinate_scope)), ("compiled", "catalog-compiled-quests.json", compiled_data), ("primary", "catalog-primary-records.json", primary), ("client", "catalog-client-evidence.json", client)):
         inputs[key] = write(ROOT/"data"/name, value)
     inputs["legacy"] = {"path": "data/catalog-source.json", "sha256": digest((ROOT/"data/catalog-source.json").read_bytes())}
     history_ids.update(row["id"] for row in rows)

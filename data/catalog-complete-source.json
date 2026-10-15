@@ -204594,6 +204594,44 @@
     {
       "title": "Flickering Flames in Kalimdor",
       "eligibilityUnknown": true,
+      "locations": [
+        {
+          "mapID": 1454,
+          "x": 0.46799999999999997,
+          "y": 0.38,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1456,
+          "x": 0.213,
+          "y": 0.264,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1458,
+          "x": 0.6759999999999999,
+          "y": 0.083,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1453,
+          "x": 0.385,
+          "y": 0.611,
+          "npcID": 16817
+        },
+        {
+          "mapID": 1455,
+          "x": 0.636,
+          "y": 0.247,
+          "npcID": 16817
+        },
+        {
+          "mapID": 1438,
+          "x": 0.5660000000000001,
+          "y": 0.9229999999999999,
+          "npcID": 16817
+        }
+      ],
       "id": 9388,
       "items": [
         {
@@ -204632,14 +204670,6 @@
       "rewardValues": {
         "xp": 1500
       },
-      "locations": [
-        {
-          "npcID": 16817
-        },
-        {
-          "npcID": 16818
-        }
-      ],
       "clientIdentityRecorded": true,
       "fieldStates": {
         "items": "published",
@@ -204651,12 +204681,50 @@
         "reputation": "unknown",
         "currencies": "unknown",
         "givers": "recorded",
-        "coordinates": "unknown"
+        "coordinates": "recorded"
       }
     },
     {
       "title": "Flickering Flames in the Eastern Kingdoms",
       "eligibilityUnknown": true,
+      "locations": [
+        {
+          "mapID": 1454,
+          "x": 0.46799999999999997,
+          "y": 0.38,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1456,
+          "x": 0.213,
+          "y": 0.264,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1458,
+          "x": 0.6759999999999999,
+          "y": 0.083,
+          "npcID": 16818
+        },
+        {
+          "mapID": 1453,
+          "x": 0.385,
+          "y": 0.611,
+          "npcID": 16817
+        },
+        {
+          "mapID": 1455,
+          "x": 0.636,
+          "y": 0.247,
+          "npcID": 16817
+        },
+        {
+          "mapID": 1438,
+          "x": 0.5660000000000001,
+          "y": 0.9229999999999999,
+          "npcID": 16817
+        }
+      ],
       "id": 9389,
       "items": [
         {
@@ -204695,14 +204763,6 @@
       "rewardValues": {
         "xp": 1500
       },
-      "locations": [
-        {
-          "npcID": 16817
-        },
-        {
-          "npcID": 16818
-        }
-      ],
       "clientIdentityRecorded": true,
       "fieldStates": {
         "items": "published",
@@ -204714,7 +204774,7 @@
         "reputation": "unknown",
         "currencies": "unknown",
         "givers": "recorded",
-        "coordinates": "unknown"
+        "coordinates": "recorded"
       }
     },
     {

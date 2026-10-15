@@ -14,7 +14,7 @@
     "itemAssociations": 3606,
     "distinctItems": 2623,
     "rowsWithGivers": 4488,
-    "rowsWithCoordinates": 4017,
+    "rowsWithCoordinates": 4019,
     "addedLegacyPairs": 84,
     "removedLegacyPairs": 89,
     "rowsWithNpcGivers": 4040,
@@ -64732,15 +64732,13 @@
       "missing": [
         "money",
         "reputation",
-        "currencies",
-        "coordinates"
+        "currencies"
       ],
       "confirmation": "published",
       "causes": {
         "money": "field-not-explicitly-published",
         "reputation": "field-not-explicitly-published",
-        "currencies": "complete-currency-list-not-exposed",
-        "coordinates": "multiple-or-mixed-starters-without-owned-point"
+        "currencies": "complete-currency-list-not-exposed"
       }
     },
     {
@@ -64748,15 +64746,13 @@
       "missing": [
         "money",
         "reputation",
-        "currencies",
-        "coordinates"
+        "currencies"
       ],
       "confirmation": "published",
       "causes": {
         "money": "field-not-explicitly-published",
         "reputation": "field-not-explicitly-published",
-        "currencies": "complete-currency-list-not-exposed",
-        "coordinates": "multiple-or-mixed-starters-without-owned-point"
+        "currencies": "complete-currency-list-not-exposed"
       }
     },
     {
@@ -81234,8 +81230,8 @@
       "recorded": 4488
     },
     "coordinates": {
-      "unknown": 1655,
-      "recorded": 4017
+      "unknown": 1653,
+      "recorded": 4019
     }
   },
   "legacyCorrection": {
@@ -82354,14 +82350,16 @@
       "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
       "line": 161,
       "field": "coords",
-      "reason": "field omitted: unsupported selected expression"
+      "reason": "field omitted: unsupported selected expression",
+      "resolvedBy": "explicit-coordinate-alias-ownership"
     },
     {
       "id": 9388,
       "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
       "line": 193,
       "field": "coords",
-      "reason": "field omitted: unsupported selected expression"
+      "reason": "field omitted: unsupported selected expression",
+      "resolvedBy": "explicit-coordinate-alias-ownership"
     },
     {
       "id": 65602,
@@ -83078,6 +83076,2128 @@
       "reason": "reward pair omitted: item acquisition fields: coord, cr"
     }
   ],
+  "coordinateOwnershipAudit": {
+    "baselineSourceSha256": "5a27d323fee0cc5ea7005bade919eae992d0f97ebb7a1ea73679236d775020ba",
+    "baselineReportSha256": "3c6a9e447a7cd4b956f61ecc1bf8416084a1dc4f90e7af33224bf36adf752ff3",
+    "rule": "Bounded audit of the 106 mixed-starter coordinate gaps from 0.1.5; explicit immutable alias ownership only, never inferred by name, point equality or list order.",
+    "quests": [
+      {
+        "id": 140,
+        "starters": [
+          {
+            "objectID": 34
+          },
+          {
+            "objectID": 33
+          }
+        ]
+      },
+      {
+        "id": 248,
+        "starters": [
+          {
+            "objectID": 31
+          },
+          {
+            "objectID": 76
+          }
+        ]
+      },
+      {
+        "id": 410,
+        "starters": [
+          {
+            "itemID": 3080
+          },
+          {
+            "objectID": 1557
+          }
+        ]
+      },
+      {
+        "id": 415,
+        "starters": [
+          {
+            "npcID": 1378
+          },
+          {
+            "npcID": 1872
+          }
+        ]
+      },
+      {
+        "id": 460,
+        "starters": [
+          {
+            "itemID": 3317
+          },
+          {
+            "objectID": 1599
+          }
+        ]
+      },
+      {
+        "id": 467,
+        "starters": [
+          {
+            "npcID": 1340
+          },
+          {
+            "npcID": 2092
+          }
+        ]
+      },
+      {
+        "id": 510,
+        "starters": [
+          {
+            "objectID": 1738
+          },
+          {
+            "objectID": 1739
+          },
+          {
+            "objectID": 1740
+          },
+          {
+            "itemID": 3718
+          }
+        ]
+      },
+      {
+        "id": 511,
+        "starters": [
+          {
+            "objectID": 1738
+          },
+          {
+            "objectID": 1739
+          },
+          {
+            "objectID": 1740
+          },
+          {
+            "itemID": 3521
+          }
+        ]
+      },
+      {
+        "id": 551,
+        "starters": [
+          {
+            "itemID": 3706
+          },
+          {
+            "objectID": 1765
+          }
+        ]
+      },
+      {
+        "id": 624,
+        "starters": [
+          {
+            "itemID": 4056
+          },
+          {
+            "objectID": 2554
+          }
+        ]
+      },
+      {
+        "id": 626,
+        "starters": [
+          {
+            "objectID": 2555
+          },
+          {
+            "objectID": 2556
+          }
+        ]
+      },
+      {
+        "id": 637,
+        "starters": [
+          {
+            "itemID": 4433
+          },
+          {
+            "objectID": 2656
+          },
+          {
+            "itemID": 4432
+          }
+        ]
+      },
+      {
+        "id": 779,
+        "starters": [
+          {
+            "objectID": 2933
+          },
+          {
+            "itemID": 4845
+          },
+          {
+            "itemID": 4844
+          },
+          {
+            "itemID": 4843
+          }
+        ]
+      },
+      {
+        "id": 781,
+        "starters": [
+          {
+            "itemID": 4851
+          },
+          {
+            "objectID": 3076
+          },
+          {
+            "itemID": 4850
+          }
+        ]
+      },
+      {
+        "id": 795,
+        "starters": [
+          {
+            "objectID": 2933
+          },
+          {
+            "itemID": 4845
+          },
+          {
+            "itemID": 4844
+          },
+          {
+            "itemID": 4843
+          }
+        ]
+      },
+      {
+        "id": 949,
+        "starters": [
+          {
+            "itemID": 5251
+          },
+          {
+            "objectID": 10076
+          }
+        ]
+      },
+      {
+        "id": 1067,
+        "starters": [
+          {
+            "npcID": 2216
+          },
+          {
+            "npcID": 5588
+          }
+        ]
+      },
+      {
+        "id": 1097,
+        "starters": [
+          {
+            "npcID": 415
+          },
+          {
+            "npcID": 514
+          }
+        ]
+      },
+      {
+        "id": 1100,
+        "starters": [
+          {
+            "itemID": 5791
+          },
+          {
+            "objectID": 19861
+          }
+        ]
+      },
+      {
+        "id": 1268,
+        "starters": [
+          {
+            "objectID": 21015
+          },
+          {
+            "objectID": 21016
+          }
+        ]
+      },
+      {
+        "id": 1284,
+        "starters": [
+          {
+            "objectID": 21015
+          },
+          {
+            "objectID": 21016
+          }
+        ]
+      },
+      {
+        "id": 1361,
+        "starters": [
+          {
+            "npcID": 2229
+          },
+          {
+            "npcID": 4485
+          }
+        ]
+      },
+      {
+        "id": 1423,
+        "starters": [
+          {
+            "itemID": 6172
+          },
+          {
+            "objectID": 28604
+          }
+        ]
+      },
+      {
+        "id": 1505,
+        "starters": [
+          {
+            "npcID": 3063
+          },
+          {
+            "npcID": 3170
+          },
+          {
+            "npcID": 3354
+          }
+        ]
+      },
+      {
+        "id": 1638,
+        "starters": [
+          {
+            "npcID": 913
+          },
+          {
+            "npcID": 5480
+          }
+        ]
+      },
+      {
+        "id": 1684,
+        "starters": [
+          {
+            "npcID": 2151
+          },
+          {
+            "npcID": 3598
+          },
+          {
+            "npcID": 3657
+          }
+        ]
+      },
+      {
+        "id": 1698,
+        "starters": [
+          {
+            "npcID": 5479
+          },
+          {
+            "npcID": 7315
+          }
+        ]
+      },
+      {
+        "id": 1718,
+        "starters": [
+          {
+            "npcID": 5113
+          },
+          {
+            "npcID": 5479
+          },
+          {
+            "npcID": 3041
+          },
+          {
+            "npcID": 3354
+          },
+          {
+            "npcID": 4595
+          }
+        ]
+      },
+      {
+        "id": 1823,
+        "starters": [
+          {
+            "npcID": 3041
+          },
+          {
+            "npcID": 3354
+          },
+          {
+            "npcID": 4595
+          }
+        ]
+      },
+      {
+        "id": 1883,
+        "starters": [
+          {
+            "npcID": 3049
+          },
+          {
+            "npcID": 7311
+          }
+        ]
+      },
+      {
+        "id": 1939,
+        "starters": [
+          {
+            "npcID": 5144
+          },
+          {
+            "npcID": 5497
+          }
+        ]
+      },
+      {
+        "id": 1947,
+        "starters": [
+          {
+            "npcID": 3048
+          },
+          {
+            "npcID": 4568
+          },
+          {
+            "npcID": 5144
+          },
+          {
+            "npcID": 5497
+          },
+          {
+            "npcID": 5885
+          }
+        ]
+      },
+      {
+        "id": 1953,
+        "starters": [
+          {
+            "npcID": 3048
+          },
+          {
+            "npcID": 4568
+          },
+          {
+            "npcID": 5144
+          },
+          {
+            "npcID": 5497
+          },
+          {
+            "npcID": 5885
+          }
+        ]
+      },
+      {
+        "id": 1959,
+        "starters": [
+          {
+            "npcID": 3049
+          },
+          {
+            "npcID": 7311
+          }
+        ]
+      },
+      {
+        "id": 2201,
+        "starters": [
+          {
+            "npcID": 6912
+          },
+          {
+            "itemID": 7668
+          }
+        ]
+      },
+      {
+        "id": 2318,
+        "starters": [
+          {
+            "npcID": 6912
+          },
+          {
+            "itemID": 7886
+          }
+        ]
+      },
+      {
+        "id": 2861,
+        "starters": [
+          {
+            "npcID": 5144
+          },
+          {
+            "npcID": 5497
+          },
+          {
+            "npcID": 4568
+          },
+          {
+            "npcID": 5885
+          }
+        ]
+      },
+      {
+        "id": 2874,
+        "starters": [
+          {
+            "npcID": 7881
+          },
+          {
+            "itemID": 9245
+          }
+        ]
+      },
+      {
+        "id": 2882,
+        "starters": [
+          {
+            "itemID": 9254
+          },
+          {
+            "objectID": 142189
+          }
+        ]
+      },
+      {
+        "id": 2978,
+        "starters": [
+          {
+            "itemID": 9370
+          },
+          {
+            "objectID": 143980
+          }
+        ]
+      },
+      {
+        "id": 3368,
+        "starters": [
+          {
+            "itemID": 10443
+          },
+          {
+            "objectID": 175704
+          }
+        ]
+      },
+      {
+        "id": 3373,
+        "starters": [
+          {
+            "itemID": 10454
+          },
+          {
+            "objectID": 148512
+          }
+        ]
+      },
+      {
+        "id": 3523,
+        "starters": [
+          {
+            "npcID": 8516
+          },
+          {
+            "itemID": 10682
+          }
+        ]
+      },
+      {
+        "id": 3525,
+        "starters": [
+          {
+            "npcID": 8516
+          },
+          {
+            "objectID": 152097
+          }
+        ]
+      },
+      {
+        "id": 3802,
+        "starters": [
+          {
+            "npcID": 8888
+          },
+          {
+            "objectID": 164689
+          }
+        ]
+      },
+      {
+        "id": 3845,
+        "starters": [
+          {
+            "itemID": 11107
+          },
+          {
+            "objectID": 161504
+          }
+        ]
+      },
+      {
+        "id": 4451,
+        "starters": [
+          {
+            "itemID": 11818
+          },
+          {
+            "objectID": 173265
+          }
+        ]
+      },
+      {
+        "id": 4867,
+        "starters": [
+          {
+            "npcID": 10799
+          },
+          {
+            "itemID": 12730
+          }
+        ]
+      },
+      {
+        "id": 4983,
+        "starters": [
+          {
+            "npcID": 10257
+          },
+          {
+            "itemID": 12652
+          }
+        ]
+      },
+      {
+        "id": 5002,
+        "starters": [
+          {
+            "npcID": 10257
+          },
+          {
+            "itemID": 12770
+          }
+        ]
+      },
+      {
+        "id": 5047,
+        "starters": [
+          {
+            "npcID": 10776
+          },
+          {
+            "itemID": 12710
+          }
+        ]
+      },
+      {
+        "id": 5160,
+        "starters": [
+          {
+            "npcID": 10740
+          },
+          {
+            "itemID": 12923
+          }
+        ]
+      },
+      {
+        "id": 5464,
+        "starters": [
+          {
+            "objectID": 176631
+          },
+          {
+            "itemID": 13624
+          }
+        ]
+      },
+      {
+        "id": 5627,
+        "starters": [
+          {
+            "npcID": 377
+          },
+          {
+            "npcID": 1226
+          },
+          {
+            "npcID": 3600
+          },
+          {
+            "npcID": 5142
+          },
+          {
+            "npcID": 5489
+          },
+          {
+            "npcID": 11397
+          },
+          {
+            "npcID": 11401
+          }
+        ]
+      },
+      {
+        "id": 5652,
+        "starters": [
+          {
+            "npcID": 3044
+          },
+          {
+            "npcID": 3706
+          },
+          {
+            "npcID": 4606
+          },
+          {
+            "npcID": 6018
+          },
+          {
+            "npcID": 11407
+          }
+        ]
+      },
+      {
+        "id": 5658,
+        "starters": [
+          {
+            "npcID": 3044
+          },
+          {
+            "npcID": 3706
+          },
+          {
+            "npcID": 4606
+          },
+          {
+            "npcID": 6018
+          },
+          {
+            "npcID": 11407
+          }
+        ]
+      },
+      {
+        "id": 5676,
+        "starters": [
+          {
+            "npcID": 376
+          },
+          {
+            "npcID": 11401
+          },
+          {
+            "npcID": 11406
+          }
+        ]
+      },
+      {
+        "id": 5679,
+        "starters": [
+          {
+            "npcID": 3044
+          },
+          {
+            "npcID": 4606
+          },
+          {
+            "npcID": 6018
+          }
+        ]
+      },
+      {
+        "id": 5680,
+        "starters": [
+          {
+            "npcID": 3044
+          },
+          {
+            "npcID": 4606
+          },
+          {
+            "npcID": 6018
+          }
+        ]
+      },
+      {
+        "id": 6024,
+        "starters": [
+          {
+            "objectID": 177667
+          },
+          {
+            "objectID": 177675
+          }
+        ]
+      },
+      {
+        "id": 6161,
+        "starters": [
+          {
+            "objectID": 177787
+          },
+          {
+            "objectID": 177786
+          }
+        ]
+      },
+      {
+        "id": 6662,
+        "starters": [
+          {
+            "npcID": 12997
+          },
+          {
+            "itemID": 17118
+          }
+        ]
+      },
+      {
+        "id": 7066,
+        "starters": [
+          {
+            "npcID": 12238
+          },
+          {
+            "itemID": 17760
+          }
+        ]
+      },
+      {
+        "id": 7124,
+        "starters": [
+          {
+            "npcID": 12097
+          },
+          {
+            "npcID": 13776
+          }
+        ]
+      },
+      {
+        "id": 7492,
+        "starters": [
+          {
+            "npcID": 10879
+          },
+          {
+            "npcID": 10880
+          },
+          {
+            "npcID": 10881
+          }
+        ]
+      },
+      {
+        "id": 7494,
+        "starters": [
+          {
+            "npcID": 2198
+          },
+          {
+            "npcID": 10877
+          },
+          {
+            "npcID": 10878
+          }
+        ]
+      },
+      {
+        "id": 7498,
+        "starters": [
+          {
+            "itemID": 18356
+          },
+          {
+            "npcID": 14383
+          }
+        ]
+      },
+      {
+        "id": 7499,
+        "starters": [
+          {
+            "itemID": 18357
+          },
+          {
+            "npcID": 14383
+          }
+        ]
+      },
+      {
+        "id": 7500,
+        "starters": [
+          {
+            "itemID": 18358
+          },
+          {
+            "npcID": 14383
+          }
+        ]
+      },
+      {
+        "id": 7501,
+        "starters": [
+          {
+            "itemID": 18359
+          },
+          {
+            "npcID": 14382
+          }
+        ]
+      },
+      {
+        "id": 7502,
+        "starters": [
+          {
+            "itemID": 18360
+          },
+          {
+            "npcID": 14382
+          }
+        ]
+      },
+      {
+        "id": 7503,
+        "starters": [
+          {
+            "itemID": 18361
+          },
+          {
+            "npcID": 14382
+          }
+        ]
+      },
+      {
+        "id": 7504,
+        "starters": [
+          {
+            "itemID": 18362
+          },
+          {
+            "npcID": 14381
+          }
+        ]
+      },
+      {
+        "id": 7505,
+        "starters": [
+          {
+            "itemID": 18363
+          },
+          {
+            "npcID": 14381
+          }
+        ]
+      },
+      {
+        "id": 7506,
+        "starters": [
+          {
+            "itemID": 18364
+          },
+          {
+            "npcID": 14381
+          }
+        ]
+      },
+      {
+        "id": 7508,
+        "starters": [
+          {
+            "npcID": 14368
+          },
+          {
+            "itemID": 18513
+          }
+        ]
+      },
+      {
+        "id": 7562,
+        "starters": [
+          {
+            "npcID": 5520
+          },
+          {
+            "npcID": 6382
+          },
+          {
+            "npcID": 5753
+          },
+          {
+            "npcID": 5815
+          }
+        ]
+      },
+      {
+        "id": 7643,
+        "starters": [
+          {
+            "npcID": 928
+          },
+          {
+            "itemID": 18753
+          },
+          {
+            "npcID": 14566
+          }
+        ]
+      },
+      {
+        "id": 7644,
+        "starters": [
+          {
+            "npcID": 14566
+          },
+          {
+            "itemID": 18792
+          },
+          {
+            "npcID": 928
+          }
+        ]
+      },
+      {
+        "id": 7877,
+        "starters": [
+          {
+            "npcID": 14358
+          },
+          {
+            "objectID": 179517
+          }
+        ]
+      },
+      {
+        "id": 7937,
+        "starters": [
+          {
+            "itemID": 19423
+          },
+          {
+            "objectID": 180025
+          }
+        ]
+      },
+      {
+        "id": 7938,
+        "starters": [
+          {
+            "itemID": 19424
+          },
+          {
+            "objectID": 180024
+          }
+        ]
+      },
+      {
+        "id": 7944,
+        "starters": [
+          {
+            "itemID": 19443
+          },
+          {
+            "objectID": 180055
+          }
+        ]
+      },
+      {
+        "id": 7945,
+        "starters": [
+          {
+            "itemID": 19452
+          },
+          {
+            "objectID": 180056
+          }
+        ]
+      },
+      {
+        "id": 8151,
+        "starters": [
+          {
+            "npcID": 4205
+          },
+          {
+            "npcID": 5116
+          },
+          {
+            "npcID": 5516
+          },
+          {
+            "npcID": 3039
+          },
+          {
+            "npcID": 3352
+          }
+        ]
+      },
+      {
+        "id": 8250,
+        "starters": [
+          {
+            "npcID": 331
+          },
+          {
+            "npcID": 7312
+          },
+          {
+            "npcID": 3047
+          },
+          {
+            "npcID": 4567
+          },
+          {
+            "npcID": 7311
+          }
+        ]
+      },
+      {
+        "id": 8410,
+        "starters": [
+          {
+            "npcID": 3032
+          },
+          {
+            "npcID": 5892
+          }
+        ]
+      },
+      {
+        "id": 8415,
+        "starters": [
+          {
+            "npcID": 928
+          },
+          {
+            "npcID": 5149
+          }
+        ]
+      },
+      {
+        "id": 8417,
+        "starters": [
+          {
+            "npcID": 5113
+          },
+          {
+            "npcID": 5479
+          },
+          {
+            "npcID": 7315
+          },
+          {
+            "npcID": 3041
+          },
+          {
+            "npcID": 3354
+          },
+          {
+            "npcID": 4593
+          }
+        ]
+      },
+      {
+        "id": 8419,
+        "starters": [
+          {
+            "npcID": 461
+          },
+          {
+            "npcID": 3326
+          },
+          {
+            "npcID": 4563
+          },
+          {
+            "npcID": 5172
+          }
+        ]
+      },
+      {
+        "id": 8767,
+        "starters": [
+          {
+            "objectID": 180746
+          },
+          {
+            "itemID": 21270
+          }
+        ]
+      },
+      {
+        "id": 8788,
+        "starters": [
+          {
+            "objectID": 180746
+          },
+          {
+            "itemID": 21271
+          }
+        ]
+      },
+      {
+        "id": 8802,
+        "starters": [
+          {
+            "npcID": 15379
+          },
+          {
+            "itemID": 21221
+          }
+        ]
+      },
+      {
+        "id": 9063,
+        "starters": [
+          {
+            "npcID": 3033
+          },
+          {
+            "npcID": 4218
+          },
+          {
+            "npcID": 12042
+          }
+        ]
+      },
+      {
+        "id": 9257,
+        "starters": [
+          {
+            "npcID": 15192
+          },
+          {
+            "itemID": 22737
+          }
+        ]
+      },
+      {
+        "id": 9269,
+        "starters": [
+          {
+            "npcID": 15192
+          },
+          {
+            "itemID": 22737
+          }
+        ]
+      },
+      {
+        "id": 9270,
+        "starters": [
+          {
+            "npcID": 15192
+          },
+          {
+            "itemID": 22737
+          }
+        ]
+      },
+      {
+        "id": 9271,
+        "starters": [
+          {
+            "npcID": 15192
+          },
+          {
+            "itemID": 22737
+          }
+        ]
+      },
+      {
+        "id": 9388,
+        "starters": [
+          {
+            "npcID": 16817
+          },
+          {
+            "npcID": 16818
+          }
+        ]
+      },
+      {
+        "id": 9389,
+        "starters": [
+          {
+            "npcID": 16817
+          },
+          {
+            "npcID": 16818
+          }
+        ]
+      },
+      {
+        "id": 79007,
+        "starters": [
+          {
+            "objectID": 415106
+          },
+          {
+            "objectID": 424010
+          }
+        ]
+      },
+      {
+        "id": 79008,
+        "starters": [
+          {
+            "objectID": 415107
+          },
+          {
+            "objectID": 417072
+          }
+        ]
+      },
+      {
+        "id": 79192,
+        "starters": [
+          {
+            "objectID": 417072
+          },
+          {
+            "objectID": 424010
+          }
+        ]
+      },
+      {
+        "id": 79976,
+        "starters": [
+          {
+            "objectID": 406918
+          },
+          {
+            "objectID": 424006
+          }
+        ]
+      },
+      {
+        "id": 92947,
+        "starters": [
+          {
+            "npcID": 252383
+          },
+          {
+            "npcID": 253844
+          }
+        ]
+      },
+      {
+        "id": 93835,
+        "starters": [
+          {
+            "npcID": 252383
+          },
+          {
+            "npcID": 253590
+          }
+        ]
+      }
+    ],
+    "audit": [
+      {
+        "id": 140,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/westfall.lua",
+        "line": 118,
+        "expression": "{ { 40.62 , 17.01 , MAP.WESTFALL } , { 25.97 , 16.90 , MAP.WESTFALL } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 248,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/redridge mountains.lua",
+        "line": 308,
+        "expression": "{ 79.2 , 46.7 , MAP.REDRIDGE_MOUNTAINS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 410,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Tirisfal Glades.lua",
+        "line": 1018,
+        "expression": "{ 66.6 , 44.8 , MAP.TIRISFAL_GLADES }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 415,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/dun morogh.lua",
+        "line": 945,
+        "expression": "{ { 49.4 , 48.4 , MAP.DUN_MOROGH } , { 46.0 , 51.6 , MAP.DUN_MOROGH } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 460,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Silverpine Forest.lua",
+        "line": 398,
+        "expression": "{ 65.2 , 32.8 , MAP.SILVERPINE_FOREST }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 467,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/dun morogh.lua",
+        "line": 1138,
+        "expression": "{ { 34.8 , 47.0 , MAP.LOCH_MODAN } , { 72.4 , 93.6 , MAP.IRONFORGE } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 510,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/alterac mountains.lua",
+        "line": 273,
+        "expression": "{ 58.3 , 68.0 , MAP.ALTERAC_MOUNTAINS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 511,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/alterac mountains.lua",
+        "line": 261,
+        "expression": "{ 58.3 , 68.0 , MAP.ALTERAC_MOUNTAINS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 551,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/alterac mountains.lua",
+        "line": 541,
+        "expression": "{ 39.2 , 14.8 , MAP.ALTERAC_MOUNTAINS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 624,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+        "line": 456,
+        "expression": "{ { 29.5 , 89.3 , MAP.STRANGLETHORN_VALE } , { 33.6 , 88.3 , MAP.STRANGLETHORN_VALE } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 626,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/stranglethorn vale.lua",
+        "line": 475,
+        "expression": "{ { 31.1 , 66.1 , MAP.DUSTWALLOW_MARSH } , { 80.8 , 46.8 , MAP.THE_HINTERLANDS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 637,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/arathi highlands.lua",
+        "line": 571,
+        "expression": "{ 44.3 , 92.9 , MAP.ARATHI_HIGHLANDS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 779,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+        "line": 544,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 781,
+        "path": ".contrib/.db/forever/zones/kalimdor/mulgore.lua",
+        "line": 42,
+        "expression": "{ 63.3 , 82.6 , MAP.MULGORE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 795,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/badlands.lua",
+        "line": 523,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 949,
+        "path": ".contrib/.db/forever/zones/kalimdor/darkshore.lua",
+        "line": 895,
+        "expression": "{ 38.6 , 86.2 , MAP.DARKSHORE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1067,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Hillsbrad Foothills.lua",
+        "line": 695,
+        "expression": "{ 61.4 , 19.2 , MAP.HILLSBRAD_FOOTHILLS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1097,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/elwynn forest.lua",
+        "line": 935,
+        "expression": "{ { 41.7 , 65.6 , MAP.ELWYNN_FOREST } , { 25.9 , 47.3 , MAP.REDRIDGE_MOUNTAINS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1100,
+        "path": ".contrib/.db/forever/dungeons & raids/razorfen kraul.lua",
+        "line": 86,
+        "expression": "{ 30.0 , 24.0 , MAP.THOUSAND_NEEDLES }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1268,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Dustwallow Marsh.lua",
+        "line": 615,
+        "expression": "{ 29.7 , 47.7 , MAP.DUSTWALLOW_MARSH }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1284,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Dustwallow Marsh.lua",
+        "line": 606,
+        "expression": "{ 29.7 , 47.7 , MAP.DUSTWALLOW_MARSH }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1361,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Desolace.lua",
+        "line": 734,
+        "expression": "{ { 63.24 , 20.68 , MAP.HILLSBRAD_FOOTHILLS } , { 75.0 , 34.2 , MAP.ORGRIMMAR } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1423,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Swamp of Sorrows.lua",
+        "line": 399,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 1505,
+        "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+        "line": 2641,
+        "expression": "{ { 54.18 , 42.47 , MAP.DUROTAR } , { 49.4 , 60.4 , MAP.MULGORE } , { 80.3 , 32.4 , MAP.ORGRIMMAR } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1638,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+        "line": 258,
+        "expression": "{ { 41.0 , 65.8 , MAP.ELWYNN_FOREST } , { 80.4 , 59.8 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1684,
+        "path": ".contrib/.db/forever/zones/kalimdor/teldrassil.lua",
+        "line": 732,
+        "expression": "{ { 39.0 , 43.4 , MAP.DARKSHORE } , { 56.2 , 59.2 , MAP.TELDRASSIL } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1698,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/redridge mountains.lua",
+        "line": 708,
+        "expression": "{ { 48.6 , 35.6 , MAP.DARNASSUS } , { 78.8 , 45.6 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1718,
+        "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+        "line": 2383,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 1823,
+        "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+        "line": 2043,
+        "expression": "{ { 80.2 , 32.4 , MAP.ORGRIMMAR } , { 57.4 , 87.2 , MAP.THUNDER_BLUFF } , { 47.2 , 17.0 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1883,
+        "path": ".contrib/.db/forever/zones/kalimdor/durotar.lua",
+        "line": 1103,
+        "expression": "{ { 39.0 , 86.0 , MAP.ORGRIMMAR } , { 25.0 , 20.6 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1939,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+        "line": 804,
+        "expression": "{ { 27.0 , 8.2 , MAP.IRONFORGE } , { 49.5 , 85.8 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1947,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Dustwallow Marsh.lua",
+        "line": 358,
+        "expression": "{ { 38.4 , 86.0 , MAP.ORGRIMMAR } , { 27.0 , 8.2 , MAP.IRONFORGE } , { 49.5 , 85.8 , MAP.STORMWIND_CITY } , { 25.8 , 14.4 , MAP.THUNDER_BLUFF } , { 85.0 , 10.2 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1953,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Dustwallow Marsh.lua",
+        "line": 559,
+        "expression": "{ { 38.4 , 86.0 , MAP.ORGRIMMAR } , { 27.0 , 8.2 , MAP.IRONFORGE } , { 49.5 , 85.8 , MAP.STORMWIND_CITY } , { 25.8 , 14.4 , MAP.THUNDER_BLUFF } , { 85.0 , 10.2 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 1959,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+        "line": 523,
+        "expression": "{ { 39.0 , 86.0 , MAP.ORGRIMMAR } , { 25.0 , 20.6 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 2201,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+        "line": 150,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 2318,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Uldaman.lua",
+        "line": 509,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 2861,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Zul'Farrak.lua",
+        "line": 147,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 2874,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Tanaris.lua",
+        "line": 268,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 2882,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Tanaris.lua",
+        "line": 227,
+        "expression": "{ 55.4 , 92.2 , MAP.TANARIS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 2978,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Feralas.lua",
+        "line": 772,
+        "expression": "{ { 75.2 , 28.7 , MAP.FERALAS } , { 80.8 , 35.0 , MAP.FERALAS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 3368,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Searing Gorge.lua",
+        "line": 420,
+        "expression": "{ 74.5 , 19.3 , MAP.SEARING_GORGE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 3373,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/The Temple of Atal'hakkar.lua",
+        "line": 404,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 3523,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+        "line": 235,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 3525,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Razorfen Downs.lua",
+        "line": 170,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 3802,
+        "path": ".contrib/.db/forever/dungeons & raids/blackrock depths.lua",
+        "line": 140,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 3845,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Un'goro Crater.lua",
+        "line": 326,
+        "expression": "{ 63.1 , 68.5 , MAP.UNGORO_CRATER }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 4451,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Searing Gorge.lua",
+        "line": 484,
+        "expression": "{ 65.6 , 62.5 , MAP.SEARING_GORGE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 4867,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+        "line": 1106,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 4983,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+        "line": 95,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 5002,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+        "line": 639,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 5047,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+        "line": 687,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 5160,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Blackrock Spire.lua",
+        "line": 921,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 5464,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Scholomance.lua",
+        "line": 429,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 5627,
+        "path": ".contrib/.db/forever/zones/kalimdor/1 - darnassus.lua",
+        "line": 293,
+        "expression": "{ { 39.2 , 81.0 , MAP.DARNASSUS } , { 55.6 , 56.8 , MAP.TELDRASSIL } , { 47.2 , 52.2 , MAP.DUN_MOROGH } , { 43.4 , 65.6 , MAP.ELWYNN_FOREST } , { 24.6 , 9.2 , MAP.IRONFORGE } , { 38.6 , 26.8 , MAP.STORMWIND_CITY } , { 20.8 , 50.2 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 5652,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/2 - Orgrimmar.lua",
+        "line": 396,
+        "expression": "{ { 35.6 , 87.6 , MAP.ORGRIMMAR } , { 54.2 , 42.8 , MAP.DUROTAR } , { 47.0 , 58.8 , MAP.MULGORE } , { 26.0 , 15.8 , MAP.THUNDER_BLUFF } , { 49.01 , 18.32 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 5658,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+        "line": 811,
+        "expression": "{ { 49.01 , 18.32 , MAP.UNDERCITY } , { 54.2 , 42.8 , MAP.DUROTAR } , { 47.0 , 58.8 , MAP.MULGORE } , { 35.6 , 87.6 , MAP.ORGRIMMAR } , { 26.0 , 15.8 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 5676,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+        "line": 327,
+        "expression": "{ { 26.4 , 7.6 , MAP.IRONFORGE } , { 38.8 , 26.6 , MAP.STORMWIND_CITY } , { 40.0 , 80.0 , MAP.DARNASSUS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 5679,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/1 - Undercity.lua",
+        "line": 200,
+        "expression": "{ { 49.0 , 18.3 , MAP.UNDERCITY } , { 35.6 , 87.6 , MAP.ORGRIMMAR } , { 26.0 , 15.8 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 5680,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/2 - Orgrimmar.lua",
+        "line": 564,
+        "expression": "{ { 35.6 , 87.6 , MAP.ORGRIMMAR } , { 49.01 , 18.32 , MAP.UNDERCITY } , { 26.0 , 15.8 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 6024,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Eastern Plaguelands.lua",
+        "line": 479,
+        "expression": "{ { 27.3 , 85.3 , MAP.EASTERN_PLAGUELANDS } , { 28.1 , 86.1 , MAP.EASTERN_PLAGUELANDS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 6161,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Desolace.lua",
+        "line": 275,
+        "expression": "{ 36.1 , 30.4 , MAP.DESOLACE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 6662,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Deeprun Tram.lua",
+        "line": 31,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7066,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/Maraudon.lua",
+        "line": 86,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7124,
+        "path": ".contrib/.db/forever/pvp/battlegrounds/alterac valley.lua",
+        "line": 174,
+        "expression": "{ 65.6 , 55.1 , MAP.ALTERAC_MOUNTAINS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7492,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 201,
+        "expression": "{ { 46.6 , 64.6 , MAP.ORGRIMMAR } , { 41.4 , 54.2 , MAP.THUNDER_BLUFF } , { 69.2 , 49.2 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7494,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 323,
+        "expression": "{ { 39.0 , 63.6 , MAP.DARNASSUS } , { 30.5 , 67.0 , MAP.IRONFORGE } , { 54.8 , 62.6 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7498,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 368,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7499,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 217,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7500,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 522,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7501,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 609,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7502,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 380,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7503,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 597,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7504,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 392,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7505,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 356,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7506,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 534,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7508,
+        "path": ".contrib/.db/forever/dungeons & raids/1.0 - onyxia's lair.lua",
+        "line": 152,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7562,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Burning Steppes.lua",
+        "line": 275,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 7643,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+        "line": 297,
+        "expression": "{ 48.6 , 50.0 , MAP.STORMWIND_CITY }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7644,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/1 - stormwind city.lua",
+        "line": 402,
+        "expression": "{ 48.6 , 50.0 , MAP.STORMWIND_CITY }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7877,
+        "path": ".contrib/.db/forever/dungeons & raids/dire maul.lua",
+        "line": 634,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7937,
+        "path": ".contrib/.db/forever/holidays/darkmoon faire.lua",
+        "line": 611,
+        "expression": "{ 84.7 , 64.4 , MAP.ELWYNN_FOREST }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 7938,
+        "path": ".contrib/.db/forever/holidays/darkmoon faire.lua",
+        "line": 599,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7944,
+        "path": ".contrib/.db/forever/holidays/darkmoon faire.lua",
+        "line": 635,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 7945,
+        "path": ".contrib/.db/forever/holidays/darkmoon faire.lua",
+        "line": 623,
+        "expression": "{ 35.0 , 61.5 , MAP.MULGORE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 8151,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Azshara.lua",
+        "line": 481,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 8250,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Azshara.lua",
+        "line": 354,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 8410,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/alterac mountains.lua",
+        "line": 229,
+        "expression": "{ { 38.0 , 37.8 , MAP.ORGRIMMAR } , { 22.8 , 19.4 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 8415,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Western Plaguelands.lua",
+        "line": 269,
+        "expression": "{ { 23.6 , 6.6 , MAP.IRONFORGE } , { 48.6 , 50.0 , MAP.STORMWIND_CITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 8417,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/02 Eastern Kingdoms/Swamp of Sorrows.lua",
+        "line": 79,
+        "cause": "unassigned-faction-branch"
+      },
+      {
+        "id": 8419,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Felwood.lua",
+        "line": 103,
+        "expression": "{ { 48.4 , 45.6 , MAP.ORGRIMMAR } , { 50.2 , 6.0 , MAP.IRONFORGE } , { 28.4 , 78.2 , MAP.STORMWIND_CITY } , { 86.0 , 15.6 , MAP.UNDERCITY } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 8767,
+        "path": ".contrib/.db/forever/holidays/feast of the winter veil.lua",
+        "line": 125,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 8788,
+        "path": ".contrib/.db/forever/holidays/feast of the winter veil.lua",
+        "line": 139,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 8802,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/2.6 Temple of Ahn'Qiraj.lua",
+        "line": 1067,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 9063,
+        "path": ".contrib/.db/forever/zzOLD/02 - Outdoor Zones/01 Kalimdor/Un'goro Crater.lua",
+        "line": 677,
+        "expression": "{ { 34.8 , 8.6 , MAP.DARNASSUS } , { 52.4 , 40.6 , MAP.MOONGLADE } , { 76.6 , 27.6 , MAP.THUNDER_BLUFF } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 9257,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+        "line": 152,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 9269,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+        "line": 188,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 9270,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+        "line": 164,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 9271,
+        "path": ".contrib/.db/forever/zzOLD/01 - Dungeons Raids/01 - Classic/3.0 Naxxramas.lua",
+        "line": 176,
+        "cause": "no-direct-coordinate-field"
+      },
+      {
+        "id": 9388,
+        "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+        "line": 193,
+        "expression": "appendGroups ( FESTIVAL_TALESPINNER_COORDS , appendGroups ( FESTIVAL_LOREMASTER_COORDS , { } ) )",
+        "cause": "recovered-explicit-coordinate-alias-ownership",
+        "proofs": [
+          {
+            "alias": "FESTIVAL_TALESPINNER_COORDS",
+            "npcID": 16818,
+            "anchors": [
+              {
+                "questID": 9339,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 146
+              },
+              {
+                "questID": 9368,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 315
+              }
+            ]
+          },
+          {
+            "alias": "FESTIVAL_LOREMASTER_COORDS",
+            "npcID": 16817,
+            "anchors": [
+              {
+                "questID": 9365,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 131
+              },
+              {
+                "questID": 9367,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 292
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9389,
+        "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+        "line": 161,
+        "expression": "appendGroups ( FESTIVAL_TALESPINNER_COORDS , appendGroups ( FESTIVAL_LOREMASTER_COORDS , { } ) )",
+        "cause": "recovered-explicit-coordinate-alias-ownership",
+        "proofs": [
+          {
+            "alias": "FESTIVAL_TALESPINNER_COORDS",
+            "npcID": 16818,
+            "anchors": [
+              {
+                "questID": 9339,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 146
+              },
+              {
+                "questID": 9368,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 315
+              }
+            ]
+          },
+          {
+            "alias": "FESTIVAL_LOREMASTER_COORDS",
+            "npcID": 16817,
+            "anchors": [
+              {
+                "questID": 9365,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 131
+              },
+              {
+                "questID": 9367,
+                "path": ".contrib/.db/forever/holidays/midsummer fire festival.lua",
+                "line": 292
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 79007,
+        "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+        "line": 118,
+        "expression": "{ { 46.4 , 73.9 , THE_BARRENS } , { 37.5 , 50.8 , WESTFALL } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 79008,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/westfall.lua",
+        "line": 64,
+        "expression": "{ { 37.5 , 50.7 , WESTFALL } , { 46.4 , 73.8 , THE_BARRENS } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 79192,
+        "path": ".contrib/.db/forever/zones/kalimdor/the barrens.lua",
+        "line": 2075,
+        "expression": "{ { 46.4 , 73.8 , THE_BARRENS } , { 37.5 , 50.8 , WESTFALL } , }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 79976,
+        "path": ".contrib/.db/forever/zones/eastern kingdoms/arathi highlands.lua",
+        "line": 728,
+        "expression": "{ 22.5 , 24.2 , ARATHI_HIGHLANDS }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 92947,
+        "path": ".contrib/.db/forever/zones/zephras isle.lua",
+        "line": 837,
+        "expression": "{ 61.2 , 71.0 , MAP.ZEPHRAS_ISLE }",
+        "cause": "unassigned-literal-coordinate-list"
+      },
+      {
+        "id": 93835,
+        "path": ".contrib/.db/forever/zones/zephras isle.lua",
+        "line": 516,
+        "expression": "{ 65.2 , 50.4 , MAP.ZEPHRAS_ISLE }",
+        "cause": "unassigned-literal-coordinate-list"
+      }
+    ],
+    "recoveredIDs": [
+      9388,
+      9389
+    ]
+  },
+  "coordinateOwnershipAuditCounts": {
+    "unassigned-literal-coordinate-list": 60,
+    "no-direct-coordinate-field": 38,
+    "unassigned-faction-branch": 6,
+    "recovered-explicit-coordinate-alias-ownership": 2
+  },
   "gapEvidence": {
     "records": [
       {
@@ -85886,7 +88006,7 @@
     "coordinates": {
       "starter-fields-absent-in-inspected-sources": 972,
       "item-start-has-no-fixed-activation-point": 180,
-      "multiple-or-mixed-starters-without-owned-point": 106,
+      "multiple-or-mixed-starters-without-owned-point": 104,
       "unconfirmed-forever-identity": 200,
       "starter-position-absent-in-inspected-sources": 185,
       "declared-hidden-trigger": 9,

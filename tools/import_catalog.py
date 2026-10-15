@@ -101,7 +101,7 @@ def literal(tokens, ends, span, aliases=None):
         return values if all(value is not None for value in values) else None
     return None
 
-def file_aliases(tokens, ends):
+def file_aliases(tokens, ends, allowed_reads=()):
     """Resolve immutable literal constants in the unscoped file prefix.
 
     No Lua is executed. Stop accepting declarations after a block or the first
@@ -142,7 +142,7 @@ def file_aliases(tokens, ends):
             typed_item = index >= 2 and tokens[index-1][0] == "," and tokens[index-2][0] in ('"i"', "'i'")
             scalar_item = type(aliases[name]) is int and index >= 2 and tokens[index-1][0] == "(" and tokens[index-2][0] == "i"
             terminal = index+1 == len(tokens) or tokens[index+1][0] in (",", ";", "}", ")")
-            if not (selected_field or typed_item or scalar_item) or not terminal:
+            if not (selected_field or typed_item or scalar_item or index in allowed_reads) or not terminal:
                 aliases.pop(name); break
     return aliases
 

@@ -88,6 +88,13 @@ required for standalone refresh, and the WDB payload is not decoded as rewards.
   require an unambiguous owner. A global NPC position can enrich an already
   proven starter, never create a new quest association. Parent context,
   objectives and item acquisition locations are insufficient starter proof.
+  The 0.1.6 coordinate layer retains the frozen 106-case mixed-starter scope
+  inside hashed metadata. It recovers only immutable coordinate aliases with
+  explicit singleton NPC ownership and exact target references. Reviewed
+  `appendGroups` compositions require fresh destinations. Mutations, escapes,
+  helper rebinding, contradictory owners and list-order/point-equality guesses
+  fail closed. The reconciliation report retains all scope IDs, expressions,
+  anchor lines and dispositions, including the 104 still-unassigned cases.
 - Classification remains exclusively `data/primary-statuses.json`.
 
 `data/catalog-complete-sources.json` hashes normalized public, metadata,

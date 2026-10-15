@@ -219,6 +219,12 @@ def build_complete(root):
     report["publicUnconfirmedIDs"] = sorted(quest for quest, row in public.items() if row["confirmation"] == "unconfirmed")
     report["eligibilityConflictIDs"] = [row["id"] for row in rows if row.get("eligibilityConflict")]
     report["metadataOmissions"] = inputs["metadata"]["omissions"]
+    recovery=inputs["metadata"].get("coordinateRecovery",{})
+    if recovery:
+        report["coordinateOwnershipAudit"]=recovery
+        precedence=["recovered-explicit-coordinate-alias-ownership","unassigned-literal-coordinate-list","unassigned-faction-branch","no-direct-coordinate-field","helper-shadow-or-mutation"]
+        cause_by_id={row["id"]:min((entry["cause"] for entry in recovery["audit"] if entry["id"]==row["id"]),key=lambda cause:precedence.index(cause),default="no-materialized-occurrence") for row in recovery["quests"]}
+        report["coordinateOwnershipAuditCounts"]=dict(Counter(cause_by_id.values()))
     evidence={row["id"]:row for row in inputs.get("gaps",{}).get("records",[])}
     report["gapEvidence"]=inputs.get("gaps",{})
     report["retainedHistoryOnlyIDs"]=sorted(history-(set(public)|compiled|native|classification|set(legacy)))
