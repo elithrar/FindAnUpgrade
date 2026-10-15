@@ -1,54 +1,32 @@
 # QuestBrief
 
-Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.6** recovers explicitly owned Midsummer giver coordinates and records a bounded audit of mixed-starter coordinate gaps.
+A reward finder and compact quest previews for World of Warcraft: Forever.
 
-- Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
-- Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.
-- See verified new quests in orange, modified quests in green, and existing quests without a tint. Text labels accompany the colors.
-- Browse guaranteed and choose-one rewards separately, with small item icons, rarity borders and native item tooltips. Shift retains equipment comparison behavior.
-- Adjust the reveal key, individual surfaces, reward details, quest colors, dialog tint and panel scale in settings.
-
-## Reward finder
-
-Open with `/questbrief search` or `/questbrief s`, or click the book icon on the minimap. Drag the icon to reposition it; `/questbrief minimap` or `/questbrief mm` toggles its visibility. Sort results by level fit or quest level. Expand cards to inspect rewards and choose among recorded giver locations when available; their menus offer location and quest-page copy actions.
-
-The finder ships an owned catalog of **5,672 exact IDs**, reconciling the complete 5,633-record public Forever vs Classic index with historical compiled records, current client-cache identities and the approved classifications. Search does not require Questie or QuestieDB. Published item lists cover 5,433 IDs: 2,136 have items and 3,297 list none; 239 remain unknown. Guaranteed and choose-one groups, quantities and repeated source slots stay distinct. Current native reward data takes precedence, including confirmed empty lists and ambiguous choices. Missing fields never become zero.
-
-## Hover previews and settings
-
-Hold **Shift** while hovering, or press it after hovering, to reveal a stack. Release Shift to inspect rewards; the stack stays in place. **Escape** or moving away closes it, with a short grace interval for pointer travel. Long stacks scroll. Ctrl, Alt and hover without a modifier are available alternatives.
-
-Use `/questbrief` or `/questbrief opts` for settings. `/questbrief on`, `off` and `status` are also available. Settings are account-wide in `QuestBriefDB`.
+- Search quest and reward names. Filter by quest level, class usability and equipment slot, including empty slots.
+- Browse guaranteed and choose-one rewards separately, with small item icons, rarity borders and native item tooltips and comparisons. XP, money and reputation appear when known.
+- See verified new quests in orange, modified quests in green and existing quests without a tint. Quest dialogs can use the same subtle colors.
+- Choose the reveal key, preview surfaces, reward details, tint strength and scale in settings.
 
 ## Installation
 
-Build the candidate ZIP using the development commands below. Copy its `QuestBrief` folder into the Forever client's `Interface/AddOns` folder, then restart WoW. `QuestBrief.toc` must be directly inside `QuestBrief`.
+Copy `QuestBrief` into your Forever client's `Interface/AddOns` folder, then restart WoW. `QuestBrief.toc` must be directly inside `QuestBrief`.
 
-## Coverage
+## Usage
 
-Classification uses exact quest variants from a verified 2026-10-14 snapshot: **1,194 IDs**, including **218 new IDs**. Unknown IDs remain untinted. Titles and group-level classifications are never used to infer a variant's status.
+Use `/questbrief search` or click the book icon on the minimap to open the reward finder. Expand cards to see more rewards and choose among recorded giver locations when available. Right-click a quest title or location to copy its Wowhead link or coordinates, or set a waypoint where supported.
 
-The public snapshot was collected on **2026-10-15**. Recorded giver and restriction metadata also uses MIT-licensed AllTheThings source build **1.60.1.69893**; the current client target is **70374**. The inventory accounts for every acquired ID, including 200 public unconfirmed records and 39 compiled-only historical records. Historical and unconfirmed candidates stay out of finder results unless current native offer/log/map evidence establishes availability; cached titles or rewards alone do not. The published inventory also does not establish current player availability. Givers are recorded for 4,488 quests, including 4,040 with NPC starters; 4,019 have recorded coordinates. `data/catalog-reconciliation.json` lists missing fields and source disagreements per ID. Locations and current availability still need live verification.
+Hold **Shift** over an NPC with known quests or a supported world-map marker to show a stack of quest cards. Release Shift to inspect rewards; **Escape** or moving away closes it. Long stacks scroll.
 
-NPC previews use exact bundled starter records, current gossip IDs, or reciprocal starter records from an optional compatible Forever QuestieDB. Exact identity is separate from current availability: native quest log/gossip/available map offers and freshly rendered Questie markers can establish a current state. Static associations cannot establish availability; known completed, disabled or ineligible rows are excluded, and specific recorded chain links can be shown without claiming a server requirement. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no quest map icons.
+Questie is optional. QuestBrief can preview its existing world-map and minimap markers; minimap quest previews require Questie. Search works without it.
 
-Money, XP and currencies use usable native rewards. Published XP, money and named reputation can fill missing fields and are labelled **base**, since player modifiers may differ. The snapshot records XP for 4,399 quests, money for 1,130 and reputation for 3,218; omission stays unknown. A partial native major-faction list preserves published ordinary factions, while a matching native faction owns its amount. No complete static currency list is available. Hover cards omit unavailable fields and empty rows. Money uses the current native coin renderer. Ambiguous mixed item/currency choices are withheld. Native quest contrast mode takes priority over dialog tint.
+Use `/questbrief` or `/questbrief opts` for settings. Ctrl, Alt and hovering without a modifier are alternatives to Shift.
 
 ## Development
 
-Run from the source root with Python 3. If needed, install Lupa locally first:
+Run `python tools/verify.py` from the repository root with Python 3.11 or newer and Lupa. It runs the checks and builds ZIPs in `dist/`.
 
-```powershell
-python -m pip install --target .work/pydeps lupa==2.8
-python tools/verify.py
-```
-
-The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `docs/DATABASE-COMPLETION.md` for database coverage, `docs/DATABASE-SYNC.md` for standalone acquisition/import/sync, `data/catalog-complete-sources.json` for frozen input hashes, and `docs/RELEASING.md` for development/release workflow and CurseForge setup.
-
-Before the first CurseForge publication, user-authorized iterations primarily use patch version bumps and direct commits to `main` after the required review and checks. Branch protections still apply; use a reviewed PR when required. Publication, release tags, credentials and game installation need their own authorization.
-
-Source inspection and offline tests do not establish native rendering, event timing or combat/taint safety. In-game finder, hover, reward comparison, scrolling and coexistence checks remain pending.
+See [AGENTS.md](https://github.com/elithrar/QuestBrief/blob/main/AGENTS.md) for development rules, [database sync](https://github.com/elithrar/QuestBrief/blob/main/docs/DATABASE-SYNC.md) for dependency setup and data maintenance, and [validation coverage](https://github.com/elithrar/QuestBrief/blob/main/docs/VALIDATION.md) for checks and pending in-game validation.
 
 ## License
 
-Original code and documentation: BSD 3-Clause. See [LICENSE](LICENSE). The ATT-derived catalog retains its separate MIT grant in the addon's `Data/ATT-LICENSE.txt`; other attribution remains in `NOTICES.md` and `XPISLAND-LICENSE.txt`.
+BSD-3-Clause. See [LICENSE](LICENSE). Third-party data licenses and attribution are in [NOTICES.md](https://github.com/elithrar/QuestBrief/blob/main/QuestBrief/NOTICES.md).
