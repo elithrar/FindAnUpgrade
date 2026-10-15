@@ -34,7 +34,7 @@ test("published quest difficulty survives cold native metadata without borrowing
     local N=start();assert(N.Catalog.records[682].level==37)
     assert(N.Catalog.records[999001].level==nil)
     N.Catalog.records[999001].source.minimum=20;N.Catalog:Metadata(N.Catalog.records[999001]);assert(N.Catalog.records[999001].level==nil)
-    C_QuestLog.GetQuestDifficultyLevel=function()return 38 end;N.Catalog:Metadata(N.Catalog.records[682]);assert(N.Catalog.records[682].level==38)
+    C_QuestLog.GetQuestDifficultyLevel=function()return 38 end;N.Catalog:Invalidate(682);N.Catalog:Metadata(N.Catalog.records[682]);assert(N.Catalog.records[682].level==38)
 end)
 
 test("recorded choice groups preserve cross-group duplicate and exact quantities",function()

@@ -11,7 +11,7 @@ import json
 import re
 import struct
 
-from catalog_html import quest_detail, quest_index_titles
+from catalog_html import quest_detail, quest_index_titles, primary_reward_values
 from import_catalog import PIN, PREFIX, parse, merge, tokenize, bounds, fields, literal, entries, quest_starters
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -293,10 +293,10 @@ def primary_records(cache):
                 if type(item) is not int or type(count) is not int or item <= 0 or count <= 0:
                     raise ValueError("Invalid primary item pair")
                 record["items"].append({"itemID": item, "quantity": count, "group": group})
-        for field, target in (("level", "level"), ("reqlevel", "minimum"), ("xp", "xp"), ("money", "money")):
+        for field, target in (("level", "level"), ("reqlevel", "minimum")):
             if field in row:
                 record[target] = row[field]
-        record["reputation"] = [{"factionID": faction, "amount": amount} for faction, amount in row.get("reprewards", [])]
+        record.update(primary_reward_values(row))
         mapper = re.search(r"new Mapper\(", html)
         if mapper:
             data, _ = decoder.raw_decode(html[mapper.end():])
@@ -322,9 +322,10 @@ def main():
     parser.add_argument("--compiled-root", type=Path, required=True)
     parser.add_argument("--primary-cache", type=Path, help="Optional retained raw primary pages; default keeps tracked normalized primary facts")
     parser.add_argument("--client-cache", type=Path, help="Optional current 70374 cache; default keeps tracked identity evidence")
+    parser.add_argument("--questie-root", type=Path, help="Optional pinned numeric Forever metadata cache; omitted retains owned normalized evidence")
     args = parser.parse_args()
     from complete_catalog import read_inputs
-    _,prior_inputs=read_inputs(ROOT)
+    prior_provenance,prior_inputs=read_inputs(ROOT)
     coordinate_scope={key:value for key,value in prior_inputs["metadata"].get("coordinateRecovery",{}).items() if key not in ("audit","recoveredIDs")}
     if not coordinate_scope:
         from complete_catalog import build_complete
@@ -376,6 +377,23 @@ def main():
     for key, name, value in (("public", "catalog-public-records.json", public), ("metadata", "catalog-metadata-records.json", authoring_metadata(args.att_source_root,coordinate_scope)), ("compiled", "catalog-compiled-quests.json", compiled_data), ("primary", "catalog-primary-records.json", primary), ("client", "catalog-client-evidence.json", client)):
         inputs[key] = write(ROOT/"data"/name, value)
     inputs["legacy"] = {"path": "data/catalog-source.json", "sha256": digest((ROOT/"data/catalog-source.json").read_bytes())}
+    for key in ("history", "gaps"):
+        if key in prior_provenance["inputs"]: inputs[key]=prior_provenance["inputs"][key]
+    def save_provenance():
+        write(ROOT/"data/catalog-complete-sources.json", {"schemaVersion": 2, "targetBuild": BUILD, "inputs": inputs, "classificationAuthority": "data/primary-statuses.json", "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Missing fields stay unknown; native cache identity is not decoded reward proof."})
+    supplemental=prior_inputs.get("supplemental", {"schemaVersion":1,"source":{},"records":[],"omissions":[],"rules":[]})
+    if args.questie_root:
+        # Rebuild against the fresh base, never against prior supplemental
+        # starters: otherwise the next reparse would discard its own recovery.
+        save_provenance()
+        from complete_catalog import build_complete
+        from questie_metadata import import_metadata, attach_primary_coordinates
+        base,_=build_complete(ROOT,include_supplemental=False)
+        supplemental=import_metadata(args.questie_root,base["quests"],args.primary_cache,primary if args.primary_cache else None)
+        if args.primary_cache:
+            primary=attach_primary_coordinates(primary,supplemental)
+            inputs["primary"]=write(ROOT/"data/catalog-primary-records.json",primary)
+    inputs["supplemental"]=write(ROOT/"data/catalog-supplemental-metadata.json",supplemental)
     history_ids.update(row["id"] for row in rows)
     history_ids.update(compiled_data["questIDs"])
     history_ids.update(client["questIDs"])
@@ -391,7 +409,7 @@ def main():
     old_gaps_path=ROOT/"data/catalog-gap-evidence.json"
     old_gaps=prior_inputs.get("gaps",{})
     inputs["gaps"]=write(old_gaps_path,{"records":sorted(gaps,key=lambda row:row["id"]),"candidateChecksComplete":candidates["complete"],"candidateIDs":candidates["requestedIDs"],"unprovenHeaderContextIDs":old_gaps.get("unprovenHeaderContextIDs",[]),"contextEvidence":old_gaps.get("contextEvidence",[]),"rule":"Explicit source confirmation/absence only. Placeholder labels do not establish removal from the game. Native cache supplies identity, not decoded reward fields."})
-    write(ROOT/"data/catalog-complete-sources.json", {"schemaVersion": 2, "targetBuild": BUILD, "inputs": inputs, "classificationAuthority": "data/primary-statuses.json", "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Current public item groups supersede historical associations. Retained primary pages independently challenge matching public rows. Missing fields stay unknown. Native cache identity is not decoded reward proof."})
+    save_provenance()
     from complete_catalog import build_complete
     source, report = build_complete(ROOT)
     write(ROOT/"data/catalog-complete-source.json", source)

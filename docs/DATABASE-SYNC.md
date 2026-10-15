@@ -20,7 +20,7 @@ which ran. Neither mocks nor inspected source establish in-game behavior.
 python tools/sync_catalog.py refresh
 ```
 
-This acquires the pinned ATT authoring and compiled files, refreshes the whole
+This acquires the pinned QuestieDB Forever artifact and ATT authoring and compiled files, refreshes the whole
 public index, revalidates changed or expired details, and checks historical
 candidate URLs absent from the index. It then imports into a unique staging
 directory, generates the catalog, writes `dist/catalog-sync-diff.json` and runs
@@ -28,8 +28,8 @@ the full verifier there. Only a passing candidate replaces the explicitly
 listed owned catalog files. Review the exact IDs/fields and cause counts before
 committing. The command never commits, pushes, installs, tags or publishes.
 
-The default cache is `.work/catalog-cache/`: `att-source/`, `att-generated/`
-and `public/`. Index/detail manifests and per-page `.receipts/` bind URL, bytes,
+The default cache is `.work/catalog-cache/`: `att-source/`, `att-generated/`,
+`questie/` and `public/`. Index/detail manifests and per-page `.receipts/` bind URL, bytes,
 SHA-256, check time and HTTP validators when supplied. ATT `ACQUISITION.json`
 also binds each Git blob. Warm details are reused for at most 24 hours without
 extending their check time. Changed index rows remain pending across interrupted
@@ -61,11 +61,16 @@ For caches acquired before this default layout, provide their paths explicitly:
 python tools/sync_catalog.py reparse --public-root .work/comprehensive-source --authoring-root .work/att-source --compiled-root .work/att-generated
 ```
 
-The same three overrides work with `refresh`. Optional `--primary-cache PATH`
+The same three overrides work with `refresh`. Optional `--questie-root PATH`
+selects the pinned numeric metadata cache. A reparse without that cache retains
+the owned normalized supplemental input; a refresh acquires it. Optional `--primary-cache PATH`
 reads retained exact primary HTML only; it makes no new primary-site requests.
 Optional `--client-cache PATH` reads a 70374 WDB cache only to validate identities
 and framing. Omit both to retain the tracked normalized evidence. Neither is
 required for standalone refresh, and the WDB payload is not decoded as rewards.
+Previously attached exact primary coordinates retain their URL/hash and mapping
+proof when the raw primary cache is omitted. Supplemental facts are regenerated
+against a fresh base without that provider, so they survive repeated imports.
 
 ## Source contracts and ownership
 
@@ -96,9 +101,19 @@ required for standalone refresh, and the WDB payload is not decoded as rewards.
   fail closed. The reconciliation report retains all scope IDs, expressions,
   anchor lines and dispositions, including the 104 still-unassigned cases.
 - Classification remains exclusively `data/primary-statuses.json`.
+  `classification-source.json` and the byte-preserved original baseline own the
+  frozen website comparison. Staging regenerates exact statuses and categories
+  from them without requiring the website checkout. A category's source AreaID
+  is not a coordinate or UiMapID. See `CLASSIFICATION-RECONCILIATION.md`.
+- Supplemental typed starters and restrictions use QuestieDB Forever 1.0.6 at
+  `36ca1ca86f6c1838de479c7c7452eb0a57d5c135`. Archive/member hashes and generated
+  source Git blobs are checked. Reciprocal relationships, class/race masks,
+  positive Forever points and exact primary map proofs have separate authority.
+  Upstream Lua is never executed. Inherited Era points and changed map frames
+  are withheld. See `STARTER-COORDINATE-RECOVERY.md`.
 
 `data/catalog-complete-sources.json` hashes normalized public, metadata,
-compiled, primary, client, legacy, identity-history and gap-evidence inputs.
+compiled, primary, client, supplemental, legacy, identity-history and gap-evidence inputs.
 `catalog-identity-history.json` preserves every previously accepted exact ID;
 vanished source rows do not silently erase identities or preserve stale reward
 claims. `catalog-gap-evidence.json` retains explicit unconfirmed/404/410
@@ -118,7 +133,8 @@ evidence establishes availability; cached item data alone is insufficient.
 
 Acquisition errors, missing receipts, changed bytes, unsupported pins,
 incomplete membership, primary conflicts, failed tests or concurrent catalog
-edits prevent replacement. Staged candidates remain in `.work/catalog-sync/`
+edits prevent replacement. Frozen classification and parser inputs are hashed
+when staging and checked again before replacement. Staged candidates remain in `.work/catalog-sync/`
 for diagnosis. Applying a validated candidate prewrites all replacements and
 rolls back a failed replacement; it touches only the listed owned files.
 Run one sync per checkout at a time. Raw caches, staging data, client files and

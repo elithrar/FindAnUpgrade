@@ -17,7 +17,7 @@ function S:NPC()
     if self.gossip and self.gossip.guid == guid then rows = N.Providers.ResolveRows(self.gossip.rows) end
     if #rows == 0 then rows = N.Providers.ForNPC(npcID) end
     if #rows == 0 then return end
-    return { key = guid, surface = "npc", rows = rows, valid = function() return true end,
+    return { key = guid, npcGUID = guid, surface = "npc", rows = rows, valid = function() return true end,
         over = function() return M.Text(A.Call(UnitGUID, "mouseover")) == guid end }
 end
 function S:Gossip()
@@ -59,16 +59,35 @@ function S:Watch(frame)
     if self.hooked[frame] or A.Forbidden(frame) or InCombatLockdown() then return end
     self.hooked[frame] = true
     frame:HookScript("OnHide", function() self:Clear(frame) end)
+    frame:HookScript("OnLeave",function()
+        local source,hover=self.current,N.Hover
+        if source and source.owner==frame and (not hover.open or not hover.source or hover.source.owner~=frame) then
+            if hover.blocked==source.key then hover.blocked=nil end
+            self.current=nil
+            if N.QuestState then N.QuestState:OfferChanged() end
+        end
+    end)
 end
-function S:Clear(owner)
+function S:Clear(owner,retainInspection)
     if owner then self.identities[owner]=nil end
-    if not owner or self.current and self.current.owner == owner then self.current = nil end
-    if N.Hover and (not owner or N.Hover.source and N.Hover.source.owner == owner) then N.Hover:Dismiss("source") end
+    local cleared=self.current and (not owner or self.current.owner==owner)
+    if cleared then self.current = nil end
+    if not retainInspection and N.Hover and (not owner or N.Hover.source and N.Hover.source.owner == owner) then N.Hover:Dismiss("source") end
+    if cleared and N.QuestState then N.QuestState:OfferChanged() end
 end
 function S:Set(source)
     if not source or #source.rows == 0 then return end
+    local core=N.Core
+    if not core.ready or not core.supported or not core.profile.enabled then return end
     self.current = source
-    N.Core:StartHoverUpdate()
+    if N.QuestState then N.QuestState:OfferChanged() end
+    local hover=N.Hover
+    if hover and hover.open and hover.source and source.owner and source.owner==hover.source.owner and source.key~=hover.source.key then
+        -- A successful render of the same pooled marker can change its exact
+        -- grouped quest IDs while retaining its primary ID and data table.
+        hover.source=source; hover:Refresh()
+    end
+    if core.profile[source.surface] and not (N.Search and N.Search:Visible()) then N.Core:StartHoverUpdate() end
     if N.Hover then N.Hover:Consider(source) end
 end
 function S:Pin(frame, id, rows)
@@ -97,7 +116,7 @@ function S:MapAvailability(id,mapID)
     local offers=A.Call(C_QuestLine and C_QuestLine.GetAvailableQuestLines,mapID)
     if not M.Readable(offers) or type(offers)~="table" or #offers>256 then return end
     for _,offer in ipairs(offers) do
-        if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID)==id and M.Readable(offer.inProgress) and offer.inProgress~=true then return "native-map-available" end
+        if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID)==id and M.Readable(offer.inProgress) and offer.inProgress==false then return "native-map-available" end
     end
 end
 function S:Attach()
@@ -129,8 +148,8 @@ function S:Attach()
     if WorldMapFrame and not self.mapHide then
         self:Watch(WorldMapFrame)
         WorldMapFrame:HookScript("OnHide", function()
-            if self.current and self.current.surface == "worldmap" then self.current=nil end
             if N.Hover.source and N.Hover.source.surface == "worldmap" then N.Hover:Dismiss("map") end
+            if self.current and self.current.surface == "worldmap" then self:Clear(self.current.owner) end
         end)
         self.mapHide = true
     end

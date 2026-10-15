@@ -1,12 +1,29 @@
 # Validation
 
-QuestBrief **0.1.6** is the current candidate for official WoW Forever, interface
+QuestBrief **0.1.7** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Current database review, 0.1.6
+## Current recovery and UI review, 0.1.7
+
+Current evidence is in `CLASSIFICATION-RECONCILIATION.md`,
+`STARTER-COORDINATE-RECOVERY.md`, `REWARD-AMOUNT-RECOVERY.md`,
+`RUNTIME-RECOVERY-REVIEW.md`, `UI-FINDER-REVIEW.md` and
+`UI-TOOLTIP-RECOVERY.md`. Full independent review and final receipts establish
+which checks passed on the exact committed build. The verifier also runs
+classification regeneration, supplemental source, malformed-input and
+integration regressions. No source/mocked check establishes live rendering,
+physical input, combat/taint or client CPU timing.
+
+The native quick preview preserves other addons' tooltip content. A persistent
+inspector owns interactive item hover. Native tooltip height after clearing its
+single appended text block and physical dropdown input still require an updated
+client session; the development workflow does not force a reload.
+
+## Historical database review, 0.1.6
+
 
 `DATABASE-COMPLETION.md` records the complete acquired inventory, corrected old
 associations, field coverage, reproduction commands and concrete source limits.

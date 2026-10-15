@@ -2,7 +2,7 @@ local _, N = ...
 local O = {}; N.Options = O
 local U = N.UI
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
-local panelWidth,panelHeight=620,398
+local panelWidth,panelHeight=620,458
 local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 
 -- Reuse current XPIsland's bounded native controls and scale-aware text fitting.
@@ -126,24 +126,32 @@ function O:Build(owner,f,parent)
     self:Label(parent,"QuestBrief",20,-15,560,16,gold)
     self.close=self:Frame("Button",parent,"UIPanelCloseButton")
     self.close:SetSize(24,24); self.close:SetPoint("TOPRIGHT",-8,-8); self.close:SetScript("OnClick",function() f:Hide() end)
-    self:Section(parent,"Appearance",16,-58,288,270); self:Section(parent,"Behavior",316,-58,288,270)
+    self:Section(parent,"Appearance",16,-58,288,330); self:Section(parent,"Behavior",316,-58,288,330)
     self:Check(parent,"accents","Quest colors",28,-82)
     self:Check(parent,"dialogTint","Quest dialog tint",28,-110)
     self:Check(parent,"rewards","Reward details",28,-138)
-    self:Slider(parent,"scale","Tooltip scale",28,-179,80,120,5)
-    self:Slider(parent,"strength","Tint strength",28,-250,10,100,5)
+    self:Label(parent,"Preview layout",28,-179,260,12)
+    self.layout=self:Dropdown(parent,28,-201,260,{
+        {value="tooltip",label="Game tooltip"},{value="inspector",label="Compact inspector"}
+    },function() return owner.profile.previewLayout end,function(value) owner:Change("previewLayout",value) end)
+    self:Slider(parent,"scale","Preview and search scale",28,-248,80,120,5)
+    self:Slider(parent,"strength","Tint strength",28,-319,10,100,5)
     self:Check(parent,"enabled","Enabled",328,-82)
     self:Label(parent,"Reveal key",328,-118,260,12)
     self.modifier=self:Dropdown(parent,328,-140,260,{
         {value="SHIFT",label="Shift"},{value="CTRL",label="Ctrl"},{value="ALT",label="Alt"},{value="NONE",label="None"}
     },function() return owner.profile.modifier end,function(value) owner:Change("modifier",value) end)
-    self:Label(parent,"Release to inspect. Escape closes.",328,-174,260,11,muted)
-    self:Check(parent,"npc","NPC previews",328,-221)
-    self:Check(parent,"worldmap","World map previews",328,-249)
-    self:Check(parent,"minimap","Minimap previews",328,-277)
-    self:Check(parent,"launcher","Minimap launcher",328,-305)
-    self.reset=self:Button(parent,"Reset",20,-356,86,function() owner:Defaults() end)
-    self.status=self:Label(parent,"",116,-356,484,11,muted)
+    self.hint=self:Label(parent,"Release to inspect. Escape closes.",328,-174,260,11,muted)
+    self:Label(parent,"Inspection position",328,-201,260,12)
+    self.position=self:Dropdown(parent,328,-223,260,{
+        {value="right",label="Right of cursor"},{value="tooltip",label="Beside game tooltip"}
+    },function() return owner.profile.inspectionPosition end,function(value) owner:Change("inspectionPosition",value) end)
+    self:Check(parent,"npc","NPC previews",328,-277)
+    self:Check(parent,"worldmap","World map previews",328,-305)
+    self:Check(parent,"minimap","Minimap previews",328,-333)
+    self:Check(parent,"launcher","Minimap launcher",328,-361)
+    self.reset=self:Button(parent,"Reset",20,-416,86,function() owner:Defaults() end)
+    self.status=self:Label(parent,"",116,-416,484,11,muted)
     f:SetScript("OnShow",function() self:Refresh() end)
     f:SetScript("OnHide",function()
         self:CloseMenu(); for _,e in pairs(self.edits) do e:ClearFocus() end; f:StopMovingOrSizing()
@@ -196,6 +204,7 @@ function O:Refresh()
     for key,b in pairs(self.sliders) do b:SetValue(p[key]*100); b.edit:SetText(tostring(math.floor(p[key]*100+.5))) end
     for _,b in ipairs(self.controls) do if self.owner.readOnly then b:Disable() else b:Enable() end end
     self.status:SetText(self.owner.readOnly and "Newer settings are read-only." or not self.owner.supported and "Unsupported client." or "")
+    self.hint:SetText(p.modifier~="NONE" and p.previewLayout=="tooltip" and "Release to inspect. Escape closes." or "Escape closes the preview.")
     self:RefreshFonts(true); self.refreshing=false
 end
 function O:Toggle(owner)

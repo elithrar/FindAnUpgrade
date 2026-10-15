@@ -82,11 +82,11 @@ function Q:Shown(icon, tooltip)
     -- leave it unchanged. Unknown tooltips must establish a baseline first.
     if previous==nil or previous==token then return end
     local data = icon.data
-    if not M.Readable(data) or type(data) ~= "table" then return end
+    if not M.Readable(data) or type(data) ~= "table" then N.Sources:Clear(icon); return end
     local dataID = M.QuestId(data.Id)
-    if not dataID then return end
+    if not dataID then N.Sources:Clear(icon); return end
     local dataType=M.Text(data.Type)
-    local rows = Q.Rows(tooltip,dataID,dataType); if #rows == 0 then return end
+    local rows = Q.Rows(tooltip,dataID,dataType); if #rows == 0 then N.Sources:Clear(icon); return end
     for _,row in ipairs(rows) do
         if row.availabilityProof then
             local proof,tip,id,tag=row.availabilityProof,row.questieTip,row.id,M.Text(row.questieTip and row.questieTip.type)
@@ -96,7 +96,7 @@ function Q:Shown(icon, tooltip)
         end
     end
     local primary=false;for _,row in ipairs(rows) do if row.id==dataID then primary=true;break end end
-    if not primary then return end
+    if not primary then N.Sources:Clear(icon); return end
     local surface = icon.miniMapIcon == true and "minimap" or "worldmap"
     N.Sources:Watch(icon)
     local signature = {}; for _,row in ipairs(rows) do signature[#signature+1]=row.id end

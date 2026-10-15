@@ -5,9 +5,87 @@ import json
 import re
 
 
+_UNSIGNED_DISPLAY_INTEGER = r"(?:0|[1-9]\d*|[1-9]\d{0,2}(?:,\d{3})+)"
+_VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+
+def primary_reward_values(row):
+    """Copy only explicitly encoded primary base amounts, never absent zeros.
+
+    The exact quest/environment binding belongs to the caller. Primary JSON
+    omits fields it does not publish; in particular, no reprewards key is not
+    evidence of a complete empty reputation list. Native client multipliers
+    and costs are separate from these nonnegative base XP/money rewards.
+    """
+    out = {}
+    for key in ("xp", "money"):
+        if key in row:
+            value = row[key]
+            if type(value) is not int or not 0 <= value < 2**53:
+                raise ValueError("Invalid explicit primary reward "+key)
+            out[key] = value
+    if "reprewards" in row:
+        if not isinstance(row["reprewards"], list) or len(row["reprewards"]) > 128:
+            raise ValueError("Invalid explicit primary reputation list")
+        rewards, factions = [], set()
+        for entry in row["reprewards"]:
+            if not isinstance(entry, list) or len(entry) != 2:
+                raise ValueError("Invalid explicit primary reputation pair")
+            faction, amount = entry
+            if type(faction) is not int or not 0 < faction < 2**31 or type(amount) is not int or not -2**31 < amount < 2**31 or faction in factions:
+                raise ValueError("Invalid or duplicate explicit primary reputation")
+            factions.add(faction)
+            rewards.append({"factionID": faction, "amount": amount})
+        out["reputation"] = rewards
+    return out
+
+
+def reward_amount_line(text):
+    """Parse one labelled Forever reward line; unrelated content stays absent.
+
+    A displayed zero is retained. No blank or absent line supplies a default.
+    Malformed explicit amount syntax fails staging instead of silently
+    discarding a field or concatenating its digits into a different value.
+    """
+    integer = _UNSIGNED_DISPLAY_INTEGER
+    match = re.fullmatch("("+integer+r") experience", text)
+    if match:
+        value = int(match[1].replace(",", ""))
+        if value >= 2**53:
+            raise ValueError("Explicit XP amount exceeds exact numeric range")
+        return "xp", value
+    match = re.fullmatch(r"([+-]"+integer+r"|0) reputation with (\S(?:.*\S)?)", text)
+    if match:
+        value = int(match[1].replace(",", ""))
+        if not -2**31 < value < 2**31:
+            raise ValueError("Explicit reputation amount exceeds supported range")
+        return "reputation", {"name": match[2], "amount": value}
+    # Coins may be split over child spans and therefore have no separating
+    # spaces. Unit labels, a unique descending unit order, and complete input
+    # consumption establish copper units; bare numbers remain unknown.
+    coin_integer = r"-?"+integer
+    coins = list(re.finditer("("+coin_integer+r")\s*([gsc])", text))
+    if coins and re.sub("("+coin_integer+r")\s*([gsc])|\s", "", text) == "":
+        units = [coin[2] for coin in coins]
+        if len(set(units)) != len(units) or units != sorted(units, key="gsc".index):
+            raise ValueError("Ambiguous explicit money unit order")
+        signs = {coin[1].startswith("-") for coin in coins}
+        if len(signs) != 1:
+            raise ValueError("Mixed reward and cost money units")
+        value = sum(int(coin[1].replace(",", ""))*{"g": 10000, "s": 100, "c": 1}[coin[2]] for coin in coins)
+        if abs(value) >= 2**53:
+            raise ValueError("Explicit money amount exceeds exact numeric range")
+        return ("moneyCost", -value) if True in signs else ("money", value)
+    if text.endswith(" experience") or " reputation with" in text or re.fullmatch(r"[\d,\s+.-]*[gsc][\d,gsc\s+.-]*", text):
+        raise ValueError("Unsupported explicit reward amount: "+text)
+    return None
+
+
 class Node:
     def __init__(self, tag="", attrs=(), parent=None):
         self.tag, self.attrs, self.parent, self.children = tag, dict(attrs), parent, []
+        self.closed = tag in _VOID_TAGS
+        self.malformed = False
 
     def text(self):
         return "".join(c if isinstance(c, str) else c.text() for c in self.children)
@@ -32,14 +110,21 @@ class Parser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         node = Node(tag, attrs, self.stack[-1])
         self.stack[-1].children.append(node)
-        if tag not in {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}:
+        if tag not in _VOID_TAGS:
             self.stack.append(node)
 
     def handle_endtag(self, tag):
         for i in range(len(self.stack)-1, 0, -1):
             if self.stack[i].tag == tag:
+                # HTMLParser permits a closing ancestor to abandon still-open
+                # children. Retain that fact: browser-style recovery cannot
+                # establish that a source reward list was complete.
+                self.stack[i].closed = True
+                self.stack[i].malformed = self.stack[i].malformed or i != len(self.stack)-1
                 self.stack = self.stack[:i]
                 return
+        if tag not in _VOID_TAGS:
+            self.stack[-1].malformed = True
 
     def handle_data(self, value):
         self.stack[-1].children.append(value)
@@ -109,6 +194,8 @@ def quest_detail(html, quest_id):
         out["reason"] = "Missing or ambiguous Forever panel"
         return out
     panel = panels[0]
+    if not panel.closed or panel.malformed or any(not node.closed or node.malformed for node in panel.all()):
+        raise ValueError("Malformed Forever reward panel: "+str(quest_id))
     if not exact or "Not in Forever" in panel.text() or "not yet confirmed" in panel.text().lower():
         out["reason"] = "Source does not confirm an exact Forever record"
         return out
@@ -164,19 +251,21 @@ def quest_detail(html, quest_id):
         if heading == "You will also receive:":
             for line in children[1:]:
                 text = line.text().strip()
-                match = re.fullmatch(r"([\d,]+) experience", text)
-                if match:
-                    out["xp"] = int(match[1].replace(",", ""))
-                    out["fieldStates"]["xp"] = "published"
+                amount = reward_amount_line(text)
+                if not amount:
                     continue
-                match = re.fullmatch(r"([+-][\d,]+) reputation with (.+)", text)
-                if match:
-                    reputation.append({"name": match[2], "amount": int(match[1].replace(",", ""))})
-                    continue
-                coins = re.findall(r"(\d+)\s*([gsc])", text)
-                if coins and re.sub(r"\d+\s*[gsc]|\s", "", text) == "":
-                    out["money"] = sum(int(count)*{"g": 10000, "s": 100, "c": 1}[unit] for count, unit in coins)
-                    out["fieldStates"]["money"] = "published"
+                key, value = amount
+                if key == "reputation":
+                    # Keep the displayed slots, including repeated names. The
+                    # source does not explain their effective award. Neither
+                    # sum nor deduplicate these separate source observations.
+                    reputation.append(value)
+                else:
+                    if key in out:
+                        raise ValueError("Duplicate explicit reward amount: "+str(quest_id)+" "+key)
+                    out[key] = value
+                    if key in out["fieldStates"]:
+                        out["fieldStates"][key] = "published"
     if reputation:
         out["reputation"] = reputation
         out["fieldStates"]["reputation"] = "published"

@@ -41,10 +41,15 @@ function P.Availability(row,context)
     local log=C_QuestLog
     local active=A.Call(log and log.IsOnQuest,id)
     if active==true then
+        if N.QuestState then A.Call(N.QuestState.Track,N.QuestState,id) end
         return A.Call(log and log.IsComplete,id)==true and state("ready","Ready to turn in","native-log") or state("active","In quest log","native-log")
     end
     local proof=row.availabilityProof
     if row.availabilityCheck then proof=A.Call(row.availabilityCheck) end
+    if not proof and not row.availabilityCheck then
+        if context and context.nativeOffers then proof=context.nativeOffers[id]
+        elseif N.QuestState then proof=A.Call(N.QuestState.Proof,N.QuestState,id,row.npcID) end
+    end
     if proof=="native-active" or proof=="native-ready" then
         return proof=="native-ready" and state("ready","Ready to turn in","native-gossip") or state("active","In quest log","native-gossip")
     end
@@ -108,8 +113,19 @@ function P.Availability(row,context)
     end
     return state("unknown",complete==true and repeatable==true and "Repeatable" or nil,complete==true and "native-history" or nil)
 end
+function P.RequiresNativeProof(source)
+    return source and (source.confirmation and source.confirmation~="published" or source.questKind=="hidden-trigger") or false
+end
+function P.HasNativeProof(availability)
+    local authority,state=availability.authority,availability.state
+    return (authority=="native-log" or authority=="native-gossip" or authority=="native-map")
+        and (state=="active" or state=="ready" or state=="available")
+end
 function P.Resolve(row,context)
     row.availability=P.Availability(row,context); row.evidence=row.availability.label
+    -- A recorded starter or optional marker cannot establish that an old
+    -- candidate or hidden tracker is obtainable in the current client.
+    if P.RequiresNativeProof(row.source or P.Source(row.id)) and not P.HasNativeProof(row.availability) then return false end
     return row.availability.state~="blocked" and row.availability.state~="completed"
 end
 function P.ResolveRows(rows)
@@ -135,10 +151,10 @@ function P.ForNPC(npcID)
         for _,location in ipairs(source.locations or {}) do
             if location.npcID==npcID and (not location.faction or location.faction==faction) then allowed=true;break end
         end
-        if allowed then out[#out+1]={id=id,title=source.title,source=source,provenance="Bundled Forever exact NPC starter association"} end
+        if allowed then out[#out+1]={id=id,title=source.title,source=source,npcID=npcID,provenance="Bundled Forever exact NPC starter association"} end
     end
     if N.Questie and N.Questie.ForNPC then
-        for _,row in ipairs(N.Questie.ForNPC(npcID)) do table.insert(out,1,row) end
+        for _,row in ipairs(N.Questie.ForNPC(npcID)) do row.npcID=npcID;table.insert(out,1,row) end
     end
     if not lib then return P.ResolveRows(out) end
     local starts = A.Call(lib.Npc.Get, npcID, "questStarts")
@@ -150,7 +166,7 @@ function P.ForNPC(npcID)
         if M.Readable(npcs) and type(npcs) == "table" and #npcs <= 256 then
             for _, starterID in ipairs(npcs) do
                 if M.QuestId(starterID) == npcID then
-                    out[#out+1] = { id = id, title = M.Text(A.Call(lib.Quest.Get, id, "name")),
+                    out[#out+1] = { id = id, npcID=npcID, title = M.Text(A.Call(lib.Quest.Get, id, "name")),
                         provenance = "QuestieDB Forever contract 3; reciprocal starter association" }
                     break
                 end

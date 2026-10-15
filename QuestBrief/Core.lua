@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.6" }; N.Core = C
+local C = { version = "0.1.7" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -22,7 +22,7 @@ function C:Change(key, value)
     if self.readOnly then return false end
     local saved = M.Copy(self.profile); saved[key] = value
     self.profile = M.Load(saved); QuestBriefDB = self.profile
-    N.Hover:Dismiss("settings"); N.Sources.current = nil
+    N.Sources:Clear()
     self:Refresh()
     if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
@@ -33,7 +33,7 @@ end
 function C:Defaults()
     if self.readOnly then return false end
     self.profile = M.Copy(M.defaults); QuestBriefDB = self.profile
-    N.Hover:Dismiss("settings"); N.Sources.current = nil
+    N.Sources:Clear()
     self:Refresh(); if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
     if N.Search:Visible() then N.Search:Fit(); N.Search:Changed() end
@@ -60,7 +60,7 @@ function C:Print(text)
 end
 function C:Slash(input)
     local command = (input or ""):match("^%s*(.-)%s*$"):lower()
-    if command=="search" or command=="s" then
+    if command=="" or command=="search" or command=="s" then
         N.Search:Toggle()
     elseif command=="minimap" or command=="mm" then
         if not self:Change("launcher",not self.profile.launcher) then self:Print("Settings are read-only.") end
@@ -68,7 +68,7 @@ function C:Slash(input)
         if not self:Change("enabled", command == "on") then self:Print("Settings are read-only.") end
     elseif command == "status" then
         self:Print((self.supported and (self.profile.enabled and "Enabled" or "Disabled") or "Unsupported client") .. "; " .. N.Data.newCount .. " verified new IDs. Data: " .. N.Data.collectedAt .. ".")
-    elseif command == "" or command == "options" or command == "opts" then
+    elseif command == "options" or command == "opts" then
         N.Options:Toggle(self)
     else self:Print("/questbrief search | minimap | opts | on | off | status") end
 end
@@ -81,6 +81,8 @@ function C:Initialize()
     SlashCmdList.QUESTBRIEF = function(input) self:Slash(input) end
     self:Attach()
     N.Sources:Attach()
+    if N.NativeTooltip then N.NativeTooltip:Attach() end
+    if N.QuestState and self.supported then N.QuestState:Initialize() end
     U:WatchFonts()
     N.Launcher:Refresh()
 end
@@ -94,24 +96,26 @@ function C:StartHoverUpdate()
     end)
 end
 local events = CreateFrame("Frame"); C.events = events
-for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "QUEST_LOG_UPDATE", "TOOLTIP_DATA_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED", "PLAYER_LEVEL_UP" }) do events:RegisterEvent(event) end
+for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED", "PLAYER_LEVEL_UP" }) do events:RegisterEvent(event) end
 events:SetScript("OnEvent", function(_, event, name)
     if event == "ADDON_LOADED" then
         if name == ADDON then C:Initialize() elseif C.ready then
             C:Attach(); N.Sources:Attach(); U:WatchFonts()
+            if N.NativeTooltip then N.NativeTooltip:Attach() end
             if U:RefreshFonts() and N.Hover.open then N.Hover:Dismiss("font") end
             if N.Options.frame then N.Options:Refresh() end
         end
     elseif not C.ready then return
     elseif event == "PLAYER_LOGIN" or event == "PLAYER_REGEN_ENABLED" then
         C:Attach(); N.Sources:Attach(); C:Refresh()
+        if N.NativeTooltip then N.NativeTooltip:Attach() end
         N.Launcher:Refresh()
     elseif event == "UPDATE_MOUSEOVER_UNIT" then
-        local source = C.supported and N.Sources:NPC()
-        if source then N.Sources:Set(source) elseif N.Sources.current and N.Sources.current.surface == "npc" then N.Sources.current=nil end
+        local source = C.supported and C.profile.enabled and C.profile.npc and not N.Search:Visible() and N.Sources:NPC()
+        if source then N.Sources:Set(source) elseif N.Sources.current and N.Sources.current.surface == "npc" then N.Sources:Clear(nil,true) end
     elseif event == "MODIFIER_STATE_CHANGED" then N.Hover:Modifier()
     elseif event == "QUEST_DATA_LOAD_RESULT" then N.Hover:Refresh(name)
-    elseif event == "QUEST_LOG_UPDATE" then N.Hover:Refresh()
+    elseif event == "ITEM_DATA_LOAD_RESULT" or event == "GET_ITEM_INFO_RECEIVED" then N.Hover:ItemData(name)
     elseif event == "TOOLTIP_DATA_UPDATE" then
         local v = N.Stack
         if v.item and not v:InspectionCurrent(v.item) then v:ClearItem()
@@ -119,9 +123,14 @@ events:SetScript("OnEvent", function(_, event, name)
             local item = v.item
             v:Inspect(item.button,item.row,true)
         end
-    elseif event == "GOSSIP_SHOW" then C:Reset(); N.Sources:Gossip()
+    elseif event == "GOSSIP_SHOW" then
+        C:Reset(); N.Sources:Gossip()
+        if N.QuestState then N.QuestState:OfferChanged() end
     else
-        C:Reset(); N.Hover:Dismiss(event); N.Sources.current=nil
-        if event == "GOSSIP_CLOSED" or event == "QUEST_FINISHED" or event == "PLAYER_ENTERING_WORLD" then N.Sources.gossip=nil end
+        C:Reset(); N.Sources:Clear()
+        if event == "GOSSIP_CLOSED" or event == "QUEST_FINISHED" or event == "PLAYER_ENTERING_WORLD" then
+            N.Sources.gossip=nil
+            if N.QuestState then N.QuestState:OfferChanged() end
+        end
     end
 end)

@@ -56,7 +56,7 @@ function Methods:SetVerticalScroll(value) self.scrollValue=value end
 function Methods:CreateTexture() return W.Object() end
 function Methods:SetOwner(owner,anchor) self.owner=owner; self.anchor=anchor end
 function Methods:GetOwner() return self.owner end
-function Methods:ClearLines() self.lines={} end
+function Methods:ClearLines() self.lines={}; self:Fire("OnTooltipCleared") end
 function Methods:NumLines() return #(self.lines or {}) end
 function Methods:GetThumbTexture() return self.thumb end
 function Methods:SetThumbTexture(value) self.thumb=self.thumb or W.Object();self.thumb:SetTexture(value) end
@@ -141,6 +141,7 @@ function W.Reset(config)
     EventRegistry={callbacks={}}
     function EventRegistry:RegisterCallback(event,fn,owner) self.callbacks[event]={fn=fn,owner=owner} end
     function EventRegistry:TriggerEvent(event,...) local e=self.callbacks[event]; if e then e.fn(e.owner,...) end end
+    GameTooltip=nil
     WorldMapFrame=W.Object(); WorldMapFrame.width=1000; WorldMapFrame.height=1000
     QuestHubPinMixin=nil; QuestieLoader=nil; LibQuestieDB=nil; C_GossipInfo=nil
     W.rewardReady=true; W.items={}; W.choices={}; W.rewardRequests={}; W.metadataRequests={}
@@ -209,7 +210,7 @@ function W.Reset(config)
     QuestBriefDB = config.saved
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","Hover.lua","Catalog.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/QuestBrief/" .. file))("QuestBrief", N) end
+    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/QuestBrief/" .. file))("QuestBrief", N) end
     W.N = N
     return N
 end

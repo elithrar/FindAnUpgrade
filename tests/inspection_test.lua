@@ -9,7 +9,7 @@ end
 local function open(id)
     local N=W.Init(); W.shift=true; local f=pin(id or 9)
     EventRegistry:TriggerEvent("MapCanvas.QuestPin.OnEnter",f,f.questID)
-    assert(N.Hover.open and N.Stack.frame:GetWidth()==320)
+    assert(N.Hover.open and N.Stack.frame:GetWidth()>=232 and N.Stack.frame:GetWidth()<=280)
     return N,f
 end
 local function geometry(N)

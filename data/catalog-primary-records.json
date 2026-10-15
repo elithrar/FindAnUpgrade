@@ -183,7 +183,6 @@
       "level": 43,
       "minimum": 28,
       "xp": 5350,
-      "reputation": [],
       "locations": [
         {
           "npcID": 715,
@@ -326,7 +325,6 @@
       "level": 40,
       "minimum": 30,
       "xp": 4700,
-      "reputation": [],
       "locations": [
         {
           "npcID": 716,
@@ -416,7 +414,6 @@
       "sha256": "c0a08d0b95937f83a0beb326aa93f7f0b655024c99fbef90d7cb7d6277de14b7",
       "level": 1,
       "minimum": 1,
-      "reputation": [],
       "locations": [
         {
           "objectID": 269,
@@ -1105,7 +1102,6 @@
       "level": 44,
       "minimum": 30,
       "xp": 5600,
-      "reputation": [],
       "locations": [
         {
           "npcID": 2934,
@@ -1299,8 +1295,7 @@
       "sha256": "e71c438d8b7d9df4b61f10e07439e4d7652e617bdabe168bba912a1796d44280",
       "level": 12,
       "minimum": 10,
-      "xp": 225,
-      "reputation": []
+      "xp": 225
     },
     {
       "id": 916,
@@ -1430,7 +1425,6 @@
       "level": 55,
       "minimum": 51,
       "xp": 5650,
-      "reputation": [],
       "locations": [
         {
           "npcID": 10302,
@@ -1511,7 +1505,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174600,
@@ -1529,7 +1522,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174599,
@@ -1709,7 +1701,6 @@
       "minimum": 30,
       "xp": 3450,
       "money": 3500,
-      "reputation": [],
       "locations": [
         {
           "npcID": 4792,
@@ -1726,8 +1717,7 @@
       "sha256": "a5e63d444974e7b9f587d758b820ec5559a2d2af1449ae99594a1dc161fa1518",
       "level": 39,
       "minimum": 29,
-      "xp": 2250,
-      "reputation": []
+      "xp": 2250
     },
     {
       "id": 1514,
@@ -1739,7 +1729,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 173327,
@@ -1849,7 +1838,6 @@
       "level": 47,
       "minimum": 40,
       "xp": 420,
-      "reputation": [],
       "locations": [
         {
           "npcID": 5387,
@@ -2026,7 +2014,6 @@
       "level": 50,
       "minimum": 40,
       "xp": 470,
-      "reputation": [],
       "locations": [
         {
           "objectID": 149502,
@@ -2108,7 +2095,6 @@
       "minimum": 45,
       "xp": 7750,
       "money": 26500,
-      "reputation": [],
       "locations": [
         {
           "npcID": 7783,
@@ -2150,7 +2136,6 @@
       "level": 52,
       "minimum": 47,
       "xp": 5100,
-      "reputation": [],
       "locations": [
         {
           "objectID": 161504,
@@ -2168,7 +2153,6 @@
       "level": 54,
       "minimum": 47,
       "xp": 5450,
-      "reputation": [],
       "locations": [
         {
           "npcID": 9116,
@@ -2186,7 +2170,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 164887,
@@ -2204,7 +2187,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 164888,
@@ -2222,7 +2204,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 164885,
@@ -2240,7 +2221,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174604,
@@ -2258,7 +2238,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174603,
@@ -2276,7 +2255,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174602,
@@ -2294,7 +2272,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174601,
@@ -2312,7 +2289,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 173284,
@@ -2330,7 +2306,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174605,
@@ -2348,7 +2323,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174606,
@@ -2366,7 +2340,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174607,
@@ -2384,7 +2357,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 173324,
@@ -2402,7 +2374,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174608,
@@ -2420,7 +2391,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174686,
@@ -2438,7 +2408,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174684,
@@ -2456,7 +2425,6 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174708,
@@ -2473,7 +2441,6 @@
       "sha256": "f923e1296e87680abf6f53895f4c0ebba6a3a5212f6226751552190fff1d63ba",
       "level": 55,
       "minimum": 48,
-      "reputation": [],
       "locations": [
         {
           "objectID": 174709,
@@ -2646,7 +2613,6 @@
       "sha256": "3b5f7faff2809acca70bca2d630cd59e498e1d1f42aeceae5a7606ad6b4a2092",
       "level": 55,
       "minimum": 47,
-      "reputation": [],
       "locations": [
         {
           "npcID": 9274,
@@ -2870,7 +2836,6 @@
       "level": 60,
       "minimum": 56,
       "xp": 6600,
-      "reputation": [],
       "locations": [
         {
           "npcID": 11878,
@@ -2888,7 +2853,6 @@
       "level": 60,
       "minimum": 56,
       "xp": 660,
-      "reputation": [],
       "locations": [
         {
           "npcID": 332,
@@ -3037,7 +3001,39 @@
       "locations": [
         {
           "npcID": 13278,
-          "name": "Duke Hydraxis"
+          "name": "Duke Hydraxis",
+          "mapID": 1447,
+          "x": 0.792,
+          "y": 0.7340000000000001
+        },
+        {
+          "npcID": 13278,
+          "name": "Duke Hydraxis",
+          "mapID": 1447,
+          "x": 0.792,
+          "y": 0.736
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 7486,
+          "entity": "Npc",
+          "starterID": 13278,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 16,
+          "mapID": 1447,
+          "points": [
+            {
+              "x": 0.792,
+              "y": 0.7340000000000001
+            },
+            {
+              "x": 0.792,
+              "y": 0.736
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=7486",
+          "sha256": "24dbf2e89322805ea219da6e97db8f280cb58f5eba8e2127eef32cb80c19f519"
         }
       ]
     },
@@ -3251,7 +3247,28 @@
       "locations": [
         {
           "npcID": 15192,
-          "name": "Anachronos"
+          "name": "Anachronos",
+          "mapID": 1446,
+          "x": 0.652,
+          "y": 0.5
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 8747,
+          "entity": "Npc",
+          "starterID": 15192,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 440,
+          "mapID": 1446,
+          "points": [
+            {
+              "x": 0.652,
+              "y": 0.5
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=8747",
+          "sha256": "a04d5d4ca61333cc5006f9eb0f17d6b70515f91f805af53800d54801635fd7bd"
         }
       ]
     },
@@ -3280,7 +3297,28 @@
       "locations": [
         {
           "npcID": 15192,
-          "name": "Anachronos"
+          "name": "Anachronos",
+          "mapID": 1446,
+          "x": 0.652,
+          "y": 0.5
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 8759,
+          "entity": "Npc",
+          "starterID": 15192,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 440,
+          "mapID": 1446,
+          "points": [
+            {
+              "x": 0.652,
+              "y": 0.5
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=8759",
+          "sha256": "db8b7660b3e257971d1914bde4af59a0453c69bd0b4f45f8970cc7c2284347e8"
         }
       ]
     },
@@ -3379,7 +3417,6 @@
       "level": 60,
       "minimum": 58,
       "xp": 6600,
-      "reputation": [],
       "locations": [
         {
           "npcID": 16013,
@@ -3403,7 +3440,6 @@
       "level": 60,
       "minimum": 58,
       "xp": 6600,
-      "reputation": [],
       "locations": [
         {
           "npcID": 16012,
@@ -3427,7 +3463,6 @@
       "level": 60,
       "minimum": 58,
       "xp": 6600,
-      "reputation": [],
       "locations": [
         {
           "npcID": 16014,
@@ -3456,7 +3491,6 @@
       "level": 60,
       "minimum": 58,
       "xp": 9950,
-      "reputation": [],
       "locations": [
         {
           "npcID": 16012,
@@ -3489,8 +3523,7 @@
       "sha256": "8fe13c506998893c2a8e59cc6d8f1b7b26d4ea7711576d43a90591bcebceabbf",
       "level": 60,
       "minimum": 58,
-      "xp": 9950,
-      "reputation": []
+      "xp": 9950
     },
     {
       "id": 8961,
@@ -3501,8 +3534,7 @@
       "sha256": "ad779ecbe4c82b348213728d200408d88824dfad17bedc9b20fcd99254e8f835",
       "level": 60,
       "minimum": 58,
-      "xp": 6600,
-      "reputation": []
+      "xp": 6600
     },
     {
       "id": 9009,
@@ -3525,7 +3557,6 @@
       "level": 60,
       "minimum": 58,
       "xp": 1650,
-      "reputation": [],
       "locations": [
         {
           "npcID": 16012,
@@ -3558,8 +3589,7 @@
       "sha256": "2cce9c1af3fbb8ec1cea65b35de4979e2067998f1d39ac26801d1a812eb60cea",
       "level": 60,
       "minimum": 58,
-      "xp": 9950,
-      "reputation": []
+      "xp": 9950
     },
     {
       "id": 9023,
@@ -3695,7 +3725,61 @@
       "locations": [
         {
           "npcID": 221471,
-          "name": "Field Captain Palandar"
+          "name": "Field Captain Palandar",
+          "mapID": 1431,
+          "x": 0.45399999999999996,
+          "y": 0.512
+        },
+        {
+          "npcID": 221471,
+          "name": "Field Captain Palandar",
+          "mapID": 1431,
+          "x": 0.456,
+          "y": 0.512
+        },
+        {
+          "npcID": 221471,
+          "name": "Field Captain Palandar",
+          "mapID": 1431,
+          "x": 0.46399999999999997,
+          "y": 0.47600000000000003
+        },
+        {
+          "npcID": 221471,
+          "name": "Field Captain Palandar",
+          "mapID": 1431,
+          "x": 0.466,
+          "y": 0.47600000000000003
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 81736,
+          "entity": "Npc",
+          "starterID": 221471,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 10,
+          "mapID": 1431,
+          "points": [
+            {
+              "x": 0.45399999999999996,
+              "y": 0.512
+            },
+            {
+              "x": 0.456,
+              "y": 0.512
+            },
+            {
+              "x": 0.46399999999999997,
+              "y": 0.47600000000000003
+            },
+            {
+              "x": 0.466,
+              "y": 0.47600000000000003
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=81736",
+          "sha256": "4a2b22cdedcb03c3716d89b09dfe702b2d9747cd184f728bb237ed7e6066a63c"
         }
       ]
     },
@@ -3716,11 +3800,31 @@
       "minimum": 20,
       "xp": 1950,
       "money": 1700,
-      "reputation": [],
       "locations": [
         {
           "npcID": 268925,
-          "name": "Night Elf Courier"
+          "name": "Night Elf Courier",
+          "mapID": 1442,
+          "x": 0.486,
+          "y": 0.39799999999999996
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 86574,
+          "entity": "Npc",
+          "starterID": 268925,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 406,
+          "mapID": 1442,
+          "points": [
+            {
+              "x": 0.486,
+              "y": 0.39799999999999996
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=86574",
+          "sha256": "43f17c5e095ffcdb07c569fef7fb9102e74af4d2e86a8fc09b95128c61481076"
         }
       ]
     },
@@ -3737,7 +3841,6 @@
       "itemState": "published",
       "sourceUrl": "https://www.wowhead.com/forever/quest=91736",
       "sha256": "926c1ffbaf1813cce3a518628786f33cd964494c70228692e57b6ba50a5932aa",
-      "reputation": [],
       "locations": [
         {
           "objectID": 562131,
@@ -3862,11 +3965,31 @@
       "minimum": 18,
       "xp": 2300,
       "money": 3000,
-      "reputation": [],
       "locations": [
         {
           "npcID": 5911,
-          "name": "Grunt Logmar"
+          "name": "Grunt Logmar",
+          "mapID": 1413,
+          "x": 0.446,
+          "y": 0.5920000000000001
+        }
+      ],
+      "coordinateEvidence": [
+        {
+          "id": 97250,
+          "entity": "Npc",
+          "starterID": 5911,
+          "basis": "retained-primary-exact-start-marker",
+          "areaID": 17,
+          "mapID": 1413,
+          "points": [
+            {
+              "x": 0.446,
+              "y": 0.5920000000000001
+            }
+          ],
+          "sourceUrl": "https://www.wowhead.com/forever/quest=97250",
+          "sha256": "7fe063eda8ef7c0153ea30a0fdb3f0ef7a862f3ceb5267ebdd3c5853b6fe5382"
         }
       ]
     },
@@ -3880,7 +4003,6 @@
       "level": 25,
       "minimum": 20,
       "xp": 200,
-      "reputation": [],
       "locations": [
         {
           "npcID": 1242,
@@ -4767,5 +4889,49 @@
       "bytes": 43365
     }
   ],
-  "method": "Retained primary HTML only; no new Wowhead requests, JavaScript execution, or area-ID-to-UI-map guesses"
+  "method": "Retained primary HTML only; no new Wowhead requests, JavaScript execution, or area-ID-to-UI-map guesses",
+  "coordinateMappingSources": [
+    {
+      "repository": "Questie/QuestieDB",
+      "revision": "36ca1ca86f6c1838de479c7c7452eb0a57d5c135",
+      "archiveSha256": "d78b066c362eaf28258d9e2d041c0a7b03d6943a2dfc741dec70c6bfd8e1fc27",
+      "files": [
+        {
+          "path": "support/Forever/Zones/areaIdToUiMapId.lua",
+          "sha256": "c6f26a18a2d0d9bdf5750039eabe111f545700a751928e8f79aedb12fbb8ff09",
+          "bytes": 59425,
+          "basis": "pinned-release-member"
+        },
+        {
+          "path": "support/Forever/Zones/uiMapIdToAreaId.lua",
+          "sha256": "4964def0918a8cddef6c5f8292526a076b2afe73ea58f178f68a78e35bec39e3",
+          "bytes": 4770,
+          "basis": "pinned-release-member"
+        }
+      ],
+      "pairs": [
+        {
+          "areaID": 10,
+          "mapID": 1431
+        },
+        {
+          "areaID": 16,
+          "mapID": 1447
+        },
+        {
+          "areaID": 17,
+          "mapID": 1413
+        },
+        {
+          "areaID": 406,
+          "mapID": 1442
+        },
+        {
+          "areaID": 440,
+          "mapID": 1446
+        }
+      ],
+      "rule": "Canonical reciprocal AreaID/UiMap pair only; no parent or compatibility override projection"
+    }
+  ]
 }

@@ -27,7 +27,7 @@ end)
 test("guaranteed-only item icons have no empty label and choices stay distinct",function()
     local N=show({{id=9}});W.items={{"A",100,2,2,true,123}}
     N.Stack:Refresh();local c=N.Stack.cards[1]
-    assert(not c.groups.items.label:IsShown() and c.icons[1]:GetWidth()==28 and c.icons[1].border.color[2]==1)
+    assert(not c.groups.items.label:IsShown() and c.icons[1]:GetWidth()==24 and c.icons[1].border.color[2]==1)
     W.choices={{"B",101,1,3,true,124}};N.Stack:Refresh()
     assert(c.groups.items.label:GetText()=="Guaranteed" and c.groups.choices.label:GetText()=="Choose one")
     assert(c.icons[1].row.kind=="reward" and c.icons[2].row.kind=="choice")
@@ -46,7 +46,7 @@ end)
 test("long stacks use a bounded viewport and clamp scroll at both ends",function()
     local rows={};for id=1,12 do rows[#rows+1]={id=id}end
     local N=show(rows);assert(N.Stack.maximum>0 and N.Stack.header:IsShown() and N.Stack.bar:IsShown())
-    assert(N.Stack.frame:GetHeight()<=320 and N.Stack.scroll:GetWidth()==304)
+    assert(N.Stack.frame:GetHeight()<=320 and N.Stack.scroll:GetWidth()==N.Stack.frame:GetWidth()-16)
     N.Stack:Scroll(10000);assert(N.Stack.offset==N.Stack.maximum)
     N.Stack:Scroll(-10000);assert(N.Stack.offset==0)
 end)
@@ -91,9 +91,9 @@ test("Questie native hide allows bounded slow opening transit then consumes the 
     GameTooltip=W.Object();GameTooltip.x=10;GameTooltip.y=540;GameTooltip.width=350;GameTooltip.height=100
     W.mouseX,W.mouseY=14,600
     local f=W.Object();f.x=5;f.y=590;f.width=20;f.height=20;f.questID=9;f.GetQuestID=function()return 9 end
-    N.Sources:Pin(f,9);assert(N.Stack.placement.left==366)
+    N.Sources:Pin(f,9);assert(N.Stack.placement.left==372)
     GameTooltip:Hide();GameTooltip._Rebuild=nil;W.mouseX=100;N.Hover:Tick(.1);N.Hover:Tick(.8);assert(N.Hover.open)
-    N.Stack.frame.x=366;N.Stack.frame.y=580;W.mouseX=380;N.Hover:Tick(.9);assert(N.Stack.openingTransitConsumed)
+    N.Stack.frame.x=372;N.Stack.frame.y=580;W.mouseX=380;N.Hover:Tick(.9);assert(N.Stack.openingTransitConsumed)
     W.mouseX=100;N.Hover:Tick(1);N.Hover:Tick(1.21);assert(not N.Hover.open)
 end)
 test("opening bridge cannot retain the stack indefinitely after icon leave",function()

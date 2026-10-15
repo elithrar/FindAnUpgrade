@@ -9,10 +9,10 @@ from lupa.lua51 import LuaRuntime
 SHIPPED = {
     "QuestBrief.toc", "Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
     "Options.lua", "Core.lua", "README.md", "NOTICES.md", "XPISLAND-LICENSE.txt",
-    "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "Hover.lua", "LICENSE",
+    "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "LICENSE",
     "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Data/Catalog.lua", "Data/ATT-LICENSE.txt",
 }
-RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "Hover.lua", "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
+RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
 SOURCE_DIRS = ["QuestBrief", "data", "docs", "tests", "tools", ".github"]
 SOURCE_ROOT = ["AGENTS.md", "README.md", "LICENSE", ".gitignore", ".gitattributes"]
 ATT_LICENSE_SHA256 = "955281b9174e0f66b08c8e83d31e0f38b2fcaa247ca3af92d1723d81a13cddfb"

@@ -40,34 +40,34 @@
       "published": 1130
     },
     "reputation": {
-      "published": 3218,
-      "unknown": 2454
+      "published": 3224,
+      "unknown": 2448
     },
     "currencies": {
       "unknown": 5672
     },
     "givers": {
-      "unknown": 1184,
-      "recorded": 4488
+      "unknown": 599,
+      "recorded": 5073
     },
     "coordinates": {
-      "unknown": 1653,
-      "recorded": 4019
+      "unknown": 1608,
+      "recorded": 4064
     }
   },
-  "questsWithGivers": 4488,
-  "questsWithNpc": 4040,
-  "questsWithCoordinates": 4019,
+  "questsWithGivers": 5073,
+  "questsWithNpc": 4429,
+  "questsWithCoordinates": 4064,
   "knownQuantities": 3606,
   "knownRewardGroups": 3606,
   "classificationCounts": {
-    "New": 218,
-    "Updated": 96,
-    "Unchanged": 880,
-    "Unknown": 4478
+    "New": 388,
+    "Updated": 176,
+    "Unchanged": 2367,
+    "Unknown": 2741
   },
   "reconciliationReport": "data/catalog-reconciliation.json",
-  "luaSha256": "34765370512ea28f8df501a0432f665d465ecc7623750a6efc4b00bddd416e6b",
-  "sourceSha256": "f39ccf629d4d8dc42cb075bd375f78c190b3cdae350ccf89e16b794e84ced01a",
+  "luaSha256": "69a9a5bbb4b6118a7247d7a2976fcad36bb9091a147c43b7be0cea98da165c33",
+  "sourceSha256": "28b01fdddfd7df67725ba7f054a73fc333b2c382bf20c11f8645a1307f1ef527",
   "liveClientVerified": false
 }

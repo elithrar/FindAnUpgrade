@@ -3,10 +3,10 @@ assert(loadfile(ROOT .. "/QuestBrief/Model.lua"))("QuestBrief", N)
 assert(loadfile(ROOT .. "/QuestBrief/Data/Quests.lua"))("QuestBrief", N)
 local M = N.Model
 local function test(name, fn) fn(); PASSED = PASSED + 1; print("PASS " .. name) end
-test("exact classification has 218 new IDs among 1194", function()
+test("exact classification matches the generated snapshot", function()
     local total, new = 0, 0
     for id, status in pairs(N.Data.statusById) do total = total + 1; if M.IsNew(id) then new = new + 1; assert(status == "verifiedNew") end end
-    assert(total == 1194 and new == 218)
+    assert(total == N.Data.questCount and new == N.Data.newCount)
 end)
 test("mixed-title older IDs never inherit New", function()
     for _, id in ipairs({286, 356, 921, 928, 929, 933, 934, 935, 7383, 932, 422, 423, 99, 424}) do assert(not M.IsNew(id)) end

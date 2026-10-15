@@ -10,7 +10,7 @@ local handler=read(base.."Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua"
 local manager=read(base.."Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua")
 local function setup(native,post)
     local N=W.Init()
-    N.CatalogData={schemaVersion=1,quests={{id=9,title="Head quest",items={{itemID=123,name="Helmet"}}}}}
+    N.CatalogData={schemaVersion=1,quests={{id=9,title="Head quest",items={{itemID=123,name="Helmet"}},locations={{npcID=54001,name="Recorded giver"}}}}}
     W.rewardReady=false; W.openMenu=nil
     C_QuestLog.GetQuestDifficultyLevel=function()return 20 end
     C_QuestLog.IsQuestFlaggedCompleted=function()return false end
@@ -367,4 +367,15 @@ test("only nil primary data is pending while restricted malformed failed and abs
     N,S,b=setup(true); C_TooltipInfo.GetHyperlink=nil
     C_TooltipInfo.GetQuestLogItem=function()error("wrong getter fallback")end
     b:Fire("OnEnter"); assert(hidden(S.inspector))
+end)
+
+
+test("usability note cannot resurrect a tooltip after synchronous addon teardown",function()
+    local N,S,b=setup();b.row.usable=nil
+    local tip=S.inspector.tooltip;local add=tip.AddLine
+    tip.AddLine=function(t,value,...)
+        add(t,value,...)
+        if value=="Class usability unconfirmed" then S.frame:Hide() end
+    end
+    b:Fire("OnEnter");assert(hidden(S.inspector) and not S:Visible())
 end)

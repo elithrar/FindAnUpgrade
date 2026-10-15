@@ -40,7 +40,7 @@ local function open(config)
     local N=setup(config); N.Core:Slash("search"); W.time=.3; N.Search.frame:Fire("OnUpdate",.3); return N
 end
 test("finder opens through canonical aliases with reviewed title and level defaults",function()
-    local N=open();assert(N.Search:Visible() and N.Search.title.text=="QuestBrief" and N.Search.filter.minimum==15 and N.Search.filter.maximum==23 and N.Search.sort.defaultText=="Level fit")
+    local N=open();assert(N.Search:Visible() and N.Search.title.text=="QuestBrief" and N.Search.filter.minimum==15 and N.Search.filter.maximum==23 and N.Search.sort.defaultText=="Current zone" and N.Search.filter.sort=="ZONE")
     N.Core:Slash("s");assert(not N.Search:Visible())
 end)
 test("bundled catalogue works with both Questie addons absent and preserves input",function()
@@ -99,10 +99,12 @@ test("native usability changes invalidate rather than permanently excluding an i
     W.Event("PLAYER_LEVEL_UP",21);assert(next(N.SearchModel.usability)==nil)
 end)
 test("recorded rewards never invent quantities or guaranteed versus choice membership",function()
-    local N=open();local card=N.Search.cards[1];assert(card.icons[1].group.text=="Recorded reward" and card.icons[1].count.text=="" and card.evidence.text:find("unconfirmed"))
+    local N=open();local card=N.Search.cards[1];assert(card.icons[1].group.text=="Recorded reward" and card.icons[1].count.text=="" and not card.icons[1].name:IsShown() and card.fullTitle:find("Head quest",1,true))
 end)
-test("result footer columns share the same baseline including unavailable values",function()
-    local N=open();local c=N.Search.cards[1];assert(c.footer[1].point[3]==c.footer[2].point[3] and c.footer[2].point[3]==c.footer[3].point[3] and c.footer[3].text=="Rep unavailable")
+test("unknown values reserve no footer cells and no repeated unavailable labels",function()
+    local N=open();local c=N.Search.cards[1]
+    for i,label in ipairs(c.footer) do assert(not label:IsShown() and not c.footerHits[i]:IsShown()) end
+    assert(c:GetHeight()<90 and not c.icons[1].name:IsShown())
 end)
 test("registered copy menu clears comparisons and preserves native menu font ownership",function()
     local N=open();local c=N.Search.cards[1];N.Search.inspector.item={};N.Search:ContextMenu(c.row,c);assert(N.Search.inspector.item==nil and #W.openMenu.root.entries==5)
@@ -176,7 +178,7 @@ test("native rewards obey slot filters and partial reputation remains explicit",
     local N=setup();W.rewardReady=true;W.items={{"Helmet",100,1,2,true,123},{"Boots",100,1,2,true,125}}
     C_QuestLog.GetQuestLogMajorFactionReputationRewards=function()return {{factionID=54,rewardAmount=125}}end
     N.Search:Create();N.Search.filter.slot="INVTYPE_HEAD";N.Search:Toggle();W.time=.3;N.Search:Tick()
-    local c=N.Search.cards[1];assert(c.icons[1].row.itemID==123 and not (c.icons[2] and c.icons[2]:IsShown()) and c.footer[3].text=="Rep (partial)" and c.footerHits[3].value:find("125"))
+    local c=N.Search.cards[1];assert(c.icons[1].row.itemID==123 and not (c.icons[2] and c.icons[2]:IsShown()) and c.footer[1].text:find("125",1,true) and c.footerHits[1].value:find("125",1,true) and not c.footer[3]:IsShown())
 end)
 
 test("cold quest difficulty cannot be inferred from its recorded minimum",function()
@@ -202,9 +204,11 @@ test("authoritative native rewards suppress conflicting catalogue associations",
 end)
 
 test("asynchronous unrelated data preserves active inspection and context menus",function()
-    local N=open();N.Search.inspector.item={marker=true};N.Search.itemRequests[124]=true;W.Event("ITEM_DATA_LOAD_RESULT",124,true)
+    local N=open();N.Search.inspector.item={marker=true};N.Search.itemRequests[124]=true
+    W.catalogItems[124].name="Changed dagger";W.Event("ITEM_DATA_LOAD_RESULT",124,true)
     assert(N.Search.inspector.item and N.Search.dirty)
-    N.Search.inspector.item=nil;local c=N.Search.cards[1];N.Search:ContextMenu(c.row,c);local menu=W.openMenu;N.Search.questRequests[14]=true;W.Event("QUEST_DATA_LOAD_RESULT",14,true);assert(W.openMenu==menu and N.Search.dirty)
+    N.Search.inspector.item=nil;local c=N.Search.cards[1];N.Search:ContextMenu(c.row,c);local menu=W.openMenu;N.Search.questRequests[14]=true
+    W.quests[14].name="Changed weapon quest";W.Event("QUEST_DATA_LOAD_RESULT",14,true);assert(W.openMenu==menu and N.Search.dirty)
 end)
 
 test("cached non equipment rewards retain native names links and tooltips",function()
@@ -232,7 +236,7 @@ end)
 
 test("single giver cards do not add a chooser or shrink the location allocation",function()
     local N=open();local S=N.Search;local c=S.cards[1]
-    assert(not c.giver:IsShown() and c.location:GetWidth()==S.child:GetWidth()-16)
+    assert(not c.giver:IsShown() and c.location:GetWidth()>200 and c.location:GetWidth()<S.child:GetWidth()-16)
     S:ContextMenu(c.row,c);assert(#W.openMenu.root.entries==5)
 end)
 
@@ -250,10 +254,10 @@ end)
 
 test("disabled location actions expose distinct reasons and never copy a fabricated NPC name",function()
     local N=open();local S=N.Search;local c=S.cards[1];local tip=W.Object()
-    c.row.location={name="NPC 99",nameKnown=false};S:ContextMenu(c.row,c);local entries=W.openMenu.root.entries
+    c.row.location={npcID=99,name="NPC 99",nameKnown=false};S:ContextMenu(c.row,c);local entries=W.openMenu.root.entries
     assert(entries[1].enabled==false and entries[2].enabled==false and entries[4].enabled==false)
     entries[1].tooltip(tip);assert(tip.text:find("coordinates unavailable",1,true));entries[4].tooltip(tip);assert(tip.text:find("NPC name unavailable",1,true))
-    c.row.location={name="Phased giver",nameKnown=true,mapID=100,x=.2,y=.3,phase=true};S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
+    c.row.location={npcID=99,name="Phased giver",nameKnown=true,mapID=100,x=.2,y=.3,phase=true};S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
     assert(entries[1].enabled==false and entries[2].enabled and entries[4].enabled);entries[1].tooltip(tip);assert(tip.text:find("phase",1,true))
     c.row.location.phase=false;C_Map.CanSetUserWaypointOnMap=function()return false end;S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
     assert(entries[1].enabled==false);entries[1].tooltip(tip);assert(tip.text:find("cannot accept",1,true))
@@ -296,7 +300,7 @@ test("mixed old row heights settle newly visible third pass rows and final geome
     local filled={};local fill=S.Fill;S.Fill=function(self,card,row)filled[row.id]=true;return fill(self,card,row)end
     S.results=rows;S.expanded[3]=true;S.heights={[1]=250,[2]=350,[3]=190,[4]=149,[5]=105,[6]=193,[7]=105,[8]=149}
     S.frame:SetSize(560,400);S:LayoutResults();S:Scroll(0)
-    assert(filled[3] and S.heights[1]==105 and S.heights[2]==105 and S.heights[3]==149)
+    assert(filled[3] and S.heights[1]<105 and S.heights[2]<105 and S.heights[3]>S.heights[2])
     local y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
     assert(S.contentHeight==y and S.child:GetHeight()==y and S.maximum==y-242)
     for _,card in ipairs(S.cards)do if card:IsShown()then assert(card.point[3]==-S.positions[card.resultIndex])end end
@@ -311,5 +315,88 @@ end)
 test("pool refresh closes owned full text and footer tips before row reuse",function()
     local N=open();local S=N.Search;local c=S.cards[1];N.Adapter.Over=function()return true end
     c.titleHit:Fire("OnEnter");assert(S.textTooltip:IsShown());S:Render();assert(not S.textTooltip:IsShown())
-    c.footerHits[1]:Fire("OnEnter");assert(S.footerTooltip:IsShown());S:Render();assert(not S.footerTooltip:IsShown())
+    N.SearchModel.Reward=function() return {state="ready",items={items={}},choices={items={}},money={state="ready",value=50},xp={state="unavailable"},currencies={items={}},reputation={items={}}},{},false end
+    S:Fill(c,c.row);c.footerHits[1]:Fire("OnEnter");assert(S.footerTooltip:IsShown());S:Render();assert(not S.footerTooltip:IsShown())
+end)
+
+
+test("native filter menus survive quest refresh and input until selection or dismissal",function()
+    local N=open();local S=N.Search
+    local file=assert(io.open(ROOT.."/.work/current-api/Interface/AddOns/Blizzard_Menu/DropdownButton.lua","rb"))
+    local source=file:read("*a");file:close()
+    local body=assert(source:match("(function DropdownButtonMixin:OnMouseDown_Intrinsic%b()%s.-\nend)"))
+    DropdownButtonMixin={};assert(loadstring(body))()
+    local setScale=S.frame.SetScale
+    S.frame.SetScale=function(frame,value)setScale(frame,value);frame:Fire("OnSizeChanged")end
+    for _,dropdown in ipairs({S.slot,S.sort}) do
+        dropdown.CloseMenu=function(d)
+            if d.openNative then d.openNative:Close();d.openNative=nil end
+        end
+        dropdown.SetMenuOpen=function(d,show)
+            if show then
+                d.openNative=MenuUtil.CreateContextMenu(d,d.menuGenerator)
+            else d:CloseMenu() end
+        end
+        dropdown.IsMenuOpen=function(d)return d.openNative~=nil end
+        S.search:SetFocus();S.minimumInput:SetFocus()
+        DropdownButtonMixin.OnMouseDown_Intrinsic(dropdown)
+        dropdown:Fire("OnMouseDown","LeftButton")
+        local menu=W.openMenu;assert(menu and dropdown:IsMenuOpen() and not S.search.focused and not S.minimumInput.focused)
+        dropdown:Fire("OnMouseUp","LeftButton");assert(W.openMenu==menu)
+        for _,event in ipairs({"QUEST_LOG_UPDATE","PLAYER_EQUIPMENT_CHANGED","SPELLS_CHANGED","SKILL_LINES_CHANGED","ZONE_CHANGED","ZONE_CHANGED_NEW_AREA","UI_SCALE_CHANGED","DISPLAY_SIZE_CHANGED"}) do
+            W.Event(event);W.time=W.time+.2;S:Tick()
+            assert(W.openMenu==menu and dropdown:IsMenuOpen(),event.." dismissed native menu")
+        end
+        assert(not dropdown:GetScript("OnMouseUp"))
+        menu.root.entries[2].callback();assert(W.openMenu==nil)
+        if dropdown==S.slot then assert(S.filter.slot=="MISSING") else assert(S.filter.sort=="FIT") end
+        dropdown:SetMenuOpen(true);assert(W.openMenu)
+        -- Outside-click/Escape use the native close callback; hiding the owner
+        -- also releases menus. No addon timer closes them after opening.
+        dropdown:CloseMenu();assert(not W.openMenu)
+        dropdown:SetMenuOpen(true);S.frame:Hide();assert(not W.openMenu)
+        S:Toggle();W.time=W.time+.3;S:Tick()
+    end
+end)
+
+test("compact rows separate reward choices without squeezed item names",function()
+    local N=open();local S=N.Search;local c=S.cards[1]
+    N.SearchModel.Reward=function()
+        local one={itemID=123,name=string.rep("A long full item name ",6),state="ready",usable=true,texture=100,quality=2,quantity=3,kind="reward"}
+        local two={itemID=125,name="Choice",state="ready",usable=true,texture=100,quality=3,quantity=1,kind="choice"}
+        return {state="ready",items={items={one}},choices={items={two}},money={state="unavailable"},xp={state="ready",value=1250},currencies={items={{name="Tokens",amount=2,isChoice=false}}},reputation={items={}}},{},false
+    end
+    S:Fill(c,c.row)
+    assert(c.icons[1].group.text=="Guaranteed" and c.icons[2].group.text=="Choose one")
+    assert(c.icons[1].count.text=="3" and c.icons[1]:GetWidth()==28)
+    assert(not c.icons[1].name:IsShown() and c.icons[1].row.name:find("full item name",1,true))
+    assert(c.footer[1].text:find("1250 XP",1,true) and c.footer[1].text:find("Guaranteed: Tokens 2",1,true))
+    assert(not c.footer[1].text:find("unavailable",1,true))
+    local iconX=c.icons[1].point[2];assert(iconX>c.location:GetWidth()+8)
+    assert(c:GetHeight()<130)
+end)
+
+test("only known amounts and item starts render without fabricated giver or zero",function()
+    local N=open();local S=N.Search;local c=S.cards[1]
+    N.Catalog.locations[9]={{itemID=123,name="A Scroll",nameKnown=true}}
+    c.row.items={};c.row.evidence=nil
+    N.SearchModel.Reward=function()return {state="ready",items={items={}},choices={items={}},money={state="unavailable"},xp={state="ready",value=900},currencies={items={}},reputation={items={}}},{},false end
+    S:Fill(c,c.row)
+    assert(c.location.text=="Starts from A Scroll" and c.footer[1].text=="900 XP")
+    assert(c:GetHeight()<70 and c.location:GetWidth()==S.child:GetWidth()-16)
+    assert(not c.evidence:IsShown() and not c.footer[2]:IsShown())
+end)
+
+
+test("location actions preserve item and object starter identities",function()
+    local N=open();local S=N.Search;local c=S.cards[1]
+    for _,spec in ipairs({{itemID=100,name="Starting Scroll",nameKnown=true},{objectID=200,name="Wanted Poster",nameKnown=true}}) do
+        c.row.location=spec;S:ContextMenu(c.row,c)
+        local entry=W.openMenu.root.entries[4]
+        assert(entry.enabled and entry.label==(spec.itemID and "Copy item name" or "Copy object name"))
+        assert(not W.openMenu.root.entries[1].enabled)
+        entry.callback();assert(S.copyEdit.text==spec.name)
+    end
+    c.row.location={name="Unproven label",nameKnown=true};S:ContextMenu(c.row,c)
+    assert(not W.openMenu.root.entries[4].enabled)
 end)

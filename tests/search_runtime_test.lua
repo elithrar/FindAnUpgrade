@@ -3,7 +3,7 @@ PASSED=0
 local function test(name,fn) fn(); PASSED=PASSED+1; print("PASS "..name) end
 local function setup(count,cold,unknown)
     local N=W.Init(); local quests={}; W.cached={}; W.itemLoads={}; W.questLoads={}; W.rewardReady=false
-    for i=1,count do quests[i]={id=i,title="Recorded "..i,items={{itemID=1000+i,name="Recorded item "..i}}}; W.cached[1000+i]=not cold end
+    for i=1,count do quests[i]={id=i,title="Recorded "..i,items={{itemID=1000+i,name="Recorded item "..i}},locations={{npcID=54001,name="Recorded giver"}}}; W.cached[1000+i]=not cold end
     N.CatalogData={schemaVersion=1,quests=quests}
     C_QuestLog.GetTitleForQuestID=function(id) if not unknown then return "Quest "..id end end
     C_QuestLog.GetQuestDifficultyLevel=function() if not unknown then return 20 end end
@@ -57,13 +57,13 @@ test("visible reward preloads get fair turns during cold catalogue hydration",fu
     assert(firstReward and firstReward<1.2 and total(W.rewardRequests)>0 and total(W.questLoads)>20)
     assert(total(W.questLoads)+total(W.rewardRequests)<=64)
 end)
-test("data callbacks refresh during a sustained burst instead of sliding forever",function()
+test("one item readiness change refreshes once during a sustained duplicate burst",function()
     local N=setup(3,true); local count=0; local refresh=N.Search.Refresh
     N.Search.Refresh=function(self) count=count+1; return refresh(self) end
     W.cached[1001]=true
     for _=1,100 do W.time=W.time+.1; W.Event("ITEM_DATA_LOAD_RESULT",1001,true); N.Search:Tick() end
     W.time=W.time+.3; N.Search:Tick()
-    assert(count>=20 and N.SearchModel.cache[1001].state=="ready")
+    assert(count==1 and N.SearchModel.cache[1001].state=="ready")
 end)
 test("item completion while hidden clears pending metadata before reopening",function()
     local N=setup(3,true); assert(N.SearchModel.cache[1001].state=="pending")
@@ -140,4 +140,12 @@ test("finder honors quest colors tint strength scale and immediate defaults",fun
     assert(c.backdropColor[1]>subtle and c.backdropColor[1]<.20 and c.backdropColor[1]>c.backdropColor[2] and c.backdropColor[2]>c.backdropColor[3])
     UIParent.width=500; UIParent.height=350; N.Core:Change("scale",1.2)
     assert(N.Search.frame.scale*N.Search.frame:GetWidth()<=476 and N.Search.frame.scale*N.Search.frame:GetHeight()<=326)
+end)
+
+
+test("unchanged background quest events perform no query or refresh",function()
+    local N=setup(3,false);local calls=0;local refresh=N.Search.Refresh
+    N.Search.Refresh=function(self)calls=calls+1;return refresh(self)end
+    for _=1,100 do W.time=W.time+.1;W.Event("QUEST_LOG_UPDATE");N.Search:Tick() end
+    W.time=W.time+.3;N.Search:Tick();assert(calls==0)
 end)

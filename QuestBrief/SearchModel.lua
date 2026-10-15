@@ -1,28 +1,87 @@
 local _, N = ...
 local M,A=N.Model,N.Adapter
 local S={cache={},usability={},currentItems={},currentStamp={}}; N.SearchModel=S
-S.slots={{"ALL","All slots"},{"MISSING","Empty slots"},{"INVTYPE_HEAD","Head"},{"INVTYPE_NECK","Neck"},{"INVTYPE_SHOULDER","Shoulder"},{"INVTYPE_CLOAK","Back"},{"CHEST","Chest"},{"INVTYPE_WRIST","Wrist"},{"INVTYPE_HAND","Hands"},{"INVTYPE_WAIST","Waist"},{"INVTYPE_LEGS","Legs"},{"INVTYPE_FEET","Feet"},{"INVTYPE_FINGER","Ring"},{"INVTYPE_TRINKET","Trinket"},{"WEAPON","Weapon"},{"OFFHAND","Off hand"},{"RANGED","Ranged"}}
+S.slots={{"ALL","All rewards"},{"MISSING","Empty slots"},{"INVTYPE_HEAD","Head"},{"INVTYPE_NECK","Neck"},{"INVTYPE_SHOULDER","Shoulder"},{"INVTYPE_CLOAK","Back"},{"CHEST","Chest"},{"INVTYPE_WRIST","Wrist"},{"INVTYPE_HAND","Hands"},{"INVTYPE_WAIST","Waist"},{"INVTYPE_LEGS","Legs"},{"INVTYPE_FEET","Feet"},{"INVTYPE_FINGER","Ring"},{"INVTYPE_TRINKET","Trinket"},{"WEAPON","Weapon"},{"OFFHAND","Off hand"},{"RANGED","Ranged"}}
 local function returns(fn,...)
     if type(fn)~="function" then return end
     local function pack(...) return {n=select("#",...),...} end
     local values=pack(pcall(fn,...)); if values[1] then return unpack(values,2,values.n) end
 end
+function S:InvalidateQuest(id)
+    id=M.QuestId(id); if not id then return false end
+    self.currentItems[id],self.currentStamp[id],self.usability[id]=nil,nil,nil
+    return true
+end
 function S:Context()
-    return N.Providers.Context()
+    local context=N.Providers.Context(); context.nativeOffers={}
+    local map=M.QuestId(A.Call(C_Map and C_Map.GetBestMapForUnit,"player"))
+    local offers=map and A.Call(C_QuestLine and C_QuestLine.GetAvailableQuestLines,map)
+    if M.Readable(offers) and type(offers)=="table" and #offers<=256 then
+        for _,offer in ipairs(offers) do
+            if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID) and M.Readable(offer.inProgress) and offer.inProgress==false then
+                context.nativeOffers[offer.questID]="native-map-available"
+            end
+        end
+    end
+    local gossip=N.Sources and N.Sources.gossip
+    if gossip and not (N.QuestState and type(N.QuestState.NativeOffers)=="function") and gossip.guid==M.Text(A.Call(UnitGUID,"npc")) then
+        local available=A.Call(C_GossipInfo and C_GossipInfo.GetAvailableQuests)
+        if M.Readable(available) and type(available)=="table" and #available<=256 then
+            for _,offer in ipairs(available) do
+                if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID) then context.nativeOffers[offer.questID]="native-available" end
+            end
+        end
+    end
+    local current=N.QuestState and A.Call(N.QuestState.NativeOffers,N.QuestState)
+    if M.Readable(current) and type(current)=="table" then
+        for id,proof in pairs(current) do
+            if M.QuestId(id) and (proof=="native-active" or proof=="native-ready" or proof=="native-available" or proof=="native-map-available") then context.nativeOffers[id]=proof end
+        end
+    end
+    return context
 end
 function S:Eligibility(row,context)
-    local availability=N.Providers.Availability(row,context)
+    local proof=context and context.nativeOffers and context.nativeOffers[row.id]
+    local availability=N.Providers.Availability(proof and {id=row.id,source=row.source,availabilityProof=proof} or row,context)
     local source=row.source or {}
-    if source.confirmation and source.confirmation~="published" or source.questKind=="hidden-trigger" then
-        local native=availability.authority=="native-log" or availability.authority=="native-gossip" or availability.authority=="native-map"
-        if not native or (availability.state~="active" and availability.state~="ready" and availability.state~="available") then
-            return false,"Forever availability unconfirmed"
+    if N.Providers.RequiresNativeProof(source) then
+        if not N.Providers.HasNativeProof(availability) then
+            return false,"Forever availability unconfirmed",availability
         end
     end
     -- The finder can inspect a recorded reward above the player's current
     -- minimum level, with the actual recorded requirement kept visible.
-    if availability.authority=="recorded-level" then return true,availability.label end
-    return availability.state~="blocked" and availability.state~="completed",availability.label
+    if availability.authority=="recorded-level" then return true,availability.label,availability end
+    return availability.state~="blocked" and availability.state~="completed",availability.label,availability
+end
+function S:StartPath(row,context,availability)
+    if availability and N.Providers.HasNativeProof(availability) then return true end
+    for _,location in ipairs(row.source and row.source.locations or {}) do
+        if (not location.faction or location.faction==context.faction) and (M.QuestId(location.npcID) or M.QuestId(location.objectID) or M.QuestId(location.itemID)) then return true end
+    end
+    return false
+end
+local function positive(value) return M.Number(value) and value>0 end
+function S:Benefit(row)
+    local current=self.currentItems[row.id]
+    if current then return current.benefit==true end
+    local values=row.source and row.source.rewardValues or {}
+    if positive(values.xp) or positive(values.money) then return true end
+    for _,entry in ipairs(N.Rewards.PublishedReputation(values.reputation)) do if positive(entry.amount) then return true end end
+    return false
+end
+local function rewardBenefit(reward)
+    if reward.xp.state=="ready" and positive(reward.xp.value) or reward.money.state=="ready" and positive(reward.money.value) then return true end
+    for _,entry in ipairs(reward.reputation.items or {}) do
+        if positive(entry.amount) then
+            local faction=entry.factionID and A.Call(C_Reputation and C_Reputation.GetFactionDataByID,entry.factionID)
+            local name=M.Text(entry.name) or M.Readable(faction) and type(faction)=="table" and M.Text(faction.name)
+                or entry.factionID and M.Text(A.Call(GetFactionInfoByID,entry.factionID))
+            if name then return true end
+        end
+    end
+    for _,entry in ipairs(reward.currencies.items or {}) do if M.Text(entry.name) and positive(entry.amount) then return true end end
+    return false
 end
 function S:Item(meta)
     local id=meta.itemID
@@ -70,13 +129,20 @@ function S.EmptySlot(slot)
 end
 function S:Query(filter)
     local out={}; self.needed={}; self.questNeeded={}; self.unknownLevels=0; local needSet={}; local context=self:Context(); local query=(filter.query or ""):lower()
+    local currentCategories=filter.sort=="ZONE" and N.Catalog:CurrentCategories() or {}
     if not M.Number(context.level) or context.level<1 then return out,"Player level unavailable" end
     for _,record in ipairs(N.Catalog.order) do
+        local candidateEligible,candidateNote,candidateAvailability
+        if N.Providers.RequiresNativeProof(record.source) then candidateEligible,candidateNote,candidateAvailability=self:Eligibility(record,context) end
+        -- Cache hydration is not availability evidence. Do not load historical
+        -- candidates or hidden trackers merely because they have a static row.
+        if candidateEligible~=false then
         if not N.Catalog:Metadata(record,context.level) then self.questNeeded[#self.questNeeded+1]=record.id end
         if not M.Number(record.level) or record.level<1 then self.unknownLevels=self.unknownLevels+1 end
         if M.Number(record.level) and record.level>=filter.minimum and record.level<=filter.maximum then
-            local eligible,note=self:Eligibility(record,context)
-            if eligible then
+            local eligible,note,availability=candidateEligible,candidateNote,candidateAvailability
+            if eligible==nil then eligible,note,availability=self:Eligibility(record,context) end
+            if eligible and self:StartPath(record,context,availability) then
                 if not self.currentItems[record.id] and A.Call(HaveQuestRewardData,record.id)==true then self:Reward(record) end
                 local match=query=="" or (record.title or ""):lower():find(query,1,true) or tostring(record.id):find(query,1,true)
                 local items={}
@@ -88,11 +154,17 @@ function S:Query(filter)
                         items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)
                     end
                 end
-                if match and #items>0 then out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,fit=math.abs(record.level-context.level)} end
+                if match and (#items>0 or filter.slot=="ALL" and self:Benefit(record)) then
+                    local category=N.Catalog:Category(record.id)
+                    out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,fit=math.abs(record.level-context.level),
+                        category=category and category.name,currentZone=category and currentCategories[category.name]==true or false}
+                end
             end
+        end
         end
     end
     table.sort(out,function(a,b)
+        if filter.sort=="ZONE" and a.currentZone~=b.currentZone then return a.currentZone end
         if filter.sort=="LEVEL" and a.level~=b.level then return a.level<b.level end
         if filter.sort~="LEVEL" and a.fit~=b.fit then return a.fit<b.fit end
         if (a.title or "")~=(b.title or "") then return (a.title or "")<(b.title or "") end
@@ -113,7 +185,9 @@ function S:Reward(row)
             end
         end end
         table.sort(stamp); stamp=table.concat(stamp,",")
-        changed=self.currentStamp[row.id]~=stamp; self.currentStamp[row.id],self.currentItems[row.id]=stamp,items
+        items.benefit=rewardBenefit(reward)
+        changed=self.currentStamp[row.id]~=stamp or self.currentItems[row.id] and self.currentItems[row.id].benefit~=items.benefit
+        self.currentStamp[row.id],self.currentItems[row.id]=stamp,items
     elseif self.currentItems[row.id] then self.currentItems[row.id],self.currentStamp[row.id]=nil,nil; changed=true end
     for _,group in ipairs({reward.items,reward.choices}) do for _,item in ipairs(group.items or {}) do if item.state=="ready" then
         verified[item.itemID]=true; changed=changed or self.usability[row.id][item.itemID]~=item.usable; self.usability[row.id][item.itemID]=item.usable

@@ -44941,6 +44941,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 250
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -44971,6 +44975,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 250
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45001,6 +45009,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45053,6 +45065,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45098,6 +45114,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45158,6 +45178,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45314,6 +45338,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 250
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45389,6 +45417,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45419,6 +45451,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 250
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -45449,6 +45485,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -61212,6 +61252,7 @@
       "minimum": 28,
       "faction": "Both",
       "xp": 2700,
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/2945",
         "sha256": "49158e7e0bfece5843569f2e11b9f52845b76265f958576863e939905a6dd4b7",
@@ -61298,6 +61339,7 @@
       "minimum": 28,
       "faction": "Alliance",
       "xp": 2750,
+      "moneyCost": 13000,
       "reputation": [
         {
           "name": "Ironforge",
@@ -61364,6 +61406,7 @@
       "minimum": 28,
       "faction": "Horde",
       "xp": 2750,
+      "moneyCost": 13000,
       "reputation": [
         {
           "name": "Orgrimmar",
@@ -61393,6 +61436,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/2951",
         "sha256": "5fc6c4e585021f94e1971a85c71c77aaf0fa3bad7c4bd15ad653253b192950d6",
@@ -61456,6 +61500,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/2953",
         "sha256": "b8eaa29c2e58e6bc0be5368aae9ed9464a71296aa10db219b7d107de18530de0",
@@ -68431,6 +68476,7 @@
       "level": 47,
       "minimum": 30,
       "faction": "Both",
+      "moneyCost": 20000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/3644",
         "sha256": "945f3c55e6c5f9d2975ac72ed44e8ba27847d3b17dc00385242e6b42c5e8e888",
@@ -68462,6 +68508,7 @@
       "level": 47,
       "minimum": 30,
       "faction": "Both",
+      "moneyCost": 20000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/3645",
         "sha256": "6ccd9b3411b23c65881f42be35f394ec526203b8a0ca249d0e5d95f02afaea4a",
@@ -68493,6 +68540,7 @@
       "level": 47,
       "minimum": 30,
       "faction": "Both",
+      "moneyCost": 20000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/3646",
         "sha256": "c2b12c6a6804f99437964d5004ff27b9b52244d87e56ab407b84af8ec01ab1d2",
@@ -68524,6 +68572,7 @@
       "level": 47,
       "minimum": 30,
       "faction": "Alliance",
+      "moneyCost": 20000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/3647",
         "sha256": "47f8bc868fb32b5d632beadd3ee97087ec4152a9417c319451d6e839d75daecd",
@@ -74906,6 +74955,7 @@
       "level": 55,
       "minimum": 50,
       "faction": "Both",
+      "moneyCost": 300000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4463",
         "sha256": "b8ae667c0c71ce6119cebbe8c2b3d7f52fd7ad14485d34d70d1267629ea8ba95",
@@ -75032,6 +75082,7 @@
       "level": 55,
       "minimum": 50,
       "faction": "Both",
+      "moneyCost": 300000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4481",
         "sha256": "3be4b53802234ccfff8e884ce56bcd217a9ca5ee0d6e0989b184768fdbf3b096",
@@ -75063,6 +75114,7 @@
       "level": 55,
       "minimum": 50,
       "faction": "Both",
+      "moneyCost": 300000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4482",
         "sha256": "f52c6d19673dcebfa4e5cf86793ab25744f0f893993ea1034596339c7c25d31f",
@@ -75094,6 +75146,7 @@
       "level": 55,
       "minimum": 50,
       "faction": "Both",
+      "moneyCost": 300000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4483",
         "sha256": "3a3c24e235a0e25da3e6cbff4f4e43e2644f91de9e7d986366f8e8dbf7e520be",
@@ -75153,6 +75206,7 @@
       "level": 55,
       "minimum": 50,
       "faction": "Both",
+      "moneyCost": 300000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4484",
         "sha256": "6668126824b0573cc1ed6cdc6efee32614d4b08e0acf57f87381de140897d7ec",
@@ -76129,6 +76183,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4601",
         "sha256": "a6f73cd32ef1777e1e5728023793b0e6ba99475b3f152f0373a274924b0f46cb",
@@ -76152,6 +76207,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4602",
         "sha256": "11a6d58acd58ad02f2d4d4b27c9c459bacba312525447e800d52b54f8225c1d0",
@@ -76183,6 +76239,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4603",
         "sha256": "662ae8ead3eca1146715f647ee1cc02938c89be0bf2d504ea0885d6de592f208",
@@ -76214,6 +76271,7 @@
       "level": 30,
       "minimum": 25,
       "faction": "Both",
+      "moneyCost": 10300,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/4604",
         "sha256": "27753f438d7c3cc0efa08b85a076ff1eac70561397cfd073f6b41800482af9f7",
@@ -80658,6 +80716,7 @@
       "level": 60,
       "minimum": 57,
       "faction": "Both",
+      "moneyCost": 500000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5063",
         "sha256": "160faee76884ffde975da9bc5569a1399080b749970b6c972303fb2c3c0c9a5b",
@@ -80795,6 +80854,7 @@
       "level": 60,
       "minimum": 57,
       "faction": "Both",
+      "moneyCost": 500000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5067",
         "sha256": "b3bc904bc2bdc0707ab68d1bfd2294eef450f44de57f1a5a904be21231adcbc6",
@@ -80826,6 +80886,7 @@
       "level": 60,
       "minimum": 57,
       "faction": "Both",
+      "moneyCost": 500000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5068",
         "sha256": "68d77a046934010e2221e8da1e0f4358128fe328d5ab49dcf10760204fc47402",
@@ -86309,6 +86370,7 @@
       "minimum": 55,
       "faction": "Horde",
       "xp": 600,
+      "moneyCost": 150000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5514",
         "sha256": "fabbad3f2d7b16a347844e926a7182c2e8b23777e964c6a3ddb1383afa9cb1f4",
@@ -86876,6 +86938,7 @@
       "level": 58,
       "minimum": 53,
       "faction": "Both",
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5532",
         "sha256": "29638e7c0e71fb95e9e3a5bf5e3841ff97d2e4b564fc7ec41eaadfe19c873131",
@@ -87033,6 +87096,7 @@
       "minimum": 55,
       "faction": "Alliance",
       "xp": 600,
+      "moneyCost": 150000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/5538",
         "sha256": "1ab2babc73ef1cff8155fded626426da025dedce537bb9a27193401a20ec2710",
@@ -103855,6 +103919,7 @@
       "minimum": 60,
       "faction": "Alliance",
       "xp": 660,
+      "moneyCost": 1500000,
       "reputation": [
         {
           "name": "Ironforge",
@@ -103999,6 +104064,7 @@
       "minimum": 60,
       "faction": "Alliance",
       "xp": 1650,
+      "moneyCost": 1500000,
       "reputation": [
         {
           "name": "Ironforge",
@@ -104091,6 +104157,7 @@
       "minimum": 60,
       "faction": "Alliance",
       "xp": 660,
+      "moneyCost": 500000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/7645",
         "sha256": "3c0e3180317643a899cc4acb9b950d07f5af4c6f5ed48e68981c56239e6ce610",
@@ -117372,6 +117439,10 @@
         {
           "name": "Cenarion Circle",
           "amount": 50
+        },
+        {
+          "name": "Leatherworking - Tribal",
+          "amount": 0
         }
       ],
       "source": {
@@ -133785,6 +133856,7 @@
       "level": 60,
       "minimum": 40,
       "faction": "Alliance",
+      "moneyCost": 50000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8763",
         "sha256": "0945b22bfa019af2bc88ee59196d7e745028e0414a5664c77d09c780da1959ac",
@@ -135128,6 +135200,7 @@
       "level": 60,
       "minimum": 40,
       "faction": "Horde",
+      "moneyCost": 50000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8799",
         "sha256": "f439fe7b3009cfa6a114cf11454fdae2957de0a2de935d9c76c4347addf74433",
@@ -138464,6 +138537,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8905",
         "sha256": "aebd0d8bc112e24203f39d1a9ce65b0de1474e22a160544e10e0e7eb38ad0c8b",
@@ -138496,6 +138570,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8906",
         "sha256": "dceb9aaa1d365b1f60069e7189f82c7cff0b77a6b778ba1d4aeed3f90f1db775",
@@ -138528,6 +138603,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8907",
         "sha256": "bef0af45c806873e6a6e4b5a4c076eeef39578b982e1d87d8365fea34aa5b813",
@@ -138560,6 +138636,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8908",
         "sha256": "23b153da69e62cb99cadc448bea88c794d1b7812d22fb4a9c639f979000236cd",
@@ -138592,6 +138669,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8909",
         "sha256": "de7c51cb2b2a2efa244a08df5dde72643af563b3f34c994d9ef8ea54de32f246",
@@ -138624,6 +138702,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8910",
         "sha256": "e0edb51801186e400687e1f0bac80bc8ca58d218970f4fbdc57e865d53375687",
@@ -138656,6 +138735,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8911",
         "sha256": "628c70d5a4de0dc2ac79ad9a2c039ee37cd8c9c41cbb277aec3c6060cc3dcc39",
@@ -138688,6 +138768,7 @@
       "minimum": 58,
       "faction": "Alliance",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8912",
         "sha256": "e083ad0aa6adea3cc2a581e43d2e8b951fc68d4afc700789e6c253a25b0ffd36",
@@ -138720,6 +138801,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8913",
         "sha256": "abc0871c9b872c939f8bb7ecf11931fcd6f003f5fdb0903053be9bd84869658d",
@@ -138752,6 +138834,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8914",
         "sha256": "4609026c77d10d9f8742307b4b8cbc73790ad2b548120f63dae440967b667f74",
@@ -138784,6 +138867,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8915",
         "sha256": "ce7001420d688222f8f5084d931ba9f340edb8f1ccce0502b5d313e9353e213a",
@@ -138816,6 +138900,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8916",
         "sha256": "703765f24496be3a8918ba4585d50d288e161f7c8bcc7cb7249682f55105dd41",
@@ -138848,6 +138933,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8917",
         "sha256": "cd06dfd6d4c8e0ecf96c39e8dc640bfb3745eb154dfedf60d47705e2c0fe17d7",
@@ -138880,6 +138966,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8918",
         "sha256": "663a18c61682c23b8222a5a7d4f32d9f7affd15793e5f8a784bccc3142d7925d",
@@ -138912,6 +138999,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8919",
         "sha256": "79061448e7d95280d9bcd4d310224f715b151ecb2f34111cb11cd2554c0d93a2",
@@ -138944,6 +139032,7 @@
       "minimum": 58,
       "faction": "Horde",
       "xp": 6600,
+      "moneyCost": 200000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8920",
         "sha256": "736d6596b6297428e777b5fbabe2699a21b9e836f93c6f226f54d8e08b5e30c0",
@@ -138976,6 +139065,7 @@
       "minimum": 58,
       "faction": "Both",
       "xp": 6600,
+      "moneyCost": 400000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/8921",
         "sha256": "cdd4cd188c787ce419a17333de8ec2cf350edd5a914ab68f35a1d45e051c5bef",
@@ -144217,6 +144307,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 1000000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -144254,6 +144345,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 750000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -144291,6 +144383,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 500000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -144328,6 +144421,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 250000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -144402,6 +144496,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 150000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -144439,6 +144534,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 100000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -145805,6 +145901,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 600000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -145834,6 +145931,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 300000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -147653,6 +147751,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 300000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -147690,6 +147789,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 300000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -148393,6 +148493,7 @@
       "minimum": 60,
       "faction": "Both",
       "xp": 6600,
+      "moneyCost": 300000,
       "reputation": [
         {
           "name": "Argent Dawn",
@@ -148453,6 +148554,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9234",
         "sha256": "26849372f514e46b92fab8f8c85fce93e8ddaddd9c69b0a62bfe6f478fd50c12",
@@ -148484,6 +148586,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9235",
         "sha256": "4a3464fad1e87c2ab6dc6192b815cf1910d756cf8bb028a4a106afc610ed292f",
@@ -148515,6 +148618,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 3000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9236",
         "sha256": "555dddeb731be7512a2ffb7d0ac364059b99ea3288359702b49ad0a32ca04f9d",
@@ -148546,6 +148650,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9237",
         "sha256": "1169c2bb40216897239835dd0168c29725d1de3ee1b5b93f4980524ce482442b",
@@ -148577,6 +148682,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Alliance",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9238",
         "sha256": "f1b88060a859741e10e3aec936867e8ca2b8baaa72dbc17f4814dbb781388deb",
@@ -148608,6 +148714,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Alliance",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9239",
         "sha256": "91829b64554357e64f6cd8bb9cc947f35c4a4b59976f34fef90a7cd934bed034",
@@ -148639,6 +148746,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Alliance",
+      "moneyCost": 3000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9240",
         "sha256": "20045dcbd27664e0f8b1faf9c9cf989932835c16fbfa8642a67e5d4ab349a54f",
@@ -148670,6 +148778,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9241",
         "sha256": "69933fe3b531f7ea8ea5939b4fde5be058e9089ff469ad7ee0d93de15762f102",
@@ -148701,6 +148810,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9242",
         "sha256": "029355fa7efd83fc9a897e94f70481a07bb5d8d5f02e25764419ebac98ec8b5d",
@@ -148732,6 +148842,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 3000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9243",
         "sha256": "33ac3566bbd48546841c7ba3aee911f5344d7b39b14f008898e19714a5a1f28a",
@@ -148763,6 +148874,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9244",
         "sha256": "1164dadb3129b464baf343f5a4b534176727963b13e865fab50c9364b80152b8",
@@ -148794,6 +148906,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 2000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9245",
         "sha256": "71301a25f23a4ef6345b3bc239ff8ef7bfe7d283cf6f4c3a1044a8955c989d04",
@@ -148825,6 +148938,7 @@
       "level": 60,
       "minimum": 60,
       "faction": "Both",
+      "moneyCost": 3000000,
       "source": {
         "url": "https://www.forevervsclassic.com/quests/9246",
         "sha256": "cc6d70a4d6545666104016e80ff1cd732a371ecd6216cdd10415d9739767c838",
@@ -152781,6 +152895,14 @@
         {
           "name": "Ironforge",
           "amount": 200
+        },
+        {
+          "name": "Stormwind",
+          "amount": 0
+        },
+        {
+          "name": "Darnassus",
+          "amount": 0
         }
       ],
       "source": {
@@ -152955,6 +153077,14 @@
         {
           "name": "Silverwing Sentinels",
           "amount": 1000
+        },
+        {
+          "name": "Stormwind",
+          "amount": 0
+        },
+        {
+          "name": "Darnassus",
+          "amount": 0
         }
       ],
       "source": {
@@ -153223,6 +153353,14 @@
         {
           "name": "Warsong Outriders",
           "amount": 1000
+        },
+        {
+          "name": "Stormwind",
+          "amount": 0
+        },
+        {
+          "name": "Darnassus",
+          "amount": 0
         }
       ],
       "source": {
@@ -157303,7 +157441,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157312,6 +157450,16 @@
       "level": 60,
       "minimum": 1,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91899",
         "sha256": "30e55f0594d85449b15137c71b5aaffb4ad2a6dd75fd31171c59b40e2d606e98",
@@ -157326,7 +157474,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157335,6 +157483,16 @@
       "level": 60,
       "minimum": 1,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91900",
         "sha256": "0292212328f8393c4eb92af8d2d2c3f52d43a0650ec87f406432b495f118cab4",
@@ -157349,7 +157507,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157358,6 +157516,16 @@
       "level": 60,
       "minimum": 1,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91901",
         "sha256": "c5e3d6491362d1f5af8c083b9072cfb0ea611b1732f9704a920145b8aa1514ab",
@@ -157372,7 +157540,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157381,6 +157549,16 @@
       "level": 60,
       "minimum": 0,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91904",
         "sha256": "fb9452a0ef771bdd2eb810ea1afdf1815b5ded92e1725d63d13250e1080240b7",
@@ -157395,7 +157573,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157404,6 +157582,16 @@
       "level": 60,
       "minimum": 0,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91905",
         "sha256": "4e8abcc938bd6c2b00638dcadb622f0e12c7efa97761a5b8ac282f7460f1d3e1",
@@ -157418,7 +157606,7 @@
       "fieldStates": {
         "xp": "unknown",
         "money": "unknown",
-        "reputation": "unknown",
+        "reputation": "published",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -157427,6 +157615,16 @@
       "level": 60,
       "minimum": 0,
       "faction": "Both",
+      "reputation": [
+        {
+          "name": "Azeroth Commerce Authority",
+          "amount": 0
+        },
+        {
+          "name": "Durotar Supply and Logistics",
+          "amount": 0
+        }
+      ],
       "source": {
         "url": "https://www.forevervsclassic.com/quests/91906",
         "sha256": "16af11501439cfcb7453e5750286f57dd645a7e39a10707f459bf51b8fb2b17a",
@@ -160492,6 +160690,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -160816,6 +161018,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -160862,6 +161068,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -160891,6 +161101,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 750
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -160920,6 +161134,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 750
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -160966,6 +161184,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161012,6 +161234,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161058,6 +161284,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 1000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161218,6 +161448,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 125
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161249,6 +161483,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161279,6 +161517,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161309,6 +161551,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161546,6 +161792,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161666,6 +161916,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161696,6 +161950,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161869,6 +162127,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 125
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161899,6 +162161,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161963,6 +162229,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -161993,6 +162263,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162023,6 +162297,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162075,6 +162353,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162105,6 +162387,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162135,6 +162421,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162190,6 +162480,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162221,6 +162515,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162311,6 +162609,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162342,6 +162644,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162394,6 +162700,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 6000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162424,6 +162734,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162649,6 +162963,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 500
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162701,6 +163019,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 6000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162779,6 +163101,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 3000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -162809,6 +163135,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 3000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -171052,6 +171382,10 @@
         {
           "name": "Magram Clan Centaur",
           "amount": 3000
+        },
+        {
+          "name": "Gelkis Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {
@@ -171082,6 +171416,10 @@
         {
           "name": "Gelkis Clan Centaur",
           "amount": 3000
+        },
+        {
+          "name": "Magram Clan Centaur",
+          "amount": 0
         }
       ],
       "source": {

@@ -8,7 +8,7 @@ M.presets = {
 M.defaults = { version = 3, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
     accents = true, dialogTint = true, rewards = true, scale = 1,
-    launcher = true, launcherAngle = 200 }
+    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right" }
 
 function M.Readable(value)
     if not issecretvalue then return true end
@@ -44,6 +44,8 @@ function M.Load(saved)
     if M.Readable(saved.modifier) and (saved.modifier == "SHIFT" or saved.modifier == "CTRL" or saved.modifier == "ALT" or saved.modifier == "NONE") then profile.modifier = saved.modifier end
     if M.Number(saved.scale) then profile.scale = math.max(.8, math.min(1.2, saved.scale)) end
     if M.Number(saved.launcherAngle) then profile.launcherAngle=saved.launcherAngle%360 end
+    if M.Readable(saved.previewLayout) and (saved.previewLayout=="tooltip" or saved.previewLayout=="inspector") then profile.previewLayout=saved.previewLayout end
+    if M.Readable(saved.inspectionPosition) and (saved.inspectionPosition=="right" or saved.inspectionPosition=="tooltip") then profile.inspectionPosition=saved.inspectionPosition end
     return profile, false
 end
 function M.Status(id)

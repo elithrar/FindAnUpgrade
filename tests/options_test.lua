@@ -6,7 +6,7 @@ local function complete(N)
     local O=N.Options
     assert(O.frame and O.frame:IsShown() and O.content:IsShown())
     assert(O.texts[1].object:GetText()=="QuestBrief" and O.status)
-    assert(count(O.checks)==8 and #O.dropdowns==1 and count(O.sliders)==2 and count(O.edits)==2)
+    assert(count(O.checks)==8 and #O.dropdowns==3 and count(O.sliders)==2 and count(O.edits)==2)
     for _,entry in ipairs(O.texts) do assert(entry.object:GetFont()) end
     assert(#UISpecialFrames==1 and UISpecialFrames[1]=="QuestBriefOptions")
 end
@@ -33,7 +33,7 @@ test("slash options constructs complete controls with native font preconditions"
     assert(QuestBriefDB==saved)
     local frames=#W.frames
     SlashCmdList.QUESTBRIEF("options"); assert(not N.Options.frame:IsShown())
-    SlashCmdList.QUESTBRIEF(""); complete(N); assert(#W.frames==frames)
+    SlashCmdList.QUESTBRIEF("opts"); complete(N); assert(#W.frames==frames)
 end)
 
 test("first label failure leaves no blank options and retry reuses the named shell",function()
@@ -109,7 +109,7 @@ end)
 
 test("options use current XPIsland dialog sections and native radio dropdown",function()
     local N=W.Init(); SlashCmdList.QUESTBRIEF("opts"); local O=N.Options
-    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==398)
+    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==458)
     assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
     assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
     assert(#O.sections==2 and O.sections[1].point[2]==16 and O.sections[2].point[2]==316)
@@ -156,8 +156,8 @@ test("long native dropdown and checkbox text stays within allocated controls at 
     assert(O.frame:GetScale()>=.3 and O.frame:GetScale()<=1)
     local text=O.modifier.Text
     assert(text:GetStringWidth()*text:GetScale()<=229)
-    assert(text.point[4]*text:GetScale()==9 and text:GetHeight()*text:GetScale()==24)
+    assert(math.abs(text.point[4]*text:GetScale()-9)<.00001 and math.abs(text:GetHeight()*text:GetScale()-24)<.00001)
     local caption=O.checks.worldmap.Text
-    assert(caption:GetStringWidth()*caption:GetScale()<=250 and caption:GetHeight()*caption:GetScale()==24)
+    assert(caption:GetStringWidth()*caption:GetScale()<=250 and math.abs(caption:GetHeight()*caption:GetScale()-24)<.00001)
     assert(QuestBriefDB==N.Core.profile)
 end)

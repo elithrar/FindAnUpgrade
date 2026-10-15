@@ -4,7 +4,7 @@
   "inputs": {
     "public": {
       "path": "data/catalog-public-records.json",
-      "sha256": "8ecdd1d658bac889c924db075d00a989818370a5f8a85d167a6863d41f981d8f"
+      "sha256": "0f94c78db3ce71a824943457419222e635573d629f14664d62438e368113c91b"
     },
     "metadata": {
       "path": "data/catalog-metadata-records.json",
@@ -16,7 +16,7 @@
     },
     "primary": {
       "path": "data/catalog-primary-records.json",
-      "sha256": "39dacfdaa9499eab8ea2399e539a91166cb0464e0162c61dff7b704c03e55119"
+      "sha256": "f211f64b39029931518c34c33ca03142262f84de7bc00bb48e5c10ab032ee147"
     },
     "client": {
       "path": "data/catalog-client-evidence.json",
@@ -33,8 +33,12 @@
     "gaps": {
       "path": "data/catalog-gap-evidence.json",
       "sha256": "fd250a054b84f9df45e960181c89110350ca0ded5a6e0b18c52b29d107cdcb92"
+    },
+    "supplemental": {
+      "path": "data/catalog-supplemental-metadata.json",
+      "sha256": "e40f0a5b7d9f4e0dfc00d3f8c5a4203b9a30b6ffd4038ac3823ac62bcfc6a4a2"
     }
   },
   "classificationAuthority": "data/primary-statuses.json",
-  "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Current public item groups supersede historical associations. Retained primary pages independently challenge matching public rows. Missing fields stay unknown. Native cache identity is not decoded reward proof."
+  "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Missing fields stay unknown; native cache identity is not decoded reward proof."
 }

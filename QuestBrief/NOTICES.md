@@ -8,7 +8,8 @@ Blizzard textures, atlases, controls and game fonts are referenced from the inst
 
 Questie and QuestieDB are optional installed runtime providers. QuestBrief reads exposed quest identities and associations without bundling their code or database. Their separate packages retain their own licenses.
 
-The bundled classification table contains only exact quest IDs and normalized primary status labels from the user-approved version-1 evidence. The source package preserves that extract's identity, version and mapping rules in `data/primary-statuses.json` and `docs/PROVENANCE.md`. The original dataset is not included, and no third-party redistribution license is inferred for it. QuestBrief's BSD-3-Clause grant covers the extraction/generation code, not rights in underlying game content or source evidence.
+The bundled classification table contains exact quest IDs, normalized primary status labels and primary category labels from the user-approved evidence. The original 1,194-ID extract is preserved separately; the completed website selection supplies 2,919 exact variants, with a reconciled union of 2,931 classified IDs. The source package preserves normalized facts, identity, hashes and mapping rules in `data/primary-statuses.json`, `data/classification-source.json` and `docs/PROVENANCE.md`. Raw source pages are not included, and no third-party redistribution license is inferred. QuestBrief's BSD-3-Clause grant covers the extraction/generation code, not rights in underlying game content or source evidence.
+
 ## Bundled reward catalogue
 
 `Data/Catalog.lua` contains numeric quest/reward/giver/coordinate facts and short
@@ -21,7 +22,7 @@ The ATT source snapshot targets `1.60.1.69893`; QuestBrief targets official Fore
 and identification labels come from the explicitly labelled Forever columns of
 [Forever vs Classic](https://www.forevervsclassic.com/quests), collected on
 2026-10-15. Previously retained exact Forever Wowhead pages independently
-corroborate 135 records; no new Wowhead requests were made for this pass.
+corroborate 135 records; no new Wowhead pages were acquired for this pass.
 Only factual numeric fields and short identification labels are bundled, with
 URL/SHA-256 provenance in the source package. Raw HTML, quest prose, website
 scripts, artwork and client files are excluded. The repository's BSD license
@@ -39,3 +40,12 @@ are in the repository's `data/catalog-complete-source.json`,
 `tools/generate_catalog.py`. No ATT runtime, artwork, lore or raw harvest outputs
 are included. Original QuestBrief code retains the repository's BSD-3-Clause
 license; this attribution does not claim BSD authorship of the ATT-derived data.
+
+Selected supplemental numeric starter, restriction and coordinate facts and short
+identification labels come from [Questie/QuestieDB](https://github.com/Questie/QuestieDB)
+Forever 1.0.6, revision `36ca1ca86f6c1838de479c7c7452eb0a57d5c135`.
+`data/catalog-supplemental-metadata.json` retains archive, member and generated
+source receipts; `docs/STARTER-COORDINATE-RECOVERY.md` records the field policy.
+No Questie implementation, baked database, raw source or archive is bundled.
+No separate upstream license grant was found in that pinned artifact; the
+repository's BSD grant does not license its source dataset or game content.

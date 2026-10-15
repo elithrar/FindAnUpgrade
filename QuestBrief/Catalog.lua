@@ -16,17 +16,21 @@ function C:Invalidate(id)
     if id then local row=self.records[id]; if row then row.metadataReady=nil end
     else for _,row in ipairs(self.order) do row.metadataReady=nil end end
 end
-function C:Metadata(row,playerLevel)
+function C:Metadata(row,playerLevel,force)
     playerLevel=playerLevel or A.Call(UnitLevel,"player")
-    if row.metadataReady and row.metadataPlayerLevel==playerLevel then return true end
+    if not force and row.metadataReady and row.metadataPlayerLevel==playerLevel then return true,false end
+    local beforeTitle,beforeLevel=row.title,row.level
     local title=M.Text(A.Call(C_QuestLog and C_QuestLog.GetTitleForQuestID,row.id))
     local level=A.Call(C_QuestLog and C_QuestLog.GetQuestDifficultyLevel,row.id)
-    if title then row.title=title end
+    local source=row.source
+    local published=source and source.confirmation=="published"
+    local recordedTitle=published and M.Text(source.title) or nil
+    if title then row.title=title elseif recordedTitle then row.title=recordedTitle end
     if M.Number(level) and level>=1 and level<=200 and level==math.floor(level) then row.level=level
-    elseif row.source and row.source.confirmation=="published" and M.Number(row.source.level) and row.source.level>=1 then row.level=row.source.level
+    elseif published and M.Number(source.level) and source.level>=1 and source.level<=200 and source.level==math.floor(source.level) then row.level=source.level
     else row.level=nil end
-    row.metadataReady=title~=nil and row.level~=nil; row.metadataPlayerLevel=playerLevel
-    return row.metadataReady
+    row.metadataReady=(title~=nil or recordedTitle~=nil) and row.level~=nil; row.metadataPlayerLevel=playerLevel
+    return row.metadataReady,row.title~=beforeTitle or row.level~=beforeLevel
 end
 function C:Step()
     if not self.ids or self.done then return false end
@@ -67,4 +71,36 @@ function C:Location(id)
     local rows=self:Locations(id); local current=A.Call(C_Map and C_Map.GetBestMapForUnit,"player")
     for _,row in ipairs(rows) do if row.mapID==current and row.x then return row,#rows end end
     return rows[1],#rows
+end
+function C:Category(id)
+    local index=N.Data and N.Data.categoryById and N.Data.categoryById[id]
+    return index and N.Data.categories and N.Data.categories[index] or nil
+end
+function C:CurrentCategories()
+    local categories=N.Data and N.Data.categories or {}
+    local names={}
+    for _,category in ipairs(categories) do
+        local area=M.QuestId(category.sourceZoneID)
+        local name=area and M.Text(A.Call(C_Map and C_Map.GetAreaInfo,area))
+        if name then
+            local match=names[name]
+            if match and match.area~=area then match.ambiguous=true
+            elseif not match then names[name]={area=area,category=category.name} end
+        end
+    end
+    local map=M.QuestId(A.Call(C_Map and C_Map.GetBestMapForUnit,"player")); local seen={}
+    for _=1,8 do
+        if not map or seen[map] then break end
+        seen[map]=true
+        local info=A.Call(C_Map and C_Map.GetMapInfo,map)
+        if not M.Readable(info) or type(info)~="table" then break end
+        local name=M.Text(info.name); local match=name and names[name]
+        local zone=Enum and Enum.UIMapType and Enum.UIMapType.Zone
+        local dungeon=Enum and Enum.UIMapType and Enum.UIMapType.Dungeon
+        if match and not match.ambiguous and M.Number(info.mapType) and (zone and info.mapType==zone or dungeon and info.mapType==dungeon) then
+            return {[match.category]=true},name
+        end
+        map=M.QuestId(info.parentMapID)
+    end
+    return {},nil
 end

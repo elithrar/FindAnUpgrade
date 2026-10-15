@@ -58,14 +58,14 @@ function V:Card(index)
     local c = CreateFrame("Frame",nil,self.child,"TooltipBorderedFrameTemplate"); self.cards[index] = c
     c:SetWidth(320); c:EnableMouse(true)
     c.title, c.status, c.evidence, c.summary = text(c,true), text(c), text(c), text(c)
-    c.title:SetTextColor(1,1,1); c.title:SetPoint("TOPLEFT",8,-8)
+    c.title:SetTextColor(1,1,1); c.title:SetPoint("TOPLEFT",8,-6)
     c.status:SetTextColor(.83,.83,.83); c.evidence:SetTextColor(.7,.7,.72)
     c.groups = {}; c.icons = {}
     return c
 end
 function V:Icon(c,index)
     if c.icons[index] then return c.icons[index] end
-    local b = CreateFrame("Button",nil,c); c.icons[index] = b; b:SetSize(28,28)
+    local b = CreateFrame("Button",nil,c); c.icons[index] = b; b:SetSize(24,24)
     b.icon = b:CreateTexture(nil,"ARTWORK"); b.icon:SetAllPoints()
     b.border = b:CreateTexture(nil,"OVERLAY"); b.border:SetAllPoints(); b.border:SetTexture("Interface\\Common\\WhiteIconFrame")
     b.count = b:CreateFontString(nil,"OVERLAY","NumberFontNormalSmall"); b.count:SetPoint("BOTTOMRIGHT",-1,1); b.count:SetJustifyH("RIGHT")
@@ -86,15 +86,16 @@ function V:Group(c,key,label,group,y,nextIcon)
     local list = group.items
     if label then y=y+height(g.label,width,label,12)+3 else g.label:Hide() end
     local limit = g.expanded and #list or math.min(#list,8)
+    local columns=math.max(1,math.floor((width+4)/28))
     for i=1,limit do
         local row, b = list[i], self:Icon(c,nextIcon); nextIcon=nextIcon+1
-        b.row = row; b:ClearAllPoints(); b:SetPoint("TOPLEFT",8+((i-1)%8)*34,-y-math.floor((i-1)/8)*34)
+        b.row = row; b:ClearAllPoints(); b:SetPoint("TOPLEFT",8+((i-1)%columns)*28,-y-math.floor((i-1)/columns)*28)
         b.icon:SetTexture(row.texture or "Interface\\Icons\\INV_Misc_QuestionMark")
         local color = row.quality and ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[row.quality]
         b.border:SetVertexColor(color and color.r or .6,color and color.g or .6,color and color.b or .6)
         b.count:SetText(row.quantity and row.quantity > 1 and tostring(row.quantity) or ""); b:Show()
     end
-    y=y+math.ceil(limit/8)*34
+    y=y+math.ceil(limit/columns)*28-4
     if #list>8 then
         g.more:ClearAllPoints(); g.more:SetPoint("TOPLEFT",8,-y); g.more.text:SetText(g.expanded and "Fewer rewards" or "+" .. (#list-8) .. " rewards"); g.more:Show(); y=y+20
     else g.more:Hide() end
@@ -109,20 +110,23 @@ function V:Fill(c,row,profile)
     local width=c:GetWidth()-16
     local classification=profile.accents and M.Status(row.id)
     local suffix=classification=="verifiedNew" and " |cffffb36bNew|r" or classification=="verifiedUpdated" and " |cff9fdf9fModified|r" or ""
-    local y=8+height(c.title,width,title..suffix,14)
+    local y=6+height(c.title,width,title..suffix,14)
     c.status:Hide() -- Classification is inline; unchanged/unknown IDs use no extra row.
-    c.evidence:ClearAllPoints(); c.evidence:SetPoint("TOPLEFT",8,-y-2)
-    local evidence=height(c.evidence,width,row.evidence,12)
-    if evidence>0 then y=y+evidence+2 end
-    y=y+4
+    -- The source has already established eligibility. Repeating Available or
+    -- In quest log on its own line made every small preview unnecessarily tall.
+    c.evidence:Hide()
+    local rewardY=y+3
+    y=rewardY
     local reward=profile.rewards and N.Rewards.Read(row.id); local nextIcon=1
     local pending=reward and (reward.state=="pending" or reward.items.state=="pending" or reward.choices.state=="pending")
     if pending and not N.Hover.timedOut then N.Hover.pending=true end
-    local lines={}
+    local lines={}; local inlineWidth=0
     if reward then
         local guaranteed,choices=#reward.items.items,#reward.choices.items
         local choiceCurrency=false
         for _,currency in ipairs(reward.currencies.items or {}) do if currency.isChoice then choiceCurrency=true end end
+        if guaranteed>0 and guaranteed<=4 and choices==0 and not choiceCurrency then inlineWidth=guaranteed*28+8
+        elseif choices>0 and choices<=4 and guaranteed==0 then inlineWidth=choices*28+8 end
         if guaranteed>0 then y,nextIcon=self:Group(c,"items",(choices>0 or choiceCurrency) and "Guaranteed" or nil,reward.items,y,nextIcon) end
         if choices>0 then y,nextIcon=self:Group(c,"choices","Choose one",reward.choices,y,nextIcon) end
         local values={}
@@ -137,8 +141,16 @@ function V:Fill(c,row,profile)
         end
         if pending and not N.Hover.timedOut and guaranteed+choices==0 and #lines==0 then lines[#lines+1]="Loading rewards…" end
     end
-    c.summary:ClearAllPoints(); c.summary:SetPoint("TOPLEFT",8,-y)
-    y=y+height(c.summary,width,table.concat(lines,"\n"),12)+8
+    local inline=inlineWidth>0 and width-inlineWidth>=100 and #lines>0
+    local summaryX,summaryY=inline and 8+inlineWidth or 8,inline and rewardY or y
+    c.summary:ClearAllPoints(); c.summary:SetPoint("TOPLEFT",summaryX,-summaryY)
+    local summaryHeight=height(c.summary,inline and width-inlineWidth or width,table.concat(lines,"\n"),12)
+    y=math.max(y,summaryY+summaryHeight)
+    if nextIcon==1 and summaryHeight==0 then y=rewardY-3 end
+    y=y+6
+    local titleWidth=A.Call(c.title.GetUnboundedStringWidth,c.title) or width
+    local summaryWidth=A.Call(c.summary.GetUnboundedStringWidth,c.summary) or 0
+    c.naturalWidth=math.max(titleWidth+16,summaryWidth+16+(inline and inlineWidth or 0),nextIcon>1 and math.min(nextIcon-1,8)*28+16 or 0)
     c:SetHeight(y)
     local new,modified=classification=="verifiedNew",classification=="verifiedUpdated"
     local r,g,b=.09,.09,.19
@@ -146,22 +158,27 @@ function V:Fill(c,row,profile)
         r,g,b=TOOLTIP_DEFAULT_BACKGROUND_COLOR:GetRGB()
     end
     r,g,b=M.AccentFill(profile,classification,r,g,b)
-    c:SetBackdropColor(r,g,b,.8)
+    c:SetBackdropColor(r,g,b,.96)
     -- The native silver border is retained for every classification.
     return y
 end
 function V:Place()
     local scale=self.frame:GetScale()
     local w,h=self.frame:GetWidth()*scale,self.frame:GetHeight()*scale
-    local left=self.anchorX+14
+    local beside=N.Core.profile.inspectionPosition=="tooltip"
+    local left=self.anchorX+56
     if self.nativeRect then
         local r=self.nativeRect
-        local rightSide,leftSide=r.x+r.w+6,r.x-w-6
+        local rightSide,leftSide=r.x+r.w+12,r.x-w-12
         local rightFits,leftFits=rightSide+w<=self.screenWidth-8,leftSide>=8
-        if leftFits and (not rightFits or math.abs(self.anchorX-r.x)<=math.abs(self.anchorX-r.x-r.w)) then left=leftSide else left=rightSide end
-    elseif left+w>self.screenWidth-8 then left=self.anchorX-w-14 end
+        if beside then
+            if leftFits and not rightFits then left=leftSide else left=rightSide end
+        elseif left<r.x+r.w+12 and left+w>r.x-12 then
+            left=rightFits and rightSide or leftFits and leftSide or left
+        end
+    elseif left+w>self.screenWidth-8 then left=self.anchorX-w-56 end
     left=math.max(8,math.min(self.screenWidth-w-8,left))
-    local top=self.nativeRect and self.nativeRect.y+self.nativeRect.h or self.anchorY+24
+    local top=beside and self.nativeRect and self.nativeRect.y+self.nativeRect.h or self.anchorY+24
     local bottom=math.max(8,math.min(self.screenHeight-h-8,top-h))
     self.placement={left=left,bottom=bottom,width=w,height=h}
     self.frame:ClearAllPoints(); self.frame:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",left/scale,bottom/scale)
@@ -174,31 +191,35 @@ function V:Refresh()
     if #self.source.rows==0 then self.refreshing=false; N.Hover:Dismiss("eligibility"); return end
     local scale=self.frame:GetScale()
     local cap=math.min(320,self.screenHeight*.6/scale,(self.screenHeight-16)/scale)
-    local y=0
+    local y,natural=0,232
     local function fill(width)
         y=0; self.child:SetWidth(width)
         for i,row in ipairs(self.source.rows) do
             local c=self:Card(i); c:SetWidth(width); c:ClearAllPoints(); c:SetPoint("TOPLEFT",0,-y)
-            y=y+self:Fill(c,row,p)+4; c:Show()
+            y=y+self:Fill(c,row,p)+2; natural=math.max(natural,c.naturalWidth or 0); c:Show()
         end
-        y=math.max(1,y-4)
+        y=math.max(1,y-2)
     end
-    fill(320)
+    fill(280)
+    local width=math.min(280,math.ceil(natural))
+    if width<280 then fill(width) end
     local overflow=y>cap
-    if overflow then fill(304) end
+    if overflow then fill(width-16) end
     for i=#self.source.rows+1,#self.cards do self.cards[i]:Hide(); self.cards[i].questID=nil end
     local header=overflow and 18 or 0
     self.viewportHeight=math.min(y,math.max(1,cap-header))
     self.child:SetHeight(y); self.contentHeight=y
-    self.frame:SetSize(320,self.viewportHeight+header)
-    self.scroll:ClearAllPoints(); self.scroll:SetPoint("TOPLEFT",0,-header); self.scroll:SetSize(overflow and 304 or 320,self.viewportHeight)
+    self.frame:SetSize(width,self.viewportHeight+header)
+    self.scroll:ClearAllPoints(); self.scroll:SetPoint("TOPLEFT",0,-header); self.scroll:SetSize(overflow and width-16 or width,self.viewportHeight)
     self.maximum=math.max(0,y-self.viewportHeight); self.bar:SetMinMaxValues(0,self.maximum); self.bar:SetShown(overflow)
     self.header:SetText(#self.source.rows .. (#self.source.rows==1 and " quest" or " quests") .. " · scroll"); self.header:SetShown(overflow)
     self:Place(); self.refreshing=false; self:Scroll(self.offset)
 end
-function V:Show(source,profile)
+function V:Show(source,profile,nativeRect)
     self:Create()
-    local x,y=A.Cursor(); local parentScale=A.Call(UIParent.GetEffectiveScale,UIParent)
+    local x,y=N.Hover.anchorX,N.Hover.anchorY
+    if not M.Number(x) or not M.Number(y) then x,y=A.Cursor() end
+    local parentScale=A.Call(UIParent.GetEffectiveScale,UIParent)
     local sw,sh=A.Call(UIParent.GetWidth,UIParent),A.Call(UIParent.GetHeight,UIParent)
     if not x or not M.Number(parentScale) or parentScale<=0 or not M.Number(sw) or not M.Number(sh) or sw<340 or sh<180 then return false end
     self.source,self.offset=source,0
@@ -206,7 +227,7 @@ function V:Show(source,profile)
     self.openingTransitAt,self.openingTransitConsumed=nil,false
     self.anchorX,self.anchorY=x/parentScale,y/parentScale
     self.nativeRect,self.nativeFrame,self.nativeOwner,self.nativeData,self.nativePhysicalRect=nil,nil,nil,nil,nil
-    local native=A.Rect(GameTooltip)
+    local native=A.Rect(GameTooltip) or nativeRect
     if native then
         local r={x=native.x/parentScale,y=native.y/parentScale,w=native.w/parentScale,h=native.h/parentScale}
         -- Ignore a remote, fixed-corner native tooltip. Preserve nearby native
@@ -451,7 +472,7 @@ function V:NativeTransit()
     return A.Over(frame)
 end
 function V:OpeningTransit(now)
-    if self.openingTransitConsumed or not self.nativeRect or not self.placement or not self.source then return false end
+    if self.openingTransitConsumed or not self.placement or not self.source then return false end
     if self.source.over() then return false end
     local x,y=A.Cursor(); if not x then return false end
     x,y=x/self.parentScale,y/self.parentScale

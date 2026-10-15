@@ -1,6 +1,17 @@
 local _, N = ...
 local M, A = N.Model, N.Adapter
 local R = {}; N.Rewards = R
+function R.PublishedReputation(entries)
+    local out, names = {}, {}
+    if not M.Readable(entries) or type(entries)~="table" or #entries>128 then return out end
+    for _,entry in ipairs(entries) do
+        if M.Readable(entry) and type(entry)=="table" and M.Text(entry.name) then names[entry.name]=(names[entry.name] or 0)+1 end
+    end
+    for _,entry in ipairs(entries) do
+        if M.Readable(entry) and type(entry)=="table" and M.Text(entry.name) and names[entry.name]==1 and M.Number(entry.amount) then out[#out+1]=entry end
+    end
+    return out
+end
 function R.RecordedItem(meta)
     local row={itemID=meta.itemID,name=meta.name,quantity=meta.quantity,group=meta.group,kind="catalog",state="pending",catalog=true}
     local getter=C_Item and C_Item.GetItemInfo or GetItemInfo
@@ -34,7 +45,9 @@ function R.Recorded(id,out)
         if out[key].state~="ready" and M.Number(values[key]) and values[key]>=0 then out[key]={state="ready",value=values[key],published=true} end
     end
     out.reputation.items=out.reputation.items or {}
-    for _,entry in ipairs(values.reputation or {}) do
+    -- Repeated same-faction source rows may describe conditional tiers. Their
+    -- effective award is unknown; do not sum them or pick an arbitrary slot.
+    for _,entry in ipairs(R.PublishedReputation(values.reputation)) do
         if M.Text(entry.name) and M.Number(entry.amount) then
             local matched=false
             for _,native in ipairs(out.reputation.items) do
@@ -170,7 +183,9 @@ function R.Read(id)
         out.reputation.items={}
         for _,row in ipairs(reputation) do
             if M.Readable(row) and type(row)=="table" and M.QuestId(row.factionID) and M.Number(row.rewardAmount) then
-                out.reputation.items[#out.reputation.items+1]={factionID=row.factionID,amount=row.rewardAmount}
+                local faction=A.Call(C_Reputation and C_Reputation.GetFactionDataByID,row.factionID)
+                local name=M.Readable(faction) and type(faction)=="table" and M.Text(faction.name) or M.Text(A.Call(GetFactionInfoByID,row.factionID))
+                out.reputation.items[#out.reputation.items+1]={factionID=row.factionID,amount=row.rewardAmount,name=name}
             end
         end
     end
