@@ -72,6 +72,7 @@ function Q.Rows(tooltip,primaryID,primaryType)
     return N.Providers.ResolveRows(rows)
 end
 function Q:Shown(icon, tooltip)
+    if not N.Sources:Enabled() then return end
     if not icon or not tooltip or A.Forbidden(icon) or not A.Visible(icon) or not A.Visible(tooltip) or icon.hidden or icon._needsUnload or tooltip._owner ~= icon then return end
     local color=A.Color(icon.texture)
     if not color or color[4]<=0 then return end
@@ -125,6 +126,7 @@ function Q:RenderedNPCEntry(tooltip,id,kind)
     return false
 end
 function Q:UnitShown(tooltip)
+    if not N.Sources:Enabled() then return end
     local module=self.units
     local profile=Questie and Questie.db and Questie.db.profile
     if not module or not profile or profile.enableTooltips~=true or profile.showQuestsInNpcTooltip~=true or not A.Visible(tooltip) then return end

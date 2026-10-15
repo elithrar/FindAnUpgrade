@@ -111,6 +111,12 @@ coalesces the resulting visible refresh. Equal events do not advance revisions;
 stat-only changes are irrelevant to this item-level heuristic. Hidden events only
 mark retained data dirty, with no API reads or scheduled work.
 
+Each finder query supplies one opaque token. Retryable item data, unavailable
+uniqueness and unknown usability are read at most once for that query. A later
+query retries; dirty metadata and changed equipment/item revisions override reuse
+even with the same token. Ready records drop the token, and existing finite
+record caches retain no token-keyed history. Pending gear uses the same bound.
+
 Queries consume the latest snapshot once. Sorting comparators use precomputed
 results and perform no API reads. Ready warm records do not reload on repeated
 queries. Pending observations retry on a later real query/reopen or relevant item
@@ -118,8 +124,8 @@ event; there is no idle polling. Non-upgrade sorts need no ranking hydration.
 
 ## Runtime API
 
-- `Ranking:Usable(itemID, snapshot)` returns true, false or nil.
-- `Ranking:Quest(items, snapshot, slotFilter)` returns `tier`, `state`, optional
+- `Ranking:Usable(itemID, snapshot, queryToken)` returns true, false or nil.
+- `Ranking:Quest(items, snapshot, slotFilter, queryToken)` returns `tier`, `state`, optional
   `gain`, `itemID`, `reason`, and fixed `estimated=true`, `metric="item-level"`.
 - `Ranking.Compare(candidate, normalizedGear, snapshot)` is pure and returns the
   same result shape. Normalized ready records include item level, equipment
@@ -131,7 +137,7 @@ event; there is no idle polling. Non-upgrade sorts need no ranking hydration.
 
 ## Verification and remaining observations
 
-The focused Lua 5.1 suite currently has 45 scenarios covering native adapter entry,
+The focused Lua 5.1 suite currently has 50 scenarios covering native adapter entry,
 ordinary/paired slots, uniqueness across the retained outfit, occupied-hand
 averages, absent partners, unknown dual-wield capability, exact variants, unknown
 levels and usability, group/quantity preservation, deterministic ordering, cache

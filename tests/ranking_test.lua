@@ -237,4 +237,47 @@ test("contradictory main hand identity never becomes a weapon comparison",functi
     local R,s=setup();local g=gear();g[16]=normal(1,"INVTYPE_HEAD",20)
     assert(R.Compare(normal(2,"INVTYPE_WEAPONMAINHAND",25),g,s).gain==nil)
 end)
+test("one query shares partial equipped metadata and the next query retries",function()
+    local R,s,add,equip,rows,calls=setup();equip(1,add(1,"INVTYPE_HEAD",nil));local item=add(2,"INVTYPE_HEAD",25);local query={}
+    for _=1,250 do assert(R:Quest({item},s,"ALL",query).gain==nil) end
+    assert(calls.info==2)
+    rows[1].level=20;assert(R:Quest({item},s,"ALL",{}).gain==5 and calls.info==3)
+    for _=1,250 do assert(R:Quest({item},s,"ALL",{}).gain==5) end;assert(calls.info==3)
+end)
+
+test("one query shares partial reward metadata without suppressing later recovery",function()
+    local R,s,add,_,rows,calls=setup();local item=add(1,"INVTYPE_HEAD",nil);local query={}
+    for _=1,250 do assert(R:Quest({item},s,"ALL",query).gain==nil) end
+    assert(calls.info==1);rows[1].level=25
+    assert(R:Quest({item},s,"ALL",{}).gain==25 and calls.info==2)
+end)
+
+test("unknown usability retries once per query and ready booleans stay warm",function()
+    for _,cold in ipairs({true,false}) do
+        local R,s,add,_,rows,calls=setup();add(1,"INVTYPE_HEAD",25,{cached=not cold,useMissing=not cold});local query={}
+        for _=1,250 do assert(R:Usable(1,s,query)==nil) end
+        assert(calls.cache==1 and calls.use==(cold and 0 or 1))
+        rows[1].cached,rows[1].useMissing=true,false
+        assert(R:Usable(1,s,query)==nil and R:Usable(1,s,{})==true)
+        local before=total(calls);for _=1,250 do assert(R:Usable(1,s,{})==true) end;assert(total(calls)==before)
+    end
+end)
+
+test("query reuse cannot override equipment item or dirty revisions",function()
+    for _,revision in ipairs({"equipmentRevision","itemRevision"}) do
+        local R,s,add,equip,rows,calls=setup();equip(1,add(1,"INVTYPE_HEAD",nil));local item=add(2,"INVTYPE_HEAD",25);local query={}
+        assert(R:Quest({item},s,"ALL",query).gain==nil);rows[1].level=20;s[revision]=s[revision]+1
+        assert(R:Quest({item},s,"ALL",query).gain==5 and calls.info==3)
+    end
+    local R,s,add,_,rows=setup();local item=add(1,"INVTYPE_HEAD",nil);local query={}
+    assert(R:Quest({item},s,"ALL",query).gain==nil);rows[1].level=25
+    assert(R:InvalidateItem(1,s,true) and R:Quest({item},s,"ALL",query).gain==25)
+end)
+
+test("temporarily unavailable equipment uniqueness retries on a later query",function()
+    local R,s,add,equip,rows,calls=setup();equip(11,add(1,"INVTYPE_FINGER",20,{uniqueMissing=true}));local item=add(2,"INVTYPE_FINGER",25,{category=7,maximum=1});local query={}
+    for _=1,250 do assert(R:Quest({item},s,"ALL",query).gain==nil) end
+    assert(calls.info==2);rows[1].uniqueMissing=false
+    assert(R:Quest({item},s,"ALL",{}).gain==25 and calls.info==3)
+end)
 PASSED=passed

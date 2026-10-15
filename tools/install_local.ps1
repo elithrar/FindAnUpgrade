@@ -27,6 +27,11 @@ Assert-ClientClosed
 if ($exe.VersionInfo.FileVersion -ne '1.60.1.70374') { throw 'The client build changed; verify matching contracts first.' }
 $validation=Get-Content -Raw -LiteralPath (Join-Path $buildPath 'dist\validation-evidence.json') | ConvertFrom-Json
 if (!$validation.success -or (Get-Content -Raw -LiteralPath (Join-Path $buildPath 'SOURCE-COMMIT')).Trim() -cne $SourceCommit) { throw 'The exact source commit has no passing build.' }
+$sourceTree=(Get-Content -Raw -LiteralPath (Join-Path $buildPath 'SOURCE-TREE')).Trim()
+if ($sourceTree -cnotmatch '^[0-9a-f]{40}$') { throw 'The exact source tree is absent or invalid.' }
+$receiptPath=Join-Path $workspaceRoot 'dist\FindAnUpgrade-installation-receipt.json'
+$pendingReceipt=Join-Path $workspaceRoot ('dist\FindAnUpgrade-installation-'+$SourceCommit.Substring(0,8)+'.pending.json')
+if ((Test-Path -LiteralPath $receiptPath) -or (Test-Path -LiteralPath $pendingReceipt)) { throw 'Existing new-name receipt must be inspected before migration.' }
 $package=Get-Content -Raw -LiteralPath (Join-Path $buildPath 'dist\package-receipt.json') | ConvertFrom-Json
 if ($package.addon -cne 'FindAnUpgrade' -or $package.version -cne '0.1.8' -or $package.interface -ne 16001) { throw 'Wrong candidate package.' }
 $zipPath=Join-Path $buildPath 'dist\FindAnUpgrade-0.1.8.zip'
@@ -111,6 +116,9 @@ try {
     $expectedDirectories=@($directories | ForEach-Object { if ($_ -ceq 'QuestBrief') { 'FindAnUpgrade' } else { $_ } } | Sort-Object)
     if (($expectedDirectories -join "`n") -cne ($afterDirectories -join "`n")) { throw 'Addon directory inventory changed unexpectedly.' }
     $finalProcessCount=@(Get-Process -Name WowB -ErrorAction SilentlyContinue).Count
+    $receipt=[ordered]@{installed=$true;installedAtUtc=[DateTime]::UtcNow.ToString('o');host=$env:COMPUTERNAME;sourceCommit=$SourceCommit;sourceTree=$sourceTree;branch='main';addonVersion='0.1.8';clientBuild=$exe.VersionInfo.FileVersion;interface=16001;installationPath=$newRoot;installedFiles=$installedFiles;previousVersion='0.1.7';backupPath=$backupRoot;previousInstalledFilesVerified=$oldReceipt.installedFiles.Count;unrelatedAddonFilesVerified=$beforeAddons.Count;unrelatedAddonDirectoriesVerified=$directories.Count-1;originalSettingsFilesVerified=$beforeSettings.Count;unrelatedAddonsUnchanged=$true;originalSettingsUnchanged=$true;settingsMigrations=$createdSettings;clientClosedBeforeMutations=$true;runningClientProcessesAtVerification=$finalProcessCount;searchCommand='/fau';optionsCommand='/fau opts';inGameValidationPerformed=$false;releasePublished=$false}
+    $receipt | ConvertTo-Json -Depth 7 | Set-Content -LiteralPath $pendingReceipt -Encoding UTF8
+    [IO.File]::Move($pendingReceipt,$receiptPath)
     $installed=$true
 } finally {
     if (!$installed) {
@@ -123,8 +131,7 @@ try {
         foreach ($entry in $createdSettings) {
             if ((Test-Path -LiteralPath $entry.target) -and (Get-FileHash -LiteralPath $entry.target -Algorithm SHA256).Hash.ToLowerInvariant() -ceq $entry.sha256) { Remove-Item -LiteralPath $entry.target }
         }
+        if (Test-Path -LiteralPath $pendingReceipt) { Remove-Item -LiteralPath $pendingReceipt -Force }
     }
 }
-$receipt=[ordered]@{installed=$true;installedAtUtc=[DateTime]::UtcNow.ToString('o');host=$env:COMPUTERNAME;sourceCommit=$SourceCommit;sourceTree=(Get-Content -Raw -LiteralPath (Join-Path $buildPath 'SOURCE-TREE')).Trim();branch='main';addonVersion='0.1.8';clientBuild=$exe.VersionInfo.FileVersion;interface=16001;installationPath=$newRoot;installedFiles=$installedFiles;previousVersion='0.1.7';backupPath=$backupRoot;previousInstalledFilesVerified=$oldReceipt.installedFiles.Count;unrelatedAddonFilesVerified=$beforeAddons.Count;unrelatedAddonDirectoriesVerified=$directories.Count-1;originalSettingsFilesVerified=$beforeSettings.Count;unrelatedAddonsUnchanged=$true;originalSettingsUnchanged=$true;settingsMigrations=$createdSettings;clientClosedBeforeMutations=$true;runningClientProcessesAtVerification=$finalProcessCount;searchCommand='/fau';optionsCommand='/fau opts';inGameValidationPerformed=$false;releasePublished=$false}
-$receipt | ConvertTo-Json -Depth 7 | Set-Content -LiteralPath (Join-Path $workspaceRoot 'dist\FindAnUpgrade-installation-receipt.json') -Encoding UTF8
-$receipt | Select-Object installed,sourceCommit,addonVersion,installationPath,backupPath,unrelatedAddonsUnchanged,originalSettingsUnchanged | ConvertTo-Json
+[pscustomobject]$receipt | Select-Object installed,sourceCommit,addonVersion,installationPath,backupPath,unrelatedAddonsUnchanged,originalSettingsUnchanged | ConvertTo-Json

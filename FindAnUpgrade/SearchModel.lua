@@ -111,6 +111,8 @@ function S:DungeonPath(row,context,availability)
     return N.Providers.StartPath(row,context)==true and N.Providers.ChainState(source)==nil
 end
 function S:Query(filter)
+    -- Retry incomplete metadata on the next query, never for every association.
+    local rankingQuery={}
     local out={}; self.needed={}; self.questNeeded={}; self.unknownLevels=0
     local needSet={}; local context=self:Context(); local query=(filter.query or ""):lower()
     local scope=filter.scope=="LEVEL_RANGE" and "LEVEL_RANGE" or "SAME_ZONE"
@@ -154,13 +156,13 @@ function S:Query(filter)
                                 if item.state~="ready" and not needSet[item.itemID] then needSet[item.itemID]=true; self.needed[#self.needed+1]=item.itemID end
                                 local usable=self.usability[record.id] and self.usability[record.id][item.itemID]
                                 local capability
-                                if filter.usable and N.Ranking and N.Ranking.Usable then capability=N.Ranking:Usable(item.itemID,context) end
+                                if filter.usable and N.Ranking and N.Ranking.Usable then capability=N.Ranking:Usable(item.itemID,context,rankingQuery) end
                                 if S.SlotMatch(item.slot,slotFilter,context) and (not filter.usable or usable~=false and capability~=false and (not item.minimum or item.minimum<=context.level)) then
                                     items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)
                                 end
                             end
                             if match and (#items>0 or slotFilter=="ALL" and self:Benefit(record)) then
-                                local ranking=(sort=="UPGRADE" or sort=="BIGGEST") and N.Ranking and N.Ranking:Quest(items,context,slotFilter)
+                                local ranking=(sort=="UPGRADE" or sort=="BIGGEST") and N.Ranking and N.Ranking:Quest(items,context,slotFilter,rankingQuery)
                                     or {tier=2,state="unsupported"}
                                 out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,
                                     fit=math.abs(record.level-context.level),category=category and category.name,

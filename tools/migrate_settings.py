@@ -3,6 +3,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import math
+import os
 import re
 
 MAX_BYTES = 4 * 1024 * 1024
@@ -120,15 +121,16 @@ def copy_settings(source, target, expected_sha):
         raise ValueError("Saved settings changed after the reviewed snapshot")
     # Exclusive creation preserves any existing new-name settings, even empty ones.
     created = False
+    identity = None
     try:
         with target.open('xb') as output:
             created = True
-            identity = target.stat()
+            identity = os.fstat(output.fileno())
             output.write(raw)
         if target.read_bytes() != raw:
             raise ValueError("Copied settings failed byte verification")
     except Exception:
-        if created and target.exists() and target.stat().st_ino == identity.st_ino:
+        if created and identity is not None and target.exists() and target.stat().st_ino == identity.st_ino:
             target.unlink()
         raise
     return {'source': str(source), 'target': str(target), 'bytes': len(raw), 'sha256': digest}

@@ -1,5 +1,6 @@
 """Offline adversarial release tests; never invoke a real publishing command."""
 from pathlib import Path
+import ast
 import json
 import os
 import shutil
@@ -424,6 +425,22 @@ class PublishTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_all_validation_workflows_supply_the_executed_native_contracts(self):
+        runner = ast.parse((ROOT / "tests/run.py").read_text())
+        required = next(ast.literal_eval(node.value) for node in runner.body
+                        if isinstance(node, ast.Assign) and any(
+                            isinstance(target, ast.Name) and target.id == "current_paths"
+                            for target in node.targets))
+        revision = json.loads((ROOT / "docs/client-contracts.json").read_text())["currentSnapshot"]["revision"]
+        for name in ["check.yml", "release.yml"]:
+            text = (ROOT / ".github/workflows" / name).read_text()
+            step = next(part for part in release.re.split(r"(?m)^      - ", text)
+                        if "path: .work/current-api" in part)
+            with self.subTest(workflow=name):
+                self.assertIn("ref: " + revision, step)
+                supplied = set(release.re.findall(r"(?m)^            /(.+)$", step))
+                self.assertTrue(set(required).issubset(supplied), sorted(set(required) - supplied))
+
     def test_workflows_pin_actions_and_keep_credentials_in_publish_steps(self):
         for name in ["check.yml", "release.yml"]:
             text = (ROOT / ".github/workflows" / name).read_text()

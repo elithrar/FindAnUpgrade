@@ -23,7 +23,7 @@ Questie is optional. FindAnUpgrade can preview its existing world-map and minima
 
 Use the cog, `/fau opts` or `/findanupgrade options` for settings. Ctrl, Alt and hovering without a modifier are alternatives to Shift.
 
-Version **0.1.9** uses the FindAnUpgrade folder and commands. When replacing QuestBrief, preserve its saved files and migrate them using the validated development installer before removing the old active folder. Existing FindAnUpgrade settings take priority. Unsupported future settings remain read-only and are preserved.
+Version **0.1.10** uses the FindAnUpgrade folder and commands. When replacing QuestBrief, preserve its saved files and migrate them using the validated development installer before removing the old active folder. Existing FindAnUpgrade settings take priority. Unsupported future settings remain read-only and are preserved.
 
 ## Development
 

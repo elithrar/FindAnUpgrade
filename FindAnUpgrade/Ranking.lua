@@ -32,15 +32,16 @@ function R:UseContext(s)
     local current=context(s)
     if self.contextKey~=current then
         self.contextKey=current;self.cache,self.order,self.byID,self.dirty={},{},{},{}
-        self.gear,self.gearKey,self.gearByID=nil,nil,nil
+        self.gear,self.gearKey,self.gearByID,self.gearQuery=nil,nil,nil,nil
         self.useKey,self.useCache,self.useOrder,self.useDirty=nil,{},{},{}
     end
 end
-function R:Usable(id,s)
+function R:Usable(id,s,query)
     id=M.QuestId(id);if not id or not tab(s) then return end;self:UseContext(s)
     local current=context(s)..":"..tostring(int(s.equipmentRevision))
     if self.useKey~=current then self.useKey=current;self.useCache,self.useOrder,self.useDirty={},{},{} end
-    local prior=self.useCache[id];if prior and not self.useDirty[id] then return prior.value end
+    local prior=self.useCache[id]
+    if prior and not self.useDirty[id] and (prior.value~=nil or not query or prior.query==query and prior.queryItems==int(s.itemRevision)) then return prior.value end
     if not prior then
         if #self.useOrder>=self.limit then local old=table.remove(self.useOrder,1);self.useCache[old],self.useDirty[old]=nil,nil end
         self.useOrder[#self.useOrder+1]=id
@@ -48,9 +49,11 @@ function R:Usable(id,s)
     local use
     if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)==true then use=A.Call(C_PlayerInfo and C_PlayerInfo.CanUseItem,id) end
     if type(use)~="boolean" then use=nil end
-    self.useCache[id],self.useDirty[id]={value=use},nil;return use
+    self.useCache[id],self.useDirty[id]={value=use,query=use==nil and query or nil,queryItems=use==nil and int(s.itemRevision) or nil},nil;return use
 end
+local function retryable(row)return row.state=="pending" or row.reason=="limits-unavailable" end
 function R:Remember(k,row)
+    if not retryable(row) then row.query,row.queryEquipment,row.queryItems=nil,nil,nil end
     if not self.cache[k] then
         if #self.order>=self.limit then
             local old=table.remove(self.order,1);local entry=self.cache[old]
@@ -79,14 +82,16 @@ local function uniqueness(link)
     if category>0 and max<1 or id~=nil and (int(id)==nil or id~=category) or count~=nil and (int(count)==nil or category>0 and count~=max) then return end
     return {category=category,maximum=max,single=single}
 end
-function R:Item(meta,s,equipped)
+function R:Item(meta,s,equipped,query)
     if not tab(s) then return {state="unsupported",reason="context-invalid"} end
     local id=tab(meta) and M.QuestId(meta.itemID);local link=tab(meta) and text(meta.link)
     if not id or not link or #link>2048 or itemID(link)~=id then return {state="pending",reason="item-pending",itemID=id} end
     self:UseContext(s);equipped=M.Readable(equipped) and equipped==true
     local k=key(link,s,equipped);local old=self.cache[k]
-    if old and not self.dirty[k] and old.state~="pending" and (old.usable==nil or old.usable==self:Usable(id,s)) then return old end
-    local row={itemID=id,link=link,state="pending",reason="item-pending",equipped=equipped}
+    local sameQuery=query and old and old.query==query and old.queryEquipment==int(s.equipmentRevision) and old.queryItems==int(s.itemRevision)
+    if old and not self.dirty[k] and (not retryable(old) or sameQuery) and (old.usable==nil or old.usable==self:Usable(id,s,query)) then return old end
+    local row={itemID=id,link=link,state="pending",reason="item-pending",equipped=equipped,query=query,
+        queryEquipment=query and int(s.equipmentRevision) or nil,queryItems=query and int(s.itemRevision) or nil}
     if not equipped and modified(link) then row.state,row.reason="unsupported","reward-variant-unconfirmed";return self:Remember(k,row) end
     if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true then return self:Remember(k,row) end
     local name,infoLink,_,level,minimum,_,_,_,slot,_,_,classID,subclassID=values(C_Item and C_Item.GetItemInfo,link)
@@ -97,7 +102,7 @@ function R:Item(meta,s,equipped)
         if equipped then row.unique=uniqueness(link) end
         row.state,row.reason="none",nil;return self:Remember(k,row)
     end
-    row.unique=uniqueness(link);row.usable=self:Usable(id,s)
+    row.unique=uniqueness(link);row.usable=self:Usable(id,s,query)
     if not row.itemLevel or row.minimum==nil or row.classID==nil or row.subclassID==nil or not M.QuestId(s.level) or type(row.usable)~="boolean" then return self:Remember(k,row) end
     if not identity(s) then row.reason="identity-pending"
     elseif row.usable==false or row.minimum>s.level then row.state,row.reason="blocked","cannot-equip"
@@ -105,20 +110,20 @@ function R:Item(meta,s,equipped)
     else row.state,row.reason="ready",nil end
     return self:Remember(k,row)
 end
-function R:Gear(s)
+function R:Gear(s,query)
     self:UseContext(s)
     local current=context(s)..":"..tostring(int(s.equipmentRevision))..":"..tostring(int(s.itemRevision))
-    if self.gearKey==current and self.gear and not self.gearPending then return self.gear end
+    if self.gearKey==current and self.gear and (not self.gearPending or query and self.gearQuery==query) then return self.gear end
     local gear,ids,pending={},{},false
     for slot=1,19 do
         local entry=tab(s.equipment) and s.equipment[slot]
         if tab(entry) and text(entry.state)=="empty" and tab(s.emptySlots) and M.Readable(s.emptySlots[slot]) and s.emptySlots[slot]==true then gear[slot]={state="empty"}
-        elseif tab(entry) then gear[slot]=self:Item(entry,s,true)
+        elseif tab(entry) then gear[slot]=self:Item(entry,s,true,query)
         else gear[slot]={state="pending",reason="equipment-pending"} end
         if gear[slot].itemID then ids[gear[slot].itemID]=true end
-        if gear[slot].state=="pending" then pending=true end
+        if retryable(gear[slot]) then pending=true end
     end
-    self.gear,self.gearKey,self.gearByID,self.gearPending=gear,current,ids,pending;return gear
+    self.gear,self.gearKey,self.gearByID,self.gearPending,self.gearQuery=gear,current,ids,pending,query;return gear
 end
 local fields={"itemID","link","state","reason","slot","itemLevel","minimum","classID","subclassID","usable"}
 local function same(a,b)
@@ -258,14 +263,14 @@ local function matches(kind,filter,s)
     if filter=="RANGED" then return kind=="INVTYPE_RANGED" or kind=="INVTYPE_RANGEDRIGHT" or kind=="INVTYPE_THROWN" end
     return kind==filter
 end
-function R:Quest(items,s,slotFilter)
+function R:Quest(items,s,slotFilter,query)
     if not tab(s) or not sequence(items,256) then return result("unsupported","context-invalid") end
-    local gear=self:Gear(s);local best,unknown,seen=nil,nil,{};slotFilter=text(slotFilter)
+    local gear=self:Gear(s,query);local best,unknown,seen=nil,nil,{};slotFilter=text(slotFilter)
     for _,meta in ipairs(items) do
         if tab(meta) then
             local identity=text(meta.link) or M.QuestId(meta.itemID)
             if identity and not seen[identity] then
-                seen[identity]=true;local item=self:Item(meta,s)
+                seen[identity]=true;local item=self:Item(meta,s,nil,query)
                 if item.state~="none" and item.state~="blocked" and matches(text(item.slot) or text(meta.slot),slotFilter,s) then
                     local rating=R.Compare(item,gear,s)
                     if rating.state=="ready" then if not best or rating.gain>best.gain or rating.gain==best.gain and rating.itemID<best.itemID then best=rating end

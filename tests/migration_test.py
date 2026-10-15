@@ -1,7 +1,9 @@
 from pathlib import Path
+from contextlib import contextmanager
 import importlib.util
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('migration', ROOT / 'tools/migrate_settings.py')
@@ -9,6 +11,42 @@ migration = importlib.util.module_from_spec(spec); spec.loader.exec_module(migra
 
 
 class MigrationTest(unittest.TestCase):
+    def test_created_file_identity_uses_its_descriptor_without_path_stat(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / '.work') as directory:
+            source = Path(directory) / 'QuestBrief.lua'; raw = b'QuestBriefDB={enabled=false}'
+            source.write_bytes(raw); target = source.with_name('FindAnUpgrade.lua')
+            original_stat = Path.stat
+            def unavailable_target_stat(path, *args, **kwargs):
+                if path == target:
+                    raise OSError('target identity path temporarily unavailable')
+                return original_stat(path, *args, **kwargs)
+            with patch.object(Path, 'stat', unavailable_target_stat):
+                migration.copy_settings(source, target, migration.validate_data(raw))
+            self.assertEqual(source.read_bytes(), raw)
+            self.assertEqual(target.read_bytes(), raw)
+
+    def test_partial_write_failure_removes_only_the_created_copy(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / '.work') as directory:
+            source = Path(directory) / 'QuestBrief.lua'; raw = b'QuestBriefDB={enabled=false}'
+            source.write_bytes(raw); target = source.with_name('FindAnUpgrade.lua')
+            original_open = Path.open
+            @contextmanager
+            def failing_output(path, mode='r', *args, **kwargs):
+                with original_open(path, mode, *args, **kwargs) as file:
+                    if path == target and mode == 'xb':
+                        class PartialOutput:
+                            def fileno(self): return file.fileno()
+                            def write(self, value):
+                                file.write(value[:3])
+                                raise OSError('injected partial write')
+                        yield PartialOutput()
+                    else:
+                        yield file
+            with patch.object(Path, 'open', failing_output), self.assertRaisesRegex(OSError, 'partial write'):
+                migration.copy_settings(source, target, migration.validate_data(raw))
+            self.assertEqual(source.read_bytes(), raw)
+            self.assertFalse(target.exists())
+
     def test_valid_settings_are_copied_verbatim_and_old_file_preserved(self):
         for raw in (b'QuestBriefDB = { ["version"]=3, enabled=false, scale=1.1, nested={"value", [3]=-1.2e2} }\n',
                     b'\xef\xbb\xbf-- saved\r\nQuestBriefDB={version=99, future="unknown \\"data\\""};\r\n'):

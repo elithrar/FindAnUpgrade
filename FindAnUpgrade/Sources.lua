@@ -1,6 +1,10 @@
 local _, N = ...
 local M, A = N.Model, N.Adapter
 local S = { hooked = setmetatable({}, { __mode = "k" }), identities = setmetatable({}, { __mode = "k" }) }; N.Sources = S
+function S:Enabled()
+    local core=N.Core
+    return core and core.ready and core.supported and core.profile.enabled or false
+end
 function S:Key(frame, signature, data)
     local identity = self.identities[frame]
     if not identity or identity.signature ~= signature or identity.data ~= data then
@@ -9,6 +13,7 @@ function S:Key(frame, signature, data)
     return identity.key
 end
 function S:NPC()
+    if not self:Enabled() then return end
     local guid = M.Text(A.Call(UnitGUID, "mouseover"))
     if not guid then return end
     local npcID = M.QuestId(tonumber(guid:match("^Creature%-%d+%-%d+%-%d+%-%d+%-(%d+)%-%x+$")))
@@ -21,8 +26,9 @@ function S:NPC()
         over = function() return M.Text(A.Call(UnitGUID, "mouseover")) == guid end }
 end
 function S:Gossip()
-    local guid = M.Text(A.Call(UnitGUID, "npc"))
     self.gossip = nil
+    if not self:Enabled() then return end
+    local guid = M.Text(A.Call(UnitGUID, "npc"))
     if not guid then return end
     local rows = {}
     for _, spec in ipairs({ { "GetAvailableQuests", "native-available" }, { "GetActiveQuests", "native-active" } }) do
@@ -78,7 +84,7 @@ end
 function S:Set(source)
     if not source or #source.rows == 0 then return end
     local core=N.Core
-    if not core.ready or not core.supported or not core.profile.enabled then return end
+    if not self:Enabled() then return end
     self.current = source
     if N.QuestState then N.QuestState:OfferChanged() end
     local hover=N.Hover
@@ -91,6 +97,7 @@ function S:Set(source)
     if N.Hover then N.Hover:Consider(source) end
 end
 function S:Pin(frame, id, rows)
+    if not self:Enabled() then return end
     if A.Forbidden(frame) or not A.Visible(frame) then return end
     id = M.QuestId(id)
     rows = rows or (id and {{id=id,availabilityCheck=function() return self:MapAvailability(id,frame.mapID) end,provenance="Native exact-ID map pin"}})
@@ -128,6 +135,7 @@ function S:Attach()
     end
     if QuestHubPinMixin and type(QuestHubPinMixin.AddCustomTooltipData) == "function" and not self.hubHook then
         hooksecurefunc(QuestHubPinMixin, "AddCustomTooltipData", function(frame)
+            if not self:Enabled() then return end
             local related = A.Call(frame.GetRelatedQuests, frame)
             local rows = {}
             if M.Readable(related) and type(related) == "table" then

@@ -4,7 +4,7 @@ FindAnUpgrade's original implementation, tests, tooling and documentation are co
 
 Font validation, settings, native-control presentation and release tooling follow patterns from [XPIsland](https://github.com/elithrar/XPIsland), copyright (c) 2026 Matt Silverlock, BSD-3-Clause. Its complete copyright, conditions and disclaimer are preserved in [XPISLAND-LICENSE.txt](XPISLAND-LICENSE.txt). Owner-authorized [AsTheCrowFlies](https://github.com/elithrar/AsTheCrowFlies) conventions also informed the font and UI components; its separate repository and assets are not included or relicensed by FindAnUpgrade.
 
-Blizzard textures, atlases, controls and game fonts are referenced from the installed client. No Blizzard source or artwork is bundled. Expressway is selected only through an installed LibSharedMedia registration; no font files, LibSharedMedia or LibStub implementation are bundled. Their providers retain their own licenses.
+Blizzard textures, atlases, controls and game fonts are referenced from the installed client. No Blizzard source or artwork is bundled. Owned text inherits the native tooltip font family, including a face supplied by another installed addon. Optional LibSharedMedia notifications refresh that inherited face; no font files, LibSharedMedia or LibStub implementation are bundled. Their providers retain their own licenses.
 
 Questie and QuestieDB are optional installed runtime providers. FindAnUpgrade reads exposed quest identities and associations without bundling their code or database. Their separate packages retain their own licenses.
 

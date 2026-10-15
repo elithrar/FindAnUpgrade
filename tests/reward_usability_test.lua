@@ -51,3 +51,20 @@ test("capability invalidation makes a changed native usability result visible",f
     use[123]=true;W.Event("SKILL_LINES_CHANGED")
     assert(#N.SearchModel:Query(filter)==1)
 end)
+
+test("a complete finder query shares partial equipment metadata across XP rows",function()
+    local N,_,_,filter=setup({}, {xp=100});filter.sort="UPGRADE";filter.usable=false
+    local quests={};for id=1000,1099 do quests[#quests+1]={id=id,title="Reward "..id,level=20,minimum=1,
+        confirmation="published",itemState="published",items={},rewardValues={xp=100},locations={{npcID=54}}} end
+    N.CatalogData={schemaVersion=2,quests=quests};N.Catalog:Begin();while N.Catalog:Step()do end
+    local snapshot=N.Character:Get();snapshot.equipment,snapshot.emptySlots={},{}
+    for slot=1,19 do snapshot.equipment[slot]={state="empty"};snapshot.emptySlots[slot]=true end
+    snapshot.equipment[1]={state="ready",itemID=999,link="item:999"};snapshot.emptySlots[1]=nil;snapshot.equipmentRevision=snapshot.equipmentRevision+1
+    local reads,level=0,nil
+    C_Item.GetItemInfo=function(link)assert(link=="item:999");reads=reads+1;return "Head",link,2,level,1,"Armor","Cloth",1,"INVTYPE_HEAD",100,0,4,1 end
+    C_Item.GetItemUniqueness=function()return 0,0 end;C_Item.GetItemUniquenessByID=function()return false end
+    C_PlayerInfo.CanUseItem=function()return true end
+    assert(#N.SearchModel:Query(filter)==100 and reads==1)
+    level=20;assert(#N.SearchModel:Query(filter)==100 and reads==2)
+    assert(#N.SearchModel:Query(filter)==100 and reads==2)
+end)

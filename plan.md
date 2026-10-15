@@ -1,5 +1,15 @@
 # FindAnUpgrade sidebar iteration
 
+## Correctness review, 0.1.10
+
+Preserve the approved sidebar and minimal item-level heuristic. A fresh independent
+review covers architecture/state ownership, events/lifecycle, cache invalidation,
+complete hot/hidden workloads, Forever native contracts/taint boundaries and
+packaging/persistence. Fix reproduced defects, add distinguishing regressions,
+re-review stable bytes, then verify/commit/CI/install an exact patch under the
+user's ongoing authorization. Review reports and receipts record unresolved
+live-client observations; offline metrics are not native performance claims.
+
 ## Current direction: 0.1.9
 
 The user's latest instruction supersedes detailed stat scoring: use usable

@@ -8,6 +8,27 @@ test("SavedVariables initialize only at matching addon load", function()
     local saved = {version=1, enabled=false}; local N = W.Reset({saved=saved}); W.Event("ADDON_LOADED", "OtherAddon")
     assert(FindAnUpgradeDB == saved and not N.Core.ready); W.Event("ADDON_LOADED", "FindAnUpgrade"); assert(not N.Core.profile.enabled)
 end)
+
+test("disabled and unsupported source callbacks never resolve providers",function()
+    for _,config in ipairs({{saved={version=3,enabled=false}},{interface=120001}}) do
+        local N=W.Init(config);local reads=0
+        N.Providers.ResolveRows=function()reads=reads+1;return {} end;N.Providers.ForNPC=N.Providers.ResolveRows
+        W.guid,W.npcGuid="Creature-0-0-0-0-54-00000001","Creature-0-0-0-0-54-00000001"
+        C_GossipInfo={GetAvailableQuests=function()reads=reads+1;return {{questID=9}} end}
+        W.Event("GOSSIP_SHOW");N.Sources:NPC();N.Sources:Pin(W.Object(),9)
+        local icon,tip=W.Object(),W.Object();icon.texture=W.Object();icon.data={Id=9,Type="available"}
+        tip._owner=icon;tip._Rebuild=function()end;tip.questOrder={[9]=true};N.Questie:Observe(tip);tip._Rebuild=function()end
+        N.Questie:Shown(icon,tip)
+        assert(reads==0 and N.Sources.gossip==nil and not N.Sources.current)
+    end
+end)
+
+test("disabled Questie NPC callback returns before unit and provider reads",function()
+    local N=W.Init({saved={version=3,enabled=false}});local reads=0
+    Questie={db={profile={enableTooltips=true,showQuestsInNpcTooltip=true}}};N.Questie.units={lastGametooltipUnit="Giver",lastGametooltipType="monster"}
+    local tip=W.Object();tip.GetUnit=function()reads=reads+1;return "Giver","mouseover" end
+    N.Sources.NPC=function()reads=reads+1 end;N.Questie:UnitShown(tip);assert(reads==0)
+end)
 test("known new native offer tints while old and unknown offers stay normal", function()
     W.Init(); W.Offer(92124); assert(tinted()); W.Offer(783); assert(normal()); W.Offer(10000000); assert(normal())
 end)

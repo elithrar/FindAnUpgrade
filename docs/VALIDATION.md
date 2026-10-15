@@ -1,12 +1,33 @@
 # Validation
 
-FindAnUpgrade **0.1.9** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.10** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Current item-level heuristic, 0.1.9
+## Fresh correctness review, 0.1.10
+
+Six independent reviews traced the current structural owners, registered event
+entrypoints, cache dependencies and stale-response guards, complete warmed and
+cold workloads, matching Forever native implementations, and extracted delivery
+artifacts. Prior reports and case counts were not accepted as fresh evidence.
+The reports are `FRESH-ARCHITECTURE-REVIEW.md`, `FRESH-EVENTS-REVIEW.md`,
+`FRESH-CACHE-REVIEW.md`, `FRESH-PERFORMANCE-REVIEW.md`,
+`FRESH-NATIVE-SAFETY-REVIEW.md` and `FRESH-DELIVERY-REVIEW.md`.
+
+The patch adds early global callback guards, query-scoped retryable metadata
+reuse with revision checks, and recovery for unknown usability/uniqueness. It
+repairs release fixture coverage, historical rename receipt rollback and
+migration file-identity capture, and corrects font-inheritance documentation.
+The approved appearance, filters and item-level heuristic remain unchanged.
+The final local verifier passes all 17 commands, 511 Lua 5.1 scenarios across
+27 suites and 171 Python tests. Exact-commit build, CI and installation receipts
+establish the settled delivery independently of intermediate workspace archives. Measurements
+are offline call/allocation evidence; native CPU, rendering, input, secret-value
+behavior and combat/taint remain unobserved.
+
+## Item-level heuristic, 0.1.9
 
 The user's simplified direction supersedes the stat-weight system. Biggest
 upgrade now means a transparent usable-slot/item-level estimate. It has no
