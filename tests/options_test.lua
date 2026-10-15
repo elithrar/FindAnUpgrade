@@ -6,7 +6,7 @@ local function complete(N)
     local O=N.Options
     assert(O.frame and O.frame:IsShown() and O.content:IsShown())
     assert(O.texts[1].object:GetText()=="FindAnUpgrade" and O.status)
-    assert(count(O.checks)==8 and #O.dropdowns==3 and count(O.sliders)==2 and count(O.edits)==2)
+    assert(count(O.checks)==10 and #O.dropdowns==5 and count(O.sliders)==2 and count(O.edits)==4)
     for _,entry in ipairs(O.texts) do assert(entry.object:GetFont()) end
     assert(#UISpecialFrames==1 and UISpecialFrames[1]=="FindAnUpgradeOptions")
 end
@@ -104,15 +104,15 @@ test("future settings remain read-only through the real options controls",functi
     N.Options.checks.enabled:Fire("OnClick"); N.Options.sliders.scale:SetValue(120)
     assert(FindAnUpgradeDB==saved and saved.future=="preserve" and saved.enabled==false)
     assert(N.Options.status:GetText()=="Newer settings are read-only.")
-    for _,control in ipairs(N.Options.controls) do assert(control.disabled) end
+    for _,control in ipairs(N.Options.controls) do assert(control.disabled==not control.navigation) end
 end)
 
 test("options use current XPIsland dialog sections and native radio dropdown",function()
     local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
-    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==458)
+    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==462)
     assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
     assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
-    assert(#O.sections==2 and O.sections[1].point[2]==16 and O.sections[2].point[2]==316)
+    assert(#O.sections==6 and O.sections[1].point[2]==16 and O.sections[2].point[2]==316)
     assert(O.sections[1]:GetWidth()==288 and O.sections[2]:GetWidth()==288)
     assert(O.modifier.template=="WowStyle1DropdownTemplate" and O.modifier:GetWidth()==260 and O.modifier:GetHeight()==24)
     assert(O.modifier.Text.justifyV=="MIDDLE" and O.modifier.Text.point[1]=="LEFT")
@@ -160,4 +160,60 @@ test("long native dropdown and checkbox text stays within allocated controls at 
     local caption=O.checks.worldmap.Text
     assert(caption:GetStringWidth()*caption:GetScale()<=250 and math.abs(caption:GetHeight()*caption:GetScale()-24)<.00001)
     assert(FindAnUpgradeDB==N.Core.profile)
+end)
+
+test("three pages reuse the XPIsland grid and close menus and incomplete numeric edits",function()
+    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options;local frames=#W.frames
+    assert(O.page=="appearance" and O.pages.appearance:IsShown() and not O.pages.behavior:IsShown())
+    assert(O.tabs.appearance.point[2]==20 and O.tabs.appearance.point[3]==-42)
+    O.font.menuOpen=true;O.edits.levelsBelow:SetText("22");O.edits.levelsBelow:SetFocus()
+    O:Page("search")
+    assert(not O.font.menuOpen and not O.edits.levelsBelow.focused and O.edits.levelsBelow:GetText()=="5")
+    assert(not O.pages.appearance:IsShown() and O.pages.search:IsShown() and O.tabs.search.activeLine:IsShown())
+    for i=1,15 do O:Page("behavior");O:Page("appearance");O:Page("search") end
+    assert(#W.frames==frames and O.font.menuGenerations==1)
+end)
+test("search-default edits validate through the model and do not persist transient search state",function()
+    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options;O:Page("search")
+    O.edits.levelsBelow:SetText("500");O.edits.levelsBelow:Fire("OnEnterPressed")
+    assert(N.Core.profile.searchDefaults.levelsBelow==199 and O.edits.levelsBelow:GetText()=="199")
+    O.edits.levelsAbove:SetText("-9");O.edits.levelsAbove:Fire("OnEnterPressed")
+    assert(N.Core.profile.searchDefaults.levelsAbove==0 and N.Core.profile.searchDefaults.levelsBelow==199)
+    O.checks.hideUnusable:SetChecked(false);O.checks.hideUnusable:Fire("OnClick")
+    assert(not N.Core.profile.searchDefaults.hideUnusable and not FindAnUpgradeDB.query and not FindAnUpgradeDB.filter)
+    local saved=FindAnUpgradeDB;O.edits.levelsBelow:SetText("20");O.edits.levelsBelow:Fire("OnEscapePressed")
+    assert(FindAnUpgradeDB==saved and O.edits.levelsBelow:GetText()=="199")
+    O.frame:Hide();N.Core:ChangeSearchDefault("includeDungeons",true);O:Toggle(N.Core)
+    assert(O.checks.includeDungeons:GetChecked()==true and O.page=="search")
+end)
+test("font and border selections survive reload and reset restores persistent defaults",function()
+    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options
+    N.Core:Change("font","Arial");N.Core:Change("border","none");N.Core:ChangeSearchDefault("levelsAbove",17)
+    local saved=N.Model.Copy(FindAnUpgradeDB)
+    N=W.Init({saved=saved});N.Options:Toggle(N.Core);O=N.Options
+    assert(O.font.Text:GetText()=="Arial" and O.border.Text:GetText()=="None" and O.edits.levelsAbove:GetText()=="17")
+    O.reset:Fire("OnClick")
+    assert(N.Core.profile.font=="Game tooltip" and N.Core.profile.border=="default" and N.Core.profile.searchDefaults.levelsAbove==3)
+    assert(O.font.Text:GetText()=="Game tooltip (default)" and O.border.Text:GetText()=="Default")
+end)
+test("unchanged option refreshes preserve open native dropdown descriptions",function()
+    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options;local generations=O.font.menuGenerations
+    O.font.menuOpen=true
+    for i=1,20 do O:Refresh();W.Event("UI_SCALE_CHANGED") end
+    assert(O.font.menuOpen and O.font.menuGenerations==generations)
+    N.Core:Change("font","Arial");assert(O.font.menuGenerations==generations and O.frame:GetScript("OnUpdate"))
+    O.font.menuOpen=false;O.frame:Fire("OnUpdate")
+    assert(O.font.menuGenerations==generations+1 and not O.frame:GetScript("OnUpdate") and O.font.Text:GetText()=="Arial")
+end)
+
+test("long Unicode font names keep role size and exact menu identity while selection abbreviates",function()
+    local name=string.rep("\228\184\173",28)..string.rep("W",20)
+    local N=W.Init({saved={font=name}});N.Options:Toggle(N.Core);local O=N.Options
+    assert(N.Core.profile.font==name and O.font.Text:GetScale()==1 and O.font.Text:GetText():sub(-3)=="...")
+    assert(O.fontMeasure:GetUnboundedStringWidth()+4<=O.font.Text.qOptionsWidth)
+    local found=false
+    for _,entry in ipairs(O.font.menu.entries) do if entry.value==name then assert(entry.label==name.." (unavailable)");found=true end end
+    assert(found)
+    local full=O.font.Text:GetText();O.font:GenerateMenu()
+    assert(O.font.Text:GetText()==full and N.Core.profile.font==name)
 end)

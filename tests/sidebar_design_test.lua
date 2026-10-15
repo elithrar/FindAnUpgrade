@@ -45,7 +45,9 @@ test("header grid stays disjoint at narrow viewport and fractional scale without
 end)
 test("native sort icon exposes a minimal item level estimate menu",function()
     local N,S=open();assert(S.sort.template==nil and S.sort.Text==nil and S.sort:GetWidth()==28 and S.sort:GetHeight()==26)
-    assert(S.sort:GetNormalTexture().atlas=="bags-button-autosort-up" and S.sort:GetPushedTexture().atlas=="bags-button-autosort-down")
+    assert(S.sort.arrows[1].atlas=="auctionhouse-ui-sortarrow" and S.sort.arrows[2].atlas=="auctionhouse-ui-sortarrow")
+    assert(S.sort.arrows[1]:GetWidth()==9 and S.sort.arrows[1]:GetHeight()==12 and S.sort.arrows[2].rotation==math.pi)
+    S.sort:Fire("OnEnter");assert(S.footerTooltip:IsShown() and S.footerTooltip.text=="Sort by");S.sort:Fire("OnLeave");assert(not S.footerTooltip:IsShown())
     local highlight=S.sort:GetHighlightTexture();assert(highlight.texture=="Interface\\Buttons\\ButtonHilight-Square" and highlight.blendMode=="ADD" and highlight:GetWidth()==24 and highlight:GetHeight()==23)
     local menu=S.sort:GenerateMenu();assert(menu.entries[1].label=="Biggest upgrade" and menu.entries[1].checked())
     assert(#menu.entries==4 and menu.titles[2]=="Item-level estimate" and menu.titles[3]=="Item level and usable slots; not a performance score")
@@ -126,7 +128,7 @@ test("classification option removes fill and badge while preserving gold quest t
 end)
 test("finder copy and row text use plain labels without explanatory hover",function()
     local N,S=open(400,350,1.2);local c=fill(N,S,{{itemID=123,state="ready",texture=100}})
-    assert(c.evidence.text=="Requires level 18" and not c.footer[1].text:find("base",1,true))
+    assert(c.evidence.text=="Req. lvl 18" and not c.footer[1].text:find("base",1,true))
     assert(not c.location.text:find("\195\130",1,true))
     c.titleHit:Fire("OnEnter");c.locationHit:Fire("OnEnter");c.footerHits[1]:Fire("OnEnter")
     assert(not S.textTooltip and not S.footerTooltip:IsShown())
@@ -154,4 +156,139 @@ test("registered item callbacks update usability under Level fit without visual 
     S.dirty=false
     for _=1,100 do W.Event("GET_ITEM_INFO_RECEIVED",123,true)end
     assert(not S.dirty)
+end)
+
+test("owned native input and dropdown art share the declared control bounds",function()
+    local _,S=open()
+    for _,dropdown in ipairs({S.slot,S.scope}) do
+        local control,left,right=rect(dropdown),rect(dropdown.Left),rect(dropdown.Right)
+        assert(not dropdown.Background:IsShown())
+        assert(math.abs(control.x-left.x)<.01 and math.abs(control.right-right.right)<.01)
+        assert(left.h==control.h and right.h==control.h)
+        for _,key in ipairs({"Left","Right","Middle"})do assert(dropdown[key].atlas==S.search[key].atlas and dropdown[key]:GetHeight()==control.h)end
+        assert(rect(dropdown.Arrow).right<=control.right and rect(dropdown.Arrow).x>=control.x)
+    end
+    for _,input in ipairs({S.search,S.minimumInput,S.maximumInput}) do
+        local control,left,right=rect(input),rect(input.Left),rect(input.Right)
+        assert(math.abs(left.x-control.x)<.01 and math.abs(right.right-control.right)<.01)
+        assert(left.h==control.h and right.h==control.h)
+    end
+    local scope,minimum,maximum,label=rect(S.scope),rect(S.minimumInput),rect(S.maximumInput),rect(S.levelLabel)
+    for _,other in ipairs({minimum,maximum,label})do assert(math.abs(scope.y+scope.h/2-other.y-other.h/2)<.01)end
+    assert(math.abs(maximum.right-rect(S.slot).right)<.01)
+end)
+
+test("query clear is content-only exact UTF8 with a roomy inset click target and one invalidation",function()
+    local _,S=open();local clear=S.clearSearch
+    assert(clear.text:GetText()==string.char(195,151) and not clear:IsShown() and S.placeholder:IsShown())
+    local updates=0;local changed=S.Changed
+    S.Changed=function(self,...)updates=updates+1;changed(self,...)end
+    S.search:SetText("gun");S.search:Fire("OnTextChanged",true)
+    assert(S.filter.query=="gun" and clear:IsShown() and not S.placeholder:IsShown() and updates==1)
+    local input,hit=rect(S.search),rect(clear)
+    assert(hit.w>=22 and hit.h>=22 and hit.x>=input.x and hit.right<=input.right)
+    assert(input.right-S.search.textInsets[2]<hit.x and separated(hit,rect(S.slot)))
+    clear:Fire("OnClick")
+    assert(S.filter.query=="" and S.search:GetText()=="" and S.search.focused and not clear:IsShown() and S.placeholder:IsShown() and updates==2)
+    clear:Fire("OnClick");assert(updates==2)
+    S.search:SetText("sword");S.search:Fire("OnTextChanged",false)
+    assert(clear:IsShown() and updates==2)
+    S.search:SetText("");S.search:Fire("OnTextChanged",false);assert(not clear:IsShown() and updates==2)
+end)
+
+test("choice captions and multiple locations cannot offset the first reward icon",function()
+    local N,S=open();local a={itemID=123,state="ready",texture=100};local b={itemID=124,state="ready",texture=100}
+    local c,row=fill(N,S,{a});local baseline=rect(c.icons[1]).top-rect(c).top
+    c,row=fill(N,S,{}, {a});assert(math.abs(rect(c.icons[1]).top-rect(c).top-baseline)<.01)
+    assert(rect(c.icons[1].group).top<rect(c.icons[1]).y and c.icons[1].group.text=="Choose one")
+    c,row=fill(N,S,{a},{b})
+    assert(math.abs(rect(c.icons[1]).top-rect(c.icons[2]).top)<.01 and math.abs(rect(c.icons[1]).top-rect(c).top-baseline)<.01)
+    for _,icon in ipairs(c.icons)do assert(separated(rect(icon),rect(icon.group)))end
+    N.Catalog.locations[9][2]={npcID=55,name="Another giver",nameKnown=true,zone="Redridge Mountains",mapID=100,x=.3,y=.4}
+    S:Fill(c,row);assert(math.abs(rect(c.icons[1]).top-rect(c).top-baseline)<.01 and c.giver:IsShown())
+    assert(rect(c.giver).top<rect(c.icons[1].group).y and rect(c.giver).top<rect(c.icons[2].group).y)
+    assert(c:GetHeight()<110)
+end)
+
+test("expanded mixed reward groups keep captions between nonoverlapping icon rows",function()
+    local N,S=open();local items,choices={},{}
+    for i=1,4 do items[i]={itemID=120+i,state="ready",texture=100};choices[i]={itemID=130+i,state="ready",texture=100}end
+    S.expanded[9]=true;local c=fill(N,S,items,choices)
+    assert(#c.icons==8 and c.icons[1].group.text=="Guaranteed" and c.icons[5].group.text=="Choose one")
+    assert(rect(c.icons[1].group).top<rect(c.icons[1]).y and rect(c.icons[5]).top<rect(c.icons[1].group).y)
+    for i=1,8 do for j=i+1,8 do assert(separated(rect(c.icons[i]),rect(c.icons[j])))end end
+    for _,icon in ipairs(c.icons)do assert(rect(icon).y>=rect(c).y)end
+end)
+
+test("location format uses exact UTF8 bullets without empty components or fake coordinates",function()
+    local _,S=open();local bullet=" "..string.char(226,128,162).." "
+    assert(S:LocationLabel({zone="Westfall",name="Gryan",mapID=100,x=.25,y=.5})=="Westfall"..bullet.."Gryan"..bullet.."25.0, 50.0")
+    assert(S:LocationLabel({name="Gryan"})=="Gryan")
+    assert(S:LocationLabel({zone="Westfall",name="Letter",itemID=123})=="Westfall"..bullet.."Starts from Letter")
+    assert(S:LocationLabel({})=="Quest giver unavailable")
+    assert(not S:LocationLabel({zone="Westfall",name="Gryan"}):find(string.char(7),1,true))
+end)
+
+test("saved search defaults apply at every opening while retaining query scope slot and sort",function()
+    local N,S=open();S.search:SetText("sword");S.search:Fire("OnTextChanged",true)
+    S.filter.slot,S.filter.scope,S.filter.sort="INVTYPE_WEAPON","LEVEL_RANGE","TITLE"
+    S.filter.usable,S.filter.includeDungeons=false,true
+    S.minimumInput:SetText("18");S.maximumInput:SetText("19");S:CommitRange();assert(S.manualRange)
+    N.Core:ChangeSearchDefault("hideUnusable",true);N.Core:ChangeSearchDefault("includeDungeons",false)
+    N.Core:ChangeSearchDefault("levelsBelow",7);N.Core:ChangeSearchDefault("levelsAbove",1)
+    assert(S.filter.usable==false and S.filter.includeDungeons==true and S.filter.minimum==18 and S.filter.maximum==19)
+    S.frame:Hide();S:Toggle()
+    assert(S.filter.usable and not S.filter.includeDungeons and S.usable:GetChecked() and not S.dungeons:GetChecked())
+    assert(S.filter.minimum==13 and S.filter.maximum==21 and not S.manualRange)
+    assert(S.filter.query=="sword" and S.search:GetText()=="sword" and S.filter.slot=="INVTYPE_WEAPON" and S.filter.scope=="LEVEL_RANGE" and S.filter.sort=="TITLE")
+    local snapshot=N.Core.profile.searchDefaults
+    S.filter.usable=false;S.filter.includeDungeons=true;S.minimumInput:SetText("17");S.maximumInput:SetText("25");S:CommitRange()
+    assert(snapshot.hideUnusable and not snapshot.includeDungeons and snapshot.levelsBelow==7 and snapshot.levelsAbove==1)
+end)
+
+test("appearance changes preserve transient filters and defer geometry until a native menu closes",function()
+    local N,S=open();S.filter.query="wand";S.filter.scope="LEVEL_RANGE";S.filter.minimum=11;S.filter.maximum=29;S.manualRange=true
+    local before=S.frame:GetScale();W.menuOpen=true
+    Menu={GetManager=function()return{IsAnyMenuOpen=function()return W.menuOpen end}end}
+    N.Core:Change("scale",.8);assert(S.frame:GetScale()==before and S.appearanceDirty)
+    W.time=W.time+.3;S:Tick();assert(S.frame:GetScale()==before)
+    W.menuOpen=false;W.time=W.time+.3;S:Tick();assert(S.frame:GetScale()==.8 and not S.appearanceDirty)
+    assert(S.filter.query=="wand" and S.filter.scope=="LEVEL_RANGE" and S.filter.minimum==11 and S.filter.maximum==29 and S.manualRange)
+end)
+
+test("result count omits rating diagnostics while retaining useful quest state in rows",function()
+    local N,S=open();local c,row=fill(N,S,{{itemID=123,state="ready",texture=100}})
+    row.ranking={state="unknown",tier=2};row.evidence="In quest log"
+    N.SearchModel.Query=function()return {row}end;S:Refresh()
+    assert(S.count:GetText():find("1 quests",1,true) and not S.count:GetText():find("not rated",1,true))
+    assert(c.evidence:GetText()=="In quest log")
+end)
+
+test("sort has a readable owned fallback if the verified native atlas cannot load",function()
+    local N=W.Init();local methods=getmetatable(W.Object()).__index;local original=methods.SetAtlas
+    methods.SetAtlas=function(self,atlas)if atlas=="auctionhouse-ui-sortarrow"then error("asset unavailable")end;return original(self,atlas)end
+    N.Search:Create();local d=N.Search.sort;methods.SetAtlas=original
+    assert(d.fallback:GetText()=="Sort" and not d.arrows[1]:IsShown() and not d.arrows[2]:IsShown())
+    assert(d.menuGenerator and d.hooks.OnMouseDown and d.hooks.OnEnter)
+end)
+
+test("appearance bursts reflow retained results without queries even with native size callbacks",function()
+    local N,S=open();local _,row=fill(N,S,{{itemID=123,state="ready",texture=100}})
+    S.results={row};S:LayoutResults();S:Scroll(0);S.dirty=false
+    local queries=0;N.SearchModel.Query=function()queries=queries+1;return {row}end
+    local setSize=S.frame.SetSize
+    S.frame.SetSize=function(frame,w,h)
+        local changed=w~=frame:GetWidth() or h~=frame:GetHeight();setSize(frame,w,h)
+        if changed then frame:Fire("OnSizeChanged",w,h)end
+    end
+    S.filter.query="gun";S.filter.scope="LEVEL_RANGE";S.filter.minimum,S.filter.maximum=12,24;S.manualRange=true
+    UIParent.width,UIParent.height=500,350
+    for _=1,10 do N.Core:Change("border","none");N.Core:Change("scale",1.2);N.Core:Change("font","Arial")end
+    W.time=W.time+.3;S:Tick()
+    assert(queries==0 and not S.dirty and S.frame:GetScale()==1.2 and S.frame:GetWidth()<=476/1.2)
+    assert(S.filter.query=="gun" and S.filter.scope=="LEVEL_RANGE" and S.filter.minimum==12 and S.filter.maximum==24 and S.manualRange)
+    W.Event("UI_SCALE_CHANGED");W.Event("DISPLAY_SIZE_CHANGED");S.frame:Fire("OnSizeChanged");S.resize:Fire("OnMouseUp")
+    W.time=W.time+.3;S:Tick();assert(queries==0 and not S.dirty)
+    -- An actual data invalidation arriving beside appearance still queries.
+    S:AppearanceChanged();S:DataChanged();W.time=W.time+.3;S:Tick();assert(queries==1)
 end)

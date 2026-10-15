@@ -5,10 +5,13 @@ M.presets = {
     blue = { .88, .95, 1 },
     amber = { 1, .94, .82 },
 }
-M.defaults = { version = 3, enabled = true, preset = "blue", strength = .55,
+M.defaults = { version = 4, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
     accents = true, dialogTint = true, rewards = true, scale = 1,
-    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right" }
+    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right",
+    font = "Game tooltip", border = "default",
+    searchDefaults = {hideUnusable=true, levelsBelow=5, levelsAbove=3, includeDungeons=false} }
+M.borders = {default=true, none=true, tooltip=true, dialog=true, thin=true}
 
 function M.Readable(value)
     if not issecretvalue then return true end
@@ -27,10 +30,27 @@ function M.Copy(value)
     local copy = {}; for key, item in pairs(value) do copy[key] = M.Copy(item) end
     return copy
 end
+function M.FontName(value)
+    -- %c follows the host C locale; some Windows locales classify UTF-8
+    -- continuation bytes as controls. Reject ASCII controls without corrupting
+    -- valid localized media names.
+    return M.Readable(value) and type(value)=="string" and #value>0 and #value<=128 and not value:find("[%z\1-\31\127|]") and value or nil
+end
+function M.SearchDefaults(saved)
+    local defaults=M.Copy(M.defaults.searchDefaults)
+    if not M.Readable(saved) or type(saved)~="table" then return defaults end
+    for _,key in ipairs({"hideUnusable","includeDungeons"}) do
+        if M.Readable(saved[key]) and type(saved[key])=="boolean" then defaults[key]=saved[key] end
+    end
+    for _,key in ipairs({"levelsBelow","levelsAbove"}) do
+        if M.Number(saved[key]) then defaults[key]=math.floor(math.max(0,math.min(199,saved[key]))) end
+    end
+    return defaults
+end
 function M.Load(saved)
     local profile = M.Copy(M.defaults)
     if not M.Readable(saved) or type(saved) ~= "table" then return profile, false end
-    if M.Number(saved.version) and saved.version > 3 then
+    if M.Number(saved.version) and saved.version > M.defaults.version then
         -- Preserve an explicit opt-out even when the newer schema is read-only.
         if M.Readable(saved.enabled) and saved.enabled == false then profile.enabled = false end
         return profile, true
@@ -46,6 +66,9 @@ function M.Load(saved)
     if M.Number(saved.launcherAngle) then profile.launcherAngle=saved.launcherAngle%360 end
     if M.Readable(saved.previewLayout) and (saved.previewLayout=="tooltip" or saved.previewLayout=="inspector") then profile.previewLayout=saved.previewLayout end
     if M.Readable(saved.inspectionPosition) and (saved.inspectionPosition=="right" or saved.inspectionPosition=="tooltip") then profile.inspectionPosition=saved.inspectionPosition end
+    profile.font=M.FontName(saved.font) or profile.font
+    if M.Readable(saved.border) and type(saved.border)=="string" and M.borders[saved.border] then profile.border=saved.border end
+    profile.searchDefaults=M.SearchDefaults(saved.searchDefaults)
     return profile, false
 end
 function M.Status(id)

@@ -1,10 +1,42 @@
 # Validation
 
-FindAnUpgrade **0.1.10** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.11** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
+
+## Alignment and settings review, 0.1.11
+
+The current patch follows the source-backed `ALIGNMENT-DESIGN-PLAN.md` and
+`SETTINGS-DESIGN-PLAN.md`, using the installed XPIsland 0.6.3 and AsTheCrowFlies
+0.1.4 constructors. Search inputs and dropdowns share native border slices;
+reward icons have a common first-row baseline with group captions below.
+The native auction sorting arrow, weapon subclass returns and selected-EditBox
+copy boundary are documented in `SEARCH-COPY-CONTRACTS.md`.
+
+The settings schema advances to 4 with font, panel-border and saved search
+defaults. Temporary filters remain separate; defaults apply on every next
+opening. Native numeric item overlays and native tooltip/comparison content
+retain their specialized font roles. Appearance changes restyle retained
+results without querying the corpus. Media choices and native menu updates
+are cached and driven by relevant changes.
+
+Independent reports are `ALIGNMENT-DESIGN-REVIEW.md`,
+`ALIGNMENT-BEHAVIOR-REVIEW.md` and `ALIGNMENT-PERFORMANCE-REVIEW.md`. Their final
+stable-file reruns and hashes establish review acceptance. The complete
+local verifier passes all 17 commands, 543 Lua 5.1 scenarios across 27 suites
+and 171 Python tests. Exact-commit build receipts establish delivered bytes;
+intermediate snapshots do not establish completion.
+
+The parent reviewer observed three of the eight latest screenshots and reported
+their concrete alignment findings. Library metadata/OCR for all eight were
+accessible here, but their latest image bytes were not materialized in this
+worker. Source inspection and independent measured-glyph constructor probes
+support these corrections; no native screenshot of 0.1.11 was observed.
+Physical controls, Ctrl+C, glyphs, apparent borders, fractional scaling,
+item/comparison transit, native CPU, combat/taint and coexistence remain live
+checks. Installation alone does not verify those outcomes.
 
 ## Fresh correctness review, 0.1.10
 

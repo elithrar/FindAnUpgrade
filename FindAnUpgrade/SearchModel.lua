@@ -60,6 +60,22 @@ local function rewardBenefit(reward)
     for _,entry in ipairs(reward.currencies.items or {}) do if M.Text(entry.name) and positive(entry.amount) then return true end end
     return false
 end
+-- Pinned Forever ItemWeaponSubclass values. These are search synonyms only;
+-- item usability, slot selection and upgrade comparison keep their own rules.
+local weaponTerms={
+    [0]="axe axes one-handed",[1]="axe axes two-handed",[2]="bow bows",[3]="gun guns",
+    [4]="mace maces one-handed",[5]="mace maces two-handed",[6]="polearm polearms",
+    [7]="sword swords one-handed",[8]="sword swords two-handed",[9]="warglaive warglaives",
+    [10]="staff staves",[13]="fist weapon unarmed",[15]="dagger daggers",[16]="thrown",
+    [18]="crossbow crossbows",[19]="wand wands",[20]="fishing pole fishingpole",
+}
+local function itemType(row,kind,subtype,class,subclass)
+    row.itemType,row.itemSubType=M.Text(kind),M.Text(subtype)
+    row.classID=M.Number(class) and class>=0 and class==math.floor(class) and class or nil
+    row.subclassID=M.Number(subclass) and subclass>=0 and subclass==math.floor(subclass) and subclass or nil
+    local aliases=row.classID==2 and weaponTerms[row.subclassID] or nil
+    row.searchTypeText=table.concat({row.itemType or "",row.itemSubType or "",aliases or ""}," "):lower()
+end
 function S:Item(meta)
     local id=meta.itemID
     local function rewardCopy(base)
@@ -71,17 +87,20 @@ function S:Item(meta)
     if self.cache[id] and (self.cache[id].state=="ready" or A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true) then return rewardCopy(self.cache[id]) end
     local row={itemID=id,name=meta.name,kind="catalog",state="pending",catalog=true}
     local fn=C_Item and C_Item.GetItemInfo or GetItemInfo
-    local name,link,quality,level,minimum,slot,texture
+    local name,link,quality,level,minimum,slot,texture,kind,subtype,class,subclass
     if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)==true then
         local values={returns(fn,id)}
         name,link,quality,level,minimum,slot,texture=values[1],values[2],values[3],values[4],values[5],values[9],values[10]
+        kind,subtype,class,subclass=values[6],values[7],values[12],values[13]
     end
     if M.Text(name) and M.Text(link) and M.Number(quality) and quality>=0 and quality<=8 and M.Readable(slot) and type(slot)=="string" and (M.Text(texture) or M.Number(texture)) then
         row.name,row.link,row.quality,row.itemLevel,row.minimum,row.slot,row.texture,row.state=name,link,quality,M.Number(level) and level or nil,M.Number(minimum) and minimum or nil,slot,texture,"ready"
     else
-        local _,_,_,instantSlot,icon=returns(C_Item and C_Item.GetItemInfoInstant or GetItemInfoInstant,id)
+        local _,instantKind,instantSubtype,instantSlot,icon,instantClass,instantSubclass=returns(C_Item and C_Item.GetItemInfoInstant or GetItemInfoInstant,id)
         row.slot=M.Text(instantSlot); row.texture=M.Text(icon) or M.Number(icon) and icon or nil
+        kind,subtype,class,subclass=instantKind,instantSubtype,instantClass,instantSubclass
     end
+    itemType(row,kind,subtype,class,subclass)
     self.cache[id]=row; return rewardCopy(row)
 end
 function S.SlotMatch(slot,filter,context)
@@ -159,6 +178,7 @@ function S:Query(filter)
                                 if filter.usable and N.Ranking and N.Ranking.Usable then capability=N.Ranking:Usable(item.itemID,context,rankingQuery) end
                                 if S.SlotMatch(item.slot,slotFilter,context) and (not filter.usable or usable~=false and capability~=false and (not item.minimum or item.minimum<=context.level)) then
                                     items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)
+                                        or (item.searchTypeText or ""):find(query,1,true)
                                 end
                             end
                             if match and (#items>0 or slotFilter=="ALL" and self:Benefit(record)) then

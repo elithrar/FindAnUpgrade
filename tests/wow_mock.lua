@@ -23,7 +23,10 @@ function Methods:SetSize(w,h) layout(self); self.width = w; self.height = h end
 function Methods:SetHeight(h) layout(self); self.height = h end
 function Methods:ClearAllPoints() layout(self); self.point=nil; self.points={} end
 function Methods:GetNumPoints()local n=0;for _ in pairs(self.points or {})do n=n+1 end;return n end
-function Methods:SetAllPoints() layout(self) end
+function Methods:SetAllPoints(relative)
+    layout(self); self:ClearAllPoints(); relative=relative or self.parent
+    if relative then self:SetPoint("TOPLEFT",relative,"TOPLEFT",0,0); self:SetPoint("BOTTOMRIGHT",relative,"BOTTOMRIGHT",0,0) end
+end
 function Methods:GetEffectiveScale() return (self.scale or 1)*(self.parent and self.parent:GetEffectiveScale() or 1) end
 function Methods:GetRect() if self.rectSecret then return W.secret,0,10,10 end; return self.x or 0,self.y or 0,self:GetWidth(),self:GetHeight() end
 function Methods:GetLeft()local x=self:GetRect();return x end
@@ -56,7 +59,7 @@ end
 function Methods:SetWordWrap(value) self.wordWrap=value end
 function Methods:SetScrollChild(child) self.scrollChild=child end
 function Methods:SetVerticalScroll(value) self.scrollValue=value end
-function Methods:CreateTexture() return W.Object() end
+function Methods:CreateTexture() local texture=W.Object(); texture.parent=self; return texture end
 function Methods:SetOwner(owner,anchor) self.owner=owner; self.anchor=anchor end
 function Methods:GetOwner() return self.owner end
 function Methods:ClearLines() self.lines={}; self:Fire("OnTooltipCleared") end
@@ -124,6 +127,9 @@ function Methods:SetValue(v) self.value = v; self:Fire("OnValueChanged", v) end
 function Methods:SetBackdropColor(...) self.backdropColor = {...} end
 function Methods:SetBackdropBorderColor(...) self.border = {...} end
 function Methods:SetBackdrop(v) self.backdrop = v end
+function Methods:GetBackdrop() return self.backdrop end
+function Methods:GetBackdropColor() return unpack(self.backdropColor or {0,0,0,0}) end
+function Methods:GetBackdropBorderColor() return unpack(self.border or {0,0,0,0}) end
 function Methods:CreateFontString(name,layer,template)
     local f=W.Object(); f.isFontString=true; f.parent=self; f.name=name; f.layer=layer; f.template=template
     if template and _G[template] then f:SetFontObject(_G[template]) end
@@ -131,7 +137,9 @@ function Methods:CreateFontString(name,layer,template)
     return f
 end
 function Methods:SetAtlas(atlas) self.atlas = atlas end
+function Methods:SetRotation(value) self.rotation=value end
 function Methods:SetTexture(tex) self.texture = tex end
+function Methods:SetColorTexture(...) self.colorTexture={...} end
 function Methods:SetNormalTexture(value)self.normalTexture=value end
 function Methods:GetNormalTexture()return self.normalTexture end
 function Methods:SetPushedTexture(value)self.pushedTexture=value end
@@ -236,8 +244,17 @@ function W.Reset(config)
         end
         if template == "UISliderTemplate" then f.thumb=W.Object();f.thumb.width=32;f.thumb.height=32 end
         if kind == "CheckButton" or kind=="DropdownButton" and template then f.Text = f:CreateFontString(nil,"OVERLAY","GameFontNormal") end
+        if kind=="DropdownButton" and template=="WowStyle1DropdownTemplate" then
+            f.Background=W.Object(); f.Background.parent=f
+            f.Background:SetPoint("TOPLEFT",f,"TOPLEFT",-9,8); f.Background:SetPoint("BOTTOMRIGHT",f,"BOTTOMRIGHT",8,-9)
+            f.Arrow=W.Object(); f.Arrow.parent=f; f.Arrow:SetSize(24,24); f.Arrow:SetPoint("RIGHT",f,"RIGHT",-1,0)
+        end
         if template=="UICheckButtonTemplate"then f.Text:SetPoint("LEFT",f,"RIGHT",-2,0)end
-        if template=="InputBoxTemplate"then for _,key in ipairs({"Left","Right","Middle"})do f[key]=W.Object();f[key].parent=f;f[key]:SetHeight(20)end end
+        if template=="InputBoxTemplate"then
+            for _,key in ipairs({"Left","Right","Middle"})do f[key]=W.Object();f[key].parent=f;f[key]:SetSize(key=="Middle" and 10 or 8,20)end
+            f.Left:SetPoint("LEFT",f,"LEFT",-5,0); f.Right:SetPoint("RIGHT",f,"RIGHT",0,0)
+            f.Middle:SetPoint("LEFT",f.Left,"RIGHT",0,0); f.Middle:SetPoint("RIGHT",f.Right,"LEFT",0,0)
+        end
         table.insert(W.frames, f); if name then _G[name] = f end; return f
     end
     QuestFrame = W.Object(true); QuestFrame.shown = true

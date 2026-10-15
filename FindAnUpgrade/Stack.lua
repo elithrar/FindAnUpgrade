@@ -8,9 +8,8 @@ local function nearSegment(x,y,ax,ay,bx,by,padding)
     return (x-ax-t*dx)^2+(y-ay-t*dy)^2<=padding*padding
 end
 local function text(parent, header)
-    -- Tooltip fonts belong to the native tooltip font objects. SharedMedia
-    -- remains an options/search convention, not a tooltip font override.
     local f = parent:CreateFontString(nil, "OVERLAY", header == true and "GameTooltipHeaderText" or "GameTooltipText")
+    U:Font(f,header==true and 14 or M.Number(header) and header or 12)
     f:SetJustifyH("LEFT"); f:SetJustifyV("TOP"); f:SetWordWrap(true)
     return f
 end
@@ -158,7 +157,7 @@ function V:Fill(c,row,profile)
         r,g,b=TOOLTIP_DEFAULT_BACKGROUND_COLOR:GetRGB()
     end
     r,g,b=M.AccentFill(profile,classification,r,g,b)
-    c:SetBackdropColor(r,g,b,.96)
+    U:Border(c,"tooltip"):SetBackdropColor(r,g,b,.96)
     -- The native silver border is retained for every classification.
     return y
 end

@@ -7,6 +7,55 @@ function U:Dialog(frame)
     frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",tile=true,tileSize=8,edgeSize=16,insets={left=4,right=4,top=4,bottom=4}})
     frame:SetBackdropColor(.045,.045,.05,.94); frame:SetBackdropBorderColor(.65,.65,.65,1)
 end
+local borderFiles={tooltip={"Interface\\Tooltips\\UI-Tooltip-Border",10},dialog={"Interface\\DialogFrame\\UI-DialogBox-Border",16},thin={"Interface\\Buttons\\WHITE8X8",1}}
+local function rgba(frame,method)
+    if type(method)~="function" then return end
+    local ok,r,g,b,a=pcall(method,frame)
+    if ok and M.Number(r) and M.Number(g) and M.Number(b) and M.Number(a) then return {r,g,b,a} end
+end
+function U:Border(frame,defaultKind)
+    local preference=N.Core and N.Core.profile.border or "default"
+    local selected=preference=="default" and defaultKind or preference
+    -- TooltipBorderedFrameTemplate owns NineSlice art, not BackdropTemplate.
+    -- Keep its center/background unchanged; only its edge becomes transparent.
+    -- Explicit replacement edges reuse one owned edge-only backdrop.
+    if frame.NineSlice then
+        if preference=="default" then
+            if frame.qNativeBorder then frame:SetBackdropBorderColor(unpack(frame.qNativeBorder));frame.qNativeBorder=nil end
+            if frame.qBorderFrame then frame.qBorderFrame:Hide() end
+            return frame
+        end
+        frame.qNativeBorder=frame.qNativeBorder or rgba(frame,frame.GetBackdropBorderColor) or {.6,.6,.6,1}
+        frame:SetBackdropBorderColor(frame.qNativeBorder[1],frame.qNativeBorder[2],frame.qNativeBorder[3],0)
+        if selected=="none" then if frame.qBorderFrame then frame.qBorderFrame:Hide() end;return frame end
+        local edge=borderFiles[selected]
+        if edge and not frame.qBorderFrame then
+            local background=CreateFrame("Frame",nil,frame,"BackdropTemplate")
+            background:SetAllPoints(frame); background:SetFrameLevel(frame:GetFrameLevel()); frame.qBorderFrame=background
+        end
+        local overlay=frame.qBorderFrame
+        if overlay then
+            if overlay.qBorderKey~=selected then
+                overlay:SetBackdrop({edgeFile=edge[1],edgeSize=edge[2],insets={left=2,right=2,top=2,bottom=2}})
+                overlay:SetBackdropBorderColor(unpack(frame.qNativeBorder));overlay.qBorderKey=selected
+            end
+            overlay:Show()
+        end
+        return frame
+    end
+    local key=tostring(selected)..":"..tostring(defaultKind)
+    if frame.qBorderKey~=key then
+        local inset=defaultKind=="dialog" and 4 or 2
+        local edge=borderFiles[selected]
+        local color=rgba(frame,frame.GetBackdropColor)
+        local border=rgba(frame,frame.GetBackdropBorderColor)
+        frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile=edge and edge[1],tile=true,tileSize=8,edgeSize=edge and edge[2] or 0,insets={left=inset,right=inset,top=inset,bottom=inset}})
+        if color then frame:SetBackdropColor(unpack(color)) else frame:SetBackdropColor(.045,.045,.05,.94) end
+        if border then frame:SetBackdropBorderColor(unpack(border)) else frame:SetBackdropBorderColor(.65,.65,.65,1) end
+        frame.qBorderKey=key
+    end
+    return frame
+end
 function U:VerticalBar(parent)
     -- Same native vertical asset/backdrop pattern as installed Questie/AceGUI.
     -- UISliderTemplate supplies horizontal NineSlice and thumb art.
@@ -53,10 +102,16 @@ function U:Font(object, size)
     self.fontSizes = self.fontSizes or {}; self.fontSizes[object]=size
     local fallback = STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF"
     local tooltip=GameTooltipTextLeft2 or GameTooltipText
-    local requested=tooltip and M.Text(A.Call(tooltip.GetFont,tooltip)) or fallback
+    local native=tooltip and M.Text(A.Call(tooltip.GetFont,tooltip)) or fallback
+    local preference=N.Core and N.Core.profile.font or "Game tooltip"
+    local lib=self:Media()
+    local key=preference..":"..native..":"..tostring(self.mediaRevision or 0)..":"..tostring(lib)
     if not self.fontProbe then self.fontProbe = UIParent:CreateFontString(nil, "OVERLAY"); self.fontProbe:Hide() end
-    if not self.fontState or self.fontState.requested ~= requested then
-        self.fontState = { requested = requested, path = setFont(self.fontProbe, requested, 12) and requested or fallback }
+    if not self.fontState or self.fontState.key ~= key then
+        local requested=preference=="Arial" and "Fonts\\ARIALN.TTF" or preference=="Friz Quadrata" and "Fonts\\FRIZQT__.TTF" or native
+        if preference~="Game tooltip" and preference~="Arial" and preference~="Friz Quadrata" and lib and A.Call(lib.IsValid,lib,"font",preference)==true then requested=M.Text(A.Call(lib.Fetch,lib,"font",preference)) or native end
+        local path=setFont(self.fontProbe,requested,12) and requested or setFont(self.fontProbe,native,12) and native or fallback
+        self.fontState = { key=key, requested=requested, path=path, default=native }
         self.fontRevision=(self.fontRevision or 0)+1
     end
     self.fontApplications = self.fontApplications or {}
@@ -65,9 +120,14 @@ function U:Font(object, size)
     if cached and cached.path == self.fontState.path and cached.size == size
         and path == cached.actual and height == cached.height and flags == cached.flags then return end
     if not setFont(object, self.fontState.path, size) then
-        if self.fontState.path ~= fallback then self.fontRevision=(self.fontRevision or 0)+1 end
-        self.fontState.path = fallback
-        if not setFont(object, fallback, size) then object:SetFontObject(GameFontNormal) end
+        local target=self.fontState.path~=self.fontState.default and self.fontState.default or fallback
+        if self.fontState.path ~= target then self.fontRevision=(self.fontRevision or 0)+1 end
+        self.fontState.path = target
+        if not setFont(object,target,size) then
+            if target~=fallback and setFont(object,fallback,size) then self.fontState.path=fallback
+            else object:SetFontObject(GameFontNormal); self.fontState.path=M.Text(A.Call(GameFontNormal.GetFont,GameFontNormal)) or fallback end
+            self.fontRevision=(self.fontRevision or 0)+1
+        end
     end
     path, height, flags = object:GetFont()
     self.fontApplications[object] = { path = self.fontState.path, size = size, actual = path, height = height, flags = flags }
@@ -93,31 +153,61 @@ function U:AnchorText(text,point,parent,relativePoint,x,y)
     text:SetPoint(point,parent,relativePoint,(x or 0)/fit,(y or 0)/fit)
 end
 local function getMedia() return LibStub and LibStub("LibSharedMedia-3.0",true) end
-function U:Media()
+function U:Media(refresh)
+    if self.mediaChecked and not refresh then return self.mediaLibrary end
     local lib=A.Call(getMedia)
-    if M.Readable(lib) and type(lib)=="table" then return lib end
+    self.mediaChecked=true
+    self.mediaLibrary=M.Readable(lib) and type(lib)=="table" and lib or nil
+    return self.mediaLibrary
+end
+function U:FontEntries()
+    local lib=self:Media()
+    local preference=N.Core and N.Core.profile.font or "Game tooltip"
+    local key=preference..":"..tostring(self.mediaRevision or 0)..":"..tostring(lib)
+    if self.fontEntriesCache and self.fontEntriesCache.key==key then return self.fontEntriesCache.entries end
+    local names={["Game tooltip"]=true,Arial=true,["Friz Quadrata"]=true}
+    local registered=lib and A.Call(lib.HashTable,lib,"font")
+    if M.Readable(registered) and type(registered)=="table" then
+        local count=0
+        for name in pairs(registered) do if M.FontName(name) then names[name]=true;count=count+1;if count>=512 then break end end end
+    end
+    names[preference]=true
+    local list={}
+    for name in pairs(names) do
+        local builtIn=name=="Game tooltip" or name=="Arial" or name=="Friz Quadrata"
+        local available=builtIn or lib and A.Call(lib.IsValid,lib,"font",name)==true
+        list[#list+1]={value=name,label=name=="Game tooltip" and "Game tooltip (default)" or name..(available and "" or " (unavailable)")}
+    end
+    table.sort(list,function(a,b) if a.value=="Game tooltip" then return b.value~="Game tooltip" elseif b.value=="Game tooltip" then return false end return a.value<b.value end)
+    self.fontEntriesCache={key=key,entries=list}
+    return list
 end
 function U:RefreshFonts()
     local before=self.fontPath
-    local revision=self.fontRevision or 0
-    for object,size in pairs(self.fontSizes or {}) do self:Font(object,size) end
-    if self.fontState and revision ~= self.fontRevision then
-        -- A late control can reject the requested font after the probe succeeded.
-        -- Replay all owned text with the final fallback, including earlier labels.
+    -- A later object can reject an otherwise usable family. Settle the bounded
+    -- requested -> native -> standard fallback before returning to layout.
+    for _=1,3 do
+        local revision=self.fontRevision or 0
         for object,size in pairs(self.fontSizes or {}) do self:Font(object,size) end
+        if revision==self.fontRevision then break end
     end
     self.fontPath=self.fontState and self.fontState.path
     return before ~= self.fontPath
 end
 function U:WatchFonts()
-    local lib=self:Media()
+    local lib=self:Media(true)
     if not lib or self.fontLibrary==lib or type(lib.RegisterCallback)~="function" then return end
     self.fontChanged=self.fontChanged or function(_,kind)
         if kind~="font" then return end
+        self.mediaRevision=(self.mediaRevision or 0)+1
+        self.fontEntriesCache=nil
         self.fontState=nil
-        if self:RefreshFonts() and N.Hover.open then N.Hover:Dismiss("font") end
+        local changed=self:RefreshFonts()
+        if changed and N.Hover.open and N.Hover.mode=="inspector" then N.Stack:Refresh() end
         if N.Options.frame then N.Options:Refresh() end
-        if N.Search and N.Search:Visible() then N.Search:Changed(nil,true) end
+        if changed and N.Search and N.Search:Visible() then
+            if N.Search.AppearanceChanged then N.Search:AppearanceChanged() else N.Search:Changed(nil,true) end
+        end
     end
     local a=pcall(lib.RegisterCallback,self,"LibSharedMedia_Registered",self.fontChanged)
     local b=pcall(lib.RegisterCallback,self,"LibSharedMedia_SetGlobal",self.fontChanged)

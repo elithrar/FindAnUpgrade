@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.10" }; N.Core = C
+local C = { version = "0.1.11" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -22,21 +22,37 @@ function C:Change(key, value)
     if self.readOnly then return false end
     local saved = M.Copy(self.profile); saved[key] = value
     self.profile = M.Load(saved); FindAnUpgradeDB = self.profile
-    N.Sources:Clear()
+    local appearance=key=="font" or key=="border" or key=="scale" or key=="accents" or key=="strength"
+    if key~="font" and key~="border" and key~="scale" and key~="searchDefaults" then N.Sources:Clear() end
+    if key=="font" then U.fontState=nil;U:RefreshFonts() end
     self:Refresh()
     if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
     if not self.profile.enabled and N.Search.frame then N.Search.frame:Hide() end
-    if N.Search:Visible() and (key=="accents" or key=="strength" or key=="scale") then N.Search:Fit(); N.Search:Changed() end
+    if appearance and N.Hover.open and N.Hover.mode=="inspector" and N.Stack.source then
+        if N.Stack.frame and M.Number(N.Stack.screenWidth) then N.Stack.frame:SetScale(math.min(self.profile.scale,(N.Stack.screenWidth-16)/320)) end
+        N.Stack:Refresh()
+    end
+    if N.Search:Visible() and appearance then
+        if N.Search.AppearanceChanged then N.Search:AppearanceChanged() else N.Search:Fit(); N.Search:Changed(nil,true) end
+    end
     return true
+end
+function C:ChangeSearchDefault(key,value)
+    if self.readOnly or M.defaults.searchDefaults[key]==nil then return false end
+    local defaults=M.Copy(self.profile.searchDefaults);defaults[key]=value
+    return self:Change("searchDefaults",M.SearchDefaults(defaults))
 end
 function C:Defaults()
     if self.readOnly then return false end
     self.profile = M.Copy(M.defaults); FindAnUpgradeDB = self.profile
+    U.fontState=nil;U:RefreshFonts()
     N.Sources:Clear()
     self:Refresh(); if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
-    if N.Search:Visible() then N.Search:Fit(); N.Search:Changed() end
+    if N.Search:Visible() then
+        if N.Search.AppearanceChanged then N.Search:AppearanceChanged() else N.Search:Fit(); N.Search:Changed(nil,true) end
+    end
     return true
 end
 function C:Attach()
@@ -106,7 +122,11 @@ events:SetScript("OnEvent", function(_, event, name)
         if name == ADDON then C:Initialize() elseif C.ready then
             C:Attach(); N.Sources:Attach(); U:WatchFonts()
             if N.NativeTooltip then N.NativeTooltip:Attach() end
-            if U:RefreshFonts() and N.Hover.open then N.Hover:Dismiss("font") end
+            local fontChanged=U:RefreshFonts()
+            if fontChanged and N.Hover.open and N.Hover.mode=="inspector" then N.Stack:Refresh() end
+            if fontChanged and N.Search:Visible() then
+                if N.Search.AppearanceChanged then N.Search:AppearanceChanged() else N.Search:Changed(nil,true) end
+            end
             if N.Options.frame then N.Options:Refresh() end
         end
     elseif not C.ready then return

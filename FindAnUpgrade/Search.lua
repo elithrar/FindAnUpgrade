@@ -23,18 +23,29 @@ local function rewardStamp(reward)
     for _,row in ipairs((reward.reputation or {}).items or {}) do add("rep",row.factionID,row.name,row.amount,row.published) end
     return table.concat(parts,"\030")
 end
-local skin={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 local function text(parent,size,color)
     local f=parent:CreateFontString(nil,"OVERLAY","GameTooltipText"); U:Font(f,size or 12)
     f:SetJustifyH("LEFT"); f:SetJustifyV("TOP"); f:SetWordWrap(false); f:SetTextColor(unpack(color or {.93,.94,.97})); return f
 end
-local function surface(f) f:SetBackdrop(skin); f:SetBackdropColor(.045,.045,.05,.96); f:SetBackdropBorderColor(.5,.5,.5,.8) end
+local function surface(f) U:Border(f,"tooltip"); f:SetBackdropColor(.045,.045,.05,.96); f:SetBackdropBorderColor(.5,.5,.5,.8) end
+local function controlArt(frame,height)
+    -- Sidebar inputs and dropdowns share the exact native border slices.
+    -- The dropdown's padded textholder cannot establish opaque-edge alignment.
+    if frame.Background then frame.Background:Hide() end
+    for _,key in ipairs({"Left","Right","Middle"}) do
+        local region=frame[key]
+        if not region then region=frame:CreateTexture(nil,"BACKGROUND"); frame[key]=region end
+        region:SetAtlas("common-search-border-"..key:lower()); region:SetHeight(height)
+        if key~="Middle" then region:SetWidth(8) end
+        region:ClearAllPoints()
+    end
+    frame.Left:SetPoint("LEFT",frame,"LEFT",0,0); frame.Right:SetPoint("RIGHT",frame,"RIGHT",0,0)
+    frame.Middle:SetPoint("LEFT",frame.Left,"RIGHT",0,0); frame.Middle:SetPoint("RIGHT",frame.Right,"LEFT",0,0)
+end
 local function edit(parent,width,height)
     height=height or 26
     local e=CreateFrame("EditBox",nil,parent,"InputBoxTemplate"); e:SetSize(width,height); e:SetAutoFocus(false); e:SetMaxLetters(100); e:SetTextInsets(8,8,0,0); e:SetJustifyV("MIDDLE"); U:Font(e,12)
-    -- InputBoxTemplate's inherited border textures retain their 20px height
-    -- when the edit box grows. Resize that owned art with its actual hit area.
-    for _,key in ipairs({"Left","Right","Middle"}) do if e[key] then e[key]:SetHeight(height) end end
+    controlArt(e,height)
     return e
 end
 function S:Visible() return self.frame and A.Visible(self.frame) end
@@ -74,6 +85,21 @@ function S:DataChanged()
     local deadline=(A.Call(GetTime) or 0)+.15
     self.changeAt=math.min(self.changeAt or deadline,deadline)
     self:Wake()
+end
+function S:AppearanceChanged()
+    -- Restyle reusable objects after an open menu is released. Appearance
+    -- changes do not replace transient search state or re-read character data.
+    self.appearanceDirty=true
+    if self.inspector then self.inspector:ClearItem() end
+    if self.footerTooltip then self.footerTooltip:Hide() end
+    self:Wake()
+end
+function S:ApplyAppearance()
+    self.appearanceDirty=nil; self.appearanceLayout=true
+    self:Fit()
+    if self.copyFrame then U:Border(self.copyFrame,"dialog") end
+    if self.results then self:LayoutResults(); self:Scroll(self.offset) end
+    self.appearanceLayout=nil
 end
 function S:Indexes()
     local data=N.CatalogData
@@ -127,7 +153,7 @@ function S:ItemData(id)
     N.SearchModel.cache[id]=nil
     N.SearchModel:Item({itemID=id,name=previous and previous.name})
     local current=N.SearchModel.cache[id];local changed=previous==nil
-    for _,key in ipairs({"state","name","link","quality","itemLevel","minimum","slot","texture"}) do
+    for _,key in ipairs({"state","name","link","quality","itemLevel","minimum","slot","texture","itemType","itemSubType","classID","subclassID","searchTypeText"}) do
         if not previous or previous[key]~=current[key] then changed=true end
     end
     if not changed then
@@ -212,6 +238,7 @@ function S:RequestStep(now)
 end
 function S:Dropdown(parent,width,entries,get,choose,height)
     local d=CreateFrame("DropdownButton",nil,parent,"WowStyle1DropdownTemplate"); d:SetSize(width,height or 26)
+    controlArt(d,height or 26)
     d.Text:ClearAllPoints(); d.Text:SetPoint("LEFT",d,"LEFT",9,0); d.Text:SetWidth(width-31); d.Text:SetHeight(height or 26); d.Text:SetJustifyH("LEFT"); d.Text:SetJustifyV("MIDDLE"); d.Text:SetWordWrap(false); U:Font(d.Text,12)
     d:SetupMenu(function(_,root)
         if self.inspector then self.inspector:ClearItem() end; if self.CloseTextTip then self:CloseTextTip() end; root:SetScrollMode(220)
@@ -243,12 +270,25 @@ function S:CharacterChanged(change)
     if change.identity or change.equipment or change.items or change.capabilities or change.location and self.filter.scope=="SAME_ZONE" then self:DataChanged() end
 end
 function S:SortButton(parent)
-    -- The native bank sort template also owns bank actions. Reuse only its
-    -- verified artwork on an intrinsic DropdownButton with our own menu.
+    -- Use the sorting arrow from the pinned AuctionHouse header, without
+    -- inheriting auction or bag actions. Two directions convey ordering.
     local d=CreateFrame("DropdownButton",nil,parent);d:SetSize(28,26)
-    local normal=d:CreateTexture(nil,"ARTWORK");normal:SetAllPoints();normal:SetAtlas("bags-button-autosort-up");d:SetNormalTexture(normal)
-    local pushed=d:CreateTexture(nil,"ARTWORK");pushed:SetAllPoints();pushed:SetAtlas("bags-button-autosort-down");d:SetPushedTexture(pushed)
+    d.arrows={}; local loaded=true
+    for i=1,2 do
+        local icon=d:CreateTexture(nil,"ARTWORK"); d.arrows[i]=icon
+        icon:SetSize(9,12); icon:SetPoint("CENTER",d,"CENTER",i==1 and -4 or 4,0)
+        local ok=pcall(icon.SetAtlas,icon,"auctionhouse-ui-sortarrow")
+        if ok and type(icon.GetAtlas)=="function" then ok=A.Call(icon.GetAtlas,icon)=="auctionhouse-ui-sortarrow" end
+        if i==2 then icon:SetRotation(math.pi) end
+        loaded=loaded and ok
+    end
+    if not loaded then
+        for _,icon in ipairs(d.arrows) do icon:Hide() end
+        d.fallback=text(d,11); d.fallback:SetAllPoints(); d.fallback:SetJustifyH("CENTER"); d.fallback:SetJustifyV("MIDDLE"); d.fallback:SetText("Sort")
+    end
     local highlight=d:CreateTexture(nil,"HIGHLIGHT");highlight:SetSize(24,23);highlight:SetPoint("CENTER");highlight:SetTexture("Interface\\Buttons\\ButtonHilight-Square");highlight:SetBlendMode("ADD");d:SetHighlightTexture(highlight)
+    d:HookScript("OnEnter",function() self.footerTooltip:SetOwner(d,"ANCHOR_LEFT"); self.footerTooltip:SetText("Sort by"); self.footerTooltip:Show() end)
+    d:HookScript("OnLeave",function() self.footerTooltip:Hide() end)
     d:SetupMenu(function(_,root)
         if self.inspector then self.inspector:ClearItem() end;root:SetScrollMode(260);root:AddMenuReleasedCallback(function()self:Wake()end)
         root:CreateTitle("Sort by")
@@ -294,9 +334,21 @@ function S:Create()
     options:SetScript("OnEnter",function() options.icon:SetVertexColor(1,.82,.2) end)
     options:SetScript("OnLeave",function() options.icon:SetVertexColor(1,1,1) end)
     options:SetScript("OnClick",function() self:CloseMenu(); self.inspector:ClearItem(); self.search:ClearFocus(); self:CancelRange(); N.Options:Toggle(N.Core) end)
-    self.search=edit(f,1,G.control); self.search:SetPoint("TOPLEFT",G.inset,-44)
-    self.placeholder=text(self.search,11,{.7,.7,.72}); self.placeholder:SetPoint("LEFT",7,0); self.placeholder:SetText("Quest or reward")
-    self.search:SetScript("OnTextChanged",function(e,user) self.placeholder:SetShown(e:GetText()==""); if user then self.filter.query=e:GetText():sub(1,100); self:Changed(true) end end)
+    self.search=edit(f,1,G.control); self.search:SetPoint("TOPLEFT",G.inset,-44); self.search:SetTextInsets(8,32,0,0)
+    self.placeholder=text(self.search,11,{.7,.7,.72}); self.placeholder:SetPoint("LEFT",8,0); self.placeholder:SetText("Quest or reward")
+    local clear=CreateFrame("Button",nil,self.search); self.clearSearch=clear
+    clear:SetSize(24,24); clear:SetPoint("RIGHT",self.search,"RIGHT",-3,0)
+    clear.text=text(clear,16,{.7,.7,.72,.65}); clear.text:SetAllPoints(); clear.text:SetJustifyH("CENTER"); clear.text:SetJustifyV("MIDDLE"); clear.text:SetText("\195\151"); clear:Hide()
+    clear:SetScript("OnEnter",function() clear.text:SetTextColor(.95,.95,.97,1) end)
+    clear:SetScript("OnLeave",function() clear.text:SetTextColor(.7,.7,.72,.65) end)
+    clear:SetScript("OnClick",function()
+        if self.search:GetText()=="" then return end
+        self.search:SetText(""); clear:Hide(); self.placeholder:Show(); self.filter.query=""; self.search:SetFocus(); self:Changed(true)
+    end)
+    self.search:SetScript("OnTextChanged",function(e,user)
+        local empty=e:GetText()==""; self.placeholder:SetShown(empty); clear:SetShown(not empty)
+        if user then self.filter.query=e:GetText():sub(1,100); self:Changed(true) end
+    end)
     self.search:SetScript("OnEscapePressed",function(e) e:ClearFocus(); f:Hide() end)
     self.search:SetScript("OnEnterPressed",function(e) e:ClearFocus() end)
     self.usable=CreateFrame("CheckButton",nil,f,"UICheckButtonTemplate"); self.usable:SetPoint("TOPLEFT",12,-114); self.usable:SetSize(24,24)
@@ -333,8 +385,11 @@ function S:Create()
     scroll:SetScript("OnMouseWheel",function(_,delta) if M.Number(delta) then self:Scroll(self.offset-delta*40) end end)
     self.empty=text(self.child,12,{.7,.7,.72}); self.empty:SetPoint("TOPLEFT",8,-14); self.empty:SetWordWrap(true)
     local resize=CreateFrame("Button",nil,f); self.resize=resize; resize:SetPoint("BOTTOMRIGHT",-2,2); resize:SetSize(18,18); resize.texture=resize:CreateTexture(nil,"ARTWORK"); resize.texture:SetAllPoints(); resize.texture:SetTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
-    resize:SetScript("OnMouseDown",function(_,button) if button=="LeftButton" then self:CloseMenu(); self.inspector:ClearItem(); f:StartSizing("BOTTOMRIGHT") end end); resize:SetScript("OnMouseUp",function() f:StopMovingOrSizing(); self:Changed() end)
-    f:SetScript("OnSizeChanged",function() if self.inspector then if self.fitting then self:DataChanged() else self:Fit(); self:Changed() end end end)
+    resize:SetScript("OnMouseDown",function(_,button) if button=="LeftButton" then self:CloseMenu(); self.inspector:ClearItem(); f:StartSizing("BOTTOMRIGHT") end end); resize:SetScript("OnMouseUp",function() f:StopMovingOrSizing(); self:AppearanceChanged() end)
+    f:SetScript("OnSizeChanged",function()
+        if not self.inspector or self.appearanceLayout then return end
+        self:AppearanceChanged()
+    end)
     f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self:CancelRange(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if self.copyFrame then self.copyFrame:Hide() end;if N.Character then N.Character:Sleep()end end)
     f:SetScript("OnEvent",function(_,event,id)
         if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" then
@@ -351,7 +406,7 @@ function S:Create()
             if i.item and not i:InspectionCurrent(i.item) then i:ClearItem()
             elseif i.item and i:HasTooltipData(id) then i:Inspect(i.item.button,i.item.row,true); self:Wake() end
             return
-        elseif event=="UI_SCALE_CHANGED" or event=="DISPLAY_SIZE_CHANGED" then self:Fit()
+        elseif event=="UI_SCALE_CHANGED" or event=="DISPLAY_SIZE_CHANGED" then self:AppearanceChanged();return
         elseif event=="ADDON_LOADED" then
             local data=N.Catalog.data;N.Catalog:Begin();if N.Catalog.data==data then return end
         end
@@ -366,7 +421,8 @@ end
 function S:DefaultRange(level)
     level=M.Number(level) and level or self:CharacterSnapshot().level
     if not M.Number(level) or level<1 then level=1 end
-    self.filter.minimum,self.filter.maximum=math.max(1,math.floor(level)-5),math.floor(level)+3
+    local defaults=M.SearchDefaults(N.Core.profile.searchDefaults)
+    self.filter.minimum,self.filter.maximum=math.max(1,math.floor(level)-defaults.levelsBelow),math.min(200,math.floor(level)+defaults.levelsAbove)
     self.minimumInput:SetText(self.filter.minimum); self.maximumInput:SetText(self.filter.maximum)
 end
 function S:Fit()
@@ -382,7 +438,7 @@ function S:Fit()
         local height=math.min(self.preferredHeight or currentH,G.maxHeight,availableH)
         self.fitWidth,self.fitHeight=width,height
         self.frame:SetResizeBounds(math.min(G.minWidth,availableW),math.min(G.minHeight,availableH),math.min(G.maxWidth,availableW),math.min(G.maxHeight,availableH))
-        self.frame:SetSize(width,height); self.frame:SetScale(scale)
+        self.frame:SetSize(width,height); self.frame:SetScale(scale); U:Border(self.frame,"dialog")
         self:LayoutControls()
         self.fitting=nil
     end
@@ -426,10 +482,13 @@ function S:Toggle()
     N.SearchModel.usability,N.SearchModel.currentItems,N.SearchModel.currentStamp={},{},{}
     self.rewardStamps,self.rewardDirty={},{}
     local snapshot=N.Character:Ensure(true)
-    self.dataDeadline=(A.Call(GetTime) or 0)+5; if not self.manualRange then self:DefaultRange(snapshot.level) end
+    local defaults=M.SearchDefaults(N.Core.profile.searchDefaults)
+    self.filter.usable,self.filter.includeDungeons=defaults.hideUnusable,defaults.includeDungeons
+    self.manualRange=nil; self:DefaultRange(snapshot.level)
+    self.dataDeadline=(A.Call(GetTime) or 0)+5
     self.usable:SetChecked(self.filter.usable);self.dungeons:SetChecked(self.filter.includeDungeons);N.Catalog:Begin()
     self.contextLevel,self.contextMap=snapshot.level,snapshot.mapID;self.contextDirty=nil
-    self:Fit(); self.frame:Show(); self.search:SetFocus(); self:Changed(true)
+    self:Fit(); self.appearanceDirty=nil; self.frame:Show(); self.search:SetFocus(); self:Changed(true)
     self:Wake()
 end
 function S:Tick()
@@ -438,6 +497,7 @@ function S:Tick()
     if now<(self.menuCheckAt or 0) then return end
     if self:MenuOpen() then self.inspector:ClearItem(); self.menuCheckAt=now+.1; return end
     self.menuCheckAt=nil
+    if self.appearanceDirty then self:ApplyAppearance() end
     self.inspector:ItemTransit(now); self.inspector:Compare()
     if self.inspector.item then return end
     if N.Catalog:Step() then self.dirty=true; self.changeAt=self.changeAt or now+.2 end
@@ -445,7 +505,7 @@ function S:Tick()
     self:RequestStep(now)
     if not self:Visible() then return end
     if self.pending and now>=self.dataDeadline then self.pending=false; self:Render() end
-    if not self.dirty and not self.pending and not self.inspector.item and (N.Catalog.done or not N.Catalog.ids) and not self:HasRequests() then self.frame:SetScript("OnUpdate",nil) end
+    if not self.dirty and not self.appearanceDirty and not self.pending and not self.inspector.item and (N.Catalog.done or not N.Catalog.ids) and not self:HasRequests() then self.frame:SetScript("OnUpdate",nil) end
 end
 function S:Refresh()
     self.dirty=false; self.inspector:ClearItem(); self.inspector.generation=self.inspector.generation+1
@@ -457,10 +517,6 @@ function S:Refresh()
     if N.Catalog.ids and not N.Catalog.done then count="Indexing rewards - "..math.floor((N.Catalog.cursor-1)/math.max(1,#N.Catalog.ids)*100).."%  -  "..count end
     if self.filter.scope=="SAME_ZONE" then
         local snapshot=self:CharacterSnapshot();if snapshot.zoneName then count=count.." - "..snapshot.zoneName end
-    end
-    if self.filter.sort=="UPGRADE" then
-        local unrated=0;for _,row in ipairs(self.results)do if row.ranking and row.ranking.state~="ready" then unrated=unrated+1 end end
-        if unrated>0 then count=count.."\n"..unrated.." not rated"end
     end
     local empty="No matching quest rewards. Try a wider level range or another slot."
     if N.Catalog.ids and not N.Catalog.done then empty="Loading quests."
@@ -512,7 +568,7 @@ local function measured(label,width,value)
     return visible and math.max(12,A.Call(label.GetStringHeight,label) or 12) or 0
 end
 function S:Fill(card,row)
-    card.row=row; local width=self.child:GetWidth(); card:SetWidth(width)
+    card.row=row; local width=self.child:GetWidth(); card:SetWidth(width); U:Border(card,"tooltip")
     local title=(row.level and "["..row.level.."] " or "")..(row.title or ("Quest "..row.id))
     local status=M.Status(row.id); local accent=N.Core.profile.accents and status
     local badge=accent=="verifiedNew" and "New in Forever" or accent=="verifiedUpdated" and "Modified" or ""
@@ -568,15 +624,13 @@ function S:Fill(card,row)
     local note=M.Text(row.evidence)
     local actionable=note and note~="Availability unconfirmed" and note~="Available" and note~="Recorded availability"
     if actionable then
-        note=note:gsub("^Recorded minimum level ","Requires level "):gsub("^Recorded ","")
+        note=note:gsub("^Recorded minimum level ","Req. lvl "):gsub("^Requires level ","Req. lvl "):gsub("^Recorded ","")
     end
     card.evidence:SetWordWrap(true); card.evidence:ClearAllPoints(); card.evidence:SetPoint("TOPLEFT",8,-y)
     local evidenceHeight=measured(card.evidence,bodyWidth,actionable and note or nil)
     y=y+evidenceHeight+(evidenceHeight>0 and 3 or 0); card.fullTitle=title
     local rewardY=top
     card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
-    card.giver:ClearAllPoints(); card.giver:SetPoint("TOPRIGHT",-8,-rewardY)
-    if #locations>1 then rewardY=rewardY+18 end
     local iconIndex,groupCursor,groupMaximum=0,0,0; local rewardTop=rewardY
     for _,group in ipairs(groups) do
         local labelled=group.label=="Choose one" or #groups>1
@@ -584,7 +638,7 @@ function S:Fill(card,row)
         for i,entry in ipairs(group.items) do
             local item=entry.item; iconIndex=iconIndex+1; local icon=self:Icon(card,iconIndex); icon.row=item
             local groupX=width-8-rewardWidth+(horizontal and groupCursor or 0)
-            local x,iy=groupX+((i-1)%columns)*stride,rewardY+labelHeight+math.floor((i-1)/columns)*stride
+            local x,iy=groupX+((i-1)%columns)*stride,rewardY+math.floor((i-1)/columns)*stride
             icon:ClearAllPoints(); icon:SetPoint("TOPLEFT",x,-iy)
             icon.icon:SetTexture(item.texture or "Interface\\Icons\\INV_Misc_QuestionMark")
             local color=item.quality and ITEM_QUALITY_COLORS and ITEM_QUALITY_COLORS[item.quality]
@@ -595,7 +649,7 @@ function S:Fill(card,row)
             local crowded=icon.level:GetText()~="" and icon.count:GetText()~="" and
                 (A.Call(icon.level.GetStringWidth,icon.level) or 0)+(A.Call(icon.count.GetStringWidth,icon.count) or 0)+5>G.icon
             icon.count:ClearAllPoints();icon.count:SetPoint(crowded and "TOPRIGHT" or "BOTTOMRIGHT",-1,crowded and -1 or 1)
-            icon.group:ClearAllPoints(); icon.group:SetPoint("TOPLEFT",groupX,-rewardY); icon.group:SetWidth(group.width)
+            icon.group:ClearAllPoints(); icon.group:SetPoint("TOPLEFT",groupX,-(rewardY+rows*stride-G.iconGap+3)); icon.group:SetWidth(group.width)
             icon.group:SetText(group.label); icon.group:SetShown(labelled and i==1)
             icon.name:Hide(); icon:Show()
         end
@@ -604,6 +658,8 @@ function S:Fill(card,row)
         else rewardY=rewardY+groupHeight end
     end
     if horizontal then rewardY=rewardTop+groupMaximum end
+    card.giver:ClearAllPoints(); card.giver:SetPoint("TOPRIGHT",-8,-rewardY)
+    if #locations>1 then rewardY=rewardY+18 end
     for i=iconIndex+1,#card.icons do local icon=card.icons[i]; icon.row=nil; icon:Hide(); icon.name:Hide(); icon.group:Hide(); icon.level:SetText(""); icon.count:SetText("") end
     card.more:SetShown(#items>4); card.more.text:SetText(self.expanded[row.id] and "Fewer rewards" or "+"..math.max(0,#items-4).." rewards")
     if #items>4 then card.more:ClearAllPoints(); card.more:SetPoint("TOPRIGHT",-8,-rewardY); rewardY=rewardY+18 end
@@ -654,7 +710,7 @@ function S:Render()
         if y and y+card:GetHeight()>=self.offset and y<=bottom then card:ClearAllPoints(); card:SetPoint("TOPLEFT",0,-y)
         else card.row=nil; card:Hide() end
     end
-    self:DataChanged()
+    if self.appearanceLayout then self.appearanceDirty=true; self:Wake() else self:DataChanged() end
 end
 function S:Scroll(value)
     if not M.Number(value) then return end
@@ -666,11 +722,11 @@ function S:Copy(value)
     self:CloseMenu(); self.inspector:ClearItem()
     if not self.copyFrame then
         local f=CreateFrame("Frame","FindAnUpgradeCopy",self.frame,"BackdropTemplate"); self.copyFrame=f; f:SetSize(math.min(380,self.frame:GetWidth()-24),90); f:SetPoint("CENTER"); f:SetClampedToScreen(true); f:SetFrameStrata("FULLSCREEN_DIALOG"); U:Dialog(f)
-        local label=text(f,12); label:SetPoint("TOPLEFT",12,-12); label:SetText("Copy - Ctrl+C")
+        local label=text(f,12); label:SetPoint("TOPLEFT",12,-12); label:SetText("Ctrl+C to copy")
         self.copyEdit=edit(f,f:GetWidth()-30); self.copyEdit:SetPoint("TOPLEFT",15,-42); self.copyEdit:SetMaxLetters(1024); self.copyEdit:SetScript("OnEscapePressed",function() f:Hide() end); self.copyEdit:SetScript("OnEnterPressed",function() f:Hide() end)
         f:SetScript("OnHide",function() self.copyEdit:ClearFocus() end); UISpecialFrames[#UISpecialFrames+1]="FindAnUpgradeCopy"
     end
-    self.copyFrame:SetWidth(math.min(380,self.frame:GetWidth()-24)); self.copyEdit:SetWidth(self.copyFrame:GetWidth()-30); self.copyFrame:Show(); self.copyEdit:SetText(value); self.copyEdit:HighlightText(); self.copyEdit:SetFocus()
+    U:Border(self.copyFrame,"dialog"); self.copyFrame:SetWidth(math.min(380,self.frame:GetWidth()-24)); self.copyEdit:SetWidth(self.copyFrame:GetWidth()-30); self.copyFrame:Show(); self.copyEdit:SetText(value); self.copyEdit:HighlightText(); self.copyEdit:SetFocus()
 end
 function S:ContextMenu(row,owner)
     if not row or not self:Visible() or not MenuUtil or type(MenuUtil.CreateContextMenu)~="function" then return end
@@ -702,9 +758,11 @@ function S:MenuLifetime(root)
 end
 function S:LocationLabel(location)
     if not location then return "Quest giver unavailable" end
-    local label=(location.zone and location.zone.."  -  " or "")..(location.itemID and "Starts from " or "")..location.name
-    if N.SearchModel.Coordinates(location) then label=label.."  -  "..string.format("%.1f, %.1f",location.x*100,location.y*100) end
-    return label
+    local parts={}; local zone=M.Text(location.zone); local name=M.Text(location.name)
+    if zone then parts[#parts+1]=zone end
+    if name then parts[#parts+1]=(location.itemID and "Starts from " or "")..name end
+    if N.SearchModel.Coordinates(location) then parts[#parts+1]=string.format("%.1f, %.1f",location.x*100,location.y*100) end
+    return #parts>0 and table.concat(parts," \226\128\162 ") or "Quest giver unavailable"
 end
 function S:GiverChoices(root,row)
     root:SetScrollMode(220)

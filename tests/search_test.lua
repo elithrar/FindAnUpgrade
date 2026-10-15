@@ -148,7 +148,7 @@ test("launcher click opens finder and aborted drag removes recurring work",funct
     b:Fire("OnDragStart");assert(b.scripts.OnUpdate);b:Hide();assert(not b.scripts.OnUpdate and not N.Launcher.dragging and W.nativeMutations==0)
 end)
 test("schema-two settings migrate and launcher values are sanitized",function()
-    local N=setup({saved={version=2,enabled=false,minimap=false,launcher=false,launcherAngle=-20}});assert(FindAnUpgradeDB.version==3 and not FindAnUpgradeDB.enabled and not FindAnUpgradeDB.minimap and not FindAnUpgradeDB.launcher and FindAnUpgradeDB.launcherAngle==340)
+    local N=setup({saved={version=2,enabled=false,minimap=false,launcher=false,launcherAngle=-20}});assert(FindAnUpgradeDB.version==4 and not FindAnUpgradeDB.enabled and not FindAnUpgradeDB.minimap and not FindAnUpgradeDB.launcher and FindAnUpgradeDB.launcherAngle==340)
 end)
 
 test("production low mid and high catalogue searches work with Questie absent",function()
@@ -399,4 +399,88 @@ test("location actions preserve item and object starter identities",function()
     end
     c.row.location={name="Unproven label",nameKnown=true};S:ContextMenu(c.row,c)
     assert(not W.openMenu.root.entries[4].enabled)
+end)
+
+local function subtypeFixture(cold)
+    local N=setup();local traits={classID=2,subclassID=3,kind="Weapon",subtype="Guns"}
+    local calls={info=0,instant=0};W.catalogItems[124].name="A neutral reward";W.quests[14].name="A neutral quest"
+    W.cached[124]=not cold
+    C_Item.GetItemInfo=function(id)
+        calls.info=calls.info+1;assert(W.cached[id],"cold full metadata read")
+        local item=W.catalogItems[id];local weapon=id==124
+        local kind,subtype,class,subclass="Armor","Plate",4,4
+        if weapon then kind,subtype,class,subclass=traits.kind,traits.subtype,traits.classID,traits.subclassID end
+        return item.name,"item:"..id,2,22,15,kind,subtype,1,
+            id==123 and "INVTYPE_HEAD" or id==125 and "INVTYPE_FEET" or "INVTYPE_RANGEDRIGHT",100,0,class,subclass
+    end
+    C_Item.GetItemInfoInstant=function(id)
+        calls.instant=calls.instant+1;local weapon=id==124
+        local kind,subtype,class,subclass="Armor","Plate",4,4
+        if weapon then kind,subtype,class,subclass=traits.kind,traits.subtype,traits.classID,traits.subclassID end
+        return id,kind,subtype,id==123 and "INVTYPE_HEAD" or id==125 and "INVTYPE_FEET" or "INVTYPE_RANGEDRIGHT",100,class,subclass
+    end
+    N.Catalog:Begin();N.Catalog:Step()
+    local filter={scope="LEVEL_RANGE",usable=false,minimum=15,maximum=23,slot="ALL",sort="FIT"}
+    local function query(value)filter.query=value;return N.SearchModel:Query(filter)end
+    return N,traits,calls,query,filter
+end
+
+test("gun sword wand and staff terms use verified weapon subclasses with neutral names",function()
+    local N,t,_,query=subtypeFixture()
+    for _,spec in ipairs({{3,"Guns","gun"},{7,"One-Handed Swords","sword"},{8,"Two-Handed Swords","sword"},{19,"Wands","wand"},{10,"Staves","staff"},{18,"Crossbows","crossbow"}}) do
+        t.subclassID,t.subtype=spec[1],spec[2];N.SearchModel.cache[124]=nil
+        local rows=query(spec[3]);assert(#rows==1 and rows[1].id==14)
+        assert(rows[1].items[1].classID==2 and rows[1].items[1].subclassID==spec[1])
+    end
+end)
+
+test("weapon subtype matches retain slot usability level and quest class restrictions",function()
+    local N,_,_,query,filter=subtypeFixture();filter.slot="INVTYPE_HEAD";assert(#query("gun")==0)
+    filter.slot="ALL";filter.usable=true;N.SearchModel.usability[14]={[124]=false};assert(#query("gun")==0)
+    N.SearchModel.usability[14]=nil;N.SearchModel.cache[124].minimum=21;assert(#query("gun")==0)
+    filter.usable=false;N.Catalog.records[14].source.classTokens={"MAGE"};assert(#query("gun")==0)
+end)
+
+test("cold instant subtype evidence matches without any cold full metadata read",function()
+    local N,_,calls,query=subtypeFixture(true);local rows=query("gun")
+    assert(#rows==1 and rows[1].id==14 and rows[1].items[1].state=="pending")
+    assert(calls.info==2 and calls.instant==1 and N.SearchModel.cache[124].itemSubType=="Guns")
+    assert(#N.SearchModel.needed==1 and N.SearchModel.needed[1]==124)
+end)
+
+test("warm subtype searches and shared associations perform no extra item metadata reads",function()
+    local N,_,calls,query=subtypeFixture();N.Catalog.records[9].items[#N.Catalog.records[9].items+1]={itemID=124,name="A neutral reward"}
+    assert(#query("gun")==2);local full,instant=calls.info,calls.instant
+    for _=1,8 do assert(#query("gun")==2) end
+    assert(calls.info==full and calls.instant==instant and full==3)
+end)
+
+test("localized native subclass and exact numeric weapon aliases both match",function()
+    local N,t,_,query=subtypeFixture();t.subtype="Armes à feu"
+    local rows=query("armes");assert(#rows==1 and rows[1].id==14)
+    assert(#query("gun")==1)
+    t.classID=4;t.subtype="Other";N.SearchModel.cache[124]=nil
+    assert(#query("gun")==0)
+end)
+
+test("unknown or secret subtype metadata never invents a weapon match",function()
+    local N,t,_,query=subtypeFixture();t.classID,t.subclassID,t.kind,t.subtype=nil,nil,W.secret,W.secret
+    assert(#query("gun")==0 and #query("wand")==0)
+    local item=N.SearchModel.cache[124];assert(item.classID==nil and item.subclassID==nil and item.itemType==nil and item.itemSubType==nil)
+end)
+
+test("subtype-only item callbacks recover query results and unchanged events stay idle",function()
+    local N,t,_,query,filter=subtypeFixture();t.subtype,t.subclassID=nil,nil
+    N.Search.filter=filter;N.Search.frame:Show();assert(#query("gun")==0)
+    t.subtype,t.subclassID="Guns",3;N.Search.dirty=false;W.Event("ITEM_DATA_LOAD_RESULT",124,true)
+    assert(N.Search.dirty and #query("gun")==1)
+    N.Search.dirty=false;W.Event("GET_ITEM_INFO_RECEIVED",124,true);assert(not N.Search.dirty)
+end)
+
+test("hidden subtype callbacks invalidate without hydration and unrelated callbacks do nothing",function()
+    local N,t,calls,query=subtypeFixture();assert(#query("gun")==1)
+    N.Search.frame:Hide();t.subtype,t.subclassID="Wands",19;local full,instant=calls.info,calls.instant
+    W.Event("ITEM_DATA_LOAD_RESULT",124,true);assert(N.SearchModel.cache[124]==nil and calls.info==full and calls.instant==instant)
+    N.Search.dirty=false;W.Event("GET_ITEM_INFO_RECEIVED",999,true);assert(not N.Search.dirty and calls.info==full and calls.instant==instant)
+    assert(#query("wand")==1)
 end)
