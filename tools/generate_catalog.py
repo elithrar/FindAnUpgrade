@@ -1,4 +1,4 @@
-"""Validate and deterministically generate QuestBrief's owned reward catalogue."""
+"""Validate and deterministically generate FindAnUpgrade's owned reward catalogue."""
 from pathlib import Path
 import argparse, hashlib, json, re, sys
 
@@ -152,7 +152,7 @@ def main():
     parser = argparse.ArgumentParser(); parser.add_argument("--check", action="store_true"); args = parser.parse_args()
     source, provenance = load_inputs()
     output = render(source, provenance); report = (json.dumps(coverage(source, output), indent=2)+"\n").encode()
-    for path, data in ((ROOT / "QuestBrief/Data/Catalog.lua", output), (ROOT / "data/catalog-coverage.json", report)):
+    for path, data in ((ROOT / "FindAnUpgrade/Data/Catalog.lua", output), (ROOT / "data/catalog-coverage.json", report)):
         if args.check: assert path.read_bytes() == data, str(path)+" is stale"
         else: path.write_bytes(data)
     print(report.decode().strip())

@@ -98,7 +98,7 @@ def prepare(root=ROOT):
         files = [str(root / "dist" / n) for n in [*data["assets"], "release.json"]]
         release.verify_remote(data, root)
         gh("release", "create", data["tag"], *files, "--verify-tag", "--draft",
-           "--title", "QuestBrief " + data["tag"], "--notes-file",
+           "--title", "FindAnUpgrade " + data["tag"], "--notes-file",
            str(root / "docs/releases" / (data["version"] + ".md")))
     # Confirm creation/upload before allowing the CurseForge side effect.
     current = existing(data["tag"])

@@ -8,7 +8,8 @@ M.presets = {
 M.defaults = { version = 3, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
     accents = true, dialogTint = true, rewards = true, scale = 1,
-    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right" }
+    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right", scoringStyles = {} }
+M.scoringStyles={MELEE=true,RANGED=true,CASTER=true,HEALER=true,TANK=true,BEAR=true}
 
 function M.Readable(value)
     if not issecretvalue then return true end
@@ -46,6 +47,14 @@ function M.Load(saved)
     if M.Number(saved.launcherAngle) then profile.launcherAngle=saved.launcherAngle%360 end
     if M.Readable(saved.previewLayout) and (saved.previewLayout=="tooltip" or saved.previewLayout=="inspector") then profile.previewLayout=saved.previewLayout end
     if M.Readable(saved.inspectionPosition) and (saved.inspectionPosition=="right" or saved.inspectionPosition=="tooltip") then profile.inspectionPosition=saved.inspectionPosition end
+    if M.Readable(saved.scoringStyles) and type(saved.scoringStyles)=="table" then
+        local count=0
+        for key,value in pairs(saved.scoringStyles) do
+            if M.Text(key) and #key<=128 and M.Text(value) and M.scoringStyles[value] and count<128 then
+                profile.scoringStyles[key]=value; count=count+1
+            end
+        end
+    end
     return profile, false
 end
 function M.Status(id)
@@ -88,14 +97,11 @@ function M.Entries(rows)
     end
     return result
 end
-function M.LegacySeed(current,legacy)
-    -- A renamed TOC cannot read a disabled old addon's SavedVariables file.
-    -- Only use an already-restored global when no QuestBrief configuration exists.
+function M.RenameSeed(current,legacy)
+    -- The installer copies the old data-only file under the new TOC identity.
+    -- The old global is read once; an existing new profile always takes priority.
     if current ~= nil then return current end
-    if not M.Readable(legacy) or type(legacy) ~= "table" then return nil end
-    local seed=M.Load(legacy)
-    if M.Number(legacy.version) and legacy.version>1 then return nil end
-    return seed
+    if M.Readable(legacy) and type(legacy)=="table" then return legacy end
 end
 function M.SameColor(a, b)
     if not a or not b then return false end

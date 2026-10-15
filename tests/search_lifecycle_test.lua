@@ -58,7 +58,7 @@ local function setup(native,post)
         GameTooltip=W.Object(true); ShoppingTooltip1=W.Object(true); ShoppingTooltip2=W.Object(true); BattlePetTooltip=W.Object(true)
         TooltipComparisonManager.tooltip=GameTooltip; TooltipComparisonManager.comparisonIndex=7
     end
-    local S=N.Search; S:Toggle(); W.time=.3; S.frame:Fire("OnUpdate",.3)
+    local S=N.Search;S:Create();S.filter.scope="LEVEL_RANGE";S.filter.sort="FIT"; S:Toggle(); W.time=.3; S.frame:Fire("OnUpdate",.3)
     S.frame.x=400; S.frame.y=200; S.frame.width=560; S.frame.height=600
     S.scroll.x=412; S.scroll.y=216; S.scroll.width=522; S.scroll.height=442
     local b=S.cards[1].icons[1]; b.x=430; b.y=500; b.width=28; b.height=28
@@ -139,7 +139,7 @@ test("pinned primary renderer cannot resurrect inspection after owner teardown",
 end)
 
 test("pinned comparison renderer cannot resurrect primary or secondary tips",function()
-    for _,name in ipairs({"QuestBriefSearchComparison1","QuestBriefSearchComparison2"}) do
+    for _,name in ipairs({"FindAnUpgradeSearchComparison1","FindAnUpgradeSearchComparison2"}) do
         local N,S,b=setup(true,function(N,t)if t.name==name then N.Search.frame:Hide() end end)
         W.shift=true; b:Fire("OnEnter"); assert(hidden(S.inspector) and not S:Visible())
         assert(TooltipComparisonManager.tooltip==GameTooltip and TooltipComparisonManager.comparisonIndex==7 and GameTooltip:IsShown())
@@ -284,7 +284,7 @@ end)
 
 test("comparison recovery preserves departure grace and handles reentrant teardown",function()
     for _,teardown in ipairs({false,true}) do
-        local N,S,b=setup(true,function(N,t)if teardown and t.name=="QuestBriefSearchComparison1" then N.Search.frame:Hide() end end)
+        local N,S,b=setup(true,function(N,t)if teardown and t.name=="FindAnUpgradeSearchComparison1" then N.Search.frame:Hide() end end)
         local cold=true; local get=C_TooltipInfo.GetHyperlink
         C_TooltipInfo.GetHyperlink=function(link)if cold and link=="item:124" then return end; return get(link)end
         W.shift=true; b:Fire("OnEnter"); local i=S.inspector
@@ -370,12 +370,8 @@ test("only nil primary data is pending while restricted malformed failed and abs
 end)
 
 
-test("usability note cannot resurrect a tooltip after synchronous addon teardown",function()
-    local N,S,b=setup();b.row.usable=nil
-    local tip=S.inspector.tooltip;local add=tip.AddLine
-    tip.AddLine=function(t,value,...)
-        add(t,value,...)
-        if value=="Class usability unconfirmed" then S.frame:Hide() end
-    end
-    b:Fire("OnEnter");assert(hidden(S.inspector) and not S:Visible())
+test("native item hover adds no explanatory usability note",function()
+    local N,S,b=setup();b.row.usable=nil;b:Fire("OnEnter")
+    assert(S.inspector.item and S.inspector.tooltip:IsShown())
+    assert(not contains(S.inspector.tooltip,"Class usability unconfirmed"))
 end)

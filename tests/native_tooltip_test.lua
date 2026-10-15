@@ -107,7 +107,7 @@ test("known XP and reputation supplements do not repeat Questie values or lose e
     N.Rewards.Read=function() return reward end
     local lines=N.NativeTooltip:Lines({rows={{id=9}}},N.Core.profile,{"Quest 9","(450xp)","+75 Stormwind"})
     local value=table.concat(lines,"\n")
-    assert(not value:find("450 XP",1,true) and not value:find("Stormwind:",1,true) and value:find("QuestBrief:",1,true))
+    assert(not value:find("450 XP",1,true) and not value:find("Stormwind:",1,true) and value:find("FindAnUpgrade:",1,true))
 end)
 test("compact and None modes work immediately and settings survive malformed imports",function()
     for _,saved in ipairs({{previewLayout="inspector"},{modifier="NONE"}}) do
@@ -120,8 +120,8 @@ end)
 test("bare slash opens search while explicit aliases keep settings separate",function()
     local N=W.Init(); local search,options=0,0
     N.Search.Toggle=function() search=search+1 end; N.Options.Toggle=function() options=options+1 end
-    for _,command in ipairs({"","search","s"}) do SlashCmdList.QUESTBRIEF(command) end
-    for _,command in ipairs({"opts","options"}) do SlashCmdList.QUESTBRIEF(command) end
+    for _,command in ipairs({"","search","s"}) do SlashCmdList.FINDANUPGRADE(command) end
+    for _,command in ipairs({"opts","options"}) do SlashCmdList.FINDANUPGRADE(command) end
     assert(search==3 and options==2)
 end)
 test("completion events remove stale native quest rows through provider eligibility",function()
@@ -285,7 +285,7 @@ test("native source clear leave and map hide immediately expire finder-only offe
         N.CatalogData={schemaVersion=2,quests={{id=id,title="Native map offer",level=20,confirmation="published",itemState="published-empty",items={},rewardValues={xp=100}}}}
         C_QuestLog.IsOnQuest=function() return false end; C_QuestLog.IsQuestFlaggedCompleted=function() return false end
         C_QuestLog.GetNumQuestLogEntries=function() return 0,0 end; C_QuestLog.GetQuestDifficultyLevel=function() return 20 end
-        W.Event("ADDON_LOADED","QuestBrief"); N.Search:Toggle()
+        W.Event("ADDON_LOADED","FindAnUpgrade"); N.Search:Create();N.Search.filter.scope="LEVEL_RANGE";N.Search:Toggle()
         local function tick() for i=1,30 do W.time=W.time+.02; N.Search.frame:Fire("OnUpdate",.02) end end
         tick(); assert(#N.Search.results==0)
         local owner=W.Object(); local valid=true

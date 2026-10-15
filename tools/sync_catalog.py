@@ -21,7 +21,7 @@ OUTPUTS=["data/"+name for name in (
     "catalog-primary-records.json","catalog-client-evidence.json","catalog-identity-history.json",
     "catalog-gap-evidence.json","catalog-complete-sources.json","catalog-complete-source.json",
     "catalog-reconciliation.json","catalog-coverage.json","catalog-supplemental-metadata.json",
-    "primary-statuses.json","classification-reconciliation.json")]+["QuestBrief/Data/Catalog.lua","QuestBrief/Data/Quests.lua"]
+    "primary-statuses.json","classification-reconciliation.json","quest-taxonomy.json")]+["FindAnUpgrade/Data/Catalog.lua","FindAnUpgrade/Data/Quests.lua"]
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
@@ -80,9 +80,9 @@ def apply_candidate(root,stage,baseline,input_baseline=None):
 def stage_sources(root,stage):
     stage.mkdir(parents=True)
     (stage/".work").mkdir()
-    for name in ("QuestBrief","data","docs","tests","tools",".github"):
+    for name in ("FindAnUpgrade","data","docs","tests","tools",".github"):
         shutil.copytree(root/name,stage/name,ignore=shutil.ignore_patterns("__pycache__","*.pyc"))
-    for name in ("AGENTS.md","README.md","LICENSE",".gitignore",".gitattributes"):
+    for name in ("AGENTS.md","README.md","plan.md","LICENSE",".gitignore",".gitattributes"):
         shutil.copyfile(root/name,stage/name)
     for name in ("blizzard","current-api"):
         source=root/".work"/name
@@ -140,6 +140,10 @@ def main():
         if path:command.extend([key,path.resolve()])
     if args.questie_root or questie.is_dir(): command.extend(["--questie-root",questie])
     run(stage,command)
+    taxonomy=["tools/quest_taxonomy.py"]
+    if args.primary_cache:taxonomy.extend(["--primary-cache",args.primary_cache.resolve()])
+    run(stage,taxonomy)
+    run(stage,["tools/generate_data.py"])
     run(stage,["tools/generate_catalog.py"])
     diff=compare(json.loads((ROOT/"data/catalog-complete-source.json").read_bytes()),json.loads((stage/"data/catalog-complete-source.json").read_bytes()))
     report={"checkedAt":datetime.now(timezone.utc).isoformat(),"stage":str(stage),"mode":args.mode,"diff":diff,"before":baseline,"frozenInputs":frozen,"after":{name:sha(stage/name) for name in OUTPUTS},"applied":False}

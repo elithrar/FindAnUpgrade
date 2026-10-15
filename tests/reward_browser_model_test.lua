@@ -16,7 +16,7 @@ local function setup(rows)
     end
     N.CatalogData={schemaVersion=2,quests=rows}
     N.Catalog:Begin();while N.Catalog:Step() do end
-    return N,rows,{query="",minimum=1,maximum=200,slot="ALL",usable=false,sort="FIT"}
+    return N,rows,{scope="LEVEL_RANGE",query="",minimum=1,maximum=200,slot="ALL",usable=false,sort="FIT"}
 end
 local function npc()return {{npcID=54001,name="Known giver"}} end
 
@@ -66,17 +66,19 @@ test("current native log gossip and map offers supply a missing start path only 
     local N,rows,filter=setup({{rewardValues={xp=100}}});local id=rows[1].id
     assert(#N.SearchModel:Query(filter)==0)
     C_QuestLog.IsOnQuest=function(candidate)return candidate==id end
+    N.Character:QuestChanged({ids={[id]=true}})
     assert(#N.SearchModel:Query(filter)==1)
     C_QuestLog.IsOnQuest=function()return false end
-    C_Map={GetBestMapForUnit=function()return 100 end}
+    C_Map={GetBestMapForUnit=function()return 100 end};N.Character:Mark("location")
     C_QuestLine={GetAvailableQuestLines=function()return {{questID=id,inProgress=false}} end}
+    N.Character:QuestChanged({ids={[id]=true}});N.QuestState.stale=true
     assert(#N.SearchModel:Query(filter)==1)
-    C_QuestLine.GetAvailableQuestLines=function()return {} end
+    C_QuestLine.GetAvailableQuestLines=function()return {} end;N.QuestState.stale=true
     assert(#N.SearchModel:Query(filter)==0)
     N.Sources.gossip={guid="Current NPC"};UnitGUID=function(unit)return unit=="npc" and "Current NPC" end
-    C_GossipInfo={GetAvailableQuests=function()return {{questID=id}} end}
+    C_GossipInfo={GetAvailableQuests=function()return {{questID=id}} end};N.QuestState.stale=true
     assert(#N.SearchModel:Query(filter)==1)
-    C_GossipInfo.GetAvailableQuests=function()return {} end
+    C_GossipInfo.GetAvailableQuests=function()return {} end;N.QuestState.stale=true
     assert(#N.SearchModel:Query(filter)==0)
 end)
 
@@ -94,7 +96,7 @@ end)
 test("starter faction qualifiers do not become another faction's path",function()
     local N,_,filter=setup({{locations={{npcID=54001,name="Other faction giver",faction="Horde"}},rewardValues={xp=100}}})
     assert(#N.SearchModel:Query(filter)==0)
-    UnitFactionGroup=function()return "Horde" end
+    UnitFactionGroup=function()return "Horde" end;N.Character:Mark("identity")
     assert(#N.SearchModel:Query(filter)==1)
 end)
 
@@ -105,30 +107,31 @@ local function zones(N,rows)
     C_Map={GetBestMapForUnit=function()return 101 end,
         GetMapInfo=function(id)return id==101 and {name="Interior",mapType=5,parentMapID=100} or {name="Localized Alpha",mapType=3} end,
         GetAreaInfo=function(id)return id==11 and "Localized Alpha" or "Localized Beta" end}
+    N.Character:Mark("location")
 end
 
-test("current zone sorting uses exact category membership and localized native parent maps",function()
+test("current zone scope uses exact category membership and localized native parent maps",function()
     local N,rows,filter=setup({{level=30,locations=npc(),rewardValues={xp=100}},{level=20,locations=npc(),rewardValues={xp=100}}})
-    zones(N,rows);filter.sort="ZONE"
+    zones(N,rows);filter.scope="SAME_ZONE"
     local result=N.SearchModel:Query(filter);local categories,name=N.Catalog:CurrentCategories()
-    assert(#result==2 and result[1].id==rows[1].id and result[1].currentZone and not result[2].currentZone)
+    assert(#result==1 and result[1].id==rows[1].id and result[1].currentZone)
     assert(categories.Alpha and name=="Localized Alpha")
-    filter.sort="FIT";result=N.SearchModel:Query(filter)
-    assert(result[1].id==rows[2].id)
+    filter.scope="LEVEL_RANGE";filter.sort="FIT";result=N.SearchModel:Query(filter)
+    assert(#result==2 and result[1].id==rows[2].id)
     filter.sort="LEVEL";result=N.SearchModel:Query(filter)
     assert(result[1].id==rows[2].id)
 end)
 
-test("unknown or ambiguous area mapping falls back to level fit without giver inference",function()
+test("unknown or ambiguous area mapping returns an honest empty zone set",function()
     local N,rows,filter=setup({{level=30,locations=npc(),rewardValues={xp=100}},{level=20,locations=npc(),rewardValues={xp=100}}})
-    zones(N,rows);filter.sort="ZONE"
+    zones(N,rows);filter.scope="SAME_ZONE"
     rows[2].locations[1].mapID,rows[2].locations[1].x,rows[2].locations[1].y=100,.5,.5
     C_Map.GetAreaInfo=function()return nil end
-    local result=N.SearchModel:Query(filter)
-    assert(result[1].id==rows[2].id and not result[1].currentZone and not result[2].currentZone)
-    C_Map.GetAreaInfo=function()return "Localized Alpha" end
-    result=N.SearchModel:Query(filter)
-    assert(result[1].id==rows[2].id and not result[1].currentZone and not result[2].currentZone)
+    local result,note=N.SearchModel:Query(filter)
+    assert(#result==0 and note)
+    C_Map.GetAreaInfo=function()return "Localized Alpha" end;N.Catalog.categorySource=nil
+    result,note=N.SearchModel:Query(filter)
+    assert(#result==0 and note)
     local _,name=N.Catalog:CurrentCategories();assert(name==nil)
 end)
 
@@ -145,6 +148,7 @@ test("a finder query snapshots native offers once instead of rescanning per reco
     local N,_,filter=setup(rows);local snapshots,proofs=0,0
     N.QuestState={NativeOffers=function()snapshots=snapshots+1;return {[980001]="native-available"} end,
         Proof=function()proofs=proofs+1;return "native-available" end}
+    N.Character:PrimeQuests({},N.QuestState:NativeOffers(),true)
     local result=N.SearchModel:Query(filter)
     assert(#result==20 and snapshots==1 and proofs==0)
 end)

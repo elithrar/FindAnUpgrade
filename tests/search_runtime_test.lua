@@ -18,11 +18,12 @@ local function setup(count,cold,unknown)
         RequestLoadItemDataByID=function(id) W.itemLoads[id]=(W.itemLoads[id] or 0)+1 end,
     }
     Menu={GetManager=function() W.menuReads=(W.menuReads or 0)+1; return {IsAnyMenuOpen=function() return false end} end}
+    N.Search:Create();N.Search.filter.scope="LEVEL_RANGE";N.Search.filter.sort="FIT"
     N.Search:Toggle(); W.time=.3; N.Search:Tick()
     return N,quests
 end
 local function tick(N,seconds,fps)
-    for _=1,math.floor(seconds*fps) do W.time=W.time+1/fps; N.Search.frame:Fire("OnUpdate",1/fps) end
+    for _=1,math.floor(seconds*fps) do W.time=W.time+1/fps;N.Character.events:Fire("OnUpdate"); N.Search.frame:Fire("OnUpdate",1/fps) end
 end
 local function total(rows) local n=0; for _,value in pairs(rows) do n=n+value end; return n end
 
@@ -85,6 +86,7 @@ end)
 test("logged quests take precedence over recorded restrictions",function()
     local N,quests=setup(3,false); quests[1].classTokens={"PALADIN"}; quests[1].faction="Horde"; quests[1].races={95}; quests[1].maximum=5
     C_QuestLog.IsOnQuest=function(id) return id==1 end
+    W.Event("QUEST_ACCEPTED",1)
     local allowed,note=N.SearchModel:Eligibility(N.Catalog.records[1],N.SearchModel:Context())
     assert(allowed and note=="In quest log")
 end)
@@ -102,21 +104,21 @@ test("ready native reward names participate before a broad search renders cards"
     GetQuestLogRewardInfo=function(index,id) if id==2 then return "Native item 9999",100,1,2,true,9999 end end
     GetNumQuestLogChoices=function() return 0 end
     N.SearchModel.currentItems,N.SearchModel.currentStamp={},{}
-    local rows=N.SearchModel:Query({query="Native item 9999",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"})
+    local rows=N.SearchModel:Query({scope="LEVEL_RANGE",query="Native item 9999",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"})
     assert(#rows==1 and rows[1].id==2 and rows[1].items[1].itemID==9999)
-    rows=N.SearchModel:Query({query="Recorded item 2",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}); assert(#rows==0)
+    rows=N.SearchModel:Query({scope="LEVEL_RANGE",query="Recorded item 2",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}); assert(#rows==0)
 end)
 test("ready quest metadata is cached until an event invalidates it",function()
     local N=setup(3,false); local calls=0
     C_QuestLog.GetTitleForQuestID=function(id) calls=calls+1; return "Changed "..id end
-    local filter={query="",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}
+    local filter={scope="LEVEL_RANGE",query="",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}
     for _=1,10 do N.SearchModel:Query(filter) end; assert(calls==0)
     W.Event("QUEST_DATA_LOAD_RESULT",1,true); N.SearchModel:Query(filter)
     assert(calls==1 and N.Catalog.records[1].title=="Changed 1")
 end)
 test("quest data invalidation discards stale per-quest usability too",function()
     local N=setup(3,false); N.SearchModel.usability[1]={[1001]=false}
-    local filter={query="1001",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}
+    local filter={scope="LEVEL_RANGE",query="1001",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"}
     assert(#N.SearchModel:Query(filter)==0)
     W.Event("QUEST_DATA_LOAD_RESULT",1,false)
     assert(N.SearchModel.usability[1]==nil and #N.SearchModel:Query(filter)==1)
@@ -130,7 +132,7 @@ end)
 test("finder honors quest colors tint strength scale and immediate defaults",function()
     local N=setup(3,false); N.Model.Status=function() return "verifiedNew" end
     N.Core:Change("accents",false); W.time=W.time+.3; N.Search:Tick()
-    local c=N.Search.cards[1]; assert(c.backdropColor[1]==.06 and c.tag.text=="New")
+    local c=N.Search.cards[1]; assert(c.backdropColor[1]==.06 and c.tag.text=="" and not c.tag:IsShown())
     N.Core:Change("strength",.1); N.Core:Change("accents",true); W.time=W.time+.3; N.Search:Tick()
     local subtle=c.backdropColor[1]; assert(subtle>.06 and c.backdropColor[1]>c.backdropColor[3])
     N.Core:Change("strength",1); W.time=W.time+.3; N.Search:Tick(); assert(c.backdropColor[1]>subtle)

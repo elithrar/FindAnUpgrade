@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.7" }; N.Core = C
+local C = { version = "0.1.8" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -21,8 +21,8 @@ end
 function C:Change(key, value)
     if self.readOnly then return false end
     local saved = M.Copy(self.profile); saved[key] = value
-    self.profile = M.Load(saved); QuestBriefDB = self.profile
-    N.Sources:Clear()
+    self.profile = M.Load(saved); FindAnUpgradeDB = self.profile
+    if key~="scoringStyles" then N.Sources:Clear() end
     self:Refresh()
     if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
@@ -32,7 +32,7 @@ function C:Change(key, value)
 end
 function C:Defaults()
     if self.readOnly then return false end
-    self.profile = M.Copy(M.defaults); QuestBriefDB = self.profile
+    self.profile = M.Copy(M.defaults); FindAnUpgradeDB = self.profile
     N.Sources:Clear()
     self:Refresh(); if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()
@@ -56,7 +56,7 @@ function C:Attach()
     if A.Visible(QuestFrameDetailPanel) then self:Offer() end
 end
 function C:Print(text)
-    if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cffffd100QuestBrief|r: " .. text) end
+    if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("|cffffd100FindAnUpgrade|r: " .. text) end
 end
 function C:Slash(input)
     local command = (input or ""):match("^%s*(.-)%s*$"):lower()
@@ -70,18 +70,22 @@ function C:Slash(input)
         self:Print((self.supported and (self.profile.enabled and "Enabled" or "Disabled") or "Unsupported client") .. "; " .. N.Data.newCount .. " verified new IDs. Data: " .. N.Data.collectedAt .. ".")
     elseif command == "options" or command == "opts" then
         N.Options:Toggle(self)
-    else self:Print("/questbrief search | minimap | opts | on | off | status") end
+    else self:Print("/findanupgrade search | minimap | opts | on | off | status") end
 end
 function C:Initialize()
     if self.ready then return end
-    self.profile, self.readOnly = M.Load(M.LegacySeed(QuestBriefDB,QuestTintDB))
-    if not self.readOnly then QuestBriefDB = self.profile end
+    local saved=M.RenameSeed(FindAnUpgradeDB,QuestBriefDB)
+    self.profile, self.readOnly = M.Load(saved)
+    -- Retain newer-schema data verbatim, including when seeded by the rename.
+    FindAnUpgradeDB = self.readOnly and saved or self.profile
     self.supported = A.Supported(); self.ready = true
-    SLASH_QUESTBRIEF1 = "/questbrief"
-    SlashCmdList.QUESTBRIEF = function(input) self:Slash(input) end
+    SLASH_FINDANUPGRADE1 = "/findanupgrade"
+    SLASH_FINDANUPGRADE2 = "/fau"
+    SlashCmdList.FINDANUPGRADE = function(input) self:Slash(input) end
     self:Attach()
     N.Sources:Attach()
     if N.NativeTooltip then N.NativeTooltip:Attach() end
+    if N.Character and self.supported then N.Character:Initialize() end
     if N.QuestState and self.supported then N.QuestState:Initialize() end
     U:WatchFonts()
     N.Launcher:Refresh()
@@ -96,7 +100,7 @@ function C:StartHoverUpdate()
     end)
 end
 local events = CreateFrame("Frame"); C.events = events
-for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED", "PLAYER_LEVEL_UP" }) do events:RegisterEvent(event) end
+for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED" }) do events:RegisterEvent(event) end
 events:SetScript("OnEvent", function(_, event, name)
     if event == "ADDON_LOADED" then
         if name == ADDON then C:Initialize() elseif C.ready then
@@ -130,7 +134,7 @@ events:SetScript("OnEvent", function(_, event, name)
         C:Reset(); N.Sources:Clear()
         if event == "GOSSIP_CLOSED" or event == "QUEST_FINISHED" or event == "PLAYER_ENTERING_WORLD" then
             N.Sources.gossip=nil
-            if N.QuestState then N.QuestState:OfferChanged() end
+            if N.QuestState and event~="PLAYER_ENTERING_WORLD" then N.QuestState:OfferChanged() end
         end
     end
 end)

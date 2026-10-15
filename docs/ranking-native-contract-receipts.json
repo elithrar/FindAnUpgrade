@@ -1,0 +1,170 @@
+[
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ClassTalentsDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/ClassTalentsDocumentation.lua",
+    "sha256": "6276873b0503b59bb238dbfe11ef13d864c6af6208b872f773f6f654ec9580f7",
+    "bytes": 13258,
+    "gitBlob": "dc4120dd1b568a49f19de43d3b0e21e31abdeb24"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemConstantsDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemConstantsDocumentation.lua",
+    "sha256": "ae3b654c4d551234e97562552e6aeb9736672f2458945efe19645b387f4b092e",
+    "bytes": 44000,
+    "gitBlob": "1e423a0af1df9c04e6218b916615dab9a803eed5"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemDocumentation.lua",
+    "sha256": "59c5dd2f70757cdb9bc4511cb0fafe6287bbfb51d58a7389097dcbb485785af0",
+    "bytes": 44454,
+    "gitBlob": "2ca379d4976dc3254c1bf24c4754a60f684740e5"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PaperDollInfoDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/PaperDollInfoDocumentation.lua",
+    "sha256": "aeb86e1baf051544f82552912d7be286d9181e913d936d23b21074fb97ec671d",
+    "bytes": 11443,
+    "gitBlob": "4539365d29e99c415eb62fbe0e1ef8be6c4d4f03"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationInfoDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationInfoDocumentation.lua",
+    "sha256": "19c7cb135202b93e303880e54d3cdc9ca197584e8b7ac8231bf3dd34aa8aa5b2",
+    "bytes": 16137,
+    "gitBlob": "537019fe3781d25bdf181ad79cd265bdacac5034"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationSharedDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/SpecializationSharedDocumentation.lua",
+    "sha256": "f0e20c71175748dede2d17ae8f0e1a20f72d37c7905734a1521da34ca3b1b8ec",
+    "bytes": 3609,
+    "gitBlob": "b2b543a50e69e5843c15896d55d24e7479e53387"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/SpellDocumentation.lua",
+    "sha256": "86583940d9a2c4594092eb248a1396a93a285084872af1f3f4875169796e7d2b",
+    "bytes": 32881,
+    "gitBlob": "b3f46e708442c4174cf54ddbe104f35836f3bbb0"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoDocumentation.lua",
+    "sha256": "0c2184a4ba787a5fbd37646e0f297a6e79a3ac5f60ccbcd07dabcc8048e89718",
+    "bytes": 31341,
+    "gitBlob": "7e98596a9076671a19fb3c47d0cb58987c6e5151"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_PlayerSpells/Blizzard_PlayerSpells.toc",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_PlayerSpells/Blizzard_PlayerSpells.toc",
+    "sha256": "770a22a6e74ad1937f3d9060525237e79ea0c9dd4c838e06516d3f93120039d6",
+    "bytes": 2610,
+    "gitBlob": "1281a3ecc1c262b56fb85b65abc0268b4e3cdd11"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_SharedTalentUI/Camelot/Blizzard_SharedTalentOverrides.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_SharedTalentUI/Camelot/Blizzard_SharedTalentOverrides.lua",
+    "sha256": "632d0d5fcf667f6e3da2f8cba88fc84a41ebb5dcbde0802ee56b58b8a3d55686",
+    "bytes": 2490,
+    "gitBlob": "22d8fb5fa65d0e460701022dace318c17efb0664"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_UIPanels_Game/Camelot/PaperDollFrame.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_UIPanels_Game/Camelot/PaperDollFrame.lua",
+    "sha256": "b1e5687ad9ee436a944704055dea3c2800f91213647b38f00d788bc16effd594",
+    "bytes": 124271,
+    "gitBlob": "ff7d712420f66b3a801c1bb15a3dca52b411b362"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_UIPanels_Game/Camelot/PaperDollFrameConstants.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_UIPanels_Game/Camelot/PaperDollFrameConstants.lua",
+    "sha256": "3ba1723a78b9d6288aa27ee8944bbb3dc122682e6a044866df0d1209d16a47a3",
+    "bytes": 2886,
+    "gitBlob": "ef71d854fc27a8071a36b66c817e45b2ce0d79e2"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/EquipmentManagerDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/EquipmentManagerDocumentation.lua",
+    "sha256": "283be31870b0d173801424399ed63db82cc4e51d299f688d6bc5fa9ec3a4bf9c",
+    "bytes": 7357,
+    "gitBlob": "f4bff3737ea6725096416b644188f6f39171935f"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemSharedDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/ItemSharedDocumentation.lua",
+    "sha256": "4c073990a7e70b3fdd915daa91ced0ec19145e8f7bfce2d33cf7d29a296b0cfa",
+    "bytes": 115,
+    "gitBlob": "364ac734deaf38724502c90e27a2f9bf5b2fdfa3"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsDocumentation.lua",
+    "sha256": "6757fa202575c2362165b77bce6c1c81526a5c3f7a983294de3fc68db52f63db",
+    "bytes": 32407,
+    "gitBlob": "b414e94a8fe6acd48ea97c0928052c12c054162d"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsEnumsDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/SharedTraitsEnumsDocumentation.lua",
+    "sha256": "8754a5e2305cf05e3ead32c0028cf7d0c7c63b053641104e496d84e5bd8eb7fd",
+    "bytes": 129,
+    "gitBlob": "6e39fbb42bbd821d207a0dfb25ece048bcdba031"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipConstantsDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipConstantsDocumentation.lua",
+    "sha256": "bb332fd85fa899b95d3a2cb7e823b867b4cace59c824dccddea70d771f995e82",
+    "bytes": 1475,
+    "gitBlob": "a3fe231c4553f4c1b9917f25e9a42de0a92c1c22"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoSharedDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoSharedDocumentation.lua",
+    "sha256": "08292af51fa78edbf2c2f8e1f8dc89812db3d4faa05e01528f3750b802ba3741",
+    "bytes": 9832,
+    "gitBlob": "c290527321efde762cad5e73af9051fc07b37aea"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TraitConfigDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/TraitConfigDocumentation.lua",
+    "sha256": "9b3510262363452d710a7946448a1d2048f5b59eff22bfa16921e7715685deed",
+    "bytes": 250,
+    "gitBlob": "c76bfb5d9f18aa547627988b9d33dc31612d3092"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/UnitDocumentation.lua",
+    "sha256": "e62816d9f8edc63ac3b80c5a50540a62caba77586fcc4827f684fd74e0257c1e",
+    "bytes": 121090,
+    "gitBlob": "5a1b5e64519c0a028f6dafbf15021473f786ebb9"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassSpecializations/Blizzard_ClassSpecializationsFrame.xml",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassSpecializations/Blizzard_ClassSpecializationsFrame.xml",
+    "sha256": "bc119cb3d377761c0018a125b3e5938f99ea55ed75edf45d8eb294844c124594",
+    "bytes": 355,
+    "gitBlob": "fc04e2ec2d378abd25528dfd5f0a19357cac96ab"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassTalents/Blizzard_ClassTalentUtil.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassTalents/Blizzard_ClassTalentUtil.lua",
+    "sha256": "52b817b0b6af16a321753d7d0cefe249f70925d3e1e04543e73aa2f85f9387ca",
+    "bytes": 2602,
+    "gitBlob": "d6b2b561a79245e53796dce6189f348d3d81777e"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassTalents/Blizzard_ClassTalentsFrame.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_PlayerSpells/Camelot/ClassTalents/Blizzard_ClassTalentsFrame.lua",
+    "sha256": "a67dba00cfb675599f1657d347ab9b934b97b184764373d9ef46bdcd6c68481a",
+    "bytes": 10981,
+    "gitBlob": "ab6749621bbb21487c7718faf23f6ea008cf673e"
+  },
+  {
+    "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInfoDocumentation.lua",
+    "url": "https://raw.githubusercontent.com/Gethe/wow-ui-source/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/PlayerInfoDocumentation.lua",
+    "sha256": "1b48d47177ec5957d0f04160a1ab12aafbbe89da4f142437e0a83e05d4b54311",
+    "bytes": 8140,
+    "gitBlob": "2559a6f69c93d265d206f82ad3d1f94a26c3b8c9"
+  }
+]

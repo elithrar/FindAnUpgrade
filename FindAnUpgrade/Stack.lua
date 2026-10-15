@@ -37,7 +37,7 @@ local function cycleHints()
 end
 function V:Create()
     if self.frame then return end
-    local f = CreateFrame("Frame", "QuestBriefStack", UIParent); self.frame = f
+    local f = CreateFrame("Frame", "FindAnUpgradeStack", UIParent); self.frame = f
     f:Hide() -- Constructor cleanup must not dismiss the first opening session.
     f:SetFrameStrata("TOOLTIP"); f:SetClampedToScreen(true); f:EnableMouse(true)
     self.header = text(f); self.header:SetPoint("TOPLEFT",8,0); self.header:Hide()
@@ -51,7 +51,7 @@ function V:Create()
     self.bar:SetScript("OnValueChanged",function(_,value) if not self.refreshing then self:Scroll(value) end end)
     scroll:SetScript("OnMouseWheel",function(_,delta) if M.Number(delta) then self:Scroll(self.offset-delta*40) end end)
     f:SetScript("OnHide",function() if N.Hover.open then N.Hover:Dismiss("escape") else self:ClearItem() end end)
-    UISpecialFrames = UISpecialFrames or {}; table.insert(UISpecialFrames,"QuestBriefStack"); f:Hide()
+    UISpecialFrames = UISpecialFrames or {}; table.insert(UISpecialFrames,"FindAnUpgradeStack"); f:Hide()
 end
 function V:Card(index)
     if self.cards[index] then return self.cards[index] end
@@ -274,7 +274,7 @@ function V:Tooltips()
         t:HookScript("OnHide",function() t:ClearHandlerInfo() end)
         return t
     end
-    local prefix=self.tooltipPrefix or "QuestBrief"
+    local prefix=self.tooltipPrefix or "FindAnUpgrade"
     self.tooltip=create(prefix.."ItemTooltip")
     self.tooltip.shoppingTooltips={create(prefix.."Comparison1"),create(prefix.."Comparison2")}
     for _,t in ipairs(self.tooltip.shoppingTooltips) do
@@ -487,5 +487,5 @@ function V:Contains(now)
     return self:NativeTransit() or self:OpeningTransit(now) or self:ItemContains(now)
 end
 function V.NewInspector(frame,scroll,isOpen)
-    return setmetatable({frame=frame,scroll=scroll,isOpen=isOpen,tooltipPrefix="QuestBriefSearch",generation=0},{__index=V})
+    return setmetatable({frame=frame,scroll=scroll,isOpen=isOpen,tooltipPrefix="FindAnUpgradeSearch",generation=0},{__index=V})
 end

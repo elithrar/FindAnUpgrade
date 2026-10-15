@@ -51,6 +51,6 @@ end)
 probe("future saved opt-out is honored without changing the saved table", function()
     local saved = {version=9,enabled=false}
     W.Init({saved=saved}); W.Offer(92124)
-    assert(QuestBriefDB == saved and W.N.Core.readOnly)
+    assert(FindAnUpgradeDB == saved and W.N.Core.readOnly)
     assert(not W.N.Core.profile.enabled, "future schema opt-out is not reflected in active profile")
 end)

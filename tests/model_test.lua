@@ -1,6 +1,6 @@
 local N = {}; PASSED = 0
-assert(loadfile(ROOT .. "/QuestBrief/Model.lua"))("QuestBrief", N)
-assert(loadfile(ROOT .. "/QuestBrief/Data/Quests.lua"))("QuestBrief", N)
+assert(loadfile(ROOT .. "/FindAnUpgrade/Model.lua"))("FindAnUpgrade", N)
+assert(loadfile(ROOT .. "/FindAnUpgrade/Data/Quests.lua"))("FindAnUpgrade", N)
 local M = N.Model
 local function test(name, fn) fn(); PASSED = PASSED + 1; print("PASS " .. name) end
 test("exact classification matches the generated snapshot", function()
@@ -43,4 +43,17 @@ test("secret colors and metadata are rejected", function()
     local marker = {}; issecretvalue = function(value) return value == marker end
     assert(not M.Number(marker)); assert(not M.SameColor({marker,1,1,1}, {1,1,1,1})); assert(M.Load(marker).enabled)
     issecretvalue = nil
+end)
+test("renamed profile priority and future data remain lossless",function()
+    local old={version=99,enabled=false,unknown={"keep"}}
+    assert(M.RenameSeed(nil,old)==old and M.RenameSeed(false,old)==false)
+    local current={version=3,enabled=true};assert(M.RenameSeed(current,old)==current)
+    local profile,readonly=M.Load(M.RenameSeed(nil,old));assert(readonly and not profile.enabled and old.unknown[1]=="keep")
+end)
+test("scoring styles are validated independent per-character preferences",function()
+    local saved={scoringStyles={["Player-1:1"]="HEALER",["Player-2:2"]="MELEE",bad="unknown",[3]="CASTER"}}
+    local profile=M.Load(saved)
+    assert(profile.scoringStyles["Player-1:1"]=="HEALER" and profile.scoringStyles["Player-2:2"]=="MELEE")
+    assert(profile.scoringStyles.bad==nil and profile.scoringStyles[3]==nil)
+    profile.scoringStyles["Player-1:1"]="TANK";assert(saved.scoringStyles["Player-1:1"]=="HEALER" and not next(M.defaults.scoringStyles))
 end)

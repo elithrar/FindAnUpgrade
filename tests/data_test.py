@@ -18,8 +18,8 @@ class DataTest(unittest.TestCase):
         cls.baseline = json.loads(cls.baseline_raw)
         cls.lua = LuaRuntime(unpack_returned_tuples=True)
         cls.lua.execute("N = {}")
-        cls.lua.globals().SOURCE = str(ROOT / "QuestBrief/Data/Quests.lua").replace("\\", "/")
-        cls.lua.execute('assert(loadfile(SOURCE))("QuestBrief", N)')
+        cls.lua.globals().SOURCE = str(ROOT / "FindAnUpgrade/Data/Quests.lua").replace("\\", "/")
+        cls.lua.execute('assert(loadfile(SOURCE))("FindAnUpgrade", N)')
         cls.actual = dict(cls.lua.globals().N.Data.statusById.items())
 
     def test_every_id_matches_per_variant_primary_status(self):

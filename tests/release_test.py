@@ -23,11 +23,11 @@ def artifact_fixture(destination, source=ROOT):
     for file in package.source_files(source):
         target = destination / file.relative_to(source)
         target.parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(file, target)
-    toc_path = destination / "QuestBrief/QuestBrief.toc"
+    toc_path = destination / "FindAnUpgrade/FindAnUpgrade.toc"
     toc = toc_path.read_text()
     version = release.re.search(r"^## Version: (.+)$", toc, release.re.M)[1]
     toc_path.write_text(toc.replace("## Version: " + version, "## Version: 0.1.0"))
-    core = destination / "QuestBrief/Core.lua"
+    core = destination / "FindAnUpgrade/Core.lua"
     core.write_text(core.read_text().replace('version = "' + version + '"', 'version = "0.1.0"'))
     notes = destination / "docs/releases/0.1.0.md"
     notes.parent.mkdir(parents=True, exist_ok=True); notes.write_text("Offline fixture release notes.\n")
@@ -113,14 +113,14 @@ class MetadataTests(unittest.TestCase):
 
     def test_multipart_preserves_binary_zip_and_headers(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as folder:
-            path = Path(folder) / "QuestBrief-0.1.0.zip"
+            path = Path(folder) / "FindAnUpgrade-0.1.0.zip"
             path.write_bytes(b"PK\x00\xff\x01")
             metadata = {"gameVersions": [99], "releaseType": "release"}
             body, kind = cf.multipart(metadata, path)
             self.assertIn(path.read_bytes(), body)
             self.assertIn(json.dumps(metadata).encode(), body)
-            self.assertIn(b'name="file"; filename="QuestBrief-0.1.0.zip"', body)
-            self.assertTrue(kind.startswith("multipart/form-data; boundary=QuestBrief-"))
+            self.assertIn(b'name="file"; filename="FindAnUpgrade-0.1.0.zip"', body)
+            self.assertTrue(kind.startswith("multipart/form-data; boundary=FindAnUpgrade-"))
 
     def test_remote_tag_moved_after_checkout_is_rejected(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as folder:
@@ -200,13 +200,13 @@ class ArtifactTests(unittest.TestCase):
 
     def test_exact_payload_passes(self):
         data = release.verify_artifacts(self.root)
-        self.assertEqual(data["archive"], "QuestBrief-0.1.0.zip")
+        self.assertEqual(data["archive"], "FindAnUpgrade-0.1.0.zip")
         payload = {p["path"] for p in json.loads((self.root / "dist/package-receipt.json").read_text())["payload"]}
-        for name in ["QuestBrief/LICENSE", "QuestBrief/Data/Catalog.lua", "QuestBrief/Data/ATT-LICENSE.txt"]:
+        for name in ["FindAnUpgrade/LICENSE", "FindAnUpgrade/Data/Catalog.lua", "FindAnUpgrade/Data/ATT-LICENSE.txt"]:
             self.assertIn(name, payload)
 
     def test_catalog_license_cannot_be_replaced_by_rewriting_provenance(self):
-        path = self.root / "QuestBrief/Data/ATT-LICENSE.txt"
+        path = self.root / "FindAnUpgrade/Data/ATT-LICENSE.txt"
         path.write_bytes(b"MIT label without the required grant or disclaimer")
         provenance = self.root / "data/catalog-sources.json"
         data = json.loads(provenance.read_bytes())
@@ -217,9 +217,9 @@ class ArtifactTests(unittest.TestCase):
 
     def test_real_notes_and_version_bump_do_not_break_fixed_fixture(self):
         # The source already includes its first real notes directory/file.
-        toc = self.root / "QuestBrief/QuestBrief.toc"
+        toc = self.root / "FindAnUpgrade/FindAnUpgrade.toc"
         toc.write_text(toc.read_text().replace("## Version: 0.1.0", "## Version: 0.2.0"))
-        core = self.root / "QuestBrief/Core.lua"
+        core = self.root / "FindAnUpgrade/Core.lua"
         core.write_text(core.read_text().replace('version = "0.1.0"', 'version = "0.2.0"'))
         (self.root / "docs/releases/0.2.0.md").write_text("Future real release notes.\n")
         destination = Path(self.temp_instance.name) / "normalized-fixture"
@@ -229,12 +229,12 @@ class ArtifactTests(unittest.TestCase):
         self.assertEqual((self.root / "docs/releases/0.2.0.md").read_text(), "Future real release notes.\n")
 
     def test_altered_archive_is_rejected(self):
-        archive = self.root / "dist/QuestBrief-0.1.0.zip"
+        archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
         archive.write_bytes(archive.read_bytes() + b"changed")
         with self.assertRaisesRegex(ValueError, "checksums"): release.verify_artifacts(self.root)
 
     def test_extra_zip_asset_is_rejected(self):
-        (self.root / "dist/QuestBrief-old.zip").write_bytes(b"old build")
+        (self.root / "dist/FindAnUpgrade-old.zip").write_bytes(b"old build")
         with self.assertRaisesRegex(ValueError, "Unexpected release ZIP"): release.verify_artifacts(self.root)
 
     def test_ignored_source_member_absent_from_tag_is_rejected(self):
@@ -255,13 +255,13 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "untracked-fixture.env"): release.check_source_tree(commit, self.root)
 
     def test_forged_checksums_do_not_allow_extra_payload(self):
-        archive = self.root / "dist/QuestBrief-0.1.0.zip"
-        with zipfile.ZipFile(archive, "a") as payload: payload.writestr("QuestBrief/unreviewed.lua", "bad")
+        archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
+        with zipfile.ZipFile(archive, "a") as payload: payload.writestr("FindAnUpgrade/unreviewed.lua", "bad")
         self.resign(archive.name)
         with self.assertRaisesRegex(ValueError, "manifest"): release.verify_artifacts(self.root)
 
     def test_forged_source_zip_is_rejected(self):
-        archive = self.root / "dist/QuestBrief-0.1.0-source.zip"
+        archive = self.root / "dist/FindAnUpgrade-0.1.0-source.zip"
         with zipfile.ZipFile(archive, "a") as payload: payload.writestr("secrets.env", "fixture")
         self.resign(archive.name)
         with self.assertRaisesRegex(ValueError, "manifest"): release.verify_artifacts(self.root)

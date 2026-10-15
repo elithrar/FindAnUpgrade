@@ -25,6 +25,7 @@ local function setup(config)
     function rootMethods:SetEnabled(v)self.enabled=v end
     function rootMethods:SetTooltip(fn)self.tooltip=fn end
     function rootMethods:SetScrollMode()end
+    function rootMethods:CreateTitle(label)self.titles=self.titles or {};self.titles[#self.titles+1]=label;return {}end
     function rootMethods:AddMenuReleasedCallback(fn)self.release=fn end
     W.menuManager={IsAnyMenuOpen=function()return W.openMenu~=nil end}
     Menu={GetManager=function()return W.menuManager end}
@@ -34,13 +35,14 @@ local function setup(config)
         W.openMenu=menu;return menu
     end}
     W.quests,W.catalogItems,W.npcs=quests,items,npcs
+    N.Search:Create();N.Search.filter.scope="LEVEL_RANGE";N.Search.filter.sort="FIT"
     return N
 end
 local function open(config)
     local N=setup(config); N.Core:Slash("search"); W.time=.3; N.Search.frame:Fire("OnUpdate",.3); return N
 end
 test("finder opens through canonical aliases with reviewed title and level defaults",function()
-    local N=open();assert(N.Search:Visible() and N.Search.title.text=="QuestBrief" and N.Search.filter.minimum==15 and N.Search.filter.maximum==23 and N.Search.sort.defaultText=="Current zone" and N.Search.filter.sort=="ZONE")
+    local N=open();assert(N.Search:Visible() and N.Search.title.text=="FindAnUpgrade" and N.Search.filter.minimum==15 and N.Search.filter.maximum==23 and N.Search.filter.sort=="FIT" and N.Search.filter.scope=="LEVEL_RANGE")
     N.Core:Slash("s");assert(not N.Search:Visible())
 end)
 test("bundled catalogue works with both Questie addons absent and preserves input",function()
@@ -57,11 +59,11 @@ test("missing or incompatible catalogue gives an explicit bounded empty state",f
 end)
 test("completed exact quests are hidden while repeatable quests remain unconfirmed",function()
     local N=setup();W.completed[9]=true;N.Search:Toggle();W.time=.3;N.Search:Tick();assert(#N.Search.results==1 and N.Search.results[1].id==14)
-    W.repeatable[9]=true;N.Search:Changed();W.time=.6;N.Search:Tick();assert(#N.Search.results==2)
+    N=setup();W.completed[9]=true;W.repeatable[9]=true;N.Search:Toggle();W.time=.6;N.Search:Tick();assert(#N.Search.results==2)
 end)
 test("wrong class and high-bit Forever race are filtered without thirty-two-bit truncation",function()
     local N=setup();W.quests[9].classTokens={"PALADIN"};W.quests[14].races={95};N.Search:Toggle();W.time=.3;N.Search:Tick();assert(#N.Search.results==0)
-    UnitRace=function()return "Skyborne","Skyborne",95 end;N.Search:Changed();W.time=.6;N.Search:Tick();assert(#N.Search.results==1 and N.Search.results[1].id==14)
+    UnitRace=function()return "Skyborne","Skyborne",95 end;N.Character:Mark("identity");N.Character.events:Fire("OnUpdate");N.Search:Changed();W.time=.6;N.Search:Tick();assert(#N.Search.results==1 and N.Search.results[1].id==14)
 end)
 test("unknown levels never become zero or a fabricated fit",function()
     local N=setup();W.quests[9].questLevel=0;W.quests[14].questLevel=nil;N.Search:Toggle();W.time=.3;N.Search:Tick();assert(#N.Search.results==0)
@@ -72,7 +74,7 @@ test("completed single prerequisite takes precedence over an unmet group",functi
 end)
 test("an excluded reward name cannot match a different equipment slot",function()
     local N=setup();W.quests[9].items[#W.quests[9].items+1]={itemID=124,name="Dagger"};N.Catalog:Begin();N.Catalog:Step()
-    local rows=N.SearchModel:Query({query="dagger",usable=true,minimum=15,maximum=23,slot="INVTYPE_HEAD",sort="FIT"});assert(#rows==0)
+    local rows=N.SearchModel:Query({scope="LEVEL_RANGE",query="dagger",usable=true,minimum=15,maximum=23,slot="INVTYPE_HEAD",sort="FIT"});assert(#rows==0)
 end)
 test("weapon and robe slot families keep valid equipment categories",function()
     local N=setup();assert(N.SearchModel.SlotMatch("INVTYPE_2HWEAPON","WEAPON") and N.SearchModel.SlotMatch("INVTYPE_ROBE","CHEST") and not N.SearchModel.SlotMatch("INVTYPE_HEAD","WEAPON"))
@@ -96,10 +98,10 @@ test("native unusable false is retained separately from unavailable usability",f
 end)
 test("native usability changes invalidate rather than permanently excluding an item",function()
     local N=open();N.SearchModel.usability[9]={[123]=false,[125]=false};N.Search:Changed();W.time=.6;N.Search:Tick();assert(#N.Search.results==1)
-    W.Event("PLAYER_LEVEL_UP",21);assert(next(N.SearchModel.usability)==nil)
+    W.Event("PLAYER_LEVEL_UP",21);N.Character.events:Fire("OnUpdate");assert(next(N.SearchModel.usability)==nil)
 end)
 test("recorded rewards never invent quantities or guaranteed versus choice membership",function()
-    local N=open();local card=N.Search.cards[1];assert(card.icons[1].group.text=="Recorded reward" and card.icons[1].count.text=="" and not card.icons[1].name:IsShown() and card.fullTitle:find("Head quest",1,true))
+    local N=open();local card=N.Search.cards[1];assert(card.icons[1].group.text=="Reward" and not card.icons[1].group:IsShown() and card.icons[1].count.text=="" and not card.icons[1].name:IsShown() and card.fullTitle:find("Head quest",1,true))
 end)
 test("unknown values reserve no footer cells and no repeated unavailable labels",function()
     local N=open();local c=N.Search.cards[1]
@@ -138,7 +140,7 @@ test("search objects are reused and a hidden finder performs no frame work",func
 end)
 test("launcher toggles persist independently from Questie preview surface",function()
     local N=setup();Minimap=W.Object(true);Minimap.width=140;Minimap.height=140;N.Launcher:Refresh();assert(N.Launcher.button:IsShown())
-    N.Core:Slash("mm");assert(not N.Launcher.button:IsShown() and not QuestBriefDB.launcher and QuestBriefDB.minimap)
+    N.Core:Slash("mm");assert(not N.Launcher.button:IsShown() and not FindAnUpgradeDB.launcher and FindAnUpgradeDB.minimap)
     N.Core:Slash("minimap");assert(N.Launcher.button:IsShown())
 end)
 test("launcher click opens finder and aborted drag removes recurring work",function()
@@ -146,7 +148,7 @@ test("launcher click opens finder and aborted drag removes recurring work",funct
     b:Fire("OnDragStart");assert(b.scripts.OnUpdate);b:Hide();assert(not b.scripts.OnUpdate and not N.Launcher.dragging and W.nativeMutations==0)
 end)
 test("schema-two settings migrate and launcher values are sanitized",function()
-    local N=setup({saved={version=2,enabled=false,minimap=false,launcher=false,launcherAngle=-20}});assert(QuestBriefDB.version==3 and not QuestBriefDB.enabled and not QuestBriefDB.minimap and not QuestBriefDB.launcher and QuestBriefDB.launcherAngle==340)
+    local N=setup({saved={version=2,enabled=false,minimap=false,launcher=false,launcherAngle=-20}});assert(FindAnUpgradeDB.version==3 and not FindAnUpgradeDB.enabled and not FindAnUpgradeDB.minimap and not FindAnUpgradeDB.launcher and FindAnUpgradeDB.launcherAngle==340)
 end)
 
 test("production low mid and high catalogue searches work with Questie absent",function()
@@ -162,8 +164,8 @@ test("production low mid and high catalogue searches work with Questie absent",f
     C_Item={IsItemDataCachedByID=function()return false end,GetItemInfoInstant=function(id)return id,"Armor","Cloth","INVTYPE_HEAD",100,4 end}
     assert(N.Catalog:Begin());while not N.Catalog.done do N.Catalog:Step() end
     for band,q in ipairs(selected) do
-        UnitLevel=function()return levels[q.id]end;UnitFactionGroup=function()return q.faction or "Alliance"end
-        local rows=N.SearchModel:Query({query=tostring(q.id),usable=true,minimum=math.max(1,levels[q.id]-5),maximum=levels[q.id]+3,slot="ALL",sort="FIT"})
+        UnitLevel=function()return levels[q.id]end;UnitFactionGroup=function()return q.faction or "Alliance"end;N.Character:Mark("identity")
+        local rows=N.SearchModel:Query({scope="LEVEL_RANGE",query=tostring(q.id),usable=true,minimum=math.max(1,levels[q.id]-5),maximum=levels[q.id]+3,slot="ALL",sort="FIT"})
         local found;for _,row in ipairs(rows) do if row.id==q.id then found=row;break end end
         assert(found and #found.items>0 and found.fit==0)
     end
@@ -188,7 +190,7 @@ test("cold quest difficulty cannot be inferred from its recorded minimum",functi
 end)
 
 test("default card geometry fits four complete results and collapse clamps scroll",function()
-    local N=open();assert(N.Search.cards[1]:GetHeight()*4+15<=N.Search.frame:GetHeight()-158)
+    local N=open();assert(N.Search.cards[1]:GetHeight()*4+15<=N.Search:ViewportHeight())
     N.Search.offset=1000;N.Search:LayoutResults();assert(N.Search.offset==N.Search.maximum)
 end)
 
@@ -199,8 +201,8 @@ end)
 test("authoritative native rewards suppress conflicting catalogue associations",function()
     local N=open();W.rewardReady=true;W.items={{"Helmet",100,1,2,true,123}}
     local reward,recorded,changed=N.SearchModel:Reward(N.Search.results[1]);assert(changed and #recorded==0 and #reward.items.items==1)
-    local rows=N.SearchModel:Query({query="boots",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"});assert(#rows==0)
-    W.rewardReady=false;N.SearchModel:Reward(N.Catalog.records[9]);rows=N.SearchModel:Query({query="boots",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"});assert(#rows==1)
+    local rows=N.SearchModel:Query({scope="LEVEL_RANGE",query="boots",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"});assert(#rows==0)
+    W.rewardReady=false;N.SearchModel:Reward(N.Catalog.records[9]);rows=N.SearchModel:Query({scope="LEVEL_RANGE",query="boots",usable=true,minimum=15,maximum=23,slot="ALL",sort="FIT"});assert(#rows==1)
 end)
 
 test("asynchronous unrelated data preserves active inspection and context menus",function()
@@ -218,7 +220,7 @@ end)
 
 test("new inspection sessions discard old point in time usability exclusions",function()
     local N=open();N.SearchModel.usability[9]={[123]=false,[125]=false};N.Search.frame:Hide();N.Search:Toggle();assert(next(N.SearchModel.usability)==nil)
-    N.SearchModel.usability[9]={[123]=false};W.Event("SKILL_LINES_CHANGED");assert(next(N.SearchModel.usability)==nil)
+    N.SearchModel.usability[9]={[123]=false};W.Event("SKILL_LINES_CHANGED");N.Character.events:Fire("OnUpdate");assert(next(N.SearchModel.usability)==nil)
 end)
 
 test("giver button and native submenu select the location used by copy and waypoint",function()
@@ -240,23 +242,21 @@ test("single giver cards do not add a chooser or shrink the location allocation"
     S:ContextMenu(c.row,c);assert(#W.openMenu.root.entries==5)
 end)
 
-test("long title and location tips honor viewport and menu ownership",function()
-    local N=open();local S=N.Search;local c=S.cards[1];local blocked=true
-    N.Adapter.Over=function(frame)return not (blocked and frame==S.scroll) end
-    c.titleHit:Fire("OnEnter");assert(not S.textTooltip)
-    blocked=false;c.row.title="A long native quest title with a distinctive final phrase";S:Fill(c,c.row)
-    c.titleHit:Fire("OnEnter");assert(S.textTooltip:IsShown() and S.textTooltip.text:find("distinctive final phrase",1,true))
-    c.titleHit:Fire("OnLeave");assert(not S.textTooltip:IsShown())
-    c.locationHit:Fire("OnEnter");assert(S.textTooltip:IsShown() and S.textTooltip.text==c.location.text)
-    S:ContextMenu(c.row,c);assert(not S.textTooltip:IsShown());c.titleHit:Fire("OnEnter");assert(not S.textTooltip:IsShown())
-    S:CloseMenu();c.titleHit:Fire("OnEnter");S.frame:Hide();assert(not S.textTooltip:IsShown())
+test("long title and location wrap in place without explanatory hover",function()
+    local N=open();local S=N.Search;local c=S.cards[1]
+    c.row.title=string.rep("A long native quest title ",5);S:Fill(c,c.row)
+    assert(c.title.text:find("A long native quest title",1,true) and c.title:GetStringHeight()>13)
+    c.titleHit:Fire("OnEnter");c.locationHit:Fire("OnEnter")
+    assert(not S.textTooltip and not S.footerTooltip:IsShown())
+    S:ContextMenu(c.row,c);c.titleHit:Fire("OnEnter");assert(not S.textTooltip)
+    S.frame:Hide();assert(not S.textTooltip)
 end)
 
 test("disabled location actions expose distinct reasons and never copy a fabricated NPC name",function()
     local N=open();local S=N.Search;local c=S.cards[1];local tip=W.Object()
     c.row.location={npcID=99,name="NPC 99",nameKnown=false};S:ContextMenu(c.row,c);local entries=W.openMenu.root.entries
     assert(entries[1].enabled==false and entries[2].enabled==false and entries[4].enabled==false)
-    entries[1].tooltip(tip);assert(tip.text:find("coordinates unavailable",1,true));entries[4].tooltip(tip);assert(tip.text:find("NPC name unavailable",1,true))
+    entries[1].tooltip(tip);assert(tip.text:lower():find("coordinates unavailable",1,true));entries[4].tooltip(tip);assert(tip.text:find("NPC name unavailable",1,true))
     c.row.location={npcID=99,name="Phased giver",nameKnown=true,mapID=100,x=.2,y=.3,phase=true};S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
     assert(entries[1].enabled==false and entries[2].enabled and entries[4].enabled);entries[1].tooltip(tip);assert(tip.text:find("phase",1,true))
     c.row.location.phase=false;C_Map.CanSetUserWaypointOnMap=function()return false end;S:ContextMenu(c.row,c);entries=W.openMenu.root.entries
@@ -278,7 +278,7 @@ test("bottom scrolling survives unseen height growth after narrowing and filter 
     S.frame:SetSize(520,400);S:LayoutResults();S:Scroll(1e9)
     assert(S.bottomTarget and S.offset==S.maximum and S.scroll.scrollValue==S.maximum and S.bar.value==S.maximum)
     local last;for _,card in ipairs(S.cards)do if card:IsShown() and card.row.id==12 then last=card end end
-    assert(last and S.positions[12]+last:GetHeight()<=S.offset+S.frame:GetHeight()-158)
+    assert(last and S.positions[12]+last:GetHeight()<=S.offset+S:ViewportHeight())
     S.expanded[12]=true;S:Render();assert(S.offset==S.maximum)
     S.expanded[12]=false;S.frame:SetSize(560,600);S:LayoutResults();S:Render();assert(S.offset==S.maximum)
     S:Scroll(S.offset-40);assert(not S.bottomTarget);local offset=S.offset;S:LayoutResults();assert(S.offset==offset)
@@ -302,23 +302,23 @@ test("mixed old row heights settle newly visible third pass rows and final geome
     S.frame:SetSize(560,400);S:LayoutResults();S:Scroll(0)
     assert(filled[3] and S.heights[1]<105 and S.heights[2]<105 and S.heights[3]>S.heights[2])
     local y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
-    assert(S.contentHeight==y and S.child:GetHeight()==y and S.maximum==y-242)
+    assert(S.contentHeight==y and S.child:GetHeight()==y and S.maximum==y-S:ViewportHeight())
     for _,card in ipairs(S.cards)do if card:IsShown()then assert(card.point[3]==-S.positions[card.resultIndex])end end
     -- A wider viewport needs more than four passes through stale tall estimates.
     S.frame:SetSize(560,900);for id=1,8 do S.heights[id]=1000 end;S.expanded={};filled={};S.dirty=false
     S:LayoutResults();S:Scroll(0);assert(S.dirty)
     y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
-    assert(S.child:GetHeight()==y and S.contentHeight==y and S.maximum==y-742 and S.offset==0 and S.bar.value==0 and S.scroll.scrollValue==0)
+    assert(S.child:GetHeight()==y and S.contentHeight==y and S.maximum==y-S:ViewportHeight() and S.offset==0 and S.bar.value==0 and S.scroll.scrollValue==0)
     for _,card in ipairs(S.cards)do if card:IsShown()then assert(card.point[3]==-S.positions[card.resultIndex])end end
 end)
 
-test("pool refresh closes owned full text and footer tips before row reuse",function()
+test("pooled text and amount rows never create explanatory hover tips",function()
     local N=open();local S=N.Search;local c=S.cards[1];N.Adapter.Over=function()return true end
-    c.titleHit:Fire("OnEnter");assert(S.textTooltip:IsShown());S:Render();assert(not S.textTooltip:IsShown())
+    c.titleHit:Fire("OnEnter");S:Render();assert(not S.textTooltip)
     N.SearchModel.Reward=function() return {state="ready",items={items={}},choices={items={}},money={state="ready",value=50},xp={state="unavailable"},currencies={items={}},reputation={items={}}},{},false end
-    S:Fill(c,c.row);c.footerHits[1]:Fire("OnEnter");assert(S.footerTooltip:IsShown());S:Render();assert(not S.footerTooltip:IsShown())
+    S:Fill(c,c.row);c.footerHits[1]:Fire("OnEnter");assert(not S.footerTooltip:IsShown())
+    S:Render();assert(not S.footerTooltip:IsShown() and not S.textTooltip)
 end)
-
 
 test("native filter menus survive quest refresh and input until selection or dismissal",function()
     local N=open();local S=N.Search
@@ -368,7 +368,7 @@ test("compact rows separate reward choices without squeezed item names",function
     end
     S:Fill(c,c.row)
     assert(c.icons[1].group.text=="Guaranteed" and c.icons[2].group.text=="Choose one")
-    assert(c.icons[1].count.text=="3" and c.icons[1]:GetWidth()==28)
+    assert(c.icons[1].count.text=="3" and math.abs(c.icons[1]:GetWidth()-112/3)<.001)
     assert(not c.icons[1].name:IsShown() and c.icons[1].row.name:find("full item name",1,true))
     assert(c.footer[1].text:find("1250 XP",1,true) and c.footer[1].text:find("Guaranteed: Tokens 2",1,true))
     assert(not c.footer[1].text:find("unavailable",1,true))

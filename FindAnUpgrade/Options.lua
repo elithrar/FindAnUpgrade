@@ -122,8 +122,8 @@ function O:Build(owner,f,parent)
     U:Dialog(f)
     f:EnableMouse(true); f:SetClampedToScreen(true); f:SetMovable(true); f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart",function() f:StartMoving() end); f:SetScript("OnDragStop",function() f:StopMovingOrSizing() end)
-    self.menuFont=self.menuFont or CreateFont("QuestBriefMenuFont"); U:Font(self.menuFont,12)
-    self:Label(parent,"QuestBrief",20,-15,560,16,gold)
+    self.menuFont=self.menuFont or CreateFont("FindAnUpgradeMenuFont"); U:Font(self.menuFont,12)
+    self:Label(parent,"FindAnUpgrade",20,-15,560,16,gold)
     self.close=self:Frame("Button",parent,"UIPanelCloseButton")
     self.close:SetSize(24,24); self.close:SetPoint("TOPRIGHT",-8,-8); self.close:SetScript("OnClick",function() f:Hide() end)
     self:Section(parent,"Appearance",16,-58,288,330); self:Section(parent,"Behavior",316,-58,288,330)
@@ -163,7 +163,7 @@ function O:Create(owner)
     self.owner=owner; self.texts={}; self.controls={}; self.checks={}; self.sliders={}; self.edits={}; self.dropdowns={}; self.sections={}
     -- Publish only complete controls. A failed construction leaves a hidden
     -- shell that the next slash invocation can reuse, never a cached blank UI.
-    local f=self.shell or CreateFrame("Frame","QuestBriefOptions",UIParent,"BackdropTemplate"); self.shell=f; f:Hide()
+    local f=self.shell or CreateFrame("Frame","FindAnUpgradeOptions",UIParent,"BackdropTemplate"); self.shell=f; f:Hide()
     local parent=self.content or CreateFrame("Frame",nil,f); self.content=parent
     self.framePool,self.textPool=self.framePool or {},self.textPool or {}
     self.frameSlot,self.textSlot=0,0
@@ -183,7 +183,7 @@ function O:Create(owner)
         error(err,0)
     end
     self.frame=f; self.content=parent
-    UISpecialFrames=UISpecialFrames or {}; table.insert(UISpecialFrames,"QuestBriefOptions")
+    UISpecialFrames=UISpecialFrames or {}; table.insert(UISpecialFrames,"FindAnUpgradeOptions")
 end
 function O:RefreshFonts(regenerate)
     if not self.frame then return end

@@ -110,7 +110,7 @@ function T:Lines(source,profile,existing)
         if not knownTitle or #source.rows>1 and #result>=first then
             table.insert(result,first,title..(sameTitle>1 and " (#"..row.id..")" or "")..accent)
         elseif accent~="" and not contains(existing,title..accent) then
-            table.insert(result,first,"QuestBrief:"..accent)
+            table.insert(result,first,"FindAnUpgrade:"..accent)
         end
     end
     if #result>12 then
@@ -139,10 +139,10 @@ end
 function T:Begin()
     self.lastRect=nil
     if not self.escape then
-        local f=CreateFrame("Frame","QuestBriefPreviewEscape",UIParent); self.escape=f
+        local f=CreateFrame("Frame","FindAnUpgradePreviewEscape",UIParent); self.escape=f
         f:SetSize(1,1); f:SetPoint("BOTTOMLEFT"); f:EnableMouse(false); f:Hide()
         f:SetScript("OnHide",function() if N.Hover.open and N.Hover.mode=="native" then N.Hover:Dismiss("escape") end end)
-        UISpecialFrames=UISpecialFrames or {}; table.insert(UISpecialFrames,"QuestBriefPreviewEscape")
+        UISpecialFrames=UISpecialFrames or {}; table.insert(UISpecialFrames,"FindAnUpgradePreviewEscape")
     end
     self.escape:Show()
 end

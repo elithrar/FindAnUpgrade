@@ -30,13 +30,17 @@ local function setup()
     local render=N.Search.Render;N.Search.Render=function(self)reads.render=reads.render+1;return render(self)end
     local metadata=N.Catalog.Metadata;N.Catalog.Metadata=function(self,...)reads.metadata=reads.metadata+1;return metadata(self,...)end
     local invalidate=N.SearchModel.InvalidateQuest;N.SearchModel.InvalidateQuest=function(self,id)reads.clears[id]=(reads.clears[id]or 0)+1;return invalidate(self,id)end
-    local S=N.Search;S:Toggle()
+    local S=N.Search;S:Toggle();S.filter.scope="LEVEL_RANGE";S:Changed(true)
     for _=1,65 do W.time=W.time+.1;S:Tick()end
     local function reset()reads.log,reads.complete,reads.query,reads.render,reads.metadata=0,0,0,0,0;reads.clears={}end
     reset();return N,S,reads,reset
 end
 local function settle(S)
-    for _=1,6 do W.time=W.time+.1;S:Tick()end
+    for _=1,6 do
+        W.time=W.time+.1
+        local events=W.N.Character.events;if events and events:GetScript("OnUpdate") then events:Fire("OnUpdate") end
+        S:Tick()
+    end
 end
 local function evidence(S,id)
     for _,row in ipairs(S.results)do if row.id==id then return row.evidence or "recorded" end end
@@ -112,6 +116,7 @@ test("current native map offers change eligibility once and expire without a sta
     C_QuestLog.GetTitleForQuestID=function(id)return id==777 and "Native offer" or "Quest "..id end
     C_QuestLog.GetQuestDifficultyLevel=function()return 20 end
     local offers={};C_Map={GetBestMapForUnit=function()return 100 end};C_QuestLine={GetAvailableQuestLines=function()return offers end}
+    W.Event("ZONE_CHANGED_NEW_AREA")
     S:Changed();settle(S);assert(not evidence(S,777));reset()
     offers={{questID=777,inProgress=false}};for _=1,100 do W.Event("QUEST_LOG_UPDATE")end;settle(S)
     assert(reads.query==1 and evidence(S,777)=="Available")

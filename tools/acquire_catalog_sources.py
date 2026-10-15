@@ -9,7 +9,7 @@ import argparse, hashlib, json
 from import_catalog import PIN, PREFIX
 
 REPO = "ATTWoWAddon/AllTheThings"
-AGENT = "QuestBrief-source-sync/1 (public pinned factual inputs)"
+AGENT = "FindAnUpgrade-source-sync/1 (public pinned factual inputs)"
 
 
 def fetch(url):

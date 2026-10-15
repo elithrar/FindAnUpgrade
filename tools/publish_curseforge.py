@@ -20,7 +20,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
 
 def request(path, token, body=None, content_type=None):
     headers = {"X-Api-Token": token, "Accept": "application/json",
-               "User-Agent": "QuestBrief-release/1"}
+               "User-Agent": "FindAnUpgrade-release/1"}
     if content_type:
         headers["Content-Type"] = content_type
     req = urllib.request.Request(BASE + path, data=body, headers=headers)
@@ -46,7 +46,7 @@ def exact_version(versions, data):
 
 
 def multipart(metadata, archive):
-    boundary = "QuestBrief-" + uuid.uuid4().hex
+    boundary = "FindAnUpgrade-" + uuid.uuid4().hex
     first = (f'--{boundary}\r\nContent-Disposition: form-data; name="metadata"\r\n'
              'Content-Type: application/json\r\n\r\n').encode() + json.dumps(metadata).encode()
     second = (f'\r\n--{boundary}\r\nContent-Disposition: form-data; name="file"; filename="{archive.name}"\r\n'
@@ -60,7 +60,7 @@ def settings(environ=None):
     if not token or not project:
         return None
     if not release.re.fullmatch(r"[1-9][0-9]*", project):
-        raise ValueError("CF_PROJECT_ID must be the exact positive numeric QuestBrief project ID")
+        raise ValueError("CF_PROJECT_ID must be the exact positive numeric FindAnUpgrade project ID")
     return token, int(project)
 
 
@@ -95,7 +95,7 @@ def main(root=ROOT):
         raise ValueError("Immutable GitHub release cannot record upload intent; configure CurseForge before publishing a new version")
     version_id = exact_version(request("/api/game/wow/versions", token), data)
     notes = root / "docs/releases" / (data["version"] + ".md")
-    metadata = {"displayName": "QuestBrief " + data["tag"], "gameVersions": [version_id],
+    metadata = {"displayName": "FindAnUpgrade " + data["tag"], "gameVersions": [version_id],
                 "releaseType": "release", "changelogType": "markdown",
                 "changelog": notes.read_text(encoding="utf-8"), "isMarkedForManualRelease": False}
     body, content_type = multipart(metadata, root / "dist" / data["archive"])

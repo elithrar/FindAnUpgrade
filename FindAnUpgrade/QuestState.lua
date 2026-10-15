@@ -15,10 +15,11 @@ function Q:Track(id)
     -- Called only after the provider has already observed IsOnQuest=true.
     -- This learns initially collapsed log entries without a catalogue scan.
     self.active[id]=boolean(C_QuestLog and C_QuestLog.IsComplete,id)==true;self.activeCount=self.activeCount+1
+    if N.Character then N.Character:PrimeQuests(self.active,self.offers,false) end
 end
 function Q:NativeOffers()
     local out={};local sources=N.Sources
-    local map=M.QuestId(A.Call(C_Map and C_Map.GetBestMapForUnit,"player"))
+    local map=N.Character and N.Character.snapshot.mapID
     local mapOffers=map and A.Call(C_QuestLine and C_QuestLine.GetAvailableQuestLines,map)
     if M.Readable(mapOffers) and type(mapOffers)=="table" and #mapOffers<=256 then
         for _,offer in ipairs(mapOffers) do
@@ -103,6 +104,7 @@ function Q:Dispatch(ids,reason)
     if not next(ids) then return end
     self.revision=self.revision+1
     local change={ids=ids,reason=reason,revision=self.revision}
+    if N.Character then N.Character:QuestChanged(change) end
     if N.Search and N.Search.QuestChanged then N.Search:QuestChanged(change) end
     if N.Hover and N.Hover.QuestChanged then N.Hover:QuestChanged(change) end
     return change
@@ -114,6 +116,7 @@ function Q:Prime()
     self.active,self.offers=self:Capture();self.activeCount=0
     for _ in pairs(self.active) do self.activeCount=self.activeCount+1 end
     self.stale=false;self.signals={};self.signalSlots={};self.signalCursor=1
+    if N.Character then N.Character:PrimeQuests(self.active,self.offers,true) end
 end
 function Q:Observe()
     if not self:Interested() then self.stale=true;return end
@@ -155,7 +158,9 @@ function Q:Signal(event,id)
 end
 function Q:Initialize()
     if self.initialized then return end
-    self:Prime();self.initialized=true
+    -- Registration must not hydrate a hidden browser or inspect the full log.
+    -- First show/hover primes once through the central character snapshot.
+    self.stale=true;self.initialized=true
     local f=CreateFrame("Frame");self.events=f
     for _,event in ipairs({"QUEST_LOG_UPDATE","QUEST_ACCEPTED","QUEST_REMOVED","QUEST_TURNED_IN"}) do f:RegisterEvent(event) end
     f:SetScript("OnEvent",function(_,event,id)

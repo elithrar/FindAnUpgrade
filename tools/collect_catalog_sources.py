@@ -21,7 +21,7 @@ import time
 from catalog_html import quest_index, quest_index_titles, quest_index_fingerprints
 
 ORIGIN = "https://www.forevervsclassic.com"
-AGENT = "GPTBot (QuestBrief public factual data collector)"
+AGENT = "GPTBot (FindAnUpgrade public factual data collector)"
 
 
 def save(path, value):

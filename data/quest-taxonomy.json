@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "targetBuild": "1.60.1.70374",
+  "method": "Explicit type in exact Forever g_quests[id] object; absent is unknown, never normal. No title, giver, objective or instance-name inference.",
+  "records": [
+    {
+      "id": 202,
+      "tagID": 1,
+      "source": {
+        "id": 202,
+        "url": "https://www.wowhead.com/forever/quest=202",
+        "sha256": "90d754d367c434e05a277f6e170b907f80e02fee294466d48d763695401b0282",
+        "bytes": 85621
+      }
+    },
+    {
+      "id": 208,
+      "tagID": 1,
+      "source": {
+        "id": 208,
+        "url": "https://www.wowhead.com/forever/quest=208",
+        "sha256": "d60e5bdb1e9428adbdedd67c7c4d1f0646a318a36dc9b7718c0adb4fe358a824",
+        "bytes": 141395
+      }
+    },
+    {
+      "id": 442,
+      "tagID": 1,
+      "source": {
+        "id": 442,
+        "url": "https://www.wowhead.com/forever/quest=442",
+        "sha256": "7ec63fc8589340e475090a2af8a352c5cd381611d1939b7e3d4c9cb76499662d",
+        "bytes": 76886
+      }
+    },
+    {
+      "id": 504,
+      "tagID": 1,
+      "source": {
+        "id": 504,
+        "url": "https://www.wowhead.com/forever/quest=504",
+        "sha256": "417348405f5894e443f27eab2a0ba64009041950fa5e745d499f226ece8499a1",
+        "bytes": 94399
+      }
+    },
+    {
+      "id": 547,
+      "tagID": 1,
+      "source": {
+        "id": 547,
+        "url": "https://www.wowhead.com/forever/quest=547",
+        "sha256": "620c044c1a30546ead80fddc57359bae0a5bc67bd8ac2dc7c9c66f643669855b",
+        "bytes": 78651
+      }
+    },
+    {
+      "id": 613,
+      "tagID": 1,
+      "source": {
+        "id": 613,
+        "url": "https://www.wowhead.com/forever/quest=613",
+        "sha256": "94cd5b3d548e55b50d496748249924c57e158720954e32e51ac2c3fa81089955",
+        "bytes": 100414
+      }
+    },
+    {
+      "id": 679,
+      "tagID": 1,
+      "source": {
+        "id": 679,
+        "url": "https://www.wowhead.com/forever/quest=679",
+        "sha256": "a7dfc63bff402082cf0301a4dc8874e1ed8c0ffd76417c48e3e86bea587336d5",
+        "bytes": 61655
+      }
+    },
+    {
+      "id": 680,
+      "tagID": 1,
+      "source": {
+        "id": 680,
+        "url": "https://www.wowhead.com/forever/quest=680",
+        "sha256": "cf0932820e442b72f6a4399d6a700c03e19da88e7844f7eaa12eeb300b285634",
+        "bytes": 71128
+      }
+    },
+    {
+      "id": 682,
+      "tagID": 1,
+      "source": {
+        "id": 682,
+        "url": "https://www.wowhead.com/forever/quest=682",
+        "sha256": "561244c791872784d21b39b32087c32b072fb6f5e8cf581ffd4a22740baa8fe0",
+        "bytes": 75224
+      }
+    },
+    {
+      "id": 684,
+      "tagID": 1,
+      "source": {
+        "id": 684,
+        "url": "https://www.wowhead.com/forever/quest=684",
+        "sha256": "8faaf3e9dac7990dc232c510a1f6a34a21fefbca089d847755a5c1cbce0c08cd",
+        "bytes": 59721
+      }
+    },
+    {
+      "id": 685,
+      "tagID": 1,
+      "source": {
+        "id": 685,
+        "url": "https://www.wowhead.com/forever/quest=685",
+        "sha256": "60dba6f9495031b8c6f06202701f7b3d6ba873b38d0d48c39b7ff35bd7d69c67",
+        "bytes": 83454
+      }
+    },
+    {
+      "id": 736,
+      "tagID": 1,
+      "source": {
+        "id": 736,
+        "url": "https://www.wowhead.com/forever/quest=736",
+        "sha256": "2ba7d45e12b5ac48900cdd233a6f84465e07674a4eff68868c58c360b5620a71",
+        "bytes": 113589
+      }
+    },
+    {
+      "id": 2203,
+      "tagID": 1,
+      "source": {
+        "id": 2203,
+        "url": "https://www.wowhead.com/forever/quest=2203",
+        "sha256": "4ace08fec7d5743a7c2bf4bf32ccf37c9c45efe3bd81d6e139eff1e2023231d5",
+        "bytes": 79860
+      }
+    },
+    {
+      "id": 2501,
+      "tagID": 1,
+      "source": {
+        "id": 2501,
+        "url": "https://www.wowhead.com/forever/quest=2501",
+        "sha256": "e2765b6f054f87c0915255c180d77ff0826a377689a9258a5ee55d121a94b6a9",
+        "bytes": 81401
+      }
+    },
+    {
+      "id": 3514,
+      "tagID": 1,
+      "source": {
+        "id": 3514,
+        "url": "https://www.wowhead.com/forever/quest=3514",
+        "sha256": "e7db629a53b419d5dd1cef7723c9af5bce3d8f4398ee4671cebbf26ed69220ca",
+        "bytes": 79864
+      }
+    },
+    {
+      "id": 3602,
+      "tagID": 1,
+      "source": {
+        "id": 3602,
+        "url": "https://www.wowhead.com/forever/quest=3602",
+        "sha256": "0ce510bfa1b2e7d79e75fbf65ea3b2d149633a8bbd5a1af7dc8f7739e4866821",
+        "bytes": 87631
+      }
+    },
+    {
+      "id": 5088,
+      "tagID": 1,
+      "source": {
+        "id": 5088,
+        "url": "https://www.wowhead.com/forever/quest=5088",
+        "sha256": "6e401091c9ec630de90e4313c7f150f22966743fb6948103fd4fe94370fd5153",
+        "bytes": 119103
+      }
+    },
+    {
+      "id": 6146,
+      "tagID": 1,
+      "source": {
+        "id": 6146,
+        "url": "https://www.wowhead.com/forever/quest=6146",
+        "sha256": "62f18d419dce5b185666d3a385293ab710953854ff2564bc84dc1ebb0b3de695",
+        "bytes": 54513
+      }
+    },
+    {
+      "id": 6183,
+      "tagID": 1,
+      "source": {
+        "id": 6183,
+        "url": "https://www.wowhead.com/forever/quest=6183",
+        "sha256": "08b605752fd2e14e5bf5316a6c8c742a9b283dbac4a1bb83980a6a9c3f4f3c68",
+        "bytes": 43629
+      }
+    },
+    {
+      "id": 6283,
+      "tagID": 1,
+      "source": {
+        "id": 6283,
+        "url": "https://www.wowhead.com/forever/quest=6283",
+        "sha256": "bd360aae2665030ed4bfdb7e731cf56839006add50bf762ca6bba93db4c413d6",
+        "bytes": 98461
+      }
+    },
+    {
+      "id": 6481,
+      "tagID": 1,
+      "source": {
+        "id": 6481,
+        "url": "https://www.wowhead.com/forever/quest=6481",
+        "sha256": "1193ffa551fba06b80dd5df79c80a624088d9086e388a89882a93b12764790a7",
+        "bytes": 92423
+      }
+    },
+    {
+      "id": 6922,
+      "tagID": 81,
+      "source": {
+        "id": 6922,
+        "url": "https://www.wowhead.com/forever/quest=6922",
+        "sha256": "c513058cbe075b60dcbf163dac9236e6e0f863f35d31078cc376f1ef7fa401ca",
+        "bytes": 70985
+      }
+    },
+    {
+      "id": 8507,
+      "tagID": 1,
+      "source": {
+        "id": 8507,
+        "url": "https://www.wowhead.com/forever/quest=8507",
+        "sha256": "90e6467bccbfdb036fbc1d292f1642b8292533edea242326484a72d1fb78fb68",
+        "bytes": 58186
+      }
+    },
+    {
+      "id": 8731,
+      "tagID": 1,
+      "source": {
+        "id": 8731,
+        "url": "https://www.wowhead.com/forever/quest=8731",
+        "sha256": "a1b6ecb870784895f3264fd196975c95551d60b2964cb996da17b590998b2cdc",
+        "bytes": 111538
+      }
+    },
+    {
+      "id": 8776,
+      "tagID": 1,
+      "source": {
+        "id": 8776,
+        "url": "https://www.wowhead.com/forever/quest=8776",
+        "sha256": "0afaf55d462f1142ee5242e8bcf889b8537c73cf652a8adca67cfe8717a40aa2",
+        "bytes": 39105
+      }
+    },
+    {
+      "id": 8908,
+      "tagID": 81,
+      "source": {
+        "id": 8908,
+        "url": "https://www.wowhead.com/forever/quest=8908",
+        "sha256": "e118482d80edcbb8f8fdbd73be8f3a2b03fa2a6dbd35246710a23f574e9e78ad",
+        "bytes": 72070
+      }
+    },
+    {
+      "id": 8920,
+      "tagID": 81,
+      "source": {
+        "id": 8920,
+        "url": "https://www.wowhead.com/forever/quest=8920",
+        "sha256": "e6175b06bc43f39c39aff40bfe4c6f0084cb1aeb03c6d8ad2b6778acb00cfdff",
+        "bytes": 55053
+      }
+    },
+    {
+      "id": 8940,
+      "tagID": 81,
+      "source": {
+        "id": 8940,
+        "url": "https://www.wowhead.com/forever/quest=8940",
+        "sha256": "40cfafe394b2ca5c0105468a42ab81c7453df98160cf2a30b80a02aa4b40971f",
+        "bytes": 55415
+      }
+    },
+    {
+      "id": 8958,
+      "tagID": 81,
+      "source": {
+        "id": 8958,
+        "url": "https://www.wowhead.com/forever/quest=8958",
+        "sha256": "8fe13c506998893c2a8e59cc6d8f1b7b26d4ea7711576d43a90591bcebceabbf",
+        "bytes": 61069
+      }
+    },
+    {
+      "id": 8961,
+      "tagID": 62,
+      "source": {
+        "id": 8961,
+        "url": "https://www.wowhead.com/forever/quest=8961",
+        "sha256": "ad779ecbe4c82b348213728d200408d88824dfad17bedc9b20fcd99254e8f835",
+        "bytes": 70835
+      }
+    },
+    {
+      "id": 9009,
+      "tagID": 81,
+      "source": {
+        "id": 9009,
+        "url": "https://www.wowhead.com/forever/quest=9009",
+        "sha256": "8a17bbb204450a16d1706cd919082ca75846cb0a92cea22798315a8ec13f4820",
+        "bytes": 51925
+      }
+    },
+    {
+      "id": 9022,
+      "tagID": 81,
+      "source": {
+        "id": 9022,
+        "url": "https://www.wowhead.com/forever/quest=9022",
+        "sha256": "2cce9c1af3fbb8ec1cea65b35de4979e2067998f1d39ac26801d1a812eb60cea",
+        "bytes": 57826
+      }
+    },
+    {
+      "id": 9023,
+      "tagID": 62,
+      "source": {
+        "id": 9023,
+        "url": "https://www.wowhead.com/forever/quest=9023",
+        "sha256": "6ab762aaa9f1de16897ede191584b7846a7d231a95b331ae8c1161ed36db59f7",
+        "bytes": 100414
+      }
+    },
+    {
+      "id": 81736,
+      "tagID": 1,
+      "source": {
+        "id": 81736,
+        "url": "https://www.wowhead.com/forever/quest=81736",
+        "sha256": "4a2b22cdedcb03c3716d89b09dfe702b2d9747cd184f728bb237ed7e6066a63c",
+        "bytes": 38726
+      }
+    },
+    {
+      "id": 97250,
+      "tagID": 1,
+      "source": {
+        "id": 97250,
+        "url": "https://www.wowhead.com/forever/quest=97250",
+        "sha256": "7fe063eda8ef7c0153ea30a0fdb3f0ef7a862f3ceb5267ebdd3c5853b6fe5382",
+        "bytes": 42735
+      }
+    },
+    {
+      "id": 99156,
+      "tagID": 1,
+      "source": {
+        "id": 99156,
+        "url": "https://www.wowhead.com/forever/quest=99156",
+        "sha256": "15ce6bed563deacbecb3fc3af9261861276ee11aa05f79c22a0e8bf0a6f1ed0e",
+        "bytes": 43365
+      }
+    }
+  ]
+}

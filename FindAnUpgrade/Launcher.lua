@@ -17,7 +17,7 @@ function L:Stop(save)
 end
 function L:Create()
     if self.button or not Minimap or A.Forbidden(Minimap) then return end
-    local b=CreateFrame("Button","QuestBriefLauncher",Minimap); self.button=b; b:SetSize(32,32); b:SetFrameStrata("MEDIUM"); b:RegisterForClicks("LeftButtonUp"); b:RegisterForDrag("LeftButton")
+    local b=CreateFrame("Button","FindAnUpgradeLauncher",Minimap); self.button=b; b:SetSize(32,32); b:SetFrameStrata("MEDIUM"); b:RegisterForClicks("LeftButtonUp"); b:RegisterForDrag("LeftButton")
     b.icon=b:CreateTexture(nil,"ARTWORK"); b.icon:SetSize(24,24); b.icon:SetPoint("CENTER"); b.icon:SetTexture("Interface\\Icons\\INV_Misc_Book_09"); b.icon:SetTexCoord(.08,.92,.08,.92)
     b.border=b:CreateTexture(nil,"OVERLAY"); b.border:SetSize(52,52); b.border:SetPoint("TOPLEFT",-2,2); b.border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
     b:SetScript("OnClick",function() if not self.dragging and (A.Call(GetTime) or 0)>=(self.suppressUntil or 0) then N.Search:Toggle() end end)
@@ -33,8 +33,8 @@ function L:Create()
     b:SetScript("OnDragStop",function() self:Stop(true) end)
     b:SetScript("OnHide",function() self:Stop(false); if self.tooltip then self.tooltip:Hide() end end)
     b:SetScript("OnEnter",function()
-        if not self.tooltip then self.tooltip=CreateFrame("GameTooltip","QuestBriefLauncherTooltip",UIParent,"SharedTooltipTemplate") end
-        self.tooltip:SetOwner(b,"ANCHOR_LEFT"); self.tooltip:SetText("QuestBrief"); self.tooltip:AddLine("Open quest reward search",.7,.7,.72); self.tooltip:Show()
+        if not self.tooltip then self.tooltip=CreateFrame("GameTooltip","FindAnUpgradeLauncherTooltip",UIParent,"SharedTooltipTemplate") end
+        self.tooltip:SetOwner(b,"ANCHOR_LEFT"); self.tooltip:SetText("FindAnUpgrade"); self.tooltip:AddLine("Open quest reward search",.7,.7,.72); self.tooltip:Show()
     end)
     b:SetScript("OnLeave",function() if self.tooltip then self.tooltip:Hide() end end)
 end

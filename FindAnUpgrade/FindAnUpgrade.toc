@@ -1,14 +1,15 @@
 ## Interface: 16001
-## Title: QuestBrief
+## Title: FindAnUpgrade
 ## Notes: Compact quest previews and subtle Forever quest classification cues.
 ## Author: Matt
-## Version: 0.1.7
-## SavedVariables: QuestBriefDB
-## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB, QuestTint
+## Version: 0.1.8
+## SavedVariables: FindAnUpgradeDB, QuestBriefDB
+## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB
 Model.lua
 Data/Quests.lua
 Data/Catalog.lua
 Adapter.lua
+Character.lua
 UI.lua
 Rewards.lua
 Providers.lua
@@ -19,6 +20,7 @@ NativeTooltip.lua
 Hover.lua
 QuestState.lua
 Catalog.lua
+Ranking.lua
 SearchModel.lua
 Search.lua
 Launcher.lua

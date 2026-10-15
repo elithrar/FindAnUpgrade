@@ -13,32 +13,7 @@ function S:InvalidateQuest(id)
     return true
 end
 function S:Context()
-    local context=N.Providers.Context(); context.nativeOffers={}
-    local map=M.QuestId(A.Call(C_Map and C_Map.GetBestMapForUnit,"player"))
-    local offers=map and A.Call(C_QuestLine and C_QuestLine.GetAvailableQuestLines,map)
-    if M.Readable(offers) and type(offers)=="table" and #offers<=256 then
-        for _,offer in ipairs(offers) do
-            if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID) and M.Readable(offer.inProgress) and offer.inProgress==false then
-                context.nativeOffers[offer.questID]="native-map-available"
-            end
-        end
-    end
-    local gossip=N.Sources and N.Sources.gossip
-    if gossip and not (N.QuestState and type(N.QuestState.NativeOffers)=="function") and gossip.guid==M.Text(A.Call(UnitGUID,"npc")) then
-        local available=A.Call(C_GossipInfo and C_GossipInfo.GetAvailableQuests)
-        if M.Readable(available) and type(available)=="table" and #available<=256 then
-            for _,offer in ipairs(available) do
-                if M.Readable(offer) and type(offer)=="table" and M.QuestId(offer.questID) then context.nativeOffers[offer.questID]="native-available" end
-            end
-        end
-    end
-    local current=N.QuestState and A.Call(N.QuestState.NativeOffers,N.QuestState)
-    if M.Readable(current) and type(current)=="table" then
-        for id,proof in pairs(current) do
-            if M.QuestId(id) and (proof=="native-active" or proof=="native-ready" or proof=="native-available" or proof=="native-map-available") then context.nativeOffers[id]=proof end
-        end
-    end
-    return context
+    return N.Character:Get()
 end
 function S:Eligibility(row,context)
     local proof=context and context.nativeOffers and context.nativeOffers[row.id]
@@ -55,11 +30,13 @@ function S:Eligibility(row,context)
     return availability.state~="blocked" and availability.state~="completed",availability.label,availability
 end
 function S:StartPath(row,context,availability)
-    if availability and N.Providers.HasNativeProof(availability) then return true end
-    for _,location in ipairs(row.source and row.source.locations or {}) do
-        if (not location.faction or location.faction==context.faction) and (M.QuestId(location.npcID) or M.QuestId(location.objectID) or M.QuestId(location.itemID)) then return true end
-    end
-    return false
+    local allowed,known=N.Providers.StartPath(row,context)
+    if allowed then return true end
+    if not availability or not N.Providers.HasNativeProof(availability) then return false end
+    if availability.authority=="native-log" or availability.authority=="native-gossip" then return true end
+    -- A current exact map offer can fill a missing starter identity. It cannot
+    -- turn an explicitly opposing starter into a usable path for this player.
+    return not known
 end
 local function positive(value) return M.Number(value) and value>0 end
 function S:Benefit(row)
@@ -107,10 +84,10 @@ function S:Item(meta)
     end
     self.cache[id]=row; return rewardCopy(row)
 end
-function S.SlotMatch(slot,filter)
+function S.SlotMatch(slot,filter,context)
     if filter=="ALL" then return true end
     if not slot then return false end
-    if filter=="MISSING" then return S.EmptySlot(slot) end
+    if filter=="MISSING" then return S.EmptySlot(slot,context) end
     if filter=="CHEST" then return slot=="INVTYPE_CHEST" or slot=="INVTYPE_ROBE" end
     if filter=="WEAPON" then return slot=="INVTYPE_WEAPON" or slot=="INVTYPE_WEAPONMAINHAND" or slot=="INVTYPE_2HWEAPON" end
     if filter=="OFFHAND" then return slot=="INVTYPE_SHIELD" or slot=="INVTYPE_HOLDABLE" or slot=="INVTYPE_WEAPONOFFHAND" end
@@ -118,59 +95,96 @@ function S.SlotMatch(slot,filter)
     return slot==filter
 end
 local inventorySlots={INVTYPE_HEAD={"HeadSlot"},INVTYPE_NECK={"NeckSlot"},INVTYPE_SHOULDER={"ShoulderSlot"},INVTYPE_CLOAK={"BackSlot"},INVTYPE_CHEST={"ChestSlot"},INVTYPE_ROBE={"ChestSlot"},INVTYPE_WRIST={"WristSlot"},INVTYPE_HAND={"HandsSlot"},INVTYPE_WAIST={"WaistSlot"},INVTYPE_LEGS={"LegsSlot"},INVTYPE_FEET={"FeetSlot"},INVTYPE_FINGER={"Finger0Slot","Finger1Slot"},INVTYPE_TRINKET={"Trinket0Slot","Trinket1Slot"},INVTYPE_WEAPON={"MainHandSlot"},INVTYPE_WEAPONMAINHAND={"MainHandSlot"},INVTYPE_2HWEAPON={"MainHandSlot"},INVTYPE_WEAPONOFFHAND={"SecondaryHandSlot"},INVTYPE_SHIELD={"SecondaryHandSlot"},INVTYPE_HOLDABLE={"SecondaryHandSlot"},INVTYPE_RANGED={"RangedSlot"},INVTYPE_RANGEDRIGHT={"RangedSlot"},INVTYPE_THROWN={"RangedSlot"}}
-function S.EmptySlot(slot)
-    if not ItemLocation or type(ItemLocation.CreateFromEquipmentSlot)~="function" then return false end
+function S.EmptySlot(slot,context)
+    context=context or N.Character:Get()
     for _,name in ipairs(inventorySlots[slot] or {}) do
-        local index=M.QuestId(A.Call(GetInventorySlotInfo,name))
-        local location=index and A.Call(ItemLocation.CreateFromEquipmentSlot,ItemLocation,index)
-        if location and A.Call(C_Item and C_Item.DoesItemExist,location)==false then return true end
+        local index=context.inventorySlots and context.inventorySlots[name]
+        if index and context.emptySlots and context.emptySlots[index]==true then return true end
     end
     return false
 end
+function S:DungeonPath(row,context,availability)
+    if availability and N.Providers.HasNativeProof(availability)
+        and (availability.authority=="native-log" or availability.authority=="native-gossip") then return true end
+    local source=row.source or {}
+    if source.confirmation~="published" or source.questKind=="hidden-trigger" or availability and availability.state=="blocked" then return false end
+    return N.Providers.StartPath(row,context)==true and N.Providers.ChainState(source)==nil
+end
 function S:Query(filter)
-    local out={}; self.needed={}; self.questNeeded={}; self.unknownLevels=0; local needSet={}; local context=self:Context(); local query=(filter.query or ""):lower()
-    local currentCategories=filter.sort=="ZONE" and N.Catalog:CurrentCategories() or {}
+    local out={}; self.needed={}; self.questNeeded={}; self.unknownLevels=0
+    local needSet={}; local context=self:Context(); local query=(filter.query or ""):lower()
+    local scope=filter.scope=="LEVEL_RANGE" and "LEVEL_RANGE" or "SAME_ZONE"
+    local currentCategories,zoneName=N.Catalog:CurrentCategories(context)
+    local includeDungeons=filter.includeDungeons==true
+    local minimum=M.Number(filter.minimum) and filter.minimum or 1
+    local maximum=M.Number(filter.maximum) and filter.maximum or 200
+    local slotFilter=filter.slot or "ALL"
+    local sort=filter.sort or "UPGRADE"
+    local style=N.Ranking and N.Ranking:Style(context,N.Core.profile and N.Core.profile.scoringStyles)
+    local status=scope=="SAME_ZONE" and not zoneName and "Zone unavailable — choose Level range" or nil
     if not M.Number(context.level) or context.level<1 then return out,"Player level unavailable" end
     for _,record in ipairs(N.Catalog.order) do
-        local candidateEligible,candidateNote,candidateAvailability
-        if N.Providers.RequiresNativeProof(record.source) then candidateEligible,candidateNote,candidateAvailability=self:Eligibility(record,context) end
-        -- Cache hydration is not availability evidence. Do not load historical
-        -- candidates or hidden trackers merely because they have a static row.
-        if candidateEligible~=false then
-        if not N.Catalog:Metadata(record,context.level) then self.questNeeded[#self.questNeeded+1]=record.id end
-        if not M.Number(record.level) or record.level<1 then self.unknownLevels=self.unknownLevels+1 end
-        if M.Number(record.level) and record.level>=filter.minimum and record.level<=filter.maximum then
-            local eligible,note,availability=candidateEligible,candidateNote,candidateAvailability
-            if eligible==nil then eligible,note,availability=self:Eligibility(record,context) end
-            if eligible and self:StartPath(record,context,availability) then
-                if not self.currentItems[record.id] and A.Call(HaveQuestRewardData,record.id)==true then self:Reward(record) end
-                local match=query=="" or (record.title or ""):lower():find(query,1,true) or tostring(record.id):find(query,1,true)
-                local items={}
-                for _,meta in ipairs(self.currentItems[record.id] or record.items) do
-                    local item=self:Item(meta)
-                    if item.state~="ready" and not needSet[item.itemID] then needSet[item.itemID]=true; self.needed[#self.needed+1]=item.itemID end
-                    local usable=self.usability[record.id] and self.usability[record.id][item.itemID]
-                    if S.SlotMatch(item.slot,filter.slot) and (not filter.usable or usable~=false and (not item.minimum or item.minimum<=context.level)) then
-                        items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)
+        local category=N.Catalog:Category(record.id)
+        local sameZone=category and currentCategories[category.name]==true or false
+        -- Exclude non-members before native metadata/item hydration. Dungeon
+        -- additions require an exact tag, never a giver's position or a title.
+        if scope=="LEVEL_RANGE" or sameZone or includeDungeons then
+            local candidateEligible,candidateNote,candidateAvailability
+            if N.Providers.RequiresNativeProof(record.source) then
+                candidateEligible,candidateNote,candidateAvailability=self:Eligibility(record,context)
+            end
+            if candidateEligible~=false then
+                if not N.Catalog:Metadata(record,context.level) then self.questNeeded[#self.questNeeded+1]=record.id end
+                if not M.Number(record.level) or record.level<1 then self.unknownLevels=self.unknownLevels+1 end
+                if M.Number(record.level) and record.level>=minimum and record.level<=maximum then
+                    local tag=N.Catalog:QuestTag(record.id)
+                    local dungeon=tag==81 -- Pinned Forever Enum.QuestTag.Dungeon.
+                    local inScope=(scope=="LEVEL_RANGE" or sameZone or includeDungeons and dungeon)
+                        and (includeDungeons or not dungeon)
+                    if inScope then
+                        local eligible,note,availability=candidateEligible,candidateNote,candidateAvailability
+                        if eligible==nil then eligible,note,availability=self:Eligibility(record,context) end
+                        local addition=includeDungeons and dungeon
+                        if eligible and self:StartPath(record,context,availability)
+                            and (not addition or self:DungeonPath(record,context,availability)) then
+                            if not self.currentItems[record.id] and A.Call(HaveQuestRewardData,record.id)==true then self:Reward(record) end
+                            local match=query=="" or (record.title or ""):lower():find(query,1,true) or tostring(record.id):find(query,1,true)
+                            local items={}
+                            for _,meta in ipairs(self.currentItems[record.id] or record.items) do
+                                local item=self:Item(meta)
+                                if item.state~="ready" and not needSet[item.itemID] then needSet[item.itemID]=true; self.needed[#self.needed+1]=item.itemID end
+                                local usable=self.usability[record.id] and self.usability[record.id][item.itemID]
+                                local capability
+                                if filter.usable and N.Ranking and N.Ranking.Usable then capability=N.Ranking:Usable(item.itemID,context) end
+                                if S.SlotMatch(item.slot,slotFilter,context) and (not filter.usable or usable~=false and capability~=false and (not item.minimum or item.minimum<=context.level)) then
+                                    items[#items+1]=item; match=match or (item.name or ""):lower():find(query,1,true)
+                                end
+                            end
+                            if match and (#items>0 or slotFilter=="ALL" and self:Benefit(record)) then
+                                local ranking=(sort=="UPGRADE" or sort=="BIGGEST") and N.Ranking and N.Ranking:Quest(items,context,style,slotFilter)
+                                    or {tier=2,state="unsupported"}
+                                out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,
+                                    fit=math.abs(record.level-context.level),category=category and category.name,
+                                    currentZone=sameZone,dungeon=dungeon,ranking=ranking}
+                            end
+                        end
                     end
-                end
-                if match and (#items>0 or filter.slot=="ALL" and self:Benefit(record)) then
-                    local category=N.Catalog:Category(record.id)
-                    out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,fit=math.abs(record.level-context.level),
-                        category=category and category.name,currentZone=category and currentCategories[category.name]==true or false}
                 end
             end
         end
-        end
     end
     table.sort(out,function(a,b)
-        if filter.sort=="ZONE" and a.currentZone~=b.currentZone then return a.currentZone end
-        if filter.sort=="LEVEL" and a.level~=b.level then return a.level<b.level end
-        if filter.sort~="LEVEL" and a.fit~=b.fit then return a.fit<b.fit end
+        if sort=="UPGRADE" or sort=="BIGGEST" then
+            local ar,br=a.ranking,b.ranking
+            if ar.tier~=br.tier then return ar.tier<br.tier end
+            if ar.state=="ready" and br.state=="ready" and M.Number(ar.gain) and M.Number(br.gain) and ar.gain~=br.gain then return ar.gain>br.gain end
+        end
+        if sort=="LEVEL" and a.level~=b.level then return a.level<b.level end
+        if sort~="LEVEL" and sort~="TITLE" and a.fit~=b.fit then return a.fit<b.fit end
         if (a.title or "")~=(b.title or "") then return (a.title or "")<(b.title or "") end
         return a.id<b.id
     end)
-    return out
+    return out,status
 end
 function S:Reward(row)
     local reward=N.Rewards.Read(row.id)

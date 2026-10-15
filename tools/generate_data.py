@@ -4,8 +4,11 @@ from collections import Counter, defaultdict
 import argparse
 import hashlib
 import json
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/"tools"))
+import quest_taxonomy
 STATUSES = {"New": "verifiedNew", "Updated": "verifiedUpdated", "Unchanged": "verifiedUnchanged"}
 
 
@@ -18,7 +21,7 @@ def lua(value):
     raise TypeError(type(value))
 
 
-def render(source):
+def render(source, taxonomy=None):
     assert source["schemaVersion"] == 2 and source["version"] == "2"
     rows = source["quests"]
     assert len(rows) == source["questIdCount"] == len({r["id"] for r in rows})
@@ -73,6 +76,8 @@ def render(source):
     for row in sorted(excluded, key=lambda r: r["id"]):
         lines.append(f'    [{row["id"]}] = ' + lua({"reason": "sideNone", "zone": row["zone"]}) + ",")
     lines.extend(["} }", ""])
+    if taxonomy is not None:
+        lines.extend(["-- Explicit receipted quest tags are separate from classification status.", quest_taxonomy.render(taxonomy)])
     return "\n".join(lines)
 
 
@@ -82,8 +87,8 @@ def main():
     args = parser.parse_args()
     raw = (ROOT / "data/primary-statuses.json").read_bytes()
     source = json.loads(raw)
-    output = render(source).encode()
-    path = ROOT / "QuestBrief/Data/Quests.lua"
+    output = render(source, quest_taxonomy.load(ROOT)).encode()
+    path = ROOT / "FindAnUpgrade/Data/Quests.lua"
     if args.check:
         assert path.read_bytes() == output, "Generated classification table is stale"
     else:

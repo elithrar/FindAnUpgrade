@@ -40,8 +40,10 @@ test("current native log gossip and map proof can expose exact candidate IDs",fu
             assert(#rows==1 and rows[1].id==id)
         end
         C_QuestLog.IsOnQuest=function(candidate)return candidate==id end
+        N.Character:QuestChanged({ids={[id]=true}})
         assert(#N.Providers.ResolveRows({{id=id}})==1)
         C_QuestLog.IsOnQuest=function()return false end
+        N.Character:QuestChanged({ids={[id]=true}})
     end
 end)
 
@@ -61,6 +63,7 @@ test("native session blocks and completed history still exclude candidate offers
     assert(#N.Providers.ResolveRows({{id=990001,availabilityProof="native-available"}})==0)
     C_QuestLog.IsQuestDisabledForSession=function()return false end
     C_QuestLog.IsQuestFlaggedCompleted=function()return true end
+    N.Character:QuestChanged({ids={[990001]=true}})
     assert(#N.Providers.ResolveRows({{id=990001}})==0)
 end)
 
@@ -105,13 +108,15 @@ test("candidate metadata hydration starts only after current native proof arrive
     C_QuestLog.GetQuestDifficultyLevel=function()return nil end
     rows[4].title,rows[4].level="Published quest",20
     N.Catalog:Begin();while N.Catalog:Step() do end
-    local filter={query="",minimum=1,maximum=200,slot="ALL",usable=false,sort="FIT"}
+    local filter={scope="LEVEL_RANGE",query="",minimum=1,maximum=200,slot="ALL",usable=false,sort="FIT"}
     N.SearchModel:Query(filter)
     assert(#N.SearchModel.questNeeded==0)
     C_QuestLog.IsOnQuest=function(id)return id==990001 or id==990002 or id==990003 end
+    N.QuestState.stale=true;N.Character:QuestChanged({ids={[990001]=true,[990002]=true,[990003]=true}})
     N.SearchModel:Query(filter)
     assert(#N.SearchModel.questNeeded==3)
     C_QuestLog.IsOnQuest=function()return false end
+    N.QuestState.stale=true;N.Character:QuestChanged({ids={[990001]=true,[990002]=true,[990003]=true}})
     N.SearchModel:Query(filter)
     assert(#N.SearchModel.questNeeded==0)
 end)
@@ -124,7 +129,7 @@ test("the complete cold catalog does not enqueue its published metadata or unava
     C_QuestLog.IsQuestFlaggedCompleted=function()return false end
     HaveQuestRewardData=function()return false end
     N.Catalog:Begin();while N.Catalog:Step() do end
-    N.SearchModel:Query({query="",minimum=15,maximum=23,slot="ALL",usable=false,sort="FIT"})
+    N.SearchModel:Query({scope="LEVEL_RANGE",query="",minimum=15,maximum=23,slot="ALL",usable=false,sort="FIT"})
     assert(#N.Catalog.order>5000 and #N.SearchModel.questNeeded<100)
     for _,id in ipairs(N.SearchModel.questNeeded) do
         local source=N.Catalog.records[id].source

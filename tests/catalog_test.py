@@ -16,11 +16,11 @@ class CatalogueTests(unittest.TestCase):
     def test_generated_output_and_coverage_are_exact(self):
         current, provenance = GENERATE.load_inputs()
         output = GENERATE.render(current, provenance)
-        self.assertEqual(output, (ROOT / "QuestBrief/Data/Catalog.lua").read_bytes())
+        self.assertEqual(output, (ROOT / "FindAnUpgrade/Data/Catalog.lua").read_bytes())
         self.assertEqual(GENERATE.coverage(current, output), json.loads((ROOT / "data/catalog-coverage.json").read_bytes()))
 
     def test_complete_mit_notice_and_matching_source_hash(self):
-        notice = (ROOT / "QuestBrief/Data/ATT-LICENSE.txt").read_bytes()
+        notice = (ROOT / "FindAnUpgrade/Data/ATT-LICENSE.txt").read_bytes()
         license_record = next(s for s in PROVENANCE["files"] if s["path"] == "LICENSE")
         self.assertEqual(hashlib.sha256(notice).hexdigest(), license_record["sha256"])
         self.assertIn(b"Copyright (c) 2026 AllTheThings WoW Addon", notice)

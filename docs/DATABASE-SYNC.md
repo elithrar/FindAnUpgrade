@@ -1,6 +1,6 @@
 # Catalog acquisition and sync
 
-Run these commands from a QuestBrief source checkout with Python 3.11 or newer.
+Run these commands from a FindAnUpgrade source checkout with Python 3.11 or newer.
 No website checkout, game installation, credentials or upstream Lua execution
 is required. The only Python dependency is the existing Lua test runtime:
 

@@ -16,6 +16,7 @@ local function setup()
     C_QuestLog.GetTitleForQuestID=function(id) return id==40002 and "Earlier quest" or id==40003 and "Other path" or "Known quest" end
     return N,N.CatalogData.quests[1]
 end
+local function changed(N,id) N.QuestState.stale=true;N.Character:QuestChanged({ids={[id]=true}}) end
 local function npcTip(N)
     local tip=W.Object();tip.GetUnit=function() return "Giver","mouseover" end
     local line="|TInterface\\Addons\\Questie\\Icons\\tooltip_available.png:14|tKnown quest"
@@ -30,8 +31,8 @@ test("exact static starter identity has no invented availability or possible-que
     assert(LibQuestieDB==nil and QuestieLoader==nil)
 end)
 test("static starter rows reject completed nonrepeatable and known session-disabled quests",function()
-    local N=setup(); W.done[40001]=true; assert(#N.Providers.ForNPC(54)==0)
-    W.done[40001]=nil; W.disabled[40001]=true; assert(#N.Providers.ForNPC(54)==0)
+    local N=setup(); W.done[40001]=true; changed(N,40001); assert(#N.Providers.ForNPC(54)==0)
+    W.done[40001]=nil; W.disabled[40001]=true; changed(N,40001); assert(#N.Providers.ForNPC(54)==0)
 end)
 test("repeatable completion history does not imply current availability",function()
     local N=setup(); W.done[40001],W.repeatable[40001]=true,true
@@ -41,7 +42,7 @@ test("native active quest overrides stale recorded faction class race and level 
     local N,source=setup(); source.faction="Horde"; source.classTokens={"PALADIN"}; source.races={95}; source.maximum=2
     W.active[40001]=true; local rows=N.Providers.ForNPC(54)
     assert(#rows==1 and rows[1].availability.state=="active" and rows[1].evidence=="In quest log")
-    W.ready[40001]=true; rows=N.Providers.ForNPC(54); assert(rows[1].availability.state=="ready" and rows[1].evidence=="Ready to turn in")
+    W.ready[40001]=true; changed(N,40001); rows=N.Providers.ForNPC(54); assert(rows[1].availability.state=="ready" and rows[1].evidence=="Ready to turn in")
 end)
 test("known wrong faction class race and level constraints filter static NPC associations",function()
     local N,source=setup(); source.faction="Horde"; assert(#N.Providers.ForNPC(54)==0)
@@ -52,7 +53,7 @@ test("known wrong faction class race and level constraints filter static NPC ass
 end)
 test("unknown player class and race cannot fabricate rejection",function()
     local N,source=setup(); source.classTokens={"PALADIN"}; source.races={95}
-    UnitClass=function() return W.secret,W.secret,W.secret end; UnitRace=function() return W.secret,W.secret,W.secret end
+    UnitClass=function() return W.secret,W.secret,W.secret end; UnitRace=function() return W.secret,W.secret,W.secret end;N.Character:Mark("identity")
     local rows=N.Providers.ForNPC(54); assert(#rows==1 and rows[1].availability.state=="unknown")
 end)
 test("unfulfilled authored chain links name exact quests without becoming hard server gates",function()
@@ -81,7 +82,7 @@ end)
 test("breadcrumb and unavailable completion data cannot become definitive hard failures",function()
     local N,source=setup(); source.prerequisites={40002}; source.prerequisitesVerified=true; N.CatalogData.quests[2].isBreadcrumb=true
     assert(#N.Providers.ForNPC(54)==1)
-    N.CatalogData.quests[2].isBreadcrumb=nil; C_QuestLog.IsQuestFlaggedCompleted=function() return W.secret end
+    N.CatalogData.quests[2].isBreadcrumb=nil; C_QuestLog.IsQuestFlaggedCompleted=function() return W.secret end;changed(N,40002)
     assert(#N.Providers.ForNPC(54)==1)
 end)
 test("verified exclusive prior paths satisfy a link without false availability",function()
@@ -134,13 +135,13 @@ end)
 test("native completed and active state overrides contradictory Questie markers",function()
     local N=setup(); local icon,tip=marker(N,"available"); W.done[40001]=true
     N.Questie:Shown(icon,tip); assert(N.Sources.current==nil)
-    W.active[40001]=true; tip._Rebuild=function() end; N.Questie:Shown(icon,tip)
+    W.active[40001]=true; changed(N,40001); tip._Rebuild=function() end; N.Questie:Shown(icon,tip)
     assert(N.Sources.current.rows[1].availability.state=="active")
 end)
 test("complete marker without a local active quest cannot invent local completion",function()
     local N=setup(); local icon,tip=marker(N,"complete"); N.Questie:Shown(icon,tip)
     assert(N.Sources.current.rows[1].availability.state=="unknown")
-    W.active[40001]=true; W.ready[40001]=true; tip._Rebuild=function() end; N.Questie:Shown(icon,tip)
+    W.active[40001]=true; W.ready[40001]=true; changed(N,40001); tip._Rebuild=function() end; N.Questie:Shown(icon,tip)
     assert(N.Sources.current.rows[1].availability.state=="ready")
 end)
 test("marker type mutation and pooled data invalidate a frozen availability source",function()
@@ -169,11 +170,12 @@ test("hidden and disabled optional NPC tooltip cannot create fresh evidence",fun
     Questie={db={profile={enableTooltips=false,showQuestsInNpcTooltip=true}}}; N.Questie:UnitShown(tip); assert(N.Questie.npc==nil)
     Questie.db.profile.enableTooltips=true; tip.shown=false; N.Questie:UnitShown(tip); assert(N.Questie.npc==nil)
 end)
-test("current Questie available evidence wins over an older recorded restriction",function()
+test("optional Questie availability cannot bypass exact faction and class restrictions",function()
     local N,source=setup(); source.faction="Horde"; source.minimum=60; source.classTokens={"PALADIN"}
     local icon,tip=marker(N,"available"); N.Questie:Shown(icon,tip)
-    assert(N.Sources.current.rows[1].availability.state=="available")
-    W.disabled[40001]=true; assert(not N.Providers.Resolve(N.Sources.current.rows[1]))
+    assert(N.Sources.current==nil)
+    local row={id=40001,source=source,availabilityProof="questie-available"}
+    assert(not N.Providers.Resolve(row) and row.availability.reason=="Other faction")
 end)
 test("gossip offer proof expires after the native offer is removed",function()
     local N=setup(); W.guid="Creature-0-1-2-3-54-0001"; W.npcGuid=W.guid
@@ -182,7 +184,7 @@ test("gossip offer proof expires after the native offer is removed",function()
     N.Sources:Gossip(); local row=N.Sources.gossip.rows[1]
     assert(row.availability.state=="available")
     list={}; assert(N.Providers.Resolve(row) and row.availability.state=="unknown" and row.evidence==nil)
-    W.done[40001]=true; assert(not N.Providers.Resolve(row) and row.availability.state=="completed")
+    W.done[40001]=true; changed(N,40001); assert(not N.Providers.Resolve(row) and row.availability.state=="completed")
 end)
 test("removed map offers cannot remain Available after a quest-log refresh",function()
     local N=setup(); local offers={{questID=40001,inProgress=false}}
@@ -191,7 +193,7 @@ test("removed map offers cannot remain Available after a quest-log refresh",func
     N.Sources:Pin(frame,40001); local row=N.Sources.current.rows[1]
     assert(row.availability.state=="available")
     offers={}; assert(N.Providers.Resolve(row) and row.availability.state=="unknown")
-    W.done[40001]=true; assert(not N.Providers.Resolve(row))
+    W.done[40001]=true; changed(N,40001); assert(not N.Providers.Resolve(row))
 end)
 test("old Questie render proof expires when a new tooltip render replaces its token",function()
     local N=setup(); local icon,tip=marker(N,"available"); N.Questie:Shown(icon,tip)
@@ -266,7 +268,7 @@ test("sticky NPC inspection retains a proved snapshot when the native tooltip hi
     Questie={db={profile={enableTooltips=true,showQuestsInNpcTooltip=true}}};N.Questie:UnitShown(tip)
     local row=N.Providers.ForNPC(54)[1];tip.shown=false
     assert(N.Providers.Resolve(row) and row.availability.state=="available")
-    W.done[40001]=true;assert(not N.Providers.Resolve(row))
+    W.done[40001]=true;changed(N,40001);assert(not N.Providers.Resolve(row))
 end)
 test("restricted native tooltip text and a stale unrelated line cannot prove an NPC offer",function()
     local N=setup();W.guid="Creature-0-1-2-3-54-0001";local tip=npcTip(N)

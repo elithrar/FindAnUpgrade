@@ -43,7 +43,7 @@ def sha(raw):
 
 
 def fetch(url):
-    with urlopen(Request(url, headers={"User-Agent": "QuestBrief-source-sync/1 (pinned factual metadata)"}), timeout=45) as response:
+    with urlopen(Request(url, headers={"User-Agent": "FindAnUpgrade-source-sync/1 (pinned factual metadata)"}), timeout=45) as response:
         return response.read()
 
 

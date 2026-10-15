@@ -1,12 +1,34 @@
 # Validation
 
-QuestBrief **0.1.7** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.8** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Current recovery and UI review, 0.1.7
+## Current sidebar, constraints and rename review, 0.1.8
+
+`plan.md` records the accepted sidebar, identity, scope and ranking behavior.
+`SIDEBAR-NATIVE-CONTRACTS.md`, `SIDEBAR-VISUAL-REVIEW.md`,
+`SIDEBAR-STATE-REVIEW.md`, `RENAME-MIGRATION-REVIEW.md`,
+`FILTERING-DESIGN.md` and `UPGRADE-RANKING-DESIGN.md` distinguish implemented
+behavior, independently executed probes and pending native checks. The final
+verifier, exact-commit build, CI and installation receipts establish delivered
+bytes and final test counts. In-progress documents do not establish completion.
+
+The final local verifier passed all **17 commands**, **505 Lua 5.1 scenarios** and
+**168 Python tests**. Independent acceptance covers **77 state probes**,
+**34 visual probes**, **1,070 ranking oracle/tooltip cases**, migration/installer
+failure cases and an extracted-source rebuild of both identical archives.
+Review records bind their exact runtime hashes and preserve specific live limits.
+
+Character facts have one snapshot owner; preferences are separate. Equipment
+identity and readiness, item data, quest membership, location and talent context
+are invalidated only by their relevant event families. Hidden work is deferred.
+Settings migration validates Lua data without executing it, preserves old files,
+refuses to overwrite existing new-name files and retains future schema data.
+
+## Historical recovery and UI review, 0.1.7
 
 Current evidence is in `CLASSIFICATION-RECONCILIATION.md`,
 `STARTER-COORDINATE-RECOVERY.md`, `REWARD-AMOUNT-RECOVERY.md`,

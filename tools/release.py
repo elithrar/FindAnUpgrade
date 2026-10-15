@@ -1,7 +1,7 @@
 """Validate an explicit release tag and the exact build before publication.
 
 This module has no publishing credentials or network writes. Release conventions
-follow XPIsland; its BSD notice is retained in QuestBrief/XPISLAND-LICENSE.txt.
+follow XPIsland; its BSD notice is retained in FindAnUpgrade/XPISLAND-LICENSE.txt.
 """
 import base64
 import hashlib
@@ -25,8 +25,8 @@ def metadata(tag, toc):
     if re.findall(r"^## Interface[^:]*: (.+)$", toc, re.M) != ["16001"]:
         raise ValueError("Only Forever 1.60.1/interface 16001 may be released")
     return {"tag": tag, "version": tag[1:], "interface": 16001,
-            "archive": f"QuestBrief-{tag[1:]}.zip",
-            "source_archive": f"QuestBrief-{tag[1:]}-source.zip",
+            "archive": f"FindAnUpgrade-{tag[1:]}.zip",
+            "source_archive": f"FindAnUpgrade-{tag[1:]}-source.zip",
             "game_version": "1.60.1", "game_version_type": 88568,
             "release_type": "release"}
 
@@ -103,7 +103,7 @@ def verify_artifacts(root=ROOT):
     from package import SHIPPED, source_files, validate
     directory = root / "dist"
     data = json.loads((directory / "release.json").read_text(encoding="utf-8"))
-    expected = metadata(data["tag"], (root / "QuestBrief/QuestBrief.toc").read_text(encoding="utf-8"))
+    expected = metadata(data["tag"], (root / "FindAnUpgrade/FindAnUpgrade.toc").read_text(encoding="utf-8"))
     if any(data.get(key) != value for key, value in expected.items()):
         raise ValueError("Unexpected release metadata")
     if not all(re.fullmatch(r"[0-9a-f]{40}", data.get(k, "")) for k in ["commit", "tag_object"]):
@@ -116,15 +116,15 @@ def verify_artifacts(root=ROOT):
     lines = (directory / "SHA256SUMS").read_text(encoding="utf-8").splitlines()
     checksums = {}
     for line in lines:
-        match = re.fullmatch(r"([0-9a-f]{64})  (QuestBrief-" + VERSION + r"(?:-source)?\.zip)", line)
+        match = re.fullmatch(r"([0-9a-f]{64})  (FindAnUpgrade-" + VERSION + r"(?:-source)?\.zip)", line)
         if not match or match[2] in checksums:
             raise ValueError("Invalid or duplicate checksum entry")
         checksums[match[2]] = match[1]
     if set(checksums) != set(names) or any(sha(directory / name) != checksums[name] for name in names):
         raise ValueError("Archive checksums do not match the exact build")
-    addon_files = [root / "QuestBrief" / name for name in SHIPPED]
+    addon_files = [root / "FindAnUpgrade" / name for name in SHIPPED]
     targets = [(data["archive"], addon_files, ""),
-               (data["source_archive"], source_files(root), f"QuestBrief-{data['version']}-source/")]
+               (data["source_archive"], source_files(root), f"FindAnUpgrade-{data['version']}-source/")]
     for name, files, prefix in targets:
         expected_files = {prefix + p.relative_to(root).as_posix(): p for p in files}
         with zipfile.ZipFile(directory / name) as archive:
@@ -135,7 +135,7 @@ def verify_artifacts(root=ROOT):
     receipt = json.loads((directory / "package-receipt.json").read_text(encoding="utf-8"))
     payload = [{"path": p.relative_to(root).as_posix(), "bytes": p.stat().st_size,
                 "sha256": sha(p)} for p in sorted(addon_files)]
-    if receipt != {"addon": "QuestBrief", "version": data["version"], "interface": 16001,
+    if receipt != {"addon": "FindAnUpgrade", "version": data["version"], "interface": 16001,
                    "candidateOnly": True, "published": False, "installed": False,
                    "archives": checksums, "payload": payload}:
         raise ValueError("Package receipt disagrees with the exact build")
@@ -149,7 +149,7 @@ def verify_artifacts(root=ROOT):
 
 
 def prepare(tag, root=ROOT):
-    data = metadata(tag, (root / "QuestBrief/QuestBrief.toc").read_text(encoding="utf-8"))
+    data = metadata(tag, (root / "FindAnUpgrade/FindAnUpgrade.toc").read_text(encoding="utf-8"))
     data["commit"] = check_tag(tag, root)
     check_source_tree(data["commit"], root)
     data["tag_object"] = git("rev-parse", "refs/tags/" + tag, root=root)

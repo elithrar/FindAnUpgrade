@@ -7,29 +7,29 @@ sys.path.insert(0, str(ROOT / ".work/pydeps"))
 from lupa.lua51 import LuaRuntime
 
 SHIPPED = {
-    "QuestBrief.toc", "Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
+    "FindAnUpgrade.toc", "Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
     "Options.lua", "Core.lua", "README.md", "NOTICES.md", "XPISLAND-LICENSE.txt",
     "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "LICENSE",
-    "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Data/Catalog.lua", "Data/ATT-LICENSE.txt",
+    "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Character.lua", "Ranking.lua", "Data/Catalog.lua", "Data/ATT-LICENSE.txt",
 }
-RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
-SOURCE_DIRS = ["QuestBrief", "data", "docs", "tests", "tools", ".github"]
-SOURCE_ROOT = ["AGENTS.md", "README.md", "LICENSE", ".gitignore", ".gitattributes"]
+RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "Character.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "Catalog.lua", "Ranking.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
+SOURCE_DIRS = ["FindAnUpgrade", "data", "docs", "tests", "tools", ".github"]
+SOURCE_ROOT = ["AGENTS.md", "README.md", "plan.md", "LICENSE", ".gitignore", ".gitattributes"]
 ATT_LICENSE_SHA256 = "955281b9174e0f66b08c8e83d31e0f38b2fcaa247ca3af92d1723d81a13cddfb"
 
 def digest(data): return hashlib.sha256(data).hexdigest()
 
 def validate(root=ROOT):
-    addon = root / "QuestBrief"
+    addon = root / "FindAnUpgrade"
     actual = {p.relative_to(addon).as_posix() for p in addon.rglob("*") if p.is_file()}
     if actual != SHIPPED: raise ValueError(f"Unexpected addon manifest: extra={actual - SHIPPED}, missing={SHIPPED - actual}")
-    toc = (addon / "QuestBrief.toc").read_text(encoding="utf-8")
+    toc = (addon / "FindAnUpgrade.toc").read_text(encoding="utf-8")
     metadata={}
     for line in toc.splitlines():
         match=re.fullmatch(r"##\s*([^:]+):\s*(.*)",line)
         if match: metadata.setdefault(match[1].strip().lower(),[]).append(match[2].strip())
     if metadata.get("interface")!=["16001"] or any(key.startswith("interface-") for key in metadata): raise ValueError("Wrong or duplicate supported interface")
-    if metadata.get("savedvariables")!=["QuestBriefDB"] or "savedvariablespercharacter" in metadata: raise ValueError("SavedVariables ownership changed")
+    if metadata.get("savedvariables")!=["FindAnUpgradeDB, QuestBriefDB"] or "savedvariablespercharacter" in metadata: raise ValueError("SavedVariables ownership changed")
     entries = [line for line in toc.splitlines() if line and not line.startswith("#")]
     if entries != RUNTIME: raise ValueError("Incorrect TOC prerequisites/load order")
     version = re.search(r"^## Version: (\d+\.\d+\.\d+)$", toc, re.M)
@@ -47,7 +47,7 @@ def validate(root=ROOT):
         if not ok: raise ValueError(f"Lua 5.1 syntax: {error}")
     spec = importlib.util.spec_from_file_location("questbrief_generator", ROOT / "tools/generate_data.py")
     generator = importlib.util.module_from_spec(spec); spec.loader.exec_module(generator)
-    expected = generator.render(json.loads((root / "data/primary-statuses.json").read_bytes())).encode()
+    expected = generator.render(json.loads((root / "data/primary-statuses.json").read_bytes()),generator.quest_taxonomy.load(root)).encode()
     if (addon / "Data/Quests.lua").read_bytes() != expected: raise ValueError("Generated data is stale")
     spec = importlib.util.spec_from_file_location("questbrief_catalog_generator", root / "tools/generate_catalog.py")
     catalog = importlib.util.module_from_spec(spec); spec.loader.exec_module(catalog)
@@ -88,15 +88,15 @@ def source_files(root=ROOT):
 def build(root=ROOT, destination=None):
     version = validate(root)
     destination = destination or root / "dist"; destination.mkdir(parents=True, exist_ok=True)
-    addon_zip = destination / f"QuestBrief-{version}.zip"
-    source_zip = destination / f"QuestBrief-{version}-source.zip"
-    addon_files = [root / "QuestBrief" / name for name in SHIPPED]
+    addon_zip = destination / f"FindAnUpgrade-{version}.zip"
+    source_zip = destination / f"FindAnUpgrade-{version}-source.zip"
+    addon_files = [root / "FindAnUpgrade" / name for name in SHIPPED]
     archive(addon_zip, addon_files, root)
-    archive(source_zip, source_files(root), root, f"QuestBrief-{version}-source/")
+    archive(source_zip, source_files(root), root, f"FindAnUpgrade-{version}-source/")
     checksums = {file.name: digest(file.read_bytes()) for file in [addon_zip, source_zip]}
     (destination / "SHA256SUMS").write_bytes("".join(f"{sha}  {name}\n" for name, sha in checksums.items()).encode())
     receipt = {
-        "addon": "QuestBrief", "version": version, "interface": 16001,
+        "addon": "FindAnUpgrade", "version": version, "interface": 16001,
         "candidateOnly": True, "published": False, "installed": False,
         "archives": checksums,
         "payload": [{"path": file.relative_to(root).as_posix(), "bytes": file.stat().st_size, "sha256": digest(file.read_bytes())} for file in sorted(addon_files)],

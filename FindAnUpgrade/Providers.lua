@@ -1,14 +1,11 @@
 local _, N = ...
 local M, A = N.Model, N.Adapter
 local P = {}; N.Providers = P
-local function values(fn,...)
-    if type(fn)~="function" then return end
-    local function pack(...) return {n=select("#",...),...} end
-    local result=pack(pcall(fn,...)); if result[1] then return unpack(result,2,result.n) end
-end
 function P.Context()
-    local _,token,class=values(UnitClass,"player"); local _,_,race=values(UnitRace,"player")
-    return {level=A.Call(UnitLevel,"player"),classID=M.QuestId(class),classToken=M.Text(token),raceID=M.QuestId(race),faction=M.Text(A.Call(UnitFactionGroup,"player"))}
+    return N.Character:Get()
+end
+local function facts(id)
+    return N.Character:Quest(id)
 end
 function P.Index()
     local data=N.CatalogData
@@ -36,56 +33,102 @@ local function contains(list,value)
     for _,entry in ipairs(list) do if not M.Readable(entry) then return nil end; if entry==value then return true end end
     return false
 end
+local function starterIdentity(location)
+    if not M.Readable(location) or type(location)~="table" then return end
+    local id=M.QuestId(location.npcID); if id then return "npcID",id end
+    id=M.QuestId(location.objectID); if id then return "objectID",id end
+    id=M.QuestId(location.itemID); if id then return "itemID",id end
+end
+function P.LocationAllowed(location,source,context)
+    local kind,id=starterIdentity(location); if not kind then return false end
+    local faction=M.Text(location.faction)
+    if faction then return faction==context.faction end
+    -- An unqualified duplicate is missing information, not a neutral starter.
+    -- Explicit qualifiers for this exact typed entity must still be respected.
+    local qualified=false
+    for _,other in ipairs(source and source.locations or {}) do
+        local otherFaction=M.Text(other.faction)
+        if M.QuestId(other[kind])==id and otherFaction then
+            qualified=true; if otherFaction==context.faction then return true end
+        end
+    end
+    return not qualified
+end
+function P.StartPath(row,context)
+    local source=row.source or P.Source(row.id)
+    local npc=M.QuestId(row.npcID); local known=false
+    for _,location in ipairs(source and source.locations or {}) do
+        local kind,id=starterIdentity(location)
+        if kind and (not npc or kind=="npcID" and id==npc) then
+            known=true
+            if P.LocationAllowed(location,source,context) then return true,true end
+        end
+    end
+    return false,known
+end
+local function offeredState(proof,active)
+    if proof=="native-map-available" then return state("available","Available","native-map") end
+    if proof=="questie-available" then return state("available","Available","questie-rendered") end
+    if proof=="questie-ready" and active~=false then return state("ready","Ready to turn in","questie-rendered") end
+end
 function P.Availability(row,context)
     local id=M.QuestId(row.id); if not id then return state("unknown") end
-    local log=C_QuestLog
-    local active=A.Call(log and log.IsOnQuest,id)
+    local current=facts(id)
+    local active=current.active
     if active==true then
         if N.QuestState then A.Call(N.QuestState.Track,N.QuestState,id) end
-        return A.Call(log and log.IsComplete,id)==true and state("ready","Ready to turn in","native-log") or state("active","In quest log","native-log")
+        return current.complete==true and state("ready","Ready to turn in","native-log") or state("active","In quest log","native-log")
     end
     local proof=row.availabilityProof
     if row.availabilityCheck then proof=A.Call(row.availabilityCheck) end
     if not proof and not row.availabilityCheck then
-        if context and context.nativeOffers then proof=context.nativeOffers[id]
-        elseif N.QuestState then proof=A.Call(N.QuestState.Proof,N.QuestState,id,row.npcID) end
+        if row.npcID then proof=N.Character:Proof(id,row.npcID)
+        elseif context and context.nativeOffers then proof=context.nativeOffers[id]
+        else proof=N.Character:Proof(id,row.npcID) end
     end
     if proof=="native-active" or proof=="native-ready" then
         return proof=="native-ready" and state("ready","Ready to turn in","native-gossip") or state("active","In quest log","native-gossip")
     end
-    if A.Call(log and log.IsQuestDisabledForSession,id)==true then return state("blocked",nil,"native-session","Quest disabled for this session") end
+    if current.disabled==true then return state("blocked",nil,"native-session","Quest disabled for this session") end
     if proof=="native-available" then return state("available","Available","native-gossip") end
-    if proof=="native-map-available" then return state("available","Available","native-map") end
-    local complete=A.Call(log and log.IsQuestFlaggedCompleted,id)
-    local repeatable=A.Call(log and log.IsRepeatableQuest,id)
+    local complete,repeatable=current.completed,current.repeatable
     if complete==true and repeatable~=true then return state("completed","Completed","native-history") end
-    -- Current optional render evidence wins over an older source snapshot, but
-    -- cannot override the native player's active/completed/disabled state.
-    if proof=="questie-available" then return state("available","Available","questie-rendered") end
-    if proof=="questie-ready" and active~=false then return state("ready","Ready to turn in","questie-rendered") end
+    -- A fresh native log or gossip offer describes this player's actual quest.
+    -- A map line or optional marker is less specific and must pass constraints.
     context=context or P.Context()
     local source=row.source or P.Source(id) or {}
     if source.eligibilityConflict then return state("blocked",nil,"recorded-conflict","Recorded eligibility is contradictory") end
     if source.faction and context.faction and source.faction~=context.faction then return state("blocked",nil,"recorded-constraint","Other faction") end
+    local starter,knownStarter=P.StartPath({id=id,source=source,npcID=row.npcID},context)
+    if knownStarter and not starter then return state("blocked",nil,"recorded-constraint","Other faction starter") end
     for _,pair in ipairs({{source.classTokens,context.classToken,"Other class"},{source.classes,context.classID,"Other class"},{source.races,context.raceID,"Other race"}}) do
         if pair[2] and contains(pair[1],pair[2])==false then return state("blocked",nil,"recorded-constraint",pair[3]) end
     end
+    local minimum
     if M.Number(context.level) then
         if M.Number(source.maximum) and source.maximum>0 and context.level>source.maximum then return state("blocked",nil,"recorded-constraint","Above recorded maximum level") end
         if M.Number(source.minimum) and context.level<source.minimum then
-            return state("blocked","Recorded minimum level "..source.minimum,"recorded-level","Below recorded minimum level")
+            minimum=state("blocked","Recorded minimum level "..source.minimum,"recorded-level","Below recorded minimum level")
         end
     end
-    -- A freshly rendered optional provider marker is current provider evidence;
-    -- it never converts a static starter association into server availability.
+    local chain=P.ChainState(source)
+    if chain and chain.state=="blocked" then return chain end
+    return minimum or offeredState(proof,active) or chain or state("unknown",complete==true and repeatable==true and "Repeatable" or nil,complete==true and "native-history" or nil)
+end
+function P.ChainState(source)
     local group,single=source.prerequisites,source.prerequisiteAlternatives
     local list=single or group
+    if list~=nil and (not M.Readable(list) or type(list)~="table" or #list>128) then
+        return state("unknown","Chain requirements unavailable","recorded-chain")
+    end
     if M.Readable(list) and type(list)=="table" and #list>0 and #list<=128 then
-        local done,unknown,missing=0,0,{}
+        local done,unknown,missing,seen=0,0,{},{}
         for _,previousID in ipairs(list) do
             previousID=M.QuestId(previousID)
+            if not previousID or seen[previousID] then return state("unknown","Chain requirements unavailable","recorded-chain") end
+            seen[previousID]=true
             local previous=previousID and P.Source(previousID)
-            local completed=previousID and A.Call(log and log.IsQuestFlaggedCompleted,previousID)
+            local completed=previousID and facts(previousID).completed
             -- A breadcrumb or an unverified alternate link cannot be a hard gate.
             if completed==true then done=done+1
             elseif not previousID or completed==nil then unknown=unknown+1
@@ -93,26 +136,29 @@ function P.Availability(row,context)
                 local alternatives=previous and previous.exclusive
                 local alternate=false
                 if previous and previous.exclusiveVerified==true and M.Readable(alternatives) and type(alternatives)=="table" and #alternatives<=128 then
-                    for _,other in ipairs(alternatives) do if M.QuestId(other) and A.Call(log and log.IsQuestFlaggedCompleted,other)==true then alternate=true end end
+                    for _,other in ipairs(alternatives) do if M.QuestId(other) and facts(other).completed==true then alternate=true end end
                 end
                 if alternate then done=done+1
                 elseif previous and previous.isBreadcrumb==true then unknown=unknown+1
-                else missing[#missing+1]={id=previousID,title=M.Text(A.Call(log and log.GetTitleForQuestID,previousID)) or previous and previous.title} end
+                else missing[#missing+1]={id=previousID,title=previous and previous.title} end
             end
         end
         local required=single and 1 or source.prerequisiteCount or #list
-        if M.Number(required) and required>=1 and required<=#list and done<required and #missing>0 then
+        if not M.Number(required) or required~=math.floor(required) or required<1 or required>#list then
+            return state("unknown","Chain requirements unavailable","recorded-chain")
+        end
+        if done<required then
             local names={}
             for i=1,math.min(2,#missing) do names[#names+1]=missing[i].title or ("Quest "..missing[i].id) end
             if #missing>2 then names[#names+1]="+"..(#missing-2) end
             if source.prerequisitesVerified==true and done+unknown<required then
                 return state("blocked","Requires "..table.concat(names,", "),"verified-prerequisite","Prerequisite incomplete",missing)
             end
-            return state("unknown","Quest chain: "..table.concat(names,", "),"recorded-chain","Recorded links may include breadcrumbs or alternate paths",missing)
+            return state("unknown",#names>0 and "Quest chain: "..table.concat(names,", ") or "Chain requirements unavailable","recorded-chain","Recorded links may include breadcrumbs or alternate paths",missing)
         end
     end
-    return state("unknown",complete==true and repeatable==true and "Repeatable" or nil,complete==true and "native-history" or nil)
 end
+
 function P.RequiresNativeProof(source)
     return source and (source.confirmation and source.confirmation~="published" or source.questKind=="hidden-trigger") or false
 end
@@ -149,7 +195,7 @@ function P.ForNPC(npcID)
         local source=P.records[id]
         local allowed=false
         for _,location in ipairs(source.locations or {}) do
-            if location.npcID==npcID and (not location.faction or location.faction==faction) then allowed=true;break end
+            if location.npcID==npcID and P.LocationAllowed(location,source,{faction=faction}) then allowed=true;break end
         end
         if allowed then out[#out+1]={id=id,title=source.title,source=source,npcID=npcID,provenance="Bundled Forever exact NPC starter association"} end
     end

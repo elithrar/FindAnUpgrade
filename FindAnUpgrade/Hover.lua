@@ -13,6 +13,7 @@ function H:Signature()
     local function add(value) parts[#parts+1]=M.Readable(value) and tostring(value) or "restricted" end
     for _,row in ipairs(self.source and self.source.rows or {}) do
         add(row.id); add(M.Text(A.Call(C_QuestLog and C_QuestLog.GetTitleForQuestID,row.id)) or row.title)
+        local availability=row.availability or {};add(availability.state);add(availability.label);add(availability.authority)
         local reward=N.Core.profile.rewards and N.Rewards.Read(row.id)
         if reward then
             add(reward.state)
@@ -31,6 +32,13 @@ end
 function H:ItemData(id)
     id=M.QuestId(id)
     if self.open and id and self.itemIDs and self.itemIDs[id] then self:Refresh() end
+end
+function H:CharacterChanged(change)
+    if not self.open or not change or not (change.identity or change.location) then return end
+    local ids={};for _,row in ipairs(self.source and self.source.rows or {}) do ids[row.id]=true end
+    -- Reuse the exact-NPC/dependency reconciliation path. No additional log
+    -- scanner, metadata queue or permanently running refresh loop is needed.
+    self:QuestChanged({ids=ids,reason="character"})
 end
 function H:QuestChanged(change)
     if not self.open or not change or not change.ids then return end
@@ -69,6 +77,7 @@ function H:Dismiss(reason)
     local source = self.source or N.Sources.current
     self.blocked = source and source.key
     self.open, self.source, self.requested, self.outsideAt = false, nil, nil, nil
+    if N.Character then N.Character:Sleep() end
     self.pending, self.pendingAt, self.timedOut = nil, nil, nil
     self.signature,self.itemIDs=nil,nil
     self.mode=nil
@@ -89,7 +98,8 @@ function H:Consider(source)
     if not c.ready or not c.supported or not c.profile.enabled or self.open or N.Search and N.Search:Visible() or not source or not c.profile[source.surface] then return end
     if self.blocked and self.blocked ~= source.key then self.blocked = nil end
     if self.blocked == source.key or not A.Modifier(c.profile.modifier) or not source.valid() or not source.over() then return end
-    if N.QuestState then N.QuestState:Prime() end
+    if N.Character then N.Character:Ensure(true)
+    elseif N.QuestState then N.QuestState:Prime() end
     self.generation = self.generation+1
     self.open, self.source, self.outsideAt, self.requested = true, source, nil, {}
     c:StartHoverUpdate()

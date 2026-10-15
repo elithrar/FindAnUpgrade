@@ -132,6 +132,7 @@ test("faction-qualified NPC starts and locations follow the current player facti
     source.locations={{npcID=11,faction="Alliance",name="Alliance giver"},{npcID=22,faction="Horde",name="Horde giver"}}
     for _,faction in ipairs({"Alliance","Horde","Unknown"}) do
         UnitFactionGroup=function()return faction end
+        W.Event("PLAYER_ENTERING_WORLD")
         local locations=N.Catalog:Locations(682)
         assert(#locations==(faction=="Unknown" and 0 or 1))
         assert(#N.Providers.ForNPC(11)==(faction=="Alliance" and 1 or 0))

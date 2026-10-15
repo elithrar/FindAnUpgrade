@@ -26,7 +26,7 @@ if native.is_file():
     report["nativeSourceBlobSha1"] = blob
 else:
     report["limitation"] = "Pinned native source fixture absent; portable mocks only"
-for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "options_test.lua", "eligibility_test.lua", "provider_recovery_test.lua", "reward_browser_model_test.lua", "reputation_recovery_test.lua", "native_tooltip_test.lua", "stack_layout_test.lua", "reference_ui_test.lua", "reference_widgets_test.lua", "native_contract_test.lua", "search_test.lua", "search_runtime_test.lua", "search_lifecycle_test.lua", "quest_state_test.lua", "complete_catalog_test.lua"]:
+for filename in ["model_test.lua", "runtime_test.lua", "independent_review_test.lua", "inspection_test.lua", "questie_test.lua", "font_test.lua", "options_test.lua", "eligibility_test.lua", "provider_recovery_test.lua", "reward_browser_model_test.lua", "reputation_recovery_test.lua", "native_tooltip_test.lua", "stack_layout_test.lua", "reference_ui_test.lua", "reference_widgets_test.lua", "native_contract_test.lua", "search_test.lua", "search_runtime_test.lua", "search_lifecycle_test.lua", "quest_state_test.lua", "character_constraints_test.lua", "sidebar_design_test.lua", "sidebar_eligibility_test.lua", "filter_scope_test.lua", "reward_usability_test.lua", "ranking_test.lua", "complete_catalog_test.lua"]:
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().ROOT = str(ROOT).replace("\\", "/")
     lua.execute((ROOT / "tests" / filename).read_text(encoding="utf-8"))

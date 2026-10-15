@@ -58,6 +58,7 @@ end)
 test("refresh filters newly completed rows and closes an empty stack",function()
     local N=show({{id=9}});C_QuestLog.IsOnQuest=function()return false end
     C_QuestLog.IsQuestFlaggedCompleted=function()return true end;C_QuestLog.IsRepeatableQuest=function()return false end
+    W.Event("QUEST_REMOVED",9)
     N.Stack:Refresh();assert(not N.Hover.open and not N.Stack.frame:IsShown())
 end)
 test("scaled placement is clamped and remains frozen after cursor changes",function()

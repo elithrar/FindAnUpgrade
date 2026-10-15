@@ -16,10 +16,13 @@ function Methods:Hide() layout(self); if self.shown then self.shown = false; sel
 function Methods:SetShown(v) if v then self:Show() else self:Hide() end end
 function Methods:RegisterEvent(e) self.events[e] = true end
 function Methods:UnregisterAllEvents() self.events={} end
-function Methods:SetPoint(...) layout(self); self.point = {...} end
+function Methods:SetPoint(...)
+    layout(self); self.point = {...}; self.points=self.points or {}; self.points[self.point[1]]=self.point
+end
 function Methods:SetSize(w,h) layout(self); self.width = w; self.height = h end
 function Methods:SetHeight(h) layout(self); self.height = h end
-function Methods:ClearAllPoints() layout(self); self.point=nil end
+function Methods:ClearAllPoints() layout(self); self.point=nil; self.points={} end
+function Methods:GetNumPoints()local n=0;for _ in pairs(self.points or {})do n=n+1 end;return n end
 function Methods:SetAllPoints() layout(self) end
 function Methods:GetEffectiveScale() return (self.scale or 1)*(self.parent and self.parent:GetEffectiveScale() or 1) end
 function Methods:GetRect() if self.rectSecret then return W.secret,0,10,10 end; return self.x or 0,self.y or 0,self:GetWidth(),self:GetHeight() end
@@ -87,6 +90,8 @@ function Methods:GenerateMenu()
     self.menuGenerations=(self.menuGenerations or 0)+1
     local root={entries={}}
     function root:SetScrollMode(height) self.scrollHeight=height end
+    function root:AddMenuReleasedCallback(fn)self.release=fn end
+    function root:CreateTitle(label)self.titles=self.titles or {};self.titles[#self.titles+1]=label;return {}end
     function root:CreateRadio(label,checked,choose,value)
         local row={label=label,checked=function() return checked(value) end,callback=function() choose(value) end,value=value}
         function row:AddInitializer(fn)
@@ -97,10 +102,11 @@ function Methods:GenerateMenu()
             end})
             fn({fontString=font}); self.fontObject=font.fontObject
         end
+        function row:SetEnabled(value)self.enabled=value end
         self.entries[#self.entries+1]=row; return row
     end
     self.menuGenerator(self,root); self.menu=root
-    for _,row in ipairs(root.entries) do if row.checked() then self.Text:SetText(row.label) end end
+    for _,row in ipairs(root.entries) do if self.Text and row.checked() then self.Text:SetText(row.label) end end
     return root
 end
 function Methods:CloseMenu() self.menuOpen=false; self.menuClosures=(self.menuClosures or 0)+1 end
@@ -126,7 +132,41 @@ function Methods:CreateFontString(name,layer,template)
 end
 function Methods:SetAtlas(atlas) self.atlas = atlas end
 function Methods:SetTexture(tex) self.texture = tex end
-for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetResizeBounds","SetAutoFocus","SetNumeric","SetMaxLetters","SetTextInsets","HighlightText","SetTexCoord","SetHitRectInsets","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
+function Methods:SetNormalTexture(value)self.normalTexture=value end
+function Methods:GetNormalTexture()return self.normalTexture end
+function Methods:SetPushedTexture(value)self.pushedTexture=value end
+function Methods:GetPushedTexture()return self.pushedTexture end
+function Methods:SetHighlightTexture(value)self.highlightTexture=value end
+function Methods:GetHighlightTexture()return self.highlightTexture end
+function Methods:SetBlendMode(value)self.blendMode=value end
+function Methods:SetResizeBounds(...)self.resizeBounds={...}end
+function Methods:SetHitRectInsets(...)self.hitInsets={...}end
+function Methods:SetTextInsets(...)self.textInsets={...}end
+for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetAutoFocus","SetNumeric","SetMaxLetters","HighlightText","SetTexCoord","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
+-- Resolve declared anchors for layout assertions. Existing pointer fixtures
+-- keep explicit rects; native pixel rounding and font metrics remain unmodeled.
+local fractions={TOPLEFT={0,1},TOP={.5,1},TOPRIGHT={1,1},LEFT={0,.5},CENTER={.5,.5},RIGHT={1,.5},BOTTOMLEFT={0,0},BOTTOM={.5,0},BOTTOMRIGHT={1,0}}
+function W.Bounds(object,seen)
+    seen=seen or {};assert(not seen[object],"cyclic anchor fixture");seen[object]=true
+    local width=object.width or (object.isFontString and object:GetStringWidth()) or 0
+    local height=object.height or (object.isFontString and object:GetStringHeight()) or 0
+    local x,y=object.x,object.y;local anchors={}
+    for name,p in pairs(object.points or {})do
+        local relative,relativePoint,dx,dy
+        if type(p[2])=="table" then relative=p[2];relativePoint=p[3];dx=p[4] or 0;dy=p[5] or 0
+        else relative=object.parent;relativePoint=name;dx=p[2] or 0;dy=p[3] or 0 end
+        local rx,ry,rw,rh=0,0,0,0
+        if relative then rx,ry,rw,rh=W.Bounds(relative,seen)end
+        local f=assert(fractions[relativePoint or name]);anchors[#anchors+1]={fractions[name],rx+rw*f[1]+dx,ry+rh*f[2]+dy}
+    end
+    for _,a in ipairs(anchors)do for _,b in ipairs(anchors)do
+        if a[1][1]~=b[1][1]then width=(b[2]-a[2])/(b[1][1]-a[1][1])end
+        if a[1][2]~=b[1][2]then height=(b[3]-a[3])/(b[1][2]-a[1][2])end
+    end end
+    if x==nil and anchors[1]then x=anchors[1][2]-width*anchors[1][1][1]end
+    if y==nil and anchors[1]then y=anchors[1][3]-height*anchors[1][1][2]end
+    seen[object]=nil;return x or 0,y or 0,width,height
+end
 function W.Object(native)
     return setmetatable({native = native, shown = true, scripts = {}, hooks = {}, events = {}}, {__index = Methods})
 end
@@ -134,10 +174,14 @@ function W.Reset(config)
     config = config or {}; W.frames = {}; W.fontStrings={}; W.hooks = {}; W.writes = 0; W.nativeMutations = 0; W.messages = {}; W.quest = config.quest or 0
     W.interface = config.interface or 16001; W.combat = config.combat or false; W.contrast = false; W.secret = {}; W.missingFont = nil
     W.shift,W.ctrl,W.alt,W.time=false,false,false,0; W.mouseX,W.mouseY=700,700; W.guid=nil; W.npcGuid=nil
+    W.playerGuid=config.playerGuid or "Player-1-00000001"
     GetTime=function() return W.time end
     GetCursorPosition=function() return W.mouseX,W.mouseY end
     IsShiftKeyDown=function() return W.shift end; IsControlKeyDown=function() return W.ctrl end; IsAltKeyDown=function() return W.alt end
-    UnitGUID=function(unit) return unit=='npc' and W.npcGuid or W.guid end
+    UnitGUID=function(unit)
+        if unit=='player' then return W.playerGuid end
+        return unit=='npc' and W.npcGuid or W.guid
+    end
     EventRegistry={callbacks={}}
     function EventRegistry:RegisterCallback(event,fn,owner) self.callbacks[event]={fn=fn,owner=owner} end
     function EventRegistry:TriggerEvent(event,...) local e=self.callbacks[event]; if e then e.fn(e.owner,...) end end
@@ -172,12 +216,13 @@ function W.Reset(config)
     GetQuestID = function() return W.quest end
     UIParent = W.Object(); UIParent.width = 1920; UIParent.height = 1080
     Minimap=nil; C_Item=nil; ItemLocation=nil; GetInventorySlotInfo=nil; C_Map=nil; UiMapPoint=nil; C_SuperTrack=nil
+    C_PaperDollInfo=nil;C_SpecializationInfo=nil;GetInventoryItemID=nil;GetInventoryItemLink=nil;GetInstanceInfo=nil
     UnitLevel=function() return 20 end; UnitClass=function() return "Warrior","WARRIOR",1 end; UnitRace=function() return "Human","Human",1 end; UnitFactionGroup=function() return "Alliance" end
     CreateFont=function() return W.Object() end
     STANDARD_TEXT_FONT = "Fonts\\FRIZQT__.TTF"; GameFontNormal = W.Object(); GameFontNormal.font={STANDARD_TEXT_FONT,12,""}
     GameTooltipTextLeft2=nil; GameTooltipText=W.Object(); GameTooltipText.font={STANDARD_TEXT_FONT,12,""}
     GameTooltipHeaderText=W.Object(); GameTooltipHeaderText.font={STANDARD_TEXT_FONT,14,""}
-    NumberFontNormalSmall=W.Object(); NumberFontNormalSmall.font={"Fonts\\ARIALN.TTF",10,"OUTLINE"}
+    NumberFontNormalSmall=W.Object(); NumberFontNormalSmall.font={"Fonts\\ARIALN.TTF",12,"OUTLINE"}
     NORMAL_FONT_COLOR={r=1,g=.82,b=0,GetRGB=function(self)return self.r,self.g,self.b end}
     UISpecialFrames = {}; SlashCmdList = {}; LibStub = nil
     QuestTextContrast = {IsEnabled = function() return W.contrast end, GetDefaultBackgroundAtlas = function() return "QuestBG-Parchment" end}
@@ -190,7 +235,9 @@ function W.Reset(config)
             f.backdropColor={.09,.09,.19,.8}; f.border={.6,.6,.6,1}
         end
         if template == "UISliderTemplate" then f.thumb=W.Object();f.thumb.width=32;f.thumb.height=32 end
-        if kind == "CheckButton" or kind=="DropdownButton" then f.Text = f:CreateFontString(nil,"OVERLAY","GameFontNormal") end
+        if kind == "CheckButton" or kind=="DropdownButton" and template then f.Text = f:CreateFontString(nil,"OVERLAY","GameFontNormal") end
+        if template=="UICheckButtonTemplate"then f.Text:SetPoint("LEFT",f,"RIGHT",-2,0)end
+        if template=="InputBoxTemplate"then for _,key in ipairs({"Left","Right","Middle"})do f[key]=W.Object();f[key].parent=f;f[key]:SetHeight(20)end end
         table.insert(W.frames, f); if name then _G[name] = f end; return f
     end
     QuestFrame = W.Object(true); QuestFrame.shown = true
@@ -207,17 +254,18 @@ function W.Reset(config)
         local original = _G[name]
         _G[name] = function(...) local results = {original(...)}; fn(...); return unpack(results) end
     end
-    QuestBriefDB = config.saved
+    FindAnUpgradeDB = config.saved
+    QuestBriefDB = config.previous
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/QuestBrief/" .. file))("QuestBrief", N) end
+    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","Character.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
     W.N = N
     return N
 end
 function W.Event(event, ...)
     for _,frame in ipairs(W.frames) do if frame.events[event] then frame:Fire("OnEvent", event, ...) end end
 end
-function W.Init(config) local N = W.Reset(config); W.Event("ADDON_LOADED", "QuestBrief"); return N end
+function W.Init(config) local N = W.Reset(config); W.Event("ADDON_LOADED", "FindAnUpgrade"); return N end
 function W.Offer(id)
     W.quest = id; QuestFrameDetailPanel.shown = true; QuestFrameDetailPanel:Fire("OnShow")
 end

@@ -45,29 +45,29 @@ test("repeated early options failures reuse permanent content and text objects",
     N.Options.Build=function(self,owner,frame,parent)self:Label(parent,"Heading",20,-15,560,16);error("persistent early failure")end
     local frames,texts
     for i=1,30 do
-        assert(not pcall(SlashCmdList.QUESTBRIEF,"opts"));assert(not N.Options.shell:IsShown() and not N.Options.frame)
+        assert(not pcall(SlashCmdList.FINDANUPGRADE,"opts"));assert(not N.Options.shell:IsShown() and not N.Options.frame)
         frames,texts=frames or #W.frames,texts or #W.fontStrings;assert(#W.frames==frames and #W.fontStrings==texts)
     end
-    N.Options.Build=build;SlashCmdList.QUESTBRIEF("opts");assert(N.Options.frame:IsShown() and N.Options.content:IsShown())
-    local total=#W.frames;for i=1,30 do SlashCmdList.QUESTBRIEF("opts")end;assert(#W.frames==total)
+    N.Options.Build=build;SlashCmdList.FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and N.Options.content:IsShown())
+    local total=#W.frames;for i=1,30 do SlashCmdList.FINDANUPGRADE("opts")end;assert(#W.frames==total)
 end)
 test("repeated late options failures reuse controls and retain atomic retry",function()
     local N=W.Init();local original=CreateFrame
     CreateFrame=function(kind,name,parent,template)
         local f=original(kind,name,parent,template)
-        if name=="QuestBriefOptions"then local register=f.RegisterEvent;f.RegisterEvent=function(self,event)if event=="DISPLAY_SIZE_CHANGED" and not W.allowRecovery then error("persistent late failure")end;return register(self,event)end end
+        if name=="FindAnUpgradeOptions"then local register=f.RegisterEvent;f.RegisterEvent=function(self,event)if event=="DISPLAY_SIZE_CHANGED" and not W.allowRecovery then error("persistent late failure")end;return register(self,event)end end
         return f
     end
     local frames,texts
     for i=1,30 do
-        assert(not pcall(SlashCmdList.QUESTBRIEF,"opts"));frames,texts=frames or #W.frames,texts or #W.fontStrings
+        assert(not pcall(SlashCmdList.FINDANUPGRADE,"opts"));frames,texts=frames or #W.frames,texts or #W.fontStrings
         assert(#W.frames==frames and #W.fontStrings==texts and not next(N.Options.shell.events))
         assert(not next(N.UI.fontSizes) and #UISpecialFrames==0)
     end
-    W.allowRecovery=true;SlashCmdList.QUESTBRIEF("opts");assert(N.Options.frame:IsShown() and #UISpecialFrames==1)
+    W.allowRecovery=true;SlashCmdList.FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and #UISpecialFrames==1)
 end)
 test("finder copy and options reuse the same working dialog chrome",function()
-    local N=W.Init();SlashCmdList.QUESTBRIEF("opts");N.Search:Toggle();N.Search:Copy("123")
+    local N=W.Init();SlashCmdList.FINDANUPGRADE("opts");N.Search:Toggle();N.Search:Copy("123")
     for _,f in ipairs({N.Options.frame,N.Search.frame,N.Search.copyFrame})do
         assert(f.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and f.backdrop.edgeSize==16 and f.backdropColor[4]==.94 and f.border[4]==1)
     end
