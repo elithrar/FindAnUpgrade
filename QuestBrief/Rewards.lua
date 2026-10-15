@@ -1,6 +1,54 @@
 local _, N = ...
 local M, A = N.Model, N.Adapter
 local R = {}; N.Rewards = R
+function R.RecordedItem(meta)
+    local row={itemID=meta.itemID,name=meta.name,quantity=meta.quantity,group=meta.group,kind="catalog",state="pending",catalog=true}
+    local getter=C_Item and C_Item.GetItemInfo or GetItemInfo
+    if type(getter)=="function" and A.Call(C_Item and C_Item.IsItemDataCachedByID,meta.itemID)==true then
+        local ok,name,link,quality,level,minimum,itemType,subType,stack,slot,texture=pcall(getter,meta.itemID)
+        if ok and M.Text(name) and M.Text(link) and M.Number(quality) and (M.Text(texture) or M.Number(texture)) then
+            row.name,row.link,row.quality,row.texture,row.state=name,link,quality,texture,"ready"
+        end
+    end
+    if not row.texture then
+        local ok,id,itemType,subType,slot,texture=pcall(C_Item and C_Item.GetItemInfoInstant or GetItemInfoInstant,meta.itemID)
+        if ok then row.texture=M.Text(texture) or M.Number(texture) and texture or nil end
+    end
+    return row
+end
+function R.Recorded(id,out)
+    local source=N.Providers and N.Providers.Source(id)
+    if not source or not source.itemState then return out end
+    -- Live readiness owns its entire item set, including confirmed empty and
+    -- class-filtered/ambiguous choices. Published fallback has no native ordinal.
+    if out.state=="pending" and (source.itemState=="published" or source.itemState=="published-empty") then
+        out.items,out.choices={state="published",items={}},{state="published",items={}}
+        out.recordedGroups=true
+        for _,meta in ipairs(source.items or {}) do
+            local group=meta.group=="guaranteed" and out.items or meta.group=="choice" and out.choices
+            if group then group.items[#group.items+1]=R.RecordedItem(meta) end
+        end
+    end
+    local values=source.rewardValues or {}
+    for _,key in ipairs({"xp","money"}) do
+        if out[key].state~="ready" and M.Number(values[key]) and values[key]>=0 then out[key]={state="ready",value=values[key],published=true} end
+    end
+    out.reputation.items=out.reputation.items or {}
+    for _,entry in ipairs(values.reputation or {}) do
+        if M.Text(entry.name) and M.Number(entry.amount) then
+            local matched=false
+            for _,native in ipairs(out.reputation.items) do
+                local faction=A.Call(C_Reputation and C_Reputation.GetFactionDataByID,native.factionID)
+                local name=M.Readable(faction) and type(faction)=="table" and M.Text(faction.name) or M.Text(A.Call(GetFactionInfoByID,native.factionID))
+                if entry.factionID and entry.factionID==native.factionID or name and name==entry.name then matched=true;break end
+            end
+            -- The native API is partial. An unrelated major faction cannot
+            -- erase separately published ordinary-faction reputation.
+            if not matched then out.reputation.items[#out.reputation.items+1]={name=entry.name,factionID=entry.factionID,amount=entry.amount,published=true} end
+        end
+    end
+    return out
+end
 function R.Money(value)
     if not M.Number(value) or value<=0 or value~=math.floor(value) then return nil end
     local native=M.Text(A.Call(C_CurrencyInfo and C_CurrencyInfo.GetCoinTextureString,value,12))
@@ -100,7 +148,7 @@ function R.Read(id)
     local out = { id = id, items = { state = "unavailable", items = {} }, choices = { state = "unavailable", items = {} },
         money = { state = "unavailable" }, xp = { state = "unavailable" }, reputation = { state = "unavailable" }, currencies = { state = "unavailable", items = {} } }
     if not id then return out end
-    if A.Call(HaveQuestRewardData, id) ~= true then out.state = "pending"; return out end
+    if A.Call(HaveQuestRewardData, id) ~= true then out.state = "pending"; return R.Recorded(id,out) end
     out.state = "ready"
     out.items, out.choices = readItems(id, "reward"), readItems(id, "choice")
     out.money = field(GetQuestLogRewardMoney,id)
@@ -126,11 +174,18 @@ function R.Read(id)
             end
         end
     end
-    return out
+    return R.Recorded(id,out)
 end
 function R.Request(id, requested, withRewards)
     if requested[id] then return end
     requested[id] = true
     if not M.Text(A.Call(C_QuestLog and C_QuestLog.GetTitleForQuestID,id)) then A.Call(C_QuestLog and C_QuestLog.RequestLoadQuestByID, id) end
     if withRewards and A.Call(HaveQuestRewardData,id) ~= true then A.Call(C_TaskQuest and C_TaskQuest.RequestPreloadRewardData,id) end
+    local source=withRewards and N.Providers and N.Providers.Source(id)
+    for _,item in ipairs(source and source.items or {}) do
+        local key="item:"..item.itemID
+        if not requested[key] and A.Call(C_Item and C_Item.IsItemDataCachedByID,item.itemID)~=true then
+            requested[key]=true; A.Call(C_Item and C_Item.RequestLoadItemDataByID,item.itemID)
+        end
+    end
 end

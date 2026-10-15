@@ -14,9 +14,10 @@ PROVENANCE = json.loads((ROOT / "data/catalog-sources.json").read_bytes())
 
 class CatalogueTests(unittest.TestCase):
     def test_generated_output_and_coverage_are_exact(self):
-        output = GENERATE.render(SOURCE, PROVENANCE)
+        current, provenance = GENERATE.load_inputs()
+        output = GENERATE.render(current, provenance)
         self.assertEqual(output, (ROOT / "QuestBrief/Data/Catalog.lua").read_bytes())
-        self.assertEqual(GENERATE.coverage(SOURCE, output), json.loads((ROOT / "data/catalog-coverage.json").read_bytes()))
+        self.assertEqual(GENERATE.coverage(current, output), json.loads((ROOT / "data/catalog-coverage.json").read_bytes()))
 
     def test_complete_mit_notice_and_matching_source_hash(self):
         notice = (ROOT / "QuestBrief/Data/ATT-LICENSE.txt").read_bytes()

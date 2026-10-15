@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "targetBuild": "1.60.1.70374",
+  "inputs": {
+    "public": {
+      "path": "data/catalog-public-records.json",
+      "sha256": "d15de2883ca0beb5b9e6ae29a7562996c8737fdf18ab6be06e49071d3307b4a1"
+    },
+    "metadata": {
+      "path": "data/catalog-metadata-records.json",
+      "sha256": "35d01edafa8400f3835ef5cf4f577716d7cde67c55b5f9bfd9ecf47735c27f4f"
+    },
+    "compiled": {
+      "path": "data/catalog-compiled-quests.json",
+      "sha256": "29c126c3c27f39570d1b808f93ca0a84ec70adb7c8a2863d496b1fd7843280b0"
+    },
+    "primary": {
+      "path": "data/catalog-primary-records.json",
+      "sha256": "ce33bb28801c2374c08fbd96ab2121bd5a76e4acb240e5bcfa59e936f0056033"
+    },
+    "client": {
+      "path": "data/catalog-client-evidence.json",
+      "sha256": "1822a844271328ddf41206afb3f3259f734971fdab53a8ac6e82ed1a6ec32f65"
+    },
+    "legacy": {
+      "path": "data/catalog-source.json",
+      "sha256": "2d83e341171aa2e405f486049bc1a2070e797061bb367e7bdda0f40d25e5bbec"
+    }
+  },
+  "classificationAuthority": "data/primary-statuses.json",
+  "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Current public item groups supersede historical associations. Retained primary pages independently challenge matching public rows. Missing fields stay unknown. Native cache identity is not decoded reward proof."
+}

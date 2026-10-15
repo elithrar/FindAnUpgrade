@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     results = []
-    commands=[["tests/run.py"], ["tests/data_test.py"], ["tools/generate_catalog.py", "--check"], ["tests/catalog_test.py"], ["tests/package_test.py"], ["tests/release_test.py"], ["tools/package.py"]]
+    commands=[["tests/run.py"], ["tests/data_test.py"], ["tools/generate_catalog.py", "--check"], ["tests/catalog_test.py"], ["tests/complete_catalog_test.py"], ["tests/package_test.py"], ["tests/release_test.py"], ["tools/package.py"]]
     for command in commands:
         run = subprocess.run([sys.executable] + command, cwd=ROOT, text=True, capture_output=True)
         results.append({"command": "python " + " ".join(command), "exitCode": run.returncode, "stdout": run.stdout, "stderr": run.stderr})

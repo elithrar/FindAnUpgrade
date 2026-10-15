@@ -51,9 +51,11 @@ def validate(root=ROOT):
     if (addon / "Data/Quests.lua").read_bytes() != expected: raise ValueError("Generated data is stale")
     spec = importlib.util.spec_from_file_location("questbrief_catalog_generator", root / "tools/generate_catalog.py")
     catalog = importlib.util.module_from_spec(spec); spec.loader.exec_module(catalog)
-    source = json.loads((root / "data/catalog-source.json").read_bytes())
+    source, catalog_provenance = catalog.load_inputs(root)
+    # The ATT component's original grant remains separately validated even when
+    # the current catalog also contains independently sourced public facts.
     provenance = json.loads((root / "data/catalog-sources.json").read_bytes())
-    expected = catalog.render(source, provenance)
+    expected = catalog.render(source, catalog_provenance)
     if (addon / "Data/Catalog.lua").read_bytes() != expected: raise ValueError("Generated catalog is stale")
     coverage = (json.dumps(catalog.coverage(source, expected), indent=2) + "\n").encode()
     if (root / "data/catalog-coverage.json").read_bytes() != coverage: raise ValueError("Catalog coverage is stale")

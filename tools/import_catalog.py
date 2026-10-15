@@ -206,7 +206,36 @@ def label(lines, line):
     text = re.sub(r"\s*\([A-Z !]+\)\s*$", "", text)
     return text if text and len(text) <= 100 and not any(c in text for c in "<>{}=|") else None
 
-def parse(text, path, maps, race_constants=None):
+def quest_starters(tokens, ends, props, lines):
+    """Only explicit top-level typed quest providers, never nested objectives."""
+    result, unresolved = [], False
+    for key in ("provider", "providers"):
+        span = props.get(key)
+        if not span: continue
+        begin, finish = span
+        if tokens[begin][0] != "{" or ends.get(begin) != finish-1:
+            unresolved = True; continue
+        groups = [span] if key == "provider" else entries(tokens, ends, begin)
+        for start, stop in groups:
+            if tokens[start][0] != "{" or ends.get(start) != stop-1:
+                unresolved = True; continue
+            parts = entries(tokens, ends, start)
+            if len(parts) not in (2, 3):
+                unresolved = True; continue
+            kind_start, kind_stop = parts[0]
+            id_start, id_stop = parts[1]
+            kind_token = tokens[kind_start][0]
+            kind = kind_token.strip("\"'")
+            if kind_stop != kind_start+1 or kind_token not in ('"n"', '"o"', '"i"', "'n'", "'o'", "'i'") or id_stop != id_start+1 or not tokens[id_start][0].isdigit() or int(tokens[id_start][0]) <= 0:
+                unresolved = True; continue
+            field = {"n":"npcID", "o":"objectID", "i":"itemID"}[kind]
+            row = {field: int(tokens[id_start][0])}
+            name = label(lines, tokens[id_start][1])
+            if name: row["name"] = name
+            if not any(existing.get(field) == row[field] for existing in result): result.append(row)
+    return result, unresolved
+
+def parse(text, path, maps, race_constants=None, include_empty=False):
     text = preprocess(text); lines = text.splitlines(); tokens = tokenize(text); ends = bounds(tokens)
     aliases = file_aliases(tokens, ends)
     records = []; omissions = []
@@ -218,10 +247,12 @@ def parse(text, path, maps, race_constants=None):
         for key, reason in invalid_restrictions.items():
             omissions.append({"id":quest,"path":path,"line":line,"field":key,"reason":reason})
         groups = props.get("groups")
-        if not groups or tokens[groups[0]][0] != "{": continue
+        if not groups or tokens[groups[0]][0] != "{":
+            if not include_empty: continue
+            groups = None
         inputs, unknown_inputs = reward_inputs(tokens, ends, index+4, aliases)
         items = []; item_lines = {}
-        for begin, finish in entries(tokens, ends, groups[0]):
+        for begin, finish in entries(tokens, ends, groups[0]) if groups else ():
             words = [w for w, _ in tokens[begin:finish]]
             if len(words) >= 4 and words[0:2] == ["i", "("] and words[2].isdigit() and ends.get(begin+1) == finish-1:
                 if words[3] not in (")", ","): continue
@@ -242,13 +273,20 @@ def parse(text, path, maps, race_constants=None):
                 item = {"itemID": item_id}; name = label(lines, tokens[begin][1])
                 if name: item["name"] = name
                 items.append(item); item_lines[item_id] = tokens[begin][1]
-        if not items: continue
+        if not items and not include_empty: continue
         def omit_restricted_pairs(field):
             for item in items:
                 omissions.append({"id":quest,"itemID":item["itemID"],"path":path,"line":item_lines[item["itemID"]],"reason":"reward pair omitted: unresolved quest "+field+" restriction"})
         if invalid_restrictions:
             for key in invalid_restrictions: omit_restricted_pairs(key)
-            continue
+            if not include_empty: continue
+            # Metadata-only callers may retain independent literal giver facts.
+            # They must resolve these restrictions separately before use.
+            unresolved = sorted(invalid_restrictions)
+            props = {key: value for key, value in props.items() if key not in invalid_restrictions}
+            items = []
+        else:
+            unresolved = []
         unsupported=[]
         for key in ("lvl", "races", "classes", "sourceQuest", "sourceQuests", "sourceQuestNumRequired", "qg", "qgs", "coord", "coords"):
             if key in props and literal(tokens, ends, props[key], aliases) is None:
@@ -261,6 +299,7 @@ def parse(text, path, maps, race_constants=None):
         for key in unsupported: props.pop(key)
         row = {"id": quest, "items": sorted({i["itemID"]: i for i in items}.values(), key=lambda i: i["itemID"]),
                "sources": [{"path": path, "line": line}]}
+        if unresolved: row["unresolvedRestrictions"] = unresolved
         if unsupported: row["eligibilityUnknown"]=True
         name = label(lines, line)
         if name: row["title"] = name
@@ -319,6 +358,13 @@ def parse(text, path, maps, race_constants=None):
                             if type(map_id) is int and map_id > 0:
                                 places.append(dict(row["locations"][0], mapID=map_id, x=point[0]/100, y=point[1]/100))
                     if places: row["locations"] = places
+        if include_empty:
+            starters, unknown = quest_starters(tokens, ends, props, lines)
+            for starter in starters:
+                if not any(any(key in starter and starter[key] == existing.get(key) for key in ("npcID", "objectID", "itemID")) for existing in row.get("locations", [])):
+                    row.setdefault("locations", []).append(starter)
+            if unknown:
+                omissions.append({"id":quest,"path":path,"line":line,"field":"providers","reason":"field omitted: unsupported typed quest starter"})
         # Conditions, race restrictions and source snapshots never prove availability.
         if any(key in props for key in ("minReputation", "maxReputation", "requireSkill", "isDaily", "isWeekly", "isMonthly", "isYearly", "repeatable", "timeline", "altQuests", "lockCriteria", "isBreadcrumb")): row["eligibilityUnknown"] = True
         # Source links can be breadcrumbs, alternatives or character-specific.
@@ -334,6 +380,8 @@ def merge(a,b):
     result=dict(a); result.update({k:v for k,v in b.items() if k not in result})
     result["sources"]=a["sources"]+b["sources"]
     result["eligibilityUnknown"]=a.get("eligibilityUnknown",False) or b.get("eligibilityUnknown",False)
+    unresolved = sorted(set(a.get("unresolvedRestrictions", [])) | set(b.get("unresolvedRestrictions", [])))
+    if unresolved: result["unresolvedRestrictions"] = unresolved
     if "title" in a and "title" in b and a["title"]!=b["title"]: result.pop("title",None)
     items={item["itemID"]:dict(item) for item in a["items"]}
     for item in b["items"]:

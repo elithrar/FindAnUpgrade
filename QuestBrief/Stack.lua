@@ -126,14 +126,14 @@ function V:Fill(c,row,profile)
         if guaranteed>0 then y,nextIcon=self:Group(c,"items",(choices>0 or choiceCurrency) and "Guaranteed" or nil,reward.items,y,nextIcon) end
         if choices>0 then y,nextIcon=self:Group(c,"choices","Choose one",reward.choices,y,nextIcon) end
         local values={}
-        if reward.money.state=="ready" and reward.money.value>0 then values[#values+1]=N.Rewards.Money(reward.money.value) end
-        if reward.xp.state=="ready" and reward.xp.value>0 then values[#values+1]=reward.xp.value .. " XP" end
+        if reward.money.state=="ready" and reward.money.value>0 then values[#values+1]=N.Rewards.Money(reward.money.value)..(reward.money.published and " (base)" or "") end
+        if reward.xp.state=="ready" and reward.xp.value>0 then values[#values+1]=reward.xp.value .. " XP"..(reward.xp.published and " (base)" or "") end
         if #values>0 then lines[#lines+1]=table.concat(values,"  ") end
         for _,currency in ipairs(reward.currencies.items or {}) do
             if currency.amount>0 then lines[#lines+1]=(currency.isChoice and "Choose one: " or (choices>0 or choiceCurrency) and "Guaranteed: " or "") .. currency.name .. " " .. currency.amount end
         end
         for _,rep in ipairs(reward.reputation.items or {}) do
-            if rep.amount~=0 then lines[#lines+1]="Major faction " .. rep.factionID .. ": " .. (rep.amount>=0 and "+" or "") .. rep.amount end
+            if rep.amount~=0 then lines[#lines+1]=(rep.name or "Major faction " .. rep.factionID) .. ": " .. (rep.amount>=0 and "+" or "") .. rep.amount..(rep.published and " (base)" or "") end
         end
         if pending and not N.Hover.timedOut and guaranteed+choices==0 and #lines==0 then lines[#lines+1]="Loading rewards…" end
     end

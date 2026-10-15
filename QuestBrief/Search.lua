@@ -288,10 +288,11 @@ function S:Fill(card,row)
     local footerY=87+math.max(0,math.ceil(limit/columns)-1)*44; local height=footerY+18
     local money=reward.money.state=="ready" and N.Rewards.Money(reward.money.value) or ""
     money=money or ""
+    if money~="" and reward.money.published then money=money.." (base)" end
     local currencies={}; for _,currency in ipairs(reward.currencies.items or {}) do currencies[#currencies+1]=(currency.isChoice and "Choice " or "")..currency.name.." "..currency.amount end
     if #currencies>0 then money=money.." · "..table.concat(currencies,", ") end
-    local reputation={}; for _,entry in ipairs(reward.reputation.items or {}) do reputation[#reputation+1]="Faction "..entry.factionID..": "..entry.amount end
-    local values={money,reward.xp.state=="ready" and tostring(reward.xp.value).." XP" or "XP unavailable",#reputation>0 and "Rep (partial)" or "Rep unavailable"}
+    local reputation={}; for _,entry in ipairs(reward.reputation.items or {}) do reputation[#reputation+1]=(entry.name or "Faction "..entry.factionID)..": "..entry.amount..(entry.published and " (base)" or "") end
+    local values={money,reward.xp.state=="ready" and tostring(reward.xp.value).." XP"..(reward.xp.published and " (base)" or "") or "XP unavailable",#reputation>0 and "Rep (partial)" or "Rep unavailable"}
     for i,label in ipairs(card.footer) do
         local x=8+(i-1)*(width-16)/3; label:ClearAllPoints(); label:SetPoint("TOPLEFT",x,-footerY); label:SetWidth((width-16)/3-8); label:SetText(values[i])
         local hit=card.footerHits[i]; hit:ClearAllPoints(); hit:SetPoint("TOPLEFT",x,-footerY); hit:SetWidth((width-16)/3-8); hit.value=i==3 and #reputation>0 and table.concat(reputation,"\n").."\nOther reputation rewards unavailable." or values[i]

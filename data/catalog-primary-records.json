@@ -1,0 +1,4585 @@
+{
+  "records": [
+    {
+      "id": 2,
+      "title": "Sharptalon's Claw",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2",
+      "sha256": "687a155df9eafb1c8effb04b33d86d0d4d754a13ea8354aadf87aa57f4a72764",
+      "level": 30,
+      "minimum": 20,
+      "xp": 2450,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 100
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Bounty on Garrick Padfoot",
+      "items": [
+        {
+          "itemID": 6076,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 60,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3070,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6",
+      "sha256": "6532e1016170f9b76cc6b290f22c3c0918c010f7d2562454bff6f0fa8eb14bd9",
+      "level": 5,
+      "minimum": 2,
+      "xp": 335,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 75
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 823,
+          "name": "Deputy Willem"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "A Rogue's Deal",
+      "items": [
+        {
+          "itemID": 4604,
+          "quantity": 5,
+          "group": "choice"
+        },
+        {
+          "itemID": 159,
+          "quantity": 5,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8",
+      "sha256": "9ed462f1536db144c990406a0ed1c199e361ab0dbb7cae299fcad5088f53a21f",
+      "level": 5,
+      "minimum": 1,
+      "xp": 110,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 25
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 6784,
+          "name": "Calvin Montague"
+        }
+      ]
+    },
+    {
+      "id": 200,
+      "title": "Bookie Herod",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=200",
+      "sha256": "2f213773a430a9d3efbe3b96b70ed01aa3e577cffe887f3f96cd79c99040cd6a",
+      "level": 35,
+      "minimum": 30,
+      "xp": 1350,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 75
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 469,
+          "name": "Lieutenant Doren"
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "title": "Colonel Kurzen",
+      "items": [
+        {
+          "itemID": 4127,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270070,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270071,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=202",
+      "sha256": "90d754d367c434e05a277f6e170b907f80e02fee294466d48d763695401b0282",
+      "level": 40,
+      "minimum": 30,
+      "xp": 3150,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 469,
+          "name": "Lieutenant Doren"
+        }
+      ]
+    },
+    {
+      "id": 208,
+      "title": "Big Game Hunter",
+      "items": [
+        {
+          "itemID": 17686,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 17687,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270084,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270085,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=208",
+      "sha256": "d60e5bdb1e9428adbdedd67c7c4d1f0646a318a36dc9b7718c0adb4fe358a824",
+      "level": 43,
+      "minimum": 28,
+      "xp": 5350,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 715,
+          "name": "Hemet Nesingwary"
+        }
+      ]
+    },
+    {
+      "id": 284,
+      "title": "The Search Continues",
+      "items": [
+        {
+          "itemID": 422,
+          "quantity": 10,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=284",
+      "sha256": "9e5bc89d4b67c90802eb3228c5e534aeccf85f35e00b2ed0093eb663d248ec05",
+      "level": 25,
+      "minimum": 20,
+      "xp": 510,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 286,
+      "title": "Return the Statuette",
+      "items": [
+        {
+          "itemID": 2950,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 2949,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=286",
+      "sha256": "28926dbbfd80bd06ba25e6f34b47e1686d07929012acbb079115059aea0caef0",
+      "level": 25,
+      "minimum": 20,
+      "xp": 1500,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 75
+        }
+      ]
+    },
+    {
+      "id": 292,
+      "title": "The Eye of Paleth",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=292",
+      "sha256": "364d606b4092708cc38af8019a25c775c49122119e850d25822e20ed042b851a",
+      "level": 30,
+      "minimum": 22,
+      "xp": 1200,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 325,
+      "title": "Armed and Ready",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=325",
+      "sha256": "b10fdd3aa261d8c8a21857a36b9c85fb8a111a2673cd13788d70cc9c78d625ff",
+      "level": 29,
+      "minimum": 20,
+      "xp": 590,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 25
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1416,
+          "name": "Grimand Elmore"
+        }
+      ]
+    },
+    {
+      "id": 338,
+      "title": "The Green Hills of Stranglethorn",
+      "items": [
+        {
+          "itemID": 17688,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 8173,
+          "quantity": 2,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 3928,
+          "quantity": 3,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=338",
+      "sha256": "201a987f5c3891472e6762a1fd7f033f5c0c7ba9f43ba6c639514d43996564be",
+      "level": 40,
+      "minimum": 30,
+      "xp": 4700,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 716,
+          "name": "Barnil Stonepot"
+        }
+      ]
+    },
+    {
+      "id": 356,
+      "title": "Rear Guard Patrol",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=356",
+      "sha256": "b9df40e455cae03f60f90c8fc300d6fed7aa1356f2f884ee2dfdc6b85e050cf5",
+      "level": 11,
+      "minimum": 6,
+      "xp": 660,
+      "money": 300,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 75
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1495,
+          "name": "Deathguard Linnea"
+        }
+      ]
+    },
+    {
+      "id": 381,
+      "title": "The Scarlet Crusade",
+      "items": [
+        {
+          "itemID": 159,
+          "quantity": 5,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 3268,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3269,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3267,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5779,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=381",
+      "sha256": "398fdc291574f4d5ae23d7a062ea81e97416cf5015c806e7152efbb652ed39a1",
+      "level": 4,
+      "minimum": 2,
+      "xp": 355,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1570,
+          "name": "Executor Arren"
+        }
+      ]
+    },
+    {
+      "id": 403,
+      "title": "Guarded Thunderbrew Barrel",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=403",
+      "sha256": "c0a08d0b95937f83a0beb326aa93f7f0b655024c99fbef90d7cb7d6277de14b7",
+      "level": 1,
+      "minimum": 1,
+      "reputation": []
+    },
+    {
+      "id": 429,
+      "title": "Wild Hearts",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=429",
+      "sha256": "8cab680c391207c0ea37d3ac2507c47c163005b4f8061ee86cf5d9878523f4f1",
+      "level": 11,
+      "minimum": 10,
+      "xp": 440,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 50
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1950,
+          "name": "Rane Yorick"
+        }
+      ]
+    },
+    {
+      "id": 442,
+      "title": "Assault on Fenris Isle",
+      "items": [
+        {
+          "itemID": 3461,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3462,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270020,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 276722,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=442",
+      "sha256": "7ec63fc8589340e475090a2af8a352c5cd381611d1939b7e3d4c9cb76499662d",
+      "level": 24,
+      "minimum": 10,
+      "xp": 1950,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1952,
+          "name": "High Executor Hadrec"
+        }
+      ]
+    },
+    {
+      "id": 451,
+      "title": "A Recipe For Death",
+      "items": [
+        {
+          "itemID": 2458,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 2459,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 3451,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3582,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 276723,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=451",
+      "sha256": "ab02fd7cf0df20c1f02a1b3d2f6732cf2b2817df871d1393e8907fc713012459",
+      "level": 18,
+      "minimum": 9,
+      "xp": 2050,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 200
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1937,
+          "name": "Apothecary Renferrel"
+        }
+      ]
+    },
+    {
+      "id": 459,
+      "title": "The Woodland Protector",
+      "items": [
+        {
+          "itemID": 961,
+          "quantity": 3,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 5398,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5399,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 11190,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=459",
+      "sha256": "0ccd506cd13680ce6501a70b5ebbe7622b3b62ae25d17fd4e61252992bc8b0ad",
+      "level": 3,
+      "minimum": 1,
+      "xp": 250,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1992,
+          "name": "Tarindrella"
+        }
+      ]
+    },
+    {
+      "id": 501,
+      "title": "Elixir of Pain",
+      "items": [
+        {
+          "itemID": 3735,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 2230,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3741,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 6482,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 276724,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=501",
+      "sha256": "65e986ab66a76422164bc6d1503a5036d99b3b29801b699d05b98d8c33ef3f51",
+      "level": 24,
+      "minimum": 21,
+      "xp": 1950,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2216,
+          "name": "Apothecary Lydon"
+        }
+      ]
+    },
+    {
+      "id": 504,
+      "title": "Crushridge Warmongers",
+      "items": [
+        {
+          "itemID": 5249,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3763,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270072,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=504",
+      "sha256": "417348405f5894e443f27eab2a0ba64009041950fa5e745d499f226ece8499a1",
+      "level": 40,
+      "minimum": 30,
+      "xp": 4700,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2263,
+          "name": "Marshal Redpath"
+        }
+      ]
+    },
+    {
+      "id": 509,
+      "title": "Elixir of Agony",
+      "items": [
+        {
+          "itemID": 2459,
+          "quantity": 3,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 929,
+          "quantity": 5,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=509",
+      "sha256": "219d4b3ab5ff40a0b3ce34df743c7c0df14ddd0d92b0b195d84958a001643387",
+      "level": 28,
+      "minimum": 24,
+      "xp": 2300,
+      "money": 2500,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2216,
+          "name": "Apothecary Lydon"
+        }
+      ]
+    },
+    {
+      "id": 515,
+      "title": "Elixir of Agony",
+      "items": [
+        {
+          "itemID": 3749,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3747,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 276727,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=515",
+      "sha256": "c23e5445cb3e8bb0cbef90f9ea7bbdfd9c1eecce729945dc1f0481e6fb6f6b9d",
+      "level": 30,
+      "minimum": 24,
+      "xp": 3050,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2055,
+          "name": "Master Apothecary Faranell"
+        }
+      ]
+    },
+    {
+      "id": 547,
+      "title": "Humbert's Sword",
+      "items": [
+        {
+          "itemID": 3750,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 3751,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270046,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=547",
+      "sha256": "620c044c1a30546ead80fddc57359bae0a5bc67bd8ac2dc7c9c66f643669855b",
+      "level": 30,
+      "minimum": 26,
+      "xp": 3050,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2419,
+          "name": "Deathguard Humbert"
+        }
+      ]
+    },
+    {
+      "id": 575,
+      "title": "Supply and Demand",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=575",
+      "sha256": "113008ba8c4a871317e48b5a5ce1b5365e8fb54d046b102edc94f8ff9ba48f69",
+      "level": 31,
+      "minimum": 26,
+      "xp": 1250,
+      "money": 2200,
+      "reputation": [
+        {
+          "factionID": 21,
+          "amount": 100
+        },
+        {
+          "factionID": 87,
+          "amount": -500
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2495,
+          "name": "Drizzlik"
+        }
+      ]
+    },
+    {
+      "id": 613,
+      "title": "Cracking Maury's Foot",
+      "items": [
+        {
+          "itemID": 4129,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270090,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270091,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=613",
+      "sha256": "94cd5b3d548e55b50d496748249924c57e158720954e32e51ac2c3fa81089955",
+      "level": 44,
+      "minimum": 30,
+      "xp": 4650,
+      "reputation": [
+        {
+          "factionID": 21,
+          "amount": 150
+        },
+        {
+          "factionID": 87,
+          "amount": -750
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2501,
+          "name": "\"Sea Wolf\" MacKinley"
+        }
+      ]
+    },
+    {
+      "id": 666,
+      "title": "Sunken Treasure",
+      "items": [
+        {
+          "itemID": 4547,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 4548,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=666",
+      "sha256": "3d9e29260662d37840273e9e0b9a4286b392869047b74e0799a9915dc1361949",
+      "level": 40,
+      "minimum": 35,
+      "xp": 3900,
+      "reputation": [
+        {
+          "factionID": 21,
+          "amount": 150
+        },
+        {
+          "factionID": 87,
+          "amount": -750
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2774,
+          "name": "Doctor Draxlegauge"
+        }
+      ]
+    },
+    {
+      "id": 679,
+      "title": "Call to Arms",
+      "items": [
+        {
+          "itemID": 9520,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 9521,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270069,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=679",
+      "sha256": "a7dfc63bff402082cf0301a4dc8874e1ed8c0ffd76417c48e3e86bea587336d5",
+      "level": 40,
+      "minimum": 30,
+      "xp": 3150,
+      "money": 5000,
+      "reputation": [
+        {
+          "factionID": 76,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2771,
+          "name": "Drum Fel"
+        }
+      ]
+    },
+    {
+      "id": 680,
+      "title": "The Real Threat",
+      "items": [
+        {
+          "itemID": 4976,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 4977,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270079,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=680",
+      "sha256": "cf0932820e442b72f6a4399d6a700c03e19da88e7844f7eaa12eeb300b285634",
+      "level": 40,
+      "minimum": 30,
+      "xp": 3900,
+      "reputation": [
+        {
+          "factionID": 76,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2772,
+          "name": "Korin Fel"
+        }
+      ]
+    },
+    {
+      "id": 682,
+      "title": "Stromgarde Badges",
+      "items": [
+        {
+          "itemID": 4741,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 4741,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270056,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270057,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=682",
+      "sha256": "561244c791872784d21b39b32087c32b072fb6f5e8cf581ffd4a22740baa8fe0",
+      "level": 37,
+      "minimum": 30,
+      "xp": 3550,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2700,
+          "name": "Captain Nials"
+        }
+      ]
+    },
+    {
+      "id": 684,
+      "title": "WANTED: Marez Cowl",
+      "items": [
+        {
+          "itemID": 4744,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270067,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270068,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=684",
+      "sha256": "8faaf3e9dac7990dc232c510a1f6a34a21fefbca089d847755a5c1cbce0c08cd",
+      "level": 39,
+      "minimum": 30,
+      "xp": 3750,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 685,
+      "title": "WANTED: Otto and Falconcrest",
+      "items": [
+        {
+          "itemID": 5247,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 4745,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270080,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=685",
+      "sha256": "60dba6f9495031b8c6f06202701f7b3d6ba873b38d0d48c39b7ff35bd7d69c67",
+      "level": 40,
+      "minimum": 30,
+      "xp": 3900,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 736,
+      "title": "The Star, the Hand and the Heart",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=736",
+      "sha256": "2ba7d45e12b5ac48900cdd233a6f84465e07674a4eff68868c58c360b5620a71",
+      "level": 44,
+      "minimum": 30,
+      "xp": 5600,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 2934,
+          "name": "Keeper Bel'dugur"
+        }
+      ]
+    },
+    {
+      "id": 757,
+      "title": "Rite of Strength",
+      "items": [
+        {
+          "itemID": 1382,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 1383,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 2137,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5776,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5777,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=757",
+      "sha256": "cabecb5ef3225888cb4ac535db1102cca78188638608e615e447dd87d15bd212",
+      "level": 4,
+      "minimum": 1,
+      "xp": 445,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2982,
+          "name": "Seer Graytongue"
+        }
+      ]
+    },
+    {
+      "id": 780,
+      "title": "The Battleboars",
+      "items": [
+        {
+          "itemID": 6059,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 4540,
+          "quantity": 10,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=780",
+      "sha256": "ad3c0e62b615cfa9720dbea67a35108f05864ddecc25d6e5c1c264112f4700ca",
+      "level": 4,
+      "minimum": 1,
+      "xp": 445,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2980,
+          "name": "Grull Hawkwind"
+        }
+      ]
+    },
+    {
+      "id": 794,
+      "title": "Burning Blade Medallion",
+      "items": [
+        {
+          "itemID": 118,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 4921,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 4922,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 6713,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=794",
+      "sha256": "b11eab8e504557a50f22ff6da19afbe871a3aa4fc5ef4da868941e3b2c87582a",
+      "level": 5,
+      "minimum": 1,
+      "xp": 670,
+      "reputation": [
+        {
+          "factionID": 76,
+          "amount": 200
+        },
+        {
+          "factionID": 530,
+          "amount": 200
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3145,
+          "name": "Zureetha Fargaze"
+        }
+      ]
+    },
+    {
+      "id": 898,
+      "title": "Free From the Hold",
+      "items": [
+        {
+          "itemID": 5311,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5312,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270011,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=898",
+      "sha256": "023db4f3ed1da56286efa79c7c8f6d36e7c9f45c88c6e03b824c262da4cc164c",
+      "level": 20,
+      "minimum": 13,
+      "xp": 1950,
+      "money": 2500,
+      "reputation": [
+        {
+          "factionID": 470,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3465,
+          "name": "Gilthares Firebough"
+        }
+      ]
+    },
+    {
+      "id": 912,
+      "title": "Stonesplinter Trogg Disguise",
+      "items": [
+        {
+          "itemID": 5131,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=912",
+      "sha256": "e71c438d8b7d9df4b61f10e07439e4d7652e617bdabe168bba912a1796d44280",
+      "level": 12,
+      "minimum": 10,
+      "xp": 225,
+      "reputation": []
+    },
+    {
+      "id": 916,
+      "title": "Webwood Venom",
+      "items": [
+        {
+          "itemID": 10544,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5392,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5393,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5586,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=916",
+      "sha256": "3d74560d8d55f0ee7121bb9e1b49266bff6897f3c344f3a362ce70b515548f5b",
+      "level": 4,
+      "minimum": 3,
+      "xp": 355,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2082,
+          "name": "Gilshalan Windwalker"
+        }
+      ]
+    },
+    {
+      "id": 943,
+      "title": "The Absent Minded Prospector",
+      "items": [
+        {
+          "itemID": 5627,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 5626,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270022,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=943",
+      "sha256": "5a88a186142ddd72da571d1cb8b2f4b2b161cfdfbdabe7c4bed133dd77d203fb",
+      "level": 24,
+      "minimum": 15,
+      "xp": 2400,
+      "reputation": [
+        {
+          "factionID": 47,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 2911,
+          "name": "Archaeologist Flagongut"
+        }
+      ]
+    },
+    {
+      "id": 947,
+      "title": "Cave Mushrooms",
+      "items": [
+        {
+          "itemID": 5610,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 4605,
+          "quantity": 10,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=947",
+      "sha256": "da7a889bababd01f9c46bf85f26777bbee3206bc0dc74dcaec886e7f1f4d8b11",
+      "level": 17,
+      "minimum": 12,
+      "xp": 1250,
+      "money": 900,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3583,
+          "name": "Barithras Moonshade"
+        }
+      ]
+    },
+    {
+      "id": 974,
+      "title": "Finding the Source",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=974",
+      "sha256": "2d69ffde71e034eac62de4e79baa1ecb8fd4a382b76e8177cb7a9caf536ea040",
+      "level": 55,
+      "minimum": 51,
+      "xp": 5650,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 10302,
+          "name": "Krakle"
+        }
+      ]
+    },
+    {
+      "id": 982,
+      "title": "Deep Ocean, Vast Sea",
+      "items": [
+        {
+          "itemID": 15401,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15402,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270004,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=982",
+      "sha256": "4cc9d51043fe45fed3d82246375b279283011fe24df079c6dc9245859cf56101",
+      "level": 17,
+      "minimum": 13,
+      "xp": 1250,
+      "money": 1800,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 6301,
+          "name": "Gorbold Steelhand"
+        }
+      ]
+    },
+    {
+      "id": 986,
+      "title": "A Lost Master",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=986",
+      "sha256": "97acdead19fc20cabe31cd55eb313f41989bd2869c75274240fa0ad409d84047",
+      "level": 20,
+      "minimum": 10,
+      "xp": 1550,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3693,
+          "name": "Terenthis"
+        }
+      ]
+    },
+    {
+      "id": 996,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=996",
+      "sha256": "37a93564e4f64f5d5119bda8d3771eda01dbcfd097eb6c4654bf8314f4d5361a",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 998,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=998",
+      "sha256": "19465ff0668cce8b706112679b17a381bbfa314d90f8c336b08da9e533a2d902",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 1012,
+      "title": "Insane Druids",
+      "items": [
+        {
+          "itemID": 5813,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270048,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270049,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1012",
+      "sha256": "9fdbf1b004d27810dc485efda900d98edd3cd26a0f55c1818e0b68df957876f8",
+      "level": 32,
+      "minimum": 24,
+      "xp": 3200,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3848,
+          "name": "Kayneth Stillwind"
+        }
+      ]
+    },
+    {
+      "id": 1046,
+      "title": "Raene's Cleansing",
+      "items": [
+        {
+          "itemID": 1116,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 276242,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 5815,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 17046,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1046",
+      "sha256": "d63b2deb460d956c89012db1ad68cb5e00a5aa736f72f062bb72837e009905dc",
+      "level": 30,
+      "minimum": 18,
+      "xp": 3050,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3897,
+          "name": "Krolg"
+        }
+      ]
+    },
+    {
+      "id": 1059,
+      "title": "Reclaiming the Charred Vale",
+      "items": [
+        {
+          "itemID": 6675,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 6676,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270035,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1059",
+      "sha256": "5321a95b988508cd06409d8a937de88d00e8f387deb78a3fb3dfb5744c1282d6",
+      "level": 27,
+      "minimum": 20,
+      "xp": 2200,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3994,
+          "name": "Keeper Albagorm"
+        }
+      ]
+    },
+    {
+      "id": 1131,
+      "title": "Steelsnap",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1131",
+      "sha256": "827cb7ff0bafdf12cacd53c672c253374d9c3bb3f8f21ccb8854909e7c2e88fb",
+      "level": 30,
+      "minimum": 20,
+      "xp": 2450,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3441,
+          "name": "Melor Stonehoof"
+        }
+      ]
+    },
+    {
+      "id": 1203,
+      "title": "Jarl Needs a Blade",
+      "items": [
+        {
+          "itemID": 5016,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 9622,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270052,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1203",
+      "sha256": "3f1ef8e9035fefab0a8b7d5be649d4cc1a29764ec41c1fe1ff454255eee68da4",
+      "level": 35,
+      "minimum": 30,
+      "xp": 3450,
+      "money": 3500,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 4792,
+          "name": "\"Swamp Eye\" Jarl"
+        }
+      ]
+    },
+    {
+      "id": 1392,
+      "title": "Noboru the Cudgel",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1392",
+      "sha256": "a5e63d444974e7b9f587d758b820ec5559a2d2af1449ae99594a1dc161fa1518",
+      "level": 39,
+      "minimum": 29,
+      "xp": 2250,
+      "reputation": []
+    },
+    {
+      "id": 1514,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=1514",
+      "sha256": "e639204f616c67f56a6c82eb17539611a5d0b4058de6d6d7e9f5d5c891787d38",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 2098,
+      "title": "Gyromast's Retrieval",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2098",
+      "sha256": "f26b644b66dff1c5af3b96157db33075d7753c654a344c166d76b99cbf93dc46",
+      "level": 20,
+      "minimum": 14,
+      "xp": 1550,
+      "money": 1200,
+      "reputation": [
+        {
+          "factionID": 47,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 6667,
+          "name": "Gelkak Gyromast"
+        }
+      ]
+    },
+    {
+      "id": 2203,
+      "title": "Badlands Reagent Run II",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2203",
+      "sha256": "4ace08fec7d5743a7c2bf4bf32ccf37c9c45efe3bd81d6e139eff1e2023231d5",
+      "level": 44,
+      "minimum": 40,
+      "xp": 3750,
+      "reputation": [
+        {
+          "factionID": 530,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 6868,
+          "name": "Jarkal Mossmeld"
+        }
+      ]
+    },
+    {
+      "id": 2399,
+      "title": "The Sprouted Fronds",
+      "items": [
+        {
+          "itemID": 5205,
+          "quantity": 5,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2399",
+      "sha256": "9d8491d6e5bc5a3725fcb6c253fa3deae4a69ec7346136185b7226afdde6bd17",
+      "level": 10,
+      "minimum": 4,
+      "xp": 85,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 10
+        }
+      ]
+    },
+    {
+      "id": 2439,
+      "title": "The Platinum Discs",
+      "items": [
+        {
+          "itemID": 9587,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 3928,
+          "quantity": 5,
+          "group": "choice"
+        },
+        {
+          "itemID": 6149,
+          "quantity": 5,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2439",
+      "sha256": "28c4769cf758f1ad95cf2c016c1f9d21853d64badb8aa1cfab1c93e94cca4e0b",
+      "level": 47,
+      "minimum": 40,
+      "xp": 420,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 5387,
+          "name": "High Explorer Magellas"
+        }
+      ]
+    },
+    {
+      "id": 2440,
+      "title": "The Platinum Discs",
+      "items": [
+        {
+          "itemID": 9587,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 3928,
+          "quantity": 5,
+          "group": "choice"
+        },
+        {
+          "itemID": 6149,
+          "quantity": 5,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2440",
+      "sha256": "57da0048d798437df3006557367e8eb9b0a8008b78d1b09892e42549f9daaaf7",
+      "level": 47,
+      "minimum": 40,
+      "xp": 420,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 10
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 3978,
+          "name": "Sage Truthseeker"
+        }
+      ]
+    },
+    {
+      "id": 2501,
+      "title": "Badlands Reagent Run II",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2501",
+      "sha256": "e2765b6f054f87c0915255c180d77ff0826a377689a9258a5ee55d121a94b6a9",
+      "level": 44,
+      "minimum": 40,
+      "xp": 3750,
+      "reputation": [
+        {
+          "factionID": 47,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1470,
+          "name": "Ghak Healtouch"
+        }
+      ]
+    },
+    {
+      "id": 2561,
+      "title": "Druid of the Claw",
+      "items": [
+        {
+          "itemID": 9598,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 18957,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2561",
+      "sha256": "c68be1a82682be473894a00322f667a3583c7225073d24d38e0fe929826df81f",
+      "level": 10,
+      "minimum": 3,
+      "xp": 1050,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 7317,
+          "name": "Oben Rageclaw"
+        }
+      ]
+    },
+    {
+      "id": 2940,
+      "title": "Feralas: A History",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=2940",
+      "sha256": "a3af2eedd5e800aaae41fa0c5bfe114a88dc239f504b633182aa97b075c2b7ed",
+      "level": 47,
+      "minimum": 42,
+      "xp": 420,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 25
+        }
+      ]
+    },
+    {
+      "id": 3161,
+      "title": "Gahz'ridian",
+      "items": [
+        {
+          "itemID": 10827,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 10826,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3161",
+      "sha256": "813ae61d4b4c64ab3a4e8f9c95363f0e9e17eb2c90fa02bc3c4beda1bc234fc3",
+      "level": 48,
+      "minimum": 43,
+      "xp": 4400,
+      "reputation": [
+        {
+          "factionID": 369,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 7771,
+          "name": "Marvon Rivetseeker"
+        }
+      ]
+    },
+    {
+      "id": 3481,
+      "title": "Trinkets...",
+      "items": [
+        {
+          "itemID": 10569,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3481",
+      "sha256": "0b2b91b6157bb0bd2b44f6d03424471864c98cad6c4ce084cc13231c7c5f5323",
+      "level": 50,
+      "minimum": 40,
+      "xp": 470,
+      "reputation": []
+    },
+    {
+      "id": 3514,
+      "title": "Horde Presence",
+      "items": [
+        {
+          "itemID": 10653,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 10654,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270038,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3514",
+      "sha256": "e7db629a53b419d5dd1cef7723c9af5bce3d8f4398ee4671cebbf26ed69220ca",
+      "level": 29,
+      "minimum": 15,
+      "xp": 2950,
+      "reputation": [
+        {
+          "factionID": 76,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 8582,
+          "name": "Kadrak"
+        }
+      ]
+    },
+    {
+      "id": 3568,
+      "title": "Seeping Corruption",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3568",
+      "sha256": "8367d9ce020a0a6d7d00c3834788798700ad1243e7981f21da1e3e80a500da1f",
+      "level": 52,
+      "minimum": 45,
+      "xp": 2550,
+      "money": 4000,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 50
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 8390,
+          "name": "Chemist Cuely"
+        }
+      ]
+    },
+    {
+      "id": 3602,
+      "title": "Azsharite",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3602",
+      "sha256": "0ce510bfa1b2e7d79e75fbf65ea3b2d149633a8bbd5a1af7dc8f7739e4866821",
+      "level": 58,
+      "minimum": 45,
+      "xp": 7750,
+      "money": 26500,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 7783,
+          "name": "Loramus Thalipedes"
+        }
+      ]
+    },
+    {
+      "id": 3783,
+      "title": "Are We There, Yeti?",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3783",
+      "sha256": "8534db4dd60dc9cb090a9e970a255b0d9c6eb63341c57a2e7977235cb19e97e0",
+      "level": 56,
+      "minimum": 52,
+      "xp": 4350,
+      "money": 8500,
+      "reputation": [
+        {
+          "factionID": 577,
+          "amount": 75
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 10305,
+          "name": "Umi Rumplesnicker"
+        }
+      ]
+    },
+    {
+      "id": 3845,
+      "title": "It's a Secret to Everybody",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=3845",
+      "sha256": "1257b79b26884056c133f54d1857f293e61b24e46dc5137a870778d163966054",
+      "level": 52,
+      "minimum": 47,
+      "xp": 5100,
+      "reputation": []
+    },
+    {
+      "id": 4005,
+      "title": "Aquementas",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4005",
+      "sha256": "2110814c482727762b77c4f3279ee3ec2df9f3585ff661d403233501b5726d03",
+      "level": 54,
+      "minimum": 47,
+      "xp": 5450,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 9116,
+          "name": "Eridan Bluewind"
+        }
+      ]
+    },
+    {
+      "id": 4115,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4115",
+      "sha256": "457229cb7b119cf443df80cb5eb8cab88690146e693933f5db0d60e9e1d31cde",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4117,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4117",
+      "sha256": "4d48193bcedfded51702ab9220b8ad3be46f12d2aec093e5c823b22eb9331055",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4119,
+      "title": "Corrupted Night Dragon",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4119",
+      "sha256": "da56d843001d9a2442a16444cd9f5e293ec4c0fa4642446d4aa34857f6daee59",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4221,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4221",
+      "sha256": "a0b66b05aec3ae4c9e8bc0d7d634643ac253283bb429b5ba447f87a49d6fc55b",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4222,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4222",
+      "sha256": "e53626d56be4727e45ae677dea94bd449131f9078e55c92201fd84eee5cb14fd",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4343,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4343",
+      "sha256": "abd33f4b23e3eb581fa093738d4d13801773c895e6a485f46e18c0762b93de65",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4403,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4403",
+      "sha256": "614562e59cea9ab55923dc1d4731516c1dab57e3888eb9b1b829a14361998cd4",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4443,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4443",
+      "sha256": "8def4f67b92395cb7673a754540e07813d7eacbaec6d7a41f7c865cf0528bdbb",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4444,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4444",
+      "sha256": "dc5c4d792d07ccc63ff8ccaedc34b0a4f1a5a25a8af055ed7b573af04fe06e8f",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4445,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4445",
+      "sha256": "0dcbf291dfa743a2cda4cd88d404ada72be3e589406c2bf2764606ce14ddb0cc",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4446,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4446",
+      "sha256": "6e2483c675be51c2e5dce060b8136b2b006fb16869037de5374ec5c3502cd911",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4447,
+      "title": "Corrupted Night Dragon",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4447",
+      "sha256": "061bd1fdb9bbf3cec91684b1f1ff32c500e4d7934e3ab1442d02b37a562298c8",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4448,
+      "title": "Corrupted Night Dragon",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4448",
+      "sha256": "c85311a5bc56c35ca3183e1079dc8ef6119a0aa0f767fa3c5e12f745b2e744ee",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4461,
+      "title": "Corrupted Whipper Root",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4461",
+      "sha256": "97c33624da63a1cdceb71a6328e08957d9f5bfd318d0325fe95611755bdad7e5",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4462,
+      "title": "Corrupted Night Dragon",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4462",
+      "sha256": "bce35ec10787d98dcefa572ab6e4818365cbfe6044cd2a6397d81e4ffec86a49",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4466,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4466",
+      "sha256": "87efde3069aa3c9d0a011e199925dfe28d14212ff02a8c3c66dd4249c7c0332b",
+      "level": 55,
+      "minimum": 48,
+      "xp": 560,
+      "reputation": []
+    },
+    {
+      "id": 4467,
+      "title": "Corrupted Windblossom",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4467",
+      "sha256": "f923e1296e87680abf6f53895f4c0ebba6a3a5212f6226751552190fff1d63ba",
+      "level": 55,
+      "minimum": 48,
+      "reputation": []
+    },
+    {
+      "id": 4493,
+      "title": "March of the Silithid",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4493",
+      "sha256": "f8b62f0cf228afd5cf46f78a6e80904c24d5c8f34f9d31c07b16ee3a0c7e40ce",
+      "level": 53,
+      "minimum": 50,
+      "xp": 530,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 10
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 7740,
+          "name": "Gracina Spiritmight"
+        }
+      ]
+    },
+    {
+      "id": 4512,
+      "title": "A Little Slime Goes a Long Way",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4512",
+      "sha256": "1a08a8bcc56544d823fc6229574f78f8dfec77f706a7cad34d70ea22d492dd55",
+      "level": 52,
+      "minimum": 48,
+      "xp": 6350,
+      "money": 7500,
+      "reputation": [
+        {
+          "factionID": 54,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 9616,
+          "name": "Laris Geardawdle"
+        }
+      ]
+    },
+    {
+      "id": 4513,
+      "title": "A Little Slime Goes a Long Way",
+      "items": [
+        {
+          "itemID": 12050,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 12051,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=4513",
+      "sha256": "4e310656c8464352a8bca04b483036d99a0e2a8743ea87cd2735880edff4bc6c",
+      "level": 54,
+      "minimum": 48,
+      "xp": 6800,
+      "money": 4000,
+      "reputation": [
+        {
+          "factionID": 54,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 9616,
+          "name": "Laris Geardawdle"
+        }
+      ]
+    },
+    {
+      "id": 5088,
+      "title": "Arikara",
+      "items": [
+        {
+          "itemID": 15464,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15465,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15466,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270037,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5088",
+      "sha256": "6e401091c9ec630de90e4313c7f150f22966743fb6948103fd4fe94370fd5153",
+      "level": 28,
+      "minimum": 24,
+      "xp": 2300,
+      "money": 2500,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 4046,
+          "name": "Magatha Grimtotem"
+        }
+      ]
+    },
+    {
+      "id": 5128,
+      "title": "Words of the High Chief",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5128",
+      "sha256": "e967b3a854411167fe98f05c6714359beeff436aba802d57b6e63fd70e34e0bd",
+      "level": 59,
+      "minimum": 52,
+      "xp": 6400,
+      "reputation": [
+        {
+          "factionID": 577,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 9298,
+          "name": "Donova Snowden"
+        }
+      ]
+    },
+    {
+      "id": 5150,
+      "title": "Dadanga is Hungry!",
+      "items": [
+        {
+          "itemID": 15699,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5150",
+      "sha256": "3b5f7faff2809acca70bca2d630cd59e498e1d1f42aeceae5a7606ad6b4a2092",
+      "level": 55,
+      "minimum": 47,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 9274,
+          "name": "Dadanga"
+        }
+      ]
+    },
+    {
+      "id": 5206,
+      "title": "Marauders of Darrowshire",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5206",
+      "sha256": "6d0d3776f5e8a7fb752006e1b89861ef847fa4b9411f0bffa1fa6329deb49f48",
+      "level": 60,
+      "minimum": 50,
+      "xp": 6600,
+      "reputation": [
+        {
+          "factionID": 529,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 11063,
+          "name": "Carlin Redpath"
+        }
+      ]
+    },
+    {
+      "id": 5215,
+      "title": "The Scourge Cauldrons",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5215",
+      "sha256": "4dbca4c810cef1fd8887e50f8cba19ddf37e5ae01cb849408240a174ad3ccc54",
+      "level": 53,
+      "minimum": 50,
+      "xp": 530,
+      "reputation": [
+        {
+          "factionID": 72,
+          "amount": 10
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 10838,
+          "name": "Commander Ashlam Valorfist"
+        }
+      ]
+    },
+    {
+      "id": 5237,
+      "title": "Mission Accomplished!",
+      "items": [
+        {
+          "itemID": 15799,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 15801,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15800,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5237",
+      "sha256": "4b06fb354e97b23a7506e2d7eb4dc7152f98ac5d16e530a5c9c65b1264034f26",
+      "level": 58,
+      "minimum": 50,
+      "xp": 9300,
+      "reputation": [
+        {
+          "factionID": 469,
+          "amount": 200
+        },
+        {
+          "factionID": 529,
+          "amount": 200
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 10838,
+          "name": "Commander Ashlam Valorfist"
+        }
+      ]
+    },
+    {
+      "id": 5321,
+      "title": "The Sleeper Has Awakened",
+      "items": [
+        {
+          "itemID": 15205,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15206,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15207,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270014,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5321",
+      "sha256": "a1d80da33ae3434b99804b5c0311b4e606ad11507e9e132494cbd28ade57acf6",
+      "level": 20,
+      "minimum": 17,
+      "xp": 1550,
+      "reputation": [
+        {
+          "factionID": 69,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 11218,
+          "name": "Kerlonian Evershade"
+        }
+      ]
+    },
+    {
+      "id": 5521,
+      "title": "Chromatic Mantle of the Dawn",
+      "items": [
+        {
+          "itemID": 18182,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5521",
+      "sha256": "5465b12cb847f06b25f54aca24a6c0f65c64fbe73f00b02c7361a79716af2c56",
+      "level": 60,
+      "minimum": 55,
+      "xp": 8300,
+      "reputation": [
+        {
+          "factionID": 529,
+          "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 10857,
+          "name": "Argent Quartermaster Lightspark"
+        }
+      ]
+    },
+    {
+      "id": 5943,
+      "title": "Gizelton Caravan",
+      "items": [
+        {
+          "itemID": 15691,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15692,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 15695,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270065,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=5943",
+      "sha256": "47c4896caaacd402bc26b9000ac6890abbebea8d4c9fde6038df21c47e258a8e",
+      "level": 38,
+      "minimum": 32,
+      "xp": 2850,
+      "reputation": [
+        {
+          "factionID": 470,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 11626,
+          "name": "Rigger Gizelton"
+        }
+      ]
+    },
+    {
+      "id": 6146,
+      "title": "Nathanos' Ruse",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6146",
+      "sha256": "62f18d419dce5b185666d3a385293ab710953854ff2564bc84dc1ebb0b3de695",
+      "level": 60,
+      "minimum": 56,
+      "xp": 6600,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 11878,
+          "name": "Nathanos Blightcaller"
+        }
+      ]
+    },
+    {
+      "id": 6183,
+      "title": "Honor the Dead",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6183",
+      "sha256": "08b605752fd2e14e5bf5316a6c8c742a9b283dbac4a1bb83980a6a9c3f4f3c68",
+      "level": 60,
+      "minimum": 56,
+      "xp": 660,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 332,
+          "name": "Master Mathias Shaw"
+        }
+      ]
+    },
+    {
+      "id": 6283,
+      "title": "Bloodfury Bloodline",
+      "items": [
+        {
+          "itemID": 16990,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 16987,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270028,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6283",
+      "sha256": "bd360aae2665030ed4bfdb7e731cf56839006add50bf762ca6bba93db4c413d6",
+      "level": 26,
+      "minimum": 18,
+      "xp": 2100,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 11860,
+          "name": "Maggran Earthbinder"
+        }
+      ]
+    },
+    {
+      "id": 6481,
+      "title": "Earthen Arise",
+      "items": [
+        {
+          "itemID": 16981,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 1306,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270010,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6481",
+      "sha256": "1193ffa551fba06b80dd5df79c80a624088d9086e388a89882a93b12764790a7",
+      "level": 20,
+      "minimum": 14,
+      "xp": 1550,
+      "reputation": [
+        {
+          "factionID": 81,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 11861,
+          "name": "Mor'rogal"
+        }
+      ]
+    },
+    {
+      "id": 6922,
+      "title": "Baron Aquanis",
+      "items": [
+        {
+          "itemID": 16886,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 16887,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 270043,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=6922",
+      "sha256": "c513058cbe075b60dcbf163dac9236e6e0f863f35d31078cc376f1ef7fa401ca",
+      "level": 30,
+      "minimum": 21,
+      "xp": 3050,
+      "reputation": [
+        {
+          "factionID": 530,
+          "amount": 150
+        }
+      ]
+    },
+    {
+      "id": 7486,
+      "title": "A Hero's Reward",
+      "items": [
+        {
+          "itemID": 18399,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 18398,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=7486",
+      "sha256": "24dbf2e89322805ea219da6e97db8f280cb58f5eba8e2127eef32cb80c19f519",
+      "level": 60,
+      "minimum": 55,
+      "xp": 9950,
+      "reputation": [
+        {
+          "factionID": 749,
+          "amount": 200
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 13278,
+          "name": "Duke Hydraxis"
+        }
+      ]
+    },
+    {
+      "id": 7806,
+      "title": "Additional Runecloth",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=7806",
+      "sha256": "00f39a140ba5abe0a7e5d1a3b8d91c0628b63779ecc41508419127a3874b388d",
+      "level": 60,
+      "minimum": 50,
+      "reputation": [
+        {
+          "factionID": 47,
+          "amount": 50
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 14723,
+          "name": "Mistina Steelshield"
+        }
+      ]
+    },
+    {
+      "id": 8287,
+      "title": "A Terrible Purpose",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8287",
+      "sha256": "4f6e234d0f12429a6b4d05d5530a16ab51dccf002193dcc0c9ee201cc10e7647",
+      "level": 60,
+      "minimum": 54,
+      "xp": 6600,
+      "money": 18000,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 15194,
+          "name": "Hermit Ortell"
+        }
+      ]
+    },
+    {
+      "id": 8497,
+      "title": "Desert Survival Kits",
+      "items": [
+        {
+          "itemID": 20800,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 21132,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8497",
+      "sha256": "efc917cfceb3f4c850bbb8860db92a8a3a6c489bc87a6a4387a9de13132701ff",
+      "level": 60,
+      "minimum": 60,
+      "xp": 660,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 8507,
+      "title": "Field Duty",
+      "items": [
+        {
+          "itemID": 20808,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 21132,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 20809,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8507",
+      "sha256": "90e6467bccbfdb036fbc1d292f1642b8292533edea242326484a72d1fb78fb68",
+      "level": 60,
+      "minimum": 60,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 25
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 15540,
+          "name": "Windcaller Kaldon"
+        }
+      ]
+    },
+    {
+      "id": 8586,
+      "title": "Dirge's Kickin' Chimaerok Chops",
+      "items": [
+        {
+          "itemID": 21025,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 21023,
+          "quantity": 20,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8586",
+      "sha256": "2a2c8bc28d75ba7eba7e7928744f22fe846e91ca437dfe89a529ac3feb23a675",
+      "level": 60,
+      "minimum": 60,
+      "xp": 6600,
+      "money": 27000,
+      "reputation": [
+        {
+          "factionID": 369,
+          "amount": 200
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 8125,
+          "name": "Dirge Quikcleave"
+        }
+      ]
+    },
+    {
+      "id": 8731,
+      "title": "Field Duty",
+      "items": [
+        {
+          "itemID": 20808,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 21266,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 20809,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8731",
+      "sha256": "a1b6ecb870784895f3264fd196975c95551d60b2964cb996da17b590998b2cdc",
+      "level": 60,
+      "minimum": 60,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 25
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 15540,
+          "name": "Windcaller Kaldon"
+        }
+      ]
+    },
+    {
+      "id": 8747,
+      "title": "The Path of the Protector",
+      "items": [
+        {
+          "itemID": 21196,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8747",
+      "sha256": "a04d5d4ca61333cc5006f9eb0f17d6b70515f91f805af53800d54801635fd7bd",
+      "level": 60,
+      "minimum": 60,
+      "xp": 6600,
+      "reputation": [
+        {
+          "factionID": 910,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 15192,
+          "name": "Anachronos"
+        }
+      ]
+    },
+    {
+      "id": 8759,
+      "title": "The Path of the Invoker",
+      "items": [
+        {
+          "itemID": 21208,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8759",
+      "sha256": "db8b7660b3e257971d1914bde4af59a0453c69bd0b4f45f8970cc7c2284347e8",
+      "level": 60,
+      "minimum": 60,
+      "xp": 6600,
+      "reputation": [
+        {
+          "factionID": 910,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 15192,
+          "name": "Anachronos"
+        }
+      ]
+    },
+    {
+      "id": 8776,
+      "title": "Target: Hive'Regal Slavemakers",
+      "items": [
+        {
+          "itemID": 20802,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8776",
+      "sha256": "0afaf55d462f1142ee5242e8bcf889b8537c73cf652a8adca67cfe8717a40aa2",
+      "level": 60,
+      "minimum": 60,
+      "xp": 660,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 8804,
+      "title": "Desert Survival Kits",
+      "items": [
+        {
+          "itemID": 20800,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 21266,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8804",
+      "sha256": "92270ea5aa16a661c3c18094c9c8695dea77407fa0df8ffdf12a490a70fe488d",
+      "level": 60,
+      "minimum": 60,
+      "xp": 660,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 8805,
+      "title": "Boots for the Guard",
+      "items": [
+        {
+          "itemID": 20800,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 21266,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8805",
+      "sha256": "750b9590d544cc287f2ad1b24244d860b8d80bac4aee02129dfacee37ca23542",
+      "level": 60,
+      "minimum": 60,
+      "xp": 660,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 8908,
+      "title": "An Earnest Proposition",
+      "items": [
+        {
+          "itemID": 22088,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8908",
+      "sha256": "e118482d80edcbb8f8fdbd73be8f3a2b03fa2a6dbd35246710a23f574e9e78ad",
+      "level": 60,
+      "minimum": 58,
+      "xp": 6600,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 16013,
+          "name": "Deliana"
+        }
+      ]
+    },
+    {
+      "id": 8920,
+      "title": "An Earnest Proposition",
+      "items": [
+        {
+          "itemID": 21996,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8920",
+      "sha256": "e6175b06bc43f39c39aff40bfe4c6f0084cb1aeb03c6d8ad2b6778acb00cfdff",
+      "level": 60,
+      "minimum": 58,
+      "xp": 6600,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 16012,
+          "name": "Mokvar"
+        }
+      ]
+    },
+    {
+      "id": 8921,
+      "title": "The Ectoplasmic Distiller",
+      "items": [
+        {
+          "itemID": 22320,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8921",
+      "sha256": "1794d7a861f7656fa0452e09a539429bdfd4acc37181d423470e8fbe39bbcece",
+      "level": 60,
+      "minimum": 58,
+      "xp": 6600,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 16014,
+          "name": "Mux Manascrambler"
+        }
+      ]
+    },
+    {
+      "id": 8940,
+      "title": "Just Compensation",
+      "items": [
+        {
+          "itemID": 22078,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22081,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8940",
+      "sha256": "40cfafe394b2ca5c0105468a42ab81c7453df98160cf2a30b80a02aa4b40971f",
+      "level": 60,
+      "minimum": 58,
+      "xp": 9950,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 16012,
+          "name": "Mokvar"
+        }
+      ]
+    },
+    {
+      "id": 8958,
+      "title": "Anthion's Parting Words",
+      "items": [
+        {
+          "itemID": 22076,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22072,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22073,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8958",
+      "sha256": "8fe13c506998893c2a8e59cc6d8f1b7b26d4ea7711576d43a90591bcebceabbf",
+      "level": 60,
+      "minimum": 58,
+      "xp": 9950,
+      "reputation": []
+    },
+    {
+      "id": 8961,
+      "title": "Three Kings of Flame",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=8961",
+      "sha256": "ad779ecbe4c82b348213728d200408d88824dfad17bedc9b20fcd99254e8f835",
+      "level": 60,
+      "minimum": 58,
+      "xp": 6600,
+      "reputation": []
+    },
+    {
+      "id": 9009,
+      "title": "Saving the Best for Last",
+      "items": [
+        {
+          "itemID": 22080,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22083,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=9009",
+      "sha256": "8a17bbb204450a16d1706cd919082ca75846cb0a92cea22798315a8ec13f4820",
+      "level": 60,
+      "minimum": 58,
+      "xp": 1650,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 16012,
+          "name": "Mokvar"
+        }
+      ]
+    },
+    {
+      "id": 9022,
+      "title": "Anthion's Parting Words",
+      "items": [
+        {
+          "itemID": 21995,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22000,
+          "quantity": 1,
+          "group": "guaranteed"
+        },
+        {
+          "itemID": 22001,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=9022",
+      "sha256": "2cce9c1af3fbb8ec1cea65b35de4979e2067998f1d39ac26801d1a812eb60cea",
+      "level": 60,
+      "minimum": 58,
+      "xp": 9950,
+      "reputation": []
+    },
+    {
+      "id": 9023,
+      "title": "The Perfect Poison",
+      "items": [
+        {
+          "itemID": 22378,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22379,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22377,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22348,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22347,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22380,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=9023",
+      "sha256": "6ab762aaa9f1de16897ede191584b7846a7d231a95b331ae8c1161ed36db59f7",
+      "level": 60,
+      "minimum": 60,
+      "xp": 6600,
+      "reputation": [
+        {
+          "factionID": 609,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 16091,
+          "name": "Dirk Thunderwood"
+        }
+      ]
+    },
+    {
+      "id": 9191,
+      "title": "Craftsman's Writ - Runecloth Bag",
+      "items": [
+        {
+          "itemID": 22524,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22523,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=9191",
+      "sha256": "af6dbb4dc0af79b7f820b3fe089debcf473dffe494ac3726ac00d844529a8ab8",
+      "level": 60,
+      "minimum": 55,
+      "reputation": [
+        {
+          "factionID": 529,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 9206,
+      "title": "Craftsman's Writ - Lightning Eel",
+      "items": [
+        {
+          "itemID": 22524,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 22523,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=9206",
+      "sha256": "e965dc00fe7462e387e39b75e5bdf0af2880f19e68cfee70ab2f48a1f4966611",
+      "level": 60,
+      "minimum": 55,
+      "reputation": [
+        {
+          "factionID": 529,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 81736,
+      "title": "Duskwood Mission VII: Recover Shadowscythe",
+      "items": [
+        {
+          "itemID": 219526,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=81736",
+      "sha256": "4a2b22cdedcb03c3716d89b09dfe702b2d9747cd184f728bb237ed7e6066a63c",
+      "level": 27,
+      "minimum": 23,
+      "xp": 1650,
+      "money": 1700,
+      "reputation": [
+        {
+          "factionID": 2641,
+          "amount": 75
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 221471,
+          "name": "Field Captain Palandar"
+        }
+      ]
+    },
+    {
+      "id": 86574,
+      "title": "Stonetalon Supply Run",
+      "items": [
+        {
+          "itemID": 281251,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=86574",
+      "sha256": "43f17c5e095ffcdb07c569fef7fb9102e74af4d2e86a8fc09b95128c61481076",
+      "level": 24,
+      "minimum": 20,
+      "xp": 1950,
+      "money": 1700,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 268925,
+          "name": "Night Elf Courier"
+        }
+      ]
+    },
+    {
+      "id": 91736,
+      "title": "Applejack Still",
+      "items": [
+        {
+          "itemID": 247824,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=91736",
+      "sha256": "926c1ffbaf1813cce3a518628786f33cd964494c70228692e57b6ba50a5932aa",
+      "reputation": []
+    },
+    {
+      "id": 92460,
+      "title": "Coming of Age",
+      "items": [
+        {
+          "itemID": 264908,
+          "quantity": 1,
+          "group": "guaranteed"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=92460",
+      "sha256": "743fc555ebca90ca0b4fa75b156d8972361b66ebe6b5c5471766dca622467ca7",
+      "level": 1,
+      "minimum": 1,
+      "xp": 40,
+      "reputation": [
+        {
+          "factionID": 2778,
+          "amount": 25
+        },
+        {
+          "factionID": 2779,
+          "amount": 25
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 251362,
+          "name": "Ailee Farheart"
+        }
+      ]
+    },
+    {
+      "id": 92461,
+      "title": "Harmony in Balance",
+      "items": [
+        {
+          "itemID": 257281,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 257280,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=92461",
+      "sha256": "3dd9f7618083cd59d20d784cdeaaaad214703f943a1ba4b07b1447f52cfed95d",
+      "level": 1,
+      "minimum": 1,
+      "xp": 80,
+      "money": 15,
+      "reputation": [
+        {
+          "factionID": 2778,
+          "amount": 50
+        },
+        {
+          "factionID": 2779,
+          "amount": 50
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 251361,
+          "name": "Rorian the Dayseeker"
+        }
+      ]
+    },
+    {
+      "id": 92910,
+      "title": "Harvesting the Harvesters",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=92910",
+      "sha256": "7629fac778d6c10984e9f98e91157950f2b4d085b6d5a404a13203b2601e6277",
+      "level": 15,
+      "minimum": 8,
+      "xp": 800,
+      "money": 500,
+      "reputation": [
+        {
+          "factionID": 54,
+          "amount": 50
+        }
+      ]
+    },
+    {
+      "id": 97250,
+      "title": "Wrongly Blamed, Justly Corrected",
+      "items": [
+        {
+          "itemID": 277286,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 277288,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 277289,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=97250",
+      "sha256": "7fe063eda8ef7c0153ea30a0fdb3f0ef7a862f3ceb5267ebdd3c5853b6fe5382",
+      "level": 23,
+      "minimum": 18,
+      "xp": 2300,
+      "money": 3000,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 5911,
+          "name": "Grunt Logmar"
+        }
+      ]
+    },
+    {
+      "id": 98189,
+      "title": "Return the Statuette",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=98189",
+      "sha256": "426efde1b0edd2289b6c54698ff1e85dadb68f5e7043d05f95f455f97882dd73",
+      "level": 25,
+      "minimum": 20,
+      "xp": 200,
+      "reputation": [],
+      "locations": [
+        {
+          "npcID": 1242,
+          "name": "Karl Boran"
+        }
+      ]
+    },
+    {
+      "id": 98323,
+      "title": "Secure the Mountain",
+      "items": [],
+      "itemState": "published-empty",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=98323",
+      "sha256": "187e24bf4b9a12bb6143c1cb0a397b7413f638a1a7b9e74d103493dc9bdae67c",
+      "level": 8,
+      "minimum": 4,
+      "xp": 70,
+      "reputation": [
+        {
+          "factionID": 47,
+          "amount": 100
+        },
+        {
+          "factionID": 54,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 271546,
+          "name": "Mountaineer Gretchen"
+        }
+      ]
+    },
+    {
+      "id": 99156,
+      "title": "Rear Guard Patrol",
+      "items": [
+        {
+          "itemID": 286742,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 286743,
+          "quantity": 1,
+          "group": "choice"
+        },
+        {
+          "itemID": 286744,
+          "quantity": 1,
+          "group": "choice"
+        }
+      ],
+      "itemState": "published",
+      "sourceUrl": "https://www.wowhead.com/forever/quest=99156",
+      "sha256": "15ce6bed563deacbecb3fc3af9261861276ee11aa05f79c22a0e8bf0a6f1ed0e",
+      "level": 13,
+      "minimum": 6,
+      "xp": 910,
+      "reputation": [
+        {
+          "factionID": 68,
+          "amount": 100
+        }
+      ],
+      "locations": [
+        {
+          "npcID": 1495,
+          "name": "Deathguard Linnea"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": 2,
+      "url": "https://www.wowhead.com/forever/quest=2",
+      "sha256": "687a155df9eafb1c8effb04b33d86d0d4d754a13ea8354aadf87aa57f4a72764",
+      "bytes": 59475
+    },
+    {
+      "id": 6,
+      "url": "https://www.wowhead.com/forever/quest=6",
+      "sha256": "6532e1016170f9b76cc6b290f22c3c0918c010f7d2562454bff6f0fa8eb14bd9",
+      "bytes": 57633
+    },
+    {
+      "id": 8,
+      "url": "https://www.wowhead.com/forever/quest=8",
+      "sha256": "9ed462f1536db144c990406a0ed1c199e361ab0dbb7cae299fcad5088f53a21f",
+      "bytes": 43262
+    },
+    {
+      "id": 200,
+      "url": "https://www.wowhead.com/forever/quest=200",
+      "sha256": "2f213773a430a9d3efbe3b96b70ed01aa3e577cffe887f3f96cd79c99040cd6a",
+      "bytes": 61497
+    },
+    {
+      "id": 202,
+      "url": "https://www.wowhead.com/forever/quest=202",
+      "sha256": "90d754d367c434e05a277f6e170b907f80e02fee294466d48d763695401b0282",
+      "bytes": 85621
+    },
+    {
+      "id": 208,
+      "url": "https://www.wowhead.com/forever/quest=208",
+      "sha256": "d60e5bdb1e9428adbdedd67c7c4d1f0646a318a36dc9b7718c0adb4fe358a824",
+      "bytes": 141395
+    },
+    {
+      "id": 284,
+      "url": "https://www.wowhead.com/forever/quest=284",
+      "sha256": "9e5bc89d4b67c90802eb3228c5e534aeccf85f35e00b2ed0093eb663d248ec05",
+      "bytes": 52104
+    },
+    {
+      "id": 286,
+      "url": "https://www.wowhead.com/forever/quest=286",
+      "sha256": "28926dbbfd80bd06ba25e6f34b47e1686d07929012acbb079115059aea0caef0",
+      "bytes": 54511
+    },
+    {
+      "id": 292,
+      "url": "https://www.wowhead.com/forever/quest=292",
+      "sha256": "364d606b4092708cc38af8019a25c775c49122119e850d25822e20ed042b851a",
+      "bytes": 50326
+    },
+    {
+      "id": 325,
+      "url": "https://www.wowhead.com/forever/quest=325",
+      "sha256": "b10fdd3aa261d8c8a21857a36b9c85fb8a111a2673cd13788d70cc9c78d625ff",
+      "bytes": 48154
+    },
+    {
+      "id": 338,
+      "url": "https://www.wowhead.com/forever/quest=338",
+      "sha256": "201a987f5c3891472e6762a1fd7f033f5c0c7ba9f43ba6c639514d43996564be",
+      "bytes": 117600
+    },
+    {
+      "id": 356,
+      "url": "https://www.wowhead.com/forever/quest=356",
+      "sha256": "b9df40e455cae03f60f90c8fc300d6fed7aa1356f2f884ee2dfdc6b85e050cf5",
+      "bytes": 48615
+    },
+    {
+      "id": 381,
+      "url": "https://www.wowhead.com/forever/quest=381",
+      "sha256": "398fdc291574f4d5ae23d7a062ea81e97416cf5015c806e7152efbb652ed39a1",
+      "bytes": 60375
+    },
+    {
+      "id": 403,
+      "url": "https://www.wowhead.com/forever/quest=403",
+      "sha256": "c0a08d0b95937f83a0beb326aa93f7f0b655024c99fbef90d7cb7d6277de14b7",
+      "bytes": 37931
+    },
+    {
+      "id": 429,
+      "url": "https://www.wowhead.com/forever/quest=429",
+      "sha256": "8cab680c391207c0ea37d3ac2507c47c163005b4f8061ee86cf5d9878523f4f1",
+      "bytes": 100068
+    },
+    {
+      "id": 442,
+      "url": "https://www.wowhead.com/forever/quest=442",
+      "sha256": "7ec63fc8589340e475090a2af8a352c5cd381611d1939b7e3d4c9cb76499662d",
+      "bytes": 76886
+    },
+    {
+      "id": 451,
+      "url": "https://www.wowhead.com/forever/quest=451",
+      "sha256": "ab02fd7cf0df20c1f02a1b3d2f6732cf2b2817df871d1393e8907fc713012459",
+      "bytes": 92958
+    },
+    {
+      "id": 459,
+      "url": "https://www.wowhead.com/forever/quest=459",
+      "sha256": "0ccd506cd13680ce6501a70b5ebbe7622b3b62ae25d17fd4e61252992bc8b0ad",
+      "bytes": 48545
+    },
+    {
+      "id": 501,
+      "url": "https://www.wowhead.com/forever/quest=501",
+      "sha256": "65e986ab66a76422164bc6d1503a5036d99b3b29801b699d05b98d8c33ef3f51",
+      "bytes": 79496
+    },
+    {
+      "id": 504,
+      "url": "https://www.wowhead.com/forever/quest=504",
+      "sha256": "417348405f5894e443f27eab2a0ba64009041950fa5e745d499f226ece8499a1",
+      "bytes": 94399
+    },
+    {
+      "id": 509,
+      "url": "https://www.wowhead.com/forever/quest=509",
+      "sha256": "219d4b3ab5ff40a0b3ce34df743c7c0df14ddd0d92b0b195d84958a001643387",
+      "bytes": 57443
+    },
+    {
+      "id": 515,
+      "url": "https://www.wowhead.com/forever/quest=515",
+      "sha256": "c23e5445cb3e8bb0cbef90f9ea7bbdfd9c1eecce729945dc1f0481e6fb6f6b9d",
+      "bytes": 91087
+    },
+    {
+      "id": 547,
+      "url": "https://www.wowhead.com/forever/quest=547",
+      "sha256": "620c044c1a30546ead80fddc57359bae0a5bc67bd8ac2dc7c9c66f643669855b",
+      "bytes": 78651
+    },
+    {
+      "id": 575,
+      "url": "https://www.wowhead.com/forever/quest=575",
+      "sha256": "113008ba8c4a871317e48b5a5ce1b5365e8fb54d046b102edc94f8ff9ba48f69",
+      "bytes": 74310
+    },
+    {
+      "id": 613,
+      "url": "https://www.wowhead.com/forever/quest=613",
+      "sha256": "94cd5b3d548e55b50d496748249924c57e158720954e32e51ac2c3fa81089955",
+      "bytes": 100414
+    },
+    {
+      "id": 666,
+      "url": "https://www.wowhead.com/forever/quest=666",
+      "sha256": "3d9e29260662d37840273e9e0b9a4286b392869047b74e0799a9915dc1361949",
+      "bytes": 76362
+    },
+    {
+      "id": 679,
+      "url": "https://www.wowhead.com/forever/quest=679",
+      "sha256": "a7dfc63bff402082cf0301a4dc8874e1ed8c0ffd76417c48e3e86bea587336d5",
+      "bytes": 61655
+    },
+    {
+      "id": 680,
+      "url": "https://www.wowhead.com/forever/quest=680",
+      "sha256": "cf0932820e442b72f6a4399d6a700c03e19da88e7844f7eaa12eeb300b285634",
+      "bytes": 71128
+    },
+    {
+      "id": 682,
+      "url": "https://www.wowhead.com/forever/quest=682",
+      "sha256": "561244c791872784d21b39b32087c32b072fb6f5e8cf581ffd4a22740baa8fe0",
+      "bytes": 75224
+    },
+    {
+      "id": 684,
+      "url": "https://www.wowhead.com/forever/quest=684",
+      "sha256": "8faaf3e9dac7990dc232c510a1f6a34a21fefbca089d847755a5c1cbce0c08cd",
+      "bytes": 59721
+    },
+    {
+      "id": 685,
+      "url": "https://www.wowhead.com/forever/quest=685",
+      "sha256": "60dba6f9495031b8c6f06202701f7b3d6ba873b38d0d48c39b7ff35bd7d69c67",
+      "bytes": 83454
+    },
+    {
+      "id": 736,
+      "url": "https://www.wowhead.com/forever/quest=736",
+      "sha256": "2ba7d45e12b5ac48900cdd233a6f84465e07674a4eff68868c58c360b5620a71",
+      "bytes": 113589
+    },
+    {
+      "id": 757,
+      "url": "https://www.wowhead.com/forever/quest=757",
+      "sha256": "cabecb5ef3225888cb4ac535db1102cca78188638608e615e447dd87d15bd212",
+      "bytes": 56097
+    },
+    {
+      "id": 780,
+      "url": "https://www.wowhead.com/forever/quest=780",
+      "sha256": "ad3c0e62b615cfa9720dbea67a35108f05864ddecc25d6e5c1c264112f4700ca",
+      "bytes": 46170
+    },
+    {
+      "id": 794,
+      "url": "https://www.wowhead.com/forever/quest=794",
+      "sha256": "b11eab8e504557a50f22ff6da19afbe871a3aa4fc5ef4da868941e3b2c87582a",
+      "bytes": 69303
+    },
+    {
+      "id": 898,
+      "url": "https://www.wowhead.com/forever/quest=898",
+      "sha256": "023db4f3ed1da56286efa79c7c8f6d36e7c9f45c88c6e03b824c262da4cc164c",
+      "bytes": 73811
+    },
+    {
+      "id": 912,
+      "url": "https://www.wowhead.com/forever/quest=912",
+      "sha256": "e71c438d8b7d9df4b61f10e07439e4d7652e617bdabe168bba912a1796d44280",
+      "bytes": 35881
+    },
+    {
+      "id": 916,
+      "url": "https://www.wowhead.com/forever/quest=916",
+      "sha256": "3d74560d8d55f0ee7121bb9e1b49266bff6897f3c344f3a362ce70b515548f5b",
+      "bytes": 46361
+    },
+    {
+      "id": 943,
+      "url": "https://www.wowhead.com/forever/quest=943",
+      "sha256": "5a88a186142ddd72da571d1cb8b2f4b2b161cfdfbdabe7c4bed133dd77d203fb",
+      "bytes": 121648
+    },
+    {
+      "id": 947,
+      "url": "https://www.wowhead.com/forever/quest=947",
+      "sha256": "da7a889bababd01f9c46bf85f26777bbee3206bc0dc74dcaec886e7f1f4d8b11",
+      "bytes": 113004
+    },
+    {
+      "id": 974,
+      "url": "https://www.wowhead.com/forever/quest=974",
+      "sha256": "2d69ffde71e034eac62de4e79baa1ecb8fd4a382b76e8177cb7a9caf536ea040",
+      "bytes": 90561
+    },
+    {
+      "id": 982,
+      "url": "https://www.wowhead.com/forever/quest=982",
+      "sha256": "4cc9d51043fe45fed3d82246375b279283011fe24df079c6dc9245859cf56101",
+      "bytes": 170519
+    },
+    {
+      "id": 986,
+      "url": "https://www.wowhead.com/forever/quest=986",
+      "sha256": "97acdead19fc20cabe31cd55eb313f41989bd2869c75274240fa0ad409d84047",
+      "bytes": 97869
+    },
+    {
+      "id": 996,
+      "url": "https://www.wowhead.com/forever/quest=996",
+      "sha256": "37a93564e4f64f5d5119bda8d3771eda01dbcfd097eb6c4654bf8314f4d5361a",
+      "bytes": 40400
+    },
+    {
+      "id": 998,
+      "url": "https://www.wowhead.com/forever/quest=998",
+      "sha256": "19465ff0668cce8b706112679b17a381bbfa314d90f8c336b08da9e533a2d902",
+      "bytes": 40318
+    },
+    {
+      "id": 1012,
+      "url": "https://www.wowhead.com/forever/quest=1012",
+      "sha256": "9fdbf1b004d27810dc485efda900d98edd3cd26a0f55c1818e0b68df957876f8",
+      "bytes": 134053
+    },
+    {
+      "id": 1046,
+      "url": "https://www.wowhead.com/forever/quest=1046",
+      "sha256": "d63b2deb460d956c89012db1ad68cb5e00a5aa736f72f062bb72837e009905dc",
+      "bytes": 106357
+    },
+    {
+      "id": 1059,
+      "url": "https://www.wowhead.com/forever/quest=1059",
+      "sha256": "5321a95b988508cd06409d8a937de88d00e8f387deb78a3fb3dfb5744c1282d6",
+      "bytes": 95937
+    },
+    {
+      "id": 1131,
+      "url": "https://www.wowhead.com/forever/quest=1131",
+      "sha256": "827cb7ff0bafdf12cacd53c672c253374d9c3bb3f8f21ccb8854909e7c2e88fb",
+      "bytes": 104906
+    },
+    {
+      "id": 1203,
+      "url": "https://www.wowhead.com/forever/quest=1203",
+      "sha256": "3f1ef8e9035fefab0a8b7d5be649d4cc1a29764ec41c1fe1ff454255eee68da4",
+      "bytes": 67155
+    },
+    {
+      "id": 1392,
+      "url": "https://www.wowhead.com/forever/quest=1392",
+      "sha256": "a5e63d444974e7b9f587d758b820ec5559a2d2af1449ae99594a1dc161fa1518",
+      "bytes": 75309
+    },
+    {
+      "id": 1514,
+      "url": "https://www.wowhead.com/forever/quest=1514",
+      "sha256": "e639204f616c67f56a6c82eb17539611a5d0b4058de6d6d7e9f5d5c891787d38",
+      "bytes": 38987
+    },
+    {
+      "id": 2098,
+      "url": "https://www.wowhead.com/forever/quest=2098",
+      "sha256": "f26b644b66dff1c5af3b96157db33075d7753c654a344c166d76b99cbf93dc46",
+      "bytes": 109047
+    },
+    {
+      "id": 2203,
+      "url": "https://www.wowhead.com/forever/quest=2203",
+      "sha256": "4ace08fec7d5743a7c2bf4bf32ccf37c9c45efe3bd81d6e139eff1e2023231d5",
+      "bytes": 79860
+    },
+    {
+      "id": 2399,
+      "url": "https://www.wowhead.com/forever/quest=2399",
+      "sha256": "9d8491d6e5bc5a3725fcb6c253fa3deae4a69ec7346136185b7226afdde6bd17",
+      "bytes": 49926
+    },
+    {
+      "id": 2439,
+      "url": "https://www.wowhead.com/forever/quest=2439",
+      "sha256": "28c4769cf758f1ad95cf2c016c1f9d21853d64badb8aa1cfab1c93e94cca4e0b",
+      "bytes": 48788
+    },
+    {
+      "id": 2440,
+      "url": "https://www.wowhead.com/forever/quest=2440",
+      "sha256": "57da0048d798437df3006557367e8eb9b0a8008b78d1b09892e42549f9daaaf7",
+      "bytes": 46556
+    },
+    {
+      "id": 2501,
+      "url": "https://www.wowhead.com/forever/quest=2501",
+      "sha256": "e2765b6f054f87c0915255c180d77ff0826a377689a9258a5ee55d121a94b6a9",
+      "bytes": 81401
+    },
+    {
+      "id": 2561,
+      "url": "https://www.wowhead.com/forever/quest=2561",
+      "sha256": "c68be1a82682be473894a00322f667a3583c7225073d24d38e0fe929826df81f",
+      "bytes": 64263
+    },
+    {
+      "id": 2940,
+      "url": "https://www.wowhead.com/forever/quest=2940",
+      "sha256": "a3af2eedd5e800aaae41fa0c5bfe114a88dc239f504b633182aa97b075c2b7ed",
+      "bytes": 55077
+    },
+    {
+      "id": 3161,
+      "url": "https://www.wowhead.com/forever/quest=3161",
+      "sha256": "813ae61d4b4c64ab3a4e8f9c95363f0e9e17eb2c90fa02bc3c4beda1bc234fc3",
+      "bytes": 100936
+    },
+    {
+      "id": 3481,
+      "url": "https://www.wowhead.com/forever/quest=3481",
+      "sha256": "0b2b91b6157bb0bd2b44f6d03424471864c98cad6c4ce084cc13231c7c5f5323",
+      "bytes": 55358
+    },
+    {
+      "id": 3514,
+      "url": "https://www.wowhead.com/forever/quest=3514",
+      "sha256": "e7db629a53b419d5dd1cef7723c9af5bce3d8f4398ee4671cebbf26ed69220ca",
+      "bytes": 79864
+    },
+    {
+      "id": 3568,
+      "url": "https://www.wowhead.com/forever/quest=3568",
+      "sha256": "8367d9ce020a0a6d7d00c3834788798700ad1243e7981f21da1e3e80a500da1f",
+      "bytes": 87951
+    },
+    {
+      "id": 3602,
+      "url": "https://www.wowhead.com/forever/quest=3602",
+      "sha256": "0ce510bfa1b2e7d79e75fbf65ea3b2d149633a8bbd5a1af7dc8f7739e4866821",
+      "bytes": 87631
+    },
+    {
+      "id": 3783,
+      "url": "https://www.wowhead.com/forever/quest=3783",
+      "sha256": "8534db4dd60dc9cb090a9e970a255b0d9c6eb63341c57a2e7977235cb19e97e0",
+      "bytes": 121079
+    },
+    {
+      "id": 3845,
+      "url": "https://www.wowhead.com/forever/quest=3845",
+      "sha256": "1257b79b26884056c133f54d1857f293e61b24e46dc5137a870778d163966054",
+      "bytes": 74891
+    },
+    {
+      "id": 4005,
+      "url": "https://www.wowhead.com/forever/quest=4005",
+      "sha256": "2110814c482727762b77c4f3279ee3ec2df9f3585ff661d403233501b5726d03",
+      "bytes": 136529
+    },
+    {
+      "id": 4115,
+      "url": "https://www.wowhead.com/forever/quest=4115",
+      "sha256": "457229cb7b119cf443df80cb5eb8cab88690146e693933f5db0d60e9e1d31cde",
+      "bytes": 39921
+    },
+    {
+      "id": 4117,
+      "url": "https://www.wowhead.com/forever/quest=4117",
+      "sha256": "4d48193bcedfded51702ab9220b8ad3be46f12d2aec093e5c823b22eb9331055",
+      "bytes": 41436
+    },
+    {
+      "id": 4119,
+      "url": "https://www.wowhead.com/forever/quest=4119",
+      "sha256": "da56d843001d9a2442a16444cd9f5e293ec4c0fa4642446d4aa34857f6daee59",
+      "bytes": 42231
+    },
+    {
+      "id": 4221,
+      "url": "https://www.wowhead.com/forever/quest=4221",
+      "sha256": "a0b66b05aec3ae4c9e8bc0d7d634643ac253283bb429b5ba447f87a49d6fc55b",
+      "bytes": 38955
+    },
+    {
+      "id": 4222,
+      "url": "https://www.wowhead.com/forever/quest=4222",
+      "sha256": "e53626d56be4727e45ae677dea94bd449131f9078e55c92201fd84eee5cb14fd",
+      "bytes": 38995
+    },
+    {
+      "id": 4343,
+      "url": "https://www.wowhead.com/forever/quest=4343",
+      "sha256": "abd33f4b23e3eb581fa093738d4d13801773c895e6a485f46e18c0762b93de65",
+      "bytes": 41299
+    },
+    {
+      "id": 4403,
+      "url": "https://www.wowhead.com/forever/quest=4403",
+      "sha256": "614562e59cea9ab55923dc1d4731516c1dab57e3888eb9b1b829a14361998cd4",
+      "bytes": 38963
+    },
+    {
+      "id": 4443,
+      "url": "https://www.wowhead.com/forever/quest=4443",
+      "sha256": "8def4f67b92395cb7673a754540e07813d7eacbaec6d7a41f7c865cf0528bdbb",
+      "bytes": 39360
+    },
+    {
+      "id": 4444,
+      "url": "https://www.wowhead.com/forever/quest=4444",
+      "sha256": "dc5c4d792d07ccc63ff8ccaedc34b0a4f1a5a25a8af055ed7b573af04fe06e8f",
+      "bytes": 38480
+    },
+    {
+      "id": 4445,
+      "url": "https://www.wowhead.com/forever/quest=4445",
+      "sha256": "0dcbf291dfa743a2cda4cd88d404ada72be3e589406c2bf2764606ce14ddb0cc",
+      "bytes": 38460
+    },
+    {
+      "id": 4446,
+      "url": "https://www.wowhead.com/forever/quest=4446",
+      "sha256": "6e2483c675be51c2e5dce060b8136b2b006fb16869037de5374ec5c3502cd911",
+      "bytes": 38448
+    },
+    {
+      "id": 4447,
+      "url": "https://www.wowhead.com/forever/quest=4447",
+      "sha256": "061bd1fdb9bbf3cec91684b1f1ff32c500e4d7934e3ab1442d02b37a562298c8",
+      "bytes": 37947
+    },
+    {
+      "id": 4448,
+      "url": "https://www.wowhead.com/forever/quest=4448",
+      "sha256": "c85311a5bc56c35ca3183e1079dc8ef6119a0aa0f767fa3c5e12f745b2e744ee",
+      "bytes": 41122
+    },
+    {
+      "id": 4461,
+      "url": "https://www.wowhead.com/forever/quest=4461",
+      "sha256": "97c33624da63a1cdceb71a6328e08957d9f5bfd318d0325fe95611755bdad7e5",
+      "bytes": 38456
+    },
+    {
+      "id": 4462,
+      "url": "https://www.wowhead.com/forever/quest=4462",
+      "sha256": "bce35ec10787d98dcefa572ab6e4818365cbfe6044cd2a6397d81e4ffec86a49",
+      "bytes": 37896
+    },
+    {
+      "id": 4466,
+      "url": "https://www.wowhead.com/forever/quest=4466",
+      "sha256": "87efde3069aa3c9d0a011e199925dfe28d14212ff02a8c3c66dd4249c7c0332b",
+      "bytes": 41543
+    },
+    {
+      "id": 4467,
+      "url": "https://www.wowhead.com/forever/quest=4467",
+      "sha256": "f923e1296e87680abf6f53895f4c0ebba6a3a5212f6226751552190fff1d63ba",
+      "bytes": 38586
+    },
+    {
+      "id": 4493,
+      "url": "https://www.wowhead.com/forever/quest=4493",
+      "sha256": "f8b62f0cf228afd5cf46f78a6e80904c24d5c8f34f9d31c07b16ee3a0c7e40ce",
+      "bytes": 44574
+    },
+    {
+      "id": 4512,
+      "url": "https://www.wowhead.com/forever/quest=4512",
+      "sha256": "1a08a8bcc56544d823fc6229574f78f8dfec77f706a7cad34d70ea22d492dd55",
+      "bytes": 69871
+    },
+    {
+      "id": 4513,
+      "url": "https://www.wowhead.com/forever/quest=4513",
+      "sha256": "4e310656c8464352a8bca04b483036d99a0e2a8743ea87cd2735880edff4bc6c",
+      "bytes": 75484
+    },
+    {
+      "id": 5088,
+      "url": "https://www.wowhead.com/forever/quest=5088",
+      "sha256": "6e401091c9ec630de90e4313c7f150f22966743fb6948103fd4fe94370fd5153",
+      "bytes": 119103
+    },
+    {
+      "id": 5128,
+      "url": "https://www.wowhead.com/forever/quest=5128",
+      "sha256": "e967b3a854411167fe98f05c6714359beeff436aba802d57b6e63fd70e34e0bd",
+      "bytes": 71156
+    },
+    {
+      "id": 5150,
+      "url": "https://www.wowhead.com/forever/quest=5150",
+      "sha256": "3b5f7faff2809acca70bca2d630cd59e498e1d1f42aeceae5a7606ad6b4a2092",
+      "bytes": 66041
+    },
+    {
+      "id": 5206,
+      "url": "https://www.wowhead.com/forever/quest=5206",
+      "sha256": "6d0d3776f5e8a7fb752006e1b89861ef847fa4b9411f0bffa1fa6329deb49f48",
+      "bytes": 96881
+    },
+    {
+      "id": 5215,
+      "url": "https://www.wowhead.com/forever/quest=5215",
+      "sha256": "4dbca4c810cef1fd8887e50f8cba19ddf37e5ae01cb849408240a174ad3ccc54",
+      "bytes": 45188
+    },
+    {
+      "id": 5237,
+      "url": "https://www.wowhead.com/forever/quest=5237",
+      "sha256": "4b06fb354e97b23a7506e2d7eb4dc7152f98ac5d16e530a5c9c65b1264034f26",
+      "bytes": 43922
+    },
+    {
+      "id": 5321,
+      "url": "https://www.wowhead.com/forever/quest=5321",
+      "sha256": "a1d80da33ae3434b99804b5c0311b4e606ad11507e9e132494cbd28ade57acf6",
+      "bytes": 123477
+    },
+    {
+      "id": 5521,
+      "url": "https://www.wowhead.com/forever/quest=5521",
+      "sha256": "5465b12cb847f06b25f54aca24a6c0f65c64fbe73f00b02c7361a79716af2c56",
+      "bytes": 58141
+    },
+    {
+      "id": 5943,
+      "url": "https://www.wowhead.com/forever/quest=5943",
+      "sha256": "47c4896caaacd402bc26b9000ac6890abbebea8d4c9fde6038df21c47e258a8e",
+      "bytes": 93838
+    },
+    {
+      "id": 6146,
+      "url": "https://www.wowhead.com/forever/quest=6146",
+      "sha256": "62f18d419dce5b185666d3a385293ab710953854ff2564bc84dc1ebb0b3de695",
+      "bytes": 54513
+    },
+    {
+      "id": 6183,
+      "url": "https://www.wowhead.com/forever/quest=6183",
+      "sha256": "08b605752fd2e14e5bf5316a6c8c742a9b283dbac4a1bb83980a6a9c3f4f3c68",
+      "bytes": 43629
+    },
+    {
+      "id": 6283,
+      "url": "https://www.wowhead.com/forever/quest=6283",
+      "sha256": "bd360aae2665030ed4bfdb7e731cf56839006add50bf762ca6bba93db4c413d6",
+      "bytes": 98461
+    },
+    {
+      "id": 6481,
+      "url": "https://www.wowhead.com/forever/quest=6481",
+      "sha256": "1193ffa551fba06b80dd5df79c80a624088d9086e388a89882a93b12764790a7",
+      "bytes": 92423
+    },
+    {
+      "id": 6922,
+      "url": "https://www.wowhead.com/forever/quest=6922",
+      "sha256": "c513058cbe075b60dcbf163dac9236e6e0f863f35d31078cc376f1ef7fa401ca",
+      "bytes": 70985
+    },
+    {
+      "id": 7486,
+      "url": "https://www.wowhead.com/forever/quest=7486",
+      "sha256": "24dbf2e89322805ea219da6e97db8f280cb58f5eba8e2127eef32cb80c19f519",
+      "bytes": 119780
+    },
+    {
+      "id": 7806,
+      "url": "https://www.wowhead.com/forever/quest=7806",
+      "sha256": "00f39a140ba5abe0a7e5d1a3b8d91c0628b63779ecc41508419127a3874b388d",
+      "bytes": 40821
+    },
+    {
+      "id": 8287,
+      "url": "https://www.wowhead.com/forever/quest=8287",
+      "sha256": "4f6e234d0f12429a6b4d05d5530a16ab51dccf002193dcc0c9ee201cc10e7647",
+      "bytes": 48730
+    },
+    {
+      "id": 8497,
+      "url": "https://www.wowhead.com/forever/quest=8497",
+      "sha256": "efc917cfceb3f4c850bbb8860db92a8a3a6c489bc87a6a4387a9de13132701ff",
+      "bytes": 44987
+    },
+    {
+      "id": 8507,
+      "url": "https://www.wowhead.com/forever/quest=8507",
+      "sha256": "90e6467bccbfdb036fbc1d292f1642b8292533edea242326484a72d1fb78fb68",
+      "bytes": 58186
+    },
+    {
+      "id": 8586,
+      "url": "https://www.wowhead.com/forever/quest=8586",
+      "sha256": "2a2c8bc28d75ba7eba7e7928744f22fe846e91ca437dfe89a529ac3feb23a675",
+      "bytes": 61305
+    },
+    {
+      "id": 8731,
+      "url": "https://www.wowhead.com/forever/quest=8731",
+      "sha256": "a1b6ecb870784895f3264fd196975c95551d60b2964cb996da17b590998b2cdc",
+      "bytes": 111538
+    },
+    {
+      "id": 8747,
+      "url": "https://www.wowhead.com/forever/quest=8747",
+      "sha256": "a04d5d4ca61333cc5006f9eb0f17d6b70515f91f805af53800d54801635fd7bd",
+      "bytes": 41855
+    },
+    {
+      "id": 8759,
+      "url": "https://www.wowhead.com/forever/quest=8759",
+      "sha256": "db8b7660b3e257971d1914bde4af59a0453c69bd0b4f45f8970cc7c2284347e8",
+      "bytes": 42235
+    },
+    {
+      "id": 8776,
+      "url": "https://www.wowhead.com/forever/quest=8776",
+      "sha256": "0afaf55d462f1142ee5242e8bcf889b8537c73cf652a8adca67cfe8717a40aa2",
+      "bytes": 39105
+    },
+    {
+      "id": 8804,
+      "url": "https://www.wowhead.com/forever/quest=8804",
+      "sha256": "92270ea5aa16a661c3c18094c9c8695dea77407fa0df8ffdf12a490a70fe488d",
+      "bytes": 44390
+    },
+    {
+      "id": 8805,
+      "url": "https://www.wowhead.com/forever/quest=8805",
+      "sha256": "750b9590d544cc287f2ad1b24244d860b8d80bac4aee02129dfacee37ca23542",
+      "bytes": 39610
+    },
+    {
+      "id": 8908,
+      "url": "https://www.wowhead.com/forever/quest=8908",
+      "sha256": "e118482d80edcbb8f8fdbd73be8f3a2b03fa2a6dbd35246710a23f574e9e78ad",
+      "bytes": 72070
+    },
+    {
+      "id": 8920,
+      "url": "https://www.wowhead.com/forever/quest=8920",
+      "sha256": "e6175b06bc43f39c39aff40bfe4c6f0084cb1aeb03c6d8ad2b6778acb00cfdff",
+      "bytes": 55053
+    },
+    {
+      "id": 8921,
+      "url": "https://www.wowhead.com/forever/quest=8921",
+      "sha256": "1794d7a861f7656fa0452e09a539429bdfd4acc37181d423470e8fbe39bbcece",
+      "bytes": 129450
+    },
+    {
+      "id": 8940,
+      "url": "https://www.wowhead.com/forever/quest=8940",
+      "sha256": "40cfafe394b2ca5c0105468a42ab81c7453df98160cf2a30b80a02aa4b40971f",
+      "bytes": 55415
+    },
+    {
+      "id": 8958,
+      "url": "https://www.wowhead.com/forever/quest=8958",
+      "sha256": "8fe13c506998893c2a8e59cc6d8f1b7b26d4ea7711576d43a90591bcebceabbf",
+      "bytes": 61069
+    },
+    {
+      "id": 8961,
+      "url": "https://www.wowhead.com/forever/quest=8961",
+      "sha256": "ad779ecbe4c82b348213728d200408d88824dfad17bedc9b20fcd99254e8f835",
+      "bytes": 70835
+    },
+    {
+      "id": 9009,
+      "url": "https://www.wowhead.com/forever/quest=9009",
+      "sha256": "8a17bbb204450a16d1706cd919082ca75846cb0a92cea22798315a8ec13f4820",
+      "bytes": 51925
+    },
+    {
+      "id": 9022,
+      "url": "https://www.wowhead.com/forever/quest=9022",
+      "sha256": "2cce9c1af3fbb8ec1cea65b35de4979e2067998f1d39ac26801d1a812eb60cea",
+      "bytes": 57826
+    },
+    {
+      "id": 9023,
+      "url": "https://www.wowhead.com/forever/quest=9023",
+      "sha256": "6ab762aaa9f1de16897ede191584b7846a7d231a95b331ae8c1161ed36db59f7",
+      "bytes": 100414
+    },
+    {
+      "id": 9191,
+      "url": "https://www.wowhead.com/forever/quest=9191",
+      "sha256": "af6dbb4dc0af79b7f820b3fe089debcf473dffe494ac3726ac00d844529a8ab8",
+      "bytes": 47725
+    },
+    {
+      "id": 9206,
+      "url": "https://www.wowhead.com/forever/quest=9206",
+      "sha256": "e965dc00fe7462e387e39b75e5bdf0af2880f19e68cfee70ab2f48a1f4966611",
+      "bytes": 55239
+    },
+    {
+      "id": 81736,
+      "url": "https://www.wowhead.com/forever/quest=81736",
+      "sha256": "4a2b22cdedcb03c3716d89b09dfe702b2d9747cd184f728bb237ed7e6066a63c",
+      "bytes": 38726
+    },
+    {
+      "id": 86574,
+      "url": "https://www.wowhead.com/forever/quest=86574",
+      "sha256": "43f17c5e095ffcdb07c569fef7fb9102e74af4d2e86a8fc09b95128c61481076",
+      "bytes": 40526
+    },
+    {
+      "id": 91736,
+      "url": "https://www.wowhead.com/forever/quest=91736",
+      "sha256": "926c1ffbaf1813cce3a518628786f33cd964494c70228692e57b6ba50a5932aa",
+      "bytes": 71957
+    },
+    {
+      "id": 92460,
+      "url": "https://www.wowhead.com/forever/quest=92460",
+      "sha256": "743fc555ebca90ca0b4fa75b156d8972361b66ebe6b5c5471766dca622467ca7",
+      "bytes": 38868
+    },
+    {
+      "id": 92461,
+      "url": "https://www.wowhead.com/forever/quest=92461",
+      "sha256": "3dd9f7618083cd59d20d784cdeaaaad214703f943a1ba4b07b1447f52cfed95d",
+      "bytes": 40934
+    },
+    {
+      "id": 92910,
+      "url": "https://www.wowhead.com/forever/quest=92910",
+      "sha256": "7629fac778d6c10984e9f98e91157950f2b4d085b6d5a404a13203b2601e6277",
+      "bytes": 42517
+    },
+    {
+      "id": 97250,
+      "url": "https://www.wowhead.com/forever/quest=97250",
+      "sha256": "7fe063eda8ef7c0153ea30a0fdb3f0ef7a862f3ceb5267ebdd3c5853b6fe5382",
+      "bytes": 42735
+    },
+    {
+      "id": 98189,
+      "url": "https://www.wowhead.com/forever/quest=98189",
+      "sha256": "426efde1b0edd2289b6c54698ff1e85dadb68f5e7043d05f95f455f97882dd73",
+      "bytes": 39724
+    },
+    {
+      "id": 98323,
+      "url": "https://www.wowhead.com/forever/quest=98323",
+      "sha256": "187e24bf4b9a12bb6143c1cb0a397b7413f638a1a7b9e74d103493dc9bdae67c",
+      "bytes": 39099
+    },
+    {
+      "id": 99156,
+      "url": "https://www.wowhead.com/forever/quest=99156",
+      "sha256": "15ce6bed563deacbecb3fc3af9261861276ee11aa05f79c22a0e8bf0a6f1ed0e",
+      "bytes": 43365
+    }
+  ],
+  "method": "Retained primary HTML only; no new Wowhead requests, JavaScript execution, or area-ID-to-UI-map guesses"
+}

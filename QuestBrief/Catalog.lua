@@ -3,7 +3,7 @@ local M,A=N.Model,N.Adapter
 local C={records={},order={},cursor=1}; N.Catalog=C
 function C:Begin()
     local data=N.CatalogData
-    if type(data)~="table" or data.schemaVersion~=1 or type(data.quests)~="table" then
+    if type(data)~="table" or (data.schemaVersion~=1 and data.schemaVersion~=2) or type(data.quests)~="table" then
         self.error="Bundled reward catalogue unavailable."; self.ids,self.order=nil,{}; return false
     end
     if self.data==data then return true end
@@ -22,7 +22,9 @@ function C:Metadata(row,playerLevel)
     local title=M.Text(A.Call(C_QuestLog and C_QuestLog.GetTitleForQuestID,row.id))
     local level=A.Call(C_QuestLog and C_QuestLog.GetQuestDifficultyLevel,row.id)
     if title then row.title=title end
-    if M.Number(level) and level>=1 and level<=200 and level==math.floor(level) then row.level=level else row.level=nil end
+    if M.Number(level) and level>=1 and level<=200 and level==math.floor(level) then row.level=level
+    elseif row.source and row.source.confirmation=="published" and M.Number(row.source.level) and row.source.level>=1 then row.level=row.source.level
+    else row.level=nil end
     row.metadataReady=title~=nil and row.level~=nil; row.metadataPlayerLevel=playerLevel
     return row.metadataReady
 end
@@ -31,7 +33,7 @@ function C:Step()
     local stop=math.min(#self.ids,self.cursor+63)
     for i=self.cursor,stop do
         local source=self.ids[i]; local id=M.QuestId(source.id)
-        if id and not self.records[id] and type(source.items)=="table" and #source.items>0 then
+        if id and not self.records[id] and type(source.items)=="table" then
             local row={id=id,title=source.title,level=source.level,items=source.items,source=source}
             self:Metadata(row); self.records[id]=row; self.order[#self.order+1]=row
         end
@@ -44,7 +46,8 @@ function C:Locations(id)
     self.locations[id]=out
     for _,location in ipairs(source and source.locations or {}) do
         local name=M.Text(location.name)
-        local row={npcID=location.npcID,name=name or (location.npcID and "NPC "..location.npcID or "Quest giver"),nameKnown=name~=nil}
+        local fallback=location.npcID and "NPC "..location.npcID or location.objectID and "Object "..location.objectID or location.itemID and "Item "..location.itemID or "Quest giver"
+        local row={npcID=location.npcID,objectID=location.objectID,itemID=location.itemID,name=name or fallback,nameKnown=name~=nil}
         local map=M.QuestId(location.mapID); local info=map and A.Call(C_Map and C_Map.GetMapInfo,map)
         -- Only recorded native-map coordinates on a current native zone map.
         if M.Readable(info) and type(info)=="table" and Enum and Enum.UIMapType and M.Readable(info.mapType) and info.mapType==Enum.UIMapType.Zone

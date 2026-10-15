@@ -3,6 +3,7 @@ PASSED=0
 local function test(name,fn)fn();PASSED=PASSED+1;print("PASS "..name)end
 local function show(rows,config)
     local N=W.Init(config);W.shift=true;GameTooltip=nil;C_QuestLog.IsOnQuest=function()return true end
+    N.CatalogData={schemaVersion=2,quests={}} -- Native-only layout fixtures; published cards have their own suite.
     if config and config.screenWidth then UIParent.width=config.screenWidth;UIParent.height=config.screenHeight end
     local f=W.Object();f.x=690;f.y=690;f.width=30;f.height=30;f.related={}
     for _,row in ipairs(rows)do f.related[row.id]={} end

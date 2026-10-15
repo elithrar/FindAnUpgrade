@@ -34,7 +34,7 @@ class PackageTest(unittest.TestCase):
             self.assertEqual(package.digest(z.read("QuestBrief/Data/ATT-LICENSE.txt")), package.ATT_LICENSE_SHA256)
         with zipfile.ZipFile(source) as z:
             prefix = f"QuestBrief-{self.version}-source/"
-            for name in ["QuestBrief/Data/Catalog.lua", "QuestBrief/Data/ATT-LICENSE.txt", "data/catalog-source.json", "data/catalog-sources.json", "data/catalog-coverage.json", "tools/generate_catalog.py"]:
+            for name in ["QuestBrief/Data/Catalog.lua", "QuestBrief/Data/ATT-LICENSE.txt", "data/catalog-source.json", "data/catalog-sources.json", "data/catalog-coverage.json", "data/catalog-complete-source.json", "data/catalog-complete-sources.json", "data/catalog-reconciliation.json", "data/catalog-public-records.json", "data/catalog-metadata-records.json", "data/catalog-compiled-quests.json", "data/catalog-primary-records.json", "data/catalog-client-evidence.json", "tools/generate_catalog.py", "tools/import_complete_catalog.py", "tools/collect_catalog_sources.py"]:
                 self.assertEqual(z.read(prefix + name), (self.root / name).read_bytes())
 
     def test_catalog_load_order_staleness_and_license_loss_are_rejected(self):
@@ -47,7 +47,9 @@ class PackageTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "load order"): package.validate(self.root)
         toc.write_bytes(original)
         path = self.root / "QuestBrief/Data/Catalog.lua"; original = path.read_bytes()
-        path.write_bytes(original.replace(b"schemaVersion=1", b"schemaVersion=2", 1))
+        changed = original.replace(b"schemaVersion=", b"schemaVersion=9", 1)
+        self.assertNotEqual(changed, original)
+        path.write_bytes(changed)
         with self.assertRaisesRegex(ValueError, "catalog is stale"): package.validate(self.root)
         path.write_bytes(original)
         path = self.root / "data/catalog-coverage.json"; original = path.read_bytes()

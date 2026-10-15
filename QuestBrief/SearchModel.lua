@@ -19,8 +19,14 @@ function S:Eligibility(row,context)
 end
 function S:Item(meta)
     local id=meta.itemID
-    if self.cache[id] and (self.cache[id].state=="ready" or A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true) then return self.cache[id] end
-    local row={itemID=id,name=meta.name,kind="catalog",state="pending",catalog=true,quantity=meta.quantity,group=meta.group}
+    local function rewardCopy(base)
+        local result={}; for key,value in pairs(base) do result[key]=value end
+        result.quantity,result.group=meta.quantity,meta.group
+        if base.state~="ready" and meta.name then result.name=meta.name end
+        return result
+    end
+    if self.cache[id] and (self.cache[id].state=="ready" or A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true) then return rewardCopy(self.cache[id]) end
+    local row={itemID=id,name=meta.name,kind="catalog",state="pending",catalog=true}
     local fn=C_Item and C_Item.GetItemInfo or GetItemInfo
     local name,link,quality,level,minimum,slot,texture
     if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)==true then
@@ -33,7 +39,7 @@ function S:Item(meta)
         local _,_,_,instantSlot,icon=returns(C_Item and C_Item.GetItemInfoInstant or GetItemInfoInstant,id)
         row.slot=M.Text(instantSlot); row.texture=M.Text(icon) or M.Number(icon) and icon or nil
     end
-    self.cache[id]=row; return row
+    self.cache[id]=row; return rewardCopy(row)
 end
 function S.SlotMatch(slot,filter)
     if filter=="ALL" then return true end
@@ -91,11 +97,13 @@ function S:Reward(row)
     local reward=N.Rewards.Read(row.id)
     local verified={}
     self.usability[row.id]=self.usability[row.id] or {}; local changed=false
-    local authoritative=reward.state=="ready" and reward.items.state=="ready" and reward.choices.state=="ready"
-    if authoritative then
+    if reward.state=="ready" then
         local items,stamp={},{}
         for _,group in ipairs({reward.items,reward.choices}) do for _,item in ipairs(group.items or {}) do
-            items[#items+1]={itemID=item.itemID,name=item.name}; stamp[#stamp+1]=tostring(item.itemID)
+            if item.state=="ready" and item.itemID then
+                items[#items+1]={itemID=item.itemID,name=item.name,quantity=item.quantity,group=item.kind}
+                stamp[#stamp+1]=tostring(item.itemID)..":"..tostring(item.quantity)..":"..tostring(item.kind)
+            end
         end end
         table.sort(stamp); stamp=table.concat(stamp,",")
         changed=self.currentStamp[row.id]~=stamp; self.currentStamp[row.id],self.currentItems[row.id]=stamp,items
@@ -104,7 +112,7 @@ function S:Reward(row)
         verified[item.itemID]=true; changed=changed or self.usability[row.id][item.itemID]~=item.usable; self.usability[row.id][item.itemID]=item.usable
     end end end
     local pending={}
-    if not authoritative then for _,item in ipairs(row.items) do if not verified[item.itemID] then pending[#pending+1]=item end end end
+    if reward.state~="ready" and not reward.recordedGroups then for _,item in ipairs(row.items) do if not verified[item.itemID] then pending[#pending+1]=item end end end
     return reward,pending,changed
 end
 function S.Waypoint(location)

@@ -90,7 +90,7 @@ test("combat start dismisses owned frames and setup is deferred",function()
     N=W.Init({combat=true});assert(not N.Sources.callbacks);W.combat=false;W.Event("PLAYER_REGEN_ENABLED");assert(N.Sources.callbacks)
 end)
 test("missing reward data never becomes zero and does not imply no choices",function()
-    local N=W.Init();W.rewardReady=false;local r=N.Rewards.Read(9)
+    local N=W.Init();W.rewardReady=false;local r=N.Rewards.Read(999001)
     assert(r.money.state=="unavailable" and r.money.value==nil and r.items.state=="unavailable" and r.state=="pending")
 end)
 test("missing choice count cannot borrow the guaranteed item count",function()
@@ -207,7 +207,7 @@ test("legacy seed preserves opt-out and never overwrites an existing new profile
 end)
 test("major faction rows never replace ordinary reputation unavailable",function()
     local N=W.Init();C_QuestLog.GetQuestLogMajorFactionReputationRewards=function()return {{factionID=72,rewardAmount=75},{factionID=76,rewardAmount=-10},{factionID=99,rewardAmount=W.secret}}end
-    local r=N.Rewards.Read(9);assert(r.reputation.state=="unavailable" and #r.reputation.items==2 and r.reputation.items[2].amount==-10)
+    local r=N.Rewards.Read(999001);assert(r.reputation.state=="unavailable" and #r.reputation.items==2 and r.reputation.items[2].amount==-10)
 end)
 test("item transit includes mouse-transparent tooltip geometry",function()
     local N=open();geometry(N);W.items={{"Reward",100,2,2,true,123}};N.Stack:Refresh();local b=N.Stack.cards[1].icons[1]

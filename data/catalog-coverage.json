@@ -1,41 +1,73 @@
 {
-  "schemaVersion": 1,
-  "sourceRevision": "d75383ccdbff1208b87cf4024fa425c0825a7ad6",
-  "sourceBuild": "1.60.1.69893",
+  "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "questCount": 1250,
-  "itemCount": 1934,
-  "associationCount": 2266,
-  "questsWithNpc": 1044,
-  "questsWithCoordinates": 999,
-  "questsWithMinimumLevel": 1128,
-  "questsWithStaticDifficultyLevel": 0,
-  "knownQuantities": 0,
-  "knownRewardGroups": 0,
-  "staticMoneyXpCurrencyReputationAmounts": 0,
-  "classifiedQuests": 360,
-  "classifiedNewQuests": 48,
+  "questCount": 5669,
+  "itemCount": 2623,
+  "associationCount": 3606,
+  "publicIndexCount": 5633,
+  "publicIdsAbsentOutput": [],
+  "itemStates": {
+    "published-empty": 3297,
+    "published": 2136,
+    "unknown": 236
+  },
+  "fieldCoverage": {
+    "items": {
+      "published-empty": 3297,
+      "published": 2136,
+      "unknown": 236
+    },
+    "title": {
+      "published": 5433,
+      "unknown": 202,
+      "recorded": 34
+    },
+    "level": {
+      "published": 5402,
+      "unknown": 267
+    },
+    "minimum": {
+      "published": 5395,
+      "unknown": 246,
+      "recorded": 28
+    },
+    "xp": {
+      "published": 4399,
+      "unknown": 1270
+    },
+    "money": {
+      "unknown": 4539,
+      "published": 1130
+    },
+    "reputation": {
+      "published": 3218,
+      "unknown": 2451
+    },
+    "currencies": {
+      "unknown": 5669
+    },
+    "givers": {
+      "unknown": 1315,
+      "recorded": 4354
+    },
+    "coordinates": {
+      "unknown": 2280,
+      "recorded": 3389
+    }
+  },
+  "questsWithGivers": 4354,
+  "questsWithNpc": 3962,
+  "questsWithCoordinates": 3389,
+  "knownQuantities": 3606,
+  "knownRewardGroups": 3606,
   "classificationCounts": {
-    "New": 48,
-    "Updated": 60,
-    "Unchanged": 252,
-    "Unknown": 890
+    "New": 218,
+    "Updated": 96,
+    "Unchanged": 880,
+    "Unknown": 4475
   },
-  "factionCounts": {
-    "Alliance": 406,
-    "Horde": 355,
-    "Unknown": 489
-  },
-  "minimumLevelBands": {
-    "1-10": 255,
-    "11-20": 189,
-    "21-30": 176,
-    "31-40": 140,
-    "41-50": 196,
-    "51-60": 172,
-    "61-200": 0
-  },
-  "luaSha256": "f515679e1640eb28246c837d4950d3be6f17f05474b96ad9b2bc403ca8377318",
-  "sourceSha256": "2d83e341171aa2e405f486049bc1a2070e797061bb367e7bdda0f40d25e5bbec",
+  "reconciliationReport": "data/catalog-reconciliation.json",
+  "luaSha256": "60510a19b015619b639296cdd61e3233bbb2b3d9bc05b13b45cbf645ffea642d",
+  "sourceSha256": "cc0d077d854ed3e53ea35feed0a78366212d8c9f733f94e61537448ccfcde2bf",
   "liveClientVerified": false
 }

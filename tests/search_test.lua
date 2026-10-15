@@ -152,7 +152,7 @@ test("production low mid and high catalogue searches work with Questie absent",f
     W.rewardReady=false
     local selected={};for _,q in ipairs(N.CatalogData.quests) do
         local band=q.minimum and (q.minimum<=10 and 1 or q.minimum>=25 and q.minimum<=35 and 2 or q.minimum>=50 and 3)
-        if band and not selected[band] and not q.classTokens and not q.races then selected[band]=q end
+        if band and #q.items>0 and not q.eligibilityConflict and not selected[band] and not q.classTokens and not q.races then selected[band]=q end
     end
     local levels={[selected[1].id]=8,[selected[2].id]=33,[selected[3].id]=60}
     C_QuestLog.GetQuestDifficultyLevel=function(id)return levels[id] end
@@ -162,7 +162,8 @@ test("production low mid and high catalogue searches work with Questie absent",f
     for band,q in ipairs(selected) do
         UnitLevel=function()return levels[q.id]end;UnitFactionGroup=function()return q.faction or "Alliance"end
         local rows=N.SearchModel:Query({query=tostring(q.id),usable=true,minimum=math.max(1,levels[q.id]-5),maximum=levels[q.id]+3,slot="ALL",sort="FIT"})
-        assert(#rows==1 and rows[1].id==q.id and #rows[1].items>0 and rows[1].fit==0)
+        local found;for _,row in ipairs(rows) do if row.id==q.id then found=row;break end end
+        assert(found and #found.items>0 and found.fit==0)
     end
 end)
 

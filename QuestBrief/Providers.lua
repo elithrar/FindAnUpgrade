@@ -60,6 +60,7 @@ function P.Availability(row,context)
     if proof=="questie-ready" and active~=false then return state("ready","Ready to turn in","questie-rendered") end
     context=context or P.Context()
     local source=row.source or P.Source(id) or {}
+    if source.eligibilityConflict then return state("blocked",nil,"recorded-conflict","Recorded eligibility is contradictory") end
     if source.faction and context.faction and source.faction~=context.faction then return state("blocked",nil,"recorded-constraint","Other faction") end
     for _,pair in ipairs({{source.classTokens,context.classToken,"Other class"},{source.classes,context.classID,"Other class"},{source.races,context.raceID,"Other race"}}) do
         if pair[2] and contains(pair[1],pair[2])==false then return state("blocked",nil,"recorded-constraint",pair[3]) end
