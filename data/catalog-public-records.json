@@ -1,8 +1,9 @@
 {
   "schemaVersion": 1,
-  "collectedAt": "2026-10-15T01:19:27.265541+00:00",
+  "collectedAt": "2026-10-15T02:22:50.113309+00:00",
   "source": "https://www.forevervsclassic.com/quests?status=any&all=1",
   "expected": 5633,
+  "indexExpected": 5633,
   "indexSources": [
     {
       "key": 1,
@@ -10,8 +11,9 @@
       "file": "index/1.html",
       "bytes": 174908,
       "sha256": "46cf7fbba41c005c86d57a378a8bdbe11e9013605007e26f57c016f2277d572e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:04.046323+00:00"
     },
     {
       "key": 10,
@@ -19,8 +21,9 @@
       "file": "index/10.html",
       "bytes": 170731,
       "sha256": "69e3b6d7e6a74bc824db7caec6ace62fcb51bcc94a05097b8e5bfb0c2cd07d08",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.311952+00:00"
     },
     {
       "key": 100,
@@ -28,8 +31,9 @@
       "file": "index/100.html",
       "bytes": 173081,
       "sha256": "0ba8e5bcdd57ebc3c92fd2573e9ecb3ee6edaa0ee7b794fceb1b7ffb9d5443d8",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:33.973324+00:00"
     },
     {
       "key": 101,
@@ -37,8 +41,9 @@
       "file": "index/101.html",
       "bytes": 171367,
       "sha256": "c908a1c040ef1e596cad39bbe0190eab69676feeb28099dd96e5bee87805f857",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:34.209476+00:00"
     },
     {
       "key": 102,
@@ -46,8 +51,9 @@
       "file": "index/102.html",
       "bytes": 170748,
       "sha256": "3c147e8bb61a30e1d498fcead1379868a9fdb2477f4bd42de5045cc8b57f7253",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:34.564865+00:00"
     },
     {
       "key": 103,
@@ -55,8 +61,9 @@
       "file": "index/103.html",
       "bytes": 172250,
       "sha256": "d8d21a5b8b51126f16f4a580f0e007f420e48ae0ebe1373d79b808bce3866b92",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:35.068554+00:00"
     },
     {
       "key": 104,
@@ -64,8 +71,9 @@
       "file": "index/104.html",
       "bytes": 172706,
       "sha256": "2fe4fc49db9d34767923bb1f9e12c1a9ba2e4e3717355b7c17b09471ff3ed7dc",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:35.278429+00:00"
     },
     {
       "key": 105,
@@ -73,8 +81,9 @@
       "file": "index/105.html",
       "bytes": 174803,
       "sha256": "625eb7f4d5681fa3689c8bbc9064a306f409cf0f808fe3bed251f4f0435967cc",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:35.539365+00:00"
     },
     {
       "key": 106,
@@ -82,8 +91,9 @@
       "file": "index/106.html",
       "bytes": 170904,
       "sha256": "c81f679f87e985b2ea879455c70cc75d6b3a7400fffa5977e047b381f959b3ed",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:35.745065+00:00"
     },
     {
       "key": 107,
@@ -91,8 +101,9 @@
       "file": "index/107.html",
       "bytes": 172076,
       "sha256": "bd80d1ea844d8447b24f7356a2c0a65b9961746ac53ad8b7219084bc4a43d4c2",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:36.173378+00:00"
     },
     {
       "key": 108,
@@ -100,8 +111,9 @@
       "file": "index/108.html",
       "bytes": 172546,
       "sha256": "b9fcfe76d9793d5ffc2365cf58ee73196334393b6df0c16a4fdd117b1edb091d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:36.302541+00:00"
     },
     {
       "key": 109,
@@ -109,8 +121,9 @@
       "file": "index/109.html",
       "bytes": 171001,
       "sha256": "917e901d37b41b98a6069eb6f4c8a3dfb2dede78d19cbfac3d6379cca50adc42",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:37.306617+00:00"
     },
     {
       "key": 11,
@@ -118,8 +131,9 @@
       "file": "index/11.html",
       "bytes": 171805,
       "sha256": "4cbc3df233026c3f39b30b8930afa0ab65bfa1c5caab031a3cbd3f21496c4c32",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.183064+00:00"
     },
     {
       "key": 110,
@@ -127,8 +141,9 @@
       "file": "index/110.html",
       "bytes": 171173,
       "sha256": "33a91ab34412ff53e01bcdc5103be1f4589e66ed2ef18579fc9fb8e5842abd9c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:36.887532+00:00"
     },
     {
       "key": 111,
@@ -136,8 +151,9 @@
       "file": "index/111.html",
       "bytes": 172790,
       "sha256": "902c0ded5af9458f59dd01360a8401a9d7d3860b5fd69f64fb49ad0e9bea788c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:37.201007+00:00"
     },
     {
       "key": 112,
@@ -145,8 +161,9 @@
       "file": "index/112.html",
       "bytes": 171833,
       "sha256": "102b7422cccd5d3866270212910692b5805ce1116b941e1daa641b7523f92e88",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:37.547139+00:00"
     },
     {
       "key": 113,
@@ -154,8 +171,9 @@
       "file": "index/113.html",
       "bytes": 134885,
       "sha256": "b53e1f1ffb50002ebd8e02204acdef2a8d921c4b30b72f73a96bfa060e20ed47",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:37.799507+00:00"
     },
     {
       "key": 12,
@@ -163,8 +181,9 @@
       "file": "index/12.html",
       "bytes": 173574,
       "sha256": "89267551676a9fe2937ca2d9830bd792d606e7c3ca18d22ee5f69540bc3e096e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.543461+00:00"
     },
     {
       "key": 13,
@@ -172,8 +191,9 @@
       "file": "index/13.html",
       "bytes": 172327,
       "sha256": "4b7a731d2782eb683709dc99d453e88152c7ced14acec709fad3674571b42275",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.955381+00:00"
     },
     {
       "key": 14,
@@ -181,8 +201,9 @@
       "file": "index/14.html",
       "bytes": 173614,
       "sha256": "9703e098e0a06d316500d5ece38966ee7c43dbd5f8502bc64833d427ebbab444",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:08.241562+00:00"
     },
     {
       "key": 15,
@@ -190,8 +211,9 @@
       "file": "index/15.html",
       "bytes": 173055,
       "sha256": "9207bb827d17afe2a1de661ab287da2d5bd1830de32f84af9a3fc675b277da5c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:08.430462+00:00"
     },
     {
       "key": 16,
@@ -199,8 +221,9 @@
       "file": "index/16.html",
       "bytes": 170908,
       "sha256": "8bcc2928a263c8a5e4a41d1b3b717311dd33d66cf4e89aed108de90e9628311d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:08.785402+00:00"
     },
     {
       "key": 17,
@@ -208,8 +231,9 @@
       "file": "index/17.html",
       "bytes": 173210,
       "sha256": "9201a1fe7a3e336d3662a36b0d48b5210ec04aece7f79517fd7d824f6eeb1a6e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:09.505421+00:00"
     },
     {
       "key": 18,
@@ -217,8 +241,9 @@
       "file": "index/18.html",
       "bytes": 171882,
       "sha256": "2f399559ca0d84544bc4f51d9392336ae7f4d4da563d21cef7cfcc433166eb8d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:09.800079+00:00"
     },
     {
       "key": 19,
@@ -226,8 +251,9 @@
       "file": "index/19.html",
       "bytes": 171087,
       "sha256": "213a8247b43748622cdf161c5e34111adc90967d47aca0004e591423689e7f03",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:10.116611+00:00"
     },
     {
       "key": 2,
@@ -235,8 +261,9 @@
       "file": "index/2.html",
       "bytes": 176694,
       "sha256": "90808c50337ec40c83423a265a65ab34b18d936dcc48276c6946f54d251f1526",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:05.046561+00:00"
     },
     {
       "key": 20,
@@ -244,8 +271,9 @@
       "file": "index/20.html",
       "bytes": 173987,
       "sha256": "3ce0cab25de1197c8bed2aa0944cf88797a831ba25bb75aa7fd24fccbdcd6088",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:10.425553+00:00"
     },
     {
       "key": 21,
@@ -253,8 +281,9 @@
       "file": "index/21.html",
       "bytes": 172469,
       "sha256": "0513222f02d9ad43611783d715dfed4f903bbe2be2fa4eeae32f0d7500de143e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:10.243539+00:00"
     },
     {
       "key": 22,
@@ -262,8 +291,9 @@
       "file": "index/22.html",
       "bytes": 172746,
       "sha256": "298b9f63ed1e2e90f403e69e7625842944a3c4aa4ae418aa81874a3ec60a09bc",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:11.156990+00:00"
     },
     {
       "key": 23,
@@ -271,8 +301,9 @@
       "file": "index/23.html",
       "bytes": 172801,
       "sha256": "a5bc4cc009ee1160d63e3d721e7f1db521d294563f17f0dcc56ebd15bf8495f6",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:10.882077+00:00"
     },
     {
       "key": 24,
@@ -280,8 +311,9 @@
       "file": "index/24.html",
       "bytes": 172781,
       "sha256": "a5f8075091677aaf03ddb1a604a220c321e7dddb9e8d6e71af1562de936f50f0",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:11.145292+00:00"
     },
     {
       "key": 25,
@@ -289,8 +321,9 @@
       "file": "index/25.html",
       "bytes": 171920,
       "sha256": "7fad5da281f10f7d2679078a21e57145db429d80d32bb67ab4758d9c8cf8b873",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:11.521834+00:00"
     },
     {
       "key": 26,
@@ -298,8 +331,9 @@
       "file": "index/26.html",
       "bytes": 175686,
       "sha256": "08696b3b0d0ae40c4f08bf855e22a1e4a4eeb08c50f4d07642e345b71a2fdd4e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:11.884426+00:00"
     },
     {
       "key": 27,
@@ -307,8 +341,9 @@
       "file": "index/27.html",
       "bytes": 180123,
       "sha256": "9227c1469332874384e2a9acaaa54c644c1e0e1c341cae7a9da8681d45e2c4da",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:12.137506+00:00"
     },
     {
       "key": 28,
@@ -316,8 +351,9 @@
       "file": "index/28.html",
       "bytes": 174072,
       "sha256": "57216e503a288c940b2c7ad8c6f5acba5b37971a119546d9ef042b9073c405be",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:12.401304+00:00"
     },
     {
       "key": 29,
@@ -325,8 +361,9 @@
       "file": "index/29.html",
       "bytes": 174199,
       "sha256": "a31633bd49ecd8c8e7f815848102019449c7a263b46994d361597d8a984c6474",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:13.655025+00:00"
     },
     {
       "key": 3,
@@ -334,8 +371,9 @@
       "file": "index/3.html",
       "bytes": 173063,
       "sha256": "bbbebf98d601f980fc13105f31b5311f0b7d1c553a3e881689baa1bfd59d6c1f",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:05.272851+00:00"
     },
     {
       "key": 30,
@@ -343,8 +381,9 @@
       "file": "index/30.html",
       "bytes": 173703,
       "sha256": "680dbe3acf08ccb1c57effe4d8b53778c93197fe2be40a9faf1ef3fad8375f35",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:13.921267+00:00"
     },
     {
       "key": 31,
@@ -352,8 +391,9 @@
       "file": "index/31.html",
       "bytes": 173883,
       "sha256": "8017dea2f27878d4a4fedad1b711f86d28dedc0919ed65528a5da5f248bab30d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:13.241841+00:00"
     },
     {
       "key": 32,
@@ -361,8 +401,9 @@
       "file": "index/32.html",
       "bytes": 173115,
       "sha256": "83a992078686594e9a7049d648b2ee60cd17ea14614b5a6e81ccdad9e6b3808e",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:14.421492+00:00"
     },
     {
       "key": 33,
@@ -370,8 +411,9 @@
       "file": "index/33.html",
       "bytes": 174446,
       "sha256": "f55ff7e2b5c45d7c7e986561a380e95af921b584349cd571e21dd016a2585830",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:13.927679+00:00"
     },
     {
       "key": 34,
@@ -379,8 +421,9 @@
       "file": "index/34.html",
       "bytes": 174372,
       "sha256": "e2a81bbbf2b4809e809ce289be3bf987f63531097702a1f49ca229defaf0ff7b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:14.119592+00:00"
     },
     {
       "key": 35,
@@ -388,8 +431,9 @@
       "file": "index/35.html",
       "bytes": 174630,
       "sha256": "e7d3ea5161e6e47692b25df467610f3ac92617c21a0ad3251b13f742d21c6ffb",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:14.473852+00:00"
     },
     {
       "key": 36,
@@ -397,8 +441,9 @@
       "file": "index/36.html",
       "bytes": 173784,
       "sha256": "5b2ff4f1c43f5f5d6871a3864fcd68c5f13d48f1b2ea213cc013c4b8f21e1377",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:14.726601+00:00"
     },
     {
       "key": 37,
@@ -406,8 +451,9 @@
       "file": "index/37.html",
       "bytes": 173363,
       "sha256": "3ab69f9ffe65ac8a4f72a352c241ce4ce2432d35efbc004f1fceecee4ce9dc17",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:15.006734+00:00"
     },
     {
       "key": 38,
@@ -415,8 +461,9 @@
       "file": "index/38.html",
       "bytes": 174854,
       "sha256": "a3be06bd2077118a0ed3d0c0a882dfb5e5a5a2f40b2fe48a95934d521c978b5d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:15.342776+00:00"
     },
     {
       "key": 39,
@@ -424,8 +471,9 @@
       "file": "index/39.html",
       "bytes": 173423,
       "sha256": "b3a518f462382fbb36c32c72ac5863f34653265c32b13476297ee189bf38e8c4",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:16.066313+00:00"
     },
     {
       "key": 4,
@@ -433,8 +481,9 @@
       "file": "index/4.html",
       "bytes": 174827,
       "sha256": "f9728531496420d1fc8533669cbaa9c557ff68303335e44fdc141eb47ea27715",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:05.590944+00:00"
     },
     {
       "key": 40,
@@ -442,8 +491,9 @@
       "file": "index/40.html",
       "bytes": 174952,
       "sha256": "0952e1b8386072fd5057955697d12483e34424f907db531c04d484c61681b70f",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:16.859305+00:00"
     },
     {
       "key": 41,
@@ -451,8 +501,9 @@
       "file": "index/41.html",
       "bytes": 174714,
       "sha256": "355ab52eb846925bb03cf14675ed4ea640c89c8ad8aa3f5bef798a4d28b6e029",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:16.322170+00:00"
     },
     {
       "key": 42,
@@ -460,8 +511,9 @@
       "file": "index/42.html",
       "bytes": 175554,
       "sha256": "bd738125bb16013b78f3c45a60c8f5148537beb58aa720f5e1d85243bdf80de4",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:16.624002+00:00"
     },
     {
       "key": 43,
@@ -469,8 +521,9 @@
       "file": "index/43.html",
       "bytes": 174497,
       "sha256": "00d08a861247a299b11b5e33c1e7801b1dc9684240070149e1bd5effe2a00004",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:16.967715+00:00"
     },
     {
       "key": 44,
@@ -478,8 +531,9 @@
       "file": "index/44.html",
       "bytes": 173232,
       "sha256": "88901ccf2dc0a2a625dbb41b59e3ea1740dbf29eb0baebf15378eac5b361fd0b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:17.133269+00:00"
     },
     {
       "key": 45,
@@ -487,8 +541,9 @@
       "file": "index/45.html",
       "bytes": 174358,
       "sha256": "2374265e4aee0d754baf06ea14e4961ad9bc231b94f4f916d54110a5e4fe86dd",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:17.502308+00:00"
     },
     {
       "key": 46,
@@ -496,8 +551,9 @@
       "file": "index/46.html",
       "bytes": 175661,
       "sha256": "e9dd9173f68327961d3d5bf2779acc2c334e7a2d8371d0e50bedfadaca0fec20",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:17.763744+00:00"
     },
     {
       "key": 47,
@@ -505,8 +561,9 @@
       "file": "index/47.html",
       "bytes": 172394,
       "sha256": "b95fab4861bf2f72629967a07a431bc9449b647ae52e7191f397714763d15e05",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:18.006219+00:00"
     },
     {
       "key": 48,
@@ -514,8 +571,9 @@
       "file": "index/48.html",
       "bytes": 173428,
       "sha256": "dd6b3abe7698e3eaa179c8cacdf5dd28a33e60b0d478b02070944cd5263f6a99",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:18.357651+00:00"
     },
     {
       "key": 49,
@@ -523,8 +581,9 @@
       "file": "index/49.html",
       "bytes": 174659,
       "sha256": "f9066595fd65181ed87c6d842fdd2afc8308a6bfd29e0a6c90fec6e71dbcbe2f",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:18.676372+00:00"
     },
     {
       "key": 5,
@@ -532,8 +591,9 @@
       "file": "index/5.html",
       "bytes": 178908,
       "sha256": "fefa69fc0ff4c6669d3bd68f2462b195c8ab5e754a12201fff2aeb81012f19fe",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:06.037875+00:00"
     },
     {
       "key": 50,
@@ -541,8 +601,9 @@
       "file": "index/50.html",
       "bytes": 174638,
       "sha256": "6504a6eba9a63f9120f93f903b65268d718dea5ccf64a34edfeacabb42d37df8",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:18.962984+00:00"
     },
     {
       "key": 51,
@@ -550,8 +611,9 @@
       "file": "index/51.html",
       "bytes": 172631,
       "sha256": "1264d04bef63730c8e83de52b114247f7cbb93bccb83b481cd9a7c93ebc5650d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:19.705274+00:00"
     },
     {
       "key": 52,
@@ -559,8 +621,9 @@
       "file": "index/52.html",
       "bytes": 174787,
       "sha256": "199e18f2a5450ef7431ad1d12204bb6e5e7a01c9184aac6dc2c5f51b12117140",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:19.600306+00:00"
     },
     {
       "key": 53,
@@ -568,8 +631,9 @@
       "file": "index/53.html",
       "bytes": 173338,
       "sha256": "d5122128f6edfc4c03138094426e8717df5eb3e96e3f6195a3fb2d1b5f94d3fa",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:19.883916+00:00"
     },
     {
       "key": 54,
@@ -577,8 +641,9 @@
       "file": "index/54.html",
       "bytes": 173166,
       "sha256": "db7d52ccbd8035d95361b8cff5a9890debd0bd1341cce0f9843e49de9d9c3ea3",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:20.266100+00:00"
     },
     {
       "key": 55,
@@ -586,8 +651,9 @@
       "file": "index/55.html",
       "bytes": 172997,
       "sha256": "29376efc1d5cfb1f44633a583f45e96a5b3bc6635768e2529da34c216b989acc",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:20.533722+00:00"
     },
     {
       "key": 56,
@@ -595,8 +661,9 @@
       "file": "index/56.html",
       "bytes": 173901,
       "sha256": "12b2300f7273511045c886c05d79c9c8fc7a0dd7ccd7aa91bff99c317a99e789",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:20.724589+00:00"
     },
     {
       "key": 57,
@@ -604,8 +671,9 @@
       "file": "index/57.html",
       "bytes": 174197,
       "sha256": "9a18feef0732b49b684b37f827ae5294d3ade4df78f769c6adafcd4f563c2eb9",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:21.058052+00:00"
     },
     {
       "key": 58,
@@ -613,8 +681,9 @@
       "file": "index/58.html",
       "bytes": 173196,
       "sha256": "fac4064611308c61da1d62a7515454cbfd3c7f50e4f28c8e186aa43740f29503",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:21.348465+00:00"
     },
     {
       "key": 59,
@@ -622,8 +691,9 @@
       "file": "index/59.html",
       "bytes": 172026,
       "sha256": "a96f4598885694a6fc29a8a856ce9470a601e0a3a9e6a915105ce2205f326506",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:21.610237+00:00"
     },
     {
       "key": 6,
@@ -631,8 +701,9 @@
       "file": "index/6.html",
       "bytes": 171145,
       "sha256": "a92647e09ccfd3363d21e75cd9243f522655e00aa8cbd2c9e658bb5090f1daec",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:06.204565+00:00"
     },
     {
       "key": 60,
@@ -640,8 +711,9 @@
       "file": "index/60.html",
       "bytes": 173819,
       "sha256": "c3f54ee8f97980f13ad3d93dbd0a9ec98ad33f7e4474562b76438c7252404805",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:22.034015+00:00"
     },
     {
       "key": 61,
@@ -649,8 +721,9 @@
       "file": "index/61.html",
       "bytes": 173296,
       "sha256": "2fb014941084835f2adab39edaa72d9a66d4014a027b25ab7f14c911eed9f060",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:22.206534+00:00"
     },
     {
       "key": 62,
@@ -658,8 +731,9 @@
       "file": "index/62.html",
       "bytes": 171215,
       "sha256": "0acdcd1a4c19240f8b4a2c9bae8771055386e55ba6abdbd39688ecbe7dafb126",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:22.510341+00:00"
     },
     {
       "key": 63,
@@ -667,8 +741,9 @@
       "file": "index/63.html",
       "bytes": 171412,
       "sha256": "fa2edfe2d3006700ff393d2562061b59dc553781aaf5791a9e53166886ac1044",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:22.790897+00:00"
     },
     {
       "key": 64,
@@ -676,8 +751,9 @@
       "file": "index/64.html",
       "bytes": 172420,
       "sha256": "de1975d7cac5fc484e416b437b23359fe448afe0786db55bfeee7831b5be3195",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:23.139535+00:00"
     },
     {
       "key": 65,
@@ -685,8 +761,9 @@
       "file": "index/65.html",
       "bytes": 175943,
       "sha256": "0cf75130b30a9c7978de0c0f66ef70d5d8a0bf2c130dbc12c28c4d6c69f690b0",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:23.461239+00:00"
     },
     {
       "key": 66,
@@ -694,8 +771,9 @@
       "file": "index/66.html",
       "bytes": 172848,
       "sha256": "856724362825267b02a0ab8dfb42b7f9be41fad6e5dd52ba23bb4c1f6d27d99b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:23.789998+00:00"
     },
     {
       "key": 67,
@@ -703,8 +781,9 @@
       "file": "index/67.html",
       "bytes": 174177,
       "sha256": "9fdcaf32c0698d0abcaa8cb1aa480760d64522038d9beb38f4b5a5ce144cabfd",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:24.050341+00:00"
     },
     {
       "key": 68,
@@ -712,8 +791,9 @@
       "file": "index/68.html",
       "bytes": 173040,
       "sha256": "7cd3c9693cab1e3cd191203540317bde8265a85ff94a7c5eb0a4148617c435eb",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:24.388933+00:00"
     },
     {
       "key": 69,
@@ -721,8 +801,9 @@
       "file": "index/69.html",
       "bytes": 174081,
       "sha256": "4bf5e138f5d4596dd386af130226b4a20231a4e62bba08fd3cd3a568d54056fe",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:24.812081+00:00"
     },
     {
       "key": 7,
@@ -730,8 +811,9 @@
       "file": "index/7.html",
       "bytes": 172133,
       "sha256": "4c3856ebc393c48bf5bbeb18bbcb906cb01a1e1d2bf6809377e928bfd8737c7c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:06.204737+00:00"
     },
     {
       "key": 70,
@@ -739,8 +821,9 @@
       "file": "index/70.html",
       "bytes": 171970,
       "sha256": "9d7147349765d1c83760f86312163740f28262f32f573e460f159ec4aaa8d7fd",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:25.106192+00:00"
     },
     {
       "key": 71,
@@ -748,8 +831,9 @@
       "file": "index/71.html",
       "bytes": 172709,
       "sha256": "a47a71a435a6cd097371cbabee62a817d8f99b19c4db1afbfaa68814382c0b8d",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:25.216995+00:00"
     },
     {
       "key": 72,
@@ -757,8 +841,9 @@
       "file": "index/72.html",
       "bytes": 170644,
       "sha256": "501f32d713ac2788df473788c3607ac5d4719830e4b837e4b41d311a133b837c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:25.500942+00:00"
     },
     {
       "key": 73,
@@ -766,8 +851,9 @@
       "file": "index/73.html",
       "bytes": 170568,
       "sha256": "ee093fd64a4e47bfddda8b7952930dc4360e7addbf0f9bec503d93056bfcffd1",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:26.023813+00:00"
     },
     {
       "key": 74,
@@ -775,8 +861,9 @@
       "file": "index/74.html",
       "bytes": 171916,
       "sha256": "9d228b77ff304fd0591908d3ac787aaacd2b7ebac3a0ca4965ee0aeadac8f9ee",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:26.121629+00:00"
     },
     {
       "key": 75,
@@ -784,8 +871,9 @@
       "file": "index/75.html",
       "bytes": 172180,
       "sha256": "9dd7d3442713b3f42f19dcf7977add5f3aac3bd0043bac83abe03e27b4292a3b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:26.449445+00:00"
     },
     {
       "key": 76,
@@ -793,8 +881,9 @@
       "file": "index/76.html",
       "bytes": 170554,
       "sha256": "8231e07cd9987e492654b2527dcb3353605aba5f7a73a09712fe67d64ad83457",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:26.701830+00:00"
     },
     {
       "key": 77,
@@ -802,8 +891,9 @@
       "file": "index/77.html",
       "bytes": 172145,
       "sha256": "f2af6de3c20886097e26128d205f9e6a7acd2b74999b9ff919a85635016557e2",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:27.053599+00:00"
     },
     {
       "key": 78,
@@ -811,8 +901,9 @@
       "file": "index/78.html",
       "bytes": 171280,
       "sha256": "e8095e593b7ca3fb2ba1caeb2352fe6eecb42687feedd711daac3f5da3b0ce3b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:27.403670+00:00"
     },
     {
       "key": 79,
@@ -820,8 +911,9 @@
       "file": "index/79.html",
       "bytes": 170847,
       "sha256": "9f0885d796c0bffdfa7415aafcbc3947f230436b6f5ee21f6b8b5e4eab98aed8",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:27.711051+00:00"
     },
     {
       "key": 8,
@@ -829,8 +921,9 @@
       "file": "index/8.html",
       "bytes": 171348,
       "sha256": "d1bb29fbffac1c6093c6184a896021ed48d5a64bde5a608d85159d0f79499477",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.102031+00:00"
     },
     {
       "key": 80,
@@ -838,8 +931,9 @@
       "file": "index/80.html",
       "bytes": 170929,
       "sha256": "ace535c2b4bc0da795f02793e69a657f8bf45b55c949ae2736297d9d695d010c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:27.961335+00:00"
     },
     {
       "key": 81,
@@ -847,8 +941,9 @@
       "file": "index/81.html",
       "bytes": 173680,
       "sha256": "4211b3c0d24a432214f73f6345b7374e27521ff352da5450364dca8bb9e84916",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:28.415722+00:00"
     },
     {
       "key": 82,
@@ -856,8 +951,9 @@
       "file": "index/82.html",
       "bytes": 172689,
       "sha256": "b5006b763146b2eb53bf28054405360ee2c1247de65dff389c55c6a79f6be712",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:28.614371+00:00"
     },
     {
       "key": 83,
@@ -865,8 +961,9 @@
       "file": "index/83.html",
       "bytes": 171498,
       "sha256": "5a4921744916f43db3d6e520b57cc02e2308fec1438e22e817b1b6235e17d461",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:28.836786+00:00"
     },
     {
       "key": 84,
@@ -874,8 +971,9 @@
       "file": "index/84.html",
       "bytes": 171095,
       "sha256": "7bdd73628ca8df6240f93dbf2e49bf786f6720a5d3a4516c85f47ac21dd6d8fd",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:29.202388+00:00"
     },
     {
       "key": 85,
@@ -883,8 +981,9 @@
       "file": "index/85.html",
       "bytes": 171888,
       "sha256": "b61acae599468b7be109e3df7878a52b64914f13189b20c2a522d6ec02c1593c",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:29.491040+00:00"
     },
     {
       "key": 86,
@@ -892,8 +991,9 @@
       "file": "index/86.html",
       "bytes": 172320,
       "sha256": "27bd5b926cc05e5100b23e55a364b1b4816c98d9bad6545ccabd3ecaf5603db5",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:29.742456+00:00"
     },
     {
       "key": 87,
@@ -901,8 +1001,9 @@
       "file": "index/87.html",
       "bytes": 171508,
       "sha256": "5f0accbf1d6cccfa2ce40644422a4c08e7e3905dc6d1fea55f2e2d4661a10644",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:30.048934+00:00"
     },
     {
       "key": 88,
@@ -910,8 +1011,9 @@
       "file": "index/88.html",
       "bytes": 171250,
       "sha256": "6ccbaa72af71aabf796a69986d88dceb8a3a83c4479a7f9808281f2182a78557",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:30.328449+00:00"
     },
     {
       "key": 89,
@@ -919,8 +1021,9 @@
       "file": "index/89.html",
       "bytes": 173148,
       "sha256": "40be6a204fc44477a12c28036cfedae956394d86a925a1d1fd71d3783fe0c181",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:30.655680+00:00"
     },
     {
       "key": 9,
@@ -928,8 +1031,9 @@
       "file": "index/9.html",
       "bytes": 171297,
       "sha256": "7a8de0b425a68fadfa29483b29b932435a60ffbe7d4236a172b3dff60ad45526",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:07.146052+00:00"
     },
     {
       "key": 90,
@@ -937,8 +1041,9 @@
       "file": "index/90.html",
       "bytes": 172615,
       "sha256": "0e8cc6e891f6bedcfba120e89fb8c7dec0f0b278d02be744efb3aaaf874cef85",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:31.019656+00:00"
     },
     {
       "key": 91,
@@ -946,8 +1051,9 @@
       "file": "index/91.html",
       "bytes": 172182,
       "sha256": "8715bd62a88bdf98343e0ebc237526bd906dfce6b5535b4b53ef49e535d65263",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:31.331174+00:00"
     },
     {
       "key": 92,
@@ -955,8 +1061,9 @@
       "file": "index/92.html",
       "bytes": 172310,
       "sha256": "2edf8be57af9b518037c31f254cace51fddc3c98b47dc871cce91ce4babbcb73",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:31.639706+00:00"
     },
     {
       "key": 93,
@@ -964,8 +1071,9 @@
       "file": "index/93.html",
       "bytes": 171141,
       "sha256": "b40b917e987b5af9e843ede46e5116286ded6bddf54ef3c26f6d53c59011dae4",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:31.874227+00:00"
     },
     {
       "key": 94,
@@ -973,8 +1081,9 @@
       "file": "index/94.html",
       "bytes": 172152,
       "sha256": "a1b32841b7a181999e32b1051efa21f66b3b87aad0d898bc97295e584a2a20c0",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:32.146803+00:00"
     },
     {
       "key": 95,
@@ -982,8 +1091,9 @@
       "file": "index/95.html",
       "bytes": 172833,
       "sha256": "b77d88971fcba32a313432054eb2133bd19de9cacef5915c672e30295d4fed77",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:32.471714+00:00"
     },
     {
       "key": 96,
@@ -991,8 +1101,9 @@
       "file": "index/96.html",
       "bytes": 172635,
       "sha256": "bafbafb3bbc5ee366ddb618f687cd3f3d60edd0a9473070f3a6bd389d3ea734a",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:32.800309+00:00"
     },
     {
       "key": 97,
@@ -1000,8 +1111,9 @@
       "file": "index/97.html",
       "bytes": 173557,
       "sha256": "36835361af26e2aeebdba7032ef744a627d284a0808ff6dc0c599ee440e9989b",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:33.054621+00:00"
     },
     {
       "key": 98,
@@ -1009,8 +1121,9 @@
       "file": "index/98.html",
       "bytes": 174692,
       "sha256": "e9b83407d2e57c40d61db9a2a627d490c6859b2e236b78bf62a9c5d7007e3a06",
-      "cached": true,
-      "state": "collected"
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:33.826286+00:00"
     },
     {
       "key": 99,
@@ -1018,53 +1131,59 @@
       "file": "index/99.html",
       "bytes": 172741,
       "sha256": "f04246b40f02a3316096413c3034a325c5724a4e37a0b8a42800bb6883a9518c",
-      "cached": true,
-      "state": "collected"
-    },
-    {
-      "key": "repair-1-1",
-      "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=%3CTXT%3E+Mystery+Reward",
-      "file": "index/repair-1-1.html",
-      "bytes": 83363,
-      "sha256": "da14591f5add170390892d81a28bf450bd533626a46faed3fc138e88b8f414c7",
       "cached": false,
-      "state": "collected"
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:33.720620+00:00"
     },
     {
-      "key": "repair-2-1",
+      "key": "repair-13b8e6c6254a7d74-1",
+      "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=Heeding+the+Call",
+      "file": "index/repair-13b8e6c6254a7d74-1.html",
+      "bytes": 77434,
+      "sha256": "31c8caf52417b5d493c22df4e436956adb075542174b8e2bf42f2789d665569c",
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:42.882872+00:00"
+    },
+    {
+      "key": "repair-240b7f4d286e5f54-1",
       "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=Camping+101%3A+First+Aid",
-      "file": "index/repair-2-1.html",
-      "bytes": 79713,
-      "sha256": "03229bb89accc113ea2f3f4f9d2f1f058abf1e664abd80f61fa242bde029fe4e",
+      "file": "index/repair-240b7f4d286e5f54-1.html",
+      "bytes": 79756,
+      "sha256": "2b21f0917a9324b233407bd5650a7354af525d9baeb9a780d68a6c1c3cc9106b",
       "cached": false,
-      "state": "collected"
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:42.171845+00:00"
     },
     {
-      "key": "repair-3-1",
+      "key": "repair-9c9db0fec22d307d-1",
       "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=Confounding+Flash",
-      "file": "index/repair-3-1.html",
+      "file": "index/repair-9c9db0fec22d307d-1.html",
       "bytes": 79628,
       "sha256": "8ff490f96cde717263250c8090079cff1a92a541b25f08fcc21a81448e484042",
       "cached": false,
-      "state": "collected"
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:42.513083+00:00"
     },
     {
-      "key": "repair-4-1",
-      "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=Heeding+the+Call",
-      "file": "index/repair-4-1.html",
-      "bytes": 76397,
-      "sha256": "d062e1c0758b68a701c5d88b0573c4bfb19eba9391a19c10ece5dcc0cd08caa4",
-      "cached": false,
-      "state": "collected"
-    },
-    {
-      "key": "repair-5-1",
+      "key": "repair-c5c219fe1c6573aa-1",
       "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=REUSE",
-      "file": "index/repair-5-1.html",
-      "bytes": 92960,
-      "sha256": "0dd0ebd2aadc8f7d3f9a4917c99f578ca60432b0fa49d6185d788fd5453b3be7",
+      "file": "index/repair-c5c219fe1c6573aa-1.html",
+      "bytes": 93997,
+      "sha256": "c658402fc7af13dd6e6c63267058c63b6a5fb2c56f17e9d5be8223bef475c0f4",
       "cached": false,
-      "state": "collected"
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:43.226231+00:00"
+    },
+    {
+      "key": "repair-f4b57e464694a3f8-1",
+      "url": "https://www.forevervsclassic.com/quests?status=any&all=1&q=%3CTXT%3E+Mystery+Reward",
+      "file": "index/repair-f4b57e464694a3f8-1.html",
+      "bytes": 84357,
+      "sha256": "a77cb101917aa39d3f127cb95a607cc3da49276b0da7f1e9fe3c73264d34be78",
+      "cached": false,
+      "state": "collected",
+      "checkedAt": "2026-10-15T02:22:41.717657+00:00"
     }
   ],
   "paginationRepairs": [

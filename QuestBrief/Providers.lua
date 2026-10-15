@@ -128,10 +128,14 @@ function P.ForNPC(npcID)
     local lib = P.Connect(); npcID = M.QuestId(npcID)
     if not npcID then return {} end
     P.Index()
-    local out={}
+    local out,faction={},P.Context().faction
     for _,id in ipairs(P.starters and P.starters[npcID] or {}) do
         local source=P.records[id]
-        out[#out+1]={id=id,title=source.title,source=source,provenance="Bundled Forever exact NPC starter association"}
+        local allowed=false
+        for _,location in ipairs(source.locations or {}) do
+            if location.npcID==npcID and (not location.faction or location.faction==faction) then allowed=true;break end
+        end
+        if allowed then out[#out+1]={id=id,title=source.title,source=source,provenance="Bundled Forever exact NPC starter association"} end
     end
     if N.Questie and N.Questie.ForNPC then
         for _,row in ipairs(N.Questie.ForNPC(npcID)) do table.insert(out,1,row) end

@@ -1,5 +1,7 @@
 """Parse public Forever HTML without executing embedded website JavaScript."""
 from html.parser import HTMLParser
+import hashlib
+import json
 import re
 
 
@@ -74,6 +76,19 @@ def quest_index_titles(html):
             title = next((node.text() for node in anchor.all("div") if node.has_class("font-semibold")), None)
             if title:
                 out[int(match[1])] = title
+    return out
+
+
+def quest_index_fingerprints(html):
+    """Hash each displayed exact row, excluding unrelated scripts/page chrome."""
+    def tree(node):
+        if isinstance(node, str): return node.strip()
+        return [node.tag, sorted(node.attrs.items()), [tree(child) for child in node.children]]
+    out = {}
+    for anchor in document(html).all("a"):
+        match = re.fullmatch(r"/quests/([1-9]\d*)", anchor.attrs.get("href", ""))
+        if match and anchor.attrs.get("data-wowhead") in ("quest="+match[1]+"&domain=forever", "quest="+match[1]+"&domain=classic"):
+            out[int(match[1])] = hashlib.sha256(json.dumps(tree(anchor), ensure_ascii=False, sort_keys=True).encode()).hexdigest()
     return out
 
 

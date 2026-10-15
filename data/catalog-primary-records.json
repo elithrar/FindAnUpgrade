@@ -212,6 +212,12 @@
           "factionID": 72,
           "amount": 25
         }
+      ],
+      "locations": [
+        {
+          "objectID": 261,
+          "name": "Damaged Crate"
+        }
       ]
     },
     {
@@ -240,6 +246,12 @@
           "factionID": 72,
           "amount": 75
         }
+      ],
+      "locations": [
+        {
+          "objectID": 259,
+          "name": "Half-buried Barrel"
+        }
       ]
     },
     {
@@ -256,6 +268,12 @@
         {
           "factionID": 72,
           "amount": 50
+        }
+      ],
+      "locations": [
+        {
+          "objectID": 112948,
+          "name": "Intrepid's Locked Strongbox"
         }
       ]
     },
@@ -398,7 +416,13 @@
       "sha256": "c0a08d0b95937f83a0beb326aa93f7f0b655024c99fbef90d7cb7d6277de14b7",
       "level": 1,
       "minimum": 1,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 269,
+          "name": "Guarded Thunder Ale Barrel"
+        }
+      ]
     },
     {
       "id": 429,
@@ -1024,6 +1048,12 @@
           "factionID": 72,
           "amount": 150
         }
+      ],
+      "locations": [
+        {
+          "objectID": 2713,
+          "name": "Wanted Board"
+        }
       ]
     },
     {
@@ -1056,6 +1086,12 @@
         {
           "factionID": 72,
           "amount": 150
+        }
+      ],
+      "locations": [
+        {
+          "objectID": 2713,
+          "name": "Wanted Board"
         }
       ]
     },
@@ -1475,7 +1511,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174600,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 998,
@@ -1487,7 +1529,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174599,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 1012,
@@ -1691,7 +1739,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 173327,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 2098,
@@ -1760,6 +1814,12 @@
         {
           "factionID": 69,
           "amount": 10
+        }
+      ],
+      "locations": [
+        {
+          "objectID": 7510,
+          "name": "Sprouted Frond"
         }
       ]
     },
@@ -1908,6 +1968,12 @@
           "factionID": 69,
           "amount": 25
         }
+      ],
+      "locations": [
+        {
+          "objectID": 142958,
+          "name": "Feralas: A History"
+        }
       ]
     },
     {
@@ -1960,7 +2026,13 @@
       "level": 50,
       "minimum": 40,
       "xp": 470,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 149502,
+          "name": "Hoard of the Black Dragonflight"
+        }
+      ]
     },
     {
       "id": 3514,
@@ -2078,7 +2150,13 @@
       "level": 52,
       "minimum": 47,
       "xp": 5100,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 161504,
+          "name": "A Small Pack"
+        }
+      ]
     },
     {
       "id": 4005,
@@ -2108,7 +2186,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 164887,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4117,
@@ -2120,7 +2204,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 164888,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4119,
@@ -2132,7 +2222,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 164885,
+          "name": "Corrupted Night Dragon"
+        }
+      ]
     },
     {
       "id": 4221,
@@ -2144,7 +2240,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174604,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4222,
@@ -2156,7 +2258,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174603,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4343,
@@ -2168,7 +2276,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174602,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4403,
@@ -2180,7 +2294,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174601,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4443,
@@ -2192,7 +2312,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 173284,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4444,
@@ -2204,7 +2330,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174605,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4445,
@@ -2216,7 +2348,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174606,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4446,
@@ -2228,7 +2366,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174607,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4447,
@@ -2240,7 +2384,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 173324,
+          "name": "Corrupted Night Dragon"
+        }
+      ]
     },
     {
       "id": 4448,
@@ -2252,7 +2402,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174608,
+          "name": "Corrupted Night Dragon"
+        }
+      ]
     },
     {
       "id": 4461,
@@ -2264,7 +2420,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174686,
+          "name": "Corrupted Whipper Root"
+        }
+      ]
     },
     {
       "id": 4462,
@@ -2276,7 +2438,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174684,
+          "name": "Corrupted Night Dragon"
+        }
+      ]
     },
     {
       "id": 4466,
@@ -2288,7 +2456,13 @@
       "level": 55,
       "minimum": 48,
       "xp": 560,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174708,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4467,
@@ -2299,7 +2473,13 @@
       "sha256": "f923e1296e87680abf6f53895f4c0ebba6a3a5212f6226751552190fff1d63ba",
       "level": 55,
       "minimum": 48,
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 174709,
+          "name": "Corrupted Windblossom"
+        }
+      ]
     },
     {
       "id": 4493,
@@ -3557,7 +3737,13 @@
       "itemState": "published",
       "sourceUrl": "https://www.wowhead.com/forever/quest=91736",
       "sha256": "926c1ffbaf1813cce3a518628786f33cd964494c70228692e57b6ba50a5932aa",
-      "reputation": []
+      "reputation": [],
+      "locations": [
+        {
+          "objectID": 562131,
+          "name": "Applejack Still"
+        }
+      ]
     },
     {
       "id": 92460,

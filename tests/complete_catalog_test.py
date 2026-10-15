@@ -31,17 +31,19 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertEqual(report, json.loads((ROOT/"data/catalog-reconciliation.json").read_bytes()))
         self.assertEqual(report["publicIdsAbsentOutput"], [])
         self.assertEqual(sum(report["fieldCoverage"]["items"].values()), len(source["quests"]))
-        self.assertEqual(report["counts"]["publicIndex"], 5633)
         self.assertGreater(report["counts"]["publishedEmptyItems"], 1837)
         self.assertGreater(report["counts"]["rowsWithGivers"], 3500)
         _, inputs = read_inputs(ROOT)
+        self.assertEqual(report["counts"]["publicIndex"], inputs["public"]["expected"])
         identity = set(inputs["compiled"]["questIDs"]) | set(inputs["client"]["questIDs"])
         identity.update(row["id"] for row in inputs["public"]["records"])
         identity.update(row["id"] for row in inputs["legacy"]["quests"])
         identity.update(row["id"] for row in json.loads((ROOT/"data/primary-statuses.json").read_bytes())["quests"])
+        identity.update(inputs.get("history",{}).get("questIDs",[]))
         self.assertEqual({row["id"] for row in source["quests"]}, identity)
-        self.assertEqual(len(identity), 5669)
         output = {row["id"]: row for row in source["quests"]}
+        for quest in inputs["compiled"].get("hiddenTriggerIDs",[]):
+            self.assertEqual(output[quest]["questKind"],"hidden-trigger")
         for published in inputs["public"]["records"]:
             row = output[published["id"]]
             self.assertEqual(row["items"], published["items"])

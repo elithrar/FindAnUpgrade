@@ -5,7 +5,7 @@ import hashlib
 import json
 
 FIELDS = ("items", "title", "level", "minimum", "xp", "money", "reputation", "currencies", "givers", "coordinates")
-METADATA = ("title", "minimum", "maximum", "faction", "classTokens", "races", "eligibilityUnknown", "prerequisites", "prerequisiteCount", "locations", "locationConflict")
+METADATA = ("title", "minimum", "maximum", "faction", "classTokens", "races", "eligibilityUnknown", "prerequisites", "prerequisiteCount", "locations", "locationConflict", "questKind")
 
 
 def digest(raw):
@@ -32,6 +32,55 @@ def pairs(items):
     return sorted((item["group"], item["itemID"], item["quantity"]) for item in items)
 
 
+def entity(location):
+    return next(((key, location[key]) for key in ("npcID", "objectID", "itemID") if key in location), None)
+
+
+def location_scope_matches(location, incoming):
+    return entity(location) == entity(incoming) and (location.get("faction") == incoming.get("faction") or location.get("faction") is None)
+
+
+def enrich_locations(row, compiled, disagreements):
+    existing = [dict(location) for location in row.get("locations", [])]
+    originals = [dict(location) for location in existing]
+    qualified={entity(location) for location in compiled.get("locations",[]) if location.get("faction")}
+    for key in qualified:
+        incoming=[location for location in compiled["locations"] if entity(location)==key]
+        if any(not location.get("faction") for location in incoming):continue
+        scopes=sorted({location["faction"] for location in incoming})
+        existing=[dict(location,faction=faction) for location in existing for faction in (scopes if entity(location)==key and not location.get("faction") else [location.get("faction")])]
+        for location in existing:
+            if location.get("faction") is None:location.pop("faction",None)
+    originals=[dict(location) for location in existing]
+    recorded_entities = {entity(location) for location in existing}
+    incoming_entities = {entity(location) for location in compiled.get("locations", [])}
+    conflicting = {(entity(incoming),incoming.get("faction")) for incoming in compiled.get("locations",[]) if not any(entity(old)==entity(incoming) and (not old.get("faction") or not incoming.get("faction") or old["faction"]==incoming["faction"]) for old in originals) and any(entity(old)[0]==entity(incoming)[0] and (not old.get("faction") or not incoming.get("faction") or old["faction"]==incoming["faction"]) for old in originals)}
+    if conflicting:
+        disagreements.append({"id": row["id"], "field": "starters", "authoring": sorted(recorded_entities), "compiled": sorted(incoming_entities)})
+    for incoming in compiled.get("locations", []):
+        key = entity(incoming)
+        # Missing authoring can be expanded from the compiled exact q record.
+        # A different source giver is diagnostic, never a guessed extra NPC.
+        if (key,incoming.get("faction")) in conflicting:
+            continue
+        matching = [location for location in existing if location_scope_matches(location,incoming)]
+        if "mapID" not in incoming:
+            if not matching: existing.append(dict(incoming))
+            continue
+        coordinate = {name: incoming[name] for name in ("mapID", "x", "y")}
+        mapped = [location for location in originals if location_scope_matches(location,incoming) and "mapID" in location]
+        if mapped:
+            if not any(all(location[name] == coordinate[name] for name in coordinate) for location in mapped):
+                row["locationConflict"] = True
+                disagreements.append({"id":row["id"],"field":"coordinates","entity":list(key),"compiled":coordinate,"authoring":[{name:location[name] for name in coordinate} for location in mapped]})
+            continue
+        bare = matching[0] if matching else next((location for location in originals if location_scope_matches(location,incoming)),{})
+        existing = [location for location in existing if not (location_scope_matches(location,incoming) and "mapID" not in location)]
+        enriched = dict(bare, **incoming)
+        if enriched not in existing: existing.append(enriched)
+    if existing: row["locations"] = existing
+
+
 def build_complete(root):
     provenance, inputs = read_inputs(root)
     public = {row["id"]: row for row in inputs["public"]["records"]}
@@ -42,15 +91,21 @@ def build_complete(root):
     legacy = {row["id"]: row for row in inputs["legacy"]["quests"]}
     compiled, native = set(inputs["compiled"]["questIDs"]), set(inputs["client"]["questIDs"])
     constraints = {row["id"]: row for row in inputs["compiled"].get("constraints", [])}
+    compiled_metadata = {row["id"]: row for row in inputs["compiled"].get("metadata", [])}
+    hidden_triggers=set(inputs["compiled"].get("hiddenTriggerIDs",[]))
+    npc_positions = {row["npcID"]: row for row in inputs["compiled"].get("npcPositions", [])}
     rejected_metadata = set(inputs["metadata"].get("rejectedIDs", []))
     classification = {row["id"] for row in json.loads((root/"data/primary-statuses.json").read_bytes())["quests"]}
-    universe = set(public) | compiled | native | classification | set(legacy)
+    history=set(inputs.get("history",{}).get("questIDs",[]))
+    if len(history)!=len(inputs.get("history",{}).get("questIDs",[])) or any(type(quest) is not int or not 0<quest<2**31 for quest in history):raise ValueError("Invalid monotonic identity history")
+    universe = set(public) | compiled | native | classification | set(legacy) | history
     rows, gaps, disagreements = [], [], []
     added_pairs, removed_pairs = [], []
     for quest in sorted(universe):
         authored, published, checked = metadata.get(quest, {}), public.get(quest), primary.get(quest)
         row = {key: authored[key] for key in METADATA if key in authored}
         row.update({"id": quest, "items": [], "itemState": "unknown", "confirmation": "historical" if quest in compiled else "unconfirmed"})
+        if quest in hidden_triggers:row["questKind"]="hidden-trigger"
         if published:
             for key in ("title", "level", "minimum", "faction", "items", "itemState", "confirmation"):
                 if key in published:
@@ -82,6 +137,15 @@ def build_complete(root):
         for unresolved in authored.get("unresolvedRestrictions", []):
             if {"classes": "classTokens", "races": "races"}[unresolved] not in constraint:
                 row["eligibilityConflict"] = True
+        enrich_locations(row, compiled_metadata.get(quest, {}), disagreements)
+        # A separately recorded NPC position can enrich an already established
+        # starter ID. It cannot create a new NPC-to-quest association.
+        known_npcs = {(location["npcID"],location.get("faction")) for location in row.get("locations", []) if "npcID" in location}
+        for npc, faction in sorted(known_npcs,key=str):
+            if any(location.get("npcID") == npc and location.get("faction") == faction and "mapID" in location for location in row["locations"]): continue
+            positions = [{"npcID":npc,**({"faction":faction} if faction else {}),**point} for point in npc_positions.get(npc, {}).get("locations", [])]
+            if positions:
+                enrich_locations(row,{"locations":positions},disagreements)
         # A retained current primary page challenges every corresponding exact
         # source group, rather than replacing an unexplained discrepancy.
         if checked:
@@ -95,10 +159,10 @@ def build_complete(root):
             if checked.get("locations"):
                 existing = [dict(location) for location in row.get("locations", [])]
                 for giver in checked["locations"]:
-                    matches = [location for location in existing if location.get("npcID") == giver["npcID"]]
+                    matches = [location for location in existing if entity(location) == entity(giver)]
                     if matches:
                         for location in matches:
-                            location["name"] = giver["name"]
+                            if giver.get("name"): location["name"] = giver["name"]
                     else:
                         existing.append(giver)
                 row["locations"] = existing
@@ -155,6 +219,31 @@ def build_complete(root):
     report["publicUnconfirmedIDs"] = sorted(quest for quest, row in public.items() if row["confirmation"] == "unconfirmed")
     report["eligibilityConflictIDs"] = [row["id"] for row in rows if row.get("eligibilityConflict")]
     report["metadataOmissions"] = inputs["metadata"]["omissions"]
+    evidence={row["id"]:row for row in inputs.get("gaps",{}).get("records",[])}
+    report["gapEvidence"]=inputs.get("gaps",{})
+    report["retainedHistoryOnlyIDs"]=sorted(history-(set(public)|compiled|native|classification|set(legacy)))
+    unsupported_starters={entry.get("id") for entry in inputs["metadata"]["omissions"] if entry.get("field") in ("providers","qg","qgs")}
+    by_id={row["id"]:row for row in rows}
+    for gap in gaps:
+        row=by_id[gap["id"]]
+        causes={}
+        for field in gap["missing"]:
+            if field=="items":cause=evidence.get(row["id"],{}).get("cause","no-current-public-reward-record")
+            elif field=="currencies":cause="complete-currency-list-not-exposed"
+            elif field in ("givers","coordinates"):
+                if row.get("questKind")=="hidden-trigger":cause="declared-hidden-trigger"
+                elif row["id"] in inputs.get("gaps",{}).get("unprovenHeaderContextIDs",[]):cause="parent-header-context-does-not-prove-child-starter"
+                elif row.get("confirmation")=="unconfirmed":cause="unconfirmed-forever-identity"
+                elif not row.get("locations"):cause="unsupported-starter-expression" if row["id"] in unsupported_starters else "starter-fields-absent-in-inspected-sources"
+                elif all("itemID" in location for location in row["locations"]):cause="item-start-has-no-fixed-activation-point"
+                elif len({entity(location) for location in row["locations"]})>1:cause="multiple-or-mixed-starters-without-owned-point"
+                else:cause="starter-position-absent-in-inspected-sources"
+            elif field in ("level","minimum") and field in public.get(row["id"],{}):cause="unsupported-published-level-value"
+            else:cause="field-not-explicitly-published"
+            causes[field]=cause
+        gap["causes"]=causes
+    report["gapCauseCounts"]={field:dict(Counter(gap["causes"][field] for gap in gaps if field in gap["causes"])) for field in FIELDS}
+    report["inventoryConfirmation"]={"published":sum(row["confirmation"]=="published" for row in rows),"historicalOrUnconfirmed":sum(row["confirmation"]!="published" for row in rows),"finderRule":"Historical/unconfirmed candidates and declared hidden triggers are excluded unless current native offer/log/map evidence proves availability. Cached rewards or titles alone are not availability proof."}
     report["compiledConstraintConflicts"] = inputs["compiled"]["constraintConflicts"]
     report["repeatedRewardSlots"] = []
     for row in rows:
@@ -162,7 +251,7 @@ def build_complete(root):
             repeated = [entry for entry in row["items"] if entry["group"] == group and entry["itemID"] == item]
             if len(repeated) > 1:
                 report["repeatedRewardSlots"].append({"id":row["id"],"group":group,"itemID":item,"slots":[{"slot":entry["slot"],"quantity":entry["quantity"]} for entry in repeated]})
-    report["acquisitionLimits"]["givers"] = "Public reward columns do not encode starters. Explicit authored qg/qgs and top-level typed NPC/object/item providers plus retained primary start markers are recorded; nested objectives and item-source coordinates are not promoted to giver proof. Missing givers remain listed per ID."
+    report["acquisitionLimits"]["givers"] = "Public reward columns do not encode starters. Explicit authored/compiled exact quest starters, qs/qss starting items, faction-qualified resolver branches and retained primary start markers are recorded. Independently recorded NPC positions enrich only already proven NPC starters. Nested objectives, parent-header context and item acquisition points are not promoted to starter proof."
     return source, report
 
 

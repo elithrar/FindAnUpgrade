@@ -1,0 +1,2770 @@
+{
+  "records": [
+    {
+      "id": 236,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Fueling the Demolishers",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/236",
+        "sha256": "0533b85130994629e6870ed6101f09eed4f96a5a85408f4e043c821bc2bdde96",
+        "bytes": 60169
+      }
+    },
+    {
+      "id": 260,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/260",
+        "sha256": "3e0dbedd626f7dbc287d29568f750df91f07f19e0c02f48bb5ff059c5714a037",
+        "bytes": 59524
+      }
+    },
+    {
+      "id": 326,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/326",
+        "sha256": "6d83f012d796f595a116fe50aa7752d1ebab630aefaad7999fba8234a37dada0",
+        "bytes": 60751
+      }
+    },
+    {
+      "id": 327,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/327",
+        "sha256": "79917dfa7e24a1118372293b19ae4076a3db5aff169d7d3cb94ef8a6e524bb30",
+        "bytes": 60055
+      }
+    },
+    {
+      "id": 402,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Sirra is Busy",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/402",
+        "sha256": "060a172b2a453b80c4db749ea4f3decaecde939004c4dd5fd92d85a06e4b6aae",
+        "bytes": 60007
+      }
+    },
+    {
+      "id": 534,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/534",
+        "sha256": "1f4c7db11e74ade13943899544666f59a38e1f8cd3052c2959e15bbb9f24b643",
+        "bytes": 59524
+      }
+    },
+    {
+      "id": 612,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/612",
+        "sha256": "5e90974eefbf1fc534ce35f5b467d684c6ab6c1ca1f1acde173126e71374209f",
+        "bytes": 61029
+      }
+    },
+    {
+      "id": 740,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/740",
+        "sha256": "766080706459321b15813a7d007ea949e124d2478086dc2a7f6e141042885b8e",
+        "bytes": 60045
+      }
+    },
+    {
+      "id": 811,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/811",
+        "sha256": "c253b418cce4d76619d40f1e10641599facc94cf14cc7f62903e2ff19e768ca1",
+        "bytes": 60416
+      }
+    },
+    {
+      "id": 904,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/904",
+        "sha256": "6c0211d6d1a6878a6fdae5fcbbc5762ed53d1cde6fe88df63a0b5fcaa4bf76bc",
+        "bytes": 59516
+      }
+    },
+    {
+      "id": 988,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/988",
+        "sha256": "0ed6c345aa415fe2406d77dfcbeff79918662fe8b42ee139851639ff2a645f47",
+        "bytes": 60037
+      }
+    },
+    {
+      "id": 989,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/989",
+        "sha256": "0cc3c072355df869c996f3474772c3dd01058bfa6be45240231fb852f7dc6d0a",
+        "bytes": 60037
+      }
+    },
+    {
+      "id": 1128,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Gnome Pit Crew is Thirsty",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1128",
+        "sha256": "309f934a6e8591362aeee31820c2aa44f5b5de756e239750dc6ecee3175cf192",
+        "bytes": 60515
+      }
+    },
+    {
+      "id": 1129,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Goblin Pit Crew is Thirsty",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1129",
+        "sha256": "a6c966810b18e14fcaf00a5a6b248370ab03d8ad2796ebe01bda8eb6cc83997f",
+        "bytes": 60531
+      }
+    },
+    {
+      "id": 1156,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> speak to alchemist pestlezugg",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1156",
+        "sha256": "862cefefcc928d0fe940b653e53e52ccd051d34cd68a8da2154893ad08b6ed58",
+        "bytes": 60709
+      }
+    },
+    {
+      "id": 1165,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> Ore for the Races",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1165",
+        "sha256": "dda507a2685dbcdc2cef932497cc209c17650b15f5b47c4c86c7695a0744f6d2",
+        "bytes": 60323
+      }
+    },
+    {
+      "id": 1289,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> Vimes's Report",
+      "explicitPlaceholderMarkers": [
+        "<nyi>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1289",
+        "sha256": "8ce72f82434289b3c209131ba3789b9647c7c48f09d41c8d47610a0b44982311",
+        "bytes": 60702
+      }
+    },
+    {
+      "id": 1290,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> Investigating Mosarn",
+      "explicitPlaceholderMarkers": [
+        "<nyi>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1290",
+        "sha256": "8ed0993b33edabefecdaa324fe6f42272bf9ad63ddf7f4e3c1cb3cbc7d9fb145",
+        "bytes": 60353
+      }
+    },
+    {
+      "id": 1390,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> Oops, We Killed Them Again.",
+      "explicitPlaceholderMarkers": [
+        "<nyi>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1390",
+        "sha256": "d1f9cc3a757ee2d9c78d5fbf902ea5549cbae468c4c642438f51d9a978cafd4c",
+        "bytes": 60862
+      }
+    },
+    {
+      "id": 1397,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> Saved!",
+      "explicitPlaceholderMarkers": [
+        "<nyi>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1397",
+        "sha256": "27065fd40ad28728d63a83c8d849ed58f67273e1dc36c505dcbb170ba13a7405",
+        "bytes": 59590
+      }
+    },
+    {
+      "id": 1443,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> The Shakedown",
+      "explicitPlaceholderMarkers": [
+        "<nyi>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1443",
+        "sha256": "05e9dd1d51a13cead535b0cd55fda624cce59729d2732dbfda58736009e30114",
+        "bytes": 60241
+      }
+    },
+    {
+      "id": 1533,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> Call of Air",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1533",
+        "sha256": "7bd8bb42e3794cb1bc9a333d30f1f06405697b3f123198eb167adef48c5bae22",
+        "bytes": 60331
+      }
+    },
+    {
+      "id": 1538,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> Call of Air",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/1538",
+        "sha256": "ea89da8fb737f3f7cba8587aa4000abd6df8d68a6664ed6c556e9b4aa8041f01",
+        "bytes": 60331
+      }
+    },
+    {
+      "id": 2018,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Rokar's Test",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/2018",
+        "sha256": "4268565ba3afd1aeced647b1b38b6ab9b57af3cefc8fc4cd7bacb62dcdd083cc",
+        "bytes": 60552
+      }
+    },
+    {
+      "id": 2019,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Tools of the Trade",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/2019",
+        "sha256": "1f99079ad8bdb78d9181470d1337f0b06c8baf24e07ad41749940bc1346b753a",
+        "bytes": 60604
+      }
+    },
+    {
+      "id": 2020,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/2020",
+        "sha256": "41052fd3d0c20282533fb4c4ab41903e38de30e88c11d5e55f986ef25381549a",
+        "bytes": 60175
+      }
+    },
+    {
+      "id": 2058,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/2058",
+        "sha256": "e811af3318e04fcec1eb15df5a0ac98172007462bd06c521638ad2e8cdf85ee8",
+        "bytes": 60175
+      }
+    },
+    {
+      "id": 2059,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/2059",
+        "sha256": "67d2b889006accc9702ded10082718047795f361629346c91e45c0c27f4d7ac2",
+        "bytes": 60175
+      }
+    },
+    {
+      "id": 3111,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED> [DEPRECATED]",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>",
+        "DEPRECATED"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3111",
+        "sha256": "8f5723e9de10e434cda06180bc2ec733a10c146530f89bc0f904b3ff6dd1ea34",
+        "bytes": 60782
+      }
+    },
+    {
+      "id": 3516,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3516",
+        "sha256": "3766458c99d9e6ac80b4a65d7e2aad98eabff64e76c558a9f6a75be2dbdd4db1",
+        "bytes": 60438
+      }
+    },
+    {
+      "id": 3530,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3530",
+        "sha256": "01d5e3bfe805b7efd325be5d4d7d5aa324627a79c26522bc05ecf85fe819b958",
+        "bytes": 60045
+      }
+    },
+    {
+      "id": 3531,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3531",
+        "sha256": "0b0fcdaf4e7e05f297983d3334c10da5e50a8896d649ebecc73d847bd424853e",
+        "bytes": 60045
+      }
+    },
+    {
+      "id": 3581,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3581",
+        "sha256": "8d54a6f15e955662a99a3f5e251639bc6d16035f9d959518adb8bc52a1e7be32",
+        "bytes": 60073
+      }
+    },
+    {
+      "id": 3623,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3623",
+        "sha256": "134bb6c65f49f4c7e8e5a613a914ff5b6e475a13d6d3615cc06c5d9cb6644a25",
+        "bytes": 60057
+      }
+    },
+    {
+      "id": 3624,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3624",
+        "sha256": "d805cca33c65a07358dd930540c4abaab12ec2f8e0c78400ba2f63289576a6d2",
+        "bytes": 60057
+      }
+    },
+    {
+      "id": 3910,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> The Un'Goro Run",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/3910",
+        "sha256": "e4127f4799b348359389e40d65676f571b93608f824c819a1ebb9025529eb8c8",
+        "bytes": 60912
+      }
+    },
+    {
+      "id": 5303,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5303",
+        "sha256": "eecfa11f11f9d3bb5877a51715f2d75a46afc574a352e0aa8bd7b0b4519ea2b2",
+        "bytes": 60111
+      }
+    },
+    {
+      "id": 5304,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5304",
+        "sha256": "d3621e4e97172c79af2122eec1d188324cc207196d2f605a725a248139c3a4fe",
+        "bytes": 60111
+      }
+    },
+    {
+      "id": 5383,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Krastinov's Bag of Horrors",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5383",
+        "sha256": "6ba434523df1f067bc29fed9f802f6126838d28bede2a39b0529ad4b038a9712",
+        "bytes": 60658
+      }
+    },
+    {
+      "id": 5530,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> Necklace of the Dawn",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5530",
+        "sha256": "ee4f76fd111d48ddece5e64fcefbdc2744e4ab079b6b0be286c53c35a6222e00",
+        "bytes": 61964
+      }
+    },
+    {
+      "id": 5668,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Blessing of Light",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5668",
+        "sha256": "1eaf0322f96fd281997576de3e7f88bb87f757abf02d77078b9e5d07ffa4e1e0",
+        "bytes": 60477
+      }
+    },
+    {
+      "id": 5669,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Blessing of Light",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5669",
+        "sha256": "b6ccf78c7f1e46a126bd65598e3ec4b4c6ec2230a1183e99f010ede6e74a5b8f",
+        "bytes": 60866
+      }
+    },
+    {
+      "id": 5670,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Blessing of Light",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5670",
+        "sha256": "2cb5af40cd7b46fae84b64aa93b2c68ffbc04ffa22f09d7f23234b5b21d823f1",
+        "bytes": 60866
+      }
+    },
+    {
+      "id": 5671,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Blessing of Light",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5671",
+        "sha256": "08da450be4dbc174163a365cc87820c80bae006d267b289b6b26456c5f04d4e1",
+        "bytes": 60866
+      }
+    },
+    {
+      "id": 5681,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5681",
+        "sha256": "09a743888ad13f772f21d0fd143eedcdcda79265d917d6123bbee4054a75657f",
+        "bytes": 60189
+      }
+    },
+    {
+      "id": 5682,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5682",
+        "sha256": "4e208f1fe63f3580f8a857a52e346eb2e6a0c2bef9b210d369b870631c1defa7",
+        "bytes": 60578
+      }
+    },
+    {
+      "id": 5683,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5683",
+        "sha256": "4f49727f4b7b64f3029d2b5413e6cd7d03521139464737658cdf6099acfd8409",
+        "bytes": 60578
+      }
+    },
+    {
+      "id": 5684,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5684",
+        "sha256": "43c4610d2233aefb03f3204a9d62a1da1c8a2569aa42174acbc8a52973479de3",
+        "bytes": 60578
+      }
+    },
+    {
+      "id": 5685,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> The Light Protects You",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5685",
+        "sha256": "2fb6b703eab66843105a66b70cdd3453686be3aaa1723cc34b910f0210bd33c6",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 5686,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Light Protects You",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5686",
+        "sha256": "ff24884d2444e39164276de69bd6faeb2dfe7bd861a25296a6a9321ac847ddc8",
+        "bytes": 60914
+      }
+    },
+    {
+      "id": 5687,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Light Protects You",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5687",
+        "sha256": "bf7854fb434a0315ce052013920892e6258c9d2e71bb351c7aff6d60d7d89ff3",
+        "bytes": 60914
+      }
+    },
+    {
+      "id": 5688,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> A Touch of Voodoo",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5688",
+        "sha256": "3ff704b53702697cfb668d773b81994acf1bdf0dc1f78cb01f28b6d6e90a52c3",
+        "bytes": 60653
+      }
+    },
+    {
+      "id": 5689,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Touch of Voodoo",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5689",
+        "sha256": "dda9b5bab4c2017a1a4092002f58df854a36852e6898e90129804fc645e53d66",
+        "bytes": 60818
+      }
+    },
+    {
+      "id": 5690,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> A Touch of Voodoo",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5690",
+        "sha256": "d8b12c64b00dac316fb4040d94b0cd44ba265d6206af74bda451c37dbbf39086",
+        "bytes": 61042
+      }
+    },
+    {
+      "id": 5694,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5694",
+        "sha256": "2cedabac066d1676fceb32e38f07f4d68768b6a1683f4916946c9d29f2e4cb40",
+        "bytes": 60189
+      }
+    },
+    {
+      "id": 5695,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5695",
+        "sha256": "0aa5c68d4154186f3dd37ebf6653f926d124feeacfe0bac11c3c60f2030fabf3",
+        "bytes": 61944
+      }
+    },
+    {
+      "id": 5696,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5696",
+        "sha256": "11409d54bb42a6c97e07389e207cbefd3d2c181fe4f96cc4b7f24b8514bc68df",
+        "bytes": 60578
+      }
+    },
+    {
+      "id": 5697,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5697",
+        "sha256": "0370187d99edacd54a5d40cb288104ec90fc25758c05a68ced670a25b5ec527b",
+        "bytes": 60578
+      }
+    },
+    {
+      "id": 5698,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> A Small Amount of Hope",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5698",
+        "sha256": "62809f6ed3d755cc179edb38ddd56ed9def825d5dad19996bd92fcaf2ea54ac9",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 5699,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Small Amount of Hope",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5699",
+        "sha256": "95a0c34d430b114b6c3c467603b61087b9f89690d3e4254280d4ef631a58ce3c",
+        "bytes": 60914
+      }
+    },
+    {
+      "id": 5700,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> A Small Amount of Hope",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5700",
+        "sha256": "6e20e8ad3c233f4ff132812026565ffc6e3da4e31ad569dcf4313ca1391a322f",
+        "bytes": 60914
+      }
+    },
+    {
+      "id": 5701,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> The Rites of Old",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5701",
+        "sha256": "6218207c38fe7a1976c1c54e4bd27e0039414dcd94ba6f3c7b19d77e23a36119",
+        "bytes": 60637
+      }
+    },
+    {
+      "id": 5702,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Rites of Old",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5702",
+        "sha256": "4b2245d0f4330ad34b6313c287e038032228062cad984572201670fffe433789",
+        "bytes": 60802
+      }
+    },
+    {
+      "id": 5703,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Rites of Old",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5703",
+        "sha256": "8ce31c0923ed496684315d0c94bb288647c5330b0be205aff66ab2a877d07482",
+        "bytes": 60802
+      }
+    },
+    {
+      "id": 5707,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> Flirting With Darkness",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5707",
+        "sha256": "378f00e4bb6eb3563fda306e324fc67141c91618002aa13912e74fcea9d44759",
+        "bytes": 60733
+      }
+    },
+    {
+      "id": 5708,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> Flirting With Darkness",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5708",
+        "sha256": "43ca11b7d6cedbca73acf1813314d6a0140103cbe741783f4b3fb12b886095b7",
+        "bytes": 60898
+      }
+    },
+    {
+      "id": 5709,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> Flirting With Darkness",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5709",
+        "sha256": "c682531cd6f4ed903237a52a2e8f52746170eb13a0162ff9065fd94f9c7b4d48",
+        "bytes": 60898
+      }
+    },
+    {
+      "id": 5710,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> <TXT> Troll Priest Robe",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5710",
+        "sha256": "4325056ac04f9fc84ec4387a66f10806409119d58d1d5b43c843932b3e8cb3ba",
+        "bytes": 60653
+      }
+    },
+    {
+      "id": 5711,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Lost Ways",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5711",
+        "sha256": "78d8589766f86fd98654a54c96dc2386bc9e45f390a98498b3fa48a84452e24e",
+        "bytes": 60754
+      }
+    },
+    {
+      "id": 5712,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<NYI> The Lost Ways",
+      "explicitPlaceholderMarkers": [
+        "<NYI>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/5712",
+        "sha256": "fba7f8fc0e24ebc54ad801937329c4a213da216e903d23c549d668710fd78435",
+        "bytes": 60754
+      }
+    },
+    {
+      "id": 6003,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> <txt> Green With Envy",
+      "explicitPlaceholderMarkers": [
+        "<nyi>",
+        "<txt>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6003",
+        "sha256": "c9ef015e586bc2fe2ca59c6cd2246b2f3bcbabb2fe87f9789dee10fa76ff2ff2",
+        "bytes": 60898
+      }
+    },
+    {
+      "id": 6202,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED> Good and Evil",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6202",
+        "sha256": "743096681b32c10b3a38fc64156308993579e28958cd487527f4f36a7f97c0f6",
+        "bytes": 61228
+      }
+    },
+    {
+      "id": 6702,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> SF, RFK, GNOMER, BF",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6702",
+        "sha256": "8595581022f5c20da4ff775af77ab95fc3e2273d0aab9e2aa8f4749d40f1bfc1",
+        "bytes": 61255
+      }
+    },
+    {
+      "id": 6703,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> SF, RFK, GNOMER, BF - Repeatable",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6703",
+        "sha256": "084346c83db1b3fe28022fc72f0887de8666636400167ecf6a0044ce54e4b818",
+        "bytes": 61322
+      }
+    },
+    {
+      "id": 6704,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> SM, RFD, ULD",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6704",
+        "sha256": "7e7cafd0020c5121fe41c8e5a6c2bda5f5d64a796b8f9a5e87e5b0128d0fc2a1",
+        "bytes": 61143
+      }
+    },
+    {
+      "id": 6705,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> SM, RFD, ULD - Repeatable",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6705",
+        "sha256": "6757235ed853bb9c8b64caf61738bcdab8bc4e0fbbad835e9d4af37cd4357450",
+        "bytes": 61210
+      }
+    },
+    {
+      "id": 6706,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> ZUL, ST, MAR",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6706",
+        "sha256": "469552e40120c604643d8fc71b1010302bf6b3fc20707e6329914e6f8bda239d",
+        "bytes": 61143
+      }
+    },
+    {
+      "id": 6707,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> ZUL, ST, MAR - Repeatable",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6707",
+        "sha256": "3cfca82addad06340df4f9ba9590aefbbbf2c0efa9e7dcab46624da4ba80922d",
+        "bytes": 61210
+      }
+    },
+    {
+      "id": 6708,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> BRD, DM, BRS",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6708",
+        "sha256": "bc577be1bf4274e98e9a6a431c1f9800926ae9078c50f4675273366d77e93152",
+        "bytes": 61143
+      }
+    },
+    {
+      "id": 6709,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> BRD, DM, BRS - Repeatable",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6709",
+        "sha256": "57be2beed6a05c535ce9007a77092698354ff758406d8c93ef0d92158eab168e",
+        "bytes": 61210
+      }
+    },
+    {
+      "id": 6710,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> UBRS, STRATH, SCHOL",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6710",
+        "sha256": "bc26f2ec6186cbf5698c73b4a1a940176315758131e7c6f1cc1f2db707da1995",
+        "bytes": 61255
+      }
+    },
+    {
+      "id": 6711,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED] <TXT> UBRS, STRATH, SCHOL - Repeatable",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/6711",
+        "sha256": "ac170a17637ae9b75d759ebacec2e79204dadd9217354046b06ee4e296da8afa",
+        "bytes": 61314
+      }
+    },
+    {
+      "id": 7361,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Favor Amongst the Darkspear",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7361",
+        "sha256": "027b49de55b2f99459294a04cc2e7615386893136782a0e564068a41b82455c5",
+        "bytes": 60944
+      }
+    },
+    {
+      "id": 7362,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Ally of the Tauren",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7362",
+        "sha256": "36f4a1e1f15b3f0ea1acabc9e5748eb9b9f5e4165c646df3d8dcc2ddc02aabf0",
+        "bytes": 60793
+      }
+    },
+    {
+      "id": 7363,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Human Condition",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7363",
+        "sha256": "6eda117e899ae1dcade0390b3d28b4219cf289fc7d372389031c06af9c9aeba2",
+        "bytes": 60801
+      }
+    },
+    {
+      "id": 7364,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Gnomeregan Bounty",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7364",
+        "sha256": "c1ab479a70e0df95175c229c0e2573f863a759ff7c4c331248b241e77f5ba5d7",
+        "bytes": 61836
+      }
+    },
+    {
+      "id": 7365,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Staghelm's Requiem",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7365",
+        "sha256": "f61ba2d98c545df86f78d0f3f5bc485e55b8c22e8dd0952fa2893c7960934916",
+        "bytes": 60839
+      }
+    },
+    {
+      "id": 7366,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Archbishop's Mercy",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7366",
+        "sha256": "06e41643e594c5a16ad01cdd4e455e963f3c0a47b88f8555e399bb70ef8f6322",
+        "bytes": 60903
+      }
+    },
+    {
+      "id": 7381,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Return of Korrak",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7381",
+        "sha256": "421b758401a2de402a844ed4b4305bdc3e2dc5d588a1af86d5e479f79ae7e513",
+        "bytes": 61782
+      }
+    },
+    {
+      "id": 7382,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Korrak the Everliving",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7382",
+        "sha256": "a71bd6ef6511ca0cdd7584898be4f090064a5941ecdc0647c1d5e863f94eddf0",
+        "bytes": 61804
+      }
+    },
+    {
+      "id": 7384,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<nyi> <txt> The Scale Crafters",
+      "explicitPlaceholderMarkers": [
+        "<nyi>",
+        "<txt>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7384",
+        "sha256": "53a95e4526a80821c2d4e29c094a0f752cbe6e2c35cd8858d83b15c92342e977",
+        "bytes": 60555
+      }
+    },
+    {
+      "id": 7401,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "WANTED: Dwarves!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7401",
+        "sha256": "3b43a3d01b8b95339b22c6037621841c12497cf6be595a3e2c26bb2b7d627670",
+        "bytes": 60753
+      }
+    },
+    {
+      "id": 7402,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "WANTED: Orcs!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7402",
+        "sha256": "e513f16b073477edf1e3fa550aa4127e0e416b427f811e702c9ce12d5fa02236",
+        "bytes": 60719
+      }
+    },
+    {
+      "id": 7421,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Darkspear Defense",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7421",
+        "sha256": "8c35478699c5a289e73a1aa8617bd8b417454c6e4ed957f6d99bedf6b668cdbc",
+        "bytes": 60566
+      }
+    },
+    {
+      "id": 7422,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Tuft it Out",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7422",
+        "sha256": "9b0c0d3565aea83b55204357d48e38004248273812039d98ad1234753006928d",
+        "bytes": 60463
+      }
+    },
+    {
+      "id": 7423,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "I've Got A Fever For More Bone Chips",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7423",
+        "sha256": "ffe81f9f14f204c0a7461b08c2fc827dbf846fbdc75980eace0cc9e1ddf56517",
+        "bytes": 60895
+      }
+    },
+    {
+      "id": 7424,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "What the Hoof?",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7424",
+        "sha256": "df4215cac74d178582338ef975cf1474037ea348bc22014e70a342747576bf58",
+        "bytes": 60519
+      }
+    },
+    {
+      "id": 7425,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Staghelm's Mojo Jamboree",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7425",
+        "sha256": "def984ade51a711bf08731c1359544a5fdd2612c29f8f81f8d37baaae0df1dab",
+        "bytes": 60703
+      }
+    },
+    {
+      "id": 7426,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "One Man's Love",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7426",
+        "sha256": "a7c486643517cfd3489f6e6ccd8e39416935662f15cbdf0f9c0dd0174f72b769",
+        "bytes": 60543
+      }
+    },
+    {
+      "id": 7427,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Wanted: MORE DWARVES!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7427",
+        "sha256": "9e048196da25919a1ebc3d1a4865bf0db0a274413820295cc7ebfda2c883544f",
+        "bytes": 60615
+      }
+    },
+    {
+      "id": 7428,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Wanted: MORE ORCS!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7428",
+        "sha256": "533bc71a1762867223e13c7599d36adcc51b537f529f958c780851bfdddb1f70",
+        "bytes": 60567
+      }
+    },
+    {
+      "id": 7521,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Thunderaan the Windseeker",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7521",
+        "sha256": "9a5bdf848391e43ac836715137ce24878b98c3e1981baa28d7fd109422faf1ac",
+        "bytes": 60592
+      }
+    },
+    {
+      "id": 7522,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Examine the Vessel",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7522",
+        "sha256": "65f72317d4f33a46b0da85ca47abfd568076b5549fc745fd8d10ae0dc0d52634",
+        "bytes": 60091
+      }
+    },
+    {
+      "id": 7561,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Rise, Thunderfury!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7561",
+        "sha256": "155e1b6a3470404ffe207b430c8063af8dfc1ecbd7544d23b982b32a1d8fe5c3",
+        "bytes": 61431
+      }
+    },
+    {
+      "id": 7702,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Kill 'Em With Sleep Deprivation",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7702",
+        "sha256": "1b90fac8d5bb339b8522fc6f8d2f623c1ef76a2c13dbdf93cb14642290f3122f",
+        "bytes": 61794
+      }
+    },
+    {
+      "id": 7741,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Praise from the Emerald Circle <NYI> <TXT>",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7741",
+        "sha256": "be3c60415ffd8306ea8714b0f10f2b7fc0eb2343046065a0643d8a86fd4c9c89",
+        "bytes": 62063
+      }
+    },
+    {
+      "id": 7886,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7886",
+        "sha256": "956cb9626c76a345b6c39f54547a93f69d7e9b823be9cdb3b9b664b1dc1b2611",
+        "bytes": 61774
+      }
+    },
+    {
+      "id": 7887,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7887",
+        "sha256": "ccbe8f83b2b20201444c3d4c383cfe87351ea0d635233b2face717ce55e699a4",
+        "bytes": 60737
+      }
+    },
+    {
+      "id": 7888,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7888",
+        "sha256": "2d4a0f4bbd2590b422daa34daf217610d0392e52c5d4d41342a99584f70561d6",
+        "bytes": 60737
+      }
+    },
+    {
+      "id": 7921,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7921",
+        "sha256": "c16bf1b74d220f69d9e7fc300c647c4d37e7472f98a1d59ae99f724f453cb646",
+        "bytes": 60733
+      }
+    },
+    {
+      "id": 7922,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7922",
+        "sha256": "bfc6f9191fccf49afcf2a8286757c06a3783c711806e35bbb40084666943dff1",
+        "bytes": 60651
+      }
+    },
+    {
+      "id": 7923,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7923",
+        "sha256": "f4d7361b802028597bd304faa9dd0de41818e2a50545bc597ad919d3554dbd88",
+        "bytes": 60651
+      }
+    },
+    {
+      "id": 7924,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7924",
+        "sha256": "b259d17b4efb08f0dfc8b8f62ddeee7df453cbc08e77df3843adfdfd50a7fe90",
+        "bytes": 60651
+      }
+    },
+    {
+      "id": 7925,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/7925",
+        "sha256": "cdbde53d0017adf6e5bbc0074ccf2b2ce0630d01a52e9ec19720aa88ff0a955e",
+        "bytes": 60647
+      }
+    },
+    {
+      "id": 8001,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Warsong Outriders <NYI> <TXT>",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8001",
+        "sha256": "ba663fb09874538ece85ba6d342aa08926c147ed7a6020ea7cf1044b9a933466",
+        "bytes": 61012
+      }
+    },
+    {
+      "id": 8002,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Silverwing Sentinels <NYI> <TXT>",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8002",
+        "sha256": "49e3d2adfe1cac274e7279a6528e48f092fc7b607f928f0e3a60245e8c720eba",
+        "bytes": 61066
+      }
+    },
+    {
+      "id": 8081,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8081",
+        "sha256": "75006dc7b3e97a8b341266c4baefa8f8e3a6c3b1f9ef8b475527bcc4f1229e5f",
+        "bytes": 60767
+      }
+    },
+    {
+      "id": 8124,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8124",
+        "sha256": "f950eacb53aaf58d538eb2457d24ebeb2c20ec5cb1698b23b25a0405d8cf5868",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 8152,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "REUSE",
+      "explicitPlaceholderMarkers": [
+        "REUSE"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8152",
+        "sha256": "38d62835f7c969bd1158e73d429104252f6a4530ddea41e20fa953975c53e251",
+        "bytes": 59751
+      }
+    },
+    {
+      "id": 8157,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8157",
+        "sha256": "1a40c2d09ef2595841bb1061eeaff8f36bba2a5c78e5e832faea3d5782dc1aef",
+        "bytes": 60767
+      }
+    },
+    {
+      "id": 8158,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8158",
+        "sha256": "9e502ca2ff96a33bd6451f2f85963ac2dabb663fe624c0508851cfe70d6c7d79",
+        "bytes": 60763
+      }
+    },
+    {
+      "id": 8159,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8159",
+        "sha256": "6b5e0c257f15bb10cbc708eeadfbd502e7fe283d95ed5a980b916346ef65a955",
+        "bytes": 60767
+      }
+    },
+    {
+      "id": 8163,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8163",
+        "sha256": "5f471c53bc1a8cd1eba7ff0847f737d23a5b7e450584e37c7abf93dbc149f427",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 8164,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8164",
+        "sha256": "32fc0f12f5ac82981634a32da0132202b5667e3de1a9276dae06fc128be5c142",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 8165,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8165",
+        "sha256": "9564aea5c731d2ae09e6b93b88c1c323f8419639bd893f5aefb384aedad32ed8",
+        "bytes": 60745
+      }
+    },
+    {
+      "id": 8226,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Rare Fish - Pale Ghoulfish",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8226",
+        "sha256": "e039ae7ae91545bcc54953dacc2322389cfc08696d164373b74376fe1c484804",
+        "bytes": 61581
+      }
+    },
+    {
+      "id": 8244,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8244",
+        "sha256": "b1d716cbe586d26bd89125a82216dc2c55ea3c3d75e7581e5757ebadadb3dcd0",
+        "bytes": 60061
+      }
+    },
+    {
+      "id": 8245,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8245",
+        "sha256": "98771af5c9e705281334d04ae8ff05724e0d5d234d42e3013c009b7a3e8b2ba7",
+        "bytes": 60061
+      }
+    },
+    {
+      "id": 8267,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Ribbons of Sacrifice",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8267",
+        "sha256": "146218638fee921852e7a69361be1e3951b78aedb8ca7603dd9b3debc2931da2",
+        "bytes": 60610
+      }
+    },
+    {
+      "id": 8269,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Ribbons of Sacrifice",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8269",
+        "sha256": "957752e7ade39fec063e877edcd26f1ee43de925f4b63d9d70aad70588e61488",
+        "bytes": 61641
+      }
+    },
+    {
+      "id": 8289,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8289",
+        "sha256": "9624b9e4c88390db826c79e33129931f222da627ebe290332c1921e1d58af6d3",
+        "bytes": 60725
+      }
+    },
+    {
+      "id": 8292,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Talismans of Merit",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8292",
+        "sha256": "dc494644670874c6d9462c4c594c596780a8a3e31e71081c3af79c9186de6704",
+        "bytes": 60737
+      }
+    },
+    {
+      "id": 8293,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8293",
+        "sha256": "cc480580b783a941b08adafcbeb15bc5b1256fbe7313cee1b52001b850a0de03",
+        "bytes": 60651
+      }
+    },
+    {
+      "id": 8296,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mark of Honor",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8296",
+        "sha256": "1588be0821f10180531f87e583f0bb82a0e764727cc9ba3be6800a170b1faaa9",
+        "bytes": 60639
+      }
+    },
+    {
+      "id": 8298,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8298",
+        "sha256": "d5b3cdbb9c050cd23a445376a5d6601f77942b5a207d1dced8f0f1219dbf8bb1",
+        "bytes": 60767
+      }
+    },
+    {
+      "id": 8300,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "More Resource Crates",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8300",
+        "sha256": "4c4f07cd78384bdae1be170e1389d69deeb07c6b05923ab70e804f44bad100e4",
+        "bytes": 60749
+      }
+    },
+    {
+      "id": 8325,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Reclaiming Sunstrider Isle",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8325",
+        "sha256": "fd66a322bab3c58f5d23531b2593a5a4c8f33bb7a4667683d4069dff0387b8cd",
+        "bytes": 62678
+      }
+    },
+    {
+      "id": 8326,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Unfortunate Measures",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8326",
+        "sha256": "60c1b5cefc3152ee9f7e75543f833f1a130f05b0678f69d6e6799af6e4b7d039",
+        "bytes": 64613
+      }
+    },
+    {
+      "id": 8327,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Report to Lanthan Perilon",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8327",
+        "sha256": "8171a35e8e31f8e771fb4b2273862d81e7b80589cd35dcd834ddb5f4a7c94042",
+        "bytes": 60527
+      }
+    },
+    {
+      "id": 8328,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Mage Training",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8328",
+        "sha256": "5ec93d1efe7e7406b8fd813cbb0343ae36aea2c7af7af059c004d51d8d883bd5",
+        "bytes": 60580
+      }
+    },
+    {
+      "id": 8329,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Warrior Training",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8329",
+        "sha256": "75e734251b141e089c358d2e8b2f36b356880d091a3de2a0cf24008d68993973",
+        "bytes": 60386
+      }
+    },
+    {
+      "id": 8330,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED]Solanian's Belongings",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8330",
+        "sha256": "bc25a49dd800a1a297daba0001da1eda151cf53f5b0cfd8ea04bc2f13b432e27",
+        "bytes": 63887
+      }
+    },
+    {
+      "id": 8334,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Aggression",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8334",
+        "sha256": "1792a7edd0c975a4159a2308438901e7bed0914f3490901a91a3773b31eee088",
+        "bytes": 65440
+      }
+    },
+    {
+      "id": 8335,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Felendren the Banished",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8335",
+        "sha256": "f8df6e85995830ee4b8161bc243f46fdbc75a1adcc11d87d95775e574ffc8fa8",
+        "bytes": 62612
+      }
+    },
+    {
+      "id": 8336,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED]A Fistful of Slivers",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8336",
+        "sha256": "594006d3889dfd7828bd8f503014310878bc410e194d19c2a3aa7c3d00462005",
+        "bytes": 61594
+      }
+    },
+    {
+      "id": 8337,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED>",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8337",
+        "sha256": "e14b98d251c62ad5f400306ecb6955cbffc1481adc0feecf90c37ed4b880e026",
+        "bytes": 59779
+      }
+    },
+    {
+      "id": 8338,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Tainted Arcane Sliver",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8338",
+        "sha256": "9ebb2cfd21213a4a0d47e474826b71e60674b915a665b13b6d0dcd52baa9e481",
+        "bytes": 60579
+      }
+    },
+    {
+      "id": 8339,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Royalty of the Council <NYI> <TXT> UNUSED",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8339",
+        "sha256": "f542eede57aeffe252b484ab0a65cd59a7306d5b0be1343b1a4e04243e63b768",
+        "bytes": 62177
+      }
+    },
+    {
+      "id": 8340,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Twilight Signet Ring <NYI> <TXT>",
+      "explicitPlaceholderMarkers": [
+        "<NYI>",
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8340",
+        "sha256": "3dbb09e567d6336bdc861998da9394b2cf2a65bc246dbb221e896c1035279546",
+        "bytes": 61570
+      }
+    },
+    {
+      "id": 8344,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Windows to the Source",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8344",
+        "sha256": "fef8716a29d558509fd48096ae2e2492109a0ed89a21268a6e1feb965ede4d76",
+        "bytes": 60726
+      }
+    },
+    {
+      "id": 8345,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED]The Shrine of Dath'Remar",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8345",
+        "sha256": "0c8cc76cb280d5e2fcc504b47e85734e8b82762d866ec746ea167c1101c91e84",
+        "bytes": 60861
+      }
+    },
+    {
+      "id": 8346,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "[DEPRECATED]Thirst Unending",
+      "explicitPlaceholderMarkers": [
+        "DEPRECATED"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8346",
+        "sha256": "81e3c5747345cbf343c5bc0a45c1b6660a414a4b5f6092d49e43f6fa405943d0",
+        "bytes": 64609
+      }
+    },
+    {
+      "id": 8347,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Aiding the Outrunners",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8347",
+        "sha256": "3c59c96d7a4d8a7671c08aec7264a5f9e4da5c2050e8d01c2e1350bb2f7ebe41",
+        "bytes": 60463
+      }
+    },
+    {
+      "id": 8350,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Completing the Delivery",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8350",
+        "sha256": "edb49f9ce73ac8780cc84546bca9dfb5a2aad755a421efed3b527b1db1ad8c1c",
+        "bytes": 62525
+      }
+    },
+    {
+      "id": 8448,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8448",
+        "sha256": "afcf1cd5ee9da5d40c40b10fb90f0647e065b538b004fb60344cc3e35ee9be7d",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8449,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8449",
+        "sha256": "3a500d34820559bca0f7a91e251c972fc9b1a1ca8d525c75e58e4f1978e879e4",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8450,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8450",
+        "sha256": "21413399dee5fd99ebeeaed0a7bf5943f9548d3a66dfe77ad2838938377fd788",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8451,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8451",
+        "sha256": "3d3d2a582f9143bd577e8dfd2db1cc63a349e088e083274d410b9a869a54dc6e",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8452,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8452",
+        "sha256": "a64fdae038e08d00055c476f45e873c5f50f9917fc29a8fcd3ecf8e25756f4d4",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8453,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8453",
+        "sha256": "5dc1202671436963528663b9580dacb9cce42113d2e0044514b30a4229455655",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8454,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT> Mystery Reward",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8454",
+        "sha256": "ae6e2518be680a1574ed65bab11fecb32ec157ad3f091608b906a59c0b597dbc",
+        "bytes": 60684
+      }
+    },
+    {
+      "id": 8463,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Unstable Mana Crystals",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8463",
+        "sha256": "e90d2565e7e9d9f7086375fcd45070672d6582c4bbe9d76d16222db0099dd512",
+        "bytes": 60599
+      }
+    },
+    {
+      "id": 8468,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "WANTED: Thaelis the Hungerer",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8468",
+        "sha256": "0eed2a228aabc0c9e86920e51cf45845203819d5d1932a21f14cc987ab1ab52e",
+        "bytes": 60697
+      }
+    },
+    {
+      "id": 8472,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Major Malfunction",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8472",
+        "sha256": "6d2553594fe9e2c3061797e9e1fd377ebedde9334cfb6d864f552a8fef19541f",
+        "bytes": 64565
+      }
+    },
+    {
+      "id": 8473,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "A Somber Task",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8473",
+        "sha256": "d3ecad3164438a6ecefaa9fd21e289804a240057003d2f00bb58596663ac79ef",
+        "bytes": 60457
+      }
+    },
+    {
+      "id": 8474,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Old Whitebark's Pendant",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8474",
+        "sha256": "9a38a903896ca85a203e4a989412f28b079f809a6665daed37af505d096f2eab",
+        "bytes": 61932
+      }
+    },
+    {
+      "id": 8475,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Dead Scar",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8475",
+        "sha256": "00665f5c2f790e6176a9f7ff71b90538d45ace39abc1da827ffaf676f5d39427",
+        "bytes": 64385
+      }
+    },
+    {
+      "id": 8476,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Amani Encroachment",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8476",
+        "sha256": "ebcb833452a11a5178b4a954b2ad7170b5c61a11a305aebb7fb3e0c39740fe9e",
+        "bytes": 60537
+      }
+    },
+    {
+      "id": 8477,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Spearcrafter's Hammer",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8477",
+        "sha256": "af2059cdb213540d05410098d199708767d21cd32bf2264963c75dd802c3f438",
+        "bytes": 63741
+      }
+    },
+    {
+      "id": 8478,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Choose Your Weapon",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8478",
+        "sha256": "328ea6fcd386fb8320b1a0899757045aed80d788e31e174b7aabdcf23faa617a",
+        "bytes": 61353
+      }
+    },
+    {
+      "id": 8479,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Zul'Marosh",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8479",
+        "sha256": "70bf58ff5f147155d6fb14104968b87e03c34156bf54ae0f7c8b93ddb435599c",
+        "bytes": 62350
+      }
+    },
+    {
+      "id": 8480,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Lost Armaments",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8480",
+        "sha256": "2173ff600e42eecf1a232fbab623dd0c274569b8f78129781cb51ce9a04d80c1",
+        "bytes": 63532
+      }
+    },
+    {
+      "id": 8482,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Incriminating Documents",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8482",
+        "sha256": "812838268ceacbfbdb39083e1f15a1cbe4563a841056de694edc9dbbd21ac3ed",
+        "bytes": 60609
+      }
+    },
+    {
+      "id": 8483,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Dwarven Spy",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8483",
+        "sha256": "d15f7242a957b217f7e7887926760bafba065912b6f3508fa202b6347dbaf356",
+        "bytes": 63417
+      }
+    },
+    {
+      "id": 8486,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Arcane Instability",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8486",
+        "sha256": "6a28de7ff9c33bc27dd2ea6293147cea369bbd1e4d5f9e303d52572800a23d9a",
+        "bytes": 62432
+      }
+    },
+    {
+      "id": 8487,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Corrupted Soil",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8487",
+        "sha256": "55b66722edaae5d1655ab10ba7af7a7811c4cf6de6e8636ae97f0e78ce78504e",
+        "bytes": 60473
+      }
+    },
+    {
+      "id": 8488,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Unexpected Results",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8488",
+        "sha256": "c572a90906f33b9ff93685b37d6202f62713a896cc941506db8b0013a57f7c5a",
+        "bytes": 60537
+      }
+    },
+    {
+      "id": 8489,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "An Intact Converter",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8489",
+        "sha256": "408359dcd0cdbef32f1a28f5fbda1b29f0945820dc594a3e316a59c64286570f",
+        "bytes": 60332
+      }
+    },
+    {
+      "id": 8490,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Powering our Defenses",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8490",
+        "sha256": "90c443852c2443ab391c3aa493af018e59b9aa16070198cb8e6ad41cd59b6c4c",
+        "bytes": 60585
+      }
+    },
+    {
+      "id": 8491,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Pelt Collection",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8491",
+        "sha256": "96e965561d0359908802affbf50238ce6138f283d7f39f855bab9aa4ef860b21",
+        "bytes": 64535
+      }
+    },
+    {
+      "id": 8531,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Alliance Needs More Singed Corestones!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8531",
+        "sha256": "78e0aa4416320171ba45242523952580104eeb43d5e766b95fa1079ac556d618",
+        "bytes": 60189
+      }
+    },
+    {
+      "id": 8547,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Welcome!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8547",
+        "sha256": "e227356a5743813b2c80d60dfa0731f0746a270064189deb476158df3210c410",
+        "bytes": 62702
+      }
+    },
+    {
+      "id": 8563,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Warlock Training",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8563",
+        "sha256": "da8c484471924434b478d3b5dffd8087f6e59b42556e65992ff8f770e6c47a7f",
+        "bytes": 60644
+      }
+    },
+    {
+      "id": 8564,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Priest Training",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8564",
+        "sha256": "0302a3f8380242112d8b711fc05c7f4f3edb87ac75daf012b4f2832636be9f1f",
+        "bytes": 60624
+      }
+    },
+    {
+      "id": 8571,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<UNUSED> Armor Kits",
+      "explicitPlaceholderMarkers": [
+        "<UNUSED>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8571",
+        "sha256": "21ae66fc3954ea5291d0db6f4da444953b579216a23040ba55398ab68a0169cd",
+        "bytes": 61853
+      }
+    },
+    {
+      "id": 8618,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Horde Needs More Singed Corestones!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8618",
+        "sha256": "0fbebff5a2c00b5110d69444fa3bd303bfcfa5f2e4e1d9b73a1ca19b4a14755f",
+        "bytes": 60141
+      }
+    },
+    {
+      "id": 8884,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Fish Heads, Fish Heads...",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8884",
+        "sha256": "46af7a9b1b1b593d7afccf28f42aeed8962c96c8ba3839c95c9de299d06e1a6c",
+        "bytes": 60531
+      }
+    },
+    {
+      "id": 8885,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Ring of Mmmrrrggglll",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8885",
+        "sha256": "4909c364adcabb083c88664e0eddd910cb1449e2c88956285e5aeb4a5ab05dbf",
+        "bytes": 65679
+      }
+    },
+    {
+      "id": 8886,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Grimscale Pirates!",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8886",
+        "sha256": "bb95328363fe921176719418173ac716e222e658175f0e8ad2b91ae4679a9a0c",
+        "bytes": 60537
+      }
+    },
+    {
+      "id": 8887,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Captain Kelisendra's Lost Rutters",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8887",
+        "sha256": "5adb234c774053f4a7a12fecb1b63070a964b46ae75b747cf98cc0157a704f72",
+        "bytes": 60817
+      }
+    },
+    {
+      "id": 8888,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Magister's Apprentice",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8888",
+        "sha256": "cb6e2ed0d804e5857b446ba2cea677eb1ce867c47981bf5782a319659d7e7f01",
+        "bytes": 60567
+      }
+    },
+    {
+      "id": 8889,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Deactivating the Spire",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8889",
+        "sha256": "1f19a2a1ebb95ef00a36e28214aff6de97e25bb2710b294d1314e7fec9068249",
+        "bytes": 60483
+      }
+    },
+    {
+      "id": 8890,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Word from the Spire",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8890",
+        "sha256": "9b7638914e6a919da2c3ff3a2d1fcebaf64fd7349cb5cae04677244b959b6e4a",
+        "bytes": 61448
+      }
+    },
+    {
+      "id": 8891,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Abandoned Investigations",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8891",
+        "sha256": "865fbd68ac34c07180b170654e46bbfa0717e2f9ecd3dfb77cd695604e73be78",
+        "bytes": 60633
+      }
+    },
+    {
+      "id": 8892,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Situation at Sunsail Anchorage",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8892",
+        "sha256": "8cea52dde6897404f27325918162b43ab6a697c22e60428da28c7016143eecc2",
+        "bytes": 60727
+      }
+    },
+    {
+      "id": 8894,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Cleaning up the Grounds",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8894",
+        "sha256": "eb64eac3d549c0925a544a99e3e60480921f98a57d39a1c907114ffd39c4b7a1",
+        "bytes": 60617
+      }
+    },
+    {
+      "id": 8895,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Delivery to the North Sanctum",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8895",
+        "sha256": "8ad1a96bd50de35247e248862c3790ef480f2156b5d36a7a9341b3acdd881066",
+        "bytes": 60715
+      }
+    },
+    {
+      "id": 8896,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "The Dwarven Spy",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/8896",
+        "sha256": "d3c313e21d421ab8e0081b9d7aecc98a0810e52414c869f8652b691463544270",
+        "bytes": 59763
+      }
+    },
+    {
+      "id": 9030,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "Anthion's Parting Words",
+      "explicitPlaceholderMarkers": [],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/9030",
+        "sha256": "785db17188fe2586849d07b22e997bf23bcab5c38d008934efdf307d8dc671de",
+        "bytes": 60602
+      }
+    },
+    {
+      "id": 9031,
+      "cause": "unconfirmed-forever-identity",
+      "indexTitle": "<TXT>Anthion's Parting Words",
+      "explicitPlaceholderMarkers": [
+        "<TXT>"
+      ],
+      "source": {
+        "url": "https://www.forevervsclassic.com/quests/9031",
+        "sha256": "edeef150a992dc6f1b2e83a58d6e041d742e38e02a35c3d5d9cec6f240436aae",
+        "bytes": 60864
+      }
+    },
+    {
+      "id": 9431,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9431",
+      "checkedAt": "2026-10-15T02:26:07.947884+00:00"
+    },
+    {
+      "id": 9433,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9433",
+      "checkedAt": "2026-10-15T02:26:08.672448+00:00"
+    },
+    {
+      "id": 9434,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9434",
+      "checkedAt": "2026-10-15T02:26:08.379264+00:00"
+    },
+    {
+      "id": 9439,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9439",
+      "checkedAt": "2026-10-15T02:26:09.102464+00:00"
+    },
+    {
+      "id": 9440,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9440",
+      "checkedAt": "2026-10-15T02:26:09.609985+00:00"
+    },
+    {
+      "id": 9443,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9443",
+      "checkedAt": "2026-10-15T02:26:09.950738+00:00"
+    },
+    {
+      "id": 9444,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9444",
+      "checkedAt": "2026-10-15T02:26:10.236903+00:00"
+    },
+    {
+      "id": 9448,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9448",
+      "checkedAt": "2026-10-15T02:26:10.441731+00:00"
+    },
+    {
+      "id": 9469,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9469",
+      "checkedAt": "2026-10-15T02:26:10.253666+00:00"
+    },
+    {
+      "id": 9470,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9470",
+      "checkedAt": "2026-10-15T02:26:10.688821+00:00"
+    },
+    {
+      "id": 9471,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9471",
+      "checkedAt": "2026-10-15T02:26:10.805052+00:00"
+    },
+    {
+      "id": 9474,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9474",
+      "checkedAt": "2026-10-15T02:26:11.520835+00:00"
+    },
+    {
+      "id": 9475,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9475",
+      "checkedAt": "2026-10-15T02:26:11.393299+00:00"
+    },
+    {
+      "id": 9476,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9476",
+      "checkedAt": "2026-10-15T02:26:11.865216+00:00"
+    },
+    {
+      "id": 9516,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9516",
+      "checkedAt": "2026-10-15T02:26:11.995971+00:00"
+    },
+    {
+      "id": 9517,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9517",
+      "checkedAt": "2026-10-15T02:26:13.238272+00:00"
+    },
+    {
+      "id": 9518,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9518",
+      "checkedAt": "2026-10-15T02:26:12.583070+00:00"
+    },
+    {
+      "id": 9519,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9519",
+      "checkedAt": "2026-10-15T02:26:13.326134+00:00"
+    },
+    {
+      "id": 9520,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9520",
+      "checkedAt": "2026-10-15T02:26:13.162897+00:00"
+    },
+    {
+      "id": 9521,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9521",
+      "checkedAt": "2026-10-15T02:26:14.074090+00:00"
+    },
+    {
+      "id": 9522,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9522",
+      "checkedAt": "2026-10-15T02:26:14.387526+00:00"
+    },
+    {
+      "id": 9526,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9526",
+      "checkedAt": "2026-10-15T02:26:14.499670+00:00"
+    },
+    {
+      "id": 9533,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9533",
+      "checkedAt": "2026-10-15T02:26:14.560731+00:00"
+    },
+    {
+      "id": 9534,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9534",
+      "checkedAt": "2026-10-15T02:26:14.831714+00:00"
+    },
+    {
+      "id": 9535,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9535",
+      "checkedAt": "2026-10-15T02:26:14.997039+00:00"
+    },
+    {
+      "id": 9536,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9536",
+      "checkedAt": "2026-10-15T02:26:15.803683+00:00"
+    },
+    {
+      "id": 9609,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/9609",
+      "checkedAt": "2026-10-15T02:26:15.679588+00:00"
+    },
+    {
+      "id": 10492,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10492",
+      "checkedAt": "2026-10-15T02:26:16.103132+00:00"
+    },
+    {
+      "id": 10493,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10493",
+      "checkedAt": "2026-10-15T02:26:16.350661+00:00"
+    },
+    {
+      "id": 10494,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10494",
+      "checkedAt": "2026-10-15T02:26:17.077423+00:00"
+    },
+    {
+      "id": 10495,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10495",
+      "checkedAt": "2026-10-15T02:26:16.975241+00:00"
+    },
+    {
+      "id": 10496,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10496",
+      "checkedAt": "2026-10-15T02:26:17.291028+00:00"
+    },
+    {
+      "id": 10497,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10497",
+      "checkedAt": "2026-10-15T02:26:17.338129+00:00"
+    },
+    {
+      "id": 10498,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10498",
+      "checkedAt": "2026-10-15T02:26:17.724377+00:00"
+    },
+    {
+      "id": 10499,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/10499",
+      "checkedAt": "2026-10-15T02:26:17.967812+00:00"
+    },
+    {
+      "id": 27118,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/27118",
+      "checkedAt": "2026-10-15T02:26:18.486553+00:00"
+    },
+    {
+      "id": 93463,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/93463",
+      "checkedAt": "2026-10-15T02:26:18.595185+00:00"
+    },
+    {
+      "id": 98289,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/98289",
+      "checkedAt": "2026-10-15T02:26:19.107242+00:00"
+    },
+    {
+      "id": 98294,
+      "cause": "public-detail-absent",
+      "httpStatus": 404,
+      "sourceUrl": "https://www.forevervsclassic.com/quests/98294",
+      "checkedAt": "2026-10-15T02:26:19.171016+00:00"
+    }
+  ],
+  "candidateChecksComplete": true,
+  "candidateIDs": [
+    9431,
+    9433,
+    9434,
+    9439,
+    9440,
+    9443,
+    9444,
+    9448,
+    9469,
+    9470,
+    9471,
+    9474,
+    9475,
+    9476,
+    9516,
+    9517,
+    9518,
+    9519,
+    9520,
+    9521,
+    9522,
+    9526,
+    9533,
+    9534,
+    9535,
+    9536,
+    9609,
+    10492,
+    10493,
+    10494,
+    10495,
+    10496,
+    10497,
+    10498,
+    10499,
+    27118,
+    93463,
+    98289,
+    98294
+  ],
+  "unprovenHeaderContextIDs": [
+    78150,
+    79536,
+    82208
+  ],
+  "contextEvidence": [
+    {
+      "ids": [
+        78150,
+        79536,
+        82208
+      ],
+      "source": {
+        "path": ".contrib/.db/forever/expansion features/library books.lua",
+        "gitBlob": "d0e497aa73f1dacad823297edb75c77e8c9117be",
+        "sha256": "eae3a288e6808ff1da6c0092783b73c755e0407f038fce8ac5a395afeef54c1a",
+        "bytes": 5734,
+        "url": "https://github.com/ATTWoWAddon/AllTheThings/blob/d75383ccdbff1208b87cf4024fa425c0825a7ad6/.contrib/.db/forever/expansion%20features/library%20books.lua"
+      },
+      "reason": "Faction header giver context is explicit; recursive child starter inheritance is not established by the pinned ResolveQuestData contract."
+    }
+  ],
+  "rule": "Explicit source confirmation/absence only. Placeholder labels do not establish removal from the game. Native cache supplies identity, not decoded reward fields."
+}

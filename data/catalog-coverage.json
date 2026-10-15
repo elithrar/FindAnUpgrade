@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "questCount": 5669,
+  "questCount": 5672,
   "itemCount": 2623,
   "associationCount": 3606,
   "publicIndexCount": 5633,
@@ -9,65 +9,65 @@
   "itemStates": {
     "published-empty": 3297,
     "published": 2136,
-    "unknown": 236
+    "unknown": 239
   },
   "fieldCoverage": {
     "items": {
       "published-empty": 3297,
       "published": 2136,
-      "unknown": 236
+      "unknown": 239
     },
     "title": {
       "published": 5433,
-      "unknown": 202,
-      "recorded": 34
+      "unknown": 203,
+      "recorded": 36
     },
     "level": {
       "published": 5402,
-      "unknown": 267
+      "unknown": 270
     },
     "minimum": {
       "published": 5395,
-      "unknown": 246,
+      "unknown": 249,
       "recorded": 28
     },
     "xp": {
       "published": 4399,
-      "unknown": 1270
+      "unknown": 1273
     },
     "money": {
-      "unknown": 4539,
+      "unknown": 4542,
       "published": 1130
     },
     "reputation": {
       "published": 3218,
-      "unknown": 2451
+      "unknown": 2454
     },
     "currencies": {
-      "unknown": 5669
+      "unknown": 5672
     },
     "givers": {
-      "unknown": 1315,
-      "recorded": 4354
+      "unknown": 1184,
+      "recorded": 4488
     },
     "coordinates": {
-      "unknown": 2280,
-      "recorded": 3389
+      "unknown": 1655,
+      "recorded": 4017
     }
   },
-  "questsWithGivers": 4354,
-  "questsWithNpc": 3962,
-  "questsWithCoordinates": 3389,
+  "questsWithGivers": 4488,
+  "questsWithNpc": 4040,
+  "questsWithCoordinates": 4017,
   "knownQuantities": 3606,
   "knownRewardGroups": 3606,
   "classificationCounts": {
     "New": 218,
     "Updated": 96,
     "Unchanged": 880,
-    "Unknown": 4475
+    "Unknown": 4478
   },
   "reconciliationReport": "data/catalog-reconciliation.json",
-  "luaSha256": "60510a19b015619b639296cdd61e3233bbb2b3d9bc05b13b45cbf645ffea642d",
-  "sourceSha256": "cc0d077d854ed3e53ea35feed0a78366212d8c9f733f94e61537448ccfcde2bf",
+  "luaSha256": "8362f4302d5f24fbeb7cce078fb57b0f53ef4dfeda5b6ea2942e5bf1a6cb93a7",
+  "sourceSha256": "5a27d323fee0cc5ea7005bade919eae992d0f97ebb7a1ea73679236d775020ba",
   "liveClientVerified": false
 }

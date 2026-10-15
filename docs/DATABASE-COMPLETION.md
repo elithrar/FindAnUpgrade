@@ -1,10 +1,15 @@
-# Quest inventory and reward reconciliation, 0.1.4
+# Quest inventory and reward reconciliation, 0.1.5
 
 The old 1,250-quest catalog was a reward-association subset, not a quest
 inventory. Its importer required a nonempty direct authored item list and a
 compiled pair intersection, then discarded rewardless rows. There was no hard
 1,250-row limit. This patch separates quest identity, published reward lists,
 historical metadata and native player data.
+
+The 0.1.5 recovery adds 134 source-backed starter records and 628 coordinate
+records to the 0.1.4 baseline. It preserves faction-specific resolver branches,
+explicit starting items and coordinate ownership. A standalone incremental
+acquisition/import/sync workflow is documented in `DATABASE-SYNC.md`.
 
 ## Acquired scope
 
@@ -17,8 +22,8 @@ were reused read-only; that checkout was not modified.
 
 The public index includes 200 explicitly unconfirmed records whose item lists
 remain unknown. There are 5,433 confirmed published lists: 2,136 item-bearing
-and 3,297 published-empty. Historical compiled ATT contributes 36 additional
-IDs absent from the index. The union contains **5,669 IDs**, including all
+and 3,297 published-empty. Historical compiled ATT contributes 39 additional
+IDs absent from the index. The union contains **5,672 IDs**, including all
 707 exact identities in the current 70374 quest cache, all 1,194 approved
 classification IDs, and the earlier catalog. Authoring-only candidates absent
 from these current/public/compiled identity sources are separately enumerated;
@@ -42,21 +47,23 @@ and now remain explicitly unknown rather than retaining unverified items.
 
 | Field | Recorded/published quests | Unknown quests |
 | --- | ---: | ---: |
-| Item list, including published-empty | 5,433 | 236 |
-| Quest difficulty level | 5,402 | 267 |
-| XP base amount | 4,399 | 1,270 |
-| Money base amount | 1,130 | 4,539 |
-| Named reputation base amounts | 3,218 | 2,451 |
-| Giver identity of any explicit type | 4,354 | 1,315 |
-| Giver coordinates | 3,389 | 2,280 |
-| Complete currency list | 0 | 5,669 |
+| Item list, including published-empty | 5,433 | 239 |
+| Quest difficulty level | 5,402 | 270 |
+| XP base amount | 4,399 | 1,273 |
+| Money base amount | 1,130 | 4,542 |
+| Named reputation base amounts | 3,218 | 2,454 |
+| Giver identity of any explicit type | 4,488 | 1,184 |
+| Giver coordinates | 4,017 | 1,655 |
+| Complete currency list | 0 | 5,672 |
 
-Giver records include 3,962 quests with NPC starters, 283 with object starters
-and 490 with item starters; those sets overlap. Only explicit top-level
-`qg`/`qgs` and quoted, typed quest `provider`/`providers` fields are used.
+Giver records include 4,040 quests with NPC starters, 295 with object starters
+and 543 with item starters; those sets overlap. Explicit exact quest
+`qg`/`qgs`, typed `provider`/`providers`, starting-item `qs`/`qss` fields and
+compiled faction-qualified resolver branches supply the associations.
 Nested objective providers are not starters. Item/object IDs never enter the
 NPC hover index, and their item-source coordinates are not promoted into a
-giver location. Retained primary start markers can enrich exact NPC names;
+giver location. Separately recorded NPC positions enrich only already proved
+starter IDs. Retained primary start markers preserve typed NPC/object names;
 their AreaTable coordinates are not guessed into UI-map IDs.
 
 Authored metadata is parsed independently of rewards. Unsupported restriction
@@ -92,17 +99,16 @@ SHA-256; ATT dependencies include map/race constants and their receipts.
 To acquire a fresh public snapshot, use ordinary allowed pages:
 
 ```powershell
-python tools/collect_catalog_sources.py --source-root .work/comprehensive-source --mode index
-python tools/collect_catalog_sources.py --source-root .work/comprehensive-source --mode quests --reuse-quest-cache C:/path/to/retained/reward-source-cache
-python tools/import_complete_catalog.py --source-root .work/comprehensive-source --att-source-root .work/att-source --compiled-root .work/att-generated --primary-cache C:/path/to/retained/reward-primary-cache --client-cache 'C:/Program Files (x86)/World of Warcraft/_classic_beta_/Cache/WDB/enUS/questcache.wdb'
-python tools/generate_catalog.py
-python tools/verify.py
+python tools/sync_catalog.py check
+python tools/sync_catalog.py refresh
 ```
 
 The ATT acquisition roots retain `ACQUISITION.json` at revision
 `d75383ccdbff1208b87cf4024fa425c0825a7ad6`; raw source acquisition is described
-in `SEARCH-DATA-FEASIBILITY.md`. The primary-cache option reads existing HTML
-only. A changed snapshot requires independent reconciliation/review rather than
+in `DATABASE-SYNC.md`. The owned normalized primary/client evidence is reused
+by default, without another checkout or game installation. Optional raw-cache
+overrides read existing files only. A changed snapshot requires reconciliation
+rather than
 silently claiming the historical 135-page check still covers new records.
 
 The collector checks the actual domain's robots policy, identifies itself,
@@ -120,6 +126,23 @@ Current plaintext QuestV2CliTask, QuestPackageItem, QuestObjective and QuestHub
 tables contain zero records. The current WDB cache supplies 707 framed exact
 identities; its reward payload layout is not verified and is not decoded into
 invented rewards. These files cannot establish complete starters/rewards.
+
+All 5,433 confirmed public item lists are accounted for as published; the
+remaining 239 candidates are 200 explicitly unconfirmed public records and 39
+compiled-only URLs that return 404. None is present in the 707-ID native cache.
+They are not asserted to be current obtainable Forever quests. The finder
+requires current native offer/log/map availability to admit an unconfirmed or
+historical candidate. A cached title, reward or item alone is insufficient.
+HTTP absence and explicit placeholder labels do not prove removal from the game.
+
+The 1,184 remaining starter gaps partition into nine declared hidden triggers,
+200 unconfirmed identities, three library quests with unproven parent-header
+starter inheritance, and 972 without materialized starter metadata in the
+inspected pinned sources. Item starts are recovered content; missing fixed
+activation coordinates are distinct from missing NPC metadata. Per-ID coordinate
+causes distinguish those item starts, mixed/multiple starters without owned
+points, unresolved starters and absent source positions. This is a bounded
+source inventory, not a claim that no further source can ever add data.
 
 `data/catalog-reconciliation.json` enumerates every missing field, historical
 ID, source disagreement and excluded candidate. This completes accounting of

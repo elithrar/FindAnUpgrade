@@ -1,19 +1,20 @@
 # Validation
 
-QuestBrief **0.1.4** is the current candidate for official WoW Forever, interface
+QuestBrief **0.1.5** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Current database review, 0.1.4
+## Current database review, 0.1.5
 
 `DATABASE-COMPLETION.md` records the complete acquired inventory, corrected old
 associations, field coverage, reproduction commands and concrete source limits.
-`DATABASE-INDEPENDENT-REVIEW.md` records the requested independent review,
+`DATABASE-RECOVERY-REVIEW.md` records the current bounded recovery/sync review.
+`DATABASE-INDEPENDENT-REVIEW.md` records the earlier inventory review,
 failure probes, fixes and final dispositions. Frozen input reconciliation
-retains all 5,633 public IDs in a 5,669-ID union, without inventing empty item
-lists for the 236 unknown records. Published guaranteed/choice groups,
+retains all 5,633 public IDs in a 5,672-ID union, without inventing empty item
+lists for the 239 unknown records. Published guaranteed/choice groups,
 quantities and repeated slots remain separate from current native ordinals.
 
 New runtime scenarios cover cold metadata, published/native authority,

@@ -1,6 +1,6 @@
 # QuestBrief
 
-Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.4** expands and reconciles the bundled quest inventory, corrects reward associations, and records published reward groups, quantities and base amounts.
+Quest previews and a reward finder for **World of Warcraft: Forever**, interface **16001**. Version **0.1.5** recovers source-backed quest starters and coordinates, preserves faction-specific locations, and adds a repeatable database sync workflow.
 
 - Search quest and item names, filter equipment or empty slots, and narrow results by item usability and native quest level.
 - Inspect a vertical stack of quest cards from a known NPC or world-map marker, including Questie's world-map and minimap markers.
@@ -12,7 +12,7 @@ Quest previews and a reward finder for **World of Warcraft: Forever**, interface
 
 Open with `/questbrief search` or `/questbrief s`, or click the book icon on the minimap. Drag the icon to reposition it; `/questbrief minimap` or `/questbrief mm` toggles its visibility. Sort results by level fit or quest level. Expand cards to inspect rewards and choose among recorded giver locations when available; their menus offer location and quest-page copy actions.
 
-The finder ships an owned catalog of **5,669 exact IDs**, reconciling the complete 5,633-record public Forever vs Classic index with historical compiled records, current client-cache identities and the approved classifications. Search does not require Questie or QuestieDB. Published item lists cover 5,433 IDs: 2,136 have items and 3,297 list none; 236 remain unknown. Guaranteed and choose-one groups, quantities and repeated source slots stay distinct. Current native reward data takes precedence, including confirmed empty lists and ambiguous choices. Missing fields never become zero.
+The finder ships an owned catalog of **5,672 exact IDs**, reconciling the complete 5,633-record public Forever vs Classic index with historical compiled records, current client-cache identities and the approved classifications. Search does not require Questie or QuestieDB. Published item lists cover 5,433 IDs: 2,136 have items and 3,297 list none; 239 remain unknown. Guaranteed and choose-one groups, quantities and repeated source slots stay distinct. Current native reward data takes precedence, including confirmed empty lists and ambiguous choices. Missing fields never become zero.
 
 ## Hover previews and settings
 
@@ -28,7 +28,7 @@ Build the candidate ZIP using the development commands below. Copy its `QuestBri
 
 Classification uses exact quest variants from a verified 2026-10-14 snapshot: **1,194 IDs**, including **218 new IDs**. Unknown IDs remain untinted. Titles and group-level classifications are never used to infer a variant's status.
 
-The public snapshot was collected on **2026-10-15**. Recorded giver and restriction metadata also uses MIT-licensed AllTheThings source build **1.60.1.69893**; the current client target is **70374**. The inventory accounts for every acquired ID, including 200 public unconfirmed records and 36 compiled-only historical records. It does not establish that every ID is currently offered. Givers are recorded for 4,354 quests, including 3,962 with NPC starters; 3,389 have recorded coordinates. `data/catalog-reconciliation.json` lists missing fields and source disagreements per ID. Locations and current availability still need live verification.
+The public snapshot was collected on **2026-10-15**. Recorded giver and restriction metadata also uses MIT-licensed AllTheThings source build **1.60.1.69893**; the current client target is **70374**. The inventory accounts for every acquired ID, including 200 public unconfirmed records and 39 compiled-only historical records. Historical and unconfirmed candidates stay out of finder results unless current native offer/log/map evidence establishes availability; cached titles or rewards alone do not. The published inventory also does not establish current player availability. Givers are recorded for 4,488 quests, including 4,040 with NPC starters; 4,017 have recorded coordinates. `data/catalog-reconciliation.json` lists missing fields and source disagreements per ID. Locations and current availability still need live verification.
 
 NPC previews use exact bundled starter records, current gossip IDs, or reciprocal starter records from an optional compatible Forever QuestieDB. Exact identity is separate from current availability: native quest log/gossip/available map offers and freshly rendered Questie markers can establish a current state. Static associations cannot establish availability; known completed, disabled or ineligible rows are excluded, and specific recorded chain links can be shown without claiming a server requirement. Native world-map pins and hubs must expose exact quest IDs. Native minimap markers are unsupported; minimap previews require Questie. The adapter targets Questie **12.1.0** and creates no quest map icons.
 
@@ -43,7 +43,7 @@ python -m pip install --target .work/pydeps lupa==2.8
 python tools/verify.py
 ```
 
-The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `docs/DATABASE-COMPLETION.md` for acquisition and database reconciliation, `data/catalog-complete-sources.json` for frozen input hashes, and `docs/RELEASING.md` for development/release workflow and CurseForge setup.
+The builder writes addon and source ZIPs, hashes and a receipt to `dist/`; it does not install or publish them. The source checkout includes `docs/VALIDATION.md` for pending live scenarios, `docs/PROVENANCE.md` for classification/API evidence, `docs/DATABASE-COMPLETION.md` for database coverage, `docs/DATABASE-SYNC.md` for standalone acquisition/import/sync, `data/catalog-complete-sources.json` for frozen input hashes, and `docs/RELEASING.md` for development/release workflow and CurseForge setup.
 
 Before the first CurseForge publication, user-authorized iterations primarily use patch version bumps and direct commits to `main` after the required review and checks. Branch protections still apply; use a reviewed PR when required. Publication, release tags, credentials and game installation need their own authorization.
 

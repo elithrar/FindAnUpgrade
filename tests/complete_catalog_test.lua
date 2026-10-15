@@ -109,3 +109,32 @@ test("compiled class restrictions survive public reward rows and native offer pr
     row.availabilityProof="native-available"
     assert(N.Providers.Availability(row,{}).state=="available")
 end)
+
+test("unconfirmed and historical candidates cannot become finder offers from cached title or rewards",function()
+    local N=start();local row=N.Catalog.records[682]
+    for _,confirmation in ipairs({"unconfirmed","historical"}) do
+        row.source.confirmation=confirmation
+        assert(N.SearchModel:Eligibility(row,{level=60})==false)
+        W.rewardReady=true;N.SearchModel:Reward(row)
+        assert(N.SearchModel:Eligibility(row,{level=60})==false)
+        row.availabilityProof="native-available"
+        assert(N.SearchModel:Eligibility(row,{level=60})==true)
+        row.availabilityProof=nil
+    end
+    row.source.confirmation="published";row.source.questKind="hidden-trigger"
+    assert(N.SearchModel:Eligibility(row,{level=60})==false)
+    row.availabilityProof="native-map-available"
+    assert(N.SearchModel:Eligibility(row,{level=60})==true)
+end)
+
+test("faction-qualified NPC starts and locations follow the current player faction",function()
+    local N=start();local source=N.Catalog.records[682].source
+    source.locations={{npcID=11,faction="Alliance",name="Alliance giver"},{npcID=22,faction="Horde",name="Horde giver"}}
+    for _,faction in ipairs({"Alliance","Horde","Unknown"}) do
+        UnitFactionGroup=function()return faction end
+        local locations=N.Catalog:Locations(682)
+        assert(#locations==(faction=="Unknown" and 0 or 1))
+        assert(#N.Providers.ForNPC(11)==(faction=="Alliance" and 1 or 0))
+        assert(#N.Providers.ForNPC(22)==(faction=="Horde" and 1 or 0))
+    end
+end)

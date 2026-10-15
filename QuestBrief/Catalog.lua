@@ -41,10 +41,13 @@ function C:Step()
     self.cursor=stop+1; self.done=self.cursor>#self.ids; return true
 end
 function C:Locations(id)
+    local faction=M.Text(A.Call(UnitFactionGroup,"player"))
+    if self.locationFaction~=faction then self.locations={};self.locationFaction=faction end
     if self.locations[id] then return self.locations[id] end
     local source=self.records[id] and self.records[id].source; local out={}
     self.locations[id]=out
     for _,location in ipairs(source and source.locations or {}) do
+        if not location.faction or location.faction==faction then
         local name=M.Text(location.name)
         local fallback=location.npcID and "NPC "..location.npcID or location.objectID and "Object "..location.objectID or location.itemID and "Item "..location.itemID or "Quest giver"
         local row={npcID=location.npcID,objectID=location.objectID,itemID=location.itemID,name=name or fallback,nameKnown=name~=nil}
@@ -56,6 +59,7 @@ function C:Locations(id)
             row.phase,row.mobile=location.phase or source.locationConflict,location.mobile
         end
         out[#out+1]=row
+        end
     end
     return out
 end

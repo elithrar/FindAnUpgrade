@@ -206,9 +206,16 @@ def label(lines, line):
     text = re.sub(r"\s*\([A-Z !]+\)\s*$", "", text)
     return text if text and len(text) <= 100 and not any(c in text for c in "<>{}=|") else None
 
-def quest_starters(tokens, ends, props, lines):
+def quest_starters(tokens, ends, props, lines, aliases=None):
     """Only explicit top-level typed quest providers, never nested objectives."""
     result, unresolved = [], False
+    for key in ("qs", "qss"):
+        if key not in props: continue
+        value = literal(tokens, ends, props[key], aliases)
+        values = [value] if key == "qs" else value
+        if isinstance(values, list) and values and all(type(item) is int and item > 0 for item in values):
+            for item in sorted(set(values)): result.append({"itemID":item})
+        else: unresolved = True
     for key in ("provider", "providers"):
         span = props.get(key)
         if not span: continue
@@ -345,8 +352,8 @@ def parse(text, path, maps, race_constants=None, include_empty=False):
         npc_ids = [giver] if type(giver) is int and giver > 0 else givers
         if isinstance(npc_ids, list) and all(type(v) is int and v > 0 for v in npc_ids):
             row["locations"] = [{"npcID": npc} for npc in sorted(set(npc_ids))]
-            if len(row["locations"]) == 1 and "qg" in props:
-                npc_name = label(lines, tokens[props["qg"][0]][1])
+            if len(row["locations"]) == 1:
+                npc_name = label(lines, tokens[props["qg"][0]][1]) if "qg" in props else None
                 if npc_name: row["locations"][0]["name"] = npc_name
                 coords = get("coord"); multiple = get("coords")
                 points = [coords] if coords else multiple
@@ -359,10 +366,20 @@ def parse(text, path, maps, race_constants=None, include_empty=False):
                                 places.append(dict(row["locations"][0], mapID=map_id, x=point[0]/100, y=point[1]/100))
                     if places: row["locations"] = places
         if include_empty:
-            starters, unknown = quest_starters(tokens, ends, props, lines)
+            starters, unknown = quest_starters(tokens, ends, props, lines, aliases)
             for starter in starters:
                 if not any(any(key in starter and starter[key] == existing.get(key) for key in ("npcID", "objectID", "itemID")) for existing in row.get("locations", [])):
                     row.setdefault("locations", []).append(starter)
+            if len(row.get("locations", [])) == 1 and "objectID" in row["locations"][0]:
+                coords = get("coord"); multiple = get("coords")
+                points = [coords] if coords else multiple
+                places = []
+                for point in points if isinstance(points, list) else []:
+                    if isinstance(point, list) and len(point) == 3 and all(type(value) in (int,float) and 0 <= value <= 100 for value in point[:2]):
+                        map_id = maps.get(point[2]) if isinstance(point[2], str) else point[2]
+                        if type(map_id) is int and map_id > 0:
+                            places.append(dict(row["locations"][0],mapID=map_id,x=point[0]/100,y=point[1]/100))
+                if places: row["locations"] = places
             if unknown:
                 omissions.append({"id":quest,"path":path,"line":line,"field":"providers","reason":"field omitted: unsupported typed quest starter"})
         # Conditions, race restrictions and source snapshots never prove availability.

@@ -4,19 +4,19 @@
   "inputs": {
     "public": {
       "path": "data/catalog-public-records.json",
-      "sha256": "d15de2883ca0beb5b9e6ae29a7562996c8737fdf18ab6be06e49071d3307b4a1"
+      "sha256": "8ecdd1d658bac889c924db075d00a989818370a5f8a85d167a6863d41f981d8f"
     },
     "metadata": {
       "path": "data/catalog-metadata-records.json",
-      "sha256": "35d01edafa8400f3835ef5cf4f577716d7cde67c55b5f9bfd9ecf47735c27f4f"
+      "sha256": "d07b03750ba0d7689c46f5c9b6ce2446ea9fdbe31aaae521bcb7affcbd16e325"
     },
     "compiled": {
       "path": "data/catalog-compiled-quests.json",
-      "sha256": "29c126c3c27f39570d1b808f93ca0a84ec70adb7c8a2863d496b1fd7843280b0"
+      "sha256": "0e01129d874ee6692c97874b72dcd1937010e5c3dff76b517916fc4979b5a550"
     },
     "primary": {
       "path": "data/catalog-primary-records.json",
-      "sha256": "ce33bb28801c2374c08fbd96ab2121bd5a76e4acb240e5bcfa59e936f0056033"
+      "sha256": "39dacfdaa9499eab8ea2399e539a91166cb0464e0162c61dff7b704c03e55119"
     },
     "client": {
       "path": "data/catalog-client-evidence.json",
@@ -25,6 +25,14 @@
     "legacy": {
       "path": "data/catalog-source.json",
       "sha256": "2d83e341171aa2e405f486049bc1a2070e797061bb367e7bdda0f40d25e5bbec"
+    },
+    "history": {
+      "path": "data/catalog-identity-history.json",
+      "sha256": "d0e5d3936da0fbc0a2eb472e0f3c32ffcda5c3ced1b9e50635d9ea98fa660f60"
+    },
+    "gaps": {
+      "path": "data/catalog-gap-evidence.json",
+      "sha256": "fd250a054b84f9df45e960181c89110350ca0ded5a6e0b18c52b29d107cdcb92"
     }
   },
   "classificationAuthority": "data/primary-statuses.json",

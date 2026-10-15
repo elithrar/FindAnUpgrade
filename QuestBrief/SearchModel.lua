@@ -12,6 +12,13 @@ function S:Context()
 end
 function S:Eligibility(row,context)
     local availability=N.Providers.Availability(row,context)
+    local source=row.source or {}
+    if source.confirmation and source.confirmation~="published" or source.questKind=="hidden-trigger" then
+        local native=availability.authority=="native-log" or availability.authority=="native-gossip" or availability.authority=="native-map"
+        if not native or (availability.state~="active" and availability.state~="ready" and availability.state~="available") then
+            return false,"Forever availability unconfirmed"
+        end
+    end
     -- The finder can inspect a recorded reward above the player's current
     -- minimum level, with the actual recorded requirement kept visible.
     if availability.authority=="recorded-level" then return true,availability.label end
