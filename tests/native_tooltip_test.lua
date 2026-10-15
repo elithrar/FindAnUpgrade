@@ -200,7 +200,8 @@ test("a newly unlocked NPC candidate appears while the pointer is in persistent 
     local N=W.Init({saved={previewLayout="inspector"}}); W.shift=true
     N.CatalogData={schemaVersion=2,quests={
         {id=9,title="Unlocked",prerequisites={8},prerequisitesVerified=true,locations={{npcID=54}}},
-        {id=14,title="Active",locations={{npcID=54}}}
+        {id=14,title="Active",locations={{npcID=54}}},
+        {id=8,title="Earlier quest",locations={}}
     }}
     local done=false
     C_QuestLog.IsOnQuest=function(id) return id==14 end

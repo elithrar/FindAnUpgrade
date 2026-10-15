@@ -318,7 +318,8 @@ function V:InspectionOpen()
     return N.Hover.open
 end
 function V:InspectionCurrent(item)
-    return item~=nil and self.item==item and item.button.row==item.row and item.generation==(self.generation or N.Hover.generation) and self:InspectionOpen()
+    return type(item)=="table" and item.button~=nil and item.row~=nil and self.item==item
+        and item.button.row==item.row and item.generation==(self.generation or N.Hover.generation) and self:InspectionOpen()
 end
 function V:HasTooltipData(id)
     if not self:InspectionCurrent(self.item) or not M.Readable(id) or id~=nil and not M.Number(id) then return false end
@@ -343,6 +344,7 @@ function V:Inspect(button,row,refresh)
         self.itemOutsideAt=outside
         inspection.bridgeAt=previous.bridgeAt
         inspection.compareDeadline,inspection.compareRetryAt,inspection.compareTimedOut=previous.compareDeadline,previous.compareRetryAt,previous.compareTimedOut
+        inspection.comparisonLoads=previous.comparisonLoads
         inspection.primaryDeadline,inspection.primaryRetryAt=previous.primaryDeadline,previous.primaryRetryAt
     end
     local getter=C_TooltipInfo and C_TooltipInfo.GetQuestLogItem
@@ -418,6 +420,54 @@ function V:Compare()
         if self.comparison.Clear then self.comparison:Clear(self.tooltip) end
     end
 end
+function V:ComparisonChanged()
+    -- The native manager keys its cache by candidate identity, not equipment,
+    -- metadata readiness or the comparison CVar. Invalidate our clone only.
+    local item=self.item
+    if not item then return end
+    if not self:InspectionCurrent(item) then self:ClearItem(); return end
+    item.compareDeadline,item.compareRetryAt,item.compareTimedOut=nil,nil,nil
+    self.compareState=nil
+    if self.comparison and self.comparison.Clear then self.comparison:Clear(self.tooltip) end
+    self:Compare()
+end
+function V:EquipmentChanged()
+    local item=self.item
+    if not item then return end
+    if not self:InspectionCurrent(item) then self:ClearItem(); return end
+    item.compareDeadline,item.compareRetryAt,item.compareTimedOut=nil,nil,nil
+    item.comparisonLoads=nil
+    -- Refresh native candidate text as well as equipped comparisons. The
+    -- refresh preserves pointer transit while discarding prior equipped data.
+    self:Inspect(item.button,item.row,true)
+end
+function V:ComparisonItemData(id)
+    -- An equipped item's ID need not be the inspected reward's ID. A completed
+    -- load may revive a bounded cold comparison even after its retry deadline.
+    local item=self.item
+    if not item or not item.compareTimedOut then return end
+    if not self:InspectionCurrent(item) then self:ClearItem(); return end
+    id=M.QuestId(id)
+    -- Existing polling already observes new data within 0.2 s. Unrelated item
+    -- floods must not extend its deadline or query native comparisons per event.
+    if not id then return end
+    local related=id==item.row.itemID
+    local function matches(entry)
+        local link=entry and M.Text(entry.hyperlink)
+        return link and tonumber(link:match("item:(%d+)"))==id
+    end
+    local info=self.comparison and self.comparison.compareInfo
+    if info then
+        related=related or matches(info.item)
+        for _,entry in ipairs(info.additionalItems or {}) do related=related or matches(entry) end
+    end
+    for _,entry in pairs(N.Character and N.Character.snapshot.equipment or {}) do related=related or entry.itemID==id end
+    item.comparisonLoads=item.comparisonLoads or {}
+    if related and not item.comparisonLoads[id] then
+        item.comparisonLoads[id]=true
+        self:ComparisonChanged()
+    end
+end
 function V:ClearItem()
     self.item,self.itemOutsideAt,self.compareState=nil,nil,nil
     self.comparisonCold=nil
@@ -430,12 +480,15 @@ function V:ItemContains(now)
     for _,t in ipairs(self.tooltip.shoppingTooltips) do
         if A.Over(t) or A.Visible(t) and A.Over(t.CompareHeader) then self.item.bridgeAt=nil; return true end
     end
-    local button,tip=A.Rect(self.item.button),A.Rect(self.tooltip)
+    local button,tip,viewport=A.Rect(self.item.button),A.Rect(self.tooltip),A.Rect(self.scroll)
     local x,y=A.Cursor()
-    if button and tip and x and A.Over(self.scroll) then
-        local ax,ay=button.x+button.w/2,button.y+button.h/2
+    if button and tip and viewport and x then
+        local left,right=math.max(button.x,viewport.x),math.min(button.x+button.w,viewport.x+viewport.w)
+        local bottom,top=math.max(button.y,viewport.y),math.min(button.y+button.h,viewport.y+viewport.h)
+        if left>=right or bottom>=top then return false end
+        local ax,ay=(left+right)/2,(bottom+top)/2
         local bx,by=math.max(tip.x,math.min(tip.x+tip.w,ax)),math.max(tip.y,math.min(tip.y+tip.h,ay))
-        if nearSegment(x,y,ax,ay,bx,by,math.min(16,button.h/2)) then
+        if nearSegment(x,y,ax,ay,bx,by,math.min(16,(top-bottom)/2)) then
             now=now or A.Call(GetTime) or 0; self.item.bridgeAt=self.item.bridgeAt or now
             return now-self.item.bridgeAt<=1.25
         end

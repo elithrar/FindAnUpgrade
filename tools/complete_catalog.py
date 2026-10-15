@@ -111,7 +111,7 @@ def merge_supplemental(row, incoming, disagreements):
     enrich_locations(row,{"locations":locations},disagreements)
 
 
-def build_complete(root, include_supplemental=True):
+def build_complete(root, include_supplemental=True, include_chains=True):
     provenance, inputs = read_inputs(root)
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
@@ -119,6 +119,7 @@ def build_complete(root, include_supplemental=True):
     metadata = {row["id"]: row for row in inputs["metadata"]["records"]}
     primary = {row["id"]: row for row in inputs["primary"]["records"]}
     supplemental = {row["id"]:row for row in inputs.get("supplemental",{}).get("records",[])} if include_supplemental else {}
+    chains = {row["id"]:row for row in inputs.get("chains",{}).get("records",[])} if include_chains else {}
     legacy = {row["id"]: row for row in inputs["legacy"]["quests"]}
     compiled, native = set(inputs["compiled"]["questIDs"]), set(inputs["client"]["questIDs"])
     constraints = {row["id"]: row for row in inputs["compiled"].get("constraints", [])}
@@ -136,6 +137,7 @@ def build_complete(root, include_supplemental=True):
         authored, published, checked = metadata.get(quest, {}), public.get(quest), primary.get(quest)
         row = {key: authored[key] for key in METADATA if key in authored}
         row.update({"id": quest, "items": [], "itemState": "unknown", "confirmation": "historical" if quest in compiled else "unconfirmed"})
+        if quest in chains: row["chain"] = chains[quest]["chain"]
         if quest in hidden_triggers:row["questKind"]="hidden-trigger"
         if published:
             for key in ("title", "level", "minimum", "faction", "items", "itemState", "confirmation", "moneyCost"):
@@ -272,6 +274,8 @@ def build_complete(root, include_supplemental=True):
     report["eligibilityConflictIDs"] = [row["id"] for row in rows if row.get("eligibilityConflict")]
     report["metadataOmissions"] = inputs["metadata"]["omissions"]
     report["supplementalMetadata"] = inputs.get("supplemental", {}) if include_supplemental else {}
+    if include_chains and "chains" in inputs:
+        report["chainCoverage"] = inputs["chains"]["coverage"]
     report["withheldGlobalPositions"] = withheld_positions
     recovery=inputs["metadata"].get("coordinateRecovery",{})
     if recovery:

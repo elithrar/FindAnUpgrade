@@ -18,7 +18,7 @@ import uuid
 ROOT=Path(__file__).resolve().parents[1]
 OUTPUTS=["data/"+name for name in (
     "catalog-public-records.json","catalog-metadata-records.json","catalog-compiled-quests.json",
-    "catalog-primary-records.json","catalog-client-evidence.json","catalog-identity-history.json",
+    "catalog-primary-records.json","catalog-client-evidence.json","catalog-identity-history.json","catalog-chain-records.json",
     "catalog-gap-evidence.json","catalog-complete-sources.json","catalog-complete-source.json",
     "catalog-reconciliation.json","catalog-coverage.json","catalog-supplemental-metadata.json",
     "primary-statuses.json","classification-reconciliation.json","quest-taxonomy.json")]+["FindAnUpgrade/Data/Catalog.lua","FindAnUpgrade/Data/Quests.lua"]
@@ -109,6 +109,7 @@ def main():
     questie=(args.questie_root or args.cache_root/"questie").resolve()
     if args.mode=="refresh":
         run(ROOT,["tools/questie_metadata.py","acquire","--source-root",questie])
+        run(ROOT,["tools/quest_chains.py","--source-root",questie,"--acquire"])
         run(ROOT,["tools/acquire_catalog_sources.py","--source-root",authored,"--compiled-root",compiled])
         run(ROOT,["tools/collect_catalog_sources.py","--source-root",public,"--mode","index","--refresh"])
         command=["tools/collect_catalog_sources.py","--source-root",public,"--mode","quests","--max-age-hours",args.max_age_hours]

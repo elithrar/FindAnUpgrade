@@ -2,6 +2,24 @@ local _, N = ...
 local M, A = N.Model, N.Adapter
 local U = { owned = {} }; N.UI = U
 
+-- Shared with Options: the XPIsland-style tab uses an ordinary owned button,
+-- native tooltip edge and one restrained selected underline.
+function U:Tab(frame,label,width)
+    frame:SetSize(width,22)
+    frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}})
+    frame:SetBackdropColor(.06,.06,.065,.8);frame:SetBackdropBorderColor(.45,.45,.45,.65)
+    if not frame.text then frame.text=frame:CreateFontString(nil,"OVERLAY","GameFontNormal") end
+    self:Font(frame.text,12);frame.text:ClearAllPoints();frame.text:SetPoint("CENTER");frame.text:SetWidth(width-12);frame.text:SetHeight(20)
+    frame.text:SetJustifyH("CENTER");frame.text:SetJustifyV("MIDDLE");frame.text:SetWordWrap(false);frame.text:SetTextColor(.93,.94,.97);frame.text:SetText(label)
+    if not frame.activeLine then
+        frame.activeLine=frame:CreateTexture(nil,"OVERLAY");frame.activeLine:SetHeight(1);frame.activeLine:SetColorTexture(1,.82,.2,.8)
+        frame.activeLine:SetPoint("BOTTOMLEFT",4,0);frame.activeLine:SetPoint("BOTTOMRIGHT",-4,0)
+    end
+    frame:SetScript("OnEnter",function()frame:SetBackdropBorderColor(.9,.8,.5,.9)end)
+    frame:SetScript("OnLeave",function()frame:SetBackdropBorderColor(.45,.45,.45,.65)end)
+    return frame
+end
+
 -- Shared shell matches the installed XPIsland/ATCF dialog constructors.
 function U:Dialog(frame)
     frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\DialogFrame\\UI-DialogBox-Border",tile=true,tileSize=8,edgeSize=16,insets={left=4,right=4,top=4,bottom=4}})

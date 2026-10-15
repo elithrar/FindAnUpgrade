@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.11" }; N.Core = C
+local C = { version = "0.1.12" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -76,7 +76,9 @@ function C:Print(text)
 end
 function C:Slash(input)
     local command = (input or ""):match("^%s*(.-)%s*$"):lower()
-    if command=="" or command=="search" or command=="s" then
+    local slot=command:match("^slot%s+(.+)$")
+    if slot then N.Search:OpenSlot(slot)
+    elseif command=="" or command=="search" or command=="s" then
         N.Search:Toggle()
     elseif command=="minimap" or command=="mm" then
         if not self:Change("launcher",not self.profile.launcher) then self:Print("Settings are read-only.") end
@@ -86,7 +88,7 @@ function C:Slash(input)
         self:Print((self.supported and (self.profile.enabled and "Enabled" or "Disabled") or "Unsupported client") .. "; " .. N.Data.newCount .. " verified new IDs. Data: " .. N.Data.collectedAt .. ".")
     elseif command == "options" or command == "opts" then
         N.Options:Toggle(self)
-    else self:Print("/findanupgrade search | minimap | opts | on | off | status") end
+    else self:Print("/fau search | slot <slot> | minimap | opts | on | off | status") end
 end
 function C:Initialize()
     if self.ready then return end
@@ -94,6 +96,7 @@ function C:Initialize()
     self.profile, self.readOnly = M.Load(saved)
     -- Retain newer-schema data verbatim, including when seeded by the rename.
     FindAnUpgradeDB = self.readOnly and saved or self.profile
+    FindAnUpgradeCharacterDB=N.Shortlist:Load(FindAnUpgradeCharacterDB)
     self.supported = A.Supported(); self.ready = true
     SLASH_FINDANUPGRADE1 = "/findanupgrade"
     SLASH_FINDANUPGRADE2 = "/fau"
@@ -116,7 +119,7 @@ function C:StartHoverUpdate()
     end)
 end
 local events = CreateFrame("Frame"); C.events = events
-for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED" }) do events:RegisterEvent(event) end
+for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "CVAR_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED" }) do events:RegisterEvent(event) end
 events:SetScript("OnEvent", function(_, event, name)
     if event == "ADDON_LOADED" then
         if name == ADDON then C:Initialize() elseif C.ready then
@@ -139,7 +142,12 @@ events:SetScript("OnEvent", function(_, event, name)
         if source then N.Sources:Set(source) elseif N.Sources.current and N.Sources.current.surface == "npc" then N.Sources:Clear(nil,true) end
     elseif event == "MODIFIER_STATE_CHANGED" then N.Hover:Modifier()
     elseif event == "QUEST_DATA_LOAD_RESULT" then N.Hover:Refresh(name)
-    elseif event == "ITEM_DATA_LOAD_RESULT" or event == "GET_ITEM_INFO_RECEIVED" then N.Hover:ItemData(name)
+    elseif event == "ITEM_DATA_LOAD_RESULT" or event == "GET_ITEM_INFO_RECEIVED" then N.Hover:ItemData(name);N.Stack:ComparisonItemData(name)
+    elseif event == "CVAR_UPDATE" then
+        if type(name)=="string" and name:lower()=="alwayscompareitems" then
+            N.Stack:ComparisonChanged()
+            if N.Search.inspector then N.Search.inspector:ComparisonChanged();N.Search:Wake() end
+        end
     elseif event == "TOOLTIP_DATA_UPDATE" then
         local v = N.Stack
         if v.item and not v:InspectionCurrent(v.item) then v:ClearItem()

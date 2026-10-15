@@ -95,7 +95,7 @@ test("breadcrumb and incompletely interpreted prerequisites remain uncertain",fu
     local allowed,note=N.SearchModel:Eligibility(N.Catalog.records[1],N.SearchModel:Context())
     assert(allowed and note=="Recorded minimum level 30")
     quests[1].minimum=nil; allowed,note=N.SearchModel:Eligibility(N.Catalog.records[1],N.SearchModel:Context())
-    assert(allowed and note=="Quest chain: Quest 999")
+    assert(allowed and note==nil)
 end)
 test("ready native reward names participate before a broad search renders cards",function()
     local N=setup(3,false); W.cached[9999]=true

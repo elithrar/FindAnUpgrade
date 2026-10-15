@@ -35,7 +35,7 @@ SOURCE_BLOBS = {
     "docs/forever-delta-base.md": "2d6742bad244436495d74d5e45447b36020c1cb3",
 }
 ENTITY_KEYS = {"Npc": "npcID", "Object": "objectID", "Item": "itemID"}
-TABLE_FIELDS = {"Quest": {2, 26}, "Npc": {7, 8, 10}, "Object": {2, 4, 7}, "Item": set()}
+TABLE_FIELDS = {"Quest": {2, 12, 13, 14, 15, 16, 26, 28}, "Npc": {7, 8, 10}, "Object": {2, 4, 7}, "Item": set()}
 
 
 def sha(raw):

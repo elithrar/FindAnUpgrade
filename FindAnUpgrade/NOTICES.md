@@ -49,3 +49,9 @@ source receipts; `docs/STARTER-COORDINATE-RECOVERY.md` records the field policy.
 No Questie implementation, baked database, raw source or archive is bundled.
 No separate upstream license grant was found in that pinned artifact; the
 repository's BSD grant does not license its source dataset or game content.
+
+Exact prerequisite group and optional/activity-window facts use the same pinned
+QuestieDB Forever artifact plus its matching Forever-authored corrections.
+`data/catalog-chain-records.json` preserves per-field authority, source hashes,
+stronger optional-link overrides and rejected self references. Inherited facts
+remain nonblocking; no Questie code, raw database or runtime requirement is added.

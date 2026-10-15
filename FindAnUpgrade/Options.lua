@@ -180,7 +180,7 @@ function O:Build(owner,f,parent)
         local key=entry[1]
         local tab=self:Button(parent,entry[2],20+(index-1)*120,-42,116,function()self:Page(key)end)
         tab.navigation=true
-        if not tab.activeLine then tab.activeLine=tab:CreateTexture(nil,"OVERLAY");tab.activeLine:SetHeight(1);tab.activeLine:SetColorTexture(1,.82,.2,.8);tab.activeLine:SetPoint("BOTTOMLEFT",4,0);tab.activeLine:SetPoint("BOTTOMRIGHT",-4,0) end
+        U:Tab(tab,entry[2],116)
         self.tabs[key]=tab
         local page=self:Frame("Frame",parent);page:SetAllPoints(parent);self.pages[key]=page
     end
@@ -317,6 +317,8 @@ function O:Refresh()
     self:RefreshFonts(); self:SyncMenus(); self.refreshing=false
 end
 function O:Toggle(owner)
+    if N.Copy then N.Copy:Hide() end
+    if N.Search and N.Search.frame then N.Search:CloseMenu();N.Search.inspector:ClearItem() end
     if not self.frame then self:Create(owner) end
     self.frame:SetShown(not self.frame:IsShown())
 end

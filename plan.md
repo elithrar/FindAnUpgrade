@@ -1,3 +1,11 @@
+# FindAnUpgrade approved iteration 0.1.12
+
+Implement native equipped comparison lifecycle, per-character Quests/Shortlist navigation, compact source-backed chain disclosure, safe `/fau slot <slot>` and platform-correct native copy input followed by guarded deferred dismissal. The mockups are directional: reuse Options/XPIsland construction, shared grid, content-sized cards and a full-size native star fill beneath the unchanged outline. Preserve unrelated addons and SavedVariables.
+
+Audit Forever-authored prerequisite corrections against the pinned final database; preserve group semantics, optional links and provenance, keep inherited metadata nonblocking and never convert unknown availability to false. No Questie runtime requirement. Independent implementation, design and performance reviews must pass before full checks, patch commit, main CI and exact-build MONOLITH installation. No CurseForge publication. Physical client rendering/input/taint remain explicit live checks.
+
+## Historical direction
+
 # FindAnUpgrade sidebar iteration
 
 ## Correctness review, 0.1.10

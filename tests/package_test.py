@@ -76,7 +76,7 @@ class PackageTest(unittest.TestCase):
         path = self.root / "FindAnUpgrade/FindAnUpgrade.toc"; original = path.read_text()
         path.write_text(original.replace("16001", "120001"))
         with self.assertRaisesRegex(ValueError, "interface"): package.validate(self.root)
-        path.write_text(original.replace("Model.lua\nData/Quests.lua", "Data/Quests.lua\nModel.lua"))
+        path.write_text(original.replace("Model.lua\nShortlist.lua", "Shortlist.lua\nModel.lua"))
         with self.assertRaisesRegex(ValueError, "load order"): package.validate(self.root)
 
     def test_version_mismatch_is_rejected(self):

@@ -4,7 +4,7 @@ local S={cards={},offset=0,expanded={},locationChoice={}}; N.Search=S
 -- One grid owns both the controls and the result viewport. Dimensions are in
 -- local UI units; Fit adapts the frame before applying the user's scale.
 local G={width=476,height=680,minWidth=420,minHeight=400,maxWidth=680,maxHeight=900,
-    inset=16,gap=10,control=30,menuWidth=144,scrollTop=178,scrollBottom=16,
+    inset=16,gap=10,control=30,menuWidth=144,scrollTop=210,scrollBottom=16,
     cardInset=8,rowGap=5,icon=112/3,iconGap=6}
 S.geometry=G
 local function rewardStamp(reward)
@@ -59,6 +59,7 @@ function S:CloseMenu()
     for _,dropdown in ipairs({self.slot,self.scope,self.sort}) do if type(dropdown.CloseMenu)=="function" then dropdown:CloseMenu() end end
     if self.footerTooltip then self.footerTooltip:Hide() end
     self:CloseTextTip()
+    if self.CloseChain then self:CloseChain() end
 end
 function S:CloseTextTip()
     if self.textTooltip then self.textTooltip:Hide() end
@@ -104,20 +105,11 @@ end
 function S:Indexes()
     local data=N.CatalogData
     if self.dependencyData~=data then
-        self.dependencyData,self.dependents,self.itemQuests=data,{},{}
+        self.dependencyData,self.itemQuests=data,{}
         for _,source in ipairs(data and data.quests or {}) do
             for _,item in ipairs(source.items or {}) do
                 local id=M.QuestId(item.itemID)
                 if id then local set=self.itemQuests[id] or {};self.itemQuests[id]=set;set[source.id]=true end
-            end
-            for _,key in ipairs({"prerequisites","prerequisiteAlternatives","exclusive"}) do
-                local list=source[key]
-                if M.Readable(list) and type(list)=="table" and #list<=128 then
-                    for _,id in ipairs(list) do
-                        id=M.QuestId(id)
-                        if id then local set=self.dependents[id] or {};self.dependents[id]=set;set[source.id]=true end
-                    end
-                end
             end
         end
     end
@@ -125,26 +117,20 @@ end
 function S:QuestRelevant(ids)
     if not self.filter then return false end
     self:Indexes()
-    local candidates,queue={},{}
-    for id in pairs(ids) do candidates[id]=true;queue[#queue+1]=id end
-    local cursor=1
-    while cursor<=#queue and cursor<=10000 do
-        for dependent in pairs(self.dependents[queue[cursor]] or {}) do
-            if not candidates[dependent] then candidates[dependent]=true;queue[#queue+1]=dependent end
-        end
-        cursor=cursor+1
-    end
+    local candidates=N.Chains and N.Chains:Dependants(ids) or ids
     for id in pairs(candidates) do
         local row=N.Catalog.records[id];local source=row and row.source or N.Providers.Source(id)
         if source then
             local level=row and row.level or source.level
-            if not M.Number(level) or level>=self.filter.minimum and level<=self.filter.maximum then return true end
+            if self.view=="shortlist" and N.Shortlist:Contains(id) or self.view~="shortlist" and (not M.Number(level) or level>=self.filter.minimum and level<=self.filter.maximum) then return true end
         end
+        if self.view=="shortlist" and N.Shortlist:Contains(id) then return true end
     end
     return false
 end
 function S:ItemData(id)
     id=M.QuestId(id);if not id then return end
+    if self.inspector and self.inspector.ComparisonItemData then self.inspector:ComparisonItemData(id) end
     local rankingChanged,forwarded=N.Ranking:InvalidateItem(id,N.Character.snapshot,self:Visible()==true)
     if rankingChanged and not forwarded and self:Visible() and self.filter and (self.filter.usable or self.filter.sort=="UPGRADE") then self:DataChanged() end
     id=M.QuestId(id);if not id or not (N.SearchModel.cache[id] or self.itemRequests and self.itemRequests[id]) then return end
@@ -260,6 +246,7 @@ function S:CharacterSnapshot()
     return N.Character:Get()
 end
 function S:CharacterChanged(change)
+    if change.equipment and self.inspector and self.inspector.EquipmentChanged then self.inspector:EquipmentChanged();self:Wake() end
     if not self.filter or not self.minimumInput or not self.maximumInput or not self:Visible() then self.contextDirty=true;return end
     local snapshot=self:CharacterSnapshot()
     self.contextLevel,self.contextMap=snapshot.level,snapshot.mapID
@@ -326,6 +313,7 @@ function S:Create()
     self.menuFont=CreateFont("FindAnUpgradeSearchMenuFont"); U:Font(self.menuFont,12)
     self.footerTooltip=CreateFrame("GameTooltip","FindAnUpgradeSearchFooterTooltip",f,"SharedTooltipTemplate"); self.footerTooltip:Hide()
     self.title=text(f,16,{1,.82,.2}); self.title:SetPoint("TOPLEFT",16,-14); self.title:SetText("FindAnUpgrade")
+    self:CreateViews()
     local drag=CreateFrame("Frame",nil,f); self.drag=drag; drag:SetPoint("TOPLEFT",0,0); drag:SetPoint("TOPRIGHT",-76,0); drag:SetHeight(38); drag:EnableMouse(true); drag:RegisterForDrag("LeftButton")
     drag:SetScript("OnDragStart",function() self:CloseMenu(); self.inspector:ClearItem(); f:StartMoving() end); drag:SetScript("OnDragStop",function() f:StopMovingOrSizing() end)
     local close=CreateFrame("Button",nil,f,"UIPanelCloseButton"); self.close=close; close:SetSize(24,24); close:SetPoint("TOPRIGHT",-8,-8); close:SetScript("OnClick",function() f:Hide() end)
@@ -334,7 +322,7 @@ function S:Create()
     options:SetScript("OnEnter",function() options.icon:SetVertexColor(1,.82,.2) end)
     options:SetScript("OnLeave",function() options.icon:SetVertexColor(1,1,1) end)
     options:SetScript("OnClick",function() self:CloseMenu(); self.inspector:ClearItem(); self.search:ClearFocus(); self:CancelRange(); N.Options:Toggle(N.Core) end)
-    self.search=edit(f,1,G.control); self.search:SetPoint("TOPLEFT",G.inset,-44); self.search:SetTextInsets(8,32,0,0)
+    self.search=edit(f,1,G.control); self.search:SetPoint("TOPLEFT",G.inset,-76); self.search:SetTextInsets(8,32,0,0)
     self.placeholder=text(self.search,11,{.7,.7,.72}); self.placeholder:SetPoint("LEFT",8,0); self.placeholder:SetText("Quest or reward")
     local clear=CreateFrame("Button",nil,self.search); self.clearSearch=clear
     clear:SetSize(24,24); clear:SetPoint("RIGHT",self.search,"RIGHT",-3,0)
@@ -343,11 +331,11 @@ function S:Create()
     clear:SetScript("OnLeave",function() clear.text:SetTextColor(.7,.7,.72,.65) end)
     clear:SetScript("OnClick",function()
         if self.search:GetText()=="" then return end
-        self.search:SetText(""); clear:Hide(); self.placeholder:Show(); self.filter.query=""; self.search:SetFocus(); self:Changed(true)
+        self.search:SetText(""); clear:Hide(); self.placeholder:Show(); if self.view=="quests" then self.filter.query="" end; self.search:SetFocus(); self:Changed(true)
     end)
     self.search:SetScript("OnTextChanged",function(e,user)
         local empty=e:GetText()==""; self.placeholder:SetShown(empty); clear:SetShown(not empty)
-        if user then self.filter.query=e:GetText():sub(1,100); self:Changed(true) end
+        if user then if self.view=="quests" then self.filter.query=e:GetText():sub(1,100) end; self:Changed(true) end
     end)
     self.search:SetScript("OnEscapePressed",function(e) e:ClearFocus(); f:Hide() end)
     self.search:SetScript("OnEnterPressed",function(e) e:ClearFocus() end)
@@ -361,7 +349,7 @@ function S:Create()
     self.dungeons.Text:SetText("Include dungeon quests")
     self.dungeons:SetScript("OnClick",function(b)self.filter.includeDungeons=b:GetChecked()==true;self:Changed(true)end)
     self.scope=self:Dropdown(f,G.menuWidth,{{"SAME_ZONE","Same zone"},{"LEVEL_RANGE","Level range"}},function()return self.filter.scope end,function(value)self.filter.scope=value;self:Changed(true)end)
-    self.scope:SetPoint("TOPLEFT",16,-82);self.scope:SetDefaultText("Same zone")
+    self.scope:SetPoint("TOPLEFT",16,-114);self.scope:SetDefaultText("Same zone")
     self.levelLabel=text(f,12); self.levelLabel:SetText("Levels"); self.levelLabel:SetHeight(26); self.levelLabel:SetJustifyV("MIDDLE")
     self.minimumInput,self.maximumInput=edit(f,38),edit(f,38)
     self.maximumInput:SetPoint("TOPRIGHT",-16,-82); self.minimumInput:SetPoint("RIGHT",self.maximumInput,"LEFT",-12,0)
@@ -373,7 +361,7 @@ function S:Create()
         e:SetScript("OnEditFocusLost",function() self:CommitRange(true) end)
         e:SetScript("OnEscapePressed",function() self:CancelRange() end)
     end
-    self.slot=self:Dropdown(f,G.menuWidth,N.SearchModel.slots,function() return self.filter.slot end,function(value) self.filter.slot=value; self:Changed(true) end,G.control); self.slot:SetPoint("TOPRIGHT",-G.inset,-44); self.slot:SetDefaultText("All rewards")
+    self.slot=self:Dropdown(f,G.menuWidth,N.SearchModel.slots,function() return self.filter.slot end,function(value) self.filter.slot=value; self:Changed(true) end,G.control); self.slot:SetPoint("TOPRIGHT",-G.inset,-76); self.slot:SetDefaultText("All rewards")
     self.count=text(f,11,{.7,.7,.72}); self.count:SetPoint("TOPLEFT",16,-146); self.count:SetHeight(26);self.count:SetWordWrap(true); self.count:SetJustifyV("MIDDLE")
     self.sort=self:SortButton(f);self.sort:SetPoint("TOPRIGHT",-16,-146)
     local scroll=CreateFrame("ScrollFrame",nil,f); self.scroll=scroll; scroll:SetPoint("TOPLEFT",12,-G.scrollTop); scroll:SetPoint("BOTTOMRIGHT",-26,G.scrollBottom); scroll:EnableMouse(true); scroll:EnableMouseWheel(true)
@@ -390,7 +378,7 @@ function S:Create()
         if not self.inspector or self.appearanceLayout then return end
         self:AppearanceChanged()
     end)
-    f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self:CancelRange(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if self.copyFrame then self.copyFrame:Hide() end;if N.Character then N.Character:Sleep()end end)
+    f:SetScript("OnHide",function() f:StopMovingOrSizing(); f:SetScript("OnUpdate",nil); self.search:ClearFocus(); self:CancelRange(); self.inspector:ClearItem(); self.footerTooltip:Hide(); self:CloseMenu(); if N.Copy then N.Copy:Hide() end;if N.Character then N.Character:Sleep()end end)
     f:SetScript("OnEvent",function(_,event,id)
         if event=="ITEM_DATA_LOAD_RESULT" or event=="GET_ITEM_INFO_RECEIVED" then
             self:ItemData(id);return
@@ -445,6 +433,17 @@ function S:Fit()
 end
 function S:LayoutControls()
     local width=self.frame:GetWidth()
+    local shortlist=self.view=="shortlist"
+    for _,control in ipairs({self.slot,self.scope,self.levelLabel,self.minimumInput,self.maximumInput,self.rangeSeparator,self.usable,self.dungeons,self.sort}) do control:SetShown(not shortlist) end
+    self.search:ClearAllPoints();self.search:SetPoint("TOPLEFT",G.inset,-76)
+    self.title:SetWidth(math.max(1,width-100));self.count:SetWidth(math.max(1,width-(shortlist and 32 or 70)))
+    self.empty:SetWidth(math.max(1,width-54));self.child:SetWidth(math.max(1,width-38))
+    if shortlist then
+        self.search:SetWidth(math.max(1,width-G.inset*2));self.count:ClearAllPoints();self.count:SetPoint("TOPLEFT",16,-114);self.count:SetHeight(26)
+        self.scrollTop=146;self.scroll:ClearAllPoints();self.scroll:SetPoint("TOPLEFT",12,-146);self.scroll:SetPoint("BOTTOMRIGHT",-26,G.scrollBottom)
+        self.bar:ClearAllPoints();self.bar:SetPoint("TOPRIGHT",-6,-148);self.bar:SetPoint("BOTTOMRIGHT",-6,18)
+        return
+    end
     local menuWidth=math.max(112,math.min(G.menuWidth,math.floor(width*.31)))
     local slotWidth=math.max(menuWidth,(A.Call(self.slot.Text.GetStringWidth,self.slot.Text) or 0)+35)
     local scopeWidth=math.max(menuWidth,(A.Call(self.scope.Text.GetStringWidth,self.scope.Text) or 0)+35)
@@ -461,12 +460,12 @@ function S:LayoutControls()
     local levelCaption=A.Call(self.levelLabel.GetStringWidth,self.levelLabel) or 36
     local rangeExtra=width<G.inset+scopeWidth+G.gap+levelCaption+8+38+12+38+G.inset and 32 or 0
     local checkExtra=width<12+24+2+caption+G.gap+24+2+dungeonCaption+G.inset and 30 or 0
-    self.maximumInput:ClearAllPoints();self.maximumInput:SetPoint("TOPRIGHT",-16,-82-rangeExtra)
-    self.usable:ClearAllPoints();self.usable:SetPoint("TOPLEFT",12,-114-rangeExtra)
-    self.dungeons:ClearAllPoints();self.dungeons:SetPoint("TOPLEFT",width-G.inset-24-2-dungeonCaption,-114-rangeExtra-checkExtra)
+    self.maximumInput:ClearAllPoints();self.maximumInput:SetPoint("TOPRIGHT",-16,-114-rangeExtra)
+    self.usable:ClearAllPoints();self.usable:SetPoint("TOPLEFT",12,-146-rangeExtra)
+    self.dungeons:ClearAllPoints();self.dungeons:SetPoint("TOPLEFT",width-G.inset-24-2-dungeonCaption,-146-rangeExtra-checkExtra)
     local extra=rangeExtra+checkExtra
-    self.count:ClearAllPoints();self.count:SetPoint("TOPLEFT",16,-146-extra)
-    self.sort:ClearAllPoints();self.sort:SetPoint("TOPRIGHT",-16,-146-extra)
+    self.count:ClearAllPoints();self.count:SetPoint("TOPLEFT",16,-178-extra)
+    self.sort:ClearAllPoints();self.sort:SetPoint("TOPRIGHT",-16,-178-extra)
     self.count:SetHeight(0)
     local countHeight=math.max(26,A.Call(self.count.GetStringHeight,self.count) or 26);self.count:SetHeight(countHeight)
     self.scrollTop=G.scrollTop+extra+countHeight-26
@@ -512,14 +511,16 @@ function S:Refresh()
     for id in pairs(self.rewardDirty or {}) do
         if self:QuestRelevant({[id]=true}) then N.SearchModel:InvalidateQuest(id);self.rewardDirty[id]=nil end
     end
-    self.results,self.error=N.SearchModel:Query(self.filter); self:Enqueue("item",N.SearchModel.needed); self:Enqueue("quest",N.SearchModel.questNeeded)
-    local count=#self.results.." quests"
-    if N.Catalog.ids and not N.Catalog.done then count="Indexing rewards - "..math.floor((N.Catalog.cursor-1)/math.max(1,#N.Catalog.ids)*100).."%  -  "..count end
-    if self.filter.scope=="SAME_ZONE" then
+    if self.view=="shortlist" then self.results,self.error=self:ShortlistQuery(),nil else self.results,self.error=N.SearchModel:Query(self.filter) end
+    self:Enqueue("item",N.SearchModel.needed); self:Enqueue("quest",N.SearchModel.questNeeded)
+    local count=#self.results..(self.view=="shortlist" and " saved quests" or " quests")
+    if self.view~="shortlist" and N.Catalog.ids and not N.Catalog.done then count="Indexing rewards - "..math.floor((N.Catalog.cursor-1)/math.max(1,#N.Catalog.ids)*100).."%  -  "..count end
+    if self.view~="shortlist" and self.filter.scope=="SAME_ZONE" then
         local snapshot=self:CharacterSnapshot();if snapshot.zoneName then count=count.." - "..snapshot.zoneName end
     end
     local empty="No matching quest rewards. Try a wider level range or another slot."
-    if N.Catalog.ids and not N.Catalog.done then empty="Loading quests."
+    if self.view=="shortlist" then empty=#N.Shortlist:IDs()==0 and "Star a quest to save it for this character." or "No matching saved quests." end
+    if self.view~="shortlist" and N.Catalog.ids and not N.Catalog.done then empty="Loading quests."
     elseif #N.SearchModel.needed>0 and (A.Call(GetTime) or 0)<self.dataDeadline then empty="Loading item details." end
     self.count:SetText(count);self:LayoutControls();self:LayoutResults(); self.empty:SetText(N.Catalog.error or self.error or (#self.results==0 and empty or "")); self.empty:SetShown(#self.results==0)
     self:Scroll(self.offset)
@@ -536,6 +537,7 @@ function S:Card(index)
     local c=CreateFrame("Frame",nil,self.child,"BackdropTemplate"); self.cards[index]=c; surface(c); c:EnableMouse(true)
     c.title,c.tag,c.location,c.evidence=text(c,13,{1,.82,.2}),text(c,10,{.82,.73,.53}),text(c,11,{.75,.75,.77}),text(c,11,{.75,.75,.77})
     c.title:SetPoint("TOPLEFT",8,-7); c.tag:SetPoint("TOPRIGHT",-8,-9); c.tag:SetJustifyH("RIGHT"); c.location:SetPoint("TOPLEFT",8,-27); c.evidence:SetPoint("TOPLEFT",8,-42)
+    self:Star(c);c.tag:ClearAllPoints();c.tag:SetPoint("TOPRIGHT",-34,-9)
     c.groupMeasure=text(c,10); c.groupMeasure:Hide()
     c.titleHit=CreateFrame("Frame",nil,c); c.titleHit:SetPoint("TOPLEFT",8,-5); c.titleHit:SetHeight(18); c.titleHit:EnableMouse(true)
     c.titleHit:SetScript("OnMouseUp",function(_,button) if button=="RightButton" and c.row and A.Over(self.scroll) and A.Over(c.titleHit) then self:ContextMenu(c.row,c) end end)
@@ -574,17 +576,25 @@ function S:Fill(card,row)
     local badge=accent=="verifiedNew" and "New in Forever" or accent=="verifiedUpdated" and "Modified" or ""
     card.tag:SetText(badge); card.tag:SetShown(badge~="")
     local badgeWidth=badge~="" and (A.Call(card.tag.GetStringWidth,card.tag) or 80)+10 or 0
-    local titleWidth=width-16-badgeWidth
+    local titleWidth=width-42-badgeWidth
+    card.star.fill:SetShown(N.Shortlist:Contains(row.id));card.star:Show()
     card.title:SetWordWrap(true); local titleHeight=measured(card.title,titleWidth,title)
     card.titleHit:SetWidth(titleWidth); card.titleHit:SetHeight(titleHeight)
     local r,g,b=M.AccentFill(N.Core.profile,accent,.06,.06,.07); card:SetBackdropColor(r,g,b,.97)
+    if row.missing then
+        card.location:SetText("Quest data unavailable");card.location:ClearAllPoints();card.location:SetPoint("TOPLEFT",8,-(titleHeight+12));card.location:Show()
+        card.evidence:Hide();card.chain:Hide();card.giver:Hide();card.more:Hide();card.locationHit:Hide()
+        for _,icon in ipairs(card.icons) do icon.row=nil;icon:Hide();icon.name:Hide();icon.group:Hide() end
+        for i,footer in ipairs(card.footer) do footer:Hide();card.footerHits[i]:Hide() end
+        local height=titleHeight+32;card:SetHeight(height);self.heights=self.heights or {};local resized=self.heights[row.id]~=height;self.heights[row.id]=height;return height,resized
+    end
     local reward,catalog,usabilityChanged=N.SearchModel:Reward(row); local items={}; local matching={}
     self.rewardStamps=self.rewardStamps or {};self.rewardStamps[row.id]=rewardStamp(reward)
     for _,item in ipairs(row.items) do matching[item.itemID]=item end
     if usabilityChanged then self:DataChanged() end
     for _,group in ipairs({{reward.items,"Guaranteed"},{reward.choices,"Choose one"}}) do
         for _,item in ipairs(group[1].items or {}) do
-            if matching[item.itemID] and (not self.filter.usable or item.usable~=false) then items[#items+1]={item=item,meta=matching[item.itemID],label=group[2]} end
+            if matching[item.itemID] and (self.view=="shortlist" or not self.filter.usable or item.usable~=false) then items[#items+1]={item=item,meta=matching[item.itemID],label=group[2]} end
         end
     end
     for _,item in ipairs(catalog) do items[#items+1]={item=item,meta=item,label="Reward"} end
@@ -622,13 +632,16 @@ function S:Fill(card,row)
     card.locationHit:SetSize(bodyWidth,placeHeight); card.locationHit:SetShown(place~=nil)
     local y=top+placeHeight+(placeHeight>0 and 3 or 0)
     local note=M.Text(row.evidence)
-    local actionable=note and note~="Availability unconfirmed" and note~="Available" and note~="Recorded availability"
+    local actionable=note and note~="Availability unconfirmed" and note~="Available" and note~="Recorded availability" and not note:find("^Quest chain:") and not note:find("^Chain requirements")
     if actionable then
         note=note:gsub("^Recorded minimum level ","Req. lvl "):gsub("^Requires level ","Req. lvl "):gsub("^Recorded ","")
     end
     card.evidence:SetWordWrap(true); card.evidence:ClearAllPoints(); card.evidence:SetPoint("TOPLEFT",8,-y)
     local evidenceHeight=measured(card.evidence,bodyWidth,actionable and note or nil)
     y=y+evidenceHeight+(evidenceHeight>0 and 3 or 0); card.fullTitle=title
+    local chain=N.Chains and N.Chains:HasDetails(row.id)
+    card.chain:SetShown(chain==true)
+    if chain then card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",8,-y);card.chain:SetWidth(math.min(100,bodyWidth));y=y+19 end
     local rewardY=top
     card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
     local iconIndex,groupCursor,groupMaximum=0,0,0; local rewardTop=rewardY
@@ -720,13 +733,7 @@ end
 function S:Copy(value)
     if not M.Text(value) then return end
     self:CloseMenu(); self.inspector:ClearItem()
-    if not self.copyFrame then
-        local f=CreateFrame("Frame","FindAnUpgradeCopy",self.frame,"BackdropTemplate"); self.copyFrame=f; f:SetSize(math.min(380,self.frame:GetWidth()-24),90); f:SetPoint("CENTER"); f:SetClampedToScreen(true); f:SetFrameStrata("FULLSCREEN_DIALOG"); U:Dialog(f)
-        local label=text(f,12); label:SetPoint("TOPLEFT",12,-12); label:SetText("Ctrl+C to copy")
-        self.copyEdit=edit(f,f:GetWidth()-30); self.copyEdit:SetPoint("TOPLEFT",15,-42); self.copyEdit:SetMaxLetters(1024); self.copyEdit:SetScript("OnEscapePressed",function() f:Hide() end); self.copyEdit:SetScript("OnEnterPressed",function() f:Hide() end)
-        f:SetScript("OnHide",function() self.copyEdit:ClearFocus() end); UISpecialFrames[#UISpecialFrames+1]="FindAnUpgradeCopy"
-    end
-    U:Border(self.copyFrame,"dialog"); self.copyFrame:SetWidth(math.min(380,self.frame:GetWidth()-24)); self.copyEdit:SetWidth(self.copyFrame:GetWidth()-30); self.copyFrame:Show(); self.copyEdit:SetText(value); self.copyEdit:HighlightText(); self.copyEdit:SetFocus()
+    N.Copy:Show(self.frame,value);self.copyFrame,self.copyEdit=N.Copy.frame,N.Copy.edit
 end
 function S:ContextMenu(row,owner)
     if not row or not self:Visible() or not MenuUtil or type(MenuUtil.CreateContextMenu)~="function" then return end

@@ -131,6 +131,17 @@ evidence establishes availability; cached item data alone is insufficient.
 
 ## Failure and review
 
+Prerequisite facts are owned by `data/catalog-chain-records.json`. The importer
+uses the pinned QuestieDB Forever final artifact and matching authored
+corrections, preserves per-field authority and stronger optional-link overrides,
+and withholds self references. Inherited group semantics remain nonblocking.
+`tools/quest_chains.py --source-root .work/starter-recovery/questie-source`
+rebuilds from the owned cache. Only explicit refresh acquisition uses its
+`--acquire` switch; offline reparse fails clearly if the pinned authored cache
+is missing. Runtime and ordinary offline checks use frozen normalized inputs
+without another addon or checkout. Classification and reward facts remain
+separate. `SHORTLIST-CHAIN-CONTRACTS.md` records coverage and remaining limits.
+
 Acquisition errors, missing receipts, changed bytes, unsupported pins,
 incomplete membership, primary conflicts, failed tests or concurrent catalog
 edits prevent replacement. Frozen classification and parser inputs are hashed

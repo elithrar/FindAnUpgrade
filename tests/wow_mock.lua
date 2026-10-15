@@ -5,6 +5,8 @@ local function layout(self)
 end
 function Methods:IsForbidden() return self.forbidden == true end
 function Methods:IsShown() return self.shown end
+function Methods:SetParent(parent) self.parent=parent end
+function Methods:HasFocus() return self.focused==true end
 function Methods:GetVertexColor() if self.colorSecret then return W.secret, 1, 1, 1 end; return unpack(self.color or {1,1,1,1}) end
 function Methods:SetVertexColor(r,g,b,a) if self.failWrite then error("blocked region") end; W.writes = W.writes + 1; self.color = {r,g,b,a} end
 function Methods:HookScript(name, fn) if W.combat and self.native then error("hook in combat") end; self.hooks[name] = self.hooks[name] or {}; table.insert(self.hooks[name], fn) end
@@ -59,6 +61,7 @@ end
 function Methods:SetWordWrap(value) self.wordWrap=value end
 function Methods:SetScrollChild(child) self.scrollChild=child end
 function Methods:SetVerticalScroll(value) self.scrollValue=value end
+function Methods:GetVerticalScroll() return self.scrollValue or 0 end
 function Methods:CreateTexture() local texture=W.Object(); texture.parent=self; return texture end
 function Methods:SetOwner(owner,anchor) self.owner=owner; self.anchor=anchor end
 function Methods:GetOwner() return self.owner end
@@ -271,11 +274,12 @@ function W.Reset(config)
         local original = _G[name]
         _G[name] = function(...) local results = {original(...)}; fn(...); return unpack(results) end
     end
+    FindAnUpgradeCharacterDB = config.characterSaved
     FindAnUpgradeDB = config.saved
     QuestBriefDB = config.previous
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","Character.lua","UI.lua","Rewards.lua","Providers.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
+    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
     W.N = N
     return N
 end

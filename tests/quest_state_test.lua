@@ -74,8 +74,8 @@ test("removal abandonment and turn-in refresh once without invalidating unrelate
     reset();W.done[9]=true;for _=1,100 do W.Event("QUEST_TURNED_IN",9,450,100)end;settle(S)
     assert(reads.query==1 and reads.clears[9]==1 and not evidence(S,9))
 end)
-test("a completed prerequisite outside the catalog can reveal its dependent quest",function()
-    local N,S,reads=setup();assert(not evidence(S,30));W.done[900]=true
+test("missing prerequisite metadata stays visible and completion still invalidates its dependent",function()
+    local N,S,reads=setup();assert(evidence(S,30));W.done[900]=true
     W.Event("QUEST_TURNED_IN",900,0,0);settle(S)
     assert(reads.query==1 and reads.clears[900]==1 and evidence(S,30))
 end)
