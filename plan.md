@@ -1,5 +1,21 @@
 # FindAnUpgrade sidebar iteration
 
+## Current direction: 0.1.9
+
+The user's latest instruction supersedes detailed stat scoring: use usable
+slots and item-level gain as a minimal heuristic. Remove specialization weights
+and scoring-style settings. Do not estimate precise damage, healing or practical
+power. Preserve class/faction/usability, exact variants, uniqueness, paired-slot
+and hand-configuration guards; missing facts stay unknown. A two-handed reward
+compares with the mean of occupied current hands; no bag partner is invented.
+
+Create a faithful high-resolution reconstruction of the current 476 by 680
+sidebar from the actual Lua layout, prior five screenshots, native artwork,
+the verified screenshot font and real quest/item records. Label it as a mock,
+distinguish illustrative character/equipment state from game observations and
+save the PNGs as native Library images. Deliver them independently of unrelated
+patch validation. Keep the underlying sidebar geometry and compact controls.
+
 ## Scope and evidence
 
 Implement the accepted FindAnUpgrade name and the compact reward finder design.
@@ -52,7 +68,7 @@ metadata cache or optional marker cannot admit an opposing-faction quest/NPC.
 Keep NPC, object and item namespaces separate, preserve neutral/multiple valid
 starters, and distinguish fresh native log/gossip proof from static records.
 Test contradictory metadata and unknown identity explicitly rather than inventing
-availability. The finder filters opportunities. Its ordering estimates stat gain
+availability. The finder filters opportunities. Its ordering estimates item-level gain
 against equipped gear; it does not promise mathematically proven upgrades.
 
 ## Name and migration
@@ -115,12 +131,11 @@ useful alternatives without a separate large dropdown. The header grid must
 still remain readable and reachable with filter/dungeon controls.
 
 Biggest upgrade compares eligible rewards with actual equipped configurations,
-using explicit class/spec stat priorities with a small transparent profile choice
-where native Forever context cannot establish a defensible default. Item level
-is displayed but is not the ranking formula. Define slot-family comparisons,
+using verified item-level gain as a deliberately simple heuristic. It needs no
+style or specialization choice. Define slot-family comparisons,
 replacement alternatives, two-hand/off-hand/dual-wield combinations, unique/equip
-restrictions, empty equipment, missing metadata and unsupported effects before
-coding the score. Do not sum choose-one alternatives or claim a precise DPS gain.
+restrictions, empty equipment and missing metadata before coding the estimate.
+Effects are not modeled or claimed as performance. Do not sum choose-one alternatives or claim a precise DPS gain.
 Unknown/incomparable candidates remain useful visible results with distinct
 ordering and no fabricated zero/percentage. Record the interpretation and
 limitations in the scoring design and user-facing menu where relevant, using
@@ -138,7 +153,7 @@ filtering, ranking and visible controls. Its table/type carries revisioned facts
 current faction, class, Forever specialization/talent-group context, level,
 zone/instance identity, known quest/log/completion/offer state, and equipment
 links/IDs/readiness/verified empty slots. Unknown facts remain explicit. Search
-query, scope/range, dungeon inclusion, sort and scoring-style choices are user
+query, scope/range, dungeon inclusion and sort choices are user
 preferences, never character facts.
 
 Reuse the existing bounded QuestState observation/deduplication bridge rather
@@ -161,8 +176,8 @@ owner and typed Lua table, without introducing an unrelated framework.
 ## Implementation evidence
 
 The accepted layout, complete identity migration, Character owner, real scope
-filters and conservative stat ranking are implemented. The complete local
-verifier passes 17 commands, 505 Lua scenarios and 168 Python tests. Independent
+filters and the earlier 0.1.8 stat ranking were implemented. That historical
+verifier passed 17 commands, 505 Lua scenarios and 168 Python tests. Independent
 visual, state, ranking and rename/package reviews are accepted and linked from
 `docs/VALIDATION.md`. Delivery receipts in `dist/` bind the final source commit,
 CI, exact-commit build, installation and settings preservation. Native appearance,

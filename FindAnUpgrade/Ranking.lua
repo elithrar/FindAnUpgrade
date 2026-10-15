@@ -1,387 +1,247 @@
 local _,N=...
 local M,A=N.Model,N.Adapter
--- 2,623 distinct catalog reward IDs + current gear fit within one context.
--- Never retain a prior player/level/capability context behind this bound.
-local R={version=1,limit=4096,cache={},order={},dirty={},byID={}};N.Ranking=R
--- Original leveling preferences, in estimated stat points. These are neither
--- simulations nor imported Retail/Classic conversion factors. No item-level term.
-local choices={WARRIOR={"MELEE","TANK"},PALADIN={"MELEE","HEALER","TANK"},HUNTER={"RANGED","MELEE"},
-    ROGUE={"MELEE"},PRIEST={"CASTER","HEALER"},SHAMAN={"MELEE","CASTER","HEALER","TANK"},
-    MAGE={"CASTER"},WARLOCK={"CASTER"},DRUID={"CASTER","MELEE","HEALER","BEAR"}}
-local labels={MELEE="Melee damage",RANGED="Ranged damage",CASTER="Spell damage",HEALER="Healing",TANK="Shield tank",BEAR="Bear tank"}
-local automatic={ROGUE="MELEE",MAGE="CASTER",WARLOCK="CASTER"}
-local function tableValue(v)return M.Readable(v) and type(v)=="table" end
+-- An estimated item-level difference, never a damage/healing or stat score.
+-- The current 2,623 catalog reward IDs plus 19 equipped variants fit this bound.
+local R={limit=4096,cache={},order={},byID={},dirty={}};N.Ranking=R
+local function tab(v)return M.Readable(v) and type(v)=="table" end
 local function text(v)return M.Readable(v) and type(v)=="string" and v~="" and v or nil end
-local function integer(v)return M.Number(v) and v>=0 and v==math.floor(v) and v or nil end
-local function sequence(v,maximum)
-    if not tableValue(v) or #v>maximum then return false end
-    local count=0
-    for key in pairs(v) do
-        if not M.Number(key) or key<1 or key>#v or key~=math.floor(key) then return false end
-        count=count+1;if count>maximum then return false end
-    end
-    return count==#v
+local function int(v)return M.Number(v) and v>=0 and v==math.floor(v) and v or nil end
+local function sequence(v,max)
+    if not tab(v) or #v>max then return false end
+    local n=0;for k in pairs(v) do if not M.Number(k) or k<1 or k>#v or k~=math.floor(k) then return false end;n=n+1 end
+    return n==#v
 end
-local function returns(fn,...)
+local function values(fn,...)
     if type(fn)~="function" then return end
     local function pack(...)return {n=select("#",...),...} end
-    local result=pack(pcall(fn,...));if result[1] then return unpack(result,2,result.n) end
+    local v=pack(pcall(fn,...));if v[1] then return unpack(v,2,v.n) end
 end
-local function result(state,reason,gain,itemID)
-    return {state=state,reason=reason,gain=gain,itemID=itemID,estimated=true,
+local function result(state,reason,gain,id)
+    return {state=state,reason=reason,gain=gain,itemID=id,estimated=true,metric="item-level",
         tier=state=="ready" and (gain>0 and 1 or 3) or 2}
 end
-local function contextKey(snapshot)
-    return tostring((M.QuestId(snapshot.level)))..":"..(integer(snapshot.identityRevision) or 0)
-        ..":"..(integer(snapshot.capabilityRevision) or 0)..":"..(text(snapshot.guid) or "")
+local function identity(s)
+    return tab(s) and M.QuestId(s.classID) and text(s.classToken) and M.Readable(s.faction)
+        and (s.faction=="Alliance" or s.faction=="Horde")
 end
-local function cacheKey(link,snapshot,equipped)
-    return link.."\031"..contextKey(snapshot)..(equipped and "\031equipment" or "\031reward")
+local function context(s)
+    return tostring((M.QuestId(s.level)))..":"..(int(s.identityRevision) or 0)..":"..(int(s.capabilityRevision) or 0)..":"..(text(s.guid) or "")
 end
-function R:UseContext(snapshot)
-    local key=contextKey(snapshot)
-    if self.contextKey~=key then
-        self.contextKey=key;self.cache,self.order,self.dirty,self.byID={},{},{},{}
-        self.gearKey,self.gear,self.gearByID=nil,nil,nil
-        self.usabilityKey,self.usability,self.usabilityOrder,self.usabilityDirty=nil,{}, {},{}
+local function key(link,s,equipped)return link.."\031"..context(s)..(equipped and "\031gear" or "\031reward") end
+function R:UseContext(s)
+    local current=context(s)
+    if self.contextKey~=current then
+        self.contextKey=current;self.cache,self.order,self.byID,self.dirty={},{},{},{}
+        self.gear,self.gearKey,self.gearByID=nil,nil,nil
+        self.useKey,self.useCache,self.useOrder,self.useDirty=nil,{},{},{}
     end
 end
-function R:Usable(id,snapshot)
-    id=M.QuestId(id);if not id or not tableValue(snapshot) then return end
-    self:UseContext(snapshot)
-    local key=contextKey(snapshot)..":"..tostring(integer(snapshot.equipmentRevision))
-    if self.usabilityKey~=key then
-        self.usabilityKey=key;self.usability,self.usabilityOrder,self.usabilityDirty={},{},{}
-    end
-    local prior=self.usability[id]
-    if prior and not self.usabilityDirty[id] then return prior.value end
+function R:Usable(id,s)
+    id=M.QuestId(id);if not id or not tab(s) then return end;self:UseContext(s)
+    local current=context(s)..":"..tostring(int(s.equipmentRevision))
+    if self.useKey~=current then self.useKey=current;self.useCache,self.useOrder,self.useDirty={},{},{} end
+    local prior=self.useCache[id];if prior and not self.useDirty[id] then return prior.value end
     if not prior then
-        if #self.usabilityOrder>=self.limit then local first=table.remove(self.usabilityOrder,1);self.usability[first],self.usabilityDirty[first]=nil,nil end
-        self.usabilityOrder[#self.usabilityOrder+1]=id
+        if #self.useOrder>=self.limit then local old=table.remove(self.useOrder,1);self.useCache[old],self.useDirty[old]=nil,nil end
+        self.useOrder[#self.useOrder+1]=id
     end
-    local value
-    if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)==true then value=A.Call(C_PlayerInfo and C_PlayerInfo.CanUseItem,id) end
-    if type(value)~="boolean" then value=nil end
-    self.usability[id],self.usabilityDirty[id]={value=value},nil
-    return value
+    local use
+    if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)==true then use=A.Call(C_PlayerInfo and C_PlayerInfo.CanUseItem,id) end
+    if type(use)~="boolean" then use=nil end
+    self.useCache[id],self.useDirty[id]={value=use},nil;return use
 end
-local function weights(id,token)
-    local w={strength=0,agility=0,stamina=.25,intellect=0,spirit=0,armor=.002,attackPower=0,rangedAttackPower=0,
-        spellPower=0,healing=0,manaRegen=0,defense=0,block=0,weaponDps=0,offhandDps=0,rangedDps=0}
-    if id=="MELEE" or id=="RANGED" then
-        local agile=token=="ROGUE" or token=="HUNTER" or token=="DRUID"
-        w.strength,w.agility=agile and .4 or 1,agile and 1 or .5
-        w.attackPower=.45;w.rangedAttackPower=id=="RANGED" and .45 or 0
-        w.weaponDps=id=="MELEE" and 4 or 0;w.offhandDps=id=="MELEE" and 2 or 0;w.rangedDps=id=="RANGED" and 4 or 0
-    elseif id=="CASTER" then w.intellect,w.spirit,w.spellPower=1,.2,1.2
-    elseif id=="HEALER" then w.intellect,w.spirit,w.healing,w.spellPower,w.manaRegen=.8,.8,1,.6,4
-    elseif id=="TANK" then
-        w.stamina,w.strength,w.agility,w.armor,w.defense,w.block=1,.45,.35,.025,.8,.3
-        w.weaponDps,w.offhandDps=1,0
-    elseif id=="BEAR" then w.stamina,w.agility,w.strength,w.armor,w.defense=1,.6,.35,.03,.5 end
-    return w
-end
-function R:Styles(snapshot)
-    local out={};local token=tableValue(snapshot) and text(snapshot.classToken)
-    for _,id in ipairs(choices[token] or {}) do out[#out+1]={id=id,label=labels[id]} end
-    return out
-end
-function R:Style(snapshot,saved)
-    if not tableValue(snapshot) then return end
-    local token,guid,group=text(snapshot.classToken),text(snapshot.guid),M.QuestId(snapshot.talentGroup)
-    local key=guid and group and guid..":"..group or nil
-    local id=key and tableValue(saved) and text(saved[key]) or nil
-    if not id then id=automatic[token] end
-    for _,allowed in ipairs(choices[token] or {}) do
-        if allowed==id then return {id=id,label=labels[id],classToken=token,weights=weights(id,token),requiresShield=id=="TANK"},key end
-    end
-    return nil,key
-end
-
--- Only explicitly recognized base-stat keys are normalized. Unknown nonzero
--- keys, effects and aliases with conflicting values cannot silently become zero.
-local statKeys={ITEM_MOD_STRENGTH_SHORT="strength",ITEM_MOD_AGILITY_SHORT="agility",ITEM_MOD_STAMINA_SHORT="stamina",
-    ITEM_MOD_INTELLECT_SHORT="intellect",ITEM_MOD_SPIRIT_SHORT="spirit",RESISTANCE0_NAME="armor",
-    ITEM_MOD_ATTACK_POWER_SHORT="attackPower",ITEM_MOD_RANGED_ATTACK_POWER_SHORT="rangedAttackPower",
-    ITEM_MOD_SPELL_POWER_SHORT="spellPower",ITEM_MOD_SPELL_DAMAGE_DONE_SHORT="spellPower",
-    ITEM_MOD_SPELL_HEALING_DONE_SHORT="healing",ITEM_MOD_MANA_REGENERATION_SHORT="manaRegen",
-    ITEM_MOD_DEFENSE_SKILL_RATING_SHORT="defense",ITEM_MOD_BLOCK_VALUE_SHORT="block"}
-function R.Normalize(stats)
-    if not tableValue(stats) then return nil,"stats-pending" end
-    local out,count={},0
-    for key,value in pairs(stats) do
-        count=count+1;if count>64 or not text(key) or not M.Number(value) or math.abs(value)>1000000 then return nil,"stats-invalid" end
-        local normalized=statKeys[key]
-        if not normalized then if value~=0 then return nil,"unsupported-stat" end
-        elseif out[normalized]~=nil and out[normalized]~=value then return nil,"stat-alias-conflict"
-        else out[normalized]=value end
-    end
-    if count==0 then return nil,"stats-empty" end
-    return out
-end
-local function effectCheck(link)
-    local data=A.Call(C_TooltipInfo and C_TooltipInfo.GetHyperlink,link,nil,nil,true)
-    if not tableValue(data) or not sequence(data.lines,128) or #data.lines<2 then return false,"tooltip-pending" end
-    local types=Enum and Enum.TooltipDataLineType
-    if not tableValue(types) then return false,"tooltip-contract" end
-    local safe={None=true,Blank=true,ItemBinding=true,EquipSlot=true,ItemName=true,Separator=true,
-        ItemLevel=true,ItemQuality=true,FlavorText=true,TradeTimeRemaining=true,UsageRequirement=true,SellPrice=true}
-    local allowed={};for name in pairs(safe) do local value=types[name];if integer(value) then allowed[value]=true end end
-    for _,line in ipairs(data.lines) do
-        if not tableValue(line) or integer(line.type)==nil or not allowed[line.type] then return false,"unsupported-effect" end
-        for _,field in ipairs({"leftText","rightText"}) do
-            local value=line[field]
-            if not M.Readable(value) then return false,"restricted-tooltip" end
-            if type(value)=="string" then
-                for _,global in ipairs({"ITEM_RANDOM_ENCHANT","ITEM_SPELL_TRIGGER_ONUSE","ITEM_SPELL_TRIGGER_ONEQUIP","ITEM_SPELL_TRIGGER_ONPROC"}) do
-                    local prefix=text(_G[global]);if prefix and value:find(prefix,1,true) then return false,"unsupported-effect" end
-                end
-            end
-        end
-    end
-    return true
-end
-local function uniqueness(link)
-    local category,maximum=returns(C_Item and C_Item.GetItemUniqueness,link)
-    local single,_,count,id=returns(C_Item and C_Item.GetItemUniquenessByID,link)
-    if integer(category)==nil or integer(maximum)==nil or not M.Readable(single) or type(single)~="boolean"
-        or not M.Readable(count) or not M.Readable(id) then return end
-    if category>0 and maximum<1 or id~=nil and (integer(id)==nil or id~=category)
-        or count~=nil and (integer(count)==nil or category>0 and count~=maximum) then return end
-    return {category=category,maximum=maximum,single=single}
-end
-local function weapon(slot)
-    return slot=="INVTYPE_WEAPON" or slot=="INVTYPE_WEAPONMAINHAND" or slot=="INVTYPE_WEAPONOFFHAND"
-        or slot=="INVTYPE_2HWEAPON" or slot=="INVTYPE_RANGED" or slot=="INVTYPE_RANGEDRIGHT" or slot=="INVTYPE_THROWN"
-end
-function R:Remember(key,row)
-    if not self.cache[key] then
+function R:Remember(k,row)
+    if not self.cache[k] then
         if #self.order>=self.limit then
-            local first=table.remove(self.order,1);local old=self.cache[first]
-            if old and self.byID[old.itemID] then self.byID[old.itemID][first]=nil;if not next(self.byID[old.itemID]) then self.byID[old.itemID]=nil end end
-            self.cache[first],self.dirty[first]=nil,nil
+            local old=table.remove(self.order,1);local entry=self.cache[old]
+            if entry and self.byID[entry.itemID] then self.byID[entry.itemID][old]=nil;if not next(self.byID[entry.itemID]) then self.byID[entry.itemID]=nil end end
+            self.cache[old],self.dirty[old]=nil,nil
         end
-        self.order[#self.order+1]=key
+        self.order[#self.order+1]=k
     end
-    self.byID[row.itemID]=self.byID[row.itemID] or {};self.byID[row.itemID][key]=true
-    self.cache[key],self.dirty[key]=row,nil;return row
+    self.byID[row.itemID]=self.byID[row.itemID] or {};self.byID[row.itemID][k]=true
+    self.cache[k],self.dirty[k]=row,nil;return row
 end
-function R:Interested(id)
-    return M.QuestId(id) and (self.byID[id]~=nil or self.gearByID and self.gearByID[id]~=nil or self.usability and self.usability[id]~=nil) or false
+local function itemID(link)
+    return tonumber(link:match("item:(%d+):") or link:match("item:(%d+)|") or link:match("item:(%d+)$"))
 end
-local function sameItem(a,b)
-    for _,key in ipairs({"itemID","link","state","reason","slot","minimum","classID","subclassID","usable"}) do
-        if a[key]~=b[key] then return false end
-    end
-    for _,key in ipairs({"unique","stats"}) do
-        local first,second=a[key],b[key]
-        if first~=second then
-            if not tableValue(first) or not tableValue(second) then return false end
-            for name,value in pairs(first) do if second[name]~=value then return false end end
-            for name in pairs(second) do if first[name]==nil then return false end end
-        end
-    end
-    return true
-end
-local function equipmentStamp(row)
-    local parts={tostring(row.itemID),row.link,row.state,row.reason or "",row.slot or "",
-        tostring(row.minimum),tostring(row.classID),tostring(row.subclassID),tostring(row.usable)}
-    for _,name in ipairs({"unique","stats"}) do
-        local keys={};for key in pairs(row[name] or {}) do keys[#keys+1]=key end;table.sort(keys)
-        for _,key in ipairs(keys) do parts[#parts+1]=name..":"..key.."="..tostring(row[name][key]) end
-    end
-    local stamp=table.concat(parts,"\031");if #stamp<=8192 then return stamp end
-end
--- Item events are owned by the existing UI/character owners. Hidden delivery
--- marks retained observations dirty without reading APIs or scheduling work.
--- Visible delivery compares semantic data, so equal callbacks remain no-ops.
-function R:InvalidateItem(id,snapshot,visible)
-    id=M.QuestId(id);if not id then return false end
-    if visible==true and tableValue(snapshot) then self:UseContext(snapshot) end
-    local keys=self.byID[id] or {};local current,seen={},{}
-    local relevant=self.gearByID and self.gearByID[id]~=nil or self.usability and self.usability[id]~=nil or false
-    for key in pairs(keys) do
-        local row=self.cache[key]
-        if row and row.itemID==id then
-            self.dirty[key]=true;relevant=true
-            if visible==true and tableValue(snapshot) and key==cacheKey(row.link,snapshot,row.equipped) then current[#current+1]=row;seen[key]=true end
-        end
-    end
-    -- The coherent gear view owns at most19 retained records independently of
-    -- FIFO item admission. An evicted equipped record is still a dependency.
-    for _,row in pairs(self.gear or {}) do
-        if row.itemID==id and text(row.link) then
-            relevant=true
-            if visible==true and tableValue(snapshot) then
-                local key=cacheKey(row.link,snapshot,true)
-                if not seen[key] then self.dirty[key]=true;current[#current+1]=row;seen[key]=true end
-            end
-        end
-    end
-    if not relevant then return false end
-    local priorUse=self.usability and self.usability[id]
-    if priorUse then self.usabilityDirty[id]=true end
-    if visible~=true or not tableValue(snapshot) then
-        self.gearKey,self.gear,self.gearByID=nil,nil,nil;return false
-    end
-    local changed,forwarded=false,false
-    if priorUse then local fresh=self:Usable(id,snapshot);changed=priorUse.value~=fresh end
-    for _,prior in ipairs(current) do
-        local fresh=self:Item({itemID=prior.itemID,link=prior.link},snapshot,prior.equipped)
-        if not sameItem(prior,fresh) then
-            changed=true
-            if prior.equipped and N.Character and type(N.Character.EquipmentMetadata)=="function" then
-                local stillCurrent=false
-                for _,entry in pairs(snapshot.equipment or {}) do
-                    if entry.itemID==id and entry.link==prior.link then stillCurrent=true;break end
-                end
-                local stamp=stillCurrent and equipmentStamp(fresh)
-                if stamp and A.Call(N.Character.EquipmentMetadata,N.Character,id,stamp,snapshot.equipmentRevision)==true then forwarded=true end
-            end
-        end
-    end
-    if changed then self.gearKey,self.gear,self.gearByID=nil,nil,nil end
-    return changed,forwarded
-end
-local function modifiedReward(link)
-    local payload=link:match("item:([^|]+)")
-    if not payload then return true end
-    local fields={};for value in (payload..":"):gmatch("([^:]*):") do fields[#fields+1]=value end
-    -- Native generic GetItemInfo(itemID) is not exact quest-suffix authority.
-    -- Enchant/gems/suffix fields are retained for equipped gear, never borrowed
-    -- as the reward's known roll or best variant.
+local function modified(link)
+    local payload=link:match("item:([^|]+)");if not payload then return true end
+    local fields={};for v in (payload..":"):gmatch("([^:]*):") do fields[#fields+1]=v end
+    -- Generic item hydration cannot establish a quest's enchant/gem/suffix roll.
     for i=2,7 do if fields[i] and fields[i]~="" and tonumber(fields[i])~=0 then return true end end
     return false
 end
-function R:Item(meta,snapshot,equipped)
-    if not tableValue(snapshot) then return {state="unsupported",reason="context-invalid"} end
-    local id=tableValue(meta) and M.QuestId(meta.itemID);local link=tableValue(meta) and text(meta.link)
-    if not id or not link or #link>2048 or tonumber(link:match("item:(%d+)"))~=id then return {state="pending",reason="item-pending",itemID=id} end
-    equipped=M.Readable(equipped) and equipped==true
-    local level=tableValue(snapshot) and M.QuestId(snapshot.level)
-    self:UseContext(snapshot)
-    local key=cacheKey(link,snapshot,equipped)
-    local cached=self.cache[key]
-    if cached and not self.dirty[key] and cached.state~="pending" then
-        if cached.usable==nil or cached.usable==self:Usable(id,snapshot) then return cached end
-    end
-    local row={itemID=id,link=link,state="pending",reason="item-pending",equipped=equipped==true}
-    if not equipped and modifiedReward(link) then row.state,row.reason="unsupported","reward-variant-unconfirmed";return self:Remember(key,row) end
-    if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true then return self:Remember(key,row) end
-    local name,infoLink,_,_,minimum,_,_,_,slot,_,_,classID,subclassID,_,_,setID=returns(C_Item and C_Item.GetItemInfo,link)
-    if not text(name) or not text(infoLink) or not M.Readable(slot) or type(slot)~="string" then return self:Remember(key,row) end
-    if not equipped and modifiedReward(infoLink) then row.state,row.reason="unsupported","reward-variant-unconfirmed";return self:Remember(key,row) end
-    row.slot,row.minimum,row.classID,row.subclassID=slot,integer(minimum),integer(classID),integer(subclassID)
-    if slot=="" then row.state,row.reason="none",nil;return self:Remember(key,row) end
-    row.unique=uniqueness(link)
-    local use=self:Usable(id,snapshot)
-    row.usable=use
-    if row.minimum==nil or not level or row.classID==nil or row.subclassID==nil or type(use)~="boolean" then return self:Remember(key,row) end
-    if use==false or row.minimum>level then row.state,row.reason="blocked","cannot-equip";return self:Remember(key,row) end
-    row.state,row.reason="unsupported","uniqueness-unknown"
-    if not row.unique then return self:Remember(key,row) end
-    if not M.Readable(setID) or setID~=nil and (integer(setID)==nil or setID>0) then row.reason="set-effect";return self:Remember(key,row) end
-    local complete,reason=effectCheck(link)
-    if not complete then row.reason=reason;if reason=="tooltip-pending" then row.state="pending" end;return self:Remember(key,row) end
-    -- Native GetItemStats has no typed weapon-DPS/speed contract. Never rank a
-    -- sword's attributes while ignoring the damage of the sword it replaces.
-    if weapon(slot) then row.reason="weapon-damage-unknown";return self:Remember(key,row) end
-    local stats;stats,reason=R.Normalize(A.Call(C_Item and C_Item.GetItemStats,link))
-    if not stats then row.reason=reason;if reason=="stats-pending" then row.state="pending" end;return self:Remember(key,row) end
-    row.stats,row.state,row.reason=stats,"ready",nil
-    return self:Remember(key,row)
+local function uniqueness(link)
+    local category,max=values(C_Item and C_Item.GetItemUniqueness,link)
+    local single,_,count,id=values(C_Item and C_Item.GetItemUniquenessByID,link)
+    if int(category)==nil or int(max)==nil or not M.Readable(single) or type(single)~="boolean" or not M.Readable(count) or not M.Readable(id) then return end
+    if category>0 and max<1 or id~=nil and (int(id)==nil or id~=category) or count~=nil and (int(count)==nil or category>0 and count~=max) then return end
+    return {category=category,maximum=max,single=single}
 end
-function R:Gear(snapshot)
-    self:UseContext(snapshot)
-    local key=tostring(integer(snapshot.equipmentRevision))..":"..tostring(integer(snapshot.identityRevision))..":"..tostring(integer(snapshot.capabilityRevision))..":"..tostring(integer(snapshot.itemRevision))..":"..tostring((M.QuestId(snapshot.level)))..":"..(text(snapshot.guid) or "")
-    if self.gearKey==key and self.gear and not self.gearPending then return self.gear end
-    local gear={}
+function R:Item(meta,s,equipped)
+    if not tab(s) then return {state="unsupported",reason="context-invalid"} end
+    local id=tab(meta) and M.QuestId(meta.itemID);local link=tab(meta) and text(meta.link)
+    if not id or not link or #link>2048 or itemID(link)~=id then return {state="pending",reason="item-pending",itemID=id} end
+    self:UseContext(s);equipped=M.Readable(equipped) and equipped==true
+    local k=key(link,s,equipped);local old=self.cache[k]
+    if old and not self.dirty[k] and old.state~="pending" and (old.usable==nil or old.usable==self:Usable(id,s)) then return old end
+    local row={itemID=id,link=link,state="pending",reason="item-pending",equipped=equipped}
+    if not equipped and modified(link) then row.state,row.reason="unsupported","reward-variant-unconfirmed";return self:Remember(k,row) end
+    if A.Call(C_Item and C_Item.IsItemDataCachedByID,id)~=true then return self:Remember(k,row) end
+    local name,infoLink,_,level,minimum,_,_,_,slot,_,_,classID,subclassID=values(C_Item and C_Item.GetItemInfo,link)
+    if not text(name) or not text(infoLink) or itemID(infoLink)~=id or not M.Readable(slot) or type(slot)~="string" then return self:Remember(k,row) end
+    if not equipped and modified(infoLink) then row.state,row.reason="unsupported","reward-variant-unconfirmed";return self:Remember(k,row) end
+    row.slot,row.itemLevel,row.minimum,row.classID,row.subclassID=slot,M.Number(level) and level>0 and level<=2000 and level or nil,int(minimum),int(classID),int(subclassID)
+    if slot=="" or slot=="INVTYPE_BODY" or slot=="INVTYPE_TABARD" then
+        if equipped then row.unique=uniqueness(link) end
+        row.state,row.reason="none",nil;return self:Remember(k,row)
+    end
+    row.unique=uniqueness(link);row.usable=self:Usable(id,s)
+    if not row.itemLevel or row.minimum==nil or row.classID==nil or row.subclassID==nil or not M.QuestId(s.level) or type(row.usable)~="boolean" then return self:Remember(k,row) end
+    if not identity(s) then row.reason="identity-pending"
+    elseif row.usable==false or row.minimum>s.level then row.state,row.reason="blocked","cannot-equip"
+    elseif not row.unique then row.state,row.reason="unsupported","limits-unavailable"
+    else row.state,row.reason="ready",nil end
+    return self:Remember(k,row)
+end
+function R:Gear(s)
+    self:UseContext(s)
+    local current=context(s)..":"..tostring(int(s.equipmentRevision))..":"..tostring(int(s.itemRevision))
+    if self.gearKey==current and self.gear and not self.gearPending then return self.gear end
+    local gear,ids,pending={},{},false
     for slot=1,19 do
-        local entry=tableValue(snapshot.equipment) and snapshot.equipment[slot]
-        if tableValue(entry) and text(entry.state)=="empty" and tableValue(snapshot.emptySlots) and M.Readable(snapshot.emptySlots[slot]) and snapshot.emptySlots[slot]==true then
-            gear[slot]={state="empty",slotIndex=slot}
-        elseif tableValue(entry) then gear[slot]=self:Item(entry,snapshot,true)
+        local entry=tab(s.equipment) and s.equipment[slot]
+        if tab(entry) and text(entry.state)=="empty" and tab(s.emptySlots) and M.Readable(s.emptySlots[slot]) and s.emptySlots[slot]==true then gear[slot]={state="empty"}
+        elseif tab(entry) then gear[slot]=self:Item(entry,s,true)
         else gear[slot]={state="pending",reason="equipment-pending"} end
+        if gear[slot].itemID then ids[gear[slot].itemID]=true end
+        if gear[slot].state=="pending" then pending=true end
     end
-    local dependencies,pending={},false
-    for _,row in pairs(gear) do if row.itemID then dependencies[row.itemID]=true end;if row.state=="pending" then pending=true end end
-    self.gearPending=pending
-    self.gearKey,self.gear,self.gearByID=key,gear,dependencies;return gear
+    self.gear,self.gearKey,self.gearByID,self.gearPending=gear,current,ids,pending;return gear
 end
-
-local slots={INVTYPE_HEAD={1},INVTYPE_NECK={2},INVTYPE_SHOULDER={3},INVTYPE_CHEST={5},INVTYPE_ROBE={5},
-    INVTYPE_WAIST={6},INVTYPE_LEGS={7},INVTYPE_FEET={8},INVTYPE_WRIST={9},INVTYPE_HAND={10},INVTYPE_FINGER={11,12},
-    INVTYPE_TRINKET={13,14},INVTYPE_CLOAK={15},INVTYPE_WEAPON={16,17},INVTYPE_WEAPONMAINHAND={16},
-    INVTYPE_SHIELD={17},INVTYPE_HOLDABLE={17},INVTYPE_WEAPONOFFHAND={17},INVTYPE_2HWEAPON={16},
-    INVTYPE_RANGED={18},INVTYPE_RANGEDRIGHT={18},INVTYPE_THROWN={18},INVTYPE_RELIC={18}}
-local function score(row,style,slot)
-    if tableValue(row) and text(row.state)=="empty" then return 0 end
-    if not tableValue(row) or text(row.state)~="ready" or not tableValue(row.stats) then return end
-    if weapon(text(row.slot)) and (not M.Readable(row.damageKnown) or row.damageKnown~=true) then return end
-    local sum,count=0,0
-    for key,value in pairs(row.stats) do
-        count=count+1;if count>64 or not text(key) or not M.Number(value) or not M.Number(style.weights[key]) then return end
-        local weight=style.weights[key]
-        if key=="weaponDps" and slot==17 then weight=style.weights.offhandDps end
-        if not M.Number(weight) then return end
-        sum=sum+value*weight
+local fields={"itemID","link","state","reason","slot","itemLevel","minimum","classID","subclassID","usable"}
+local function same(a,b)
+    for _,field in ipairs(fields) do if a[field]~=b[field] then return false end end
+    for _,field in ipairs({"category","maximum","single"}) do if (a.unique and a.unique[field])~=(b.unique and b.unique[field]) then return false end end
+    return true
+end
+local function stamp(row)
+    local out={};for _,field in ipairs(fields) do out[#out+1]=field.."="..tostring(row[field]) end
+    for _,field in ipairs({"category","maximum","single"}) do out[#out+1]=field.."="..tostring(row.unique and row.unique[field]) end
+    local value=table.concat(out,"\031");if #value<=8192 then return value end
+end
+function R:Interested(id)
+    return M.QuestId(id) and (self.byID[id]~=nil or self.gearByID and self.gearByID[id]~=nil or self.useCache and self.useCache[id]~=nil) or false
+end
+-- Existing event owners deliver item changes. Hidden delivery never hydrates.
+-- A central equipment notification owns the resulting coherent search refresh.
+function R:InvalidateItem(id,s,visible)
+    id=M.QuestId(id);if not id then return false end
+    if visible==true and tab(s) then self:UseContext(s) end
+    local current,seen={},{};local relevant=self.gearByID and self.gearByID[id] or self.useCache and self.useCache[id] or false
+    for k in pairs(self.byID[id] or {}) do
+        local row=self.cache[k]
+        if row then
+            self.dirty[k]=true;relevant=true
+            if visible==true and tab(s) and k==key(row.link,s,row.equipped) then current[#current+1]=row;seen[k]=true end
+        end
     end
-    return M.Number(sum) and sum or nil
+    for _,row in pairs(self.gear or {}) do
+        if row.itemID==id and text(row.link) then
+            relevant=true
+            if visible==true and tab(s) then local k=key(row.link,s,true);if not seen[k] then self.dirty[k]=true;current[#current+1]=row;seen[k]=true end end
+        end
+    end
+    if not relevant then return false end
+    local priorUse=self.useCache and self.useCache[id];if priorUse then self.useDirty[id]=true end
+    if visible~=true or not tab(s) then self.gear,self.gearKey,self.gearByID=nil,nil,nil;return false end
+    local changed,forwarded=false,false
+    if priorUse then changed=priorUse.value~=self:Usable(id,s) end
+    for _,prior in ipairs(current) do
+        local fresh=self:Item({itemID=prior.itemID,link=prior.link},s,prior.equipped)
+        if not same(prior,fresh) then
+            changed=true
+            if prior.equipped and N.Character and type(N.Character.EquipmentMetadata)=="function" then
+                local exact=false;for _,entry in pairs(s.equipment or {}) do if entry.itemID==id and entry.link==prior.link then exact=true;break end end
+                local value=exact and stamp(fresh)
+                if value and A.Call(N.Character.EquipmentMetadata,N.Character,id,value,s.equipmentRevision)==true then forwarded=true end
+            end
+        end
+    end
+    if changed then self.gear,self.gearKey,self.gearByID=nil,nil,nil end
+    return changed,forwarded
+end
+local slots={INVTYPE_HEAD={1},INVTYPE_NECK={2},INVTYPE_SHOULDER={3},INVTYPE_CHEST={5},INVTYPE_ROBE={5},INVTYPE_WAIST={6},INVTYPE_LEGS={7},INVTYPE_FEET={8},INVTYPE_WRIST={9},INVTYPE_HAND={10},INVTYPE_FINGER={11,12},INVTYPE_TRINKET={13,14},INVTYPE_CLOAK={15},INVTYPE_WEAPON={16,17},INVTYPE_WEAPONMAINHAND={16},INVTYPE_SHIELD={17},INVTYPE_HOLDABLE={17},INVTYPE_WEAPONOFFHAND={17},INVTYPE_2HWEAPON={16},INVTYPE_RANGED={18},INVTYPE_RANGEDRIGHT={18},INVTYPE_THROWN={18},INVTYPE_RELIC={18}}
+local function oneHand(kind)return kind=="INVTYPE_WEAPON" or kind=="INVTYPE_WEAPONMAINHAND" or kind=="INVTYPE_WEAPONOFFHAND" end
+local function level(row)
+    if not tab(row) then return end
+    if text(row.state)=="empty" then return 0 end
+    if text(row.state)~="pending" and M.Number(row.itemLevel) and row.itemLevel>0 and row.itemLevel<=2000 then return row.itemLevel end
 end
 local function legal(candidate,gear,replaced,removed)
-    local u=candidate.unique;if not tableValue(u) then return nil end
-    if integer(u.category)==nil or integer(u.maximum)==nil or not M.Readable(u.single) or type(u.single)~="boolean"
-        or u.category>0 and u.maximum<1 then return nil end
-    if u.category==0 and u.single==false then return true end
-    local count,sameID=1,1
+    local u=candidate.unique
+    if not tab(u) or int(u.category)==nil or int(u.maximum)==nil or not M.Readable(u.single) or type(u.single)~="boolean" or u.category>0 and u.maximum<1 then return end
+    if u.category==0 and not u.single then return true end
+    local count,duplicates=1,1
     for slot=1,19 do
         if slot~=replaced and slot~=removed then
-            local row=gear[slot]
-            if not tableValue(row) then return nil end
+            local row=gear[slot];if not tab(row) then return end
             if text(row.state)~="empty" then
-                if not M.QuestId(row.itemID) then return nil end
-                if row.itemID==candidate.itemID then sameID=sameID+1 end
-                if u.category>0 then
-                    if not tableValue(row.unique) or integer(row.unique.category)==nil then return nil end
-                    if row.unique.category==u.category then count=count+1 end
-                end
+                if not M.QuestId(row.itemID) then return end
+                if row.itemID==candidate.itemID then duplicates=duplicates+1 end
+                if u.category>0 then if not tab(row.unique) or int(row.unique.category)==nil then return end;if row.unique.category==u.category then count=count+1 end end
             end
         end
     end
-    return (not u.single or sameID<=1) and (u.category==0 or count<=u.maximum)
+    return (not u.single or duplicates<=1) and (u.category==0 or count<=u.maximum)
 end
--- Pure comparison entry point: normalized records only, no native calls.
-function R.Compare(candidate,gear,style,context)
-    if not tableValue(style) or not tableValue(style.weights) then return result("choose-style","choose-style") end
-    if not tableValue(candidate) then return result("unsupported","item-pending") end
-    if text(candidate.state)~="ready" then
-        return result(text(candidate.state)=="pending" and "pending" or "unsupported",text(candidate.reason) or "item-pending")
-    end
-    if not tableValue(gear) or not M.QuestId(candidate.itemID) then return result("unsupported","context-invalid") end
-    if not M.Readable(candidate.usable) or candidate.usable~=true then return result("unsupported","cannot-equip") end
+local function dual(gear,s)
+    local value;if tab(s) and tab(s.capabilities) then value=s.capabilities.dualWield end
+    if M.Readable(value) and type(value)=="boolean" then return value end
+    -- The actual equipped pair proves a currently legal dual-wield outfit.
+    if tab(gear[16]) and tab(gear[17]) and oneHand(text(gear[16].slot)) and oneHand(text(gear[17].slot)) then return true end
+end
+local function hands(gear)
+    local main,off=gear[16],gear[17];local a,b=level(main),level(off)
+    if a==nil or b==nil then return end
+    if a>0 and text(main.slot)~="INVTYPE_2HWEAPON" and not oneHand(text(main.slot)) then return end
+    if b>0 and not oneHand(text(off.slot)) and text(off.slot)~="INVTYPE_SHIELD" and text(off.slot)~="INVTYPE_HOLDABLE" then return end
+    if a>0 and text(main.slot)=="INVTYPE_2HWEAPON" and b>0 then return end
+    local count=(a>0 and 1 or 0)+(b>0 and 1 or 0)
+    return count>0 and (a+b)/count or 0
+end
+-- Pure comparison: no API reads, bag substitutions, item effects or stat weights.
+function R.Compare(candidate,gear,s)
+    if not identity(s) then return result("unsupported","identity-pending") end
+    if not tab(candidate) or not tab(gear) or not M.QuestId(candidate.itemID) then return result("unsupported","context-invalid") end
+    if text(candidate.state)~="ready" then return result(text(candidate.state)=="pending" and "pending" or "unsupported",text(candidate.reason) or "item-pending") end
+    if not M.Readable(candidate.usable) or candidate.usable~=true or not level(candidate) then return result("unsupported","cannot-equip") end
     local kind=text(candidate.slot);local targets=slots[kind];if not targets then return result("none","not-equipment") end
-    if kind=="INVTYPE_2HWEAPON" and (not M.Readable(style.requiresShield) or style.requiresShield==true) then return result("unsupported","shield-style") end
     local best,unknown
     for _,slot in ipairs(targets) do
-        local allowed=true
-        if slot==17 then
+        local allowed,before,removed=true,nil,nil
+        if kind=="INVTYPE_2HWEAPON" then before=hands(gear);removed=17
+        elseif slot==16 then
+            local main,off=gear[16],gear[17]
+            if not tab(main) or text(main.state)=="pending" or not tab(off) or text(off.state)=="pending" then allowed=nil
+            elseif text(main.state)~="empty" and not oneHand(text(main.slot)) then allowed=nil
+            elseif text(off.state)~="empty" and not oneHand(text(off.slot)) and text(off.slot)~="INVTYPE_SHIELD" and text(off.slot)~="INVTYPE_HOLDABLE" then allowed=nil end
+            before=level(main)
+        elseif slot==17 then
             local main=gear[16]
-            if not tableValue(main) or not text(main.state) or text(main.state)=="pending" or not text(main.slot) and text(main.state)~="empty" then allowed=nil
-            elseif text(main.state)=="empty" or text(main.slot)=="INVTYPE_2HWEAPON" then allowed=false end
-            if allowed and (kind=="INVTYPE_WEAPON" or kind=="INVTYPE_WEAPONOFFHAND") then
-                local dual=tableValue(context) and tableValue(context.capabilities) and context.capabilities.dualWield
-                if not M.Readable(dual) or dual~=true then allowed=nil end
+            if not tab(main) or text(main.state)=="pending" then allowed=nil
+            elseif text(main.slot)=="INVTYPE_2HWEAPON" then allowed=false
+            elseif text(main.state)~="empty" and not oneHand(text(main.slot)) then allowed=nil end
+            if allowed and oneHand(kind) then
+                local capable=dual(gear,s);if capable==false then allowed=false elseif capable~=true or text(main.state)=="empty" then allowed=nil end
             end
-            if allowed and style.requiresShield==true and kind~="INVTYPE_SHIELD" then allowed=false end
-        end
-        local removed=kind=="INVTYPE_2HWEAPON" and 17 or nil
+            before=level(gear[17])
+        else before=level(gear[slot]) end
         if allowed then allowed=legal(candidate,gear,slot,removed) end
         if allowed==nil then unknown=true
         elseif allowed then
-            local before=score(gear[slot],style,slot);local after=score(candidate,style,slot)
-            if removed then local off=score(gear[removed],style,removed);before=before and off and before+off end
-            if before==nil or after==nil then unknown=true
-            else local gain=after-before;if best==nil or gain>best then best=gain end end
+            if before==nil then unknown=true else local gain=candidate.itemLevel-before;if best==nil or gain>best then best=gain end end
         end
     end
     if unknown then return result("unsupported","comparison-incomplete") end
@@ -389,41 +249,31 @@ function R.Compare(candidate,gear,style,context)
     if math.abs(best)<.000001 then best=0 end
     return result("ready",nil,best,candidate.itemID)
 end
-local function filterMatch(kind,filter,snapshot)
+local function matches(kind,filter,s)
     if not filter or filter=="ALL" or not kind then return true end
-    if filter=="MISSING" then
-        for _,slot in ipairs(slots[kind] or {}) do
-            if tableValue(snapshot.emptySlots) and M.Readable(snapshot.emptySlots[slot]) and snapshot.emptySlots[slot]==true then return true end
-        end
-        return false
-    end
+    if filter=="MISSING" then for _,slot in ipairs(slots[kind] or {}) do if tab(s.emptySlots) and M.Readable(s.emptySlots[slot]) and s.emptySlots[slot]==true then return true end end;return false end
     if filter=="CHEST" then return kind=="INVTYPE_CHEST" or kind=="INVTYPE_ROBE" end
     if filter=="WEAPON" then return kind=="INVTYPE_WEAPON" or kind=="INVTYPE_WEAPONMAINHAND" or kind=="INVTYPE_2HWEAPON" end
     if filter=="OFFHAND" then return kind=="INVTYPE_SHIELD" or kind=="INVTYPE_HOLDABLE" or kind=="INVTYPE_WEAPONOFFHAND" end
     if filter=="RANGED" then return kind=="INVTYPE_RANGED" or kind=="INVTYPE_RANGEDRIGHT" or kind=="INVTYPE_THROWN" end
     return kind==filter
 end
-function R:Quest(items,snapshot,style,slotFilter)
-    if not style then return result("choose-style","choose-style") end
-    if not tableValue(snapshot) or not sequence(items,256) then return result("unsupported","context-invalid") end
-    slotFilter=text(slotFilter)
-    local gear=self:Gear(snapshot);local best,unknown,seen=nil,nil,{}
+function R:Quest(items,s,slotFilter)
+    if not tab(s) or not sequence(items,256) then return result("unsupported","context-invalid") end
+    local gear=self:Gear(s);local best,unknown,seen=nil,nil,{};slotFilter=text(slotFilter)
     for _,meta in ipairs(items) do
-        if tableValue(meta) then
+        if tab(meta) then
             local identity=text(meta.link) or M.QuestId(meta.itemID)
             if identity and not seen[identity] then
-                seen[identity]=true
-                local item=self:Item(meta,snapshot)
-                if item.state~="none" and item.state~="blocked" and filterMatch(text(item.slot) or text(meta.slot),slotFilter,snapshot) then
-                    local comparison=R.Compare(item,gear,style,snapshot)
-                    if comparison.state=="ready" then
-                        if not best or comparison.gain>best.gain or comparison.gain==best.gain and comparison.itemID<best.itemID then best=comparison end
-                    elseif not unknown or comparison.state=="pending" then unknown=comparison end
+                seen[identity]=true;local item=self:Item(meta,s)
+                if item.state~="none" and item.state~="blocked" and matches(text(item.slot) or text(meta.slot),slotFilter,s) then
+                    local rating=R.Compare(item,gear,s)
+                    if rating.state=="ready" then if not best or rating.gain>best.gain or rating.gain==best.gain and rating.itemID<best.itemID then best=rating end
+                    elseif not unknown or rating.state=="pending" then unknown=rating end
                 end
             elseif not identity then unknown=result("unsupported","item-invalid") end
         else unknown=result("unsupported","item-invalid") end
     end
-    -- A partial best-of-choice claim is misleading. One unresolved equipment
-    -- option keeps the quest unranked; no amounts/quantities/groups are summed.
+    -- Best single legal item: quantities and mutually exclusive choices aren't summed.
     return unknown or best or result("none","no-comparable-equipment")
 end

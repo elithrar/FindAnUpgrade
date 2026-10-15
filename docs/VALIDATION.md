@@ -1,12 +1,40 @@
 # Validation
 
-FindAnUpgrade **0.1.8** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.9** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-## Current sidebar, constraints and rename review, 0.1.8
+## Current item-level heuristic, 0.1.9
+
+The user's simplified direction supersedes the stat-weight system. Biggest
+upgrade now means a transparent usable-slot/item-level estimate. It has no
+specialization weights or scoring-style preferences and makes no prediction
+of damage, healing or practical performance. Equipment legality, paired slots,
+hand configuration and unknown data retain explicit guards.
+
+`UPGRADE-RANKING-DESIGN.md` describes the current contract. Independent review in
+[HEURISTIC-REVIEW.md](HEURISTIC-REVIEW.md) passed 2,328 independent comparison
+cases and six registered-event scenarios, including bounded-cache overflow,
+zero-work hidden events and equal-metadata no-ops. The current complete verifier
+passes all 17 commands, 503 Lua 5.1 scenarios across 27 suites and 168 Python tests.
+
+[UPDATE-INSTALLER-REVIEW.md](UPDATE-INSTALLER-REVIEW.md) records 28 successful
+independent PowerShell success/failure probes. The updater requires an increased
+version, verified exact source/build/payload, a closed matching client and an
+unchanged prior installation; it restores the payload and receipt on failure.
+It does not write SavedVariables or other addons.
+
+The two high-resolution sidebar PNGs were saved to native Library before patch
+installation. They execute the current constructor/row/menu code against verified
+quest/item fixtures and reconstruct pixels with Expressway. Their illustrative
+character context, numeric font and several controls are explicitly limited in
+[MOCK-RECONSTRUCTION.md](MOCK-RECONSTRUCTION.md). They are not game captures or
+live rendering verification. Exact-commit build, CI and installation receipts in
+`dist/` establish the final delivered bytes independently of these images.
+
+## Historical sidebar, constraints and rename review, 0.1.8
 
 `plan.md` records the accepted sidebar, identity, scope and ranking behavior.
 `SIDEBAR-NATIVE-CONTRACTS.md`, `SIDEBAR-VISUAL-REVIEW.md`,

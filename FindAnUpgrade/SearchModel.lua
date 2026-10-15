@@ -120,7 +120,6 @@ function S:Query(filter)
     local maximum=M.Number(filter.maximum) and filter.maximum or 200
     local slotFilter=filter.slot or "ALL"
     local sort=filter.sort or "UPGRADE"
-    local style=N.Ranking and N.Ranking:Style(context,N.Core.profile and N.Core.profile.scoringStyles)
     local status=scope=="SAME_ZONE" and not zoneName and "Zone unavailable — choose Level range" or nil
     if not M.Number(context.level) or context.level<1 then return out,"Player level unavailable" end
     for _,record in ipairs(N.Catalog.order) do
@@ -161,7 +160,7 @@ function S:Query(filter)
                                 end
                             end
                             if match and (#items>0 or slotFilter=="ALL" and self:Benefit(record)) then
-                                local ranking=(sort=="UPGRADE" or sort=="BIGGEST") and N.Ranking and N.Ranking:Quest(items,context,style,slotFilter)
+                                local ranking=(sort=="UPGRADE" or sort=="BIGGEST") and N.Ranking and N.Ranking:Quest(items,context,slotFilter)
                                     or {tier=2,state="unsupported"}
                                 out[#out+1]={id=record.id,title=record.title,level=record.level,items=items,evidence=note,
                                     fit=math.abs(record.level-context.level),category=category and category.name,

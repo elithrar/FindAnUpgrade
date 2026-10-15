@@ -43,20 +43,20 @@ test("header grid stays disjoint at narrow viewport and fractional scale without
         local scroll=rect(S.scroll);assert(math.abs(scroll.h-S:ViewportHeight())<.01)
     end
 end)
-test("native sort icon owns only menu artwork and exposes explicit scoring style",function()
+test("native sort icon exposes a minimal item level estimate menu",function()
     local N,S=open();assert(S.sort.template==nil and S.sort.Text==nil and S.sort:GetWidth()==28 and S.sort:GetHeight()==26)
     assert(S.sort:GetNormalTexture().atlas=="bags-button-autosort-up" and S.sort:GetPushedTexture().atlas=="bags-button-autosort-down")
     local highlight=S.sort:GetHighlightTexture();assert(highlight.texture=="Interface\\Buttons\\ButtonHilight-Square" and highlight.blendMode=="ADD" and highlight:GetWidth()==24 and highlight:GetHeight()==23)
     local menu=S.sort:GenerateMenu();assert(menu.entries[1].label=="Biggest upgrade" and menu.entries[1].checked())
-    assert(menu.titles[2]:find("weapons and effects not rated",1,true))
+    assert(#menu.entries==4 and menu.titles[2]=="Item-level estimate" and menu.titles[3]=="Item level and usable slots; not a performance score")
     local owner=W.Object();local source={key={},owner=owner,surface="worldmap",rows={{id=9,availabilityCheck=function()return "native-map-available"end}},valid=function()return true end,over=function()return false end}
     N.Sources:Set(source);local proof=N.Sources.current
-    local style=menu.entries[5];assert(style and style.enabled and not style.checked());style.callback()
-    assert(style.checked() and N.Core.profile.scoringStyles[N.Character.snapshot.guid..":1"]==style.value)
+    menu.entries[2].callback();assert(S.filter.sort=="FIT" and menu.entries[2].checked())
     assert(N.Sources.current==proof and proof==source)
-    C_SpecializationInfo.GetActiveSpecGroup=function()return 2 end;N.Character:Mark("identity");N.Character.events:Fire("OnUpdate")
-    style.callback();assert(N.Core.profile.scoringStyles[N.Character.snapshot.guid..":2"]==style.value)
+    for _,title in ipairs(menu.titles)do assert(not title:find("style",1,true))end
+    assert(not S.count:GetText():find("style",1,true))
 end)
+
 test("scope and dungeon controls bind the exact query inputs without changing level window",function()
     local _,S=open();local lo,hi=S.filter.minimum,S.filter.maximum
     local menu=S.scope:GenerateMenu();assert(menu.entries[1].checked() and menu.entries[2].label=="Level range")

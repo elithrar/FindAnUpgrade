@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.8" }; N.Core = C
+local C = { version = "0.1.9" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -22,7 +22,7 @@ function C:Change(key, value)
     if self.readOnly then return false end
     local saved = M.Copy(self.profile); saved[key] = value
     self.profile = M.Load(saved); FindAnUpgradeDB = self.profile
-    if key~="scoringStyles" then N.Sources:Clear() end
+    N.Sources:Clear()
     self:Refresh()
     if N.Options.frame then N.Options:Refresh() end
     N.Launcher:Refresh()

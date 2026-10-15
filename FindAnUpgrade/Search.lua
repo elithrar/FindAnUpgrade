@@ -252,28 +252,12 @@ function S:SortButton(parent)
     d:SetupMenu(function(_,root)
         if self.inspector then self.inspector:ClearItem() end;root:SetScrollMode(260);root:AddMenuReleasedCallback(function()self:Wake()end)
         root:CreateTitle("Sort by")
-        root:CreateTitle("Estimated stat gain; weapons and effects not rated")
+        root:CreateTitle("Item-level estimate")
+        root:CreateTitle("Item level and usable slots; not a performance score")
         for _,entry in ipairs({{"UPGRADE","Biggest upgrade"},{"FIT","Level fit"},{"LEVEL","Quest level"},{"TITLE","Quest title"}})do
             local key,label=entry[1],entry[2]
             local row=root:CreateRadio(label,function(value)return self.filter.sort==value end,function(value)self.filter.sort=value;self:Changed(true)end,key)
             self:MenuFont(row)
-        end
-        local snapshot=self:CharacterSnapshot()
-        local _,saveKey=N.Ranking:Style(snapshot,N.Core.profile.scoringStyles)
-        local styles=N.Ranking:Styles(snapshot)
-        if #styles>1 then
-            root:CreateTitle("Scoring style")
-            for _,style in ipairs(styles)do
-                local row=root:CreateRadio(style.label,function(value)local active=N.Ranking:Style(self:CharacterSnapshot(),N.Core.profile.scoringStyles);return active and active.id==value or false end,function(value)
-                    local current=self:CharacterSnapshot();local _,key=N.Ranking:Style(current,N.Core.profile.scoringStyles)
-                    if not key then return end
-                    local allowed=false;for _,entry in ipairs(N.Ranking:Styles(current))do if entry.id==value then allowed=true;break end end
-                    if not allowed then return end
-                    local preferences=M.Copy(N.Core.profile.scoringStyles);preferences[key]=value
-                    N.Core:Change("scoringStyles",preferences);self:Changed(true)
-                end,style.id)
-                self:MenuFont(row);row:SetEnabled(saveKey~=nil and not N.Core.readOnly)
-            end
         end
     end)
     d:HookScript("OnMouseDown",function()self:CommitRange(true);self.search:ClearFocus();self.minimumInput:ClearFocus();self.maximumInput:ClearFocus()end)
@@ -475,12 +459,8 @@ function S:Refresh()
         local snapshot=self:CharacterSnapshot();if snapshot.zoneName then count=count.." - "..snapshot.zoneName end
     end
     if self.filter.sort=="UPGRADE" then
-        local snapshot=self:CharacterSnapshot();local style,key=N.Ranking:Style(snapshot,N.Core.profile.scoringStyles)
-        if not style then count=count..(key and #N.Ranking:Styles(snapshot)>1 and "\nChoose a scoring style in Sort" or "\nNot rated")
-        else
-            local unrated=0;for _,row in ipairs(self.results)do if row.ranking and row.ranking.state~="ready" then unrated=unrated+1 end end
-            if unrated>0 then count=count.."\n"..unrated.." not rated"end
-        end
+        local unrated=0;for _,row in ipairs(self.results)do if row.ranking and row.ranking.state~="ready" then unrated=unrated+1 end end
+        if unrated>0 then count=count.."\n"..unrated.." not rated"end
     end
     local empty="No matching quest rewards. Try a wider level range or another slot."
     if N.Catalog.ids and not N.Catalog.done then empty="Loading quests."

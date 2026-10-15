@@ -8,8 +8,7 @@ M.presets = {
 M.defaults = { version = 3, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
     accents = true, dialogTint = true, rewards = true, scale = 1,
-    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right", scoringStyles = {} }
-M.scoringStyles={MELEE=true,RANGED=true,CASTER=true,HEALER=true,TANK=true,BEAR=true}
+    launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right" }
 
 function M.Readable(value)
     if not issecretvalue then return true end
@@ -47,14 +46,6 @@ function M.Load(saved)
     if M.Number(saved.launcherAngle) then profile.launcherAngle=saved.launcherAngle%360 end
     if M.Readable(saved.previewLayout) and (saved.previewLayout=="tooltip" or saved.previewLayout=="inspector") then profile.previewLayout=saved.previewLayout end
     if M.Readable(saved.inspectionPosition) and (saved.inspectionPosition=="right" or saved.inspectionPosition=="tooltip") then profile.inspectionPosition=saved.inspectionPosition end
-    if M.Readable(saved.scoringStyles) and type(saved.scoringStyles)=="table" then
-        local count=0
-        for key,value in pairs(saved.scoringStyles) do
-            if M.Text(key) and #key<=128 and M.Text(value) and M.scoringStyles[value] and count<128 then
-                profile.scoringStyles[key]=value; count=count+1
-            end
-        end
-    end
     return profile, false
 end
 function M.Status(id)
