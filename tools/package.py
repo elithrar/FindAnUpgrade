@@ -7,12 +7,12 @@ sys.path.insert(0, str(ROOT / ".work/pydeps"))
 from lupa.lua51 import LuaRuntime
 
 SHIPPED = {
-    "FindAnUpgrade.toc", "Model.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
+    "FindAnUpgrade.toc", "Model.lua", "Shortlist.lua", "Copy.lua", "Chains.lua", "SearchViews.lua", "Data/Quests.lua", "Adapter.lua", "UI.lua",
     "Options.lua", "Core.lua", "README.md", "NOTICES.md", "XPISLAND-LICENSE.txt",
     "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "LICENSE",
     "Catalog.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Character.lua", "Ranking.lua", "Data/Catalog.lua", "Data/ATT-LICENSE.txt",
 }
-RUNTIME = ["Model.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "Character.lua", "UI.lua", "Rewards.lua", "Providers.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "Catalog.lua", "Ranking.lua", "SearchModel.lua", "Search.lua", "Launcher.lua", "Options.lua", "Core.lua"]
+RUNTIME = ["Model.lua", "Shortlist.lua", "Data/Quests.lua", "Data/Catalog.lua", "Adapter.lua", "Character.lua", "UI.lua", "Copy.lua", "Rewards.lua", "Providers.lua", "Chains.lua", "Questie.lua", "Sources.lua", "Stack.lua", "NativeTooltip.lua", "Hover.lua", "QuestState.lua", "Catalog.lua", "Ranking.lua", "SearchModel.lua", "Search.lua", "SearchViews.lua", "Launcher.lua", "Options.lua", "Core.lua"]
 SOURCE_DIRS = ["FindAnUpgrade", "data", "docs", "tests", "tools", ".github"]
 SOURCE_ROOT = ["AGENTS.md", "README.md", "plan.md", "LICENSE", ".gitignore", ".gitattributes"]
 ATT_LICENSE_SHA256 = "955281b9174e0f66b08c8e83d31e0f38b2fcaa247ca3af92d1723d81a13cddfb"
@@ -29,7 +29,7 @@ def validate(root=ROOT):
         match=re.fullmatch(r"##\s*([^:]+):\s*(.*)",line)
         if match: metadata.setdefault(match[1].strip().lower(),[]).append(match[2].strip())
     if metadata.get("interface")!=["16001"] or any(key.startswith("interface-") for key in metadata): raise ValueError("Wrong or duplicate supported interface")
-    if metadata.get("savedvariables")!=["FindAnUpgradeDB, QuestBriefDB"] or "savedvariablespercharacter" in metadata: raise ValueError("SavedVariables ownership changed")
+    if metadata.get("savedvariables")!=["FindAnUpgradeDB, QuestBriefDB"] or metadata.get("savedvariablespercharacter")!=["FindAnUpgradeCharacterDB"]: raise ValueError("SavedVariables ownership changed")
     entries = [line for line in toc.splitlines() if line and not line.startswith("#")]
     if entries != RUNTIME: raise ValueError("Incorrect TOC prerequisites/load order")
     version = re.search(r"^## Version: (\d+\.\d+\.\d+)$", toc, re.M)

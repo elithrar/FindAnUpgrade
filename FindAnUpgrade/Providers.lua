@@ -92,7 +92,7 @@ function P.Availability(row,context)
     if current.disabled==true then return state("blocked",nil,"native-session","Quest disabled for this session") end
     if proof=="native-available" then return state("available","Available","native-gossip") end
     local complete,repeatable=current.completed,current.repeatable
-    if complete==true and repeatable~=true then return state("completed","Completed","native-history") end
+    if complete==true and repeatable==false then return state("completed","Completed","native-history") end
     -- A fresh native log or gossip offer describes this player's actual quest.
     -- A map line or optional marker is less specific and must pass constraints.
     context=context or P.Context()
@@ -116,47 +116,7 @@ function P.Availability(row,context)
     return minimum or offeredState(proof,active) or chain or state("unknown",complete==true and repeatable==true and "Repeatable" or nil,complete==true and "native-history" or nil)
 end
 function P.ChainState(source)
-    local group,single=source.prerequisites,source.prerequisiteAlternatives
-    local list=single or group
-    if list~=nil and (not M.Readable(list) or type(list)~="table" or #list>128) then
-        return state("unknown","Chain requirements unavailable","recorded-chain")
-    end
-    if M.Readable(list) and type(list)=="table" and #list>0 and #list<=128 then
-        local done,unknown,missing,seen=0,0,{},{}
-        for _,previousID in ipairs(list) do
-            previousID=M.QuestId(previousID)
-            if not previousID or seen[previousID] then return state("unknown","Chain requirements unavailable","recorded-chain") end
-            seen[previousID]=true
-            local previous=previousID and P.Source(previousID)
-            local completed=previousID and facts(previousID).completed
-            -- A breadcrumb or an unverified alternate link cannot be a hard gate.
-            if completed==true then done=done+1
-            elseif not previousID or completed==nil then unknown=unknown+1
-            else
-                local alternatives=previous and previous.exclusive
-                local alternate=false
-                if previous and previous.exclusiveVerified==true and M.Readable(alternatives) and type(alternatives)=="table" and #alternatives<=128 then
-                    for _,other in ipairs(alternatives) do if M.QuestId(other) and facts(other).completed==true then alternate=true end end
-                end
-                if alternate then done=done+1
-                elseif previous and previous.isBreadcrumb==true then unknown=unknown+1
-                else missing[#missing+1]={id=previousID,title=previous and previous.title} end
-            end
-        end
-        local required=single and 1 or source.prerequisiteCount or #list
-        if not M.Number(required) or required~=math.floor(required) or required<1 or required>#list then
-            return state("unknown","Chain requirements unavailable","recorded-chain")
-        end
-        if done<required then
-            local names={}
-            for i=1,math.min(2,#missing) do names[#names+1]=missing[i].title or ("Quest "..missing[i].id) end
-            if #missing>2 then names[#names+1]="+"..(#missing-2) end
-            if source.prerequisitesVerified==true and done+unknown<required then
-                return state("blocked","Requires "..table.concat(names,", "),"verified-prerequisite","Prerequisite incomplete",missing)
-            end
-            return state("unknown",#names>0 and "Quest chain: "..table.concat(names,", ") or "Chain requirements unavailable","recorded-chain","Recorded links may include breadcrumbs or alternate paths",missing)
-        end
-    end
+    return N.Chains and N.Chains:State(source)
 end
 
 function P.RequiresNativeProof(source)

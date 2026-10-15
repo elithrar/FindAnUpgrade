@@ -58,7 +58,7 @@ test("unknown player class and race cannot fabricate rejection",function()
 end)
 test("unfulfilled authored chain links name exact quests without becoming hard server gates",function()
     local N,source=setup(); source.prerequisites={40002}; source.eligibilityUnknown=true
-    local rows=N.Providers.ForNPC(54); assert(#rows==1 and rows[1].availability.state=="unknown" and rows[1].evidence=="Quest chain: Earlier quest")
+    local rows=N.Providers.ForNPC(54); assert(#rows==1 and rows[1].availability.state=="unknown" and rows[1].evidence==nil)
     assert(rows[1].availability.requirements[1].id==40002)
 end)
 test("completed chain links do not fabricate Available",function()
@@ -72,7 +72,7 @@ end)
 test("group thresholds count alternatives once and never silently assume all-of",function()
     local N,source=setup(); source.prerequisites={40002,40003}; source.prerequisiteCount=1; W.done[40003]=true
     local value=N.Providers.Availability({id=40001,source=source}); assert(value.state=="unknown" and value.label==nil)
-    source.prerequisiteCount=2; value=N.Providers.Availability({id=40001,source=source}); assert(value.label=="Quest chain: Earlier quest")
+    source.prerequisiteCount=2; value=N.Providers.Availability({id=40001,source=source}); assert(value.label==nil)
 end)
 test("verified hard prerequisites may exclude while unverified links may not",function()
     local N,source=setup(); source.prerequisites={40002}; source.prerequisitesVerified=true

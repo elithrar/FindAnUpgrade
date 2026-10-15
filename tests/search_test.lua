@@ -299,7 +299,7 @@ test("mixed old row heights settle newly visible third pass rows and final geome
     end
     local filled={};local fill=S.Fill;S.Fill=function(self,card,row)filled[row.id]=true;return fill(self,card,row)end
     S.results=rows;S.expanded[3]=true;S.heights={[1]=250,[2]=350,[3]=190,[4]=149,[5]=105,[6]=193,[7]=105,[8]=149}
-    S.frame:SetSize(560,400);S:LayoutResults();S:Scroll(0)
+    S.frame:SetSize(560,440);S:LayoutResults();S:Scroll(0)
     assert(filled[3] and S.heights[1]<105 and S.heights[2]<105 and S.heights[3]>S.heights[2])
     local y=0;for i,row in ipairs(rows)do assert(S.positions[i]==y);y=y+S.heights[row.id]+5 end
     assert(S.contentHeight==y and S.child:GetHeight()==y and S.maximum==y-S:ViewportHeight())

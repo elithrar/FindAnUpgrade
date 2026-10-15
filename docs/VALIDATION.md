@@ -1,10 +1,32 @@
 # Validation
 
-FindAnUpgrade **0.1.11** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.12** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
+
+## Shortlist, chains and comparisons, 0.1.12
+
+The approved iteration adds per-character shortlist storage, Quests/Shortlist
+navigation using the shared Options tab constructor, bounded grouped chain
+disclosure, an owned slot command and guarded deferred native-copy dismissal.
+The native comparison manager remains the authority for equipped items and
+stat deltas. Exact source contracts, imported authority and known coverage
+limits are in `SHORTLIST-CHAIN-CONTRACTS.md`.
+
+Independent implementation, design and performance review findings are tracked
+in this iteration's three review reports. Final full-verifier counts and
+exact-commit installation/CI receipts are authoritative for delivered bytes.
+The current Lua suite passes 606 scenarios across 32 suites. Independent
+implementation, design and performance re-reviews passed after fixing optional
+breadcrumb precedence, grouped disclosure, changed-selection dismissal and
+Options popup cleanup. Stress retained 89 frames through 1,400 view switches
+and 200 reopen sessions, with zero hidden update handlers. These are offline
+call/frame counts, not native CPU measurements.
+
+No offline preview or mock establishes physical clipboard ordering, actual
+engine comparison output, native rendering, taint safety or coexistence.
 
 ## Alignment and settings review, 0.1.11
 

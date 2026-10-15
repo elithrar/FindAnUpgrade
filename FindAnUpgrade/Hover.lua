@@ -34,6 +34,7 @@ function H:ItemData(id)
     if self.open and id and self.itemIDs and self.itemIDs[id] then self:Refresh() end
 end
 function H:CharacterChanged(change)
+    if change and change.equipment and N.Stack.EquipmentChanged then N.Stack:EquipmentChanged() end
     if not self.open or not change or not (change.identity or change.location) then return end
     local ids={};for _,row in ipairs(self.source and self.source.rows or {}) do ids[row.id]=true end
     -- Reuse the exact-NPC/dependency reconciliation path. No additional log
@@ -42,6 +43,7 @@ function H:CharacterChanged(change)
 end
 function H:QuestChanged(change)
     if not self.open or not change or not change.ids then return end
+    if N.Chains then change={ids=N.Chains:Dependants(change.ids),reason=change.reason,revision=change.revision} end
     local function relevant(id)
         if change.ids[id] then return true end
         local source=N.Providers.Source(id)

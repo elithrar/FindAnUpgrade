@@ -37,6 +37,10 @@
     "supplemental": {
       "path": "data/catalog-supplemental-metadata.json",
       "sha256": "e40f0a5b7d9f4e0dfc00d3f8c5a4203b9a30b6ffd4038ac3823ac62bcfc6a4a2"
+    },
+    "chains": {
+      "path": "data/catalog-chain-records.json",
+      "sha256": "d6d5140c60b2d8e28dbb34c1ef8428403005e7b6ae41d36af48dd18ac92b0df6"
     }
   },
   "classificationAuthority": "data/primary-statuses.json",

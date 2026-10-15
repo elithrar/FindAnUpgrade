@@ -101351,6 +101351,27 @@
       "No classification, XP, money, item rewards or reputation are inferred"
     ]
   },
+  "chainCoverage": {
+    "overriddenFallbackGroups": 11,
+    "anyGroups": 2436,
+    "verifiedGroups": 247,
+    "related": 202,
+    "verifiedRelations": 767,
+    "allGroups": 337,
+    "supersededBy": 2019,
+    "optionalPrerequisite": 216,
+    "breadcrumb": 216,
+    "exclusive": 1467,
+    "unlocks": 45,
+    "requiresActive": 42,
+    "disabledWhileActive": 13,
+    "untilCompleted": 23,
+    "countGroups": 1,
+    "startingWith": 2,
+    "records": 3694,
+    "catalogQuestCount": 5672,
+    "omittedFields": 3
+  },
   "withheldGlobalPositions": [
     {
       "id": 7662,

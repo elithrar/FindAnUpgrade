@@ -377,7 +377,7 @@ def main():
     for key, name, value in (("public", "catalog-public-records.json", public), ("metadata", "catalog-metadata-records.json", authoring_metadata(args.att_source_root,coordinate_scope)), ("compiled", "catalog-compiled-quests.json", compiled_data), ("primary", "catalog-primary-records.json", primary), ("client", "catalog-client-evidence.json", client)):
         inputs[key] = write(ROOT/"data"/name, value)
     inputs["legacy"] = {"path": "data/catalog-source.json", "sha256": digest((ROOT/"data/catalog-source.json").read_bytes())}
-    for key in ("history", "gaps"):
+    for key in ("history", "gaps", "chains"):
         if key in prior_provenance["inputs"]: inputs[key]=prior_provenance["inputs"][key]
     def save_provenance():
         write(ROOT/"data/catalog-complete-sources.json", {"schemaVersion": 2, "targetBuild": BUILD, "inputs": inputs, "classificationAuthority": "data/primary-statuses.json", "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Missing fields stay unknown; native cache identity is not decoded reward proof."})
@@ -410,6 +410,10 @@ def main():
     old_gaps=prior_inputs.get("gaps",{})
     inputs["gaps"]=write(old_gaps_path,{"records":sorted(gaps,key=lambda row:row["id"]),"candidateChecksComplete":candidates["complete"],"candidateIDs":candidates["requestedIDs"],"unprovenHeaderContextIDs":old_gaps.get("unprovenHeaderContextIDs",[]),"contextEvidence":old_gaps.get("contextEvidence",[]),"rule":"Explicit source confirmation/absence only. Placeholder labels do not establish removal from the game. Native cache supplies identity, not decoded reward fields."})
     save_provenance()
+    if args.questie_root:
+        from quest_chains import build as build_chains
+        inputs["chains"]=write(ROOT/"data/catalog-chain-records.json",build_chains(ROOT,args.questie_root))
+        save_provenance()
     from complete_catalog import build_complete
     source, report = build_complete(ROOT)
     write(ROOT/"data/catalog-complete-source.json", source)
