@@ -289,6 +289,24 @@ test("native slider clamping does not let direct input escape option bounds",fun
     O.sliders.scale:SetValue(-900); assert(N.Core.profile.scale==.8 and O.edits.scale:GetText()=="80")
 end)
 
+test("cursor inspector keeps physical clearance with independent parent and addon scales",function()
+    for _,parentScale in ipairs({.64,.8,1})do for _,addonScale in ipairs({.8,1,1.2})do
+        local N,W,rect=fixture({saved={inspectionPosition="right",previewLayout="inspector",scale=addonScale}})
+        UIParent:SetSize(1200,800);UIParent:SetScale(parentScale);W.shift=true
+        W.mouseX,W.mouseY=600*parentScale,500*parentScale;C_QuestLog.IsOnQuest=function()return true end
+        local tip=W.Object();GameTooltip=tip;tip.parent=UIParent;tip:SetSize(500,150)
+        tip:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",500,450)
+        local f=W.Object();f.parent=UIParent;f:SetSize(20,20);f:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",590,490)
+        f.questID=9;f.GetQuestID=function()return 9 end;N.Sources:Pin(f,9)
+        assert(N.Hover.mode=="inspector"and N.Stack.frame:IsShown())
+        local x,y,w,h=rect(N.Stack.frame);local tx,ty,tw,th=rect(tip)
+        assert(close(x,656*parentScale),"cursor-relative placement changed under independent parent/addon scales")
+        assert(y+h<=ty-12*parentScale+.001 or y>=ty+th+12*parentScale-.001)
+        assert(x>=8*parentScale and x+w<=1192*parentScale and y>=8*parentScale and y+h<=792*parentScale)
+        W.Event("UI_SCALE_CHANGED");assert(not N.Hover.open,"changed coordinate space retained a stale inspector")
+    end end
+end)
+
 test("actual pinned backdrop mixin applies native center color for quest cards",function()
     if not nativeBackdrop then return false end
     local N,W=fixture(); N.Stack:Create(); local card=N.Stack:Card(1)

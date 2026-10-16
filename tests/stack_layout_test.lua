@@ -69,6 +69,29 @@ test("scaled placement is clamped and remains frozen after cursor changes",funct
     assert(bottom+N.Stack.frame:GetHeight()*scale<=240-8)
     W.mouseX,W.mouseY=100,100;N.Stack:Refresh();assert(N.Stack.frame.point[4]==point[4] and N.Stack.frame.point[5]==point[5])
 end)
+
+test("cursor placement uses vertical clearance before flipping beside a wide native tooltip",function()
+    local N=show({{id=9}});local V=N.Stack
+    V.frame:SetScale(1);V.frame:SetSize(280,100);V.screenWidth,V.screenHeight=1200,800;V.anchorX,V.anchorY=600,500
+    V.nativeRect={x=500,y=450,w=500,h=150};N.Core.profile.inspectionPosition="right";V:Place()
+    local p=V.placement
+    assert(p.left==656,"native tooltip avoidance silently replaced cursor positioning")
+    assert(p.bottom+p.height<=450-12 or p.bottom>=600+12,"cursor inspector overlaps native tooltip")
+    assert(p.bottom>=8 and p.bottom+p.height<=792)
+    N.Core.profile.inspectionPosition="tooltip";V:Place()
+    assert(V.placement.left==208 and V.placement.bottom+V.placement.height==600,"beside-tooltip mode changed")
+end)
+
+test("cursor placement ignores vertically separate native content and keeps bounded edge fallback",function()
+    local N=show({{id=9}});local V=N.Stack
+    V.frame:SetScale(1);V.frame:SetSize(280,100);V.screenWidth,V.screenHeight=1200,800;V.anchorX,V.anchorY=600,500
+    V.nativeRect={x=500,y=650,w=500,h=100};V:Place()
+    assert(V.placement.left==656 and V.placement.bottom==424,"disjoint native content displaced the cursor inspector")
+    V.nativeRect={x=500,y=0,w=300,h=800};V:Place()
+    assert(V.placement.left==812,"a blocked vertical route must still use clear right-side space")
+    V.nativeRect=nil;V.anchorX=1150;V:Place()
+    assert(V.placement.left==814 and V.placement.left+V.placement.width<=1192)
+end)
 test("native tooltip bridge permits slow transit and rejects owner or geometry changes",function()
     local N=show({{id=9}});N.Hover:Dismiss();N.Hover.blocked=nil
     GameTooltip=W.Object();GameTooltip.x=685;GameTooltip.y=620;GameTooltip.width=280;GameTooltip.height=100;GameTooltip.owner=W.Object();local data={id=54,type=1,guid="npc54"};GameTooltip.GetPrimaryTooltipData=function()return data end
@@ -89,6 +112,7 @@ test("native item tooltip aligns to its icon while remaining beside stack",funct
 end)
 test("Questie native hide allows bounded slow opening transit then consumes the bridge",function()
     local N=show({{id=9}},{screenWidth=900,screenHeight=700});N.Hover:Dismiss();N.Hover.blocked=nil
+    N.Core.profile.inspectionPosition="tooltip"
     GameTooltip=W.Object();GameTooltip.x=10;GameTooltip.y=540;GameTooltip.width=350;GameTooltip.height=100
     W.mouseX,W.mouseY=14,600
     local f=W.Object();f.x=5;f.y=590;f.width=20;f.height=20;f.questID=9;f.GetQuestID=function()return 9 end
@@ -96,6 +120,21 @@ test("Questie native hide allows bounded slow opening transit then consumes the 
     GameTooltip:Hide();GameTooltip._Rebuild=nil;W.mouseX=100;N.Hover:Tick(.1);N.Hover:Tick(.8);assert(N.Hover.open)
     N.Stack.frame.x=372;N.Stack.frame.y=580;W.mouseX=380;N.Hover:Tick(.9);assert(N.Stack.openingTransitConsumed)
     W.mouseX=100;N.Hover:Tick(1);N.Hover:Tick(1.21);assert(not N.Hover.open)
+end)
+
+test("cursor vertical clearance retains a bounded opening route after native hide",function()
+    local N=show({{id=9}},{screenWidth=1200,screenHeight=800});N.Hover:Dismiss();N.Hover.blocked=nil
+    GameTooltip=W.Object();GameTooltip.x=500;GameTooltip.y=450;GameTooltip.width=500;GameTooltip.height=150
+    W.mouseX,W.mouseY=600,500
+    local f=W.Object();f.x=590;f.y=490;f.width=20;f.height=20;f.questID=9;f.GetQuestID=function()return 9 end
+    N.Sources:Pin(f,9);local p=N.Stack.placement
+    assert(p.left==656 and p.bottom+p.height<=438)
+    N.Stack.frame.x,N.Stack.frame.y=p.left,p.bottom
+    GameTooltip:Hide();W.mouseX,W.mouseY=628,(500+p.bottom+p.height-8)/2
+    N.Hover:Tick(.1);N.Hover:Tick(.8);assert(N.Hover.open)
+    W.mouseX,W.mouseY=p.left+8,p.bottom+p.height-8;N.Hover:Tick(.9);assert(N.Stack.openingTransitConsumed)
+    W.mouseX,W.mouseY=628,(500+p.bottom+p.height-8)/2
+    N.Hover:Tick(1);N.Hover:Tick(1.21);assert(not N.Hover.open)
 end)
 test("opening bridge cannot retain the stack indefinitely after icon leave",function()
     local N=show({{id=9}});N.Stack.nativeRect={};N.Stack.placement={left=1066,bottom=640,width=320,height=60}

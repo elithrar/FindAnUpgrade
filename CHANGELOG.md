@@ -1,9 +1,9 @@
 # Changelog
 
-## 0.1.0
+## 0.1.1
 
-Find quests with upgrades: based on item level, empty slots, class and/or level range and zone. Track down quest givers with waypoints and shortlist the quest with the items you need.
+- Keep the quest inspector to the right of the cursor when space permits, using vertical clearance around the game tooltip before switching sides. The inspector stays anchored while moving into reward icons.
 
-FindAnUpgrade is designed to make it easier to chase down the quests that give you that missing weapon, trinket, ring or shoulder item that you need the most when levelling in WoW: Forever. New and modified quests and their rewards are built right in.
+- Align quest-card reward and warning footers with the card's left inset.
 
-Open it with /fau or click the FindAnUpgrade button on your minimap.
+- Clarify the quest inspector position setting and document patch-version and release-tag requirements for contributors.
