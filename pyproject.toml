@@ -1,29 +1,19 @@
 [project]
 name = "findanupgrade-tooling"
 version = "0.1.15"
-description = "Development, data, and release tools for FindAnUpgrade"
+description = "Repository-local supporting tools for FindAnUpgrade"
 requires-python = ">=3.15,<3.16"
-dependencies = []
-
-[project.scripts]
-fau = "fau_tools.cli:main"
-
-[build-system]
-requires = ["setuptools==84.0.0"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-packages = ["fau_tools"]
+dependencies = ["lupa==2.8"]
 
 [dependency-groups]
 dev = [
-    "lupa==2.8",
     "ruff==0.17.1",
 ]
 
 [tool.uv]
-package = true
+package = false
 required-version = "==0.13.1"
+# Lupa's isolated source build on Python 3.15 x64.
 build-constraint-dependencies = [
     "cython==3.3.0",
     "packaging==26.3",

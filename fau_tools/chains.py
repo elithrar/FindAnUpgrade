@@ -369,8 +369,8 @@ def build(root, cache):
     return result
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+def main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog, description=__doc__)
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument(
         "--acquire",

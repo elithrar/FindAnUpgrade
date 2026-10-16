@@ -614,8 +614,8 @@ def ordered_inputs(inputs, previous):
     }
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser()
+def main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--att-source-root", type=Path, required=True)
     parser.add_argument("--compiled-root", type=Path, required=True)

@@ -68,27 +68,32 @@ def extract(text):
 
 
 def check(source_root, membership):
-    assert (
+    if not (
         membership["source"]["revision"] == PIN
         and membership["source"]["generatedBuildStamp"] is None
-    )
+    ):
+        raise AssertionError()
     pairs = set()
     constraints = collections.defaultdict(list)
     for source in membership["sources"]:
         path = (source_root / source["path"]).resolve()
-        assert path.is_relative_to(source_root.resolve())
+        if not (path.is_relative_to(source_root.resolve())):
+            raise AssertionError()
         raw = path.read_bytes()
-        assert hashlib.sha256(raw).hexdigest() == source["sha256"]
-        assert (
+        if not (hashlib.sha256(raw).hexdigest() == source["sha256"]):
+            raise AssertionError()
+        if not (
             hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
             == source["gitBlob"]
-        )
+        ):
+            raise AssertionError()
         if (
             source["path"].startswith("db/Camelot/Categories/")
             and path.suffix == ".lua"
         ):
             text = raw.decode("utf-8")
-            assert "_.CreateQuest" in text or "q(" not in text
+            if not ("_.CreateQuest" in text or "q(" not in text):
+                raise AssertionError()
             found, rows = extract(text)
             pairs.update(found)
             for quest, values in rows.items():
@@ -111,23 +116,27 @@ def check(source_root, membership):
         if len(row) > 1:
             result.append(row)
     expected = sorted([list(pair) for pair in pairs])
-    assert expected == membership["pairs"], "Compiled membership changed"
-    assert (
+    if not (expected == membership["pairs"]):
+        raise AssertionError("Compiled membership changed")
+    if not (
         result == membership["constraints"]
         and conflicts == membership["constraintConflicts"]
-    )
-    assert (
+    ):
+        raise AssertionError()
+    if not (
         hashlib.sha256(json.dumps(expected, separators=(",", ":")).encode()).hexdigest()
         == membership["pairsSHA256"]
-    )
+    ):
+        raise AssertionError()
     print(
         f"Verified {len(expected)} compiled exact pairs and {len(result)} consistent constraints; no upstream execution"
     )
 
 
-def main(argv=None):
+def main(argv=None, *, prog=None):
     parser = argparse.ArgumentParser(
-        description="Verify exact compiled ATT membership without upstream execution"
+        prog=prog,
+        description="Verify exact compiled ATT membership without upstream execution",
     )
     parser.add_argument("--source-root", type=Path, required=True)
     args = parser.parse_args(argv)

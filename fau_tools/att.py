@@ -3,7 +3,7 @@
 Only direct q(...,{groups={i(...)}}) candidates without acquisition/input
 semantics and selected literal fields are included. Objective components,
 starter items, intermediates, nested vendors and loot are not reward evidence.
-See docs/SEARCH-DATABASE-PLAN.md for scope and source boundaries."""
+See AGENTS.md for scope and source boundaries."""
 
 import argparse
 import hashlib
@@ -76,19 +76,23 @@ def preprocess(text):
                 active = condition(value)
                 states.append([active, active])
             elif action == "elseif":
-                assert states
+                if not (states):
+                    raise AssertionError()
                 active = not states[-1][1] and condition(value)
                 states[-1] = [active, states[-1][1] or active]
             elif action == "else":
-                assert states
+                if not (states):
+                    raise AssertionError()
                 states[-1] = [not states[-1][1], True]
             else:
-                assert states
+                if not (states):
+                    raise AssertionError()
                 states.pop()
             output.append("\n")
         else:
             output.append(line if all(state[0] for state in states) else "\n")
-    assert not states, "Unclosed source condition"
+    if not (not states):
+        raise AssertionError("Unclosed source condition")
     return "".join(output)
 
 
@@ -114,12 +118,12 @@ def bounds(tokens):
         if word in ("{", "(", "["):
             stack.append((word, index))
         elif word in opener:
-            assert stack and stack[-1][0] == opener[word], (
-                "Unbalanced source delimiters"
-            )
+            if not (stack and stack[-1][0] == opener[word]):
+                raise AssertionError("Unbalanced source delimiters")
             _, start = stack.pop()
             ends[start] = index
-    assert not stack, "Unclosed source delimiters"
+    if not (not stack):
+        raise AssertionError("Unclosed source delimiters")
     return ends
 
 
@@ -142,7 +146,8 @@ def fields(tokens, ends, start):
     out = {}
     for begin, finish in entries(tokens, ends, start):
         if begin + 1 < finish and tokens[begin + 1][0] == "=":
-            assert tokens[begin][0] not in out, "Duplicate selected source field"
+            if not (tokens[begin][0] not in out):
+                raise AssertionError("Duplicate selected source field")
             out[tokens[begin][0]] = (begin + 2, finish)
         elif (
             begin + 3 < finish
@@ -153,7 +158,8 @@ def fields(tokens, ends, start):
             key = tokens[begin + 1][0]
             if re.fullmatch(r'"[A-Za-z_][A-Za-z_0-9]*"', key):
                 key = json.loads(key)
-                assert key not in out, "Duplicate selected source field"
+                if not (key not in out):
+                    raise AssertionError("Duplicate selected source field")
                 out[key] = (begin + 4, finish)
     return out
 
@@ -955,12 +961,13 @@ def merge(a, b):
     return result
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser()
+def main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--source-root", type=Path, required=True)
     args = parser.parse_args(argv)
     acquisition = json.loads((args.source_root / "ACQUISITION.json").read_bytes())
-    assert acquisition["commit"] == PIN
+    if not (acquisition["commit"] == PIN):
+        raise AssertionError()
     maps_path = PREFIX + ".config/constants/maps.lua"
     maps_text = (args.source_root / maps_path).read_text(encoding="utf-8")
     maps = {
@@ -981,7 +988,8 @@ def main(argv=None):
     membership = json.loads(
         (ROOT / "data/catalog-compiled-membership.json").read_bytes()
     )
-    assert membership["source"]["revision"] == PIN
+    if not (membership["source"]["revision"] == PIN):
+        raise AssertionError()
     allowed = {tuple(pair) for pair in membership["pairs"]}
     constraints = {row["id"]: row for row in membership.get("constraints", [])}
     class_names = {
@@ -1004,7 +1012,8 @@ def main(argv=None):
     for source in sorted(acquisition["files"], key=lambda s: s["path"]):
         path = source["path"]
         raw = (args.source_root / path).read_bytes()
-        assert hashlib.sha256(raw).hexdigest() == source["sha256"]
+        if not (hashlib.sha256(raw).hexdigest() == source["sha256"]):
+            raise AssertionError()
         if (
             not path.startswith(PREFIX)
             or not path.endswith(".lua")

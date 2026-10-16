@@ -130,8 +130,8 @@ def stage_sources(root, stage):
             shutil.copytree(source, stage / ".work" / name)
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+def main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog, description=__doc__)
     parser.add_argument("mode", choices=("check", "reparse", "refresh"))
     parser.add_argument("--cache-root", type=Path, default=ROOT / ".work/catalog-cache")
     parser.add_argument("--public-root", type=Path)

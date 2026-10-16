@@ -60,9 +60,12 @@ def import_website(website):
     )
     raws = {name: (provenance / name).read_bytes() for name in names}
     chart, ledger = (json.loads(raws[name]) for name in names)
-    assert chart["schemaVersion"] == 3
-    assert ledger["revision"] == chart["datasetRevision"]
-    assert ledger["after"] == chart["verification"]
+    if not (chart["schemaVersion"] == 3):
+        raise AssertionError()
+    if not (ledger["revision"] == chart["datasetRevision"]):
+        raise AssertionError()
+    if not (ledger["after"] == chart["verification"]):
+        raise AssertionError()
     categories = []
     for source_key, section in (("zones", "main"), ("ancillaryZones", "ancillary")):
         for zone in chart[source_key]:
@@ -87,16 +90,24 @@ def import_website(website):
             )
             for bucket, groups in zone["quests"].items():
                 for group in groups:
-                    assert BUCKETS[group["primaryStatus"]] == bucket
+                    if not (BUCKETS[group["primaryStatus"]] == bucket):
+                        raise AssertionError()
                     variants = group["variants"]
-                    assert group["ids"] == [v["id"] for v in variants]
-                    assert group["name"] == variants[0]["name"]
-                    assert group["primaryStatus"] == max(
-                        (v["primaryStatus"] for v in variants),
-                        key=PRIMARY_STATUSES.index,
-                    )
+                    if not (group["ids"] == [v["id"] for v in variants]):
+                        raise AssertionError()
+                    if not (group["name"] == variants[0]["name"]):
+                        raise AssertionError()
+                    if not (
+                        group["primaryStatus"]
+                        == max(
+                            (v["primaryStatus"] for v in variants),
+                            key=PRIMARY_STATUSES.index,
+                        )
+                    ):
+                        raise AssertionError()
                     for variant in variants:
-                        assert variant["name"] == group["name"]
+                        if not (variant["name"] == group["name"]):
+                            raise AssertionError()
                         category["variants"].append(
                             {
                                 "id": variant["id"],
@@ -149,44 +160,63 @@ def import_website(website):
 
 
 def reconcile(source, baseline, baseline_raw):
-    assert source["schemaVersion"] == 1 and baseline["schemaVersion"] == 1
+    if not (source["schemaVersion"] == 1 and baseline["schemaVersion"] == 1):
+        raise AssertionError()
     receipts = source["receipts"]
-    assert isinstance(receipts, list) and len(receipts) == 2, (
-        "Expected two distinct classification source receipts"
-    )
-    assert all(isinstance(r, dict) and isinstance(r.get("file"), str) for r in receipts)
-    assert {r["file"] for r in receipts} == RECEIPT_FILES, (
-        "Expected one chart and one exclusion-ledger receipt"
-    )
-    assert all(
-        isinstance(r.get("sha256"), str)
-        and re.fullmatch(r"[a-fA-F0-9]{64}", r["sha256"])
-        and type(r.get("bytes")) is int
-        and r["bytes"] > 0
-        for r in receipts
-    ), "Invalid classification source receipt hash or byte length"
+    if not (isinstance(receipts, list) and len(receipts) == 2):
+        raise AssertionError("Expected two distinct classification source receipts")
+    if not (
+        all(isinstance(r, dict) and isinstance(r.get("file"), str) for r in receipts)
+    ):
+        raise AssertionError()
+    if not ({r["file"] for r in receipts} == RECEIPT_FILES):
+        raise AssertionError("Expected one chart and one exclusion-ledger receipt")
+    if not (
+        all(
+            isinstance(r.get("sha256"), str)
+            and re.fullmatch(r"[a-fA-F0-9]{64}", r["sha256"])
+            and type(r.get("bytes")) is int
+            and r["bytes"] > 0
+            for r in receipts
+        )
+    ):
+        raise AssertionError(
+            "Invalid classification source receipt hash or byte length"
+        )
     by_id, category_reports, mixed, projected = {}, [], [], {}
-    assert len({c["name"] for c in source["categories"]}) == len(source["categories"])
+    if not (
+        len({c["name"] for c in source["categories"]}) == len(source["categories"])
+    ):
+        raise AssertionError()
     for category in source["categories"]:
         rows = category["variants"]
         for row in rows:
-            assert type(row["id"]) is int and row["id"] > 0
-            assert (
+            if not (type(row["id"]) is int and row["id"] > 0):
+                raise AssertionError()
+            if not (
                 row["status"] in PRIMARY_STATUSES and row["faction"] in FACTIONS["All"]
-            )
-            assert row["id"] not in by_id, "An exact ID has multiple primary categories"
-            assert re.match(
-                r"https://www\.wowhead\.com/forever/quest="
-                + str(row["id"])
-                + r"(?:/|$)",
-                row["primaryUrl"],
-            )
-            assert row["sourceListUrl"].startswith(
-                (
-                    "https://www.wowhead.com/forever/quests",
-                    "https://www.wowhead.com/forever/zone=",
+            ):
+                raise AssertionError()
+            if not (row["id"] not in by_id):
+                raise AssertionError("An exact ID has multiple primary categories")
+            if not (
+                re.match(
+                    r"https://www\.wowhead\.com/forever/quest="
+                    + str(row["id"])
+                    + r"(?:/|$)",
+                    row["primaryUrl"],
                 )
-            )
+            ):
+                raise AssertionError()
+            if not (
+                row["sourceListUrl"].startswith(
+                    (
+                        "https://www.wowhead.com/forever/quests",
+                        "https://www.wowhead.com/forever/zone=",
+                    )
+                )
+            ):
+                raise AssertionError()
             by_id[row["id"]] = {
                 **row,
                 "zone": category["name"],
@@ -195,13 +225,20 @@ def reconcile(source, baseline, baseline_raw):
                 "websiteDisplay": True,
             }
         all_counts = counts(rows)
-        assert all_counts["questIdCount"] == category["sourceQuestIdCount"]
-        assert all_counts["titleGroupCount"] == category["sourceTitleCounts"]["total"]
-        assert all(
-            all_counts["titleGroupStatuses"][s]
-            == category["sourceTitleCounts"][BUCKETS[s]]
-            for s in PRIMARY_STATUSES
-        )
+        if not (all_counts["questIdCount"] == category["sourceQuestIdCount"]):
+            raise AssertionError()
+        if not (
+            all_counts["titleGroupCount"] == category["sourceTitleCounts"]["total"]
+        ):
+            raise AssertionError()
+        if not (
+            all(
+                all_counts["titleGroupStatuses"][s]
+                == category["sourceTitleCounts"][BUCKETS[s]]
+                for s in PRIMARY_STATUSES
+            )
+        ):
+            raise AssertionError()
         projections = {
             name: counts([r for r in rows if r["faction"] in factions])
             for name, factions in FACTIONS.items()
@@ -252,41 +289,52 @@ def reconcile(source, baseline, baseline_raw):
             if section == "combined" or c["section"] == section
         ]
         verified = source["sourceVerification"][section]
-        assert len(rows) == verified["zoneCount"]
-        assert (
+        if not (len(rows) == verified["zoneCount"]):
+            raise AssertionError()
+        if not (
             sum(c["projections"]["All"]["questIdCount"] for c in rows)
             == verified["questIds"]
-        )
+        ):
+            raise AssertionError()
         for status in PRIMARY_STATUSES:
-            assert (
+            if not (
                 sum(c["projections"]["All"]["titleGroupStatuses"][status] for c in rows)
                 == verified["titleGroups"][BUCKETS[status]]
-            )
+            ):
+                raise AssertionError()
     old = {r["id"]: r for r in baseline["quests"]}
-    assert len(old) == baseline["questIdCount"] == len(baseline["quests"])
+    if not (len(old) == baseline["questIdCount"] == len(baseline["quests"])):
+        raise AssertionError()
     exclusions = {r["id"]: r for r in source["excludedVariants"]}
-    assert len(exclusions) == len(source["excludedVariants"])
-    assert not exclusions.keys() & by_id.keys(), (
-        "Excluded website variants cannot re-enter website totals"
-    )
+    if not (len(exclusions) == len(source["excludedVariants"])):
+        raise AssertionError()
+    if not (not exclusions.keys() & by_id.keys()):
+        raise AssertionError("Excluded website variants cannot re-enter website totals")
     shared = old.keys() & by_id.keys()
-    assert all(old[q]["status"] == by_id[q]["status"] for q in shared), (
-        "Conflicting exact-ID statuses need explicit source resolution"
-    )
+    if not (all(old[q]["status"] == by_id[q]["status"] for q in shared)):
+        raise AssertionError(
+            "Conflicting exact-ID statuses need explicit source resolution"
+        )
     retained = []
     for quest in sorted(old.keys() - by_id.keys()):
         exclusion = exclusions[quest]
-        assert old[quest]["status"] == exclusion["status"]
+        if not (old[quest]["status"] == exclusion["status"]):
+            raise AssertionError()
         reasons = exclusion["reasons"]
-        assert exclusion["faction"] == "Unknown"
-        assert (
+        if not (exclusion["faction"] == "Unknown"):
+            raise AssertionError()
+        if not (
             isinstance(reasons, list)
             and reasons
             and all(
                 isinstance(reason, str) and "Side: None" in reason for reason in reasons
             )
-        ), "Retained exclusion requires nonempty exact Side: None evidence"
-        assert old[quest]["zone"] == exclusion["zone"]
+        ):
+            raise AssertionError(
+                "Retained exclusion requires nonempty exact Side: None evidence"
+            )
+        if not (old[quest]["zone"] == exclusion["zone"]):
+            raise AssertionError()
         row = {
             **old[quest],
             "websiteDisplay": False,
@@ -362,8 +410,8 @@ def reconcile(source, baseline, baseline_raw):
     return primary, report
 
 
-def import_main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+def import_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog, description=__doc__)
     parser.add_argument(
         "--website-root",
         type=Path,
@@ -387,7 +435,8 @@ def import_main(argv=None):
     )
     for path, raw in candidates.items():
         if args.check:
-            assert path.read_bytes() == raw, "Stale classification output: " + path.name
+            if not (path.read_bytes() == raw):
+                raise AssertionError("Stale classification output: " + path.name)
         else:
             path.write_bytes(raw)
     print(
@@ -521,8 +570,8 @@ def render_taxonomy(document):
     )
 
 
-def taxonomy_main(argv=None):
-    parser = argparse.ArgumentParser()
+def taxonomy_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--primary-cache", type=Path)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
@@ -573,28 +622,39 @@ def lua(value):
 
 
 def render_quests(source, taxonomy=None):
-    assert source["schemaVersion"] == 2 and source["version"] == "2"
+    if not (source["schemaVersion"] == 2 and source["version"] == "2"):
+        raise AssertionError()
     rows = source["quests"]
-    assert len(rows) == source["questIdCount"] == len({r["id"] for r in rows})
-    assert all(
-        type(r["id"]) is int and r["id"] > 0 and r["status"] in LUA_STATUSES
-        for r in rows
-    )
+    if not (len(rows) == source["questIdCount"] == len({r["id"] for r in rows})):
+        raise AssertionError()
+    if not (
+        all(
+            type(r["id"]) is int and r["id"] > 0 and r["status"] in LUA_STATUSES
+            for r in rows
+        )
+    ):
+        raise AssertionError()
     actual = Counter(row["status"] for row in rows)
-    assert {s: actual[s] for s in source["statusCounts"]} == source["statusCounts"]
+    if not ({s: actual[s] for s in source["statusCounts"]} == source["statusCounts"]):
+        raise AssertionError()
     included = [r for r in rows if r["websiteDisplay"]]
     excluded = [r for r in rows if not r["websiteDisplay"]]
-    assert len(included) == source["websiteQuestIdCount"]
-    assert len(excluded) == source["retainedExcludedQuestIdCount"]
+    if not (len(included) == source["websiteQuestIdCount"]):
+        raise AssertionError()
+    if not (len(excluded) == source["retainedExcludedQuestIdCount"]):
+        raise AssertionError()
     categories = defaultdict(list)
     metadata = {c["name"]: c for c in source["categories"]}
-    assert len(metadata) == source["zoneCount"]
+    if not (len(metadata) == source["zoneCount"]):
+        raise AssertionError()
     for name in metadata:
         categories[name] = []
     for row in included:
-        assert row["zone"] in metadata
+        if row["zone"] not in metadata:
+            raise AssertionError()
         categories[row["zone"]].append(row)
-    assert len(categories) == source["zoneCount"]
+    if not (len(categories) == source["zoneCount"]):
+        raise AssertionError()
     category_ids = {name: index for index, name in enumerate(sorted(categories), 1)}
     new_count = actual["New"]
     lines = [
@@ -642,7 +702,8 @@ def render_quests(source, taxonomy=None):
             },
         }
         lines.append("    " + lua(summary) + ",")
-    assert total_titles == source["titleGroupCount"]
+    if not (total_titles == source["titleGroupCount"]):
+        raise AssertionError()
     lines.append("}, categoryById = {")
     for row in sorted(included, key=lambda r: r["id"]):
         lines.append(f"    [{row['id']}] = {category_ids[row['zone']]},")
@@ -664,8 +725,8 @@ def render_quests(source, taxonomy=None):
     return "\n".join(lines)
 
 
-def quests_main(argv=None):
-    parser = argparse.ArgumentParser()
+def quests_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
     raw = (ROOT / "data/primary-statuses.json").read_bytes()
@@ -673,7 +734,8 @@ def quests_main(argv=None):
     output = render_quests(source, load_taxonomy(ROOT)).encode()
     path = ROOT / "FindAnUpgrade/Data/Quests.lua"
     if args.check:
-        assert path.read_bytes() == output, "Generated classification table is stale"
+        if not (path.read_bytes() == output):
+            raise AssertionError("Generated classification table is stale")
     else:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(output)

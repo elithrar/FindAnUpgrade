@@ -24,7 +24,7 @@ CURRENT_PATHS = [
 
 def fixture_evidence(root=ROOT):
     """Check every available pinned source, including partial caches."""
-    contracts = json.loads((root / "docs/client-contracts.json").read_bytes())
+    contracts = json.loads((root / "data/contracts/client-contracts.json").read_bytes())
     report = {}
     native = (
         root

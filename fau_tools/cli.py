@@ -1,18 +1,34 @@
-"""One explicit entry point for maintained checkout, catalog, and release tasks."""
+"""Route checkout commands while domain parsers own their options and help."""
 
 import argparse
 import json
 import sys
 
+PROG = "python -m fau_tools"
 
-def main(argv=None):
-    argv = list(sys.argv[1:] if argv is None else argv)
+
+def command_parser():
+    """Own command structure; forwarded leaf options stay with domain parsers."""
     parser = argparse.ArgumentParser(
-        prog="fau",
+        prog=PROG,
         description="FindAnUpgrade tooling: check, build, and safely import the owned catalog.",
-        epilog="Use fau COMMAND --help for options. Metadata, source, and data commands are advanced import maintenance; publication commands require separately authorized release credentials and tags.",
+        epilog=f"Use {PROG} COMMAND --help for options. Publication requires separately authorized release credentials and tags.",
     )
     commands = parser.add_subparsers(dest="command", title="commands", required=True)
+    forwarded = {
+        "sync",
+        "import",
+        "metadata",
+        "chains",
+        "membership",
+        "import-att",
+        "import-catalog",
+        "migrate",
+    }
+    groups = {
+        "data": ("classify", "tags", "quests", "catalog"),
+        "source": ("att", "public"),
+    }
     for name, description in (
         ("check", "Run lint, deterministic data checks, Lua/Python tests, and build"),
         ("build", "Build deterministic addon and maintained-source archives"),
@@ -30,124 +46,117 @@ def main(argv=None):
         ("publish-github", "Prepare an authorized release draft or finalize it"),
         ("publish-curseforge", "Upload an authorized exact Forever release once"),
     ):
-        commands.add_parser(name, help=description, add_help=False)
-    if not argv or argv[0] in ("-h", "--help"):
+        command = commands.add_parser(
+            name,
+            help=description,
+            description=description,
+            add_help=name not in forwarded,
+        )
+        command.set_defaults(command_parser=command)
+        if name in groups:
+            modes = command.add_subparsers(dest="mode", required=True)
+            for mode in groups[name]:
+                leaf = modes.add_parser(mode, add_help=False)
+                leaf.set_defaults(command_parser=leaf)
+        elif name == "release":
+            command.add_argument("--verify", action="store_true")
+        elif name == "publish-github":
+            command.add_argument("--finalize", action="store_true")
+    return parser
+
+
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    parser = command_parser()
+    if not argv:
         parser.print_help()
         return
-    command = parser.parse_args(argv[:1]).command
-    arguments = argv[1:]
-    if command in {
-        "check",
-        "build",
-        "data",
-        "source",
-        "release",
-        "publish-github",
-        "publish-curseforge",
-    } and arguments in (["--help"], ["-h"]):
-        detail = argparse.ArgumentParser(prog="fau " + command)
-        match command:
-            case "data":
-                detail.add_argument(
-                    "mode", choices=("classify", "tags", "quests", "catalog")
-                )
-            case "source":
-                detail.add_argument("mode", choices=("att", "public"))
-            case "release":
-                detail.add_argument("--verify", action="store_true")
-            case "publish-github":
-                detail.add_argument("--finalize", action="store_true")
-        detail.print_help()
-        return
+    selected, arguments = parser.parse_known_args(argv)
+    command = selected.command
+    detail = selected.command_parser
+    prog = detail.prog
+    if (
+        command in {"check", "build", "release", "publish-github", "publish-curseforge"}
+        and arguments
+    ):
+        detail.error("unrecognized arguments: " + " ".join(arguments))
     match command:
         case "check":
             from fau_tools import verify
 
-            if arguments:
-                parser.error("check accepts no arguments")
             verify.main()
         case "build":
             from fau_tools import packaging
 
-            if arguments:
-                parser.error("build accepts no arguments")
             print(json.dumps(packaging.build(), indent=2))
         case "sync" | "import":
             from fau_tools import sync
 
-            sync.main(
-                (["reparse", "--stage-only"] if command == "import" else []) + arguments
-            )
+            if command == "import":
+                if "--help" in arguments or "-h" in arguments:
+                    print(
+                        f"{PROG} import is an alias for {PROG} sync reparse --stage-only.\n"
+                    )
+                sync.main(["reparse", "--stage-only", *arguments], prog=f"{PROG} sync")
+            else:
+                sync.main(arguments, prog=prog)
         case "data":
             from fau_tools import catalog, classification
 
-            if not arguments:
-                parser.error("data requires classify, tags, quests, or catalog")
-            mode, *arguments = arguments
-            match mode:
+            match selected.mode:
                 case "classify":
-                    classification.import_main(arguments)
+                    classification.import_main(arguments, prog=prog)
                 case "tags":
-                    classification.taxonomy_main(arguments)
+                    classification.taxonomy_main(arguments, prog=prog)
                 case "quests":
-                    classification.quests_main(arguments)
+                    classification.quests_main(arguments, prog=prog)
                 case "catalog":
-                    catalog.generate_main(arguments)
-                case _:
-                    parser.error("data requires classify, tags, quests, or catalog")
+                    catalog.generate_main(arguments, prog=prog)
         case "source":
             from fau_tools import sources
 
-            if not arguments:
-                parser.error("source requires att or public")
-            mode, *arguments = arguments
-            match mode:
-                case "att":
-                    sources.att_main(arguments)
-                case "public":
-                    sources.public_main(arguments)
-                case _:
-                    parser.error("source requires att or public")
+            if selected.mode == "att":
+                sources.att_main(arguments, prog=prog)
+            else:
+                sources.public_main(arguments, prog=prog)
         case "metadata":
             from fau_tools import questie
 
-            questie.main(arguments)
+            questie.main(arguments, prog=prog)
         case "chains":
             from fau_tools import chains
 
-            chains.main(arguments)
+            chains.main(arguments, prog=prog)
         case "membership":
             from fau_tools import membership
 
-            membership.main(arguments)
+            membership.main(arguments, prog=prog)
         case "import-att":
             from fau_tools import att
 
-            att.main(arguments)
+            att.main(arguments, prog=prog)
         case "import-catalog":
             from fau_tools import importer
 
-            importer.main(arguments)
+            importer.main(arguments, prog=prog)
         case "migrate":
             from fau_tools import migration
 
-            migration.main(arguments)
+            migration.main(arguments, prog=prog)
         case "release":
             from fau_tools import release
 
-            release.main(arguments)
+            release.main(argv[1:])
         case "publish-github":
             from fau_tools import publishing
 
-            if arguments == ["--finalize"]:
+            if argv[1:] == ["--finalize"]:
                 publishing.finalize()
-            elif not arguments:
+            elif len(argv) == 1:
                 publishing.prepare()
             else:
-                parser.error("publish-github accepts only --finalize")
+                detail.error("publish-github accepts only --finalize")
         case "publish-curseforge":
             from fau_tools import publishing
 
-            if arguments:
-                parser.error("publish-curseforge accepts no arguments")
             publishing.upload()

@@ -1076,8 +1076,8 @@ def import_metadata(root, quests, primary_cache=None, primary=None):
     }
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser()
+def main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("mode", choices=("acquire", "reparse"))
     parser.add_argument(
         "--source-root", type=Path, default=ROOT / ".work/catalog-cache/questie"

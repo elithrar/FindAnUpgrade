@@ -13,21 +13,21 @@ build-constraints = [
 [[package]]
 name = "findanupgrade-tooling"
 version = "0.1.15"
-source = { editable = "." }
+source = { virtual = "." }
+dependencies = [
+    { name = "lupa" },
+]
 
 [package.dev-dependencies]
 dev = [
-    { name = "lupa" },
     { name = "ruff" },
 ]
 
 [package.metadata]
+requires-dist = [{ name = "lupa", specifier = "==2.8" }]
 
 [package.metadata.requires-dev]
-dev = [
-    { name = "lupa", specifier = "==2.8" },
-    { name = "ruff", specifier = "==0.17.1" },
-]
+dev = [{ name = "ruff", specifier = "==0.17.1" }]
 
 [[package]]
 name = "lupa"

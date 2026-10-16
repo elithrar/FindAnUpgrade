@@ -154,8 +154,8 @@ def acquire(destination, selected):
     }
 
 
-def att_main(argv=None):
-    parser = argparse.ArgumentParser()
+def att_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument(
         "--source-root", type=Path, default=ROOT / ".work/catalog-cache/att-source"
     )
@@ -448,8 +448,8 @@ class Collector:
         return results, errors
 
 
-def public_main(argv=None):
-    parser = argparse.ArgumentParser()
+def public_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--reuse-quest-cache", type=Path)
     parser.add_argument(

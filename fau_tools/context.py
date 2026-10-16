@@ -1,52 +1,158 @@
-"""Repository paths and maintained source inventory shared by all commands.
-
-The editable/installable package determines its checkout from its own location,
-never the caller's working directory. Explicit input paths remain caller supplied.
-"""
+"""Repository-local paths and the reviewed source ZIP/staging inventory."""
 
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / ".work"
 DIST = ROOT / "dist"
-SOURCE_SUFFIXES = {
-    "FindAnUpgrade": {".lua", ".toc", ".md", ".txt", ""},
-    "data": {".json"},
-    "docs": {".md", ".json"},
-    "tests": {".py", ".lua"},
-    "fau_tools": {".py"},
-    ".github": {".yml", ".yaml"},
-}
-SOURCE_ROOT = (
-    "AGENTS.md",
-    "README.md",
-    "LICENSE",
-    ".gitignore",
+
+# Add maintained files deliberately; never discover private scratch files by suffix.
+# This inventory also works in extracted source archives without Git metadata.
+SOURCE_FILES = (
     ".gitattributes",
-    "pyproject.toml",
-    "uv.lock",
+    ".github/workflows/check.yml",
+    ".github/workflows/release.yml",
+    ".gitignore",
     ".python-version",
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "FindAnUpgrade/Adapter.lua",
+    "FindAnUpgrade/Catalog.lua",
+    "FindAnUpgrade/Chains.lua",
+    "FindAnUpgrade/Character.lua",
+    "FindAnUpgrade/Copy.lua",
+    "FindAnUpgrade/Core.lua",
+    "FindAnUpgrade/Data/ATT-LICENSE.txt",
+    "FindAnUpgrade/Data/Catalog.lua",
+    "FindAnUpgrade/Data/Quests.lua",
+    "FindAnUpgrade/FindAnUpgrade.toc",
+    "FindAnUpgrade/Hover.lua",
+    "FindAnUpgrade/LICENSE",
+    "FindAnUpgrade/Launcher.lua",
+    "FindAnUpgrade/Model.lua",
+    "FindAnUpgrade/NOTICES.md",
+    "FindAnUpgrade/NativeTooltip.lua",
+    "FindAnUpgrade/Options.lua",
+    "FindAnUpgrade/Providers.lua",
+    "FindAnUpgrade/QuestState.lua",
+    "FindAnUpgrade/Questie.lua",
+    "FindAnUpgrade/README.md",
+    "FindAnUpgrade/Ranking.lua",
+    "FindAnUpgrade/Rewards.lua",
+    "FindAnUpgrade/Search.lua",
+    "FindAnUpgrade/SearchModel.lua",
+    "FindAnUpgrade/SearchViews.lua",
+    "FindAnUpgrade/Shortlist.lua",
+    "FindAnUpgrade/Sources.lua",
+    "FindAnUpgrade/Stack.lua",
+    "FindAnUpgrade/UI.lua",
+    "FindAnUpgrade/XPISLAND-LICENSE.txt",
+    "LICENSE",
+    "README.md",
+    "data/catalog-chain-records.json",
+    "data/catalog-client-evidence.json",
+    "data/catalog-compiled-membership.json",
+    "data/catalog-compiled-quests.json",
+    "data/catalog-complete-source.json",
+    "data/catalog-complete-sources.json",
+    "data/catalog-coverage.json",
+    "data/catalog-gap-evidence.json",
+    "data/catalog-identity-history.json",
+    "data/catalog-metadata-records.json",
+    "data/catalog-primary-records.json",
+    "data/catalog-public-records.json",
+    "data/catalog-reconciliation.json",
+    "data/catalog-source.json",
+    "data/catalog-sources.json",
+    "data/catalog-supplemental-metadata.json",
+    "data/classification-baseline.json",
+    "data/classification-reconciliation.json",
+    "data/classification-source.json",
+    "data/contracts/client-contracts.json",
+    "data/contracts/ranking-native-contract-receipts.json",
+    "data/contracts/sidebar-native-contract-receipts.json",
+    "data/primary-statuses.json",
+    "data/quest-taxonomy.json",
+    "fau_tools/__init__.py",
+    "fau_tools/__main__.py",
+    "fau_tools/att.py",
+    "fau_tools/catalog.py",
+    "fau_tools/chains.py",
+    "fau_tools/classification.py",
+    "fau_tools/cli.py",
+    "fau_tools/context.py",
+    "fau_tools/coordinates.py",
+    "fau_tools/html.py",
+    "fau_tools/importer.py",
+    "fau_tools/membership.py",
+    "fau_tools/migration.py",
+    "fau_tools/packaging.py",
+    "fau_tools/publishing.py",
+    "fau_tools/questie.py",
+    "fau_tools/release.py",
+    "fau_tools/sources.py",
+    "fau_tools/sync.py",
+    "fau_tools/verify.py",
+    "pyproject.toml",
+    "tests/__init__.py",
+    "tests/catalog_sync_test.py",
+    "tests/catalog_test.py",
+    "tests/character_constraints_test.lua",
+    "tests/complete_catalog_test.lua",
+    "tests/complete_catalog_test.py",
+    "tests/copy_runtime_test.lua",
+    "tests/data_test.py",
+    "tests/eligibility_test.lua",
+    "tests/equipped_comparison_test.lua",
+    "tests/filter_scope_test.lua",
+    "tests/font_test.lua",
+    "tests/independent_review_test.lua",
+    "tests/inspection_test.lua",
+    "tests/migration_test.py",
+    "tests/model_test.lua",
+    "tests/native_contract_test.lua",
+    "tests/native_tooltip_test.lua",
+    "tests/options_test.lua",
+    "tests/package_test.py",
+    "tests/provider_recovery_test.lua",
+    "tests/quest_chain_test.lua",
+    "tests/quest_chain_test.py",
+    "tests/quest_state_test.lua",
+    "tests/quest_taxonomy_test.py",
+    "tests/questie_test.lua",
+    "tests/ranking_test.lua",
+    "tests/recovery_integration_test.py",
+    "tests/reference_ui_test.lua",
+    "tests/reference_widgets_test.lua",
+    "tests/release_test.py",
+    "tests/reputation_recovery_test.lua",
+    "tests/reward_amount_recovery_test.py",
+    "tests/reward_browser_model_test.lua",
+    "tests/reward_usability_test.lua",
+    "tests/run.py",
+    "tests/runtime_test.lua",
+    "tests/search_lifecycle_test.lua",
+    "tests/search_runtime_test.lua",
+    "tests/search_test.lua",
+    "tests/shortlist_test.lua",
+    "tests/shortlist_ui_test.lua",
+    "tests/sidebar_design_test.lua",
+    "tests/sidebar_eligibility_test.lua",
+    "tests/stack_layout_test.lua",
+    "tests/starter_coordinate_recovery_test.py",
+    "tests/tooling_test.py",
+    "tests/validation_guards_test.py",
+    "tests/wow_mock.lua",
+    "uv.lock",
 )
 
 
 def source_files(root=ROOT):
-    """Exact maintained sources; temporary caches and build outputs are excluded."""
-    files = [root / name for name in SOURCE_ROOT]
-    for directory, suffixes in SOURCE_SUFFIXES.items():
-        files.extend(
-            file
-            for file in (root / directory).rglob("*")
-            if file.is_file()
-            and not any(
-                part
-                in {"__pycache__", ".work", ".venv", "build", "dist", ".ruff_cache"}
-                or part.endswith(".egg-info")
-                for part in file.relative_to(root).parts
-            )
-            and file.suffix in suffixes
-            and not any(
-                part.startswith(".")
-                for part in file.relative_to(root / directory).parts
-            )
-        )
+    """Return only declared sources; missing members make the snapshot invalid."""
+    files = [root / name for name in SOURCE_FILES]
+    missing = [
+        file.relative_to(root).as_posix() for file in files if not file.is_file()
+    ]
+    if missing:
+        raise ValueError("Missing declared source files: " + ", ".join(missing))
     return sorted(files)

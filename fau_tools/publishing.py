@@ -143,7 +143,7 @@ def prepare(root=ROOT):
             "--title",
             "FindAnUpgrade " + data["tag"],
             "--notes-file",
-            str(root / "docs/releases" / (data["version"] + ".md")),
+            str(release.release_notes(data, root)),
         )
     # Confirm creation/upload before allowing the CurseForge side effect.
     current = existing(data["tag"])
@@ -293,7 +293,7 @@ def upload(root=ROOT):
             "Immutable GitHub release cannot record upload intent; configure CurseForge before publishing a new version"
         )
     version_id = exact_version(request("/api/game/wow/versions", token), data)
-    notes = root / "docs/releases" / (data["version"] + ".md")
+    notes = release.release_notes(data, root)
     metadata = {
         "displayName": "FindAnUpgrade " + data["tag"],
         "gameVersions": [version_id],

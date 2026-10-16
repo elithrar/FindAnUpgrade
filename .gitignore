@@ -9,7 +9,7 @@ __pycache__/
 .venv/
 .ruff_cache/
 
-# Editable package metadata and interrupted atomic sync writes
+# Python build outputs and interrupted atomic sync writes
 build/
 *.egg-info/
 data/*.sync-*

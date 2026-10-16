@@ -23,7 +23,7 @@ COMMANDS = (
 def trailing_whitespace(root=ROOT):
     """Report source whitespace without altering owned files or evidence."""
     trailing = []
-    for name in ("FindAnUpgrade", "data", "docs", "tests", "fau_tools"):
+    for name in ("FindAnUpgrade", "data", "tests", "fau_tools"):
         for file in (root / name).rglob("*"):
             if not file.is_file() or "__pycache__" in file.parts:
                 continue

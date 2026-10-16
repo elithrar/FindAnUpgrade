@@ -1,5 +1,6 @@
 import json
 import shutil
+import subprocess
 import tempfile
 import unittest
 import zipfile
@@ -116,17 +117,68 @@ class PackageTest(unittest.TestCase):
             path = self.root / directory / "private.txt"
             path.parent.mkdir()
             path.write_text("must not ship")
+        incidental = (
+            "fau_tools/scratch.py",
+            "data/private.json",
+            "data/contracts/local-review.json",
+            "tests/private_test.py",
+            ".github/workflows/private.yml",
+        )
+        for name in incidental:
+            path = self.root / name
+            path.write_bytes(b"must not ship despite its source-like suffix")
         package.build(self.root)
         with zipfile.ZipFile(
             self.root / f"dist/FindAnUpgrade-{self.version}-source.zip"
         ) as z:
             self.assertFalse(any("private.txt" in name for name in z.namelist()))
             prefix = f"FindAnUpgrade-{self.version}-source/"
+            self.assertFalse(
+                set(prefix + name for name in incidental) & set(z.namelist())
+            )
+            self.assertEqual(
+                set(z.namelist()),
+                {
+                    prefix + file.relative_to(ROOT).as_posix()
+                    for file in package.source_files()
+                },
+            )
             for name in ("pyproject.toml", "uv.lock", ".python-version"):
                 self.assertEqual(z.read(prefix + name), (ROOT / name).read_bytes())
             self.assertFalse(
                 any(".work/" in name or ".venv/" in name for name in z.namelist())
             )
+
+    def test_source_archive_rebuilds_without_git_metadata(self):
+        expected = package.build(self.root)
+        source = self.root / "dist" / f"FindAnUpgrade-{self.version}-source.zip"
+        with zipfile.ZipFile(source) as archive:
+            archive.extractall(self.root / "extracted")
+        extracted = self.root / "extracted" / f"FindAnUpgrade-{self.version}-source"
+        self.assertFalse((extracted / ".git").exists())
+        self.assertEqual(package.build(extracted), expected)
+
+    def test_missing_declared_source_cannot_produce_a_source_archive(self):
+        (self.root / "fau_tools/membership.py").unlink()
+        with self.assertRaisesRegex(
+            ValueError, "Missing declared source files: fau_tools/membership.py"
+        ):
+            package.build(self.root)
+        self.assertFalse(
+            (self.root / "dist" / f"FindAnUpgrade-{self.version}-source.zip").exists()
+        )
+
+    def test_source_inventory_covers_every_tracked_maintained_file(self):
+        if not (ROOT / ".git").exists():
+            self.skipTest("Source snapshots intentionally omit Git metadata")
+        tracked = subprocess.check_output(
+            ["git", "ls-files", "-z"], cwd=ROOT, text=True, encoding="utf-8"
+        ).split("\0")
+        maintained = {name for name in tracked if name and (ROOT / name).is_file()}
+        declared = {
+            path.relative_to(ROOT).as_posix() for path in package.source_files()
+        }
+        self.assertEqual(maintained - declared, set())
 
     def test_stray_shipped_file_is_rejected(self):
         (self.root / "FindAnUpgrade/surprise.lua").write_text("print('unreviewed')")

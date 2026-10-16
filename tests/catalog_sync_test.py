@@ -339,19 +339,12 @@ class SyncTests(unittest.TestCase):
 
     def test_staged_snapshot_carries_locked_tooling_without_private_environment(self):
         source = self.root / "source"
-        for name in ("FindAnUpgrade", "data", "docs", "tests", "fau_tools", ".github"):
-            (source / name).mkdir(parents=True)
-        for name in (
-            "AGENTS.md",
-            "README.md",
-            "LICENSE",
-            ".gitignore",
-            ".gitattributes",
-            "pyproject.toml",
-            "uv.lock",
-            ".python-version",
-        ):
-            (source / name).write_bytes(name.encode("utf-8"))
+        from fau_tools.context import SOURCE_FILES
+
+        for name in SOURCE_FILES:
+            path = source / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(name.encode("utf-8"))
         private = source / ".work/venv/private.txt"
         private.parent.mkdir(parents=True)
         private.write_text("private environment", encoding="utf-8")

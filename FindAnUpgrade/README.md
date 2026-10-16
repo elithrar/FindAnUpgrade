@@ -24,9 +24,9 @@ Open an issue before submitting a PR. Unsolicited PRs may be closed.
 
 ## Development
 
-Run `uv run --locked fau check` from the repository root for lint, formatting, tests and a local ZIP in `dist/`.
+Run `uv run --locked python -m fau_tools check` from the repository root for lint, formatting, tests and ZIPs in `dist/`.
 
-See [development setup](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/DEVELOPMENT.md), [database sync](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/DATABASE-SYNC.md) and [validation coverage](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/VALIDATION.md).
+See [AGENTS.md](https://github.com/elithrar/FindAnUpgrade/blob/main/AGENTS.md) for setup, catalog imports and contributor guidance.
 
 ## License
 

@@ -207,7 +207,7 @@ def verify_artifacts(root=ROOT):
     assets = names + ["SHA256SUMS", "package-receipt.json"]
     if data.get("assets") != {name: sha(directory / name) for name in assets}:
         raise ValueError("Release asset receipt changed")
-    notes = root / "docs/releases" / (data["version"] + ".md")
+    notes = release_notes(data, root)
     if (
         not notes.is_file()
         or not notes.read_text(encoding="utf-8").strip()
@@ -217,6 +217,20 @@ def verify_artifacts(root=ROOT):
     return data
 
 
+def release_notes(data, root=ROOT):
+    """Keep the current changelog bound to the exact release version."""
+    path = root / "CHANGELOG.md"
+    if not path.is_file():
+        raise ValueError("Version-specific release notes missing")
+    text = path.read_text(encoding="utf-8")
+    versions = re.findall(r"^## ([0-9]+\.[0-9]+\.[0-9]+)\s*$", text, re.M)
+    if versions != [data["version"]]:
+        raise ValueError(
+            "CHANGELOG must contain only the exact current release version"
+        )
+    return path
+
+
 def prepare(tag, root=ROOT):
     data = metadata(
         tag, (root / "FindAnUpgrade/FindAnUpgrade.toc").read_text(encoding="utf-8")
@@ -224,7 +238,7 @@ def prepare(tag, root=ROOT):
     data["commit"] = check_tag(tag, root)
     check_source_tree(data["commit"], root)
     data["tag_object"] = git("rev-parse", "refs/tags/" + tag, root=root)
-    notes = root / "docs/releases" / (data["version"] + ".md")
+    notes = release_notes(data, root)
     if not notes.is_file() or not notes.read_text(encoding="utf-8").strip():
         raise ValueError("Add version-specific release notes before tagging")
     data["notes_sha256"] = sha(notes)

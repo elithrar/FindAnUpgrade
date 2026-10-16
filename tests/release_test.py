@@ -34,9 +34,9 @@ def artifact_fixture(destination, source=ROOT):
     core.write_text(
         core.read_text().replace('version = "' + version + '"', 'version = "0.1.0"')
     )
-    notes = destination / "docs/releases/0.1.0.md"
+    notes = destination / "CHANGELOG.md"
     notes.parent.mkdir(parents=True, exist_ok=True)
-    notes.write_text("Offline fixture release notes.\n")
+    notes.write_text("# Changelog\n\n## 0.1.0\n\nOffline fixture release notes.\n")
     package.build(destination)
     data = release.metadata("v0.1.0", toc_path.read_text())
     data.update(commit="a" * 40, tag_object="b" * 40, notes_sha256=release.sha(notes))
@@ -55,6 +55,20 @@ def artifact_fixture(destination, source=ROOT):
 
 
 class MetadataTests(unittest.TestCase):
+    def test_changelog_requires_one_exact_version_heading(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            data = {"version": "0.1.0"}
+            with self.assertRaisesRegex(ValueError, "notes missing"):
+                release.release_notes(data, root)
+            path = root / "CHANGELOG.md"
+            for content in ["No version", "## 0.2.0", "## 0.1.0\n## 0.2.0"]:
+                path.write_text(content)
+                with self.assertRaisesRegex(ValueError, "exact current release"):
+                    release.release_notes(data, root)
+            path.write_text("# Changelog\n\n## 0.1.0\n\nCurrent notes\n")
+            self.assertEqual(release.release_notes(data, root), path)
+
     def toc(self, version="0.1.0"):
         return f"## Interface: 16001\n## Version: {version}\n"
 
@@ -344,7 +358,6 @@ class ArtifactTests(unittest.TestCase):
             release.verify_artifacts(self.root)
 
     def test_real_notes_and_version_bump_do_not_break_fixed_fixture(self):
-        # The source already includes its first real notes directory/file.
         toc = self.root / "FindAnUpgrade/FindAnUpgrade.toc"
         toc.write_text(
             toc.read_text().replace("## Version: 0.1.0", "## Version: 0.2.0")
@@ -353,17 +366,13 @@ class ArtifactTests(unittest.TestCase):
         core.write_text(
             core.read_text().replace('version = "0.1.0"', 'version = "0.2.0"')
         )
-        (self.root / "docs/releases/0.2.0.md").write_text(
-            "Future real release notes.\n"
-        )
+        future_notes = "# Changelog\n\n## 0.2.0\n\nFuture real release notes.\n"
+        (self.root / "CHANGELOG.md").write_text(future_notes)
         destination = Path(self.temp_instance.name) / "normalized-fixture"
         data = artifact_fixture(destination, self.root)
         self.assertEqual(data["version"], "0.1.0")
-        self.assertTrue((destination / "docs/releases/0.2.0.md").is_file())
-        self.assertEqual(
-            (self.root / "docs/releases/0.2.0.md").read_text(),
-            "Future real release notes.\n",
-        )
+        self.assertIn("## 0.1.0", (destination / "CHANGELOG.md").read_text())
+        self.assertEqual((self.root / "CHANGELOG.md").read_text(), future_notes)
 
     def test_altered_archive_is_rejected(self):
         archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
@@ -397,21 +406,21 @@ class ArtifactTests(unittest.TestCase):
         git("tag", "-a", "v0.1.0", "-m", "Version")
         commit = release.check_tag("v0.1.0", self.root)
         release.check_source_tree(commit, self.root)
-        ignored = self.root / "docs/.work/untracked-fixture.env"
+        ignored = self.root / "fau_tools/.work/untracked-fixture.env"
         ignored.parent.mkdir()
         ignored.write_bytes(b"private fixture must not ship")
         self.assertEqual(git("status", "--porcelain"), "")
         self.assertNotIn(ignored, self.package.source_files(self.root))
         release.check_source_tree(commit, self.root)
-        # A source-shaped ignored file still cannot enter a tagged release.
-        unknown = self.root / "docs/untracked-fixture.md"
+        # A source-shaped ignored file is excluded from release sources too.
+        unknown = self.root / "data/untracked-fixture.json"
         unknown.write_bytes(b"unreviewed source")
         exclusion = self.root / ".git/info/exclude"
         with exclusion.open("ab") as output:
-            output.write(b"\ndocs/untracked-fixture.md\n")
+            output.write(b"\ndata/untracked-fixture.json\n")
         self.assertEqual(git("status", "--porcelain"), "")
-        with self.assertRaisesRegex(ValueError, "untracked-fixture.md"):
-            release.check_source_tree(commit, self.root)
+        self.assertNotIn(unknown, self.package.source_files(self.root))
+        release.check_source_tree(commit, self.root)
 
     def test_forged_checksums_do_not_allow_extra_payload(self):
         archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
@@ -450,7 +459,7 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "receipt"):
             release.verify_artifacts(self.root)
         path.write_bytes(original)
-        (self.root / "docs/releases/0.1.0.md").write_text("Different notes")
+        (self.root / "CHANGELOG.md").write_text("Different notes")
         with self.assertRaises(ValueError):
             release.verify_artifacts(self.root)
 
@@ -461,8 +470,9 @@ class PublishTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / "dist").mkdir()
-        (self.root / "docs/releases").mkdir(parents=True)
-        (self.root / "docs/releases/0.1.0.md").write_text("Fixture notes")
+        (self.root / "CHANGELOG.md").write_text(
+            "# Changelog\n\n## 0.1.0\n\nFixture notes"
+        )
         self.data = release.metadata("v0.1.0", MetadataTests().toc())
         self.data.update(commit="a" * 40, tag_object="b" * 40)
         self.assets = {}
@@ -742,9 +752,9 @@ class WorkflowTests(unittest.TestCase):
                 for target in node.targets
             )
         )
-        revision = json.loads((ROOT / "docs/client-contracts.json").read_text())[
-            "currentSnapshot"
-        ]["revision"]
+        revision = json.loads(
+            (ROOT / "data/contracts/client-contracts.json").read_text()
+        )["currentSnapshot"]["revision"]
         for name in ["check.yml", "release.yml"]:
             text = (ROOT / ".github/workflows" / name).read_text()
             step = next(
@@ -777,8 +787,7 @@ class WorkflowTests(unittest.TestCase):
                 text.count("persist-credentials: false"),
                 text.count("uses: actions/checkout@"),
             )
-            self.assertIn("fau check", text)
-            self.assertIn("uv run --locked fau check", text)
+            self.assertIn("uv run --locked python -m fau_tools check", text)
             self.assertIn("uv sync --locked", text)
             for step in release.re.split(r"(?m)^      - ", text)[1:]:
                 self.assertTrue(
@@ -796,12 +805,12 @@ class WorkflowTests(unittest.TestCase):
         final_step = publish.split("- name: Publish completed GitHub release", 1)[1]
         self.assertIn("CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}", final_step)
         self.assertLess(
-            publish.index("fau release --verify"),
-            publish.index("fau publish-github"),
+            publish.index("python -m fau_tools release --verify"),
+            publish.index("python -m fau_tools publish-github"),
         )
         self.assertLess(
-            publish.index("fau publish-curseforge"),
-            publish.index("fau publish-github --finalize"),
+            publish.index("python -m fau_tools publish-curseforge"),
+            publish.index("python -m fau_tools publish-github --finalize"),
         )
         self.assertNotIn("git fetch origin", workflow)
 

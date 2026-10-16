@@ -8,7 +8,7 @@ Blizzard textures, atlases, controls and game fonts are referenced from the inst
 
 Questie and QuestieDB are optional installed runtime providers. FindAnUpgrade reads exposed quest identities and associations without bundling their code or database. Their separate packages retain their own licenses.
 
-The bundled classification table contains exact quest IDs, normalized primary status labels and primary category labels from the user-approved evidence. The original 1,194-ID extract is preserved separately; the completed website selection supplies 2,919 exact variants, with a reconciled union of 2,931 classified IDs. The source package preserves normalized facts, identity, hashes and mapping rules in `data/primary-statuses.json`, `data/classification-source.json` and `docs/PROVENANCE.md`. Raw source pages are not included, and no third-party redistribution license is inferred. FindAnUpgrade's BSD-3-Clause grant covers the extraction/generation code, not rights in underlying game content or source evidence.
+The bundled classification table contains exact quest IDs, normalized primary status labels and primary category labels from the user-approved evidence. The original 1,194-ID extract is preserved separately; the completed website selection supplies 2,919 exact variants, with a reconciled union of 2,931 classified IDs. The source package preserves normalized facts, identity, hashes and mapping rules in `data/primary-statuses.json`, `data/classification-source.json` and `data/classification-baseline.json`. Raw source pages are not included, and no third-party redistribution license is inferred. FindAnUpgrade's BSD-3-Clause grant covers the extraction/generation code, not rights in underlying game content or source evidence.
 
 ## Bundled reward catalogue
 
@@ -45,7 +45,7 @@ Selected supplemental numeric starter, restriction and coordinate facts and shor
 identification labels come from [Questie/QuestieDB](https://github.com/Questie/QuestieDB)
 Forever 1.0.6, revision `36ca1ca86f6c1838de479c7c7452eb0a57d5c135`.
 `data/catalog-supplemental-metadata.json` retains archive, member and generated
-source receipts; `docs/STARTER-COORDINATE-RECOVERY.md` records the field policy.
+source receipts; [AGENTS.md](https://github.com/elithrar/FindAnUpgrade/blob/main/AGENTS.md) records the source and field rules.
 No Questie implementation, baked database, raw source or archive is bundled.
 No separate upstream license grant was found in that pinned artifact; the
 repository's BSD grant does not license its source dataset or game content.

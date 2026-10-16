@@ -819,94 +819,129 @@ def load_inputs(root=ROOT):
 
 
 def positive(value):
-    assert type(value) is int and 0 < value < 2**31, "Invalid exact ID"
+    if not (type(value) is int and 0 < value < 2**31):
+        raise AssertionError("Invalid exact ID")
 
 
 def text(value):
-    assert (
+    if not (
         isinstance(value, str)
         and 0 < len(value) <= 100
         and all(ord(c) >= 32 for c in value)
-    ), "Invalid identification label"
+    ):
+        raise AssertionError("Invalid identification label")
 
 
 def validate(source, provenance):
     if source.get("schemaVersion") == 2:
         validate_complete(source, provenance, ROOT)
         return
-    assert source["schemaVersion"] == 1
-    assert source["source"] == {
-        "repository": "ATTWoWAddon/AllTheThings",
-        "revision": PIN,
-        "license": "MIT",
-        "clientBuild": "1.60.1.69893",
-    }
-    assert provenance["revision"] == PIN and provenance["targetBuild"] == "1.60.1.70374"
+    if not (source["schemaVersion"] == 1):
+        raise AssertionError()
+    if not (
+        source["source"]
+        == {
+            "repository": "ATTWoWAddon/AllTheThings",
+            "revision": PIN,
+            "license": "MIT",
+            "clientBuild": "1.60.1.69893",
+        }
+    ):
+        raise AssertionError()
+    if not (
+        provenance["revision"] == PIN and provenance["targetBuild"] == "1.60.1.70374"
+    ):
+        raise AssertionError()
     membership = json.loads(
         (ROOT / "data/catalog-compiled-membership.json").read_bytes()
     )
-    assert membership["source"]["revision"] == PIN and membership["schemaVersion"] == 1
-    assert (
+    if not (
+        membership["source"]["revision"] == PIN and membership["schemaVersion"] == 1
+    ):
+        raise AssertionError()
+    if not (
         provenance["membershipSha256"]
         == hashlib.sha256(
             (ROOT / "data/catalog-compiled-membership.json").read_bytes()
         ).hexdigest()
-    )
+    ):
+        raise AssertionError()
     allowed = {tuple(pair) for pair in membership["pairs"]}
-    assert len(allowed) == len(membership["pairs"]) and all(
-        len(pair) == 2 and all(type(v) is int and v > 0 for v in pair)
-        for pair in allowed
-    )
+    if not (
+        len(allowed) == len(membership["pairs"])
+        and all(
+            len(pair) == 2 and all(type(v) is int and v > 0 for v in pair)
+            for pair in allowed
+        )
+    ):
+        raise AssertionError()
     paths = {row["path"] for row in provenance["files"]}
-    assert "LICENSE" in paths
+    if "LICENSE" not in paths:
+        raise AssertionError()
     for row in provenance["files"]:
-        assert re.fullmatch(r"[a-f0-9]{64}", row["sha256"]) and re.fullmatch(
-            r"[a-f0-9]{40}", row["gitBlob"]
-        )
-        assert row["url"].startswith(
-            "https://github.com/ATTWoWAddon/AllTheThings/blob/" + PIN + "/"
-        )
+        if not (
+            re.fullmatch(r"[a-f0-9]{64}", row["sha256"])
+            and re.fullmatch(r"[a-f0-9]{40}", row["gitBlob"])
+        ):
+            raise AssertionError()
+        if not (
+            row["url"].startswith(
+                "https://github.com/ATTWoWAddon/AllTheThings/blob/" + PIN + "/"
+            )
+        ):
+            raise AssertionError()
     excluded = set()
     for omission in provenance["omissions"]:
-        assert omission["path"] in paths and isinstance(omission["reason"], str)
+        if not (omission["path"] in paths and isinstance(omission["reason"], str)):
+            raise AssertionError()
         if "itemID" in omission:
             positive(omission["id"])
             positive(omission["itemID"])
-            assert type(omission["line"]) is int and omission["line"] > 0
+            if not (type(omission["line"]) is int and omission["line"] > 0):
+                raise AssertionError()
             excluded.add((omission["id"], omission["itemID"]))
-    assert provenance["excludedRewardPairCount"] == len(excluded)
+    if not (provenance["excludedRewardPairCount"] == len(excluded)):
+        raise AssertionError()
     ids = set()
     for row in source["quests"]:
-        assert set(row) <= {
-            "id",
-            "title",
-            "minimum",
-            "maximum",
-            "faction",
-            "classTokens",
-            "races",
-            "eligibilityUnknown",
-            "prerequisites",
-            "prerequisiteCount",
-            "items",
-            "locations",
-            "locationConflict",
-            "sources",
-        }, "Unexpected quest field"
+        if not (
+            set(row)
+            <= {
+                "id",
+                "title",
+                "minimum",
+                "maximum",
+                "faction",
+                "classTokens",
+                "races",
+                "eligibilityUnknown",
+                "prerequisites",
+                "prerequisiteCount",
+                "items",
+                "locations",
+                "locationConflict",
+                "sources",
+            }
+        ):
+            raise AssertionError("Unexpected quest field")
         positive(row["id"])
-        assert row["id"] not in ids
+        if not (row["id"] not in ids):
+            raise AssertionError()
         ids.add(row["id"])
         if "title" in row:
             text(row["title"])
         for key in ("minimum", "maximum"):
             if key in row:
-                assert type(row[key]) is int and 1 <= row[key] <= 200
+                if not (type(row[key]) is int and 1 <= row[key] <= 200):
+                    raise AssertionError()
         if "minimum" in row and "maximum" in row:
-            assert row["minimum"] <= row["maximum"], "Inverted level constraint"
+            if not (row["minimum"] <= row["maximum"]):
+                raise AssertionError("Inverted level constraint")
         if "faction" in row:
-            assert row["faction"] in ("Alliance", "Horde")
+            if row["faction"] not in ("Alliance", "Horde"):
+                raise AssertionError()
         if "classTokens" in row:
-            assert (
+            if not (
                 isinstance(row["classTokens"], list)
                 and row["classTokens"]
                 and all(
@@ -925,68 +960,85 @@ def validate(source, provenance):
                     )
                     for c in row["classTokens"]
                 )
-            )
-            assert len(set(row["classTokens"])) == len(row["classTokens"]), (
-                "Duplicate class constraint"
-            )
+            ):
+                raise AssertionError()
+            if not (len(set(row["classTokens"])) == len(row["classTokens"])):
+                raise AssertionError("Duplicate class constraint")
         if "eligibilityUnknown" in row:
-            assert type(row["eligibilityUnknown"]) is bool
+            if type(row["eligibilityUnknown"]) is not bool:
+                raise AssertionError()
         if "locationConflict" in row:
-            assert type(row["locationConflict"]) is bool
+            if type(row["locationConflict"]) is not bool:
+                raise AssertionError()
         for key in ("prerequisites", "races"):
             if key in row:
-                assert isinstance(row[key], list) and row[key], (
-                    "Invalid constraint array"
-                )
+                if not (isinstance(row[key], list) and row[key]):
+                    raise AssertionError("Invalid constraint array")
             for value in row.get(key, []):
                 positive(value)
-                assert key != "prerequisites" or value != row["id"]
-            assert len(set(row.get(key, []))) == len(row.get(key, [])), (
-                "Duplicate constraint ID"
-            )
+                if not (key != "prerequisites" or value != row["id"]):
+                    raise AssertionError()
+            if not (len(set(row.get(key, []))) == len(row.get(key, []))):
+                raise AssertionError("Duplicate constraint ID")
         if "prerequisiteCount" in row:
-            assert type(row["prerequisiteCount"]) is int and 1 <= row[
-                "prerequisiteCount"
-            ] <= len(row["prerequisites"])
-        assert row["sources"] and all(
-            s["path"] in paths and type(s["line"]) is int and s["line"] > 0
-            for s in row["sources"]
-        )
-        assert row["items"] and len(row["items"]) <= 512
+            if not (
+                type(row["prerequisiteCount"]) is int
+                and 1 <= row["prerequisiteCount"] <= len(row["prerequisites"])
+            ):
+                raise AssertionError()
+        if not (
+            row["sources"]
+            and all(
+                s["path"] in paths and type(s["line"]) is int and s["line"] > 0
+                for s in row["sources"]
+            )
+        ):
+            raise AssertionError()
+        if not (row["items"] and len(row["items"]) <= 512):
+            raise AssertionError()
         item_ids = set()
         for item in row["items"]:
-            assert set(item) <= {"itemID", "name", "quantity", "group"}
+            if not (set(item) <= {"itemID", "name", "quantity", "group"}):
+                raise AssertionError()
             positive(item["itemID"])
-            assert item["itemID"] not in item_ids
+            if not (item["itemID"] not in item_ids):
+                raise AssertionError()
             item_ids.add(item["itemID"])
-            assert (row["id"], item["itemID"]) in allowed, (
-                "Association absent from pinned compiled cross-check"
-            )
-            assert (row["id"], item["itemID"]) not in excluded, (
-                "Excluded input/acquisition pair reintroduced"
-            )
+            if (row["id"], item["itemID"]) not in allowed:
+                raise AssertionError(
+                    "Association absent from pinned compiled cross-check"
+                )
+            if not ((row["id"], item["itemID"]) not in excluded):
+                raise AssertionError("Excluded input/acquisition pair reintroduced")
             if "name" in item:
                 text(item["name"])
             if "quantity" in item:
                 positive(item["quantity"])
             if "group" in item:
-                assert item["group"] in ("guaranteed", "choice")
+                if item["group"] not in ("guaranteed", "choice"):
+                    raise AssertionError()
             # This source only establishes associations. A future observed source
             # needs a schema/provenance update before counts/groups are accepted.
-            assert "quantity" not in item and "group" not in item
+            if not ("quantity" not in item and "group" not in item):
+                raise AssertionError()
         for location in row.get("locations", []):
-            assert set(location) <= {"npcID", "name", "mapID", "x", "y"}
+            if not (set(location) <= {"npcID", "name", "mapID", "x", "y"}):
+                raise AssertionError()
             positive(location["npcID"])
             if "name" in location:
                 text(location["name"])
             if "mapID" in location:
                 positive(location["mapID"])
-                assert all(
-                    type(location[k]) in (int, float) and 0 <= location[k] <= 1
-                    for k in ("x", "y")
-                )
+                if not (
+                    all(
+                        type(location[k]) in (int, float) and 0 <= location[k] <= 1
+                        for k in ("x", "y")
+                    )
+                ):
+                    raise AssertionError()
             else:
-                assert "x" not in location and "y" not in location
+                if not ("x" not in location and "y" not in location):
+                    raise AssertionError()
 
 
 def lua(value):
@@ -1138,8 +1190,8 @@ def coverage(source, output):
     }
 
 
-def generate_main(argv=None):
-    parser = argparse.ArgumentParser()
+def generate_main(argv=None, *, prog=None):
+    parser = argparse.ArgumentParser(prog=prog)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args(argv)
     source, provenance = load_inputs()
@@ -1150,7 +1202,8 @@ def generate_main(argv=None):
         (ROOT / "data/catalog-coverage.json", report),
     ):
         if args.check:
-            assert path.read_bytes() == data, str(path) + " is stale"
+            if not (path.read_bytes() == data):
+                raise AssertionError(str(path) + " is stale")
         else:
             path.write_bytes(data)
     print(report.decode().strip())
