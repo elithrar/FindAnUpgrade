@@ -59,4 +59,4 @@ jobs:
       - name: Install locked development dependencies
         run: uv sync --locked
       - name: Test and package exact payload
-        run: uv run --locked python tools/verify.py
+        run: uv run --locked fau check

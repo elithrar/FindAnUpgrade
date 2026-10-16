@@ -1,14 +1,13 @@
 import copy
 import hashlib
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
+from fau_tools import classification as taxonomy
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import quest_taxonomy as taxonomy  # noqa: E402 - local tools require the repository path above
 
 
 class TaxonomyTest(unittest.TestCase):
@@ -51,7 +50,7 @@ class TaxonomyTest(unittest.TestCase):
         return receipt
 
     def test_owned_exact_tags_and_receipts(self):
-        document = taxonomy.load(ROOT)
+        document = taxonomy.load_taxonomy(ROOT)
         self.assertEqual(len(document["records"]), 36)
         self.assertEqual(
             [row["id"] for row in document["records"] if row["tagID"] == 81],
@@ -133,11 +132,11 @@ class TaxonomyTest(unittest.TestCase):
         document = taxonomy.acquire(self.cache, self.primary)
         document["records"].append(copy.deepcopy(document["records"][0]))
         with self.assertRaises(ValueError):
-            taxonomy.validate(document, self.primary)
+            taxonomy.validate_taxonomy(document, self.primary)
 
     def test_generator_emits_only_separate_exact_type_lookup(self):
         self.page(1, 81)
-        output = taxonomy.render(taxonomy.acquire(self.cache, self.primary))
+        output = taxonomy.render_taxonomy(taxonomy.acquire(self.cache, self.primary))
         self.assertEqual(output, "N.QuestTags = {\n    [1] = 81,\n}\n")
         self.assertNotIn("status", output)
 
@@ -146,11 +145,11 @@ class TaxonomyTest(unittest.TestCase):
         document = taxonomy.acquire(self.cache, self.primary)
         document["schemaVersion"] = True
         with self.assertRaises(ValueError):
-            taxonomy.validate(document, self.primary)
+            taxonomy.validate_taxonomy(document, self.primary)
         document["schemaVersion"] = 1
         self.primary["sources"].append(copy.deepcopy(self.primary["sources"][0]))
         with self.assertRaises(ValueError):
-            taxonomy.validate(document, self.primary)
+            taxonomy.validate_taxonomy(document, self.primary)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 Merging does not publish. The workflow publishes only after an explicitly requested annotated `vX.Y.Z` tag push or a manual **Release addon** run for an existing tag. This implementation has not been released or uploaded.
 
-Before a release, complete the live checks in [VALIDATION.md](VALIDATION.md), align `FindAnUpgrade/FindAnUpgrade.toc` and `FindAnUpgrade/Core.lua`, add `docs/releases/<version>.md`, and pass **Check addon**. The tagged commit must be reachable from `origin/main`. Version-specific notes are present for 0.1.14; live verification remains pending. Only stable semantic versions are supported by this workflow.
+Before a release, complete the live checks in [VALIDATION.md](VALIDATION.md), align `FindAnUpgrade/FindAnUpgrade.toc` and `FindAnUpgrade/Core.lua`, add `docs/releases/<version>.md`, and pass **Check addon**. The tagged commit must be reachable from `origin/main`. Live verification remains pending. Only stable semantic versions are supported by this workflow.
 
 After release approval, create and push an annotated matching tag. Never move a published tag; corrections need a new version. A manual run for the same tag resumes a partial upload without overwriting existing assets. A dirty or untracked checkout is rejected; every packaged source member must also match a tracked blob in the tag, including files hidden by ignore rules.
 
@@ -15,12 +15,10 @@ GitHub receives the addon ZIP, source ZIP, SHA256SUMS, package receipt and relea
 Before the first CurseForge publication, subsequent user-authorized iterations
 primarily use direct `main` commits and patch bumps (for example, `0.1.0` to
 `0.1.3`). Complete independent review when requested, fix findings and pass
-`uv run --locked python tools/verify.py` before committing and pushing; verify main CI afterward.
+`uv run --locked fau check` before committing and pushing; verify main CI afterward.
 Use a reviewed PR when branch protection requires one and never bypass required
 checks. An existing PR still needs applicable merge authorization. This iteration
 workflow does not authorize publication, credentials, release tags or installation.
-PR #2's unpublished finder candidate uses `0.1.1`; its earlier `0.2.0` build label
-was replaced before merge to follow this workflow.
 
 Merge and installation may be authorized separately from this default workflow.
 An authorized installation must use the final validated package and record the
@@ -48,8 +46,8 @@ Before the single upload POST, `curseforge-upload-pending.json` is appended to t
 
 ```sh
 uv sync --locked
-uv run --locked python tests/release_test.py
-uv run --locked python tools/verify.py
+uv run --locked python -m unittest discover -s tests -p release_test.py
+uv run --locked fau check
 ```
 
-Release tests use disposable local Git repositories and mocked network calls. They exercise tag ancestry, exact artifact checks, receipts, uncertain retries and missing settings without contacting GitHub or CurseForge. Adding workflows does not establish that a hosted run or real upload succeeded; both remain untested until a future authorized run.
+Release tests use disposable local Git repositories and mocked network calls. They exercise tag ancestry, exact artifact checks, receipts, uncertain retries and missing settings without contacting GitHub or CurseForge. Hosted validation has passed for prior iterations; real release API calls and uploads remain untested until a future authorized release.

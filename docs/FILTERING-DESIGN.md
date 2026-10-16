@@ -1,6 +1,6 @@
 # Finder scope and eligibility
 
-Design for the accepted second phase in `plan.md`, official Forever
+Finder behavior for official Forever
 1.60.1.70374, interface 16001. This audit changes no classification, rewards or
 availability facts. Implementation follows the full addon identity rename.
 
@@ -93,7 +93,7 @@ The approved implementation stores these 36 explicit facts in
   diagnostic rather than guessed. Conflicting or disappeared explicit source
   types abort a reparse for review; partial caches preserve previous exact IDs.
 
-`python tools/quest_taxonomy.py --check` validates the owned facts offline.
+`uv run --locked fau data tags --check` validates the owned facts offline.
 An explicit `--primary-cache <directory>` imports only pages whose exact URL,
 bytes and SHA-256 match `catalog-primary-records.json`. No download or JavaScript
 execution occurs. Staged catalog sync imports taxonomy after the optional primary

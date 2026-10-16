@@ -1,12 +1,12 @@
 # Catalog acquisition and sync
 
-Run these commands from a FindAnUpgrade source checkout after the locked uv
+Run these commands after the locked uv
 setup in [DEVELOPMENT.md](DEVELOPMENT.md). No website checkout, game installation,
 credentials or upstream Lua execution is required.
 
 ```powershell
 uv sync --locked
-uv run --locked python tools/sync_catalog.py check
+uv run --locked fau sync check
 ```
 
 `check` works offline from tracked normalized inputs. It reproduces the data,
@@ -17,7 +17,7 @@ which ran. Neither mocks nor inspected source establish in-game behavior.
 ## Refresh and reuse
 
 ```powershell
-uv run --locked python tools/sync_catalog.py refresh
+uv run --locked fau sync refresh
 ```
 
 This acquires the pinned QuestieDB Forever artifact and ATT authoring and compiled files, refreshes the whole
@@ -37,8 +37,8 @@ runs until detail collection succeeds. Unreceipted files are fetched again;
 receipt mismatches fail instead of trusting altered bytes.
 
 ```powershell
-uv run --locked python tools/sync_catalog.py refresh --refresh-details
-uv run --locked python tools/sync_catalog.py refresh --max-age-hours 6
+uv run --locked fau sync refresh --refresh-details
+uv run --locked fau sync refresh --max-age-hours 6
 ```
 
 The first forces detail revalidation, including changes not visible in index
@@ -49,16 +49,24 @@ no fixed record cap: counts, page coverage, exact membership and duplicate
 dispositions must reconcile. Ordinary visible name filters repair pagination
 ties; an unresolved count or changed row during collection stops the refresh.
 
-To reparse existing owned caches without network:
+To inspect an offline import without changing tracked facts:
 
 ```powershell
-uv run --locked python tools/sync_catalog.py reparse
+uv run --locked fau import
+```
+
+This reparses existing owned caches into an isolated stage, writes the diff and
+runs the full verifier there. The stage remains in `.work/catalog-sync/`; no
+owned output is replaced. To validate and apply an offline reparse:
+
+```powershell
+uv run --locked fau sync reparse
 ```
 
 For caches acquired before this default layout, provide their paths explicitly:
 
 ```powershell
-uv run --locked python tools/sync_catalog.py reparse --public-root .work/comprehensive-source --authoring-root .work/att-source --compiled-root .work/att-generated
+uv run --locked fau sync reparse --public-root .work/comprehensive-source --authoring-root .work/att-source --compiled-root .work/att-generated
 ```
 
 The same three overrides work with `refresh`. Optional `--questie-root PATH`
@@ -135,7 +143,7 @@ Prerequisite facts are owned by `data/catalog-chain-records.json`. The importer
 uses the pinned QuestieDB Forever final artifact and matching authored
 corrections, preserves per-field authority and stronger optional-link overrides,
 and withholds self references. Inherited group semantics remain nonblocking.
-`tools/quest_chains.py --source-root .work/starter-recovery/questie-source`
+`uv run --locked fau chains --source-root .work/starter-recovery/questie-source`
 rebuilds from the owned cache. Only explicit refresh acquisition uses its
 `--acquire` switch; offline reparse fails clearly if the pinned authored cache
 is missing. Runtime and ordinary offline checks use frozen normalized inputs
@@ -154,8 +162,32 @@ dependencies never enter source or addon ZIPs.
 Review `dist/catalog-sync-diff.json`, `data/catalog-reconciliation.json` and
 `data/catalog-coverage.json`; require independent review for parser or authority
 changes. Fix concrete findings, bump the patch version for an authorized
-iteration, and run `uv run --locked python tools/verify.py` again before commit/push. Follow
+iteration, and run `uv run --locked fau check` again before commit/push. Follow
 `RELEASING.md` and applicable authorization for CI and any exact-commit install.
 This sync workflow itself grants no release, installation or game-action
 permission. Pending native rendering, transitions and combat/taint checks stay
 explicit in `VALIDATION.md`.
+
+## Owned inputs and generated projections
+
+| Files in `data/` | Role |
+| --- | --- |
+| `classification-source.json`, `classification-baseline.json` | Frozen exact-variant source and original authority; required to regenerate classifications without the website checkout |
+| `primary-statuses.json`, `classification-reconciliation.json`, `quest-taxonomy.json` | Checked classification/category projections and reconciliation |
+| `catalog-source.json`, `catalog-sources.json`, `catalog-compiled-membership.json` | Pinned ATT baseline facts, source/license hashes and independent compiled-membership cross-check; retained for reproducible base imports and regression coverage |
+| `catalog-public-records.json`, `catalog-metadata-records.json`, `catalog-compiled-quests.json`, `catalog-primary-records.json`, `catalog-client-evidence.json`, `catalog-supplemental-metadata.json`, `catalog-chain-records.json` | Normalized source-specific facts and receipts, retained separately to preserve per-field authority and to recheck conflicts |
+| `catalog-identity-history.json`, `catalog-gap-evidence.json` | Monotonic accepted identities and explicit missing/unconfirmed evidence; not disposable missing-value caches |
+| `catalog-complete-source.json`, `catalog-complete-sources.json`, `catalog-reconciliation.json`, `catalog-coverage.json` | Canonical catalog, normalized-input hashes, cause partitions and generated coverage; offline checks reproduce them |
+
+`FindAnUpgrade/Data/Quests.lua` and `Catalog.lua` are deterministic shipped
+projections. Raw HTML/archives/client fixtures are ignored `.work/` inputs;
+packages, validation evidence and sync diffs are ignored `dist/` outputs. The
+shared source inventory in `fau_tools/context.py` governs both staging and source
+ZIPs. Neither path copies local environments, caches, old review logs or build
+metadata. No normalized input is removed as an apparent duplicate merely
+because it overlaps a generated catalog.
+
+From another directory, use `uv run --project <checkout> --locked fau ...`.
+Defaults resolve inside that checkout; explicit input paths are caller-relative.
+Advanced acquisition/import commands remain available through `fau --help`; the
+normal refresh/import workflow calls them in the correct order automatically.

@@ -3,7 +3,7 @@
 -- propagates effective visibility and focus events, and applies the actual
 -- pinned tooltip backdrop mixin. Glyph measurements remain offline estimates.
 PASSED=0
-local function test(name,fn) fn(); PASSED=PASSED+1; print("PASS "..name) end
+local function test(name,fn) if fn()==false then print("SKIP "..name..": pinned fixture absent");return end; PASSED=PASSED+1; print("PASS "..name) end
 local function close(a,b) return math.abs(a-b)<.0001 end
 local fractions={TOPLEFT={0,1},TOP={.5,1},TOPRIGHT={1,1},LEFT={0,.5},CENTER={.5,.5},RIGHT={1,.5},BOTTOMLEFT={0,0},BOTTOM={.5,0},BOTTOMRIGHT={1,0}}
 local function read(path)
@@ -198,7 +198,7 @@ test("options parent hide and reopen propagate complete child lifecycle",functio
 end)
 
 test("actual intrinsic SetupMenu generates shown controls under a hidden shell",function()
-    if not nativeDropdown then return end
+    if not nativeDropdown then return false end
     local N,W=fixture(); N.Options:Create(N.Core); local O=N.Options
     assert(not O.frame:IsShown() and O.modifier:IsShown() and not O.modifier:IsVisible())
     assert(O.modifier.menuGenerations>=1 and O.modifier.Text:GetText()=="Shift",
@@ -254,7 +254,7 @@ test("native slider clamping does not let direct input escape option bounds",fun
 end)
 
 test("actual pinned backdrop mixin applies native center color for quest cards",function()
-    if not nativeBackdrop then return end
+    if not nativeBackdrop then return false end
     local N,W=fixture(); N.Stack:Create(); local card=N.Stack:Card(1)
     assert(card.NineSlice.sharpeningDisabled and card.NineSlice.centerColor[4]==.8)
     card:SetBackdropColor(.12,.15,.19,.8)

@@ -18,7 +18,7 @@ identification labels. Historical giver/restriction metadata is derived from ATT
 copyright, permission and warranty notice is in `Data/ATT-LICENSE.txt`.
 
 The ATT source snapshot targets `1.60.1.69893`; FindAnUpgrade targets official Forever
-`1.60.1.70374` / interface `16001`. Public item groups, quantities, base amounts
+`1.60.1.70425` / interface `16001`. Public item groups, quantities, base amounts
 and identification labels come from the explicitly labelled Forever columns of
 [Forever vs Classic](https://www.forevervsclassic.com/quests), collected on
 2026-10-15. Previously retained exact Forever Wowhead pages independently
@@ -36,8 +36,8 @@ by these sources. Classification remains a separate exact-ID source.
 Matching preferred source, source-file hashes and deterministic generation tools
 are in the repository's `data/catalog-complete-source.json`,
 `data/catalog-complete-sources.json`, `data/catalog-reconciliation.json`,
-`data/catalog-coverage.json`, `tools/import_complete_catalog.py` and
-`tools/generate_catalog.py`. No ATT runtime, artwork, lore or raw harvest outputs
+`data/catalog-coverage.json`, `fau_tools/importer.py` and
+`fau_tools/catalog.py`. No ATT runtime, artwork, lore or raw harvest outputs
 are included. Original FindAnUpgrade code retains the repository's BSD-3-Clause
 license; this attribution does not claim BSD authorship of the ATT-derived data.
 

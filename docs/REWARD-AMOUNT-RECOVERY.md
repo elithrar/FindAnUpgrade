@@ -7,7 +7,7 @@ amount field did not establish a zero award.
 
 ## Parser repairs
 
-`tools/catalog_html.py` now accepts the source's explicit unsigned zero
+`fau_tools/html.py` now accepts the source's explicit unsigned zero
 reputation lines, such as `0 reputation with Gelkis Clan Centaur`. The old
 parser required a `+` or `-` prefix and silently skipped these observations.
 Reparsing the complete retained corpus recovers **64 zero-valued faction
@@ -60,9 +60,9 @@ or 3 gold 50 silver by assumption.
 Every imported public row retains the exact URL, source SHA-256 and byte count
 in [catalog-public-records.json](../data/catalog-public-records.json). Primary
 receipts remain in [catalog-primary-records.json](../data/catalog-primary-records.json).
-Normal `sync_catalog.py reparse` and `refresh` use these parser repairs, so they
+Normal `fau sync reparse` and `refresh` use these parser repairs, so they
 persist without a hand-maintained per-ID reward patch. Run the focused checks
-with `python tests/reward_amount_recovery_test.py`; the normal verifier includes
+with `uv run --locked python -m unittest discover -s tests -p reward_amount_recovery_test.py`; the normal verifier includes
 them as part of the full validation.
 
 ## Remaining source limits

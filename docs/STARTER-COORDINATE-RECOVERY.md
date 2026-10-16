@@ -7,7 +7,7 @@ still apply. Classification is independently owned by `primary-statuses.json`.
 
 ## Repeatable inputs
 
-`tools/questie_metadata.py` acquires the public **QuestieDB 1.0.6 Forever**
+`fau_tools/questie.py` acquires the public **QuestieDB 1.0.6 Forever**
 artifact at revision `36ca1ca86f6c1838de479c7c7452eb0a57d5c135`. The release
 ZIP SHA-256 is
 `d78b066c362eaf28258d9e2d041c0a7b03d6943a2dfc741dec70c6bfd8e1fc27`.
@@ -17,8 +17,8 @@ blobs and per-file SHA-256/size receipts. Raw code and archives stay in `.work/`
 only selected facts and receipts enter normalized inputs.
 
 ```powershell
-python tools/questie_metadata.py acquire --source-root .work/catalog-cache/questie
-python tools/questie_metadata.py reparse --source-root .work/catalog-cache/questie --catalog PATH_TO_FRESH_BASE.json --output .work/questie-metadata.json
+uv run --locked fau metadata acquire --source-root .work/catalog-cache/questie
+uv run --locked fau metadata reparse --source-root .work/catalog-cache/questie --catalog PATH_TO_FRESH_BASE.json --output .work/questie-metadata.json
 ```
 
 The base must be rebuilt **without** this supplemental provider. Reading the
@@ -110,5 +110,5 @@ race/class masks and Skyborne bits, dynamic restriction writes, unknown-bit
 failure, source point survival, source conflicts, preserved faction scopes,
 mobile/phase/map rejection, retained primary marker ownership and repeat
 imports from a fresh base. Broader canonical, package and runtime checks run
-through `python tools/verify.py`. Native rendering, physical input, actual
+through `uv run --locked fau check`. Native rendering, physical input, actual
 map placement and combat/taint behavior require client observations.

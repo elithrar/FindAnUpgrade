@@ -1,10 +1,6 @@
 # FindAnUpgrade sidebar native contracts
 
-Read-only construction audit for the sidebar iteration in `plan.md`. Inspected
-all five supplied screenshots (`135549`, `135550`, `135551`, `135553`, `135555`)
-and the installed MONOLITH XPIsland/AsTheCrowFlies constructors. The two middle
-full-window captures are identical. Their checkbox separation, shallow search
-border, white quest names and small icons match the reported defects.
+Maintained source contracts for sidebar construction and native controls.
 
 Target: official Forever 1.60.1.70374, interface 16001, Gethe UI-source commit
 `735496de78ebd30ce816a0637982c556987f258c`. Newly retrieved definitions were

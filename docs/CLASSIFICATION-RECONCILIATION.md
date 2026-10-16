@@ -24,13 +24,13 @@ and catalog refresh use the owned frozen inputs below.
 From the repository root:
 
 ```text
-python tools/import_classifications.py --check
-python tools/generate_data.py --check
+uv run --locked fau data classify --check
+uv run --locked fau data quests --check
 ```
 
 Omit `--check` to regenerate owned outputs from the normalized source and baseline.
 For an explicit replacement with a completed website snapshot, use
-`python tools/import_classifications.py --website-root <checkout>` first, inspect
+`uv run --locked fau data classify --website-root <checkout>` first, inspect
 the source receipts and reconciliation, then regenerate the Lua table and run
 the normal verifier. No source checkout is needed after import. A changed shared
 ID status, unexplained missing baseline ID, duplicate primary category, wrong

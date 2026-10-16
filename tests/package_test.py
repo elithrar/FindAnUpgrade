@@ -1,4 +1,3 @@
-import importlib.util
 import json
 import shutil
 import tempfile
@@ -6,10 +5,9 @@ import unittest
 import zipfile
 from pathlib import Path
 
+from fau_tools import packaging as package
+
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("package", ROOT / "tools/package.py")
-package = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(package)
 
 
 class PackageTest(unittest.TestCase):
@@ -73,9 +71,9 @@ class PackageTest(unittest.TestCase):
                 "data/catalog-compiled-quests.json",
                 "data/catalog-primary-records.json",
                 "data/catalog-client-evidence.json",
-                "tools/generate_catalog.py",
-                "tools/import_complete_catalog.py",
-                "tools/collect_catalog_sources.py",
+                "fau_tools/catalog.py",
+                "fau_tools/importer.py",
+                "fau_tools/sources.py",
             ]:
                 self.assertEqual(z.read(prefix + name), (self.root / name).read_bytes())
 

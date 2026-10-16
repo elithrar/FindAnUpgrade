@@ -12,20 +12,21 @@ from pathlib import Path
 from unittest import mock
 from urllib.error import HTTPError
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import acquire_catalog_sources as acquire  # noqa: E402 - local tools require the repository path above
-import collect_catalog_sources as collect  # noqa: E402 - local tools require the repository path above
-import sync_catalog as sync  # noqa: E402 - local tools require the repository path above
-from complete_catalog import enrich_locations  # noqa: E402 - local tools require the repository path above
-from coordinate_bindings import recover_file  # noqa: E402 - local tools require the repository path above
-from import_catalog import bounds, literal, tokenize  # noqa: E402 - local tools require the repository path above
-from import_complete_catalog import (  # noqa: E402 - local tools require the repository path above
+from fau_tools import sources as acquire
+from fau_tools import sources as collect
+from fau_tools import sync as sync
+from fau_tools.att import bounds, literal, tokenize
+from fau_tools.catalog import enrich_locations
+from fau_tools.coordinates import recover_file
+from fau_tools.importer import (
     compiled_ids,
     compiled_locations,
     compiled_quest_variants,
+    ordered_inputs,
     source_bytes,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class Response:
@@ -139,7 +140,7 @@ class SyncTests(unittest.TestCase):
                 ),
                 contextlib.redirect_stdout(io.StringIO()),
             ):
-                collect.main()
+                collect.public_main()
 
         with mock.patch.object(collect, "urlopen", side_effect=fetch):
             command("index")
@@ -321,14 +322,28 @@ class SyncTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "outside cache"):
             source_bytes(self.root, {"file": "../private.html"})
 
+    def test_provenance_retains_owned_order_and_sorts_new_keys(self):
+        previous = {"public": {}, "metadata": {}, "supplemental": {}, "chains": {}}
+        inputs = {
+            "chains": {"sha256": "c"},
+            "public": {"sha256": "p"},
+            "supplemental": {"sha256": "s"},
+            "zeta": {},
+            "alpha": {},
+        }
+        ordered = ordered_inputs(inputs, previous)
+        self.assertEqual(
+            list(ordered), ["public", "supplemental", "chains", "alpha", "zeta"]
+        )
+        self.assertEqual(ordered, inputs)
+
     def test_staged_snapshot_carries_locked_tooling_without_private_environment(self):
         source = self.root / "source"
-        for name in ("FindAnUpgrade", "data", "docs", "tests", "tools", ".github"):
+        for name in ("FindAnUpgrade", "data", "docs", "tests", "fau_tools", ".github"):
             (source / name).mkdir(parents=True)
         for name in (
             "AGENTS.md",
             "README.md",
-            "plan.md",
             "LICENSE",
             ".gitignore",
             ".gitattributes",

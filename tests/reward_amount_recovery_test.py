@@ -1,15 +1,14 @@
 """Reward evidence regressions: explicit amounts versus absent source fields."""
 
 import json
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
+from fau_tools.html import primary_reward_values, quest_detail, reward_amount_line
+from fau_tools.importer import primary_records
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-from catalog_html import primary_reward_values, quest_detail, reward_amount_line  # noqa: E402 - local tools require the repository path above
-from import_complete_catalog import primary_records  # noqa: E402 - local tools require the repository path above
 
 
 def page(body, before="", after=""):

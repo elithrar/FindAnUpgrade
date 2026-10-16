@@ -132,4 +132,6 @@ if file then file:close()
         W.Event("ADDON_LOADED","FindAnUpgrade"); W.Offer(92124); assert(tinted() and QuestFrameDetailPanel.Bg.atlas=="QuestBG-Parchment")
         W.Offer(783); assert(normal()); assert(QuestFrameDetailPanel.fadingProgress==1024)
     end)
+else
+    print("SKIP actual pinned Forever detail renderer and material setter integrate: pinned fixture absent")
 end

@@ -74,12 +74,12 @@ jobs:
       - name: Install locked development dependencies
         run: uv sync --locked
       - name: Test and package exact payload
-        run: uv run --locked python tools/verify.py
+        run: uv run --locked fau check
       - name: Verify annotated tag, main ancestry, version and exact build
         id: metadata
         env:
           GH_TOKEN: ${{ github.token }}
-        run: uv run --locked python tools/release.py
+        run: uv run --locked fau release
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release-package
@@ -118,22 +118,22 @@ jobs:
       - name: Refresh main ancestry and reject moved tags
         env:
           GH_TOKEN: ${{ github.token }}
-        run: uv run --locked python tools/release.py --verify
+        run: uv run --locked fau release --verify
       - name: Prepare and confirm exact GitHub draft assets
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: uv run --locked python tools/publish_github.py
+        run: uv run --locked fau publish-github
       - name: Upload exact Forever package when CurseForge is configured
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: uv run --locked python tools/publish_curseforge.py
+        run: uv run --locked fau publish-curseforge
       - name: Publish completed GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: uv run --locked python tools/publish_github.py --finalize
+        run: uv run --locked fau publish-github --finalize

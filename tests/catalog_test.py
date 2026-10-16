@@ -3,7 +3,6 @@
 import contextlib
 import copy
 import hashlib
-import importlib.util
 import io
 import json
 import shutil
@@ -13,18 +12,12 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from fau_tools import att as IMPORT
+from fau_tools import catalog as GENERATE
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def module(name):
-    spec = importlib.util.spec_from_file_location(name, ROOT / "tools" / (name + ".py"))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-IMPORT = module("import_catalog")
-GENERATE = module("generate_catalog")
 SOURCE = json.loads((ROOT / "data/catalog-source.json").read_bytes())
 PROVENANCE = json.loads((ROOT / "data/catalog-sources.json").read_bytes())
 

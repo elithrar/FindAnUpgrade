@@ -5,23 +5,22 @@ import json
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
+from fau_tools import publishing as cf
+from fau_tools import publishing as github
+from fau_tools import release as release
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import publish_curseforge as cf  # noqa: E402 - local tools require the repository path above
-import publish_github as github  # noqa: E402 - local tools require the repository path above
-import release  # noqa: E402 - local tools require the repository path above
 
 
 def artifact_fixture(destination, source=ROOT):
     """Create an isolated fixed-version fixture, independent of real releases."""
-    import package
+    from fau_tools import packaging as package
 
     for file in package.source_files(source):
         target = destination / file.relative_to(source)
@@ -286,7 +285,7 @@ class MetadataTests(unittest.TestCase):
 class ArtifactTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        import package
+        from fau_tools import packaging as package
 
         cls.package = package
         cls.temp = tempfile.TemporaryDirectory(dir=ROOT / ".work")
@@ -377,7 +376,9 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unexpected release ZIP"):
             release.verify_artifacts(self.root)
 
-    def test_ignored_source_member_absent_from_tag_is_rejected(self):
+    def test_ignored_private_files_are_excluded_and_untracked_sources_are_rejected(
+        self,
+    ):
         def git(*args):
             return release.git(*args, root=self.root)
 
@@ -400,7 +401,16 @@ class ArtifactTests(unittest.TestCase):
         ignored.parent.mkdir()
         ignored.write_bytes(b"private fixture must not ship")
         self.assertEqual(git("status", "--porcelain"), "")
-        with self.assertRaisesRegex(ValueError, "untracked-fixture.env"):
+        self.assertNotIn(ignored, self.package.source_files(self.root))
+        release.check_source_tree(commit, self.root)
+        # A source-shaped ignored file still cannot enter a tagged release.
+        unknown = self.root / "docs/untracked-fixture.md"
+        unknown.write_bytes(b"unreviewed source")
+        exclusion = self.root / ".git/info/exclude"
+        with exclusion.open("ab") as output:
+            output.write(b"\ndocs/untracked-fixture.md\n")
+        self.assertEqual(git("status", "--porcelain"), "")
+        with self.assertRaisesRegex(ValueError, "untracked-fixture.md"):
             release.check_source_tree(commit, self.root)
 
     def test_forged_checksums_do_not_allow_extra_payload(self):
@@ -546,7 +556,7 @@ class PublishTests(unittest.TestCase):
         }
 
     def test_success_records_confirmed_intent_before_one_post_and_receipt_after(self):
-        self.assertTrue(cf.main(self.root))
+        self.assertTrue(cf.upload(self.root))
         post = next(
             i
             for i, c in enumerate(self.calls)
@@ -570,7 +580,7 @@ class PublishTests(unittest.TestCase):
 
     def test_receipt_validated_before_duplicate_upload_is_skipped(self):
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
-        self.assertTrue(cf.main(self.root))
+        self.assertTrue(cf.upload(self.root))
         self.assertEqual(cf.request.call_count, 0)
         for key, value in [
             ("sha256", "bad"),
@@ -582,17 +592,17 @@ class PublishTests(unittest.TestCase):
                 {**self.receipt(), key: value}
             ).encode()
             with self.assertRaises(ValueError):
-                cf.main(self.root)
+                cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
     def test_pending_and_immutable_block_post(self):
         self.assets["curseforge-upload-pending.json"] = b"intent"
         with self.assertRaisesRegex(ValueError, "unresolved"):
-            cf.main(self.root)
+            cf.upload(self.root)
         del self.assets["curseforge-upload-pending.json"]
         self.current["immutable"] = True
         with self.assertRaisesRegex(ValueError, "Immutable"):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
     def test_timeout_is_never_retried(self):
@@ -605,16 +615,16 @@ class PublishTests(unittest.TestCase):
 
         cf.request.side_effect = failure
         with self.assertRaises(TimeoutError):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 2)
         self.assertIn("curseforge-upload-pending.json", self.assets)
         self.assertNotIn("curseforge-receipt.json", self.assets)
 
     def test_missing_settings_skip_without_network(self):
         with patch.dict(os.environ, {"CF_API_KEY": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
         with patch.dict(os.environ, {"CF_PROJECT_ID": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
         self.assertEqual(cf.request.call_count, 0)
         self.assertEqual(self.calls, [])
 
@@ -650,7 +660,7 @@ class PublishTests(unittest.TestCase):
     def test_unresolved_upload_blocks_github_finalize_when_settings_removed(self):
         self.assets["curseforge-upload-pending.json"] = b"intent"
         with patch.dict(os.environ, {"CF_API_KEY": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
             with self.assertRaisesRegex(ValueError, "Unresolved"):
                 github.finalize(self.root)
         self.assertEqual(self.calls, [])
@@ -668,7 +678,7 @@ class PublishTests(unittest.TestCase):
         ]:
             self.assets["curseforge-receipt.json"] = json.dumps(receipt).encode()
             with patch.dict(os.environ, {"CF_API_KEY": ""}):
-                self.assertFalse(cf.main(self.root))
+                self.assertFalse(cf.upload(self.root))
                 with self.assertRaises(ValueError):
                     github.finalize(self.root)
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
@@ -682,7 +692,7 @@ class PublishTests(unittest.TestCase):
     def test_uncertain_intent_write_stops_before_post(self):
         github.gh.side_effect = lambda *args: ""
         with self.assertRaisesRegex(ValueError, "intent was not confirmed"):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 1)  # version GET only
 
     def test_read_failure_and_wrong_repository_fail_closed(self):
@@ -694,7 +704,7 @@ class PublishTests(unittest.TestCase):
             patch.dict(os.environ, {"GH_REPO": "other/fork"}),
             self.assertRaises(ValueError),
         ):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
 
@@ -728,7 +738,7 @@ class WorkflowTests(unittest.TestCase):
             for node in runner.body
             if isinstance(node, ast.Assign)
             and any(
-                isinstance(target, ast.Name) and target.id == "current_paths"
+                isinstance(target, ast.Name) and target.id == "CURRENT_PATHS"
                 for target in node.targets
             )
         )
@@ -767,8 +777,8 @@ class WorkflowTests(unittest.TestCase):
                 text.count("persist-credentials: false"),
                 text.count("uses: actions/checkout@"),
             )
-            self.assertIn("python tools/verify.py", text)
-            self.assertIn("uv run --locked python tools/verify.py", text)
+            self.assertIn("fau check", text)
+            self.assertIn("uv run --locked fau check", text)
             self.assertIn("uv sync --locked", text)
             for step in release.re.split(r"(?m)^      - ", text)[1:]:
                 self.assertTrue(
@@ -786,12 +796,12 @@ class WorkflowTests(unittest.TestCase):
         final_step = publish.split("- name: Publish completed GitHub release", 1)[1]
         self.assertIn("CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}", final_step)
         self.assertLess(
-            publish.index("python tools/release.py --verify"),
-            publish.index("python tools/publish_github.py"),
+            publish.index("fau release --verify"),
+            publish.index("fau publish-github"),
         )
         self.assertLess(
-            publish.index("python tools/publish_curseforge.py"),
-            publish.index("python tools/publish_github.py --finalize"),
+            publish.index("fau publish-curseforge"),
+            publish.index("fau publish-github --finalize"),
         )
         self.assertNotIn("git fetch origin", workflow)
 

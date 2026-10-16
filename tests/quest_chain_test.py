@@ -2,16 +2,15 @@
 
 import hashlib
 import json
-import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from fau_tools import chains as chains
+from fau_tools import questie as provider
+from fau_tools.catalog import build_complete, read_inputs
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import quest_chains as chains  # noqa: E402 - local tools require the repository path above
-import questie_metadata as provider  # noqa: E402 - local tools require the repository path above
-from complete_catalog import build_complete, read_inputs  # noqa: E402 - local tools require the repository path above
 
 
 def import_fixture(fields, authored="", dynamic="", quests=None, extra_files=None):

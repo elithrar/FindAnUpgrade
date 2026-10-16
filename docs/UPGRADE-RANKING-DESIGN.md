@@ -146,13 +146,6 @@ It also verifies that stats/tooltip APIs are never used, 600 eligible reward
 records have zero warm native reads, and 1,000 warm comparisons perform no native
 reads or item requests.
 
-The [independent heuristic review](HEURISTIC-REVIEW.md) passes against this
-simplified implementation: 2,328 independent paired-slot, uniqueness and occupied-
-hand oracle cases; six registered-event scenarios; actual 4,096-entry overflow;
-and a repeated 600-item working set with zero added native reads. The reviewer
-also reran the 45 focused ranking scenarios and seven shared usability scenarios.
-The historical stat-score review does not establish this heuristic.
-
 Actual item-level and usability values, equip/category restrictions, variant
 behavior, native event ordering, final appearance/input and combat/taint remain
 live-client checks. The accepted behavior is an explicitly approximate item-level
