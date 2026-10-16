@@ -85,6 +85,7 @@ def main(root=ROOT):
         "questie_test.lua",
         "font_test.lua",
         "options_test.lua",
+        "recorder_test.lua",
         "eligibility_test.lua",
         "provider_recovery_test.lua",
         "reward_browser_model_test.lua",

@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.1" }; N.Core = C
+local C = { version = "0.1.2" }; N.Core = C
 
 function C:Reset()
     self.questId = nil
@@ -19,6 +19,7 @@ function C:Refresh()
     if self.questId and self.questId == A.QuestId() and A.Visible(QuestFrameDetailPanel) then U:Apply(self.profile, M.Status(self.questId)) else self:Reset() end
 end
 function C:Change(key, value)
+    if key=="enabled" and value==false then N.Recorder:Enable(false) end
     if self.readOnly then return false end
     local saved = M.Copy(self.profile); saved[key] = value
     self.profile = M.Load(saved); FindAnUpgradeDB = self.profile
@@ -98,6 +99,7 @@ function C:Initialize()
     FindAnUpgradeDB = self.readOnly and saved or self.profile
     FindAnUpgradeCharacterDB=N.Shortlist:Load(FindAnUpgradeCharacterDB)
     self.supported = A.Supported(); self.ready = true
+    N.Recorder:Initialize()
     SLASH_FINDANUPGRADE1 = "/findanupgrade"
     SLASH_FINDANUPGRADE2 = "/fau"
     SlashCmdList.FINDANUPGRADE = function(input) self:Slash(input) end

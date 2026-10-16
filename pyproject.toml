@@ -1,6 +1,6 @@
 [project]
 name = "findanupgrade-tooling"
-version = "0.1.1"
+version = "0.1.2"
 description = "Repository-local supporting tools for FindAnUpgrade"
 requires-python = ">=3.15,<3.16"
 dependencies = ["lupa==2.8"]

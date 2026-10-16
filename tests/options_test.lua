@@ -130,7 +130,7 @@ test("future settings remain read-only through the real options controls",functi
     N.Options.checks.enabled:Fire("OnClick"); N.Options.sliders.scale:SetValue(120)
     assert(FindAnUpgradeDB==saved and saved.future=="preserve" and saved.enabled==false)
     assert(N.Options.status:GetText()=="Newer settings are read-only.")
-    for _,control in ipairs(N.Options.controls) do assert(control.disabled==not control.navigation) end
+    for _,control in ipairs(N.Options.controls) do if not control.recorder then assert(control.disabled==not control.navigation) end end
 end)
 
 test("options use current XPIsland dialog sections and native radio dropdown",function()
@@ -138,7 +138,7 @@ test("options use current XPIsland dialog sections and native radio dropdown",fu
     assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==690)
     assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
     assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
-    assert(#O.sections==5 and O.sections[1].point[2]==0 and O.sections[2].point[2]==292)
+    assert(#O.sections==6 and O.sections[1].point[2]==0 and O.sections[2].point[2]==292)
     assert(O.sections[1]:GetWidth()==280 and O.sections[2]:GetWidth()==280)
     assert(O.modifier.template=="WowStyle1DropdownTemplate" and O.modifier:GetWidth()==260 and O.modifier:GetHeight()==24)
     assert(O.modifier.Text.justifyV=="MIDDLE" and O.modifier.Text.point[1]=="LEFT")
@@ -197,7 +197,7 @@ test("single options canvas keeps every setting together without navigation tabs
         assert(not control.navigation)
     end
     assert(O.bar:GetThumbTexture().texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
-    assert(O.maximum==0 and not O.bar:IsShown() and O.frame:GetScale()==1)
+    assert(O.maximum==110 and O.bar:IsShown() and O.frame:GetScale()==1)
     for i=1,15 do O:Toggle(N.Core);O:Toggle(N.Core);O:Refresh() end
     assert(#W.frames==frames and O.font.menuGenerations==1)
 end)
@@ -205,19 +205,19 @@ end)
 test("small-height options scroll at readable scale and keep footer outside the viewport",function()
     local N=W.Init();UIParent.width=960;UIParent.height=360;N.Options:Toggle(N.Core);local O=N.Options
     assert(O.frame:GetHeight()==336 and O.frame:GetScale()==1)
-    assert(O.scroll:GetHeight()==246 and O.body:GetHeight()==600 and O.maximum==354 and O.bar:IsShown())
+    assert(O.scroll:GetHeight()==246 and O.body:GetHeight()==710 and O.maximum==464 and O.bar:IsShown())
     assert(O.reset.parent==O.content and O.reset.point[1]=="BOTTOMLEFT" and O.reset.point[3]==16)
     local saved=FindAnUpgradeDB;O.font.menuOpen=true;O.edits.scale:SetFocus();O.edits.scale:SetText("81")
     O.scroll:Fire("OnMouseWheel",-1)
     assert(O.offset==40 and O.scroll:GetVerticalScroll()==40 and O.bar.value==40)
     assert(not O.font.menuOpen and not O.edits.scale.focused and O.edits.scale:GetText()=="100" and FindAnUpgradeDB==saved)
-    O.bar:SetValue(10000);assert(O.offset==O.maximum and O.scroll:GetVerticalScroll()==354)
+    O.bar:SetValue(10000);assert(O.offset==O.maximum and O.scroll:GetVerticalScroll()==464)
     O.scroll:Fire("OnMouseWheel",100);assert(O.offset==0 and O.bar.value==0)
-    O:Scroll(354);O.modifier.menuOpen=true;O.edits.levelsBelow:SetFocus();O.edits.levelsBelow:SetText("99")
+    O:Scroll(464);O.modifier.menuOpen=true;O.edits.levelsBelow:SetFocus();O.edits.levelsBelow:SetText("99")
     UIParent.height=1080;W.Event("DISPLAY_SIZE_CHANGED")
-    assert(O.frame:GetHeight()==690 and O.maximum==0 and O.offset==0 and not O.bar:IsShown())
+    assert(O.frame:GetHeight()==690 and O.maximum==110 and O.offset==110 and O.bar:IsShown())
     assert(not O.modifier.menuOpen and not O.edits.levelsBelow.focused and O.edits.levelsBelow:GetText()=="5")
-    O:Scroll(0/0);O:Scroll(math.huge);assert(O.offset==0 and FindAnUpgradeDB==saved)
+    O:Scroll(0/0);O:Scroll(math.huge);assert(O.offset==110 and FindAnUpgradeDB==saved)
 end)
 
 test("scrolling and hidden refresh preserve read-only future settings and reuse controls",function()

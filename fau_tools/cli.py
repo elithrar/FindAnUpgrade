@@ -24,6 +24,7 @@ def command_parser():
         "import-att",
         "import-catalog",
         "migrate",
+        "observations",
     }
     groups = {
         "data": ("classify", "tags", "quests", "catalog"),
@@ -42,6 +43,10 @@ def command_parser():
         ("import-att", "Import the original pinned ATT snapshot"),
         ("import-catalog", "Normalize complete cached catalog sources"),
         ("migrate", "Validate or explicitly copy owned renamed saved settings"),
+        (
+            "observations",
+            "Validate and compare an untrusted manual quest-data JSON export",
+        ),
         ("release", "Prepare or verify an authorized exact release tag"),
         ("publish-github", "Prepare an authorized release draft or finalize it"),
         ("publish-curseforge", "Upload an authorized exact Forever release once"),
@@ -143,6 +148,10 @@ def main(argv=None):
             from fau_tools import migration
 
             migration.main(arguments, prog=prog)
+        case "observations":
+            from fau_tools import observations
+
+            observations.main(arguments, prog=prog)
         case "release":
             from fau_tools import release
 

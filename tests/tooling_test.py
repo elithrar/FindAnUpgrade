@@ -97,6 +97,7 @@ class CommandBoundaryTests(unittest.TestCase):
             ["import-att"],
             ["import-catalog"],
             ["migrate"],
+            ["observations"],
             ["release"],
             ["publish-github"],
             ["publish-curseforge"],
