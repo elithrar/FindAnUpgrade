@@ -39,8 +39,8 @@ Version **0.1.13** uses the FindAnUpgrade folder and commands. When replacing Qu
 
 Run `python tools/verify.py` from the repository root with Python 3.11 or newer and Lupa. It runs the checks and builds ZIPs in `dist/`.
 
-See [AGENTS.md](https://github.com/elithrar/QuestBrief/blob/main/AGENTS.md) for development rules, [database sync](https://github.com/elithrar/QuestBrief/blob/main/docs/DATABASE-SYNC.md) for dependency setup and data maintenance, and [validation coverage](https://github.com/elithrar/QuestBrief/blob/main/docs/VALIDATION.md) for checks and pending in-game validation.
+See [AGENTS.md](https://github.com/elithrar/FindAnUpgrade/blob/main/AGENTS.md) for development rules, [database sync](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/DATABASE-SYNC.md) for dependency setup and data maintenance, and [validation coverage](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/VALIDATION.md) for checks and pending in-game validation.
 
 ## License
 
-BSD-3-Clause. See [LICENSE](LICENSE). Third-party data licenses and attribution are in [NOTICES.md](https://github.com/elithrar/QuestBrief/blob/main/FindAnUpgrade/NOTICES.md).
+BSD-3-Clause. See [LICENSE](LICENSE). Third-party data licenses and attribution are in [NOTICES.md](https://github.com/elithrar/FindAnUpgrade/blob/main/FindAnUpgrade/NOTICES.md).

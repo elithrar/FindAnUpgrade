@@ -6,6 +6,11 @@ The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
+Release readiness was also checked against the renamed `elithrar/FindAnUpgrade`
+repository and the supplied `CF_API_KEY` secret name, without reading its value.
+`CF_PROJECT_ID` is still required before publication. See
+`RELEASE-READINESS.md` and its independent review for exact boundaries.
+
 ## Star spacing and unified Options, 0.1.13
 
 All three user-supplied screenshots were downloaded by Library identity and
@@ -27,7 +32,7 @@ Scrolling cancels incomplete numeric edits and closes native menus; no settings
 schema or saved values change. Quests/Shortlist retain their separate tabs.
 
 The full verifier passes all 18 commands: 612 Lua scenarios across 32 suites
-and 182 Python tests. Exact-commit build/CI/installation receipts establish
+and 183 Python tests. Exact-commit build/CI/installation receipts establish
 delivered bytes. Native glyphs, subpixel star rendering, physical
 scroll/drag input, pointer transit, item comparisons, combat/taint and coexistence
 remain live checks. Installation alone does not verify those outcomes.
