@@ -63,10 +63,8 @@ class PackageTest(unittest.TestCase):
                 "FindAnUpgrade/Data/ATT-LICENSE.txt",
                 "data/catalog-source.json",
                 "data/catalog-sources.json",
-                "data/catalog-coverage.json",
                 "data/catalog-complete-source.json",
                 "data/catalog-complete-sources.json",
-                "data/catalog-reconciliation.json",
                 "data/catalog-public-records.json",
                 "data/catalog-metadata-records.json",
                 "data/catalog-compiled-quests.json",
@@ -99,14 +97,6 @@ class PackageTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "catalog is stale"):
             package.validate(self.root)
         path.write_bytes(original)
-        path = self.root / "data/catalog-coverage.json"
-        original = path.read_bytes()
-        coverage = json.loads(original)
-        coverage["liveClientVerified"] = True
-        path.write_text(json.dumps(coverage))
-        with self.assertRaisesRegex(ValueError, "coverage is stale"):
-            package.validate(self.root)
-        path.write_bytes(original)
         path = self.root / "FindAnUpgrade/Data/ATT-LICENSE.txt"
         path.write_text("MIT label without the copyright, permission or disclaimer")
         with self.assertRaisesRegex(ValueError, "MIT permission"):
@@ -120,7 +110,7 @@ class PackageTest(unittest.TestCase):
         incidental = (
             "fau_tools/scratch.py",
             "data/private.json",
-            "data/contracts/local-review.json",
+            "data/local-review.json",
             "tests/private_test.py",
             ".github/workflows/private.yml",
         )
@@ -156,7 +146,44 @@ class PackageTest(unittest.TestCase):
             archive.extractall(self.root / "extracted")
         extracted = self.root / "extracted" / f"FindAnUpgrade-{self.version}-source"
         self.assertFalse((extracted / ".git").exists())
+        self.assertFalse((extracted / "dist").exists())
         self.assertEqual(package.build(extracted), expected)
+
+    def test_build_regenerates_reports_without_trusting_missing_or_dirty_outputs(self):
+        from fau_tools.catalog import build_complete, coverage
+
+        facts = {
+            path.relative_to(self.root): path.read_bytes()
+            for path in (self.root / "data").glob("*.json")
+        }
+        self.assertEqual(len(facts), 18)
+        self.assertFalse((self.root / "dist").exists())
+        first = package.build(self.root)
+        expected_source, expected_report = build_complete(self.root)
+        report = self.root / "dist/catalog-reconciliation.json"
+        coverage_path = self.root / "dist/catalog-coverage.json"
+        self.assertEqual(json.loads(report.read_bytes()), expected_report)
+        self.assertEqual(
+            json.loads(coverage_path.read_bytes()),
+            coverage(
+                expected_source,
+                (self.root / "FindAnUpgrade/Data/Catalog.lua").read_bytes(),
+                self.root,
+            ),
+        )
+        report.write_bytes(b"invalid diagnostic JSON")
+        coverage_path.write_text('{"liveClientVerified": true}', encoding="utf-8")
+        self.assertEqual(package.validate(self.root), self.version)
+        self.assertEqual(package.build(self.root), first)
+        self.assertEqual(json.loads(report.read_bytes()), expected_report)
+        self.assertFalse(json.loads(coverage_path.read_bytes())["liveClientVerified"])
+        self.assertEqual(
+            {
+                path.relative_to(self.root): path.read_bytes()
+                for path in (self.root / "data").glob("*.json")
+            },
+            facts,
+        )
 
     def test_missing_declared_source_cannot_produce_a_source_archive(self):
         (self.root / "fau_tools/membership.py").unlink()

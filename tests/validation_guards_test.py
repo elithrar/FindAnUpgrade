@@ -42,11 +42,41 @@ class ValidationGuardTests(unittest.TestCase):
             "classification-source.json",
             "classification-baseline.json",
             "primary-statuses.json",
-            "classification-reconciliation.json",
         ):
             path = self.root / "data" / name
             path.parent.mkdir(exist_ok=True)
             path.write_bytes((ROOT / "data" / name).read_bytes())
+
+    def test_classification_check_regenerates_missing_or_dirty_ignored_report(self):
+        self.classification_fixture()
+        before = self.snapshot()
+        code = (
+            "import sys; from pathlib import Path; "
+            "from fau_tools import classification; "
+            "classification.ROOT = Path(sys.argv[1]); "
+            "classification.import_main(['--check'])"
+        )
+        report = self.root / "dist/classification-reconciliation.json"
+        for optimized in (False, True):
+            for dirty in (False, True):
+                with self.subTest(optimized=optimized, dirty=dirty):
+                    report.parent.mkdir(exist_ok=True)
+                    report.unlink(missing_ok=True)
+                    if dirty:
+                        report.write_bytes(b"not an authority or valid JSON")
+                    result = self.run_python(code, str(self.root), optimized=optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual(
+                        json.loads(report.read_bytes())["union"]["questIdCount"], 2931
+                    )
+                    self.assertEqual(
+                        {
+                            name: raw
+                            for name, raw in self.snapshot().items()
+                            if name.parts[0] == "data"
+                        },
+                        before,
+                    )
 
     def test_stale_classification_check_fails_without_writing(self):
         self.classification_fixture()

@@ -243,7 +243,43 @@ test("single options grid keeps native controls and headings within their sectio
         local rx,ry,rw,rh=rect(O.reset);local bx,by,bw,bh=rect(O.bar)
         assert(x>=fx and x+w<=fx+fw and y>=fy and y+h<=fy+fh)
         assert(ry+rh<y and by>=y and by+bh<=y+h and bx>x+w)
-        assert(O.maximum==math.max(0,630-O.scroll:GetHeight()) and O.frame:GetScale()==1)
+        assert(O.maximum==math.max(0,600-O.scroll:GetHeight()) and O.frame:GetScale()==1)
+    end
+end)
+
+test("search default rows keep nearby aligned numeric fields and consistent section gaps at every layout scale",function()
+    for _,view in ipairs({{1920,1080,1},{640,360,.83},{320,240,.65},{1280,720,1.25}}) do
+        local N,W,rect=fixture();UIParent.width,UIParent.height=view[1],view[2];UIParent:SetScale(view[3])
+        SlashCmdList.FINDANUPGRADE("opts");local O=N.Options;local scale=O.body:GetEffectiveScale()
+        local function label(value)
+            for _,entry in ipairs(O.texts) do if entry.object:GetText()==value then return entry.object end end
+            error("Missing options label: "..value)
+        end
+        for _,row in ipairs({{"Levels below",O.edits.levelsBelow},{"Levels above",O.edits.levelsAbove}}) do
+            local caption=label(row[1]);local lx,ly,lw,lh=rect(caption);local x,y,w,h=rect(row[2])
+            assert(close(x-lx,120*scale) and close(x-lx-lw,12*scale),"numeric field detached from its label")
+            assert(close(ly+lh/2,y+h/2),"numeric field and label are not vertically centered")
+            assert(caption:GetScale()==1 and row[2]:GetScale()==1,"spacing must not shrink the selected font or field")
+            local _,size=caption:GetFont();assert(math.abs(size-12)<.1)
+            assert(close(w,58*scale) and close(h,22*scale),"native numeric field changed size")
+        end
+        local _,by,_,bh=rect(O.edits.levelsBelow);local _,ay,_,ah=rect(O.edits.levelsAbove)
+        local _,cy,_,ch=rect(O.checks.includeDungeons)
+        assert(close(by+bh/2-ay-ah/2,28*scale) and close(cy+ch/2-by-bh/2,28*scale),"search rows lost the shared cadence")
+        local _,hy,_,hh=rect(label("Applies next time search opens."))
+        local _,zy,_,zh=rect(label("Starts in the current zone."))
+        assert(ay-hy-hh>=10*scale and ay-hy-hh<=14*scale,"search hint separated by unnecessary blank space")
+        assert(close(hy-zy,20*scale) and close(hh,zh),"search hints overlap or have inconsistent leading")
+        for _,pair in ipairs({{1,3},{2,4},{4,5}}) do
+            local _,uy=rect(O.sections[pair[1]]);local _,ly,_,lh=rect(O.sections[pair[2]])
+            assert(close(uy-ly-lh,24*scale),"section separation is inconsistent")
+        end
+        local sx,sy,sw,sh=rect(O.sections[5]);local x,y,w,h=rect(O.edits.levelsAbove)
+        assert(x>=sx+12*scale and x+w<=sx+sw-12*scale and y>=sy+12*scale)
+        assert(zy>=sy+10*scale and zy+zh<=sy+sh)
+        local _,fy,_,fh=rect(O.frame);local _,vy,_,vh=rect(O.scroll);local _,ry,_,rh=rect(O.reset)
+        assert(vy>=fy and vy+vh<=fy+fh and ry+rh<vy,"content overlaps the fixed footer")
+        O:Scroll(O.maximum);assert(close(O.offset+O.scroll:GetHeight(),O.body:GetHeight()),"last row cannot be reached")
     end
 end)
 

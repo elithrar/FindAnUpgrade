@@ -46,9 +46,6 @@ class CompleteCatalogTests(unittest.TestCase):
         source, report = build_complete(ROOT)
         actual = json.loads((ROOT / "data/catalog-complete-source.json").read_bytes())
         self.assertEqual(source, actual)
-        self.assertEqual(
-            report, json.loads((ROOT / "data/catalog-reconciliation.json").read_bytes())
-        )
         self.assertEqual(report["publicIdsAbsentOutput"], [])
         self.assertEqual(
             sum(report["fieldCoverage"]["items"].values()), len(source["quests"])

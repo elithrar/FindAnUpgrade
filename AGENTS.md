@@ -5,8 +5,8 @@ Official WoW Forever addon, interface **16001**. This is the canonical contribut
 ## Repository
 
 - `FindAnUpgrade/` ships exactly; its TOC owns load order and the shared namespace.
-- `data/` owns normalized facts, receipts, classification authority, identity history and gap evidence; `data/contracts/` preserves native source receipts.
-- `fau_tools/` is repository-local Python tooling, invoked as a module; `context.py` owns shared paths/source/staging inventory. `tests/` holds Python/Lua regressions.
+- `data/` owns normalized facts, receipts, classification authority, identity history and gap evidence.
+- `fau_tools/` is repository-local Python tooling, invoked as a module; `context.py` owns shared paths/source/staging inventory. `tests/` holds Python/Lua regressions and the minimal native source fixture manifest.
 - `.work/` holds ignored raw sources, environments, managed Python, caches and stages. `dist/` holds ignored packages, diffs and validation/review records.
 - Keep legal attribution in [NOTICES.md](FindAnUpgrade/NOTICES.md), release notes in [CHANGELOG.md](CHANGELOG.md). Add no script wrappers, path injection, tracked generated logs or replacement docs tree.
 
@@ -42,7 +42,7 @@ Lupa supplies Lua 5.1. Python 3.15 x64 needs a compiler for Lupa 2.8; Windows wi
 - Supplemental pin: [QuestieDB Forever 1.0.6](https://github.com/Questie/QuestieDB/tree/36ca1ca86f6c1838de479c7c7452eb0a57d5c135). Verify archive/member/blob receipts, reciprocal typed starters, restrictions and coordinate owner/map frame. Never infer associations from parent context/titles/points; unknown restrictions fail closed and unverified chains remain nonblocking. Rebuild supplemental facts from a fresh base without that provider; retain independent primary proofs when raw caches are omitted.
 - Respect robots/access rules; stop on 401/403/429, challenges, encryption or disallowed access. No restricted `/api/`/`/search` use or bypass. Preserve full BSD/XPIsland/ATT grants and scoped factual attribution; bundle no third-party implementation/database, raw pages, prose, artwork, fonts or client files.
 
-Offline checks need no other checkout, game or credentials. Default caches are `.work/catalog-cache/{att-source,att-generated,questie,public}`; use help for overrides. Run one sync per checkout. Review `dist/catalog-sync-diff.json`, `data/catalog-reconciliation.json` and `data/catalog-coverage.json`; parser/authority changes need independent review. Never hand-patch generated Lua.
+Offline checks need no other checkout, game or credentials. Default caches are `.work/catalog-cache/{att-source,att-generated,questie,public}`; use help for overrides. Run one sync per checkout. Review `dist/catalog-sync-diff.json`, `dist/catalog-reconciliation.json` and `dist/catalog-coverage.json`; parser/authority changes need independent review. Never hand-patch generated Lua.
 
 Missing receipts, changed bytes, incomplete membership, conflicts, failed checks or concurrent edits prevent replacement. Keep failed `.work/catalog-sync/` stages, fix the cause and rerun; never force-copy them. Apply prewrites listed owned files and rolls back failed replacements. Sync never commits, pushes, installs or publishes.
 
@@ -50,7 +50,7 @@ Missing receipts, changed bytes, incomplete membership, conflicts, failed checks
 
 Keep Lua 5.1 and separate model/adapter/appearance/options/event owners. Preserve Blizzard scripts with secure post-hooks/additive `HookScript`; never accept/complete quests, alter protected layout/visibility or write another addon's data. Guard secret/forbidden values. Restore validated SavedVariables in `ADDON_LOADED`; never evaluate imported Lua. Reuse XPIsland/ATCF conventions, defer hidden work, bound async retries and reject stale callbacks; unsupported identities fail safely.
 
-Current contracts: [1.60.1.70425](https://github.com/Gethe/wow-ui-source/tree/b401e0332adfbf0460d319b06d8ea29279a941f1). Baseline detail renderer: [70338](https://github.com/Gethe/wow-ui-source/tree/943764493e6b16d63ded3ab304150d1f05e58b57). Preserve distinct build receipts in `data/contracts/`. Optional fixture receipts identify executed/skipped tests. Before commit/push run the full check and inspect `dist/validation-evidence.json`, `dist/test-results.json` and package manifests. Preserve deterministic facts/projections.
+Current contracts: [1.60.1.70425](https://github.com/Gethe/wow-ui-source/tree/b401e0332adfbf0460d319b06d8ea29279a941f1). Baseline detail renderer: [70338](https://github.com/Gethe/wow-ui-source/tree/943764493e6b16d63ded3ab304150d1f05e58b57). `tests/native-source-fixtures.json` pins only sources exercised by optional integration tests. Test outputs identify executed/skipped cases. Before commit/push run the full check and inspect `dist/validation-evidence.json`, `dist/test-results.json` and package manifests. Preserve deterministic facts/projections.
 
 Source/mocks/CI/install hashes do **not** establish native rendering, input, API values, CPU, combat/taint or addon coexistence. Keep live checks pending until observed with actual build/payload.
 

@@ -21,11 +21,9 @@ class DataTest(unittest.TestCase):
         cls.evidence = json.loads(
             (ROOT / "data/classification-source.json").read_bytes()
         )
-        cls.report = json.loads(
-            (ROOT / "data/classification-reconciliation.json").read_bytes()
-        )
         cls.baseline_raw = (ROOT / "data/classification-baseline.json").read_bytes()
         cls.baseline = json.loads(cls.baseline_raw)
+        _, cls.report = importer.reconcile(cls.evidence, cls.baseline, cls.baseline_raw)
         cls.lua = LuaRuntime(unpack_returned_tuples=True)
         cls.lua.execute("N = {}")
         cls.lua.globals().SOURCE = str(ROOT / "FindAnUpgrade/Data/Quests.lua").replace(

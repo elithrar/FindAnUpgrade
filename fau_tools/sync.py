@@ -29,11 +29,8 @@ OUTPUTS = [
         "catalog-gap-evidence.json",
         "catalog-complete-sources.json",
         "catalog-complete-source.json",
-        "catalog-reconciliation.json",
-        "catalog-coverage.json",
         "catalog-supplemental-metadata.json",
         "primary-statuses.json",
-        "classification-reconciliation.json",
         "quest-taxonomy.json",
     )
 ] + ["FindAnUpgrade/Data/Catalog.lua", "FindAnUpgrade/Data/Quests.lua"]
@@ -315,6 +312,9 @@ def main(argv=None, *, prog=None):
     apply_candidate(ROOT, stage, baseline, frozen)
     report["applied"] = True
     receipt()
+    # Diagnostics are derived after the fact transaction, never replacement inputs.
+    run(ROOT, ["data", "classify", "--check"])
+    run(ROOT, ["data", "catalog", "--check"])
     print(
         json.dumps(
             {

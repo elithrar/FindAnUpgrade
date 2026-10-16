@@ -400,10 +400,12 @@ def main(argv=None, *, prog=None):
 
     source, report = build_complete(ROOT)
     for name, value in (
-        ("catalog-complete-source.json", source),
-        ("catalog-reconciliation.json", report),
+        ("data/catalog-complete-source.json", source),
+        ("dist/catalog-reconciliation.json", report),
     ):
-        (ROOT / "data" / name).write_bytes(
+        path = ROOT / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(
             (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
         )
     print(json.dumps(result["coverage"], indent=2))

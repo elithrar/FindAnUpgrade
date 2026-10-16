@@ -658,7 +658,9 @@ def main(argv=None, *, prog=None):
                 (ROOT / "data/catalog-complete-source.json").read_bytes()
             ),
             "baselineReportSha256": digest(
-                (ROOT / "data/catalog-reconciliation.json").read_bytes()
+                (json.dumps(prior_report, indent=2, ensure_ascii=False) + "\n").encode(
+                    "utf-8"
+                )
             ),
             "rule": "Bounded audit of the 106 mixed-starter coordinate gaps from 0.1.5; explicit immutable alias ownership only, never inferred by name, point equality or list order.",
             "quests": [
@@ -899,5 +901,5 @@ def main(argv=None, *, prog=None):
 
     source, report = build_complete(ROOT)
     write(ROOT / "data/catalog-complete-source.json", source)
-    write(ROOT / "data/catalog-reconciliation.json", report)
+    write(ROOT / "dist/catalog-reconciliation.json", report)
     print(json.dumps(report["counts"], indent=2))

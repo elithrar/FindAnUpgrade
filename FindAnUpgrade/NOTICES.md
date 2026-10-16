@@ -35,8 +35,7 @@ by these sources. Classification remains a separate exact-ID source.
 
 Matching preferred source, source-file hashes and deterministic generation tools
 are in the repository's `data/catalog-complete-source.json`,
-`data/catalog-complete-sources.json`, `data/catalog-reconciliation.json`,
-`data/catalog-coverage.json`, `fau_tools/importer.py` and
+`data/catalog-complete-sources.json`, `fau_tools/importer.py` and
 `fau_tools/catalog.py`. No ATT runtime, artwork, lore or raw harvest outputs
 are included. Original FindAnUpgrade code retains the repository's BSD-3-Clause
 license; this attribution does not claim BSD authorship of the ATT-derived data.

@@ -2,7 +2,8 @@ local _, N = ...
 local O = {}; N.Options = O
 local U, M = N.UI, N.Model
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
-local panelWidth,panelHeight,bodyWidth,bodyHeight=620,720,572,630
+local panelWidth,panelHeight,bodyWidth,bodyHeight=620,690,572,600
+local rowStep,sectionGap,labelGap=28,24,20
 local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 
 -- Reuse current XPIsland's bounded native controls and scale-aware text fitting.
@@ -175,9 +176,11 @@ function O:Layout()
     self:Scroll(self.offset or 0,true)
 end
 function O:SearchNumber(parent,key,label,x,y)
-    self:Label(parent,label,x,y,184,12)
+    -- Short numeric rows keep their field near the label, centered in the same
+    -- 24px row as the native checkboxes rather than at the slider value column.
+    local caption=self:Label(parent,label,x,y,108,12);bounded(caption,108,24)
     local e=self:Frame("EditBox",parent,"InputBoxTemplate")
-    e:SetPoint("TOPLEFT",x+202,y+4);e:SetSize(58,22);e:SetTextInsets(6,6,0,0);e:SetAutoFocus(false);e:SetMaxLetters(8);U:Font(e,12)
+    e:SetPoint("TOPLEFT",x+120,y-1);e:SetSize(58,22);e:SetTextInsets(6,6,0,0);e:SetAutoFocus(false);e:SetMaxLetters(8);U:Font(e,12)
     self.texts[#self.texts+1]={object=e,size=12};self.edits[key]=e;self.controls[#self.controls+1]=e
     e.searchDefault=key
     e:SetScript("OnEnterPressed",function()
@@ -205,11 +208,12 @@ function O:Build(owner,f,parent)
     self.bar:SetPoint("TOPRIGHT",-14,-48);self.bar:SetHeight(bodyHeight-4);self.bar:SetValueStep(1)
     self.bar:SetScript("OnValueChanged",function(_,value)if not self.scrolling then self:Scroll(value)end end)
     scroll:SetScript("OnMouseWheel",function(_,delta)if M.Number(delta)then self:Scroll((self.offset or 0)-delta*40)end end)
+    local secondaryY=-212-sectionGap;local searchY=secondaryY-132-sectionGap
     self:Section(page,"Appearance",0,0,280,212);self:Section(page,"Inspection",292,0,280,212)
-    self:Section(page,"Quest previews",0,-242,280,252);self:Section(page,"Surfaces",292,-242,280,132)
-    self:Section(page,"Search defaults",292,-404,280,206)
+    self:Section(page,"Quest previews",0,secondaryY,280,248);self:Section(page,"Surfaces",292,secondaryY,280,132)
+    self:Section(page,"Search defaults",292,searchY,280,188)
     self:Label(page,"Font",12,-25,260,12)
-    self.font=self:Dropdown(page,12,-45,260,function()return U:FontEntries()end,function()return owner.profile.font end,function(value)owner:Change("font",value)end)
+    self.font=self:Dropdown(page,12,-25-labelGap,260,function()return U:FontEntries()end,function()return owner.profile.font end,function(value)owner:Change("font",value)end)
     self.font.Text.qNoFit=true
     self.fontMeasure=self:Text(parent);U:Font(self.fontMeasure,12);self.fontMeasure:SetWordWrap(false);self.fontMeasure:Hide()
     self.texts[#self.texts+1]={object=self.fontMeasure,size=12}
@@ -217,38 +221,38 @@ function O:Build(owner,f,parent)
         hooksecurefunc(self.font.Text,"SetText",function(object)self:FontCaption(object)end);self.font.qCaptionHooked=true
     end
     self:Label(page,"Border",12,-83,260,12)
-    self.border=self:Dropdown(page,12,-103,260,{
+    self.border=self:Dropdown(page,12,-83-labelGap,260,{
         {value="default",label="Default"},{value="none",label="None"},{value="tooltip",label="Tooltip"},{value="dialog",label="Dialog"},{value="thin",label="Thin"}
     },function()return owner.profile.border end,function(value)owner:Change("border",value)end)
-    self:Slider(page,"scale","Preview and search scale",12,-146,80,120,5)
-    self:Check(page,"accents","Quest colors",12,-267)
-    self:Check(page,"dialogTint","Quest dialog tint",12,-295)
-    self:Check(page,"rewards","Reward details",12,-323)
-    self:Label(page,"Preview layout",12,-361,260,12)
-    self.layout=self:Dropdown(page,12,-383,260,{
+    self:Slider(page,"scale","Preview and search scale",12,-142,80,120,5)
+    self:Check(page,"accents","Quest colors",12,secondaryY-25)
+    self:Check(page,"dialogTint","Quest dialog tint",12,secondaryY-25-rowStep)
+    self:Check(page,"rewards","Reward details",12,secondaryY-25-rowStep*2)
+    self:Label(page,"Preview layout",12,secondaryY-117,260,12)
+    self.layout=self:Dropdown(page,12,secondaryY-117-labelGap,260,{
         {value="tooltip",label="Game tooltip"},{value="inspector",label="Compact inspector"}
     },function() return owner.profile.previewLayout end,function(value) owner:Change("previewLayout",value) end)
-    self:Slider(page,"strength","Tint strength",12,-431,10,100,5)
+    self:Slider(page,"strength","Tint strength",12,secondaryY-177,10,100,5)
     self:Check(page,"enabled","Enabled",304,-25)
     self:Label(page,"Reveal key",304,-65,260,12)
-    self.modifier=self:Dropdown(page,304,-85,260,{
+    self.modifier=self:Dropdown(page,304,-65-labelGap,260,{
         {value="SHIFT",label="Shift"},{value="CTRL",label="Ctrl"},{value="ALT",label="Alt"},{value="NONE",label="None"}
     },function() return owner.profile.modifier end,function(value) owner:Change("modifier",value) end)
-    self.hint=self:Label(page,"Release to inspect. Escape closes.",304,-119,260,11,muted)
-    self:Label(page,"Inspection position",304,-156,260,12)
-    self.position=self:Dropdown(page,304,-178,260,{
+    self.hint=self:Label(page,"Release to inspect. Escape closes.",304,-115,260,11,muted)
+    self:Label(page,"Inspection position",304,-147,260,12)
+    self.position=self:Dropdown(page,304,-147-labelGap,260,{
         {value="right",label="Right of cursor"},{value="tooltip",label="Beside game tooltip"}
     },function() return owner.profile.inspectionPosition end,function(value) owner:Change("inspectionPosition",value) end)
-    self:Check(page,"npc","NPC previews",304,-267)
-    self:Check(page,"worldmap","World map previews",304,-295)
-    self:Check(page,"minimap","Minimap previews",304,-323)
-    self:Check(page,"launcher","Minimap launcher",304,-351)
-    self:Check(page,"hideUnusable","Hide unusable",304,-429,true)
-    self:Check(page,"includeDungeons","Include dungeon quests",304,-457,true)
-    self:SearchNumber(page,"levelsBelow","Levels below",304,-501)
-    self:SearchNumber(page,"levelsAbove","Levels above",304,-541)
-    self:Label(page,"Applies next time search opens.",304,-578,260,11,muted)
-    self:Label(page,"Starts in the current zone.",304,-598,260,11,muted)
+    self:Check(page,"npc","NPC previews",304,secondaryY-25)
+    self:Check(page,"worldmap","World map previews",304,secondaryY-25-rowStep)
+    self:Check(page,"minimap","Minimap previews",304,secondaryY-25-rowStep*2)
+    self:Check(page,"launcher","Minimap launcher",304,secondaryY-25-rowStep*3)
+    self:Check(page,"hideUnusable","Hide unusable",304,searchY-25,true)
+    self:Check(page,"includeDungeons","Include dungeon quests",304,searchY-25-rowStep,true)
+    self:SearchNumber(page,"levelsBelow","Levels below",304,searchY-25-rowStep*2)
+    self:SearchNumber(page,"levelsAbove","Levels above",304,searchY-25-rowStep*3)
+    self:Label(page,"Applies next time search opens.",304,searchY-145,260,11,muted)
+    self:Label(page,"Starts in the current zone.",304,searchY-165,260,11,muted)
     self.reset=self:Button(parent,"Reset",0,0,86,function() owner:Defaults() end)
     self.reset:ClearAllPoints();self.reset:SetPoint("BOTTOMLEFT",20,16)
     self.status=self:Label(parent,"",0,0,484,11,muted)

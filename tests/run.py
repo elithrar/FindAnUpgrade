@@ -24,7 +24,7 @@ CURRENT_PATHS = [
 
 def fixture_evidence(root=ROOT):
     """Check every available pinned source, including partial caches."""
-    contracts = json.loads((root / "data/contracts/client-contracts.json").read_bytes())
+    contracts = json.loads((root / "tests/native-source-fixtures.json").read_bytes())
     report = {}
     native = (
         root
@@ -80,7 +80,7 @@ def main(root=ROOT):
         "copy_runtime_test.lua",
         "equipped_comparison_test.lua",
         "runtime_test.lua",
-        "independent_review_test.lua",
+        "tint_safety_test.lua",
         "inspection_test.lua",
         "questie_test.lua",
         "font_test.lua",

@@ -20,7 +20,6 @@ FACTIONS = {
     "Neutral": {"Both"},
 }
 BUCKETS = {"Unchanged": "same", "Updated": "tweaked", "New": "new"}
-OUTPUTS = ("data/primary-statuses.json", "data/classification-reconciliation.json")
 RECEIPT_FILES = {
     "quests/provenance/forever-confirmed-chart-data.json",
     "quests/provenance/forever-confirmed-change-ledger.json",
@@ -430,15 +429,16 @@ def import_main(argv=None, *, prog=None):
     baseline_raw = (ROOT / "data/classification-baseline.json").read_bytes()
     primary, report = reconcile(source, json.loads(baseline_raw), baseline_raw)
     candidates = {source_path: encode(source)} if args.website_root else {}
-    candidates.update(
-        {ROOT / name: encode(value) for name, value in zip(OUTPUTS, (primary, report))}
-    )
+    candidates[ROOT / "data/primary-statuses.json"] = encode(primary)
     for path, raw in candidates.items():
         if args.check:
             if not (path.read_bytes() == raw):
                 raise AssertionError("Stale classification output: " + path.name)
         else:
             path.write_bytes(raw)
+    report_path = ROOT / "dist/classification-reconciliation.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_bytes(encode(report))
     print(
         f"{primary['questIdCount']} classified exact IDs; {primary['websiteQuestIdCount']} website IDs; "
         f"{primary['retainedExcludedQuestIdCount']} retained exclusions; {len(report['categories'])} primary categories"

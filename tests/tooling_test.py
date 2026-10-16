@@ -238,7 +238,7 @@ class CommandBoundaryTests(unittest.TestCase):
         maintained = (
             "fau_tools/cli.py",
             "data/catalog-source.json",
-            "data/contracts/client-contracts.json",
+            "tests/native-source-fixtures.json",
             "tests/model_test.lua",
             ".github/workflows/check.yml",
             "FindAnUpgrade/LICENSE",
@@ -246,13 +246,13 @@ class CommandBoundaryTests(unittest.TestCase):
         incidental = (
             "fau_tools/scratch.py",
             "data/private.json",
-            "data/contracts/local-review.json",
+            "tests/local-review.json",
             "tests/scratch_test.py",
             ".github/workflows/private.yml",
             "fau_tools/private-cache.bin",
             "fau_tools/.venv/private.env",
             "fau_tools/tooling.egg-info/PKG-INFO",
-            "data/contracts/local-review.tmp",
+            "data/local-review.tmp",
             "data/catalog-source.json.sync-123",
             "fau_tools/__pycache__/cli.pyc",
             "tests/.private.py",
@@ -340,7 +340,7 @@ class NativeFixtureEvidenceTests(unittest.TestCase):
             },
             "files": [],
         }
-        document = self.root / "data/contracts/client-contracts.json"
+        document = self.root / "tests/native-source-fixtures.json"
         document.parent.mkdir(parents=True)
         document.write_text(json.dumps(contracts), encoding="utf-8")
 

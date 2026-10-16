@@ -135,11 +135,6 @@ def validate(root=ROOT):
     expected = catalog.render(source, catalog_provenance)
     if (addon / "Data/Catalog.lua").read_bytes() != expected:
         raise ValueError("Generated catalog is stale")
-    coverage = (
-        json.dumps(catalog.coverage(source, expected), indent=2) + "\n"
-    ).encode()
-    if (root / "data/catalog-coverage.json").read_bytes() != coverage:
-        raise ValueError("Catalog coverage is stale")
     license_rows = [row for row in provenance["files"] if row["path"] == "LICENSE"]
     if (
         len(license_rows) != 1
@@ -176,6 +171,13 @@ def build(root=ROOT, destination=None):
     version = validate(root)
     destination = destination or root / "dist"
     destination.mkdir(parents=True, exist_ok=True)
+    source, _ = catalog.load_inputs(root)
+    catalog.write_reports(
+        source,
+        (root / "FindAnUpgrade/Data/Catalog.lua").read_bytes(),
+        root,
+        destination,
+    )
     addon_zip = destination / f"FindAnUpgrade-{version}.zip"
     source_zip = destination / f"FindAnUpgrade-{version}-source.zip"
     addon_files = [root / "FindAnUpgrade" / name for name in SHIPPED]

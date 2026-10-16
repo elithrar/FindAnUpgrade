@@ -752,9 +752,9 @@ class WorkflowTests(unittest.TestCase):
                 for target in node.targets
             )
         )
-        revision = json.loads(
-            (ROOT / "data/contracts/client-contracts.json").read_text()
-        )["currentSnapshot"]["revision"]
+        revision = json.loads((ROOT / "tests/native-source-fixtures.json").read_text())[
+            "currentSnapshot"
+        ]["revision"]
         for name in ["check.yml", "release.yml"]:
             text = (ROOT / ".github/workflows" / name).read_text()
             step = next(
@@ -765,9 +765,7 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(workflow=name):
                 self.assertIn("ref: " + revision, step)
                 supplied = set(release.re.findall(r"(?m)^            /(.+)$", step))
-                self.assertTrue(
-                    set(required).issubset(supplied), sorted(set(required) - supplied)
-                )
+                self.assertEqual(set(required), supplied)
 
     def test_workflows_pin_actions_and_keep_credentials_in_publish_steps(self):
         for name in ["check.yml", "release.yml"]:

@@ -27,10 +27,23 @@ class CatalogueTests(unittest.TestCase):
         current, provenance = GENERATE.load_inputs()
         output = GENERATE.render(current, provenance)
         self.assertEqual(output, (ROOT / "FindAnUpgrade/Data/Catalog.lua").read_bytes())
+        report = GENERATE.coverage(current, output)
+        self.assertEqual(report["questCount"], len(current["quests"]))
         self.assertEqual(
-            GENERATE.coverage(current, output),
-            json.loads((ROOT / "data/catalog-coverage.json").read_bytes()),
+            report["associationCount"],
+            sum(len(row["items"]) for row in current["quests"]),
         )
+        self.assertEqual(report["luaSha256"], hashlib.sha256(output).hexdigest())
+        self.assertEqual(
+            report["sourceSha256"],
+            hashlib.sha256(
+                (ROOT / "data/catalog-complete-source.json").read_bytes()
+            ).hexdigest(),
+        )
+        self.assertEqual(
+            report["reconciliationReport"], "dist/catalog-reconciliation.json"
+        )
+        self.assertFalse(report["liveClientVerified"])
 
     def test_complete_mit_notice_and_matching_source_hash(self):
         notice = (ROOT / "FindAnUpgrade/Data/ATT-LICENSE.txt").read_bytes()

@@ -2,8 +2,9 @@
 
 ## 0.1.15
 
+- Tighten options spacing, including compact level-range rows, consistent section gaps and a shorter window that preserves readable controls and scrolling.
 - Run repository-local supporting tools through `uv run --locked python -m fau_tools`; retain locked dependencies without building or installing a Python distribution.
 - Keep validation active under optimized Python and restrict source archives/import stages to reviewed files; preserve deterministic quest facts and provenance.
-- Remove obsolete plans, local installers, mock renderers and the docs tree; retain brief contributor guidance in AGENTS.md and machine-readable contracts under data/contracts. Historical files remain recoverable through Git.
+- Remove obsolete plans, local installers, mock renderers and historical receipts; retain brief contributor guidance in AGENTS.md and only the native source pins exercised by tests. Generate diagnostic reports under ignored dist paths.
 
-This is a repository maintenance iteration. It does not change gameplay behavior or establish new native-client verification.
+This iteration changes repository tooling and options spacing. It does not establish new live-client verification.

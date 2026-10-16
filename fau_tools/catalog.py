@@ -1100,13 +1100,13 @@ def render(source, provenance):
     return "\n".join(lines).encode()
 
 
-def coverage(source, output):
+def coverage(source, output, root=ROOT):
     if source["schemaVersion"] == 2:
-        _, report = build_complete(ROOT)
+        _, report = build_complete(root)
         rows = source["quests"]
         primary = {
             row["id"]: row["status"]
-            for row in json.loads((ROOT / "data/primary-statuses.json").read_bytes())[
+            for row in json.loads((root / "data/primary-statuses.json").read_bytes())[
                 "quests"
             ]
         }
@@ -1133,15 +1133,15 @@ def coverage(source, output):
                 key: sum(primary.get(row["id"], "Unknown") == key for row in rows)
                 for key in ("New", "Updated", "Unchanged", "Unknown")
             },
-            "reconciliationReport": "data/catalog-reconciliation.json",
+            "reconciliationReport": "dist/catalog-reconciliation.json",
             "luaSha256": hashlib.sha256(output).hexdigest(),
             "sourceSha256": hashlib.sha256(
-                (ROOT / "data/catalog-complete-source.json").read_bytes()
+                (root / "data/catalog-complete-source.json").read_bytes()
             ).hexdigest(),
             "liveClientVerified": False,
         }
     rows = source["quests"]
-    primary = json.loads((ROOT / "data/primary-statuses.json").read_bytes())
+    primary = json.loads((root / "data/primary-statuses.json").read_bytes())
     statuses = {q["id"]: q["status"] for q in primary["quests"]}
     return {
         "schemaVersion": 1,
@@ -1184,10 +1184,26 @@ def coverage(source, output):
         },
         "luaSha256": hashlib.sha256(output).hexdigest(),
         "sourceSha256": hashlib.sha256(
-            (ROOT / "data/catalog-source.json").read_bytes()
+            (root / "data/catalog-source.json").read_bytes()
         ).hexdigest(),
         "liveClientVerified": False,
     }
+
+
+def write_reports(source, output, root=ROOT, destination=None):
+    """Regenerate ignored diagnostics from facts; reports never supply authority."""
+    directory = destination or root / "dist"
+    directory.mkdir(parents=True, exist_ok=True)
+    _, reconciliation = build_complete(root)
+    summary = coverage(source, output, root)
+    for name, value in (
+        ("catalog-reconciliation.json", reconciliation),
+        ("catalog-coverage.json", summary),
+    ):
+        (directory / name).write_bytes(
+            (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
+        )
+    return summary
 
 
 def generate_main(argv=None, *, prog=None):
@@ -1196,14 +1212,11 @@ def generate_main(argv=None, *, prog=None):
     args = parser.parse_args(argv)
     source, provenance = load_inputs()
     output = render(source, provenance)
-    report = (json.dumps(coverage(source, output), indent=2) + "\n").encode()
-    for path, data in (
-        (ROOT / "FindAnUpgrade/Data/Catalog.lua", output),
-        (ROOT / "data/catalog-coverage.json", report),
-    ):
-        if args.check:
-            if not (path.read_bytes() == data):
-                raise AssertionError(str(path) + " is stale")
-        else:
-            path.write_bytes(data)
-    print(report.decode().strip())
+    path = ROOT / "FindAnUpgrade/Data/Catalog.lua"
+    if args.check:
+        if path.read_bytes() != output:
+            raise AssertionError(str(path) + " is stale")
+    else:
+        path.write_bytes(output)
+    report = write_reports(source, output, ROOT)
+    print(json.dumps(report, indent=2))
