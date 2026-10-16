@@ -24,9 +24,12 @@ jobs:
           persist-credentials: false
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          version: '0.13.1'
-          python-version: '3.15.0'
-          enable-cache: false
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+            .python-version
+          prune-cache: true
       - name: Check out pinned Forever API contracts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -46,7 +49,6 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /version.txt
             /Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua
@@ -56,7 +58,7 @@ jobs:
             /Interface/AddOns/Blizzard_Menu/DropdownButton.lua
             /Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua
-      - name: Install locked development dependencies
+      - name: Sync locked tooling dependencies
         run: uv sync --locked
       - name: Test and package exact payload
-        run: uv run --locked python tools/verify.py
+        run: uv run --locked python -m fau_tools check

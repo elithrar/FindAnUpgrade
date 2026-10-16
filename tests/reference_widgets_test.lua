@@ -31,6 +31,8 @@ test("always compare preference survives private automatic-manager suppression",
         assert(loadstring(assert(helper)))()
         assert(TooltipUtil.ShouldDoItemComparison(N.Stack.tooltip)==false)
         assert(TooltipUtil.ShouldDoItemComparison({suppressAutomaticCompareItem=false})==true)
+    else
+        print("SKIP native TooltipUtil helper assertions: pinned fixture absent; portable comparison assertions still run")
     end
     assert(N.Stack.item and N.Stack.tooltip.suppressAutomaticCompareItem and N.Stack.comparison.calls==1)
     assert(TooltipComparisonManager.calls==nil and N.Stack.compareState)

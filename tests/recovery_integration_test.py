@@ -1,15 +1,14 @@
 """Regress source-boundary failures found during independent recovery review."""
 
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
 
+from fau_tools import catalog as catalog
+from fau_tools import sync as sync
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import complete_catalog as catalog  # noqa: E402 - local tools require the repository path above
-import sync_catalog as sync  # noqa: E402 - local tools require the repository path above
 
 
 class RecoveryIntegrationTests(unittest.TestCase):

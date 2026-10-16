@@ -1,20 +1,19 @@
 [project]
 name = "findanupgrade-tooling"
-version = "0.1.14"
-description = "Development, data, and release tools for FindAnUpgrade"
+version = "0.1.15"
+description = "Repository-local supporting tools for FindAnUpgrade"
 requires-python = ">=3.15,<3.16"
-dependencies = []
+dependencies = ["lupa==2.8"]
 
 [dependency-groups]
 dev = [
-    "lupa==2.8",
     "ruff==0.17.1",
 ]
-visual = ["pillow==12.3.0"]
 
 [tool.uv]
 package = false
 required-version = "==0.13.1"
+# Lupa's isolated source build on Python 3.15 x64.
 build-constraint-dependencies = [
     "cython==3.3.0",
     "packaging==26.3",

@@ -1,15 +1,14 @@
-import importlib.util
 import json
 import shutil
+import subprocess
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
 
+from fau_tools import packaging as package
+
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("package", ROOT / "tools/package.py")
-package = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(package)
 
 
 class PackageTest(unittest.TestCase):
@@ -64,18 +63,16 @@ class PackageTest(unittest.TestCase):
                 "FindAnUpgrade/Data/ATT-LICENSE.txt",
                 "data/catalog-source.json",
                 "data/catalog-sources.json",
-                "data/catalog-coverage.json",
                 "data/catalog-complete-source.json",
                 "data/catalog-complete-sources.json",
-                "data/catalog-reconciliation.json",
                 "data/catalog-public-records.json",
                 "data/catalog-metadata-records.json",
                 "data/catalog-compiled-quests.json",
                 "data/catalog-primary-records.json",
                 "data/catalog-client-evidence.json",
-                "tools/generate_catalog.py",
-                "tools/import_complete_catalog.py",
-                "tools/collect_catalog_sources.py",
+                "fau_tools/catalog.py",
+                "fau_tools/importer.py",
+                "fau_tools/sources.py",
             ]:
                 self.assertEqual(z.read(prefix + name), (self.root / name).read_bytes())
 
@@ -100,14 +97,6 @@ class PackageTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "catalog is stale"):
             package.validate(self.root)
         path.write_bytes(original)
-        path = self.root / "data/catalog-coverage.json"
-        original = path.read_bytes()
-        coverage = json.loads(original)
-        coverage["liveClientVerified"] = True
-        path.write_text(json.dumps(coverage))
-        with self.assertRaisesRegex(ValueError, "coverage is stale"):
-            package.validate(self.root)
-        path.write_bytes(original)
         path = self.root / "FindAnUpgrade/Data/ATT-LICENSE.txt"
         path.write_text("MIT label without the copyright, permission or disclaimer")
         with self.assertRaisesRegex(ValueError, "MIT permission"):
@@ -118,17 +107,105 @@ class PackageTest(unittest.TestCase):
             path = self.root / directory / "private.txt"
             path.parent.mkdir()
             path.write_text("must not ship")
+        incidental = (
+            "fau_tools/scratch.py",
+            "data/private.json",
+            "data/local-review.json",
+            "tests/private_test.py",
+            ".github/workflows/private.yml",
+        )
+        for name in incidental:
+            path = self.root / name
+            path.write_bytes(b"must not ship despite its source-like suffix")
         package.build(self.root)
         with zipfile.ZipFile(
             self.root / f"dist/FindAnUpgrade-{self.version}-source.zip"
         ) as z:
             self.assertFalse(any("private.txt" in name for name in z.namelist()))
             prefix = f"FindAnUpgrade-{self.version}-source/"
+            self.assertFalse(
+                set(prefix + name for name in incidental) & set(z.namelist())
+            )
+            self.assertEqual(
+                set(z.namelist()),
+                {
+                    prefix + file.relative_to(ROOT).as_posix()
+                    for file in package.source_files()
+                },
+            )
             for name in ("pyproject.toml", "uv.lock", ".python-version"):
                 self.assertEqual(z.read(prefix + name), (ROOT / name).read_bytes())
             self.assertFalse(
                 any(".work/" in name or ".venv/" in name for name in z.namelist())
             )
+
+    def test_source_archive_rebuilds_without_git_metadata(self):
+        expected = package.build(self.root)
+        source = self.root / "dist" / f"FindAnUpgrade-{self.version}-source.zip"
+        with zipfile.ZipFile(source) as archive:
+            archive.extractall(self.root / "extracted")
+        extracted = self.root / "extracted" / f"FindAnUpgrade-{self.version}-source"
+        self.assertFalse((extracted / ".git").exists())
+        self.assertFalse((extracted / "dist").exists())
+        self.assertEqual(package.build(extracted), expected)
+
+    def test_build_regenerates_reports_without_trusting_missing_or_dirty_outputs(self):
+        from fau_tools.catalog import build_complete, coverage
+
+        facts = {
+            path.relative_to(self.root): path.read_bytes()
+            for path in (self.root / "data").glob("*.json")
+        }
+        self.assertEqual(len(facts), 18)
+        self.assertFalse((self.root / "dist").exists())
+        first = package.build(self.root)
+        expected_source, expected_report = build_complete(self.root)
+        report = self.root / "dist/catalog-reconciliation.json"
+        coverage_path = self.root / "dist/catalog-coverage.json"
+        self.assertEqual(json.loads(report.read_bytes()), expected_report)
+        self.assertEqual(
+            json.loads(coverage_path.read_bytes()),
+            coverage(
+                expected_source,
+                (self.root / "FindAnUpgrade/Data/Catalog.lua").read_bytes(),
+                self.root,
+            ),
+        )
+        report.write_bytes(b"invalid diagnostic JSON")
+        coverage_path.write_text('{"liveClientVerified": true}', encoding="utf-8")
+        self.assertEqual(package.validate(self.root), self.version)
+        self.assertEqual(package.build(self.root), first)
+        self.assertEqual(json.loads(report.read_bytes()), expected_report)
+        self.assertFalse(json.loads(coverage_path.read_bytes())["liveClientVerified"])
+        self.assertEqual(
+            {
+                path.relative_to(self.root): path.read_bytes()
+                for path in (self.root / "data").glob("*.json")
+            },
+            facts,
+        )
+
+    def test_missing_declared_source_cannot_produce_a_source_archive(self):
+        (self.root / "fau_tools/membership.py").unlink()
+        with self.assertRaisesRegex(
+            ValueError, "Missing declared source files: fau_tools/membership.py"
+        ):
+            package.build(self.root)
+        self.assertFalse(
+            (self.root / "dist" / f"FindAnUpgrade-{self.version}-source.zip").exists()
+        )
+
+    def test_source_inventory_covers_every_tracked_maintained_file(self):
+        if not (ROOT / ".git").exists():
+            self.skipTest("Source snapshots intentionally omit Git metadata")
+        tracked = subprocess.check_output(
+            ["git", "ls-files", "-z"], cwd=ROOT, text=True, encoding="utf-8"
+        ).split("\0")
+        maintained = {name for name in tracked if name and (ROOT / name).is_file()}
+        declared = {
+            path.relative_to(ROOT).as_posix() for path in package.source_files()
+        }
+        self.assertEqual(maintained - declared, set())
 
     def test_stray_shipped_file_is_rejected(self):
         (self.root / "FindAnUpgrade/surprise.lua").write_text("print('unreviewed')")

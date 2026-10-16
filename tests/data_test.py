@@ -9,9 +9,9 @@ from pathlib import Path
 
 from lupa.lua51 import LuaRuntime
 
+from fau_tools import classification as importer
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import import_classifications as importer  # noqa: E402 - local tools require the repository path above
 
 
 class DataTest(unittest.TestCase):
@@ -21,11 +21,9 @@ class DataTest(unittest.TestCase):
         cls.evidence = json.loads(
             (ROOT / "data/classification-source.json").read_bytes()
         )
-        cls.report = json.loads(
-            (ROOT / "data/classification-reconciliation.json").read_bytes()
-        )
         cls.baseline_raw = (ROOT / "data/classification-baseline.json").read_bytes()
         cls.baseline = json.loads(cls.baseline_raw)
+        _, cls.report = importer.reconcile(cls.evidence, cls.baseline, cls.baseline_raw)
         cls.lua = LuaRuntime(unpack_returned_tuples=True)
         cls.lua.execute("N = {}")
         cls.lua.globals().SOURCE = str(ROOT / "FindAnUpgrade/Data/Quests.lua").replace(
@@ -263,8 +261,12 @@ class DataTest(unittest.TestCase):
             importer.reconcile(missing_exclusion, self.baseline, self.baseline_raw)
 
     def test_generated_outputs_are_reproducible_without_website_checkout(self):
-        for command in ["tools/import_classifications.py", "tools/generate_data.py"]:
-            subprocess.run([sys.executable, str(ROOT / command), "--check"], check=True)
+        for command in ("classify", "quests"):
+            subprocess.run(
+                [sys.executable, "-m", "fau_tools", "data", command, "--check"],
+                cwd=ROOT,
+                check=True,
+            )
 
     def test_retained_exclusion_requires_nonempty_string_reasons(self):
         for invalid in (

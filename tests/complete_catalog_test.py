@@ -3,17 +3,16 @@
 import copy
 import json
 import struct
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 
+from fau_tools.att import merge, parse
+from fau_tools.catalog import build_complete, read_inputs, validate_complete
+from fau_tools.html import quest_detail, quest_index
+from fau_tools.importer import native_ids
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-from catalog_html import quest_detail, quest_index  # noqa: E402 - local tools require the repository path above
-from complete_catalog import build_complete, read_inputs, validate_complete  # noqa: E402 - local tools require the repository path above
-from import_catalog import merge, parse  # noqa: E402 - local tools require the repository path above
-from import_complete_catalog import native_ids  # noqa: E402 - local tools require the repository path above
 
 
 def page(body="", quest=9, extra="", label="Forever"):
@@ -47,9 +46,6 @@ class CompleteCatalogTests(unittest.TestCase):
         source, report = build_complete(ROOT)
         actual = json.loads((ROOT / "data/catalog-complete-source.json").read_bytes())
         self.assertEqual(source, actual)
-        self.assertEqual(
-            report, json.loads((ROOT / "data/catalog-reconciliation.json").read_bytes())
-        )
         self.assertEqual(report["publicIdsAbsentOutput"], [])
         self.assertEqual(
             sum(report["fieldCoverage"]["items"].values()), len(source["quests"])

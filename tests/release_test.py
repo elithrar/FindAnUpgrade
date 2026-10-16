@@ -5,23 +5,22 @@ import json
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 import unittest
 import zipfile
 from pathlib import Path
 from unittest.mock import patch
 
+from fau_tools import publishing as cf
+from fau_tools import publishing as github
+from fau_tools import release as release
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import publish_curseforge as cf  # noqa: E402 - local tools require the repository path above
-import publish_github as github  # noqa: E402 - local tools require the repository path above
-import release  # noqa: E402 - local tools require the repository path above
 
 
 def artifact_fixture(destination, source=ROOT):
     """Create an isolated fixed-version fixture, independent of real releases."""
-    import package
+    from fau_tools import packaging as package
 
     for file in package.source_files(source):
         target = destination / file.relative_to(source)
@@ -35,9 +34,9 @@ def artifact_fixture(destination, source=ROOT):
     core.write_text(
         core.read_text().replace('version = "' + version + '"', 'version = "0.1.0"')
     )
-    notes = destination / "docs/releases/0.1.0.md"
+    notes = destination / "CHANGELOG.md"
     notes.parent.mkdir(parents=True, exist_ok=True)
-    notes.write_text("Offline fixture release notes.\n")
+    notes.write_text("# Changelog\n\n## 0.1.0\n\nOffline fixture release notes.\n")
     package.build(destination)
     data = release.metadata("v0.1.0", toc_path.read_text())
     data.update(commit="a" * 40, tag_object="b" * 40, notes_sha256=release.sha(notes))
@@ -56,6 +55,20 @@ def artifact_fixture(destination, source=ROOT):
 
 
 class MetadataTests(unittest.TestCase):
+    def test_changelog_requires_one_exact_version_heading(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            data = {"version": "0.1.0"}
+            with self.assertRaisesRegex(ValueError, "notes missing"):
+                release.release_notes(data, root)
+            path = root / "CHANGELOG.md"
+            for content in ["No version", "## 0.2.0", "## 0.1.0\n## 0.2.0"]:
+                path.write_text(content)
+                with self.assertRaisesRegex(ValueError, "exact current release"):
+                    release.release_notes(data, root)
+            path.write_text("# Changelog\n\n## 0.1.0\n\nCurrent notes\n")
+            self.assertEqual(release.release_notes(data, root), path)
+
     def toc(self, version="0.1.0"):
         return f"## Interface: 16001\n## Version: {version}\n"
 
@@ -286,7 +299,7 @@ class MetadataTests(unittest.TestCase):
 class ArtifactTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        import package
+        from fau_tools import packaging as package
 
         cls.package = package
         cls.temp = tempfile.TemporaryDirectory(dir=ROOT / ".work")
@@ -345,7 +358,6 @@ class ArtifactTests(unittest.TestCase):
             release.verify_artifacts(self.root)
 
     def test_real_notes_and_version_bump_do_not_break_fixed_fixture(self):
-        # The source already includes its first real notes directory/file.
         toc = self.root / "FindAnUpgrade/FindAnUpgrade.toc"
         toc.write_text(
             toc.read_text().replace("## Version: 0.1.0", "## Version: 0.2.0")
@@ -354,17 +366,13 @@ class ArtifactTests(unittest.TestCase):
         core.write_text(
             core.read_text().replace('version = "0.1.0"', 'version = "0.2.0"')
         )
-        (self.root / "docs/releases/0.2.0.md").write_text(
-            "Future real release notes.\n"
-        )
+        future_notes = "# Changelog\n\n## 0.2.0\n\nFuture real release notes.\n"
+        (self.root / "CHANGELOG.md").write_text(future_notes)
         destination = Path(self.temp_instance.name) / "normalized-fixture"
         data = artifact_fixture(destination, self.root)
         self.assertEqual(data["version"], "0.1.0")
-        self.assertTrue((destination / "docs/releases/0.2.0.md").is_file())
-        self.assertEqual(
-            (self.root / "docs/releases/0.2.0.md").read_text(),
-            "Future real release notes.\n",
-        )
+        self.assertIn("## 0.1.0", (destination / "CHANGELOG.md").read_text())
+        self.assertEqual((self.root / "CHANGELOG.md").read_text(), future_notes)
 
     def test_altered_archive_is_rejected(self):
         archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
@@ -377,7 +385,9 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unexpected release ZIP"):
             release.verify_artifacts(self.root)
 
-    def test_ignored_source_member_absent_from_tag_is_rejected(self):
+    def test_ignored_private_files_are_excluded_and_untracked_sources_are_rejected(
+        self,
+    ):
         def git(*args):
             return release.git(*args, root=self.root)
 
@@ -396,12 +406,21 @@ class ArtifactTests(unittest.TestCase):
         git("tag", "-a", "v0.1.0", "-m", "Version")
         commit = release.check_tag("v0.1.0", self.root)
         release.check_source_tree(commit, self.root)
-        ignored = self.root / "docs/.work/untracked-fixture.env"
+        ignored = self.root / "fau_tools/.work/untracked-fixture.env"
         ignored.parent.mkdir()
         ignored.write_bytes(b"private fixture must not ship")
         self.assertEqual(git("status", "--porcelain"), "")
-        with self.assertRaisesRegex(ValueError, "untracked-fixture.env"):
-            release.check_source_tree(commit, self.root)
+        self.assertNotIn(ignored, self.package.source_files(self.root))
+        release.check_source_tree(commit, self.root)
+        # A source-shaped ignored file is excluded from release sources too.
+        unknown = self.root / "data/untracked-fixture.json"
+        unknown.write_bytes(b"unreviewed source")
+        exclusion = self.root / ".git/info/exclude"
+        with exclusion.open("ab") as output:
+            output.write(b"\ndata/untracked-fixture.json\n")
+        self.assertEqual(git("status", "--porcelain"), "")
+        self.assertNotIn(unknown, self.package.source_files(self.root))
+        release.check_source_tree(commit, self.root)
 
     def test_forged_checksums_do_not_allow_extra_payload(self):
         archive = self.root / "dist/FindAnUpgrade-0.1.0.zip"
@@ -440,7 +459,7 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "receipt"):
             release.verify_artifacts(self.root)
         path.write_bytes(original)
-        (self.root / "docs/releases/0.1.0.md").write_text("Different notes")
+        (self.root / "CHANGELOG.md").write_text("Different notes")
         with self.assertRaises(ValueError):
             release.verify_artifacts(self.root)
 
@@ -451,8 +470,9 @@ class PublishTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / "dist").mkdir()
-        (self.root / "docs/releases").mkdir(parents=True)
-        (self.root / "docs/releases/0.1.0.md").write_text("Fixture notes")
+        (self.root / "CHANGELOG.md").write_text(
+            "# Changelog\n\n## 0.1.0\n\nFixture notes"
+        )
         self.data = release.metadata("v0.1.0", MetadataTests().toc())
         self.data.update(commit="a" * 40, tag_object="b" * 40)
         self.assets = {}
@@ -546,7 +566,7 @@ class PublishTests(unittest.TestCase):
         }
 
     def test_success_records_confirmed_intent_before_one_post_and_receipt_after(self):
-        self.assertTrue(cf.main(self.root))
+        self.assertTrue(cf.upload(self.root))
         post = next(
             i
             for i, c in enumerate(self.calls)
@@ -570,7 +590,7 @@ class PublishTests(unittest.TestCase):
 
     def test_receipt_validated_before_duplicate_upload_is_skipped(self):
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
-        self.assertTrue(cf.main(self.root))
+        self.assertTrue(cf.upload(self.root))
         self.assertEqual(cf.request.call_count, 0)
         for key, value in [
             ("sha256", "bad"),
@@ -582,17 +602,17 @@ class PublishTests(unittest.TestCase):
                 {**self.receipt(), key: value}
             ).encode()
             with self.assertRaises(ValueError):
-                cf.main(self.root)
+                cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
     def test_pending_and_immutable_block_post(self):
         self.assets["curseforge-upload-pending.json"] = b"intent"
         with self.assertRaisesRegex(ValueError, "unresolved"):
-            cf.main(self.root)
+            cf.upload(self.root)
         del self.assets["curseforge-upload-pending.json"]
         self.current["immutable"] = True
         with self.assertRaisesRegex(ValueError, "Immutable"):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
     def test_timeout_is_never_retried(self):
@@ -605,16 +625,16 @@ class PublishTests(unittest.TestCase):
 
         cf.request.side_effect = failure
         with self.assertRaises(TimeoutError):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 2)
         self.assertIn("curseforge-upload-pending.json", self.assets)
         self.assertNotIn("curseforge-receipt.json", self.assets)
 
     def test_missing_settings_skip_without_network(self):
         with patch.dict(os.environ, {"CF_API_KEY": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
         with patch.dict(os.environ, {"CF_PROJECT_ID": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
         self.assertEqual(cf.request.call_count, 0)
         self.assertEqual(self.calls, [])
 
@@ -650,7 +670,7 @@ class PublishTests(unittest.TestCase):
     def test_unresolved_upload_blocks_github_finalize_when_settings_removed(self):
         self.assets["curseforge-upload-pending.json"] = b"intent"
         with patch.dict(os.environ, {"CF_API_KEY": ""}):
-            self.assertFalse(cf.main(self.root))
+            self.assertFalse(cf.upload(self.root))
             with self.assertRaisesRegex(ValueError, "Unresolved"):
                 github.finalize(self.root)
         self.assertEqual(self.calls, [])
@@ -668,7 +688,7 @@ class PublishTests(unittest.TestCase):
         ]:
             self.assets["curseforge-receipt.json"] = json.dumps(receipt).encode()
             with patch.dict(os.environ, {"CF_API_KEY": ""}):
-                self.assertFalse(cf.main(self.root))
+                self.assertFalse(cf.upload(self.root))
                 with self.assertRaises(ValueError):
                     github.finalize(self.root)
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
@@ -682,7 +702,7 @@ class PublishTests(unittest.TestCase):
     def test_uncertain_intent_write_stops_before_post(self):
         github.gh.side_effect = lambda *args: ""
         with self.assertRaisesRegex(ValueError, "intent was not confirmed"):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 1)  # version GET only
 
     def test_read_failure_and_wrong_repository_fail_closed(self):
@@ -694,7 +714,7 @@ class PublishTests(unittest.TestCase):
             patch.dict(os.environ, {"GH_REPO": "other/fork"}),
             self.assertRaises(ValueError),
         ):
-            cf.main(self.root)
+            cf.upload(self.root)
         self.assertEqual(cf.request.call_count, 0)
 
 
@@ -728,11 +748,11 @@ class WorkflowTests(unittest.TestCase):
             for node in runner.body
             if isinstance(node, ast.Assign)
             and any(
-                isinstance(target, ast.Name) and target.id == "current_paths"
+                isinstance(target, ast.Name) and target.id == "CURRENT_PATHS"
                 for target in node.targets
             )
         )
-        revision = json.loads((ROOT / "docs/client-contracts.json").read_text())[
+        revision = json.loads((ROOT / "tests/native-source-fixtures.json").read_text())[
             "currentSnapshot"
         ]["revision"]
         for name in ["check.yml", "release.yml"]:
@@ -745,9 +765,7 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(workflow=name):
                 self.assertIn("ref: " + revision, step)
                 supplied = set(release.re.findall(r"(?m)^            /(.+)$", step))
-                self.assertTrue(
-                    set(required).issubset(supplied), sorted(set(required) - supplied)
-                )
+                self.assertEqual(set(required), supplied)
 
     def test_workflows_pin_actions_and_keep_credentials_in_publish_steps(self):
         for name in ["check.yml", "release.yml"]:
@@ -767,8 +785,7 @@ class WorkflowTests(unittest.TestCase):
                 text.count("persist-credentials: false"),
                 text.count("uses: actions/checkout@"),
             )
-            self.assertIn("python tools/verify.py", text)
-            self.assertIn("uv run --locked python tools/verify.py", text)
+            self.assertIn("uv run --locked python -m fau_tools check", text)
             self.assertIn("uv sync --locked", text)
             for step in release.re.split(r"(?m)^      - ", text)[1:]:
                 self.assertTrue(
@@ -786,12 +803,12 @@ class WorkflowTests(unittest.TestCase):
         final_step = publish.split("- name: Publish completed GitHub release", 1)[1]
         self.assertIn("CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}", final_step)
         self.assertLess(
-            publish.index("python tools/release.py --verify"),
-            publish.index("python tools/publish_github.py"),
+            publish.index("python -m fau_tools release --verify"),
+            publish.index("python -m fau_tools publish-github"),
         )
         self.assertLess(
-            publish.index("python tools/publish_curseforge.py"),
-            publish.index("python tools/publish_github.py --finalize"),
+            publish.index("python -m fau_tools publish-curseforge"),
+            publish.index("python -m fau_tools publish-github --finalize"),
         )
         self.assertNotIn("git fetch origin", workflow)
 

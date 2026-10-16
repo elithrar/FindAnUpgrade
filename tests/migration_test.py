@@ -1,16 +1,12 @@
-import importlib.util
 import tempfile
 import unittest
 from contextlib import contextmanager
 from pathlib import Path
 from unittest.mock import patch
 
+from fau_tools import migration
+
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location(
-    "migration", ROOT / "tools/migrate_settings.py"
-)
-migration = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(migration)
 
 
 class MigrationTest(unittest.TestCase):

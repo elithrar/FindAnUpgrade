@@ -3,16 +3,15 @@
 import base64
 import json
 import struct
-import sys
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from fau_tools import catalog as complete_catalog
+from fau_tools import questie as source
+
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "tools"))
-import complete_catalog  # noqa: E402 - local tools require the repository path above
-import questie_metadata as source  # noqa: E402 - local tools require the repository path above
 
 
 def cbor(value):

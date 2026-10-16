@@ -10,6 +10,12 @@ A compact quest and reward browser for World of Warcraft: Forever.
 - Save quests to your character's Shortlist and inspect quest chains.
 - Choose fonts, borders, scale and preview settings in one Options window.
 
+Open it with `/fau` or click the _FindAnUpgrade_ button on your minimap.
+
+## Screenshot
+
+<img width="600" alt="fau_overview" src="https://github.com/user-attachments/assets/f19cd5f8-11e8-41f1-8ec4-b8bbfe8f4839" />
+
 ## Installation
 
 Install [FindAnUpgrade from CurseForge](https://www.curseforge.com/wow/addons/findanupgrade), then restart WoW. For a manual install, copy `FindAnUpgrade` into your Forever client's `Interface/AddOns` folder. `FindAnUpgrade.toc` must be directly inside `FindAnUpgrade`.
@@ -24,9 +30,9 @@ Open an issue before submitting a PR. Unsolicited PRs may be closed.
 
 ## Development
 
-Run `uv run --locked python tools/verify.py` from the repository root for lint, formatting, tests and a local ZIP in `dist/`.
+Run `uv run --locked python -m fau_tools check` from the repository root for lint, formatting, tests and ZIPs in `dist/`.
 
-See [development setup](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/DEVELOPMENT.md), [database sync](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/DATABASE-SYNC.md) and [validation coverage](https://github.com/elithrar/FindAnUpgrade/blob/main/docs/VALIDATION.md).
+See [AGENTS.md](https://github.com/elithrar/FindAnUpgrade/blob/main/AGENTS.md) for setup, catalog imports and contributor guidance.
 
 ## License
 
