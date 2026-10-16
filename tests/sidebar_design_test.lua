@@ -16,8 +16,8 @@ end
 local function fill(N,S,items,choices)
     local row={id=9,title="A useful quest",level=20,items={},evidence="Recorded minimum level 18"}
     for _,group in ipairs({items or {},choices or {}})do for _,item in ipairs(group)do row.items[#row.items+1]=item end end
-    N.Catalog.records[9]={id=9,source={}}
-    N.Catalog.locations[9]={{npcID=54,name="A long but useful quest giver",nameKnown=true,zone="Redridge Mountains",mapID=100,x=.226,y=.474}}
+    N.Catalog.records[9]={id=9,source={locations={{npcID=54,name="A long but useful quest giver",nameKnown=true,zone="Redridge Mountains",mapID=100,x=.226,y=.474}}}}
+    N.Catalog.locations[9]=nil
     N.SearchModel.Reward=function()return reward(items,choices),{},false end
     local card=S:Card(1);S:Fill(card,row);return card,row
 end
@@ -118,6 +118,75 @@ test("single item area is natural width while guaranteed and choices remain dist
     c=fill(N,S,{a},{b});assert(c.icons[1].group.text=="Guaranteed" and c.icons[2].group.text=="Choose one")
     assert(c.icons[1].group:IsShown() and c.icons[2].group:IsShown())
     assert(separated(rect(c.icons[1]),rect(c.icons[2])) and c:GetHeight()<105)
+end)
+
+local function footerLayout(S,card)
+    local box,footer=rect(card),rect(card.footer[1]);local inset=S.geometry.cardInset
+    assert(math.abs(footer.x-box.x-inset)<.01,"reward text must share the row's left inset")
+    assert(math.abs(footer.y-box.y-inset)<.01,"reward text must stay at the row's bottom inset")
+    assert(card.footer[1].point[1]=="BOTTOMLEFT" and card.footer[1]:GetNumPoints()==1)
+    assert(card.footer[1].justifyH=="LEFT" and card.footer[1].justifyV=="TOP")
+    assert(footer.right<=box.right-inset+.01 and footer.top<=box.top-inset+.01)
+    for _,label in ipairs({card.title,card.location,card.evidence,card.chain})do
+        if label:IsShown()then assert(separated(footer,rect(label)),"reward text overlaps quest or giver text")end
+    end
+    for _,icon in ipairs(card.icons)do
+        if icon:IsShown()then
+            assert(separated(footer,rect(icon)),"reward text overlaps an item")
+            if icon.group:IsShown()then assert(separated(footer,rect(icon.group)),"reward text overlaps a reward caption")end
+        end
+    end
+    for _,button in ipairs({card.giver,card.more})do
+        if button:IsShown()then assert(separated(footer,rect(button)),"reward text overlaps a reward action")end
+    end
+    local hit=rect(card.footerHits[1]);assert(hit.x==footer.x and hit.y==footer.y and hit.h>=footer.h and hit.h<=footer.h+1.01)
+end
+
+test("XP and reputation share a bottom-left footer without adding empty reward space",function()
+    local N,S=open();local item={itemID=123,state="ready",texture=100}
+    local card,row=fill(N,S,{item});row.title="For Love Eternal";row.evidence=nil
+    local data=reward({item});data.money={state="unavailable"}
+    N.SearchModel.Reward=function()return data,{},false end
+    local height
+    for _,case in ipairs({{true,false},{false,true},{true,true},{false,false},{true,true}})do
+        data.xp=case[1]and {state="ready",value=875}or {state="unavailable"}
+        data.reputation.items=case[2]and {{name="Darnassus",amount=75}}or {}
+        S:Fill(card,row)
+        if not height then height=card:GetHeight()else assert(card:GetHeight()==height,"short footer must reuse existing row space")end
+        if case[1]or case[2]then
+            assert(card.footer[1]:IsShown());footerLayout(S,card)
+            assert((card.footer[1].text:find("875 XP",1,true)~=nil)==case[1])
+            assert((card.footer[1].text:find("Darnassus +75",1,true)~=nil)==case[2])
+        else
+            for i,label in ipairs(card.footer)do assert(not label:IsShown()and label.text==""and not card.footerHits[i]:IsShown()and card.footerHits[i].value==nil)end
+        end
+    end
+    row.items={};data.items.items={};S:Fill(card,row);footerLayout(S,card)
+    assert(card:GetHeight()<70 and not card.icons[1]:IsShown())
+    local withFooter=card:GetHeight();data.xp={state="unavailable"};data.reputation.items={};S:Fill(card,row)
+    assert(card:GetHeight()<withFooter and not card.footer[1]:IsShown(),"no rewards must reserve no footer space")
+end)
+
+test("wrapped reward footers clear long text and expanded item groups at narrow widths",function()
+    for _,size in ipairs({{1920,1080,1},{400,350,1.2},{640,480,.85}})do
+        local N,S=open(unpack(size));local guaranteed,choices={},{}
+        for i=1,8 do guaranteed[i]={itemID=120+i,state="ready",texture=100}end
+        for i=1,3 do choices[i]={itemID=220+i,state="ready",texture=100}end
+        local card,row=fill(N,S,guaranteed,choices)
+        row.title=string.rep("WANTED: Chok'sul and a long quest title ",3)
+        row.evidence=string.rep("Requires a long verified prerequisite ",3)
+        N.Catalog.records[9].source.locations[1].name=string.rep("A long localized quest giver ",4)
+        N.Catalog.records[9].source.locations[2]={npcID=55,name="Another giver",nameKnown=true}
+        N.Catalog.locations[9]=nil
+        N.Chains.HasDetails=function()return true end
+        local data=reward(guaranteed,choices)
+        data.reputation.items={{name=string.rep("A long faction name ",3),amount=200},{name="Stormwind",amount=75}}
+        N.SearchModel.Reward=function()return data,{},false end
+        for _,expanded in ipairs({false,true,false})do
+            S.expanded[row.id]=expanded;S:Fill(card,row);footerLayout(S,card)
+            assert(card.footer[1]:GetStringHeight()>12 and card.more:IsShown()and card.chain:IsShown())
+        end
+    end
 end)
 test("classification option removes fill and badge while preserving gold quest titles",function()
     local N,S=open();N.Model.Status=function()return "verifiedNew"end
@@ -323,9 +392,11 @@ test("appearance bursts reflow retained results without queries even with native
     for _=1,10 do N.Core:Change("border","none");N.Core:Change("scale",1.2);N.Core:Change("font","Arial")end
     W.time=W.time+.3;S:Tick()
     assert(queries==0 and not S.dirty and S.frame:GetScale()==1.2 and S.frame:GetWidth()<=476/1.2)
+    footerLayout(S,S.cards[1])
     assert(S.filter.query=="gun" and S.filter.scope=="LEVEL_RANGE" and S.filter.minimum==12 and S.filter.maximum==24 and S.manualRange)
     W.Event("UI_SCALE_CHANGED");W.Event("DISPLAY_SIZE_CHANGED");S.frame:Fire("OnSizeChanged");S.resize:Fire("OnMouseUp")
     W.time=W.time+.3;S:Tick();assert(queries==0 and not S.dirty)
+    footerLayout(S,S.cards[1])
     -- An actual data invalidation arriving beside appearance still queries.
     S:AppearanceChanged();S:DataChanged();W.time=W.time+.3;S:Tick();assert(queries==1)
 end)

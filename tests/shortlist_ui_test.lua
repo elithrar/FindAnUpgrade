@@ -52,6 +52,29 @@ test("save removal refreshes after click and pooled cards cannot retain old stat
     card.star:Fire("OnClick");tick(S);assert(#S.results==0 and not card:IsShown() and S.offset==0)
     assert(S.empty:GetText()=="Star a quest to save it for this character.")
 end)
+
+test("search and shortlist render bottom rewards and clear recycled or unavailable rows",function()
+    local N,S=setup({1,2});N.Adapter.Over=function()return true end
+    N.SearchModel.Reward=function(_,row)
+        return {state="ready",items={items=row.items},choices={items={}},money={state="unavailable"},
+            xp=row.id==1 and {state="ready",value=875}or {state="unavailable"},currencies={items={}},
+            reputation={items=row.id==1 and {{name="Darnassus",amount=75}}or {}}},{},false
+    end
+    S:Changed(true);tick(S)
+    local card=S.cards[1]
+    local function bottom()
+        assert(card.row.id==1 and card.footer[1]:IsShown())
+        assert(math.abs(rect(card.footer[1]).y-rect(card).y-S.geometry.cardInset)<.01)
+    end
+    bottom();S:View("shortlist");tick(S);assert(S.cards[1]==card);bottom()
+    card.star:Fire("OnClick");tick(S)
+    assert(card.row.id==2 and not card.footer[1]:IsShown()and card.footer[1].text==""and card.footerHits[1].value==nil)
+    S:Fill(card,{id=999,title="Unavailable saved quest",missing=true,items={}})
+    assert(not card.footer[1]:IsShown()and card.footerHits[1].value==nil)
+    S:View("quests");tick(S);assert(S.cards[1]==card);bottom()
+    S:Fill(card,{id=999,title="Unavailable saved quest",missing=true,items={}})
+    assert(not card.footer[1]:IsShown()and card.footer[1].text==""and card.footerHits[1].value==nil)
+end)
 test("one native star texture swaps states at fifteen percent smaller size",function()
     local N,S=setup();local card=S.cards[1]
     assert(card.star:GetWidth()==24 and card.star:GetHeight()==24)

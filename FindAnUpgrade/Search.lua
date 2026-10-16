@@ -537,12 +537,12 @@ function S:Card(index)
     if self.cards[index] then return self.cards[index] end
     local c=CreateFrame("Frame",nil,self.child,"BackdropTemplate"); self.cards[index]=c; surface(c); c:EnableMouse(true)
     c.title,c.tag,c.location,c.evidence=text(c,13,{1,.82,.2}),text(c,10,{.82,.73,.53}),text(c,11,{.75,.75,.77}),text(c,11,{.75,.75,.77})
-    c.title:SetPoint("TOPLEFT",8,-7); c.tag:SetPoint("TOPRIGHT",-8,-9); c.tag:SetJustifyH("RIGHT"); c.location:SetPoint("TOPLEFT",8,-27); c.evidence:SetPoint("TOPLEFT",8,-42)
+    c.title:SetPoint("TOPLEFT",G.cardInset,-7); c.tag:SetPoint("TOPRIGHT",-G.cardInset,-9); c.tag:SetJustifyH("RIGHT"); c.location:SetPoint("TOPLEFT",G.cardInset,-27); c.evidence:SetPoint("TOPLEFT",G.cardInset,-42)
     self:Star(c);c.tag:ClearAllPoints();c.tag:SetPoint("TOPRIGHT",-34,-9)
     c.groupMeasure=text(c,10); c.groupMeasure:Hide()
-    c.titleHit=CreateFrame("Frame",nil,c); c.titleHit:SetPoint("TOPLEFT",8,-5); c.titleHit:SetHeight(18); c.titleHit:EnableMouse(true)
+    c.titleHit=CreateFrame("Frame",nil,c); c.titleHit:SetPoint("TOPLEFT",G.cardInset,-5); c.titleHit:SetHeight(18); c.titleHit:EnableMouse(true)
     c.titleHit:SetScript("OnMouseUp",function(_,button) if button=="RightButton" and c.row and A.Over(self.scroll) and A.Over(c.titleHit) then self:ContextMenu(c.row,c) end end)
-    c.locationHit=CreateFrame("Frame",nil,c); c.locationHit:SetPoint("TOPLEFT",8,-25); c.locationHit:SetHeight(16); c.locationHit:EnableMouse(true)
+    c.locationHit=CreateFrame("Frame",nil,c); c.locationHit:SetPoint("TOPLEFT",G.cardInset,-25); c.locationHit:SetHeight(16); c.locationHit:EnableMouse(true)
     c.locationHit:SetScript("OnMouseUp",function(_,button) if button=="RightButton" and c.row and A.Over(self.scroll) and A.Over(c.locationHit) then self:ContextMenu(c.row,c) end end)
     c.giver=CreateFrame("Button",nil,c); c.giver:SetPoint("TOPRIGHT",-8,-26); c.giver:SetSize(80,16); c.giver.text=text(c.giver,10,{1,.82,.2}); c.giver.text:SetAllPoints(); c.giver.text:SetJustifyH("RIGHT")
     c.giver:SetScript("OnClick",function() if c.row and A.Over(self.scroll) and A.Over(c.giver) then self:LocationMenu(c.row,c.giver) end end)
@@ -583,10 +583,10 @@ function S:Fill(card,row)
     card.titleHit:SetWidth(titleWidth); card.titleHit:SetHeight(titleHeight)
     local r,g,b=M.AccentFill(N.Core.profile,accent,.06,.06,.07); card:SetBackdropColor(r,g,b,.97)
     if row.missing then
-        card.location:SetText("Quest data unavailable");card.location:ClearAllPoints();card.location:SetPoint("TOPLEFT",8,-(titleHeight+12));card.location:Show()
+        card.location:SetText("Quest data unavailable");card.location:ClearAllPoints();card.location:SetPoint("TOPLEFT",G.cardInset,-(titleHeight+12));card.location:Show()
         card.evidence:Hide();card.chain:Hide();card.giver:Hide();card.more:Hide();card.locationHit:Hide()
         for _,icon in ipairs(card.icons) do icon.row=nil;icon:Hide();icon.name:Hide();icon.group:Hide() end
-        for i,footer in ipairs(card.footer) do footer:Hide();card.footerHits[i]:Hide() end
+        for i,footer in ipairs(card.footer) do footer:SetText("");footer:Hide();card.footerHits[i]:Hide();card.footerHits[i].value=nil end
         local height=titleHeight+32;card:SetHeight(height);self.heights=self.heights or {};local resized=self.heights[row.id]~=height;self.heights[row.id]=height;return height,resized
     end
     local reward,catalog,usabilityChanged=N.SearchModel:Reward(row); local items={}; local matching={}
@@ -626,12 +626,12 @@ function S:Fill(card,row)
     local giverWidth=(A.Call(card.giver.text.GetStringWidth,card.giver.text) or 0)+2
     card.giver:SetWidth(giverWidth)
     if #locations>1 then rewardWidth=math.max(rewardWidth,giverWidth) end
-    local bodyWidth=width-16-(rewardWidth>0 and rewardWidth+12 or 0)
+    local bodyWidth=width-2*G.cardInset-(rewardWidth>0 and rewardWidth+12 or 0)
     local top=8+titleHeight+4
     local location=self.locationChoice[row.id] or N.Catalog:Location(row.id); row.location=location
     local place=location and self:LocationLabel(location) or nil
-    card.location:SetWordWrap(true); card.location:ClearAllPoints(); card.location:SetPoint("TOPLEFT",8,-top)
-    card.locationHit:ClearAllPoints(); card.locationHit:SetPoint("TOPLEFT",8,-top)
+    card.location:SetWordWrap(true); card.location:ClearAllPoints(); card.location:SetPoint("TOPLEFT",G.cardInset,-top)
+    card.locationHit:ClearAllPoints(); card.locationHit:SetPoint("TOPLEFT",G.cardInset,-top)
     local placeHeight=measured(card.location,bodyWidth,place)
     card.locationHit:SetSize(bodyWidth,placeHeight); card.locationHit:SetShown(place~=nil)
     local y=top+placeHeight+(placeHeight>0 and 3 or 0)
@@ -640,12 +640,12 @@ function S:Fill(card,row)
     if actionable then
         note=note:gsub("^Recorded minimum level ","Req. lvl "):gsub("^Requires level ","Req. lvl "):gsub("^Recorded ","")
     end
-    card.evidence:SetWordWrap(true); card.evidence:ClearAllPoints(); card.evidence:SetPoint("TOPLEFT",8,-y)
+    card.evidence:SetWordWrap(true); card.evidence:ClearAllPoints(); card.evidence:SetPoint("TOPLEFT",G.cardInset,-y)
     local evidenceHeight=measured(card.evidence,bodyWidth,actionable and note or nil)
     y=y+evidenceHeight+(evidenceHeight>0 and 3 or 0); card.fullTitle=title
     local chain=N.Chains and N.Chains:HasDetails(row.id)
     card.chain:SetShown(chain==true)
-    if chain then card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",8,-y);card.chain:SetWidth(math.min(100,bodyWidth));y=y+19 end
+    if chain then card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",G.cardInset,-y);card.chain:SetWidth(math.min(100,bodyWidth));y=y+19 end
     -- Reserve the whole star target, even for a one-line title, so moving
     -- from the star to an item cannot activate overlapping controls.
     local badgeBottom=badge~="" and 9+(A.Call(card.tag.GetStringHeight,card.tag) or 10) or 0
@@ -696,15 +696,19 @@ function S:Fill(card,row)
         local amount=(entry.amount>0 and "+" or "")..entry.amount
         values[#values+1]=(entry.name or "Faction "..entry.factionID).." "..amount
     end
-    for i,label in ipairs(card.footer) do label:Hide(); card.footerHits[i]:Hide(); card.footerHits[i].value=nil end
+    for i,label in ipairs(card.footer) do label:SetText("");label:Hide(); card.footerHits[i]:Hide(); card.footerHits[i].value=nil end
+    local footerHeight=0
     if #values>0 then
         local label,hit=card.footer[1],card.footerHits[1]
-        label:SetWordWrap(true); label:ClearAllPoints(); label:SetPoint("TOPLEFT",8,-y)
-        local h=measured(label,bodyWidth,table.concat(values,"  "))
-        hit:ClearAllPoints(); hit:SetPoint("TOPLEFT",8,-y); hit:SetSize(bodyWidth,h); hit.value=table.concat(values,"\n")
-        y=y+h+3
+        label:SetWordWrap(true); label:ClearAllPoints(); label:SetPoint("BOTTOMLEFT",G.cardInset,G.cardInset)
+        footerHeight=measured(label,bodyWidth,table.concat(values,"  "))
+        hit:ClearAllPoints(); hit:SetPoint("BOTTOMLEFT",G.cardInset,G.cardInset); hit:SetSize(bodyWidth,footerHeight); hit.value=table.concat(values,"\n")
     end
-    local height=math.max(y,rewardY)+5; card:SetHeight(height); self.heights=self.heights or {}
+    -- The footer shares the left text column and stays at the bottom even when
+    -- right-side rewards make the row taller. Wrapped text must still clear it.
+    local height=math.max(y,rewardY)+5
+    if footerHeight>0 then height=math.max(height,y+footerHeight+G.cardInset) end
+    card:SetHeight(height); self.heights=self.heights or {}
     local resized=self.heights[row.id]~=height; self.heights[row.id]=height
     if reward.state=="pending" and (A.Call(GetTime) or 0)<self.dataDeadline then self.pending=true end
     self:Enqueue("reward",{row.id})
