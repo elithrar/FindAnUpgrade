@@ -1,10 +1,9 @@
 # Changelog
 
-## 0.1.15
+## 0.1.0
 
-- Tighten options spacing, including compact level-range rows, consistent section gaps and a shorter window that preserves readable controls and scrolling.
-- Run repository-local supporting tools through `uv run --locked python -m fau_tools`; retain locked dependencies without building or installing a Python distribution.
-- Keep validation active under optimized Python and restrict source archives/import stages to reviewed files; preserve deterministic quest facts and provenance.
-- Remove obsolete plans, local installers, mock renderers and historical receipts; retain brief contributor guidance in AGENTS.md and only the native source pins exercised by tests. Generate diagnostic reports under ignored dist paths.
+Find quests with upgrades: based on item level, empty slots, class and/or level range and zone. Track down quest givers with waypoints and shortlist the quest with the items you need.
 
-This iteration changes repository tooling and options spacing. It does not establish new live-client verification.
+FindAnUpgrade is designed to make it easier to chase down the quests that give you that missing weapon, trinket, ring or shoulder item that you need the most when levelling in WoW: Forever. New and modified quests and their rewards are built right in.
+
+Open it with /fau or click the FindAnUpgrade button on your minimap.

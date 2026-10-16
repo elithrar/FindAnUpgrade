@@ -231,6 +231,21 @@ def release_notes(data, root=ROOT):
     return path
 
 
+def release_notes_body(data, root=ROOT):
+    """Extract public notes while retaining the tracked changelog's hash binding."""
+    raw = release_notes(data, root).read_bytes()
+    if hashlib.sha256(raw).hexdigest() != data.get("notes_sha256"):
+        raise ValueError("Release notes source changed since verification")
+    text = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+    heading = re.search(r"^## " + re.escape(data["version"]) + r"[ \t]*$", text, re.M)
+    if heading is None:
+        raise ValueError("Release notes version heading changed")
+    body = text[heading.end() :].strip()
+    if not body or re.search(r"^\s*#{1,6}(?:\s|$)", body, re.M):
+        raise ValueError("Release notes body must contain text without headings")
+    return body
+
+
 def prepare(tag, root=ROOT):
     data = metadata(
         tag, (root / "FindAnUpgrade/FindAnUpgrade.toc").read_text(encoding="utf-8")

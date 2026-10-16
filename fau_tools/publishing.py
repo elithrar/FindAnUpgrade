@@ -42,6 +42,8 @@ def download(tag, name, root=ROOT):
 
 
 def verify_existing(data, current, root=ROOT):
+    if current.get("body") != release.release_notes_body(data, root):
+        raise ValueError("Existing GitHub release notes differ; do not replace them")
     assets = current["assets"]
     names = [a["name"] for a in assets]
     if len(names) != len(set(names)):
@@ -132,6 +134,8 @@ def prepare(root=ROOT):
             gh("release", "upload", data["tag"], str(root / "dist" / name))
     else:
         files = [str(root / "dist" / n) for n in [*data["assets"], "release.json"]]
+        notes = root / "dist/release-notes.md"
+        notes.write_bytes(release.release_notes_body(data, root).encode("utf-8"))
         release.verify_remote(data, root)
         gh(
             "release",
@@ -143,7 +147,7 @@ def prepare(root=ROOT):
             "--title",
             "FindAnUpgrade " + data["tag"],
             "--notes-file",
-            str(release.release_notes(data, root)),
+            str(notes),
         )
     # Confirm creation/upload before allowing the CurseForge side effect.
     current = existing(data["tag"])
@@ -293,13 +297,12 @@ def upload(root=ROOT):
             "Immutable GitHub release cannot record upload intent; configure CurseForge before publishing a new version"
         )
     version_id = exact_version(request("/api/game/wow/versions", token), data)
-    notes = release.release_notes(data, root)
     metadata = {
         "displayName": "FindAnUpgrade " + data["tag"],
         "gameVersions": [version_id],
         "releaseType": "release",
         "changelogType": "markdown",
-        "changelog": notes.read_text(encoding="utf-8"),
+        "changelog": release.release_notes_body(data, root),
         "isMarkedForManualRelease": False,
     }
     body, content_type = multipart(metadata, root / "dist" / data["archive"])

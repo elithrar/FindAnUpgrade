@@ -16,6 +16,11 @@ from fau_tools import publishing as github
 from fau_tools import release as release
 
 ROOT = Path(__file__).resolve().parents[1]
+PUBLIC_NOTES = """Find quests with upgrades: based on item level, empty slots, class and/or level range and zone. Track down quest givers with waypoints and shortlist the quest with the items you need.
+
+FindAnUpgrade is designed to make it easier to chase down the quests that give you that missing weapon, trinket, ring or shoulder item that you need the most when levelling in WoW: Forever. New and modified quests and their rewards are built right in.
+
+Open it with /fau or click the FindAnUpgrade button on your minimap."""
 
 
 def artifact_fixture(destination, source=ROOT):
@@ -55,6 +60,30 @@ def artifact_fixture(destination, source=ROOT):
 
 
 class MetadataTests(unittest.TestCase):
+    def test_public_notes_extract_only_exact_paragraphs_and_bind_source_hash(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            path = root / "CHANGELOG.md"
+            source = "# Changelog\n\n## 0.1.0\n\n" + PUBLIC_NOTES + "\n"
+            for newline in ("\n", "\r\n"):
+                path.write_bytes(source.replace("\n", newline).encode("utf-8"))
+                data = {"version": "0.1.0", "notes_sha256": release.sha(path)}
+                self.assertEqual(release.release_notes_body(data, root), PUBLIC_NOTES)
+                self.assertEqual(len(PUBLIC_NOTES.split("\n\n")), 3)
+            path.write_bytes((source + "Changed after verification.\n").encode("utf-8"))
+            with self.assertRaisesRegex(ValueError, "source changed"):
+                release.release_notes_body(data, root)
+
+    def test_public_notes_reject_empty_bodies_and_embedded_headings(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            path = root / "CHANGELOG.md"
+            for body in ("", "# More notes", "Paragraph\n\n## Details\n\nMore text"):
+                path.write_bytes(("# Changelog\n\n## 0.1.0\n\n" + body).encode("utf-8"))
+                data = {"version": "0.1.0", "notes_sha256": release.sha(path)}
+                with self.assertRaisesRegex(ValueError, "text without headings"):
+                    release.release_notes_body(data, root)
+
     def test_changelog_requires_one_exact_version_heading(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
             root = Path(directory)
@@ -470,11 +499,14 @@ class PublishTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         (self.root / "dist").mkdir()
-        (self.root / "CHANGELOG.md").write_text(
-            "# Changelog\n\n## 0.1.0\n\nFixture notes"
+        notes = self.root / "CHANGELOG.md"
+        notes.write_bytes(
+            ("# Changelog\n\n## 0.1.0\n\n" + PUBLIC_NOTES + "\n").encode("utf-8")
         )
         self.data = release.metadata("v0.1.0", MetadataTests().toc())
-        self.data.update(commit="a" * 40, tag_object="b" * 40)
+        self.data.update(
+            commit="a" * 40, tag_object="b" * 40, notes_sha256=release.sha(notes)
+        )
         self.assets = {}
         for name in [
             self.data["archive"],
@@ -502,6 +534,7 @@ class PublishTests(unittest.TestCase):
             "assets": [],
             "draft": True,
             "immutable": False,
+            "body": PUBLIC_NOTES,
             "html_url": "https://example.invalid/release",
         }
         self.calls = []
@@ -517,6 +550,9 @@ class PublishTests(unittest.TestCase):
                 self.assets[path.name] = path.read_bytes()
             elif args[:2] == ("release", "edit"):
                 self.current["draft"] = False
+            elif args[:2] == ("release", "create"):
+                notes_file = Path(args[args.index("--notes-file") + 1])
+                self.current["body"] = notes_file.read_text(encoding="utf-8")
             return ""
 
         def request(path, token, body=None, content_type=None):
@@ -587,6 +623,46 @@ class PublishTests(unittest.TestCase):
             sum(c[0] == "request" and c[1].endswith("upload-file") for c in self.calls),
             1,
         )
+
+    def test_github_and_curseforge_use_the_same_exact_three_paragraphs(self):
+        self.current["assets"] = [{"name": name} for name in self.assets]
+        with patch.object(github, "existing", side_effect=[None, self.current]):
+            github.prepare(self.root)
+        create = next(
+            args
+            for kind, args in self.calls
+            if kind == "gh" and args[:2] == ("release", "create")
+        )
+        notes_file = Path(create[create.index("--notes-file") + 1])
+        self.assertEqual(notes_file, self.root / "dist/release-notes.md")
+        self.assertEqual(notes_file.read_bytes(), PUBLIC_NOTES.encode("utf-8"))
+        self.assertEqual(self.current["body"], PUBLIC_NOTES)
+        with patch.object(cf, "multipart", wraps=cf.multipart) as multipart:
+            self.assertTrue(cf.upload(self.root))
+        metadata = multipart.call_args.args[0]
+        self.assertEqual(metadata["changelog"], PUBLIC_NOTES)
+        posted_metadata = json.loads(
+            cf.request.call_args.args[2].split(b"\r\n\r\n", 1)[1].split(b"\r\n--", 1)[0]
+        )
+        self.assertEqual(posted_metadata["changelog"], PUBLIC_NOTES)
+        self.assertEqual(metadata["changelog"], notes_file.read_text(encoding="utf-8"))
+        self.assertEqual(len(metadata["changelog"].split("\n\n")), 3)
+        self.assertNotIn("#", metadata["changelog"])
+        self.assertEqual(
+            release.sha(self.root / "CHANGELOG.md"), self.data["notes_sha256"]
+        )
+
+    def test_conflicting_existing_notes_fail_without_edit_or_upload(self):
+        self.current["body"] = "Different notes, possibly already published."
+        for draft in (True, False):
+            self.current["draft"] = draft
+            for operation in (github.prepare, github.finalize, cf.upload):
+                with (
+                    self.subTest(draft=draft, operation=operation.__name__),
+                    self.assertRaisesRegex(ValueError, "release notes differ"),
+                ):
+                    operation(self.root)
+        self.assertEqual(self.calls, [])
 
     def test_receipt_validated_before_duplicate_upload_is_skipped(self):
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
