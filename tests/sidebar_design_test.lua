@@ -207,7 +207,7 @@ test("choice captions and multiple locations cannot offset the first reward icon
     N.Catalog.locations[9][2]={npcID=55,name="Another giver",nameKnown=true,zone="Redridge Mountains",mapID=100,x=.3,y=.4}
     S:Fill(c,row);assert(math.abs(rect(c.icons[1]).top-rect(c).top-baseline)<.01 and c.giver:IsShown())
     assert(rect(c.giver).top<rect(c.icons[1].group).y and rect(c.giver).top<rect(c.icons[2].group).y)
-    assert(c:GetHeight()<110)
+    assert(c:GetHeight()<120)
 end)
 
 test("expanded mixed reward groups keep captions between nonoverlapping icon rows",function()
@@ -218,6 +218,43 @@ test("expanded mixed reward groups keep captions between nonoverlapping icon row
     assert(rect(c.icons[1].group).top<rect(c.icons[1]).y and rect(c.icons[5]).top<rect(c.icons[1].group).y)
     for i=1,8 do for j=i+1,8 do assert(separated(rect(c.icons[i]),rect(c.icons[j])))end end
     for _,icon in ipairs(c.icons)do assert(rect(icon).y>=rect(c).y)end
+end)
+
+test("reward controls clear the full star target and measured header at narrow scales",function()
+    for _,size in ipairs({{1920,1080,1},{640,480,.85},{500,350,1.2},{400,350,1.2}}) do
+        local N,S=open(unpack(size));N.Data.statusById[9]="verifiedUpdated"
+        local a={itemID=123,state="ready",texture=100};local b={itemID=124,state="ready",texture=100}
+        local c,row=fill(N,S,{a},{b});assert(S.frame:GetScale()==size[3])
+        for _,title in ipairs({"Short",string.rep("A longer quest title ",6)}) do
+            row.title=title;S:Fill(c,row)
+            for _,icon in ipairs(c.icons) do
+                assert(separated(rect(c.star),rect(icon)))
+                assert(rect(c.star).y-rect(icon).top>=6-.01)
+                assert(rect(c.title).y-rect(icon).top>=8-.01)
+                assert(rect(c.tag).y-rect(icon).top>=6-.01)
+            end
+            assert(c.star.icon:GetWidth()==17 and c.star.icon:GetHeight()==15.3)
+        end
+    end
+end)
+
+test("measured reward captions keep space before following groups and location controls",function()
+    local N,S=open();local items,choices={},{}
+    for i=1,4 do items[i]={itemID=120+i,state="ready",texture=100};choices[i]={itemID=130+i,state="ready",texture=100} end
+    S.expanded[9]=true;local c,row=fill(N,S,items,choices)
+    -- A tall font's measured line box must expand the group allocation.
+    c.groupMeasure.GetStringHeight=function()return 24 end
+    for _,icon in ipairs(c.icons) do icon.group.GetStringHeight=function()return 24 end end
+    N.Catalog.locations[9][2]={npcID=55,name="Other",nameKnown=true};S:Fill(c,row)
+    local lastFirstRow=rect(c.icons[4]);local firstCaption=rect(c.icons[1].group)
+    local nextGroup=rect(c.icons[5]);local finalCaption=rect(c.icons[5].group)
+    assert(lastFirstRow.y-firstCaption.top>=5-.01)
+    assert(firstCaption.y-nextGroup.top>=8-.01)
+    assert(finalCaption.y-rect(c.giver).top>=8-.01)
+    assert(rect(c.giver).y-rect(c).y>=5-.01)
+    -- Horizontal groups also have room between their caption bounds.
+    c,row=fill(N,S,{items[1]},{choices[1]})
+    assert(rect(c.icons[2].group).x-rect(c.icons[1].group).right>=14-.01)
 end)
 
 test("location format uses exact UTF8 bullets without empty components or fake coordinates",function()

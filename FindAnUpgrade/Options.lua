@@ -2,7 +2,7 @@ local _, N = ...
 local O = {}; N.Options = O
 local U, M = N.UI, N.Model
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
-local panelWidth,panelHeight=620,462
+local panelWidth,panelHeight,bodyWidth,bodyHeight=620,720,572,630
 local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 
 -- Reuse current XPIsland's bounded native controls and scale-aware text fitting.
@@ -115,8 +115,8 @@ function O:Check(parent,key,value,x,y,searchDefault)
     local b=self:Frame("CheckButton",parent,"UICheckButtonTemplate")
     b:SetPoint("TOPLEFT",x-4,y); b:SetSize(24,24); b.key,b.caption=key,value; b.text=b.Text
     self.texts[#self.texts+1]={object=b.Text,size=12}; U:Font(b.Text,12)
-    b.Text:SetJustifyH("LEFT"); b.Text:SetTextColor(unpack(ink)); bounded(b.Text,250,24)
-    b:SetHitRectInsets(0,-250,0,0); b.Text:SetText(value)
+    b.Text:SetJustifyH("LEFT"); b.Text:SetTextColor(unpack(ink)); bounded(b.Text,240,24)
+    b:SetHitRectInsets(0,-240,0,0); b.Text:SetText(value)
     b.searchDefault=searchDefault
     b:SetScript("OnClick",function()
         if searchDefault then self.owner:ChangeSearchDefault(key,b:GetChecked()==true) else self.owner:Change(key,b:GetChecked()==true) end
@@ -145,12 +145,34 @@ function O:Slider(parent,key,value,x,y,low,high,step)
     self:Label(parent,low.."-"..high.."%",x,y-47,260,11,muted)
     self.sliders[key]=b; self.controls[#self.controls+1]=b; self.controls[#self.controls+1]=e; return b
 end
-function O:Page(key)
-    if not self.pages or not self.pages[key] then return end
-    self:CloseMenu(); for _,e in pairs(self.edits) do e:ClearFocus() end
-    self.page=key
-    for name,page in pairs(self.pages) do page:SetShown(name==key);self.tabs[name].activeLine:SetShown(name==key) end
-    if self.frame then self:Refresh() end
+-- Scrolling keeps the shell, reset and status fixed, and never commits an
+-- unfinished numeric edit. The same native vertical control is used by Search.
+function O:Scroll(value,layout)
+    if not M.Number(value) then return end
+    local offset=math.max(0,math.min(self.maximum or 0,value))
+    local changed=offset~=(self.offset or 0)
+    self.offset=offset;self.scrolling=true
+    self.scroll:SetVerticalScroll(offset);self.bar:SetValue(offset);self.scrolling=nil
+    if changed and not layout then
+        self:CloseMenu();for _,e in pairs(self.edits) do e:ClearFocus() end
+        self:Refresh()
+    end
+end
+function O:Layout()
+    local scale=math.min(1,math.max(.1,(UIParent:GetWidth()-24)/panelWidth))
+    local height=math.max(100,math.min(panelHeight,(UIParent:GetHeight()-24)/scale))
+    local key=scale..":"..height..":"..UIParent:GetEffectiveScale()
+    if self.layoutKey and self.layoutKey~=key then
+        self:CloseMenu();for _,e in pairs(self.edits) do e:ClearFocus() end
+    end
+    self.layoutKey=key
+    self.frame:SetScale(scale);self.frame:SetHeight(height)
+    local viewport=height-90
+    self.scroll:SetSize(bodyWidth,viewport);self.body:SetSize(bodyWidth,bodyHeight)
+    self.bar:SetHeight(math.max(22,viewport-4))
+    self.maximum=math.max(0,bodyHeight-viewport)
+    self.scrolling=true;self.bar:SetMinMaxValues(0,self.maximum);self.bar:SetShown(self.maximum>0);self.scrolling=nil
+    self:Scroll(self.offset or 0,true)
 end
 function O:SearchNumber(parent,key,label,x,y)
     self:Label(parent,label,x,y,184,12)
@@ -175,65 +197,62 @@ function O:Build(owner,f,parent)
     self:Label(parent,"FindAnUpgrade",20,-15,560,16,gold)
     self.close=self:Frame("Button",parent,"UIPanelCloseButton")
     self.close:SetSize(24,24); self.close:SetPoint("TOPRIGHT",-8,-8); self.close:SetScript("OnClick",function() f:Hide() end)
-    self.pages,self.tabs={},{}
-    for index,entry in ipairs({{"appearance","Appearance"},{"behavior","Behavior"},{"search","Search defaults"}}) do
-        local key=entry[1]
-        local tab=self:Button(parent,entry[2],20+(index-1)*120,-42,116,function()self:Page(key)end)
-        tab.navigation=true
-        U:Tab(tab,entry[2],116)
-        self.tabs[key]=tab
-        local page=self:Frame("Frame",parent);page:SetAllPoints(parent);self.pages[key]=page
-    end
-    local page=self.pages.appearance
-    self:Section(page,"Appearance",16,-80,288,300);self:Section(page,"Quest previews",316,-80,288,300)
-    self:Label(page,"Font",28,-105,260,12)
-    self.font=self:Dropdown(page,28,-125,260,function()return U:FontEntries()end,function()return owner.profile.font end,function(value)owner:Change("font",value)end)
+    local scroll=self:Frame("ScrollFrame",parent);self.scroll=scroll
+    scroll:SetPoint("TOPLEFT",16,-46);scroll:SetSize(bodyWidth,bodyHeight)
+    scroll:EnableMouse(true);scroll:EnableMouseWheel(true)
+    local page=self:Frame("Frame",scroll);self.body=page;page:SetSize(bodyWidth,bodyHeight);scroll:SetScrollChild(page)
+    self.bar=self:Frame("Slider",parent,"BackdropTemplate");U:VerticalBar(parent,self.bar)
+    self.bar:SetPoint("TOPRIGHT",-14,-48);self.bar:SetHeight(bodyHeight-4);self.bar:SetValueStep(1)
+    self.bar:SetScript("OnValueChanged",function(_,value)if not self.scrolling then self:Scroll(value)end end)
+    scroll:SetScript("OnMouseWheel",function(_,delta)if M.Number(delta)then self:Scroll((self.offset or 0)-delta*40)end end)
+    self:Section(page,"Appearance",0,0,280,212);self:Section(page,"Inspection",292,0,280,212)
+    self:Section(page,"Quest previews",0,-242,280,252);self:Section(page,"Surfaces",292,-242,280,132)
+    self:Section(page,"Search defaults",292,-404,280,206)
+    self:Label(page,"Font",12,-25,260,12)
+    self.font=self:Dropdown(page,12,-45,260,function()return U:FontEntries()end,function()return owner.profile.font end,function(value)owner:Change("font",value)end)
     self.font.Text.qNoFit=true
     self.fontMeasure=self:Text(parent);U:Font(self.fontMeasure,12);self.fontMeasure:SetWordWrap(false);self.fontMeasure:Hide()
     self.texts[#self.texts+1]={object=self.fontMeasure,size=12}
     if not self.font.qCaptionHooked then
         hooksecurefunc(self.font.Text,"SetText",function(object)self:FontCaption(object)end);self.font.qCaptionHooked=true
     end
-    self:Label(page,"Border",28,-163,260,12)
-    self.border=self:Dropdown(page,28,-183,260,{
+    self:Label(page,"Border",12,-83,260,12)
+    self.border=self:Dropdown(page,12,-103,260,{
         {value="default",label="Default"},{value="none",label="None"},{value="tooltip",label="Tooltip"},{value="dialog",label="Dialog"},{value="thin",label="Thin"}
     },function()return owner.profile.border end,function(value)owner:Change("border",value)end)
-    self:Slider(page,"scale","Preview and search scale",28,-225,80,120,5)
-    self:Check(page,"accents","Quest colors",328,-105)
-    self:Check(page,"dialogTint","Quest dialog tint",328,-133)
-    self:Check(page,"rewards","Reward details",328,-161)
-    self:Label(page,"Preview layout",328,-199,260,12)
-    self.layout=self:Dropdown(page,328,-221,260,{
+    self:Slider(page,"scale","Preview and search scale",12,-146,80,120,5)
+    self:Check(page,"accents","Quest colors",12,-267)
+    self:Check(page,"dialogTint","Quest dialog tint",12,-295)
+    self:Check(page,"rewards","Reward details",12,-323)
+    self:Label(page,"Preview layout",12,-361,260,12)
+    self.layout=self:Dropdown(page,12,-383,260,{
         {value="tooltip",label="Game tooltip"},{value="inspector",label="Compact inspector"}
     },function() return owner.profile.previewLayout end,function(value) owner:Change("previewLayout",value) end)
-    self:Slider(page,"strength","Tint strength",328,-269,10,100,5)
-    page=self.pages.behavior
-    self:Section(page,"Inspection",16,-80,288,300);self:Section(page,"Surfaces",316,-80,288,300)
-    self:Check(page,"enabled","Enabled",28,-105)
-    self:Label(page,"Reveal key",28,-143,260,12)
-    self.modifier=self:Dropdown(page,28,-165,260,{
+    self:Slider(page,"strength","Tint strength",12,-431,10,100,5)
+    self:Check(page,"enabled","Enabled",304,-25)
+    self:Label(page,"Reveal key",304,-65,260,12)
+    self.modifier=self:Dropdown(page,304,-85,260,{
         {value="SHIFT",label="Shift"},{value="CTRL",label="Ctrl"},{value="ALT",label="Alt"},{value="NONE",label="None"}
     },function() return owner.profile.modifier end,function(value) owner:Change("modifier",value) end)
-    self.hint=self:Label(page,"Release to inspect. Escape closes.",28,-199,260,11,muted)
-    self:Label(page,"Inspection position",28,-236,260,12)
-    self.position=self:Dropdown(page,28,-258,260,{
+    self.hint=self:Label(page,"Release to inspect. Escape closes.",304,-119,260,11,muted)
+    self:Label(page,"Inspection position",304,-156,260,12)
+    self.position=self:Dropdown(page,304,-178,260,{
         {value="right",label="Right of cursor"},{value="tooltip",label="Beside game tooltip"}
     },function() return owner.profile.inspectionPosition end,function(value) owner:Change("inspectionPosition",value) end)
-    self:Check(page,"npc","NPC previews",328,-105)
-    self:Check(page,"worldmap","World map previews",328,-133)
-    self:Check(page,"minimap","Minimap previews",328,-161)
-    self:Check(page,"launcher","Minimap launcher",328,-189)
-    page=self.pages.search
-    self:Section(page,"Search defaults",16,-80,288,160);self:Section(page,"Level range",316,-80,288,160)
-    self:Check(page,"hideUnusable","Hide unusable",28,-105,true)
-    self:Check(page,"includeDungeons","Include dungeon quests",28,-133,true)
-    self:SearchNumber(page,"levelsBelow","Levels below",328,-109)
-    self:SearchNumber(page,"levelsAbove","Levels above",328,-149)
-    self:Label(page,"Applies next time search opens.",28,-200,260,11,muted)
-    self:Label(page,"New sessions start in the current zone.",28,-266,560,11,muted)
-    self.reset=self:Button(parent,"Reset",20,-420,86,function() owner:Defaults() end)
-    self.status=self:Label(parent,"",116,-420,484,11,muted)
-    self:Page(self.page or "appearance")
+    self:Check(page,"npc","NPC previews",304,-267)
+    self:Check(page,"worldmap","World map previews",304,-295)
+    self:Check(page,"minimap","Minimap previews",304,-323)
+    self:Check(page,"launcher","Minimap launcher",304,-351)
+    self:Check(page,"hideUnusable","Hide unusable",304,-429,true)
+    self:Check(page,"includeDungeons","Include dungeon quests",304,-457,true)
+    self:SearchNumber(page,"levelsBelow","Levels below",304,-501)
+    self:SearchNumber(page,"levelsAbove","Levels above",304,-541)
+    self:Label(page,"Applies next time search opens.",304,-578,260,11,muted)
+    self:Label(page,"Starts in the current zone.",304,-598,260,11,muted)
+    self.reset=self:Button(parent,"Reset",0,0,86,function() owner:Defaults() end)
+    self.reset:ClearAllPoints();self.reset:SetPoint("BOTTOMLEFT",20,16)
+    self.status=self:Label(parent,"",0,0,484,11,muted)
+    self.status:ClearAllPoints();self.status:SetPoint("BOTTOMLEFT",116,16)
     f:SetScript("OnShow",function() self:Refresh() end)
     f:SetScript("OnHide",function()
         self:CloseMenu(); for _,e in pairs(self.edits) do e:ClearFocus() end; f:StopMovingOrSizing();f:SetScript("OnUpdate",nil);self.menuWaiting=nil
@@ -307,7 +326,7 @@ end
 function O:Refresh()
     if not self.frame then return end
     self.refreshing=true; local p=self.owner.profile
-    self.frame:SetScale(math.max(.3,math.min(1,(UIParent:GetWidth()-24)/panelWidth,(UIParent:GetHeight()-24)/panelHeight)))
+    self:Layout()
     for key,b in pairs(self.checks) do b.Text:SetText(b.caption); b:SetChecked(b.searchDefault and p.searchDefaults[key] or not b.searchDefault and p[key]) end
     for key,b in pairs(self.sliders) do b:SetValue(p[key]*100); b.edit:SetText(tostring(math.floor(p[key]*100+.5))) end
     for key,e in pairs(self.edits) do if e.searchDefault then e:SetText(tostring(p.searchDefaults[key])) end end

@@ -73,8 +73,34 @@ test("late construction failure removes handlers and font ownership before retry
     assert(not shell:GetScript("OnShow") and not shell:GetScript("OnEvent"))
     assert(not next(N.UI.fontSizes) and not next(N.UI.fontApplications))
     for _,f in ipairs(W.frames) do if f.parent==shell then assert(not f:IsShown()) end end
+    local frames=#W.frames
     SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    assert(#W.frames==frames,"construction retry leaked a scrollbar or content subtree")
     assert(shell.events.UI_SCALE_CHANGED and shell.events.DISPLAY_SIZE_CHANGED)
+end)
+
+test("repeated native scrollbar setup failures reuse the permanent slider",function()
+    local clean=W.Init();clean.Options:Toggle(clean.Core);local expected=#W.frames
+    local N=W.Init();local original=CreateFrame;local remaining=2;local scrollbar
+    CreateFrame=function(kind,name,parent,template)
+        local frame=original(kind,name,parent,template)
+        if kind=="Slider" and template=="BackdropTemplate" then
+            scrollbar=frame;local setThumb=frame.SetThumbTexture
+            frame.SetThumbTexture=function(self,value)
+                if remaining>0 then remaining=remaining-1;error("Transient native thumb failure") end
+                return setThumb(self,value)
+            end
+        end
+        return frame
+    end
+    for i=1,2 do
+        local ok,err=pcall(SlashCmdList.FINDANUPGRADE,"opts")
+        assert(not ok and err:find("Transient native thumb failure",1,true))
+        assert(N.Options.bar==scrollbar and not N.Options.shell:IsShown() and not N.Options.frame)
+    end
+    SlashCmdList.FINDANUPGRADE("opts");complete(N)
+    assert(N.Options.bar==scrollbar and #W.frames==expected)
+    assert(scrollbar.thumb.texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
 end)
 
 test("unavailable path fonts fall back to the native font object before text",function()
@@ -109,11 +135,11 @@ end)
 
 test("options use current XPIsland dialog sections and native radio dropdown",function()
     local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
-    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==462)
+    assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==720)
     assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
     assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
-    assert(#O.sections==6 and O.sections[1].point[2]==16 and O.sections[2].point[2]==316)
-    assert(O.sections[1]:GetWidth()==288 and O.sections[2]:GetWidth()==288)
+    assert(#O.sections==5 and O.sections[1].point[2]==0 and O.sections[2].point[2]==292)
+    assert(O.sections[1]:GetWidth()==280 and O.sections[2]:GetWidth()==280)
     assert(O.modifier.template=="WowStyle1DropdownTemplate" and O.modifier:GetWidth()==260 and O.modifier:GetHeight()==24)
     assert(O.modifier.Text.justifyV=="MIDDLE" and O.modifier.Text.point[1]=="LEFT")
     assert(O.modifier.Text.point[4]*O.modifier.Text:GetScale()==9 and O.modifier.Text.qOptionsWidth==229)
@@ -158,23 +184,53 @@ test("long native dropdown and checkbox text stays within allocated controls at 
     assert(text:GetStringWidth()*text:GetScale()<=229)
     assert(math.abs(text.point[4]*text:GetScale()-9)<.00001 and math.abs(text:GetHeight()*text:GetScale()-24)<.00001)
     local caption=O.checks.worldmap.Text
-    assert(caption:GetStringWidth()*caption:GetScale()<=250 and math.abs(caption:GetHeight()*caption:GetScale()-24)<.00001)
+    assert(caption:GetStringWidth()*caption:GetScale()<=240 and math.abs(caption:GetHeight()*caption:GetScale()-24)<.00001)
     assert(FindAnUpgradeDB==N.Core.profile)
 end)
 
-test("three pages reuse the XPIsland grid and close menus and incomplete numeric edits",function()
+test("single options canvas keeps every setting together without navigation tabs",function()
     local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options;local frames=#W.frames
-    assert(O.page=="appearance" and O.pages.appearance:IsShown() and not O.pages.behavior:IsShown())
-    assert(O.tabs.appearance.point[2]==20 and O.tabs.appearance.point[3]==-42)
-    O.font.menuOpen=true;O.edits.levelsBelow:SetText("22");O.edits.levelsBelow:SetFocus()
-    O:Page("search")
-    assert(not O.font.menuOpen and not O.edits.levelsBelow.focused and O.edits.levelsBelow:GetText()=="5")
-    assert(not O.pages.appearance:IsShown() and O.pages.search:IsShown() and O.tabs.search.activeLine:IsShown())
-    for i=1,15 do O:Page("behavior");O:Page("appearance");O:Page("search") end
+    assert(not O.pages and not O.tabs and not O.page and not O.Page)
+    assert(O.scroll.scrollChild==O.body and O.body.parent==O.scroll)
+    for _,control in ipairs(O.controls) do
+        assert(control.parent==O.body or control==O.reset)
+        assert(not control.navigation)
+    end
+    assert(O.bar:GetThumbTexture().texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
+    assert(O.maximum==0 and not O.bar:IsShown() and O.frame:GetScale()==1)
+    for i=1,15 do O:Toggle(N.Core);O:Toggle(N.Core);O:Refresh() end
     assert(#W.frames==frames and O.font.menuGenerations==1)
 end)
+
+test("small-height options scroll at readable scale and keep footer outside the viewport",function()
+    local N=W.Init();UIParent.width=960;UIParent.height=360;N.Options:Toggle(N.Core);local O=N.Options
+    assert(O.frame:GetHeight()==336 and O.frame:GetScale()==1)
+    assert(O.scroll:GetHeight()==246 and O.body:GetHeight()==630 and O.maximum==384 and O.bar:IsShown())
+    assert(O.reset.parent==O.content and O.reset.point[1]=="BOTTOMLEFT" and O.reset.point[3]==16)
+    local saved=FindAnUpgradeDB;O.font.menuOpen=true;O.edits.scale:SetFocus();O.edits.scale:SetText("81")
+    O.scroll:Fire("OnMouseWheel",-1)
+    assert(O.offset==40 and O.scroll:GetVerticalScroll()==40 and O.bar.value==40)
+    assert(not O.font.menuOpen and not O.edits.scale.focused and O.edits.scale:GetText()=="100" and FindAnUpgradeDB==saved)
+    O.bar:SetValue(10000);assert(O.offset==O.maximum and O.scroll:GetVerticalScroll()==384)
+    O.scroll:Fire("OnMouseWheel",100);assert(O.offset==0 and O.bar.value==0)
+    O:Scroll(384);O.modifier.menuOpen=true;O.edits.levelsBelow:SetFocus();O.edits.levelsBelow:SetText("99")
+    UIParent.height=1080;W.Event("DISPLAY_SIZE_CHANGED")
+    assert(O.frame:GetHeight()==720 and O.maximum==0 and O.offset==0 and not O.bar:IsShown())
+    assert(not O.modifier.menuOpen and not O.edits.levelsBelow.focused and O.edits.levelsBelow:GetText()=="5")
+    O:Scroll(0/0);O:Scroll(math.huge);assert(O.offset==0 and FindAnUpgradeDB==saved)
+end)
+
+test("scrolling and hidden refresh preserve read-only future settings and reuse controls",function()
+    local saved={version=99,enabled=false,future="keep"};local N=W.Init({saved=saved})
+    UIParent.height=360;N.Options:Toggle(N.Core);local O=N.Options;local frames=#W.frames
+    for i=1,12 do O.scroll:Fire("OnMouseWheel",-1);O:Toggle(N.Core);O:Toggle(N.Core) end
+    assert(#W.frames==frames and FindAnUpgradeDB==saved and saved.future=="keep" and O.offset==O.maximum)
+    O.font.menuOpen=true;N.Core.profile.font="Arial";O:Refresh();assert(O.frame:GetScript("OnUpdate"))
+    O.frame:Hide();assert(not O.frame:GetScript("OnUpdate") and not O.font.menuOpen and not O.menuWaiting)
+end)
+
 test("search-default edits validate through the model and do not persist transient search state",function()
-    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options;O:Page("search")
+    local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options
     O.edits.levelsBelow:SetText("500");O.edits.levelsBelow:Fire("OnEnterPressed")
     assert(N.Core.profile.searchDefaults.levelsBelow==199 and O.edits.levelsBelow:GetText()=="199")
     O.edits.levelsAbove:SetText("-9");O.edits.levelsAbove:Fire("OnEnterPressed")
@@ -184,7 +240,7 @@ test("search-default edits validate through the model and do not persist transie
     local saved=FindAnUpgradeDB;O.edits.levelsBelow:SetText("20");O.edits.levelsBelow:Fire("OnEscapePressed")
     assert(FindAnUpgradeDB==saved and O.edits.levelsBelow:GetText()=="199")
     O.frame:Hide();N.Core:ChangeSearchDefault("includeDungeons",true);O:Toggle(N.Core)
-    assert(O.checks.includeDungeons:GetChecked()==true and O.page=="search")
+    assert(O.checks.includeDungeons:GetChecked()==true and O.body:IsShown())
 end)
 test("font and border selections survive reload and reset restores persistent defaults",function()
     local N=W.Init();N.Options:Toggle(N.Core);local O=N.Options

@@ -29,11 +29,11 @@ Questie is optional. FindAnUpgrade can preview its existing world-map and minima
 
 Use the cog, `/fau opts` or `/findanupgrade options` for settings. Ctrl, Alt and hovering without a modifier are alternatives to Shift.
 
-Settings has Appearance, Behavior and Search defaults pages. Font choices include the game tooltip family, native fonts and installed SharedMedia fonts. A missing font uses the native fallback while preserving the preference. Border choices apply to owned preview/search panels; item rarity borders retain their meaning.
+Settings keeps Appearance, Inspection, Quest previews, Surfaces and Search defaults together in one window. On shorter screens, scroll to reach the remaining controls; Reset stays at the bottom. Font choices include the game tooltip family, native fonts and installed SharedMedia fonts. A missing font uses the native fallback while preserving the preference. Border choices apply to owned preview/search panels; item rarity borders retain their meaning.
 
 Saved search defaults apply each time the browser opens: Hide unusable starts enabled, dungeon quests disabled, and the level window spans five levels below through three above your current level. Temporary query, slot, scope and sort choices persist during the session. Editing defaults leaves an open search's filters intact until its next opening. New sessions start in the current zone. Reset restores saved preferences with the same next-opening rule for search defaults.
 
-Version **0.1.12** uses the FindAnUpgrade folder and commands. When replacing QuestBrief, preserve its saved files and migrate them using the validated development installer before removing the old active folder. Existing FindAnUpgrade settings take priority. Unsupported future settings remain read-only and are preserved.
+Version **0.1.13** uses the FindAnUpgrade folder and commands. When replacing QuestBrief, preserve its saved files and migrate them using the validated development installer before removing the old active folder. Existing FindAnUpgrade settings take priority. Unsupported future settings remain read-only and are preserved.
 
 ## Development
 

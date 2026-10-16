@@ -1,10 +1,36 @@
 # Validation
 
-FindAnUpgrade **0.1.12** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.13** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
 The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
+
+## Star spacing and unified Options, 0.1.13
+
+All three user-supplied screenshots were downloaded by Library identity and
+inspected as pixels. They show the prior installed layout; no screenshot of
+this patch in the native client has been observed.
+
+The star now swaps one native auction-house favorite texture between empty and
+filled states, without an added outline. Its visual bounds are 17 by 15.3 UI
+units (15% smaller), retaining the 24 by 24 click target. Rewards start below
+the complete header/star target with a six-unit minimum clearance. Captions
+have five units above and eight below their measured line boxes; adjacent
+horizontal groups have fourteen units between caption bounds. Item size and
+native item/comparison behavior are unchanged. Native asset provenance and
+independent geometry/lifecycle results are in `UI-SPACING-OPTIONS-REVIEW.md`.
+
+Options is one window with five sections and no navigation tabs. Short screens
+use a native thumb and wheel, keeping title, close, Reset and status fixed.
+Scrolling cancels incomplete numeric edits and closes native menus; no settings
+schema or saved values change. Quests/Shortlist retain their separate tabs.
+
+The full verifier passes all 18 commands: 612 Lua scenarios across 32 suites
+and 182 Python tests. Exact-commit build/CI/installation receipts establish
+delivered bytes. Native glyphs, subpixel star rendering, physical
+scroll/drag input, pointer transit, item comparisons, combat/taint and coexistence
+remain live checks. Installation alone does not verify those outcomes.
 
 ## Shortlist, chains and comparisons, 0.1.12
 
@@ -18,7 +44,7 @@ limits are in `SHORTLIST-CHAIN-CONTRACTS.md`.
 Independent implementation, design and performance review findings are tracked
 in this iteration's three review reports. Final full-verifier counts and
 exact-commit installation/CI receipts are authoritative for delivered bytes.
-The current Lua suite passes 606 scenarios across 32 suites. Independent
+The 0.1.12 Lua suite passed 606 scenarios across 32 suites. Independent
 implementation, design and performance re-reviews passed after fixing optional
 breadcrumb precedence, grouped disclosure, changed-selection dismissal and
 Options popup cleanup. Stress retained 89 frames through 1,400 view switches

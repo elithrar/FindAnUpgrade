@@ -1,4 +1,4 @@
-# Shortlist, chains and comparison contracts, 0.1.12
+# Shortlist, chains and comparison contracts, 0.1.13
 
 Target: official Forever 1.60.1.70374, interface 16001. Native source revision:
 `735496de78ebd30ce816a0637982c556987f258c`. Source inspection and mock execution
@@ -6,7 +6,8 @@ are distinct from observed client behavior.
 
 ## Native controls and input
 
-`UI:Tab` is shared by Search and Options. It retains the installed XPIsland-style
+`UI:Tab` owns the Quests/Shortlist tabs; Options uses one scrolling window.
+The tabs retain the installed XPIsland-style
 owned Button, native tooltip edge, 12-unit text and one-unit active underline.
 The sidebar remains 476 by 680, with a common 16-unit control inset. Cards are
 content-measured; the 24-unit star target reserves title/badge space and the
@@ -15,10 +16,17 @@ rarity roles. All game textures remain runtime references, not bundled art.
 
 The [native favorite template](https://github.com/Gethe/wow-ui-source/blob/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_AuctionHouseUI/Shared/Blizzard_AuctionHouseSharedTemplates.xml#L165)
 uses `auctionhouse-icon-favorite` and `auctionhouse-icon-favorite-off`, 20 by 18.
-Both states retain the same foreground outline object, atlas, anchors and size;
-saved adds the full-size native gold underlay. The native pair has slight
-antialias fringe differences. This does not prove exact final pixel-alpha contour
-equality or native visual acceptance. The earlier inset mock is superseded.
+The [native favorite state implementation](https://github.com/Gethe/wow-ui-source/blob/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_AuctionHouseUI/Shared/Blizzard_AuctionHouseSharedTemplates.lua#L779)
+swaps this pair on one normal texture. Its inspected source SHA-256 is
+`cc41ec3d23e4be14d3e117f5403e1e6310e52f698d8c9c0ced8386a4ed5794b9`.
+Version 0.1.13 follows that construction at 17 by 15.3, retaining the 24-unit
+hit target. The prior extra foreground outline is removed. An offline texture
+inspection used Gethe/wow-ui-textures revision
+`d23deaf8f44a7d280dc974a5c9d5321c013db59b`; alternative ReputationStar,
+PetJournal, FriendsListFavorite and installed addon candidates offered no
+better paired silhouette. The chosen pair retains slight antialias fringe
+differences. Source and offline resampling do not prove exact final pixel-alpha
+contour equality or native visual acceptance. No extracted game art ships.
 
 [BuildDocumentation.lua:75](https://github.com/Gethe/wow-ui-source/blob/735496de78ebd30ce816a0637982c556987f258c/Interface/AddOns/Blizzard_APIDocumentationGenerated/BuildDocumentation.lua#L75)
 declares `IsMacClient`; the Windows discriminator is at line 112.

@@ -5,7 +5,8 @@ local S={cards={},offset=0,expanded={},locationChoice={}}; N.Search=S
 -- local UI units; Fit adapts the frame before applying the user's scale.
 local G={width=476,height=680,minWidth=420,minHeight=400,maxWidth=680,maxHeight=900,
     inset=16,gap=10,control=30,menuWidth=144,scrollTop=210,scrollBottom=16,
-    cardInset=8,rowGap=5,icon=112/3,iconGap=6}
+    cardInset=8,rowGap=5,icon=112/3,iconGap=6,
+    rewardHeaderGap=6,captionGap=5,rewardGroupGap=8,rewardColumnGap=14}
 S.geometry=G
 local function rewardStamp(reward)
     local parts={}
@@ -577,7 +578,7 @@ function S:Fill(card,row)
     card.tag:SetText(badge); card.tag:SetShown(badge~="")
     local badgeWidth=badge~="" and (A.Call(card.tag.GetStringWidth,card.tag) or 80)+10 or 0
     local titleWidth=width-42-badgeWidth
-    card.star.fill:SetShown(N.Shortlist:Contains(row.id));card.star:Show()
+    card.star.icon:SetAtlas(N.Shortlist:Contains(row.id) and "auctionhouse-icon-favorite" or "auctionhouse-icon-favorite-off");card.star:Show()
     card.title:SetWordWrap(true); local titleHeight=measured(card.title,titleWidth,title)
     card.titleHit:SetWidth(titleWidth); card.titleHit:SetHeight(titleHeight)
     local r,g,b=M.AccentFill(N.Core.profile,accent,.06,.06,.07); card:SetBackdropColor(r,g,b,.97)
@@ -612,10 +613,13 @@ function S:Fill(card,row)
         local labelled=group.label=="Choose one" or #groups>1
         local natural=math.min(columns,#group.items)*stride-G.iconGap
         if labelled then card.groupMeasure:SetText(group.label); natural=math.max(natural,(A.Call(card.groupMeasure.GetStringWidth,card.groupMeasure) or 0)) end
-        group.width=natural; rewardWidth=math.max(rewardWidth,natural); totalGroupWidth=totalGroupWidth+natural
+        group.width=natural
+        card.groupMeasure:SetWidth(natural)
+        group.labelHeight=labelled and math.max(12,A.Call(card.groupMeasure.GetStringHeight,card.groupMeasure) or 12) or 0
+        rewardWidth=math.max(rewardWidth,natural); totalGroupWidth=totalGroupWidth+natural
     end
-    local horizontal=#groups>1 and totalGroupWidth+G.gap*(#groups-1)<=maxReward
-    if horizontal then rewardWidth=totalGroupWidth+G.gap*(#groups-1) end
+    local horizontal=#groups>1 and totalGroupWidth+G.rewardColumnGap*(#groups-1)<=maxReward
+    if horizontal then rewardWidth=totalGroupWidth+G.rewardColumnGap*(#groups-1) end
     if #items>4 then rewardWidth=math.max(rewardWidth,82) end
     local locations=N.Catalog:Locations(row.id)
     card.giver.text:SetText(#locations.." locations")
@@ -642,12 +646,15 @@ function S:Fill(card,row)
     local chain=N.Chains and N.Chains:HasDetails(row.id)
     card.chain:SetShown(chain==true)
     if chain then card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",8,-y);card.chain:SetWidth(math.min(100,bodyWidth));y=y+19 end
-    local rewardY=top
+    -- Reserve the whole star target, even for a one-line title, so moving
+    -- from the star to an item cannot activate overlapping controls.
+    local badgeBottom=badge~="" and 9+(A.Call(card.tag.GetStringHeight,card.tag) or 10) or 0
+    local rewardY=math.max(top+4,3+card.star:GetHeight()+G.rewardHeaderGap,badgeBottom+G.rewardHeaderGap)
     card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
     local iconIndex,groupCursor,groupMaximum=0,0,0; local rewardTop=rewardY
     for _,group in ipairs(groups) do
         local labelled=group.label=="Choose one" or #groups>1
-        local rows=math.ceil(#group.items/columns); local labelHeight=labelled and 14 or 0
+        local rows=math.ceil(#group.items/columns); local iconHeight=rows*stride-G.iconGap
         for i,entry in ipairs(group.items) do
             local item=entry.item; iconIndex=iconIndex+1; local icon=self:Icon(card,iconIndex); icon.row=item
             local groupX=width-8-rewardWidth+(horizontal and groupCursor or 0)
@@ -662,12 +669,12 @@ function S:Fill(card,row)
             local crowded=icon.level:GetText()~="" and icon.count:GetText()~="" and
                 (A.Call(icon.level.GetStringWidth,icon.level) or 0)+(A.Call(icon.count.GetStringWidth,icon.count) or 0)+5>G.icon
             icon.count:ClearAllPoints();icon.count:SetPoint(crowded and "TOPRIGHT" or "BOTTOMRIGHT",-1,crowded and -1 or 1)
-            icon.group:ClearAllPoints(); icon.group:SetPoint("TOPLEFT",groupX,-(rewardY+rows*stride-G.iconGap+3)); icon.group:SetWidth(group.width)
+            icon.group:ClearAllPoints(); icon.group:SetPoint("TOPLEFT",groupX,-(rewardY+iconHeight+G.captionGap)); icon.group:SetWidth(group.width)
             icon.group:SetText(group.label); icon.group:SetShown(labelled and i==1)
             icon.name:Hide(); icon:Show()
         end
-        local groupHeight=labelHeight+rows*stride-G.iconGap+5
-        if horizontal then groupMaximum=math.max(groupMaximum,groupHeight);groupCursor=groupCursor+group.width+G.gap
+        local groupHeight=iconHeight+(labelled and G.captionGap+group.labelHeight or 0)+G.rewardGroupGap
+        if horizontal then groupMaximum=math.max(groupMaximum,groupHeight);groupCursor=groupCursor+group.width+G.rewardColumnGap
         else rewardY=rewardY+groupHeight end
     end
     if horizontal then rewardY=rewardTop+groupMaximum end
