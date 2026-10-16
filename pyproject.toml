@@ -1,0 +1,33 @@
+[project]
+name = "findanupgrade-tooling"
+version = "0.1.14"
+description = "Development, data, and release tools for FindAnUpgrade"
+requires-python = ">=3.15,<3.16"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "lupa==2.8",
+    "ruff==0.17.1",
+]
+visual = ["pillow==12.3.0"]
+
+[tool.uv]
+package = false
+required-version = "==0.13.1"
+build-constraint-dependencies = [
+    "cython==3.3.0",
+    "packaging==26.3",
+    "setuptools==84.0.0",
+    "wheel==0.48.0",
+]
+
+[tool.ruff]
+required-version = "==0.17.1"
+target-version = "py315"
+line-length = 88
+extend-exclude = [".work", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]

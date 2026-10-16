@@ -22,6 +22,99 @@
     }
   ],
   "currentSnapshot": {
+    "revision": "b401e0332adfbf0460d319b06d8ea29279a941f1",
+    "client": "Forever 1.60.1.70425",
+    "interface": 16001,
+    "files": [
+      {
+        "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/QuestLogDocumentation.lua",
+        "blobSha1": "587006566ca7de68deeb8fb044f8e3bcbc999931",
+        "sha256": "e637368f36d153f8b432455cfa247d0c67c84996dce8d591bc1eb4d1cd7bc098"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/TooltipInfoDocumentation.lua",
+        "blobSha1": "7e98596a9076671a19fb3c47d0cb58987c6e5151",
+        "sha256": "0c2184a4ba787a5fbd37646e0f297a6e79a3ac5f60ccbcd07dabcc8048e89718"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedMapDataProviders/QuestDataProvider.lua",
+        "blobSha1": "0a78c0bdfaa82af7205479cb633605de05a9d3b8",
+        "sha256": "be7610338144886df30a6ad6ad597981f1f49ab309644024c0d9574fab5776ab"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedMapDataProviders/QuestOfferDataProvider.lua",
+        "blobSha1": "874478aa2be85c88944765d60f85df5ce4e21bd3",
+        "sha256": "560ecf803c7e87450d4cae34e59269a64250cbe634b45346c2aab4ce8863c147"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXML/SharedTooltipTemplates.lua",
+        "blobSha1": "dcb155626c583a6766bc5bd2947f498838eb0106",
+        "sha256": "27d982f63fbec3902d146474b1440c079174f2c8028c86465ae9d1ee2e0a4c6b"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXML/SharedTooltipTemplates.xml",
+        "blobSha1": "33580dae3c0719e81a49d40f3f0d73fafef7c572",
+        "sha256": "622df1c3e84fd3de1a18dbfae725a1254d4d20abd41f68f3a86c8a4eb12b4018"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipComparisonManager.lua",
+        "blobSha1": "03a73a19a6202a0d8043910e608c309c8b5b0b1c",
+        "sha256": "5734a4f0270f47b5d8c858d6f9d355d2850fc258687d75a372631369f3420727"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipDataHandler.lua",
+        "blobSha1": "90c60103b3ed34e08e283b209820f6bea200719d",
+        "sha256": "05a86b963b518a589cfebf22dec825507a5b1f564f66eb64fd7caead919f0642"
+      },
+      {
+        "path": "version.txt",
+        "blobSha1": "f9dfddc1e6dfa577b0ec6b52ee77a06372793cbc",
+        "sha256": "dd5fb1507dc8c9e7749a1187d63ee89bc0a07c6e1d40c8f69942529e68397bfc"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_APIDocumentationGenerated/CurrencyInfoDocumentation.lua",
+        "sha256": "4469ef929c58223c45371876e4364478be0397578f72cc24415f31fa060b47a1",
+        "blobSha1": "da1b31f9c6694bcc1beb25ae7d1df81907dc5944"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_Menu/DropdownButton.lua",
+        "sha256": "dc68e281eb03d7f1c558ab3faad429686a4db8f4e87a52f8d7bab99cbd1b7116",
+        "blobSha1": "82f0ad4edebc4489d36b4eccad391a7f1a551c22"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml",
+        "sha256": "587d91c2764fb94044935cd27cf36bc03156ee230991139791c17f1b2db81c85",
+        "blobSha1": "7322b3e92318c10077eac0cc986ed5c861dc9e4e"
+      },
+      {
+        "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua",
+        "sha256": "4825bac4057b4002e630ffa7a6104add204f1164c0910e73bfe7b84ea6b31ec8",
+        "blobSha1": "8eec7985798c4f395d89fb5f71b22cf0d54b0c0d"
+      }
+    ]
+  },
+  "installedEvidence": {
+    "host": "MONOLITH",
+    "product": "wow_classic_beta",
+    "version": "1.60.1.70425",
+    "observation": "read-only .build.info wow_classic_beta row and WowB.exe FileVersion; no GetBuildInfo runtime observation",
+    "questieVersion": "12.1.0",
+    "files": [
+      {
+        "path": "Questie_Camelot.toc",
+        "sha256": "2bd4388a11fcb4f7165fc101393ebb080e489d2dfe5948cc6b3ea1a6fe86c964"
+      },
+      {
+        "path": "Modules/Tooltips/MapIconTooltip.lua",
+        "sha256": "2c3735d14312b86461ff1e800d05917b6811fe804204a6bd6058270256c0ebd0"
+      },
+      {
+        "path": "Modules/FramePool/QuestieFramePool.lua",
+        "sha256": "0d83d13a0b5b6432389cf81a25a64b8da6d682f05bfc7a84efd75c66ed4f4cd9"
+      }
+    ]
+  },
+  "previousCurrentSnapshot": {
     "revision": "735496de78ebd30ce816a0637982c556987f258c",
     "client": "Forever 1.60.1.70374",
     "interface": 16001,
@@ -86,27 +179,6 @@
       {
         "path": "Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua",
         "sha256": "4825bac4057b4002e630ffa7a6104add204f1164c0910e73bfe7b84ea6b31ec8"
-      }
-    ]
-  },
-  "installedEvidence": {
-    "host": "MONOLITH",
-    "product": "wow_classic_beta",
-    "version": "1.60.1.70374",
-    "observation": "read-only .build.info and installed Questie_Camelot.toc; no GetBuildInfo runtime observation",
-    "questieVersion": "12.1.0",
-    "files": [
-      {
-        "path": "Questie_Camelot.toc",
-        "sha256": "2bd4388a11fcb4f7165fc101393ebb080e489d2dfe5948cc6b3ea1a6fe86c964"
-      },
-      {
-        "path": "Modules/Tooltips/MapIconTooltip.lua",
-        "sha256": "2c3735d14312b86461ff1e800d05917b6811fe804204a6bd6058270256c0ebd0"
-      },
-      {
-        "path": "Modules/FramePool/QuestieFramePool.lua",
-        "sha256": "0d83d13a0b5b6432389cf81a25a64b8da6d682f05bfc7a84efd75c66ed4f4cd9"
       }
     ]
   }

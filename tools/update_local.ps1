@@ -17,7 +17,7 @@ if ((Test-Path -LiteralPath $backup) -or (Test-Path -LiteralPath $stage)) { thro
 function Assert-Closed { if (@(Get-Process -Name WowB -ErrorAction SilentlyContinue).Count) { throw 'Close Forever normally before updating; no reload or closure is forced.' } }
 Assert-Closed
 $exe=Get-Item -LiteralPath (Join-Path $ClientRoot 'WowB.exe')
-if ($exe.VersionInfo.FileVersion -cne '1.60.1.70374') { throw 'Client build changed; verify matching contracts first.' }
+if ($exe.VersionInfo.FileVersion -cne '1.60.1.70425') { throw 'Client build changed; verify matching contracts first.' }
 $validation=Get-Content -Raw -LiteralPath (Join-Path $build 'dist\validation-evidence.json') | ConvertFrom-Json
 if (!$validation.success -or (Get-Content -Raw -LiteralPath (Join-Path $build 'SOURCE-COMMIT')).Trim() -cne $SourceCommit) { throw 'Exact source verification is absent.' }
 $sourceTree=(Get-Content -Raw -LiteralPath (Join-Path $build 'SOURCE-TREE')).Trim()

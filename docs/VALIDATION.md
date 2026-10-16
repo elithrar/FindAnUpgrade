@@ -1,15 +1,38 @@
 # Validation
 
-FindAnUpgrade **0.1.13** is the current candidate for official WoW Forever, interface
+FindAnUpgrade **0.1.14** is the current candidate for official WoW Forever, interface
 **16001**. Its earlier unpublished **0.2.0** label was superseded before merge.
-The installed Forever beta on MONOLITH is **1.60.1.70374**, established from
+The installed Forever beta on MONOLITH is **1.60.1.70425**, established from
 `.build.info` and the installed Camelot addon manifests. This is installation
 evidence, not a running client's `GetBuildInfo()` observation.
 
-Release readiness was also checked against the renamed `elithrar/FindAnUpgrade`
-repository and the supplied `CF_API_KEY` secret name, without reading its value.
-`CF_PROJECT_ID` is still required before publication. See
-`RELEASE-READINESS.md` and its independent review for exact boundaries.
+## Python tooling, README and current client, 0.1.14
+
+The README follows the current XPIsland README's download-first structure,
+short feature list, installation/usage and contributor/development/license
+sections. Its CurseForge link is supplied by the user; public-listing visibility
+was not verified. User-facing copy omits implementation history and versions.
+
+Development uses uv 0.13.1, Python 3.15.0, Lupa 2.8 and Ruff 0.17.1 from a
+locked environment. The full local verifier passes all 21 checks, including
+612 Lua scenarios across 32 suites and 187 Python tests. Ruff lint and format
+checks are separate from the actual
+Lua/data/import/sync/package/release tests. No normalized quest facts or source
+hashes changed. Exact final verifier counts and runtime architecture are in
+current delivery receipts; setup and dependency pins are in DEVELOPMENT.md.
+
+The current client contract matches 70425 at source revision
+`b401e0332adfbf0460d319b06d8ea29279a941f1`. The 70338 detail-renderer fixture
+remains pinned, and the prior 70374 snapshot is retained in client-contracts.json.
+See CLIENT-70425-REVIEW.md for compared source behavior and installation guard.
+An attempted 0.1.13 installation stopped at the changed-build guard before
+writes; the installed 0.1.12 payload was preserved.
+
+Release setup now uses `elithrar/FindAnUpgrade`, the `CF_API_KEY` secret name
+and the user-supplied/read-back `CF_PROJECT_ID=1747486`. No secret value was read.
+The initial release audit's missing-variable finding has been resolved in
+repository configuration. Live token/project access and exact-version lookup
+remain untested; no tag, release dispatch or public upload was performed.
 
 ## Star spacing and unified Options, 0.1.13
 

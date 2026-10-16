@@ -1,20 +1,20 @@
-from pathlib import Path
 import copy
 import hashlib
 import json
 import sys
 import tempfile
 import unittest
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT/"tools"))
-import quest_taxonomy as taxonomy
+sys.path.insert(0, str(ROOT / "tools"))
+import quest_taxonomy as taxonomy  # noqa: E402 - local tools require the repository path above
 
 
 class TaxonomyTest(unittest.TestCase):
     def setUp(self):
-        (ROOT/".work").mkdir(exist_ok=True)
-        self.temp = tempfile.TemporaryDirectory(dir=ROOT/".work")
+        (ROOT / ".work").mkdir(exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=ROOT / ".work")
         self.cache = Path(self.temp.name)
         self.primary = {"sources": []}
 
@@ -25,18 +25,38 @@ class TaxonomyTest(unittest.TestCase):
         record = {"id": identity, "name": "Dungeon in a title is no evidence"}
         if tag is not None:
             record["type"] = tag
-        raw = ("WH.Gatherer.addData(5, "+str(domain)+", {\""+str(identity)+"\":{}});\n"
-               "$.extend(g_quests["+str(identity)+"], "+json.dumps(record)+");"+extra).encode()
-        (self.cache/(str(identity)+".html")).write_bytes(raw)
-        receipt = {"id": identity, "url": "https://www.wowhead.com/forever/quest="+str(identity),
-                   "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
-        self.primary["sources"] = [row for row in self.primary["sources"] if row["id"] != identity]+[receipt]
+        raw = (
+            "WH.Gatherer.addData(5, "
+            + str(domain)
+            + ', {"'
+            + str(identity)
+            + '":{}});\n'
+            "$.extend(g_quests["
+            + str(identity)
+            + "], "
+            + json.dumps(record)
+            + ");"
+            + extra
+        ).encode()
+        (self.cache / (str(identity) + ".html")).write_bytes(raw)
+        receipt = {
+            "id": identity,
+            "url": "https://www.wowhead.com/forever/quest=" + str(identity),
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "bytes": len(raw),
+        }
+        self.primary["sources"] = [
+            row for row in self.primary["sources"] if row["id"] != identity
+        ] + [receipt]
         return receipt
 
     def test_owned_exact_tags_and_receipts(self):
         document = taxonomy.load(ROOT)
         self.assertEqual(len(document["records"]), 36)
-        self.assertEqual([row["id"] for row in document["records"] if row["tagID"] == 81], [6922, 8908, 8920, 8940, 8958, 9009, 9022])
+        self.assertEqual(
+            [row["id"] for row in document["records"] if row["tagID"] == 81],
+            [6922, 8908, 8920, 8940, 8958, 9009, 9022],
+        )
         self.assertEqual(len({row["id"] for row in document["records"]}), 36)
 
     def test_missing_is_unknown_and_dungeon_names_are_ignored(self):
@@ -48,19 +68,28 @@ class TaxonomyTest(unittest.TestCase):
     def test_group_and_raid_do_not_become_dungeon(self):
         for identity, tag in [(1, 1), (2, 62), (3, 81)]:
             self.page(identity, tag)
-        self.assertEqual([r["tagID"] for r in taxonomy.acquire(self.cache, self.primary)["records"]], [1, 62, 81])
+        self.assertEqual(
+            [r["tagID"] for r in taxonomy.acquire(self.cache, self.primary)["records"]],
+            [1, 62, 81],
+        )
 
     def test_partial_cache_preserves_all_prior_ids(self):
         self.page(1, 81)
         previous = taxonomy.acquire(self.cache, self.primary)
-        (self.cache/"1.html").unlink()
+        (self.cache / "1.html").unlink()
         self.page(2, 1)
-        self.assertEqual([r["id"] for r in taxonomy.acquire(self.cache, self.primary, previous)["records"]], [1, 2])
+        self.assertEqual(
+            [
+                r["id"]
+                for r in taxonomy.acquire(self.cache, self.primary, previous)["records"]
+            ],
+            [1, 2],
+        )
 
     def test_empty_cache_reparse_is_idempotent(self):
         self.page(1, 81)
         previous = taxonomy.acquire(self.cache, self.primary)
-        (self.cache/"1.html").unlink()
+        (self.cache / "1.html").unlink()
         self.assertEqual(taxonomy.acquire(self.cache, self.primary, previous), previous)
 
     def test_changed_receipt_same_explicit_fact_can_be_reconfirmed(self):
@@ -81,8 +110,8 @@ class TaxonomyTest(unittest.TestCase):
     def test_unread_stale_receipt_or_missing_owned_source_cannot_survive(self):
         self.page(1, 81)
         previous = taxonomy.acquire(self.cache, self.primary)
-        (self.cache/"1.html").unlink()
-        self.primary["sources"][0]["sha256"] = "0"*64
+        (self.cache / "1.html").unlink()
+        self.primary["sources"][0]["sha256"] = "0" * 64
         with self.assertRaises(ValueError):
             taxonomy.acquire(self.cache, self.primary, previous)
 
@@ -92,7 +121,7 @@ class TaxonomyTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 taxonomy.acquire(self.cache, self.primary)
         self.page(1, 81)
-        (self.cache/"1.html").write_bytes(b"tampered")
+        (self.cache / "1.html").write_bytes(b"tampered")
         with self.assertRaises(ValueError):
             taxonomy.acquire(self.cache, self.primary)
 

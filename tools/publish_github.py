@@ -1,10 +1,11 @@
 """Publish verified release assets without moving tags or replacing asset bytes."""
+
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from pathlib import Path
 
 import release
 
@@ -22,7 +23,9 @@ def require_repository():
 
 def existing(tag):
     # API/read errors fail closed, never mean that creating a release is safe.
-    pages = json.loads(gh("api", "--paginate", "--slurp", "repos/{owner}/{repo}/releases"))
+    pages = json.loads(
+        gh("api", "--paginate", "--slurp", "repos/{owner}/{repo}/releases")
+    )
     matches = [r for page in pages for r in page if r["tag_name"] == tag]
     if len(matches) > 1:
         raise ValueError("Ambiguous GitHub release")
@@ -40,25 +43,43 @@ def verify_existing(data, current, root=ROOT):
     names = [a["name"] for a in assets]
     if len(names) != len(set(names)):
         raise ValueError("Duplicate GitHub asset names")
-    expected = dict(data["assets"], **{"release.json": release.sha(root / "dist/release.json")})
-    allowed = set(expected) | {"curseforge-upload-pending.json", "curseforge-receipt.json"}
+    expected = dict(
+        data["assets"], **{"release.json": release.sha(root / "dist/release.json")}
+    )
+    allowed = set(expected) | {
+        "curseforge-upload-pending.json",
+        "curseforge-receipt.json",
+    }
     if set(names) - allowed:
         raise ValueError("Unexpected GitHub release assets")
     missing = []
     for name, digest in expected.items():
         if name not in names:
             missing.append(name)
-        elif release.hashlib.sha256(download(data["tag"], name, root)).hexdigest() != digest:
-            raise ValueError("Existing release asset has different bytes; use a new version")
+        elif (
+            release.hashlib.sha256(download(data["tag"], name, root)).hexdigest()
+            != digest
+        ):
+            raise ValueError(
+                "Existing release asset has different bytes; use a new version"
+            )
     if missing and (not current["draft"] or current.get("immutable")):
-        raise ValueError("Published release is incomplete; do not replace published assets")
+        raise ValueError(
+            "Published release is incomplete; do not replace published assets"
+        )
     return missing
 
 
 def upload_identity(data, project):
-    return {"tag": data["tag"], "commit": data["commit"], "project_id": project,
-            "sha256": data["assets"][data["archive"]], "game_version": "1.60.1",
-            "game_version_type": 88568, "release_type": "release"}
+    return {
+        "tag": data["tag"],
+        "commit": data["commit"],
+        "project_id": project,
+        "sha256": data["assets"][data["archive"]],
+        "game_version": "1.60.1",
+        "game_version_type": 88568,
+        "release_type": "release",
+    }
 
 
 def verify_upload_records(data, current, project, root=ROOT):
@@ -68,17 +89,29 @@ def verify_upload_records(data, current, project, root=ROOT):
             raise ValueError("Unresolved CurseForge upload intent blocks publication")
         return False
     if type(project) is not int or project <= 0:
-        raise ValueError("CF_PROJECT_ID is required to validate an existing upload receipt")
+        raise ValueError(
+            "CF_PROJECT_ID is required to validate an existing upload receipt"
+        )
     receipt = json.loads(download(data["tag"], "curseforge-receipt.json", root))
     expected = upload_identity(data, project)
-    if (not isinstance(receipt, dict) or any(receipt.get(k) != v for k, v in expected.items())
-            or type(receipt.get("file_id")) is not int or receipt["file_id"] <= 0
-            or type(receipt.get("game_version_id")) is not int or receipt["game_version_id"] <= 0
-            or receipt.get("status") != "upload accepted; moderation/public visibility unverified"
-            or set(receipt) != set(expected) | {"file_id", "game_version_id", "status"}):
-        raise ValueError("Existing CurseForge receipt does not match this release/project")
+    if (
+        not isinstance(receipt, dict)
+        or any(receipt.get(k) != v for k, v in expected.items())
+        or type(receipt.get("file_id")) is not int
+        or receipt["file_id"] <= 0
+        or type(receipt.get("game_version_id")) is not int
+        or receipt["game_version_id"] <= 0
+        or receipt.get("status")
+        != "upload accepted; moderation/public visibility unverified"
+        or set(receipt) != set(expected) | {"file_id", "game_version_id", "status"}
+    ):
+        raise ValueError(
+            "Existing CurseForge receipt does not match this release/project"
+        )
     if "curseforge-upload-pending.json" in names:
-        intent = json.loads(download(data["tag"], "curseforge-upload-pending.json", root))
+        intent = json.loads(
+            download(data["tag"], "curseforge-upload-pending.json", root)
+        )
         if intent != expected:
             raise ValueError("Existing CurseForge intent does not match its receipt")
     return True
@@ -97,9 +130,18 @@ def prepare(root=ROOT):
     else:
         files = [str(root / "dist" / n) for n in [*data["assets"], "release.json"]]
         release.verify_remote(data, root)
-        gh("release", "create", data["tag"], *files, "--verify-tag", "--draft",
-           "--title", "FindAnUpgrade " + data["tag"], "--notes-file",
-           str(root / "docs/releases" / (data["version"] + ".md")))
+        gh(
+            "release",
+            "create",
+            data["tag"],
+            *files,
+            "--verify-tag",
+            "--draft",
+            "--title",
+            "FindAnUpgrade " + data["tag"],
+            "--notes-file",
+            str(root / "docs/releases" / (data["version"] + ".md")),
+        )
     # Confirm creation/upload before allowing the CurseForge side effect.
     current = existing(data["tag"])
     if not current or verify_existing(data, current, root):

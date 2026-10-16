@@ -18,6 +18,10 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  UV_CACHE_DIR: ${{ github.workspace }}/.work/uv-cache
+  UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}/.work/uv-python
+  UV_PYTHON_BIN_DIR: ${{ github.workspace }}/.work/uv-bin
+  UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv
   RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
 
 jobs:
@@ -33,9 +37,11 @@ jobs:
           ref: ${{ inputs.tag || github.ref }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          python-version: '3.12'
+          version: '0.13.1'
+          python-version: '3.15.0'
+          enable-cache: false
       - name: Check out pinned Forever API contracts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -50,7 +56,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Gethe/wow-ui-source
-          ref: 735496de78ebd30ce816a0637982c556987f258c # Forever 1.60.1.70374
+          ref: b401e0332adfbf0460d319b06d8ea29279a941f1 # Forever 1.60.1.70425
           path: .work/current-api
           persist-credentials: false
           sparse-checkout-cone-mode: false
@@ -65,15 +71,15 @@ jobs:
             /Interface/AddOns/Blizzard_Menu/DropdownButton.lua
             /Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua
-      - name: Install offline Lua runtime
-        run: python -m pip install --target .work/pydeps lupa==2.8
+      - name: Install locked development dependencies
+        run: uv sync --locked
       - name: Test and package exact payload
-        run: python tools/verify.py
+        run: uv run --locked python tools/verify.py
       - name: Verify annotated tag, main ancestry, version and exact build
         id: metadata
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python tools/release.py
+        run: uv run --locked python tools/release.py
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release-package
@@ -97,11 +103,13 @@ jobs:
           ref: ${{ needs.validate.outputs.commit }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          python-version: '3.12'
-      - name: Install offline Lua runtime
-        run: python -m pip install --target .work/pydeps lupa==2.8
+          version: '0.13.1'
+          python-version: '3.15.0'
+          enable-cache: false
+      - name: Install locked development dependencies
+        run: uv sync --locked
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: release-package
@@ -110,22 +118,22 @@ jobs:
       - name: Refresh main ancestry and reject moved tags
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python tools/release.py --verify
+        run: uv run --locked python tools/release.py --verify
       - name: Prepare and confirm exact GitHub draft assets
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: python tools/publish_github.py
+        run: uv run --locked python tools/publish_github.py
       - name: Upload exact Forever package when CurseForge is configured
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: python tools/publish_curseforge.py
+        run: uv run --locked python tools/publish_curseforge.py
       - name: Publish completed GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: python tools/publish_github.py --finalize
+        run: uv run --locked python tools/publish_github.py --finalize
