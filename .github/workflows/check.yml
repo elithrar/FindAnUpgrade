@@ -8,6 +8,12 @@ on:
 permissions:
   contents: read
 
+env:
+  UV_CACHE_DIR: ${{ github.workspace }}/.work/uv-cache
+  UV_PYTHON_INSTALL_DIR: ${{ github.workspace }}/.work/uv-python
+  UV_PYTHON_BIN_DIR: ${{ github.workspace }}/.work/uv-bin
+  UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -16,9 +22,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
-          python-version: '3.12'
+          version: '0.13.1'
+          python-version: '3.15.0'
+          enable-cache: false
       - name: Check out pinned Forever API contracts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -33,7 +41,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Gethe/wow-ui-source
-          ref: 735496de78ebd30ce816a0637982c556987f258c # Forever 1.60.1.70374
+          ref: b401e0332adfbf0460d319b06d8ea29279a941f1 # Forever 1.60.1.70425
           path: .work/current-api
           persist-credentials: false
           sparse-checkout-cone-mode: false
@@ -48,7 +56,7 @@ jobs:
             /Interface/AddOns/Blizzard_Menu/DropdownButton.lua
             /Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua
-      - name: Install offline Lua runtime
-        run: python -m pip install --target .work/pydeps lupa==2.8
+      - name: Install locked development dependencies
+        run: uv sync --locked
       - name: Test and package exact payload
-        run: python tools/verify.py
+        run: uv run --locked python tools/verify.py

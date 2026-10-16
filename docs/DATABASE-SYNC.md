@@ -1,12 +1,12 @@
 # Catalog acquisition and sync
 
-Run these commands from a FindAnUpgrade source checkout with Python 3.11 or newer.
-No website checkout, game installation, credentials or upstream Lua execution
-is required. The only Python dependency is the existing Lua test runtime:
+Run these commands from a FindAnUpgrade source checkout after the locked uv
+setup in [DEVELOPMENT.md](DEVELOPMENT.md). No website checkout, game installation,
+credentials or upstream Lua execution is required.
 
 ```powershell
-python -m pip install --target .work/pydeps lupa==2.8
-python tools/sync_catalog.py check
+uv sync --locked
+uv run --locked python tools/sync_catalog.py check
 ```
 
 `check` works offline from tracked normalized inputs. It reproduces the data,
@@ -17,7 +17,7 @@ which ran. Neither mocks nor inspected source establish in-game behavior.
 ## Refresh and reuse
 
 ```powershell
-python tools/sync_catalog.py refresh
+uv run --locked python tools/sync_catalog.py refresh
 ```
 
 This acquires the pinned QuestieDB Forever artifact and ATT authoring and compiled files, refreshes the whole
@@ -37,8 +37,8 @@ runs until detail collection succeeds. Unreceipted files are fetched again;
 receipt mismatches fail instead of trusting altered bytes.
 
 ```powershell
-python tools/sync_catalog.py refresh --refresh-details
-python tools/sync_catalog.py refresh --max-age-hours 6
+uv run --locked python tools/sync_catalog.py refresh --refresh-details
+uv run --locked python tools/sync_catalog.py refresh --max-age-hours 6
 ```
 
 The first forces detail revalidation, including changes not visible in index
@@ -52,13 +52,13 @@ ties; an unresolved count or changed row during collection stops the refresh.
 To reparse existing owned caches without network:
 
 ```powershell
-python tools/sync_catalog.py reparse
+uv run --locked python tools/sync_catalog.py reparse
 ```
 
 For caches acquired before this default layout, provide their paths explicitly:
 
 ```powershell
-python tools/sync_catalog.py reparse --public-root .work/comprehensive-source --authoring-root .work/att-source --compiled-root .work/att-generated
+uv run --locked python tools/sync_catalog.py reparse --public-root .work/comprehensive-source --authoring-root .work/att-source --compiled-root .work/att-generated
 ```
 
 The same three overrides work with `refresh`. Optional `--questie-root PATH`
@@ -154,7 +154,7 @@ dependencies never enter source or addon ZIPs.
 Review `dist/catalog-sync-diff.json`, `data/catalog-reconciliation.json` and
 `data/catalog-coverage.json`; require independent review for parser or authority
 changes. Fix concrete findings, bump the patch version for an authorized
-iteration, and run `python tools/verify.py` again before commit/push. Follow
+iteration, and run `uv run --locked python tools/verify.py` again before commit/push. Follow
 `RELEASING.md` and applicable authorization for CI and any exact-commit install.
 This sync workflow itself grants no release, installation or game-action
 permission. Pending native rendering, transitions and combat/taint checks stay
