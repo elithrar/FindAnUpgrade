@@ -56,7 +56,7 @@ def multipart(metadata, archive):
 
 def settings(environ=None):
     environ = os.environ if environ is None else environ
-    token, project = environ.get("CF_API_TOKEN", ""), environ.get("CF_PROJECT_ID", "")
+    token, project = environ.get("CF_API_KEY", ""), environ.get("CF_PROJECT_ID", "")
     if not token or not project:
         return None
     if not release.re.fullmatch(r"[1-9][0-9]*", project):
@@ -74,7 +74,7 @@ def summary(message):
 def main(root=ROOT):
     configured = settings()
     if not configured:
-        summary("CurseForge upload NOT attempted: add CF_API_TOKEN secret and CF_PROJECT_ID repository variable.")
+        summary("CurseForge upload NOT attempted: add CF_API_KEY secret and CF_PROJECT_ID repository variable.")
         return False
     token, project = configured
     github.require_repository()

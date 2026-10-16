@@ -67,11 +67,11 @@ class MetadataTests(unittest.TestCase):
             with self.assertRaises(ValueError): cf.exact_version(values, data)
 
     def test_settings_missing_skip_and_invalid_id_reject(self):
-        for settings in [{}, {"CF_API_TOKEN": "fixture"}, {"CF_PROJECT_ID": "42"}]:
+        for settings in [{}, {"CF_API_KEY": "fixture"}, {"CF_PROJECT_ID": "42"}]:
             self.assertIsNone(cf.settings(settings))
-        self.assertEqual(cf.settings({"CF_API_TOKEN": "fixture", "CF_PROJECT_ID": "42"}), ("fixture", 42))
+        self.assertEqual(cf.settings({"CF_API_KEY": "fixture", "CF_PROJECT_ID": "42"}), ("fixture", 42))
         for value in ["0", "-1", "01", "42;echo bad", " 42", "https://example.invalid"]:
-            with self.assertRaises(ValueError): cf.settings({"CF_API_TOKEN": "fixture", "CF_PROJECT_ID": value})
+            with self.assertRaises(ValueError): cf.settings({"CF_API_KEY": "fixture", "CF_PROJECT_ID": value})
 
     def test_git_annotation_ancestry_head_and_tag_move(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as folder:
@@ -321,7 +321,7 @@ class PublishTests(unittest.TestCase):
                     patch.object(github, "download", side_effect=lambda tag, name, root: self.assets[name]),
                     patch.object(cf, "request", side_effect=request),
                     patch("builtins.print"),
-                    patch.dict(os.environ, {"GH_REPO": "elithrar/QuestBrief", "CF_API_TOKEN": "offline-fixture-only",
+                    patch.dict(os.environ, {"GH_REPO": "elithrar/FindAnUpgrade", "CF_API_KEY": "offline-fixture-only",
                                             "CF_PROJECT_ID": "42", "GITHUB_STEP_SUMMARY": ""})]
         for context in contexts: context.start(); self.addCleanup(context.stop)
 
@@ -368,7 +368,7 @@ class PublishTests(unittest.TestCase):
         self.assertNotIn("curseforge-receipt.json", self.assets)
 
     def test_missing_settings_skip_without_network(self):
-        with patch.dict(os.environ, {"CF_API_TOKEN": ""}): self.assertFalse(cf.main(self.root))
+        with patch.dict(os.environ, {"CF_API_KEY": ""}): self.assertFalse(cf.main(self.root))
         with patch.dict(os.environ, {"CF_PROJECT_ID": ""}): self.assertFalse(cf.main(self.root))
         self.assertEqual(cf.request.call_count, 0); self.assertEqual(self.calls, [])
 
@@ -395,7 +395,7 @@ class PublishTests(unittest.TestCase):
 
     def test_unresolved_upload_blocks_github_finalize_when_settings_removed(self):
         self.assets["curseforge-upload-pending.json"] = b"intent"
-        with patch.dict(os.environ, {"CF_API_TOKEN": ""}):
+        with patch.dict(os.environ, {"CF_API_KEY": ""}):
             self.assertFalse(cf.main(self.root))
             with self.assertRaisesRegex(ValueError, "Unresolved"): github.finalize(self.root)
         self.assertEqual(self.calls, [])
@@ -404,7 +404,7 @@ class PublishTests(unittest.TestCase):
         self.assets["curseforge-upload-pending.json"] = json.dumps(github.upload_identity(self.data, 42)).encode()
         for receipt in [{}, {**self.receipt(), "project_id": 99}, {**self.receipt(), "file_id": True}]:
             self.assets["curseforge-receipt.json"] = json.dumps(receipt).encode()
-            with patch.dict(os.environ, {"CF_API_TOKEN": ""}):
+            with patch.dict(os.environ, {"CF_API_KEY": ""}):
                 self.assertFalse(cf.main(self.root))
                 with self.assertRaises(ValueError): github.finalize(self.root)
         self.assets["curseforge-receipt.json"] = json.dumps(self.receipt()).encode()
@@ -425,6 +425,23 @@ class PublishTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_renamed_repository_and_supplied_secret_are_the_release_contract(self):
+        with patch.dict(os.environ, {"GH_REPO": "elithrar/FindAnUpgrade"}):
+            github.require_repository()
+        for repository in ["elithrar/QuestBrief", "other/FindAnUpgrade", ""]:
+            with patch.dict(os.environ, {"GH_REPO": repository}), self.assertRaises(ValueError):
+                github.require_repository()
+        self.assertIsNone(cf.settings({"CF_API_TOKEN": "offline-obsolete", "CF_PROJECT_ID": "42"}))
+        workflow = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
+        self.assertIn("if: github.repository == 'elithrar/FindAnUpgrade'", workflow)
+        self.assertNotIn("elithrar/QuestBrief", workflow)
+        self.assertNotIn("secrets.CF_API_TOKEN", workflow)
+        triggers = workflow.split("permissions:\n", 1)[0]
+        self.assertIn("tags: ['v*']", triggers)
+        self.assertIn("workflow_dispatch:", triggers)
+        self.assertNotIn("branches:", triggers)
+        self.assertNotIn("pull_request", triggers)
+
     def test_all_validation_workflows_supply_the_executed_native_contracts(self):
         runner = ast.parse((ROOT / "tests/run.py").read_text())
         required = next(ast.literal_eval(node.value) for node in runner.body
@@ -458,7 +475,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("contents: write", validation)
         self.assertIn("needs: validate", publish)
         self.assertIn("cancel-in-progress: false", workflow)
-        self.assertIn("CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}", publish)
+        self.assertIn("CF_API_KEY: ${{ secrets.CF_API_KEY }}", publish)
         self.assertIn("CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}", publish)
         final_step = publish.split("- name: Publish completed GitHub release", 1)[1]
         self.assertIn("CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}", final_step)

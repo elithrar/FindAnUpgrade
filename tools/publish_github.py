@@ -16,8 +16,8 @@ def gh(*args):
 
 
 def require_repository():
-    if os.environ.get("GH_REPO") != "elithrar/QuestBrief":
-        raise ValueError("Publishing is configured only for elithrar/QuestBrief")
+    if os.environ.get("GH_REPO") != "elithrar/FindAnUpgrade":
+        raise ValueError("Publishing is configured only for elithrar/FindAnUpgrade")
 
 
 def existing(tag):

@@ -2,7 +2,7 @@
 
 Merging does not publish. The workflow publishes only after an explicitly requested annotated `vX.Y.Z` tag push or a manual **Release addon** run for an existing tag. This implementation has not been released or uploaded.
 
-Before a release, complete the live checks in [VALIDATION.md](VALIDATION.md), align `QuestBrief/QuestBrief.toc` and `QuestBrief/Core.lua`, add `docs/releases/<version>.md`, and pass **Check addon**. The tagged commit must be reachable from `origin/main`. The first release still needs its version-specific notes and live verification. Only stable semantic versions are supported by this workflow.
+Before a release, complete the live checks in [VALIDATION.md](VALIDATION.md), align `FindAnUpgrade/FindAnUpgrade.toc` and `FindAnUpgrade/Core.lua`, add `docs/releases/<version>.md`, and pass **Check addon**. The tagged commit must be reachable from `origin/main`. Version-specific notes are present for 0.1.13; live verification remains pending. Only stable semantic versions are supported by this workflow.
 
 After release approval, create and push an annotated matching tag. Never move a published tag; corrections need a new version. A manual run for the same tag resumes a partial upload without overwriting existing assets. A dirty or untracked checkout is rejected; every packaged source member must also match a tracked blob in the tag, including files hidden by ignore rules.
 
@@ -29,14 +29,14 @@ authorizes a release, tag, CurseForge publication or credential setup.
 
 ## CurseForge setup
 
-Create or use the QuestBrief WoW project, then configure these in the repository's **Settings → Secrets and variables → Actions**:
+Create or use the FindAnUpgrade WoW project, then configure these in the repository's **Settings → Secrets and variables → Actions**:
 
 | Setting | Kind | Value |
 | --- | --- | --- |
-| `CF_API_TOKEN` | Secret | Upload token from [CurseForge API Tokens](https://authors.curseforge.com/#/api-tokens) |
-| `CF_PROJECT_ID` | Variable | QuestBrief's exact positive numeric project ID from its author-dashboard URL |
+| `CF_API_KEY` | Secret | Upload token from [CurseForge API Tokens](https://authors.curseforge.com/#/api-tokens) |
+| `CF_PROJECT_ID` | Variable | FindAnUpgrade's exact positive numeric project ID from its author-dashboard URL |
 
-No project ID or token has been supplied. Missing either setting produces an explicit “CurseForge upload NOT attempted” summary while GitHub publication can complete. A malformed project ID, invalid token, unavailable exact game version or rejected upload fails the job. Secrets are supplied only to the upload step and are never sent through command arguments or printed.
+As checked on 2026-10-16, the renamed `elithrar/FindAnUpgrade` repository has the `CF_API_KEY` secret (presence metadata only; its value was not read). The `CF_PROJECT_ID` repository variable is missing and must be set to the exact existing project ID before CurseForge publication. Missing either setting produces an explicit “CurseForge upload NOT attempted” summary while GitHub publication can complete. A malformed project ID, invalid token, unavailable exact game version or rejected upload fails the job. Secrets are supplied only to the upload step and are never sent through command arguments or printed.
 
 The uploader resolves one exact `1.60.1` game-version ID with Forever type `88568`; it never substitutes another patch or flavor. The flavor mapping is verified in [BigWigs packager 2.6.1 source](https://github.com/BigWigsMods/packager/blob/e50a250f8705041e40f2fa1ddcb280a686d65aa0/release.sh#L2656-L2693). The returned game-version ID remains a runtime API lookup. It sends the same addon ZIP bytes using the documented [CurseForge Upload API](https://support.curseforge.com/support/solutions/articles/9000197321-curseforge-upload-api). Upload acceptance confirms a file ID, not moderation approval or public visibility.
 

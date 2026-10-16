@@ -36,15 +36,16 @@ function S:Save(row)
 end
 function S:Star(card)
     local star=CreateFrame("Button",nil,card);card.star=star;star:SetSize(24,24);star:SetPoint("TOPRIGHT",-4,-3)
-    star.fill=star:CreateTexture(nil,"ARTWORK");star.fill:SetSize(20,18);star.fill:SetPoint("CENTER");star.fill:SetAtlas("auctionhouse-icon-favorite")
-    star.outline=star:CreateTexture(nil,"OVERLAY");star.outline:SetSize(20,18);star.outline:SetPoint("CENTER");star.outline:SetAtlas("auctionhouse-icon-favorite-off")
+    -- Blizzard uses these two atlases on one texture. Swapping the art keeps
+    -- the native silhouette without a second outline over the filled state.
+    star.icon=star:CreateTexture(nil,"ARTWORK");star.icon:SetSize(17,15.3);star.icon:SetPoint("CENTER")
     star:SetScript("OnClick",function()if card.row and A.Over(self.scroll) then self:Save(card.row) end end)
     star:SetScript("OnEnter",function()
         if not card.row or not A.Over(self.scroll) then return end
-        self.inspector:ClearItem();star.outline:SetVertexColor(1.25,1.25,1.25)
+        self.inspector:ClearItem();star.icon:SetVertexColor(1.25,1.25,1.25)
         self.footerTooltip:SetOwner(star,"ANCHOR_LEFT");self.footerTooltip:SetText(N.Shortlist:Contains(card.row.id) and "Remove from shortlist" or "Save to shortlist");self.footerTooltip:Show()
     end)
-    star:SetScript("OnLeave",function()star.outline:SetVertexColor(1,1,1);self.footerTooltip:Hide()end)
+    star:SetScript("OnLeave",function()star.icon:SetVertexColor(1,1,1);self.footerTooltip:Hide()end)
     card.chain=CreateFrame("Button",nil,card);card.chain:SetHeight(16)
     card.chain.text=card.chain:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(card.chain.text,11);card.chain.text:SetAllPoints();card.chain.text:SetJustifyH("LEFT");card.chain.text:SetTextColor(.85,.75,.45);card.chain.text:SetText("Quest chain")
     card.chain:SetScript("OnClick",function()if card.row and A.Over(self.scroll) then self:Chain(card.row.id,card.chain) end end)

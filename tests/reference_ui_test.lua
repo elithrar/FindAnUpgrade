@@ -187,7 +187,7 @@ test("shown child under hidden parent is not an eligible pointer target",functio
 end)
 
 test("options parent hide and reopen propagate complete child lifecycle",function()
-    local N,W=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options;O:Page("behavior")
+    local N,W=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
     local shows,hides=0,0; O.modifier:HookScript("OnShow",function()
         shows=shows+1; assert(O.frame and O.modifier.Text:GetText()=="Shift" and O.edits.scale:GetText()=="100")
     end)
@@ -199,7 +199,7 @@ end)
 
 test("actual intrinsic SetupMenu generates shown controls under a hidden shell",function()
     if not nativeDropdown then return end
-    local N,W=fixture(); N.Options:Create(N.Core); local O=N.Options;O:Page("behavior")
+    local N,W=fixture(); N.Options:Create(N.Core); local O=N.Options
     assert(not O.frame:IsShown() and O.modifier:IsShown() and not O.modifier:IsVisible())
     assert(O.modifier.menuGenerations>=1 and O.modifier.Text:GetText()=="Shift",
         "native SetupMenu should populate a shown dropdown even while its shell is hidden")
@@ -208,7 +208,7 @@ end)
 
 test("fractional scale resolves options native dropdown anchors inside its row",function()
     local N,W,rect=fixture(); UIParent:SetScale(.83); SlashCmdList.FINDANUPGRADE("opts")
-    local O=N.Options;O:Page("behavior"); UIParent.width,UIParent.height=640,360; O:Refresh()
+    local O=N.Options; UIParent.width,UIParent.height=640,360; O:Refresh()
     local bx,by,bw,bh=rect(O.modifier); local tx,ty,tw,th=rect(O.modifier.Text)
     assert(close(tx-bx,9*O.modifier:GetEffectiveScale()))
     assert(ty>=by-.001 and ty+th<=by+bh+.001 and tx+tw<=bx+bw-20*O.modifier:GetEffectiveScale())
@@ -216,10 +216,35 @@ test("fractional scale resolves options native dropdown anchors inside its row",
     assert(close(x,fx) and close(y,fy) and close(w,fw) and close(h,fh))
 end)
 
-test("native checkbox caption geometry remains inside the Behavior section",function()
-    local N,W,rect=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options;O:Page("behavior")
+test("native checkbox caption geometry remains inside the Surfaces section",function()
+    local N,W,rect=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
     local x,y,w,h=rect(O.checks.launcher.Text); local sx,sy,sw,sh=rect(O.sections[4])
     assert(x>=sx and x+w<=sx+sw and y>=sy and y+h<=sy+sh)
+end)
+
+test("single options grid keeps native controls and headings within their sections",function()
+    for _,height in ipairs({1080,360}) do
+        local N,W,rect=fixture();UIParent.height=height;SlashCmdList.FINDANUPGRADE("opts");local O=N.Options
+        local groups={
+            {1,{O.font,O.border,O.sliders.scale,O.edits.scale}},
+            {2,{O.checks.enabled,O.modifier,O.position,O.hint}},
+            {3,{O.checks.accents,O.checks.dialogTint,O.checks.rewards,O.layout,O.sliders.strength,O.edits.strength}},
+            {4,{O.checks.npc,O.checks.worldmap,O.checks.minimap,O.checks.launcher}},
+            {5,{O.checks.hideUnusable,O.checks.includeDungeons,O.edits.levelsBelow,O.edits.levelsAbove}},
+        }
+        for _,group in ipairs(groups) do
+            local sx,sy,sw,sh=rect(O.sections[group[1]])
+            for _,control in ipairs(group[2]) do
+                local x,y,w,h=rect(control)
+                assert(x>=sx and x+w<=sx+sw and y>=sy and y+h<=sy+sh,"control crosses a single-window section edge")
+            end
+        end
+        local fx,fy,fw,fh=rect(O.frame);local x,y,w,h=rect(O.scroll)
+        local rx,ry,rw,rh=rect(O.reset);local bx,by,bw,bh=rect(O.bar)
+        assert(x>=fx and x+w<=fx+fw and y>=fy and y+h<=fy+fh)
+        assert(ry+rh<y and by>=y and by+bh<=y+h and bx>x+w)
+        assert(O.maximum==math.max(0,630-O.scroll:GetHeight()) and O.frame:GetScale()==1)
+    end
 end)
 
 test("native slider clamping does not let direct input escape option bounds",function()

@@ -74,10 +74,10 @@ function U:Border(frame,defaultKind)
     end
     return frame
 end
-function U:VerticalBar(parent)
+function U:VerticalBar(parent,bar)
     -- Same native vertical asset/backdrop pattern as installed Questie/AceGUI.
     -- UISliderTemplate supplies horizontal NineSlice and thumb art.
-    local bar=CreateFrame("Slider",nil,parent,"BackdropTemplate")
+    bar=bar or CreateFrame("Slider",nil,parent,"BackdropTemplate")
     bar:SetOrientation("VERTICAL"); bar:EnableMouse(true); bar:SetHitRectInsets(0,0,-10,0)
     bar:SetBackdrop({bgFile="Interface\\Buttons\\UI-SliderBar-Background",edgeFile="Interface\\Buttons\\UI-SliderBar-Border",tile=true,tileSize=8,edgeSize=8,insets={left=3,right=3,top=3,bottom=3}})
     bar:SetWidth(12); bar:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Vertical")
