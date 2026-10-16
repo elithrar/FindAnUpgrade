@@ -54,8 +54,16 @@ Current contracts: [1.60.1.70425](https://github.com/Gethe/wow-ui-source/tree/b4
 
 Source/mocks/CI/install hashes do **not** establish native rendering, input, API values, CPU, combat/taint or addon coexistence. Keep live checks pending until observed with actual build/payload.
 
+## Versioning
+
+Use a **patch bump by default** for current non-breaking fixes, UI refinements, data updates, tooling and documentation changes. Use a **minor bump** when a substantial backward-compatible feature or behavior expansion warrants it. Continue forward from the latest published version; do not repeat the initial public-release version reset.
+
+Every change set entering `main` (a merged PR or direct commit) must have a matching version bump and annotated `vX.Y.Z` tag on the resulting main commit. Include the aligned TOC, runtime Core, `pyproject.toml`, `uv.lock` and current CHANGELOG version before merge; verify main CI before pushing the matching tag. Never reuse or move a published tag. Reconcile an existing untagged change with a new versioned follow-up commit rather than rewriting published history.
+
+Pushing a `v*` tag starts [the release workflow](.github/workflows/release.yml), which can publish GitHub and CurseForge releases; dispatching it also publishes or resumes an existing tag. Obtain applicable merge, tag and release authorization before proceeding with this sequence. If authorization is missing, keep the change pending and report the blocker rather than silently leaving main unversioned or treating a tag as bookkeeping. A version/tag does not authorize installation.
+
 ## Authorization
 
-Before first CurseForge publication, prefer direct `main` commits and patch bumps for authorized iterations; align TOC/runtime/tool versions and CHANGELOG. Respect branch protection/review requirements and verify main CI. Merge, credentials, tags, publication and installation require applicable user authorization; later explicit instructions can authorize them. Cleanup grants no release/install permission.
+Respect branch protection/review requirements and verify main CI. Merge, credentials, tags, publication and installation require applicable user authorization; later explicit instructions can authorize them. Cleanup grants no release/install permission.
 
 After release approval, finish required live acceptance and checks; use an annotated matching stable `vX.Y.Z` tag reachable from `origin/main` on a clean tracked tree. Never move published tags/replace differing assets or expose secrets. CurseForge requires exact Forever **1.60.1/type 88568**. Unresolved upload-pending receipts block retries until dashboard reconciliation. Merge/build does not publish or verify API rights/moderation/public visibility.

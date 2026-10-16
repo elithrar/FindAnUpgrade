@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.0" }; N.Core = C
+local C = { version = "0.1.1" }; N.Core = C
 
 function C:Reset()
     self.questId = nil

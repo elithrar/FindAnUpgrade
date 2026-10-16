@@ -166,19 +166,28 @@ function V:Place()
     local w,h=self.frame:GetWidth()*scale,self.frame:GetHeight()*scale
     local beside=N.Core.profile.inspectionPosition=="tooltip"
     local left=self.anchorX+56
+    local top=beside and self.nativeRect and self.nativeRect.y+self.nativeRect.h or self.anchorY+24
+    local maxBottom=self.screenHeight-h-8
+    local bottom=math.max(8,math.min(maxBottom,top-h))
+    if left+w>self.screenWidth-8 then left=self.anchorX-w-56 end
+    left=math.max(8,math.min(self.screenWidth-w-8,left))
     if self.nativeRect then
         local r=self.nativeRect
         local rightSide,leftSide=r.x+r.w+12,r.x-w-12
         local rightFits,leftFits=rightSide+w<=self.screenWidth-8,leftSide>=8
         if beside then
             if leftFits and not rightFits then left=leftSide else left=rightSide end
-        elseif left<r.x+r.w+12 and left+w>r.x-12 then
-            left=rightFits and rightSide or leftFits and leftSide or left
+        elseif left<r.x+r.w+12 and left+w>r.x-12 and bottom<r.y+r.h+12 and bottom+h>r.y-12 then
+            -- Cursor mode keeps its horizontal anchor when vertical clearance
+            -- is available. Native-tooltip mode owns the side-by-side policy.
+            local below,above=r.y-h-12,r.y+r.h+12
+            local belowFits,aboveFits=below>=8 and below<=maxBottom,above>=8 and above<=maxBottom
+            if belowFits and (not aboveFits or math.abs(below-bottom)<=math.abs(above-bottom)) then bottom=below
+            elseif aboveFits then bottom=above
+            else left=rightFits and rightSide or leftFits and leftSide or left end
         end
-    elseif left+w>self.screenWidth-8 then left=self.anchorX-w-56 end
+    end
     left=math.max(8,math.min(self.screenWidth-w-8,left))
-    local top=beside and self.nativeRect and self.nativeRect.y+self.nativeRect.h or self.anchorY+24
-    local bottom=math.max(8,math.min(self.screenHeight-h-8,top-h))
     self.placement={left=left,bottom=bottom,width=w,height=h}
     self.frame:ClearAllPoints(); self.frame:SetPoint("BOTTOMLEFT",UIParent,"BOTTOMLEFT",left/scale,bottom/scale)
 end

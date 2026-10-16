@@ -43,6 +43,23 @@ test("release removes only owned native text and hands off to compact persistent
     assert(N.Stack.cards[1].icons[1]:GetWidth()==24 and N.Stack.cards[1].icons[1].border.color[2]==1)
     assert(N.Stack.frame:GetHeight()<=60 and N.Stack.placement.left>=N.Stack.anchorX+56)
 end)
+
+test("saved cursor position applies to both immediate and released quest inspectors without moving native UI",function()
+    for _,layout in ipairs({"tooltip","inspector"})do
+        local N=W.Init({saved={inspectionPosition="right",previewLayout=layout}});W.shift=true
+        UIParent.width,UIParent.height=1200,800;W.mouseX,W.mouseY=600,500;C_QuestLog.IsOnQuest=function()return true end
+        local f=W.Object();f.x,f.y,f.width,f.height=590,490,20,20;f.questID=9;f.GetQuestID=function()return 9 end
+        local tip=native(N,f,{"Native NPC","Quest 9"});tip.x,tip.y,tip.width,tip.height=500,450,500,150
+        N.Sources:Pin(f,9)
+        if layout=="tooltip"then assert(N.Hover.mode=="native"and not N.Stack.frame)else assert(N.Hover.mode=="inspector")end
+        W.shift=false;W.Event("MODIFIER_STATE_CHANGED","LSHIFT",0)
+        assert(N.Hover.mode=="inspector"and N.Stack.placement.left==656)
+        assert(N.Model.Load(FindAnUpgradeDB).inspectionPosition=="right")
+        assert(tip.x==500 and tip.y==450 and tip:GetOwner()==f)
+        local before=N.Stack.placement;W.mouseX,W.mouseY=700,300;N.Stack:Refresh()
+        assert(N.Stack.placement.left==before.left and N.Stack.placement.bottom==before.bottom)
+    end
+end)
 test("Escape dismisses native mode and a held key cannot immediately reopen it",function()
     local N,f=open(); N.NativeTooltip.escape:Hide()
     assert(not N.Hover.open); N.Sources:Pin(f,9); assert(not N.Hover.open)

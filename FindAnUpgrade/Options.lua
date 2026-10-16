@@ -239,7 +239,7 @@ function O:Build(owner,f,parent)
         {value="SHIFT",label="Shift"},{value="CTRL",label="Ctrl"},{value="ALT",label="Alt"},{value="NONE",label="None"}
     },function() return owner.profile.modifier end,function(value) owner:Change("modifier",value) end)
     self.hint=self:Label(page,"Release to inspect. Escape closes.",304,-115,260,11,muted)
-    self:Label(page,"Inspection position",304,-147,260,12)
+    self:Label(page,"Quest inspector position",304,-147,260,12)
     self.position=self:Dropdown(page,304,-147-labelGap,260,{
         {value="right",label="Right of cursor"},{value="tooltip",label="Beside game tooltip"}
     },function() return owner.profile.inspectionPosition end,function(value) owner:Change("inspectionPosition",value) end)
