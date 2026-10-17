@@ -191,7 +191,8 @@ function W.Reset(config)
     IsShiftKeyDown=function() return W.shift end; IsControlKeyDown=function() return W.ctrl end; IsAltKeyDown=function() return W.alt end
     UnitGUID=function(unit)
         if unit=='player' then return W.playerGuid end
-        return unit=='npc' and W.npcGuid or W.guid
+        if unit=='npc' then return W.npcGuid end
+        return W.guid
     end
     EventRegistry={callbacks={}}
     function EventRegistry:RegisterCallback(event,fn,owner) self.callbacks[event]={fn=fn,owner=owner} end
@@ -258,6 +259,10 @@ function W.Reset(config)
             f.Left:SetPoint("LEFT",f,"LEFT",-5,0); f.Right:SetPoint("RIGHT",f,"RIGHT",0,0)
             f.Middle:SetPoint("LEFT",f.Left,"RIGHT",0,0); f.Middle:SetPoint("RIGHT",f.Right,"LEFT",0,0)
         end
+        if template=="InputScrollFrameTemplate"then
+            f.EditBox=W.Object();f.EditBox.parent=f;f.EditBox:SetFontObject(GameFontNormal)
+            f.EditBox.Instructions=W.Object();f.CharCount=W.Object()
+        end
         table.insert(W.frames, f); if name then _G[name] = f end; return f
     end
     QuestFrame = W.Object(true); QuestFrame.shown = true
@@ -275,11 +280,12 @@ function W.Reset(config)
         _G[name] = function(...) local results = {original(...)}; fn(...); return unpack(results) end
     end
     FindAnUpgradeCharacterDB = config.characterSaved
+    FindAnUpgradeObservations = config.observations
     FindAnUpgradeDB = config.saved
     QuestBriefDB = config.previous
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
+    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","ObservationData.lua","Recorder.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
     W.N = N
     return N
 end

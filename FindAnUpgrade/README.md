@@ -26,11 +26,19 @@ Use the cog or `/fau opts` for settings. Ctrl and Alt are available as alternati
 
 ## Contributing
 
+To help fill gaps in quest data, open `/fau opts`, scroll to **Contribute quest data**, and enable **Record encountered quests**. Recording is off by default. Pause with the same checkbox or `/fau off`; **Export** opens a manual JSON copy view. Save the text to a `.json` file and review it before sharing. **Clear**, then **Confirm clear**, removes the observations and pauses recording. Resetting appearance settings does not change this separate data store.
+
+The recorder captures quests you encounter through native dialogs and gossip, with build/locale, NPC or item source, observer map position, faction/class/race/level, and player-visible reward slots and quantities. It omits player identity fields, GUIDs, account details, chat and quest prose; your name is redacted if it occurs in a canonical quest title. No data is uploaded automatically. Observations stop at 250 records, 256 KiB of JSON, or 12 variants per quest and stage; export and clear to resume. WoW saves these observations through its normal SavedVariables lifecycle.
+
+Incomplete slots stay unknown. Listed, offered, accepted, completion-dialog and turned-in observations are distinct; offered choices do not identify the selected reward. Observer positions are not NPC spawn coordinates, and observer context does not establish availability for every character. Player-visible rewards may differ from published base rewards; other reward types remain unknown. Submissions require independent review before any catalog change.
+
 Open an issue before submitting a PR. Unsolicited PRs may be closed.
 
 ## Development
 
 Run `uv run --locked python -m fau_tools check` from the repository root for lint, formatting, tests and ZIPs in `dist/`.
+
+Use `uv run --locked python -m fau_tools observations submission.json` to validate a manual export and print a read-only comparison with the bundled catalog. This accepts bounded JSON only, rejects unknown fields, and never executes SavedVariables Lua or updates catalog files. Treat the comparison as leads for source review, not proof of a current-build database change.
 
 See [AGENTS.md](https://github.com/elithrar/FindAnUpgrade/blob/main/AGENTS.md) for setup, catalog imports and contributor guidance.
 

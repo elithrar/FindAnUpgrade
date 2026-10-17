@@ -231,6 +231,7 @@ test("single options grid keeps native controls and headings within their sectio
             {3,{O.checks.accents,O.checks.dialogTint,O.checks.rewards,O.layout,O.sliders.strength,O.edits.strength}},
             {4,{O.checks.npc,O.checks.worldmap,O.checks.minimap,O.checks.launcher}},
             {5,{O.checks.hideUnusable,O.checks.includeDungeons,O.edits.levelsBelow,O.edits.levelsAbove}},
+            {6,{O.record,O.recordStatus,O.export,O.clear}},
         }
         for _,group in ipairs(groups) do
             local sx,sy,sw,sh=rect(O.sections[group[1]])
@@ -243,7 +244,7 @@ test("single options grid keeps native controls and headings within their sectio
         local rx,ry,rw,rh=rect(O.reset);local bx,by,bw,bh=rect(O.bar)
         assert(x>=fx and x+w<=fx+fw and y>=fy and y+h<=fy+fh)
         assert(ry+rh<y and by>=y and by+bh<=y+h and bx>x+w)
-        assert(O.maximum==math.max(0,600-O.scroll:GetHeight()) and O.frame:GetScale()==1)
+        assert(O.maximum==math.max(0,O.body:GetHeight()-O.scroll:GetHeight()) and O.frame:GetScale()==1)
     end
 end)
 

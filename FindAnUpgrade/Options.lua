@@ -2,7 +2,7 @@ local _, N = ...
 local O = {}; N.Options = O
 local U, M = N.UI, N.Model
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
-local panelWidth,panelHeight,bodyWidth,bodyHeight=620,690,572,600
+local panelWidth,panelHeight,bodyWidth,bodyHeight=620,690,572,710
 local rowStep,sectionGap,labelGap=28,24,20
 local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 
@@ -253,12 +253,30 @@ function O:Build(owner,f,parent)
     self:SearchNumber(page,"levelsAbove","Levels above",304,searchY-25-rowStep*3)
     self:Label(page,"Applies next time search opens.",304,searchY-145,260,11,muted)
     self:Label(page,"Starts in the current zone.",304,searchY-165,260,11,muted)
+    local contributeY=secondaryY-248-sectionGap
+    self:Section(page,"Contribute quest data",0,contributeY,280,174)
+    local record=self:Frame("CheckButton",page,"UICheckButtonTemplate");self.record=record;record.recorder=true
+    record:SetPoint("TOPLEFT",8,contributeY-25);record:SetSize(24,24)
+    self.texts[#self.texts+1]={object=record.Text,size=12};U:Font(record.Text,12)
+    record.Text:SetText("Record encountered quests");record.Text:SetTextColor(unpack(ink))
+    bounded(record.Text,240,24);record:SetHitRectInsets(0,-240,0,0)
+    record:SetScript("OnClick",function() self.confirmClear=nil;N.Recorder:Enable(record:GetChecked()==true);self:RefreshRecorder() end)
+    self.controls[#self.controls+1]=record
+    self:Label(page,"No names or automatic uploads.",12,contributeY-57,260,11,muted)
+    self:Label(page,"Review exports before sharing.",12,contributeY-77,260,11,muted)
+    self.recordStatus=self:Label(page,"",12,contributeY-103,260,11,muted)
+    self.export=self:Button(page,"Export",12,contributeY-135,110,function() self:ExportObservations() end);self.export.recorder=true
+    self.clear=self:Button(page,"Clear",142,contributeY-135,126,function()
+        if self.confirmClear then N.Recorder:Clear();self.confirmClear=nil else self.confirmClear=true end
+        self:RefreshRecorder()
+    end);self.clear.recorder=true
     self.reset=self:Button(parent,"Reset",0,0,86,function() owner:Defaults() end)
     self.reset:ClearAllPoints();self.reset:SetPoint("BOTTOMLEFT",20,16)
     self.status=self:Label(parent,"",0,0,484,11,muted)
     self.status:ClearAllPoints();self.status:SetPoint("BOTTOMLEFT",116,16)
     f:SetScript("OnShow",function() self:Refresh() end)
     f:SetScript("OnHide",function()
+        self.confirmClear=nil;self:CloseExport()
         self:CloseMenu(); for _,e in pairs(self.edits) do e:ClearFocus() end; f:StopMovingOrSizing();f:SetScript("OnUpdate",nil);self.menuWaiting=nil
     end)
     f:RegisterEvent("UI_SCALE_CHANGED"); f:RegisterEvent("DISPLAY_SIZE_CHANGED"); f:SetScript("OnEvent",function() self:Refresh() end)
@@ -334,10 +352,46 @@ function O:Refresh()
     for key,b in pairs(self.checks) do b.Text:SetText(b.caption); b:SetChecked(b.searchDefault and p.searchDefaults[key] or not b.searchDefault and p[key]) end
     for key,b in pairs(self.sliders) do b:SetValue(p[key]*100); b.edit:SetText(tostring(math.floor(p[key]*100+.5))) end
     for key,e in pairs(self.edits) do if e.searchDefault then e:SetText(tostring(p.searchDefaults[key])) end end
-    for _,b in ipairs(self.controls) do if self.owner.readOnly and not b.navigation then b:Disable() else b:Enable() end end
+    for _,b in ipairs(self.controls) do if self.owner.readOnly and not b.navigation and not b.recorder then b:Disable() else b:Enable() end end
     self.status:SetText(self.owner.readOnly and "Newer settings are read-only." or not self.owner.supported and "Unsupported client." or "")
     self.hint:SetText(p.modifier~="NONE" and p.previewLayout=="tooltip" and "Release to inspect. Escape closes." or "Escape closes the preview.")
     self:RefreshFonts(); self:SyncMenus(); self.refreshing=false
+    self:RefreshRecorder()
+    if self.exportMode then self.scroll:Hide();self.bar:Hide();self.reset:Hide();self.status:Hide() end
+end
+function O:RefreshRecorder()
+    if not self.record then return end
+    local R,D=N.Recorder,N.ObservationData
+    self.record:SetChecked(R.active==true);self.recordStatus:SetText(R:Status())
+    self.clear.text:SetText(self.confirmClear and "Confirm clear" or "Clear")
+    if D.readOnly or D.full or not R.client or not self.owner.supported or not self.owner.profile.enabled then self.record:Disable() else self.record:Enable() end
+    for _,button in ipairs({self.export,self.clear}) do if D.readOnly then button:Disable() else button:Enable() end end
+end
+function O:CloseExport()
+    if not self.exportMode then return end
+    self.exportMode=nil;self.exportEditor.EditBox:ClearFocus();self.exportEditor.EditBox:SetText("");self.exportPanel:Hide()
+    self.scroll:Show();self.reset:Show();self.status:Show();self.bar:SetShown((self.maximum or 0)>0)
+end
+function O:ExportObservations()
+    local value=N.ObservationData:Export();if not value then return end
+    self.confirmClear=nil;self:CloseMenu()
+    for _,e in pairs(self.edits) do e:ClearFocus() end
+    if not self.exportPanel then
+        local panel=CreateFrame("Frame",nil,self.content);self.exportPanel=panel
+        panel:SetPoint("TOPLEFT",16,-46);panel:SetPoint("BOTTOMRIGHT",-16,46)
+        -- This native template owns multiline caret scrolling and its scrollbar.
+        local editor=CreateFrame("ScrollFrame",nil,panel,"InputScrollFrameTemplate");self.exportEditor=editor
+        editor:SetPoint("TOPLEFT",8,-40);editor:SetPoint("BOTTOMRIGHT",-24,8);editor:SetSize(bodyWidth-40,400)
+        editor.EditBox:SetWidth(bodyWidth-58);editor.EditBox:SetMaxLetters(N.ObservationData.byteLimit)
+        editor.CharCount:Hide();editor.EditBox.Instructions:Hide();U:Font(editor.EditBox,12)
+        editor.EditBox:SetScript("OnEscapePressed",function() self:CloseExport() end)
+        local back=CreateFrame("Button",nil,panel,"UIPanelButtonTemplate");back:SetPoint("TOPLEFT",0,0);back:SetSize(76,22);back:SetText("Back")
+        back:SetScript("OnClick",function() self:CloseExport() end)
+        local hint=panel:CreateFontString(nil,"OVERLAY","GameFontNormal");U:Font(hint,12)
+        hint:SetPoint("TOPLEFT",90,-4);hint:SetText("Ctrl+C to copy. Save as a JSON file for review.")
+    end
+    self.exportMode=true;self.scroll:Hide();self.bar:Hide();self.reset:Hide();self.status:Hide();self.exportPanel:Show()
+    self.exportEditor.EditBox:SetText(value);self.exportEditor.EditBox:SetFocus();self.exportEditor.EditBox:HighlightText()
 end
 function O:Toggle(owner)
     if N.Copy then N.Copy:Hide() end

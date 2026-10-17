@@ -19,6 +19,8 @@ SHIPPED = {
     "SearchViews.lua",
     "Data/Quests.lua",
     "Adapter.lua",
+    "ObservationData.lua",
+    "Recorder.lua",
     "UI.lua",
     "Options.lua",
     "Core.lua",
@@ -49,6 +51,8 @@ RUNTIME = [
     "Data/Quests.lua",
     "Data/Catalog.lua",
     "Adapter.lua",
+    "ObservationData.lua",
+    "Recorder.lua",
     "Character.lua",
     "UI.lua",
     "Copy.lua",
@@ -95,7 +99,7 @@ def validate(root=ROOT):
     ):
         raise ValueError("Wrong or duplicate supported interface")
     if metadata.get("savedvariables") != [
-        "FindAnUpgradeDB, QuestBriefDB"
+        "FindAnUpgradeDB, QuestBriefDB, FindAnUpgradeObservations"
     ] or metadata.get("savedvariablespercharacter") != ["FindAnUpgradeCharacterDB"]:
         raise ValueError("SavedVariables ownership changed")
     entries = [line for line in toc.splitlines() if line and not line.startswith("#")]
