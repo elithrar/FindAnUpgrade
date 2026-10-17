@@ -26,9 +26,11 @@ env:
 
 jobs:
   validate:
-    if: github.repository == 'elithrar/FindAnUpgrade'
+    if: github.repository == 'elithrar/FindAnUpgrade' && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/release-venv
     outputs:
       commit: ${{ steps.metadata.outputs.commit }}
     steps:
@@ -40,12 +42,6 @@ jobs:
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
           enable-cache: false
-      - name: Check out release tooling from this workflow revision
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ github.workflow_sha }}
-          path: .work/release-tools
-          persist-credentials: false
       - name: Check out pinned Forever API contracts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -74,16 +70,29 @@ jobs:
             /Interface/AddOns/Blizzard_Menu/DropdownButton.lua
             /Interface/AddOns/Blizzard_GameTooltip/Mainline/GameTooltip.xml
             /Interface/AddOns/Blizzard_SharedXMLGame/Tooltip/TooltipUtil.lua
-      - name: Sync locked tooling dependencies
+      - name: Sync locked payload dependencies
+        env:
+          UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv
         run: uv sync --locked
       - name: Test and package exact payload
+        env:
+          UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv
         run: uv run --locked python -m fau_tools check
+      - name: Check out release tooling from this workflow revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: .work/release-tools
+          persist-credentials: false
+      - name: Sync locked release tooling dependencies
+        working-directory: .work/release-tools
+        run: uv sync --locked
       - name: Verify annotated tag, main ancestry, version and exact build
         id: metadata
         working-directory: .work/release-tools
         env:
           GH_TOKEN: ${{ github.token }}
-        run: uv run --locked python -m fau_tools release --root "$GITHUB_WORKSPACE"
+        run: uv run --locked --no-sync python -m fau_tools release --root "$GITHUB_WORKSPACE"
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: release-package
@@ -101,6 +110,8 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
+    env:
+      UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/release-venv
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -116,7 +127,8 @@ jobs:
           ref: ${{ github.workflow_sha }}
           path: .work/release-tools
           persist-credentials: false
-      - name: Sync locked tooling dependencies
+      - name: Sync locked release tooling dependencies
+        working-directory: .work/release-tools
         run: uv sync --locked
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -127,13 +139,13 @@ jobs:
         working-directory: .work/release-tools
         env:
           GH_TOKEN: ${{ github.token }}
-        run: uv run --locked python -m fau_tools release --verify --root "$GITHUB_WORKSPACE"
+        run: uv run --locked --no-sync python -m fau_tools release --verify --root "$GITHUB_WORKSPACE"
       - name: Prepare and confirm exact GitHub draft assets
         working-directory: .work/release-tools
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: uv run --locked python -m fau_tools publish-github --root "$GITHUB_WORKSPACE"
+        run: uv run --locked --no-sync python -m fau_tools publish-github --root "$GITHUB_WORKSPACE"
       - name: Upload exact Forever package when CurseForge is configured
         working-directory: .work/release-tools
         env:
@@ -141,11 +153,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: uv run --locked python -m fau_tools publish-curseforge --root "$GITHUB_WORKSPACE"
+        run: uv run --locked --no-sync python -m fau_tools publish-curseforge --root "$GITHUB_WORKSPACE"
       - name: Publish completed GitHub release
         working-directory: .work/release-tools
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
-        run: uv run --locked python -m fau_tools publish-github --finalize --root "$GITHUB_WORKSPACE"
+        run: uv run --locked --no-sync python -m fau_tools publish-github --finalize --root "$GITHUB_WORKSPACE"

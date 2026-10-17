@@ -62,6 +62,8 @@ Every change set entering `main` (a merged PR or direct commit) must have a matc
 
 Keep the current CHANGELOG version first; retained historical versions must be unique and strictly descending. Only the current section is published, while the full tracked file remains hash-bound. Normal CI must validate the actual checked-in changelog, not only normalized test fixtures. To recover an unchanged older tag after a tooling fix, dispatch the release workflow from reviewed `main` with that tag as input. Release tooling is pinned to the workflow commit and receives the separate tagged payload via `--root`; every existing source, archive, tag, ancestry and upload check still applies. Never dispatch unreviewed recovery tooling or edit a tagged payload to pass a check.
 
+The workflow restricts manual dispatches to `main`, checks out tooling after payload tests, and syncs its separate environment before credential-bearing steps. Release and publishing commands must use `--no-sync`.
+
 Pushing a `v*` tag starts [the release workflow](.github/workflows/release.yml), which can publish GitHub and CurseForge releases; dispatching it also publishes or resumes an existing tag. Obtain applicable merge, tag and release authorization before proceeding with this sequence. If authorization is missing, keep the change pending and report the blocker rather than silently leaving main unversioned or treating a tag as bookkeeping. A version/tag does not authorize installation.
 
 ## Authorization

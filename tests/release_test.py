@@ -927,6 +927,46 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("ref: ${{ needs.validate.outputs.commit }}", publish)
         self.assertNotIn("python -m fau_tools check --root", workflow)
 
+    def test_recovery_dispatch_and_credentials_use_reviewed_presynced_tools(self):
+        workflow = (ROOT / ".github/workflows/release.yml").read_text()
+        self.assertIn(
+            "(github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')",
+            workflow,
+        )
+        validation, publish = workflow.split("  publish:\n", 1)
+        for job in (validation, publish):
+            header, *steps = release.re.split(r"(?m)^      - ", job)
+            self.assertIn(
+                "UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/release-venv",
+                header,
+            )
+            sync = next(
+                index
+                for index, step in enumerate(steps)
+                if "name: Sync locked release tooling dependencies" in step
+            )
+            self.assertIn("working-directory: .work/release-tools", steps[sync])
+            self.assertIn("run: uv sync --locked", steps[sync])
+            self.assertNotIn("GH_TOKEN:", steps[sync])
+            self.assertNotIn("secrets.", steps[sync])
+            for index, step in enumerate(steps):
+                if "GH_TOKEN:" in step or "secrets." in step:
+                    self.assertGreater(index, sync)
+                    self.assertIn("uv run --locked --no-sync python -m fau_tools", step)
+                    self.assertNotIn("UV_PROJECT_ENVIRONMENT:", step)
+        self.assertLess(
+            validation.index("python -m fau_tools check"),
+            validation.index("name: Check out release tooling"),
+        )
+        for step in release.re.split(r"(?m)^      - ", validation)[1:]:
+            if (
+                "name: Sync locked payload dependencies" in step
+                or "name: Test and package" in step
+            ):
+                self.assertIn(
+                    "UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv", step
+                )
+
     def test_renamed_repository_and_supplied_secret_are_the_release_contract(self):
         with patch.dict(os.environ, {"GH_REPO": "elithrar/FindAnUpgrade"}):
             github.require_repository()
