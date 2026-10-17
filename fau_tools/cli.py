@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from pathlib import Path
 
 PROG = "python -m fau_tools"
 
@@ -64,9 +65,16 @@ def command_parser():
                 leaf = modes.add_parser(mode, add_help=False)
                 leaf.set_defaults(command_parser=leaf)
         elif name == "release":
-            command.add_argument("--verify", action="store_true")
+            command.add_argument("--verify", action="count", default=0)
         elif name == "publish-github":
-            command.add_argument("--finalize", action="store_true")
+            command.add_argument("--finalize", action="count", default=0)
+        if name in {"release", "publish-github", "publish-curseforge"}:
+            command.add_argument(
+                "--root",
+                type=Path,
+                action="append",
+                help="Tagged payload checkout (defaults to this checkout)",
+            )
     return parser
 
 
@@ -85,6 +93,15 @@ def main(argv=None):
         and arguments
     ):
         detail.error("unrecognized arguments: " + " ".join(arguments))
+    release_options = {}
+    if command in {"release", "publish-github", "publish-curseforge"}:
+        roots = selected.root or []
+        if len(roots) > 1:
+            detail.error("supply --root only once")
+        if roots:
+            release_options["root"] = roots[0].resolve()
+        if getattr(selected, "verify", 0) > 1 or getattr(selected, "finalize", 0) > 1:
+            detail.error("supply each release flag only once")
     match command:
         case "check":
             from fau_tools import verify
@@ -155,17 +172,15 @@ def main(argv=None):
         case "release":
             from fau_tools import release
 
-            release.main(argv[1:])
+            release.main(["--verify"] if selected.verify else [], **release_options)
         case "publish-github":
             from fau_tools import publishing
 
-            if argv[1:] == ["--finalize"]:
-                publishing.finalize()
-            elif len(argv) == 1:
-                publishing.prepare()
+            if selected.finalize:
+                publishing.finalize(**release_options)
             else:
-                detail.error("publish-github accepts only --finalize")
+                publishing.prepare(**release_options)
         case "publish-curseforge":
             from fau_tools import publishing
 
-            publishing.upload()
+            publishing.upload(**release_options)

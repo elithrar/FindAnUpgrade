@@ -214,6 +214,7 @@ def verify_artifacts(root=ROOT):
         or data.get("notes_sha256") != sha(notes)
     ):
         raise ValueError("Version-specific release notes missing or changed")
+    release_notes_body(data, root)
     return data
 
 
@@ -223,10 +224,19 @@ def release_notes(data, root=ROOT):
     if not path.is_file():
         raise ValueError("Version-specific release notes missing")
     text = path.read_text(encoding="utf-8")
-    versions = re.findall(r"^## ([0-9]+\.[0-9]+\.[0-9]+)\s*$", text, re.M)
-    if versions != [data["version"]]:
+    versions = re.findall(r"^## (.+?)[ \t]*$", text, re.M)
+    if (
+        not versions
+        or versions[0] != data["version"]
+        or any(not re.fullmatch(VERSION, version) for version in versions)
+        or len(set(versions)) != len(versions)
+        or any(
+            tuple(map(int, newer.split("."))) <= tuple(map(int, older.split(".")))
+            for newer, older in zip(versions, versions[1:])
+        )
+    ):
         raise ValueError(
-            "CHANGELOG must contain only the exact current release version"
+            "CHANGELOG must start with the exact current release version and unique older versions in descending order"
         )
     return path
 
@@ -240,7 +250,9 @@ def release_notes_body(data, root=ROOT):
     heading = re.search(r"^## " + re.escape(data["version"]) + r"[ \t]*$", text, re.M)
     if heading is None:
         raise ValueError("Release notes version heading changed")
-    body = text[heading.end() :].strip()
+    following = re.search(r"^## " + VERSION + r"[ \t]*$", text[heading.end() :], re.M)
+    end = heading.end() + following.start() if following else len(text)
+    body = text[heading.end() : end].strip()
     if not body or re.search(r"^\s*#{1,6}(?:\s|$)", body, re.M):
         raise ValueError("Release notes body must contain text without headings")
     return body
@@ -286,17 +298,17 @@ def verify_remote(data, root=ROOT):
     check_source_tree(data["commit"], root)
 
 
-def main(argv=None):
+def main(argv=None, root=ROOT):
     argv = sys.argv[1:] if argv is None else argv
     if argv not in ([], ["--verify"]):
         raise SystemExit("release accepts only --verify")
     if argv == ["--verify"]:
-        data = verify_artifacts()
-        verify_remote(data)
+        data = verify_artifacts(root)
+        verify_remote(data, root)
     else:
         tag = os.environ.get("RELEASE_TAG", "")
-        refresh_refs(tag)
-        data = prepare(tag)
+        refresh_refs(tag, root)
+        data = prepare(tag, root)
     if os.environ.get("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
             output.write("commit=" + data["commit"] + "\n")

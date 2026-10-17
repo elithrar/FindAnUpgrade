@@ -60,6 +60,15 @@ def artifact_fixture(destination, source=ROOT):
 
 
 class MetadataTests(unittest.TestCase):
+    def test_checked_in_release_notes_match_the_actual_manifest(self):
+        toc = (ROOT / "FindAnUpgrade/FindAnUpgrade.toc").read_text(encoding="utf-8")
+        version = release.re.search(r"^## Version: (.+)$", toc, release.re.M)[1]
+        data = release.metadata("v" + version, toc)
+        data["notes_sha256"] = release.sha(ROOT / "CHANGELOG.md")
+        body = release.release_notes_body(data, ROOT)
+        self.assertTrue(body.strip())
+        self.assertNotIn("## ", body)
+
     def test_public_notes_extract_only_exact_paragraphs_and_bind_source_hash(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
             root = Path(directory)
@@ -81,22 +90,122 @@ class MetadataTests(unittest.TestCase):
             for body in ("", "# More notes", "Paragraph\n\n## Details\n\nMore text"):
                 path.write_bytes(("# Changelog\n\n## 0.1.0\n\n" + body).encode("utf-8"))
                 data = {"version": "0.1.0", "notes_sha256": release.sha(path)}
-                with self.assertRaisesRegex(ValueError, "text without headings"):
+                with self.assertRaises(ValueError):
                     release.release_notes_body(data, root)
 
-    def test_changelog_requires_one_exact_version_heading(self):
+    def test_changelog_requires_exact_current_then_unique_descending_history(self):
         with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
             root = Path(directory)
             data = {"version": "0.1.0"}
             with self.assertRaisesRegex(ValueError, "notes missing"):
                 release.release_notes(data, root)
             path = root / "CHANGELOG.md"
-            for content in ["No version", "## 0.2.0", "## 0.1.0\n## 0.2.0"]:
+            for content in [
+                "No version",
+                "## 0.2.0",
+                "## 0.1.0\n## 0.2.0",
+                "## 0.1.0\n## 0.1.0",
+                "## 0.1.0\n## 0.0.8\n## 0.0.9",
+                "## 0.1.0\n## 0.0.09",
+                "## 0.2.0-rc\n## 0.1.0",
+            ]:
                 path.write_text(content)
                 with self.assertRaisesRegex(ValueError, "exact current release"):
                     release.release_notes(data, root)
             path.write_text("# Changelog\n\n## 0.1.0\n\nCurrent notes\n")
             self.assertEqual(release.release_notes(data, root), path)
+
+    def test_current_public_notes_exclude_history_and_bind_even_historical_bytes(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            path = root / "CHANGELOG.md"
+            source = (
+                "# Changelog\n\n## 0.1.0\n\n"
+                + PUBLIC_NOTES
+                + "\n\n## 0.0.9\n\nOlder release text.\n"
+            )
+            for newline in ("\n", "\r\n"):
+                path.write_bytes(source.replace("\n", newline).encode("utf-8"))
+                data = {"version": "0.1.0", "notes_sha256": release.sha(path)}
+                self.assertEqual(release.release_notes_body(data, root), PUBLIC_NOTES)
+            path.write_bytes(
+                source.replace(
+                    "Older release text.", "Changed historical text."
+                ).encode("utf-8")
+            )
+            with self.assertRaisesRegex(ValueError, "source changed"):
+                release.release_notes_body(data, root)
+
+    def test_release_commands_route_only_the_explicit_payload_root(self):
+        from fau_tools import cli
+
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory).resolve()
+            with patch.object(release, "main") as run:
+                cli.main(["release", "--verify", "--root", str(root)])
+            run.assert_called_once_with(["--verify"], root=root)
+            for arguments, method in (([], "prepare"), (["--finalize"], "finalize")):
+                with patch.object(github, method) as run:
+                    cli.main(["publish-github", *arguments, "--root", str(root)])
+                run.assert_called_once_with(root=root)
+            with patch.object(cf, "upload") as run:
+                cli.main(["publish-curseforge", "--root", str(root)])
+            run.assert_called_once_with(root=root)
+
+    def test_explicit_root_verification_never_uses_the_tooling_checkout(self):
+        with tempfile.TemporaryDirectory(dir=ROOT / ".work") as directory:
+            root = Path(directory)
+            data = {"tag": "v0.1.0", "commit": "a" * 40}
+            with (
+                patch.dict(os.environ, {"GITHUB_OUTPUT": str(root / "verify-output")}),
+                patch.object(release, "verify_artifacts", return_value=data) as verify,
+                patch.object(release, "verify_remote") as remote,
+            ):
+                release.main(["--verify"], root=root)
+            verify.assert_called_once_with(root)
+            remote.assert_called_once_with(data, root)
+            with (
+                patch.dict(
+                    os.environ,
+                    {
+                        "RELEASE_TAG": "v0.1.0",
+                        "GITHUB_OUTPUT": str(root / "prepare-output"),
+                    },
+                ),
+                patch.object(release, "prepare", return_value=data) as prepare,
+                patch.object(release, "refresh_refs") as refresh,
+            ):
+                release.main([], root=root)
+            prepare.assert_called_once_with("v0.1.0", root)
+            refresh.assert_called_once_with("v0.1.0", root)
+            self.assertEqual(
+                (root / "prepare-output").read_text(), "commit=" + data["commit"] + "\n"
+            )
+
+    def test_duplicate_release_roots_and_flags_reject_before_side_effects(self):
+        from contextlib import redirect_stderr
+        from io import StringIO
+
+        from fau_tools import cli
+
+        for arguments in (
+            ["release", "--verify", "--verify"],
+            ["release", "--root", "one", "--root", "two"],
+            ["publish-github", "--root", "one", "--root", "two"],
+            ["publish-curseforge", "--root", "one", "--root", "two"],
+        ):
+            with (
+                self.subTest(arguments=arguments),
+                patch.object(release, "main") as run,
+                patch.object(github, "prepare") as prepare,
+                patch.object(github, "finalize") as finalize,
+                patch.object(cf, "upload") as upload,
+                redirect_stderr(StringIO()),
+                self.assertRaises(SystemExit),
+            ):
+                cli.main(arguments)
+            for operation in (run, prepare, finalize, upload):
+                operation.assert_not_called()
 
     def toc(self, version="0.1.0"):
         return f"## Interface: 16001\n## Version: {version}\n"
@@ -795,6 +904,69 @@ class PublishTests(unittest.TestCase):
 
 
 class WorkflowTests(unittest.TestCase):
+    def test_recovery_tools_are_pinned_separately_from_the_unchanged_tagged_payload(
+        self,
+    ):
+        workflow = (ROOT / ".github/workflows/release.yml").read_text()
+        validation, publish = workflow.split("  publish:\n", 1)
+        for job, command_count in ((validation, 1), (publish, 4)):
+            steps = release.re.split(r"(?m)^      - ", job)[1:]
+            tools = [step for step in steps if "path: .work/release-tools" in step]
+            self.assertEqual(len(tools), 1)
+            self.assertIn("ref: ${{ github.workflow_sha }}", tools[0])
+            commands = [
+                step
+                for step in steps
+                if release.re.search(r"python -m fau_tools (?:release|publish-)", step)
+            ]
+            self.assertEqual(len(commands), command_count)
+            for step in commands:
+                self.assertIn("working-directory: .work/release-tools", step)
+                self.assertIn('--root "$GITHUB_WORKSPACE"', step)
+        self.assertIn("ref: ${{ inputs.tag || github.ref }}", validation)
+        self.assertIn("ref: ${{ needs.validate.outputs.commit }}", publish)
+        self.assertNotIn("python -m fau_tools check --root", workflow)
+
+    def test_recovery_dispatch_and_credentials_use_reviewed_presynced_tools(self):
+        workflow = (ROOT / ".github/workflows/release.yml").read_text()
+        self.assertIn(
+            "(github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')",
+            workflow,
+        )
+        validation, publish = workflow.split("  publish:\n", 1)
+        for job in (validation, publish):
+            header, *steps = release.re.split(r"(?m)^      - ", job)
+            self.assertIn(
+                "UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/release-venv",
+                header,
+            )
+            sync = next(
+                index
+                for index, step in enumerate(steps)
+                if "name: Sync locked release tooling dependencies" in step
+            )
+            self.assertIn("working-directory: .work/release-tools", steps[sync])
+            self.assertIn("run: uv sync --locked", steps[sync])
+            self.assertNotIn("GH_TOKEN:", steps[sync])
+            self.assertNotIn("secrets.", steps[sync])
+            for index, step in enumerate(steps):
+                if "GH_TOKEN:" in step or "secrets." in step:
+                    self.assertGreater(index, sync)
+                    self.assertIn("uv run --locked --no-sync python -m fau_tools", step)
+                    self.assertNotIn("UV_PROJECT_ENVIRONMENT:", step)
+        self.assertLess(
+            validation.index("python -m fau_tools check"),
+            validation.index("name: Check out release tooling"),
+        )
+        for step in release.re.split(r"(?m)^      - ", validation)[1:]:
+            if (
+                "name: Sync locked payload dependencies" in step
+                or "name: Test and package" in step
+            ):
+                self.assertIn(
+                    "UV_PROJECT_ENVIRONMENT: ${{ github.workspace }}/.work/venv", step
+                )
+
     def test_renamed_repository_and_supplied_secret_are_the_release_contract(self):
         with patch.dict(os.environ, {"GH_REPO": "elithrar/FindAnUpgrade"}):
             github.require_repository()
