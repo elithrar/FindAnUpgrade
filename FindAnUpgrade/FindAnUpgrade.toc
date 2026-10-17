@@ -2,7 +2,7 @@
 ## Title: FindAnUpgrade
 ## Notes: Compact quest previews and subtle Forever quest classification cues.
 ## Author: Matt
-## Version: 0.1.2
+## Version: 0.1.3
 ## SavedVariables: FindAnUpgradeDB, QuestBriefDB, FindAnUpgradeObservations
 ## SavedVariablesPerCharacter: FindAnUpgradeCharacterDB
 ## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB

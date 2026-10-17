@@ -86,7 +86,9 @@ end
 function Methods:SetFontObject(font) self.fontObject = font; self.font=nil end
 function Methods:SetText(t)
     if self.isFontString and not self:GetFont() then error("FontString:SetText(): Font not set",2) end
+    local changed=self.text~=t
     self.text = t
+    if changed and self.kind=="EditBox" then self:Fire("OnTextChanged",false) end
 end
 function Methods:GetText() return self.text or "" end
 function Methods:GetCenter() return self.x or 200,self.y or 200 end
@@ -118,6 +120,7 @@ end
 function Methods:CloseMenu() self.menuOpen=false; self.menuClosures=(self.menuClosures or 0)+1 end
 function Methods:SetFocus() self.focused=true end
 function Methods:ClearFocus() self.focused=false end
+function Methods:SetAutoFocus(value) self.autoFocus=value end
 function Methods:Disable() self.disabled=true end
 function Methods:Enable() self.disabled=false end
 function Methods:SetJustifyH(value) self.justifyH=value end
@@ -153,7 +156,7 @@ function Methods:SetBlendMode(value)self.blendMode=value end
 function Methods:SetResizeBounds(...)self.resizeBounds={...}end
 function Methods:SetHitRectInsets(...)self.hitInsets={...}end
 function Methods:SetTextInsets(...)self.textInsets={...}end
-for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetAutoFocus","SetNumeric","SetMaxLetters","HighlightText","SetTexCoord","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
+for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetNumeric","SetMaxLetters","HighlightText","SetTexCoord","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
 -- Resolve declared anchors for layout assertions. Existing pointer fixtures
 -- keep explicit rects; native pixel rounding and font metrics remain unmodeled.
 local fractions={TOPLEFT={0,1},TOP={.5,1},TOPRIGHT={1,1},LEFT={0,.5},CENTER={.5,.5},RIGHT={1,.5},BOTTOMLEFT={0,0},BOTTOM={.5,0},BOTTOMRIGHT={1,0}}
@@ -240,7 +243,7 @@ function W.Reset(config)
     QuestTextContrast = {IsEnabled = function() return W.contrast end, GetDefaultBackgroundAtlas = function() return "QuestBG-Parchment" end}
     DEFAULT_CHAT_FRAME = {AddMessage = function(_, text) table.insert(W.messages, text) end}
     CreateFrame = function(kind,name,parent,template)
-        local f = W.Object(); f.name = name; f.parent = parent; f.template = template
+        local f = W.Object(); f.kind=kind; f.name = name; f.parent = parent; f.template = template
         if template == "SharedTooltipTemplate" then f.shown = false end
         if template == "TooltipBorderedFrameTemplate" then
             f.NineSlice=W.Object(); f.nativeTooltipArt=true

@@ -327,12 +327,15 @@ function S:Create()
     self.placeholder=text(self.search,11,{.7,.7,.72}); self.placeholder:SetPoint("LEFT",8,0); self.placeholder:SetText("Quest or reward")
     local clear=CreateFrame("Button",nil,self.search); self.clearSearch=clear
     clear:SetSize(24,24); clear:SetPoint("RIGHT",self.search,"RIGHT",-3,0)
-    clear.text=text(clear,16,{.7,.7,.72,.65}); clear.text:SetAllPoints(); clear.text:SetJustifyH("CENTER"); clear.text:SetJustifyV("MIDDLE"); clear.text:SetText("\195\151"); clear:Hide()
-    clear:SetScript("OnEnter",function() clear.text:SetTextColor(.95,.95,.97,1) end)
-    clear:SetScript("OnLeave",function() clear.text:SetTextColor(.7,.7,.72,.65) end)
+    -- Blizzard's SearchBoxTemplate art avoids depending on the selected font's glyphs.
+    clear.icon=clear:CreateTexture(nil,"ARTWORK"); clear.icon:SetAtlas("common-search-clearbutton")
+    clear.icon:SetSize(12,12); clear.icon:SetPoint("CENTER"); clear.icon:SetVertexColor(1,1,1,.55); clear:Hide()
+    clear:SetScript("OnEnter",function() clear.icon:SetVertexColor(1,1,1,1) end)
+    local function dimClear() clear.icon:SetVertexColor(1,1,1,.55) end
+    clear:SetScript("OnLeave",dimClear); clear:SetScript("OnHide",dimClear)
     clear:SetScript("OnClick",function()
         if self.search:GetText()=="" then return end
-        self.search:SetText(""); clear:Hide(); self.placeholder:Show(); if self.view=="quests" then self.filter.query="" end; self.search:SetFocus(); self:Changed(true)
+        self.search:SetText(""); clear:Hide(); self.placeholder:Show(); if self.view=="quests" then self.filter.query="" end; self.search:ClearFocus(); self:Changed(true)
     end)
     self.search:SetScript("OnTextChanged",function(e,user)
         local empty=e:GetText()==""; self.placeholder:SetShown(empty); clear:SetShown(not empty)
@@ -488,7 +491,8 @@ function S:Toggle()
     self.dataDeadline=(A.Call(GetTime) or 0)+5
     self.usable:SetChecked(self.filter.usable);self.dungeons:SetChecked(self.filter.includeDungeons);N.Catalog:Begin()
     self.contextLevel,self.contextMap=snapshot.level,snapshot.mapID;self.contextDirty=nil
-    self:Fit(); self.appearanceDirty=nil; self.frame:Show(); self.search:SetFocus(); self:Changed(true)
+    -- Opening leaves movement keys available; clicking the edit box still focuses it.
+    self:Fit(); self.appearanceDirty=nil; self.frame:Show(); self.search:ClearFocus(); self:Changed(true)
     self:Wake()
 end
 function S:Tick()

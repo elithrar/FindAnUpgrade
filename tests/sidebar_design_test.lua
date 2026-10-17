@@ -247,9 +247,10 @@ test("owned native input and dropdown art share the declared control bounds",fun
     assert(math.abs(maximum.right-rect(S.slot).right)<.01)
 end)
 
-test("query clear is content-only exact UTF8 with a roomy inset click target and one invalidation",function()
+test("query clear uses subtle native art with a roomy inset target and one invalidation",function()
     local _,S=open();local clear=S.clearSearch
-    assert(clear.text:GetText()==string.char(195,151) and not clear:IsShown() and S.placeholder:IsShown())
+    assert(clear.icon.atlas=="common-search-clearbutton" and not clear:IsShown() and S.placeholder:IsShown())
+    assert(clear.icon:GetWidth()==12 and clear.icon:GetHeight()==12 and clear.icon.color[4]==.55)
     local updates=0;local changed=S.Changed
     S.Changed=function(self,...)updates=updates+1;changed(self,...)end
     S.search:SetText("gun");S.search:Fire("OnTextChanged",true)
@@ -257,12 +258,34 @@ test("query clear is content-only exact UTF8 with a roomy inset click target and
     local input,hit=rect(S.search),rect(clear)
     assert(hit.w>=22 and hit.h>=22 and hit.x>=input.x and hit.right<=input.right)
     assert(input.right-S.search.textInsets[2]<hit.x and separated(hit,rect(S.slot)))
+    local icon=rect(clear.icon)
+    assert(math.abs(icon.x+icon.w/2-hit.x-hit.w/2)<.01 and math.abs(icon.y+icon.h/2-input.y-input.h/2)<.01)
+    clear:Fire("OnEnter");assert(clear.icon.color[4]==1)
+    clear:Fire("OnLeave");assert(clear.icon.color[4]==.55)
+    clear:Fire("OnEnter");S.search:SetFocus()
     clear:Fire("OnClick")
-    assert(S.filter.query=="" and S.search:GetText()=="" and S.search.focused and not clear:IsShown() and S.placeholder:IsShown() and updates==2)
+    assert(S.filter.query=="" and S.search:GetText()=="" and not S.search:HasFocus() and not clear:IsShown() and S.placeholder:IsShown() and updates==2)
+    assert(clear.icon.color[4]==.55)
     clear:Fire("OnClick");assert(updates==2)
     S.search:SetText("sword");S.search:Fire("OnTextChanged",false)
     assert(clear:IsShown() and updates==2)
     S.search:SetText("");S.search:Fire("OnTextChanged",false);assert(not clear:IsShown() and updates==2)
+end)
+
+test("both search views keep the native clear icon centered and text clear of its hit target",function()
+    for _,size in ipairs({{1920,1080,1},{500,350,1.2},{400,350,1.2},{640,480,.85}}) do
+        local _,S=open(unpack(size))
+        for _,view in ipairs({"quests","shortlist"}) do
+            S:View(view);S.search:SetText(string.rep("W",100))
+            local input,hit,icon=rect(S.search),rect(S.clearSearch),rect(S.clearSearch.icon)
+            assert(S.clearSearch:IsShown() and not S.placeholder:IsShown())
+            assert(hit.w==24 and hit.h==24 and hit.x>=input.x and hit.right<=input.right)
+            assert(input.right-S.search.textInsets[2]<hit.x)
+            assert(math.abs(icon.x+icon.w/2-hit.x-hit.w/2)<.01 and math.abs(icon.y+icon.h/2-input.y-input.h/2)<.01)
+            if view=="quests" then assert(separated(hit,rect(S.slot))) end
+            S.search:SetText("");assert(not S.clearSearch:IsShown() and S.placeholder:IsShown())
+        end
+    end
 end)
 
 test("choice captions and multiple locations cannot offset the first reward icon",function()
