@@ -30,8 +30,6 @@ To help fill gaps in quest data, open `/fau opts`, scroll to **Contribute quest 
 
 The recorder captures quests you encounter through native dialogs and gossip, with build/locale, NPC or item source, observer map position, faction/class/race/level, and player-visible reward slots and quantities. It omits player identity fields, GUIDs, account details, chat and quest prose; your name is redacted if it occurs in a canonical quest title. No data is uploaded automatically. Observations stop at 250 records, 256 KiB of JSON, or 12 variants per quest and stage; export and clear to resume. WoW saves these observations through its normal SavedVariables lifecycle.
 
-When a compatible QuestieTrace is already running with its own consent granted, FindAnUpgrade can automatically corroborate new accepted/turned-in events. This optional read-only bridge supports diagnostic schema 14, recording contract 1. It never starts QuestieTrace, reads saved sessions or imports its function streams; other versions leave native recording independent.
-
 Incomplete slots stay unknown. Listed, offered, accepted, completion-dialog and turned-in observations are distinct; offered choices do not identify the selected reward. Observer positions are not NPC spawn coordinates, and observer context does not establish availability for every character. Player-visible rewards may differ from published base rewards; other reward types remain unknown. Submissions require independent review before any catalog change.
 
 Open an issue before submitting a PR. Unsolicited PRs may be closed.

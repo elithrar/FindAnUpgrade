@@ -280,13 +280,12 @@ function W.Reset(config)
         _G[name] = function(...) local results = {original(...)}; fn(...); return unpack(results) end
     end
     FindAnUpgradeCharacterDB = config.characterSaved
-    QuestieTrace=nil;QuestieTraceCore=nil
     FindAnUpgradeObservations = config.observations
     FindAnUpgradeDB = config.saved
     QuestBriefDB = config.previous
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","ObservationData.lua","QuestieTrace.lua","Recorder.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
+    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","ObservationData.lua","Recorder.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
     W.N = N
     return N
 end

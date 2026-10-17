@@ -15,9 +15,10 @@ from fau_tools import observations as O
 from fau_tools.context import ROOT
 
 
-def exported():
+def exported(lifecycle=False):
     lua = LuaRuntime(unpack_returned_tuples=True)
     lua.globals().ROOT = ROOT.as_posix()
+    lua.globals().CAPTURE_LIFECYCLE = lifecycle
     return lua.execute("""
         local W=assert(loadfile(ROOT..'/tests/wow_mock.lua'))()
         local N=W.Reset(); GetBuildInfo=function()return '1.60.1','70425','2026-10-15',16001 end
@@ -30,6 +31,10 @@ def exported():
         C_QuestOffer={GetQuestRewardCurrencyInfo=function()return {currencyID=55,totalRewardAmount=8}end}
         W.Event('ADDON_LOADED','FindAnUpgrade');N.Recorder:Enable(true);W.quest=6
         W.npcGuid='Creature-0-1-2-3-12345-0001';W.Event('QUEST_DETAIL')
+        if CAPTURE_LIFECYCLE then
+            W.Event('QUEST_ACCEPTED',6)
+            W.Event('QUEST_TURNED_IN',6,123,456);W.Event('QUEST_TURNED_IN',6,123,456)
+        end
         return N.ObservationData:Export()
     """).encode("utf-8")
 
@@ -51,6 +56,28 @@ class ObservationTests(unittest.TestCase):
         self.assertEqual(rewards["guaranteed"]["slots"][0]["quantity"], 3)
         self.assertEqual(rewards["xp"], {"state": "unknown"})
         self.assertEqual(rewards["otherRewards"], "unknown")
+
+    def test_native_lifecycle_export_keeps_stages_counts_and_player_reward_values(self):
+        data = O.load(exported(lifecycle=True))
+        offered, accepted, turned_in = data["records"]
+        self.assertEqual(
+            [row["stage"] for row in data["records"]],
+            ["offered", "accepted", "turned_in"],
+        )
+        self.assertEqual(accepted["source"], offered["source"])
+        self.assertEqual(turned_in["source"], {"kind": "unknown", "role": "unknown"})
+        self.assertEqual((accepted["samples"], turned_in["samples"]), (1, 2))
+        for row in (accepted, turned_in):
+            self.assertEqual(
+                row["rewards"]["guaranteed"], {"state": "unknown", "slots": []}
+            )
+            self.assertEqual(
+                row["rewards"]["choices"], {"state": "unknown", "slots": []}
+            )
+        self.assertEqual(turned_in["rewards"]["xp"], {"state": "ready", "value": 123})
+        self.assertEqual(
+            turned_in["rewards"]["money"], {"state": "ready", "value": 456}
+        )
 
     def test_never_evaluates_lua_or_accepts_compressed_or_executable_formats(self):
         for source in (

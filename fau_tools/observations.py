@@ -122,16 +122,8 @@ def record(row):
             "rewards",
             "samples",
         },
-        {"title", "trace"},
+        {"title"},
     )
-    if "trace" in row:
-        trace = obj(row["trace"], {"schema", "contract"})
-        integer(trace["schema"], 14, 14)
-        integer(trace["contract"], 1, 1)
-        require(
-            row["stage"] in ("accepted", "turned_in"),
-            "Trace corroboration requires a lifecycle event",
-        )
     integer(row["questID"])
     require(row["stage"] in STAGES, "Unknown encounter stage")
     integer(row["samples"], 1, 1000000)

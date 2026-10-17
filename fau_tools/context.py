@@ -37,7 +37,6 @@ SOURCE_FILES = (
     "FindAnUpgrade/Providers.lua",
     "FindAnUpgrade/QuestState.lua",
     "FindAnUpgrade/Questie.lua",
-    "FindAnUpgrade/QuestieTrace.lua",
     "FindAnUpgrade/README.md",
     "FindAnUpgrade/Ranking.lua",
     "FindAnUpgrade/Recorder.lua",

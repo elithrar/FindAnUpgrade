@@ -66,8 +66,6 @@ function D.Record(raw)
     local rewards=object(raw.rewards)
     row.rewards={scope="dialog-items-and-choice-currencies",otherRewards="unknown",
         guaranteed=group(rewards.guaranteed,false),choices=group(rewards.choices,true),xp=field(rewards.xp),money=field(rewards.money)}
-    local trace=object(raw.trace)
-    if (stage=="accepted" or stage=="turned_in") and D.Integer(trace.schema,14,14)==14 and D.Integer(trace.contract,1,1)==1 then row.trace={schema=14,contract=1} end
     return row
 end
 
@@ -111,9 +109,8 @@ end
 function D:Add(raw,samples,restoring)
     if self.readOnly then return false end
     local row=D.Record(raw);if not row then return false end
-    local trace=row.trace;row.trace=nil
-    local signature=encode(row);row.trace=trace;local existing=self.index[signature]
-    if existing then existing.samples=math.min(1000000,existing.samples+(samples or 1));existing.trace=trace or existing.trace;return true,existing end
+    local signature=encode(row);local existing=self.index[signature]
+    if existing then existing.samples=math.min(1000000,existing.samples+(samples or 1));return true end
     local key=row.questID..":"..row.stage
     if #self.db.records>=self.limit or self.bytes+#signature+128>self.byteLimit or (self.variants[key] or 0)>=self.variantLimit then
         self.db.dropped=math.min(1000000,self.db.dropped+1);self.db.enabled=false;self.full=true;return false
@@ -121,7 +118,7 @@ function D:Add(raw,samples,restoring)
     row.samples=samples or 1;self.db.records[#self.db.records+1]=row;self.index[signature]=row
     self.variants[key]=(self.variants[key] or 0)+1;self.bytes=self.bytes+#signature+128
     if not restoring then self.changed=true end
-    return true,row
+    return true
 end
 function D:Export()
     if self.readOnly then return end

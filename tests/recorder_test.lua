@@ -96,6 +96,14 @@ test("native frame may become visible after the recorder receives QUEST_DETAIL",
     assert(#FindAnUpgradeObservations.records==0 and W.reads==0 and pending()==1)
     QuestFrame.shown=true;tick();assert(last(N).questID==99999 and last(N).rewards.guaranteed.state=="ready")
 end)
+test("unrelated addon loads leave native dialog settling intact",function()
+    local N=setup();W.missingItem=true;open(N);local dialog=N.Recorder.dialog
+    assert(not N.Recorder.events.events.ADDON_LOADED)
+    W.Event("ADDON_LOADED","UnrelatedAddon")
+    assert(N.Recorder.dialog==dialog and pending()==1)
+    W.missingItem=false;tick();assert(last(N).rewards.guaranteed.state=="ready")
+    W.Event("QUEST_FINISHED");assert(pending()==0)
+end)
 test("rapid A to B dialogs cancel old jobs including same-ID reacceptance",function()
     local N=setup();open(N,99990);local old=W.jobs[1];W.quest=99991;W.Event("QUEST_DETAIL")
     assert(old.cancelled and pending()==1);local count=#FindAnUpgradeObservations.records;old.fn()
@@ -128,6 +136,16 @@ test("completion options do not imply chosen rewards or an actual turn-in",funct
     W.Event("QUEST_TURNED_IN",99999,123,456)
     assert(last(N).stage=="turned_in" and last(N).source.role=="ender" and last(N).rewards.choices.state=="unknown")
     assert(last(N).rewards.xp.value==123 and last(N).rewards.money.value==456)
+end)
+test("native lifecycle events deduplicate without deferred reward reads",function()
+    local N=setup();N.Recorder:Enable(true)
+    for i=1,2 do W.Event("QUEST_ACCEPTED",99999) end
+    for i=1,2 do W.Event("QUEST_TURNED_IN",99999,123,456) end
+    local rows=FindAnUpgradeObservations.records
+    assert(#rows==2 and rows[1].stage=="accepted" and rows[2].stage=="turned_in")
+    assert(rows[1].samples==2 and rows[2].samples==2 and rows[2].rewards.xp.value==123)
+    assert(rows[1].rewards.choices.state=="unknown" and rows[2].rewards.choices.state=="unknown")
+    assert(pending()==0 and W.reads==0)
 end)
 test("gossip availability records typed NPC roles and bounded exact IDs",function()
     local N=setup();N.Recorder:Enable(true)
@@ -201,55 +219,4 @@ test("options consent clear and native manual export reuse one integrated view",
     O.frame:Hide();assert(not O.exportMode and not O.exportEditor.EditBox.focused and O.exportEditor.EditBox:GetText()=="")
     O:Toggle(N.Core);O.clear:Fire("OnClick");assert(#FindAnUpgradeObservations.records==1)
     O.clear:Fire("OnClick");assert(#FindAnUpgradeObservations.records==0 and not N.Recorder.active)
-end)
-local function trace(N,schema,contract)
-    local capture={schemaVersion=schema or 14,recordingContractVersion=contract or 1,events={}}
-    QuestieTrace={schemaVersion=14,settings={dataCollectionConsent=true}}
-    QuestieTraceCore={GetDiagnosticSession=function()return capture,"active" end}
-    N.Trace:Reset(true);return capture
-end
-test("optional QuestieTrace corroborates new lifecycle events once without borrowing other log fields",function()
-    local N=setup();N.Recorder:Enable(true);local capture=trace(N)
-    W.Event("QUEST_ACCEPTED",99999);capture.events[1]={e="QUEST_ACCEPTED",a={99999,n=1}}
-    assert(pending()==1);tick();local row=last(N)
-    assert(row.trace.schema==14 and row.trace.contract==1 and #FindAnUpgradeObservations.records==1)
-    W.Event("QUEST_ACCEPTED",99999);tick()
-    assert(#FindAnUpgradeObservations.records==1 and last(N).samples==2 and row.trace.schema==14)
-    assert(#capture.events==1 and capture.events[1].a[1]==99999 and not capture.events[1].trace)
-end)
-test("QuestieTrace absence incompatible schema consent and stopped captures do not affect native recording",function()
-    for _,case in ipairs({"absent","schema","contract","consent","saved","error"}) do
-        local N=setup();N.Recorder:Enable(true);local capture=trace(N)
-        if case=="absent"then QuestieTraceCore=nil
-        elseif case=="schema"then capture.schemaVersion=15
-        elseif case=="contract"then capture.recordingContractVersion=2
-        elseif case=="consent"then QuestieTrace.settings.dataCollectionConsent=false
-        elseif case=="saved"then QuestieTraceCore.GetDiagnosticSession=function()return capture,"saved"end
-        else QuestieTraceCore.GetDiagnosticSession=function()error("unsupported diagnostic")end end
-        W.Event("QUEST_ACCEPTED",99999);capture.events[1]={e="QUEST_ACCEPTED",a={99999,n=1}};tick()
-        assert(N.Recorder.active and last(N).stage=="accepted" and not last(N).trace and pending()==0)
-    end
-end)
-test("late QuestieTrace load and new sessions skip history and cancel stale pending reads",function()
-    local N=setup();N.Recorder:Enable(true);W.Event("QUEST_ACCEPTED",99990)
-    local capture=trace(N);capture.events[1]={e="QUEST_ACCEPTED",a={99990,n=1}};W.Event("ADDON_LOADED","QuestieTrace")
-    W.Event("QUEST_ACCEPTED",99991);capture.events[2]={e="QUEST_ACCEPTED",a={99991,n=1}};tick()
-    assert(not FindAnUpgradeObservations.records[1].trace and last(N).trace)
-    W.Event("QUEST_ACCEPTED",99992);local old=N.Trace.timer
-    local replacement={schemaVersion=14,recordingContractVersion=1,events={{e="QUEST_ACCEPTED",a={99992,n=1}}}}
-    QuestieTraceCore.GetDiagnosticSession=function()return replacement,"active"end;tick()
-    assert(not last(N).trace and not N.Trace.session)
-    W.Event("PLAYER_ENTERING_WORLD");W.Event("QUEST_ACCEPTED",99993);assert(not last(N).trace)
-    N.Recorder:Enable(false);old.fn();assert(not N.Trace.timer and not N.Recorder.active)
-end)
-test("QuestieTrace bridge bounds queue and scan and revocation cancels all retained session state",function()
-    local N=setup();N.Recorder:Enable(true);local capture=trace(N)
-    for i=1,40 do W.Event("QUEST_ACCEPTED",99000+i);capture.events[i]={e="QUEST_ACCEPTED",a={99000+i,n=1}} end
-    assert(#N.Trace.queue==8 and pending()==1);tick()
-    assert(N.Trace.cursor==40 and #N.Trace.queue==0 and pending()==0)
-    assert(last(N).trace and not FindAnUpgradeObservations.records[1].trace)
-    W.Event("QUEST_TURNED_IN",99999);capture.events[41]={e="QUEST_TURNED_IN",a={99999,n=1}}
-    QuestieTrace.settings.dataCollectionConsent=false;tick();assert(not last(N).trace and not N.Trace.session)
-    QuestieTrace.settings.dataCollectionConsent=true;W.Event("QUEST_ACCEPTED",99998);N.Recorder:Enable(false)
-    assert(not N.Trace.session and #N.Trace.queue==0 and pending()==0)
 end)

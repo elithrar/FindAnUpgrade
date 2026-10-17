@@ -113,10 +113,9 @@ function R:Save(row)
     local signature=D.Encode(clean)
     if self.dialog and self.dialog.signature==signature then return end
     if self.dialog then self.dialog.signature=signature end
-    local _,stored=D:Add(clean)
+    D:Add(clean)
     if not D.db.enabled then self:Activate(false) end
     if N.Options.frame and N.Options.frame:IsShown() then N.Options:RefreshRecorder() end
-    return stored
 end
 function R:Sample(dialog)
     if not self:Current(dialog) or dialog.attempts>=8 then return end
@@ -173,9 +172,7 @@ function R:Gossip()
 end
 function R:Event(event,id,xp,money)
     if not self.active then return end
-    N.Trace:Reconcile()
-    if event=="ADDON_LOADED" then if id=="QuestieTrace" then N.Trace:Reset(true) end
-    elseif event=="QUEST_DETAIL" then self:Open("offered",id) -- payload is start item ID, not quest ID
+    if event=="QUEST_DETAIL" then self:Open("offered",id) -- payload is start item ID, not quest ID
     elseif event=="QUEST_PROGRESS" then self:Open("progress")
     elseif event=="QUEST_COMPLETE" then self:Open("completion")
     elseif event=="GOSSIP_SHOW" then self:Gossip()
@@ -187,25 +184,24 @@ function R:Event(event,id,xp,money)
             local row=self:Base(id,event=="QUEST_ACCEPTED" and "accepted" or "turned_in",
                 matches and dialog.source or nil,matches and dialog.location or nil,matches and dialog.context or nil)
             if event=="QUEST_TURNED_IN" then row.rewards.xp=known(xp);row.rewards.money=known(money) end
-            local stored=self:Save(row);N.Trace:Observe(event,id,stored)
+            self:Save(row)
         end
         self:Cancel()
     elseif event=="QUEST_ITEM_UPDATE" or event=="QUEST_DATA_LOAD_RESULT" or event=="ITEM_DATA_LOAD_RESULT" then
         if self.dialog and (event~="QUEST_DATA_LOAD_RESULT" or id==self.dialog.id) then self:Schedule(self.dialog) end
-    else self:Cancel();if event=="PLAYER_ENTERING_WORLD" or event=="PLAYER_LOGOUT" then N.Trace:Reset(false) end end
+    else self:Cancel() end
 end
 function R:Activate(enabled)
     self:Cancel();self.active=false
-    N.Trace:Reset(false)
     if self.events then self.events:UnregisterAllEvents() end
     if not enabled or D.readOnly or D.full or not self.client or not N.Core.supported or not N.Core.profile.enabled then return false end
     self.events=self.events or CreateFrame("Frame")
     self.events:SetScript("OnEvent",function(_,event,...) self:Event(event,...) end)
     for _,event in ipairs({"QUEST_DETAIL","QUEST_PROGRESS","QUEST_COMPLETE","QUEST_ACCEPTED","QUEST_TURNED_IN","QUEST_FINISHED",
-        "QUEST_GREETING","GOSSIP_SHOW","GOSSIP_CLOSED","QUEST_ITEM_UPDATE","QUEST_DATA_LOAD_RESULT","ITEM_DATA_LOAD_RESULT","PLAYER_ENTERING_WORLD","PLAYER_LOGOUT","ADDON_LOADED"}) do
+        "QUEST_GREETING","GOSSIP_SHOW","GOSSIP_CLOSED","QUEST_ITEM_UPDATE","QUEST_DATA_LOAD_RESULT","ITEM_DATA_LOAD_RESULT","PLAYER_ENTERING_WORLD","PLAYER_LOGOUT"}) do
         if not pcall(self.events.RegisterEvent,self.events,event) then self.events:UnregisterAllEvents();return false end
     end
-    self.active=true;N.Trace:Reset(true);return true
+    self.active=true;return true
 end
 function R:Enable(enabled)
     if D.readOnly then return end
