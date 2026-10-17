@@ -45,6 +45,71 @@ test("finder opens through canonical aliases with reviewed title and level defau
     local N=open();assert(N.Search:Visible() and N.Search.title.text=="FindAnUpgrade" and N.Search.filter.minimum==15 and N.Search.filter.maximum==23 and N.Search.filter.sort=="FIT" and N.Search.filter.scope=="LEVEL_RANGE")
     N.Core:Slash("s");assert(not N.Search:Visible())
 end)
+
+test("registered finder aliases open and reopen without taking edit focus",function()
+    for _,command in ipairs({"","search","s"}) do
+        local N=setup();local S=N.Search
+        for attempt=1,2 do
+            SlashCmdList.FINDANUPGRADE(command)
+            assert(S:Visible() and not S.search:HasFocus(),"opening the finder took search focus")
+            for _,e in ipairs({S.search,S.minimumInput,S.maximumInput}) do assert(e.autoFocus==false and not e:HasFocus()) end
+            W.time=W.time+.3;S:Tick();assert(not S.search:HasFocus())
+            SlashCmdList.FINDANUPGRADE(command);assert(not S:Visible())
+        end
+    end
+end)
+
+test("closing a deliberately focused search releases focus and reopening retains its query",function()
+    for _,close in ipairs({
+        function(S)SlashCmdList.FINDANUPGRADE("")end,
+        function(S)S.close:Fire("OnClick")end,
+        function(S)S.search:Fire("OnEscapePressed")end,
+    }) do
+        local N=open();local S=N.Search
+        -- Model native click-to-type focus; addon code must leave it available.
+        S.search:SetFocus();S.search:SetText("Helmet");S.search:Fire("OnTextChanged",true)
+        W.time=W.time+.3;S:Tick();assert(S.search:HasFocus() and #S.results==1 and S.results[1].id==9)
+        close(S);assert(not S:Visible() and not S.search:HasFocus())
+        SlashCmdList.FINDANUPGRADE("");W.time=W.time+.3;S:Tick()
+        assert(S:Visible() and not S.search:HasFocus() and S.search:GetText()=="Helmet" and #S.results==1)
+    end
+end)
+
+test("enter releases deliberate search focus without dismissing or clearing results",function()
+    local N=open();local S=N.Search
+    S.search:SetFocus();S.search:SetText("Helmet");S.search:Fire("OnTextChanged",true)
+    S.search:Fire("OnEnterPressed");W.time=W.time+.3;S:Tick()
+    assert(S:Visible() and not S.search:HasFocus() and S.filter.query=="Helmet" and #S.results==1)
+end)
+
+test("opening clears stale search focus even if it was focused while hidden",function()
+    local N=setup();local S=N.Search;S.search:SetFocus()
+    SlashCmdList.FINDANUPGRADE("");assert(S:Visible() and not S.search:HasFocus())
+end)
+
+test("clear refreshes both views without taking focus or erasing the other query",function()
+    for _,focused in ipairs({false,true}) do
+        local N=open();local S=N.Search;N.Shortlist:Toggle(9);N.Shortlist:Toggle(14)
+        local function query(value)
+            S.search:SetFocus();S.search:SetText(value);S.search:Fire("OnTextChanged",true)
+            W.time=W.time+.3;S:Tick()
+        end
+        query("Helmet");assert(#S.results==1 and S.clearSearch:IsShown())
+        S:View("shortlist");assert(S.placeholder:IsShown() and not S.clearSearch:IsShown())
+        query("Dagger");assert(#S.results==1 and S.results[1].id==14)
+        if not focused then S.search:ClearFocus() end
+        S.clearSearch:Fire("OnClick");W.time=W.time+.3;S:Tick()
+        assert(not S.search:HasFocus() and S.search:GetText()=="" and #S.results==2 and S.offset==0)
+        assert(S.placeholder:IsShown() and not S.clearSearch:IsShown())
+        S:View("quests");W.time=W.time+.3;S:Tick()
+        assert(S.search:GetText()=="Helmet" and S.clearSearch:IsShown() and #S.results==1)
+        if focused then S.search:SetFocus() end
+        S.clearSearch:Fire("OnClick");W.time=W.time+.3;S:Tick()
+        assert(not S.search:HasFocus() and S.filter.query=="" and #S.results==2 and S.offset==0)
+        S:View("shortlist");assert(S.search:GetText()=="" and S.placeholder:IsShown() and not S.clearSearch:IsShown())
+        S:View("quests");assert(S.search:GetText()=="" and not S.clearSearch:IsShown())
+    end
+end)
 test("bundled catalogue works with both Questie addons absent and preserves input",function()
     local N=setup();assert(N.Catalog:Begin());N.Catalog:Step()
     assert(#N.Catalog.order==2 and #N.Catalog.records[9].items==2 and N.CatalogData.quests[1].id==9 and LibQuestieDB==nil)

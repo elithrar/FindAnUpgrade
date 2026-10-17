@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Leave keyboard movement available when opening or reopening `/fau`, including after typing in search.
+- Use Blizzard's subtle clear-search icon in both Quests and Shortlist. Clearing refreshes results and releases keyboard focus.
+
 ## 0.1.2
 
 - Add optional, passive quest-data recording with bounded separate storage, privacy filtering, manual JSON export and clear/pause controls in Options. Recording remains off until enabled.
