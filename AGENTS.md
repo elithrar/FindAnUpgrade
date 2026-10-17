@@ -60,6 +60,8 @@ Use a **patch bump by default** for current non-breaking fixes, UI refinements, 
 
 Every change set entering `main` (a merged PR or direct commit) must have a matching version bump and annotated `vX.Y.Z` tag on the resulting main commit. Include the aligned TOC, runtime Core, `pyproject.toml`, `uv.lock` and current CHANGELOG version before merge; verify main CI before pushing the matching tag. Never reuse or move a published tag. Reconcile an existing untagged change with a new versioned follow-up commit rather than rewriting published history.
 
+Keep the current CHANGELOG version first; retained historical versions must be unique and strictly descending. Only the current section is published, while the full tracked file remains hash-bound. Normal CI must validate the actual checked-in changelog, not only normalized test fixtures. To recover an unchanged older tag after a tooling fix, dispatch the release workflow from reviewed `main` with that tag as input. Release tooling is pinned to the workflow commit and receives the separate tagged payload via `--root`; every existing source, archive, tag, ancestry and upload check still applies. Never dispatch unreviewed recovery tooling or edit a tagged payload to pass a check.
+
 Pushing a `v*` tag starts [the release workflow](.github/workflows/release.yml), which can publish GitHub and CurseForge releases; dispatching it also publishes or resumes an existing tag. Obtain applicable merge, tag and release authorization before proceeding with this sequence. If authorization is missing, keep the change pending and report the blocker rather than silently leaving main unversioned or treating a tag as bookkeeping. A version/tag does not authorize installation.
 
 ## Authorization

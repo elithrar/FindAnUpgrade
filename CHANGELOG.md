@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Publish only the current release's notes while preserving and verifying changelog history.
+- Allow reviewed release tooling to validate and publish an unchanged older tag, with the same exact-source, archive, tag and upload checks.
+
 ## 0.1.3
 
 - Leave keyboard movement available when opening or reopening `/fau`, including after typing in search.
