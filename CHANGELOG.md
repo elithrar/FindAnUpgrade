@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Refresh saved quest titles and levels in Shortlist after player-level changes or metadata invalidation, using the same metadata cache as Quests.
+
 ## 0.1.4
 
 - Publish only the current release's notes while preserving and verifying changelog history.

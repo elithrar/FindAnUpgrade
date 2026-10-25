@@ -105,6 +105,26 @@ test("new dependency changes invalidate saved rows outside level filters",functi
     local N,S,quests=setup({2});quests[2].chain={groups={{kind="all",ids={1},verified=true}}};S:View("shortlist");tick(S)
     S.filter.minimum=70;S.filter.maximum=80;S.dirty=false;S:QuestChanged({ids={[1]=true}});assert(S.dirty)
 end)
+test("shortlist refreshes cached quest metadata when player level changes",function()
+    local N,S=setup({1});S:View("shortlist");tick(S)
+    assert(S.results[1].level==20)
+    C_QuestLog.GetQuestDifficultyLevel=function()return 21 end
+    W.Event("PLAYER_LEVEL_UP",21);N.Character:Flush(true);tick(S)
+    assert(S.results[1].level==21 and S.cards[1].title:GetText():find("[21]",1,true))
+    assert(N.Catalog.records[1].metadataPlayerLevel==21)
+    local reads=0
+    C_QuestLog.GetQuestDifficultyLevel=function()reads=reads+1;return 21 end
+    S:ShortlistQuery();S:ShortlistQuery();assert(reads==0,"unchanged context reuses metadata")
+end)
+test("reopening shortlist refreshes metadata invalidated while hidden",function()
+    local N,S=setup({1});S:View("shortlist");tick(S);S:Toggle()
+    C_QuestLog.GetTitleForQuestID=function()return "Updated title" end
+    C_QuestLog.GetQuestDifficultyLevel=function()return 22 end
+    S:QuestData(1);assert(not N.Catalog.records[1].metadataReady)
+    S:Toggle();tick(S)
+    assert(S.view=="shortlist" and S.results[1].title=="Updated title" and S.results[1].level==22)
+    assert(N.Catalog.records[1].metadataReady)
+end)
 test("repeated view switches reuse cards tabs and popup frames without idle work",function()
     local _,S=setup({1,2,3});S:View("shortlist");tick(S);S:View("quests");tick(S);local count=#W.frames
     for i=1,40 do S:View(i%2==0 and "quests" or "shortlist");tick(S) end
