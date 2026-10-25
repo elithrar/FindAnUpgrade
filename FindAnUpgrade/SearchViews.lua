@@ -57,8 +57,10 @@ function S:ShortlistQuery()
         local record=N.Catalog.records[id];local source=N.Providers.Source(id)
         if not record and source then
             record={id=id,title=source.title,level=source.level,items=source.items or {},source=source}
-            N.Catalog:Metadata(record,context.level);N.Catalog.records[id]=record;N.Catalog.order[#N.Catalog.order+1]=record
+            N.Catalog.records[id]=record;N.Catalog.order[#N.Catalog.order+1]=record
         end
+        -- Reuse the same context-aware metadata cache as the Quests view.
+        if record then N.Catalog:Metadata(record,context.level) end
         local row={id=id,title=record and record.title or "Quest "..id,level=record and record.level,source=source,items={},missing=not source}
         local match=query=="" or row.title:lower():find(query,1,true) or tostring(id):find(query,1,true)
         for _,meta in ipairs(model.currentItems[id] or record and record.items or {}) do
