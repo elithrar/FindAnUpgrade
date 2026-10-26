@@ -9,6 +9,15 @@ DIST = ROOT / "dist"
 # Add maintained files deliberately; never discover private scratch files by suffix.
 # This inventory also works in extracted source archives without Git metadata.
 SOURCE_FILES = (
+    "FindAnUpgrade/Libs/SomethingNeedDoing/Core.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/Diagnostics.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/Scope.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/State.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/Settings.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/UI.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/Options.lua",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/LICENSE",
+    "FindAnUpgrade/Libs/SomethingNeedDoing/UPSTREAM.json",
     ".gitattributes",
     ".github/workflows/check.yml",
     ".github/workflows/release.yml",

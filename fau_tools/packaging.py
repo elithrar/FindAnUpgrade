@@ -11,6 +11,15 @@ from fau_tools import catalog, classification
 from fau_tools.context import ROOT, source_files
 
 SHIPPED = {
+    "Libs/SomethingNeedDoing/Core.lua",
+    "Libs/SomethingNeedDoing/Diagnostics.lua",
+    "Libs/SomethingNeedDoing/Scope.lua",
+    "Libs/SomethingNeedDoing/State.lua",
+    "Libs/SomethingNeedDoing/Settings.lua",
+    "Libs/SomethingNeedDoing/UI.lua",
+    "Libs/SomethingNeedDoing/Options.lua",
+    "Libs/SomethingNeedDoing/LICENSE",
+    "Libs/SomethingNeedDoing/UPSTREAM.json",
     "FindAnUpgrade.toc",
     "Model.lua",
     "Shortlist.lua",
@@ -46,6 +55,13 @@ SHIPPED = {
     "Data/ATT-LICENSE.txt",
 }
 RUNTIME = [
+    "Libs/SomethingNeedDoing/Core.lua",
+    "Libs/SomethingNeedDoing/Diagnostics.lua",
+    "Libs/SomethingNeedDoing/Scope.lua",
+    "Libs/SomethingNeedDoing/State.lua",
+    "Libs/SomethingNeedDoing/Settings.lua",
+    "Libs/SomethingNeedDoing/UI.lua",
+    "Libs/SomethingNeedDoing/Options.lua",
     "Model.lua",
     "Shortlist.lua",
     "Data/Quests.lua",
@@ -87,6 +103,26 @@ def validate(root=ROOT):
     if actual != SHIPPED:
         raise ValueError(
             f"Unexpected addon manifest: extra={actual - SHIPPED}, missing={SHIPPED - actual}"
+        )
+    upstream = addon / "Libs/SomethingNeedDoing"
+    pin = json.loads((upstream / "UPSTREAM.json").read_text())
+    assert (
+        pin["version"] == "0.3.0"
+        and pin["commit"] == "2b6a1d355e6fb174ea696c62953b0556c08700f0"
+    )
+    assert set(pin["sha256"]) == {
+        "Core.lua",
+        "Diagnostics.lua",
+        "Scope.lua",
+        "State.lua",
+        "Settings.lua",
+        "UI.lua",
+        "Options.lua",
+        "LICENSE",
+    }
+    for name, checksum in pin["sha256"].items():
+        assert hashlib.sha256((upstream / name).read_bytes()).hexdigest() == checksum, (
+            name
         )
     toc = (addon / "FindAnUpgrade.toc").read_text(encoding="utf-8")
     metadata = {}

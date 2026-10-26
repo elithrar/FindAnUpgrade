@@ -187,7 +187,7 @@ test("shown child under hidden parent is not an eligible pointer target",functio
 end)
 
 test("options parent hide and reopen propagate complete child lifecycle",function()
-    local N,W=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N,W=fixture(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     local shows,hides=0,0; O.modifier:HookScript("OnShow",function()
         shows=shows+1; assert(O.frame and O.modifier.Text:GetText()=="Shift" and O.edits.scale:GetText()=="100")
     end)
@@ -207,7 +207,7 @@ test("actual intrinsic SetupMenu generates shown controls under a hidden shell",
 end)
 
 test("fractional scale resolves options native dropdown anchors inside its row",function()
-    local N,W,rect=fixture(); UIParent:SetScale(.83); SlashCmdList.FINDANUPGRADE("opts")
+    local N,W,rect=fixture(); UIParent:SetScale(.83); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts")
     local O=N.Options; UIParent.width,UIParent.height=640,360; O:Refresh()
     local bx,by,bw,bh=rect(O.modifier); local tx,ty,tw,th=rect(O.modifier.Text)
     assert(close(tx-bx,9*O.modifier:GetEffectiveScale()))
@@ -217,14 +217,14 @@ test("fractional scale resolves options native dropdown anchors inside its row",
 end)
 
 test("native checkbox caption geometry remains inside the Surfaces section",function()
-    local N,W,rect=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N,W,rect=fixture(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     local x,y,w,h=rect(O.checks.launcher.Text); local sx,sy,sw,sh=rect(O.sections[4])
     assert(x>=sx and x+w<=sx+sw and y>=sy and y+h<=sy+sh)
 end)
 
 test("single options grid keeps native controls and headings within their sections",function()
     for _,height in ipairs({1080,360}) do
-        local N,W,rect=fixture();UIParent.height=height;SlashCmdList.FINDANUPGRADE("opts");local O=N.Options
+        local N,W,rect=fixture();UIParent.height=height;SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");local O=N.Options
         local groups={
             {1,{O.font,O.border,O.sliders.scale,O.edits.scale}},
             {2,{O.checks.enabled,O.modifier,O.position,O.hint}},
@@ -251,7 +251,7 @@ end)
 test("search default rows keep nearby aligned numeric fields and consistent section gaps at every layout scale",function()
     for _,view in ipairs({{1920,1080,1},{640,360,.83},{320,240,.65},{1280,720,1.25}}) do
         local N,W,rect=fixture();UIParent.width,UIParent.height=view[1],view[2];UIParent:SetScale(view[3])
-        SlashCmdList.FINDANUPGRADE("opts");local O=N.Options;local scale=O.body:GetEffectiveScale()
+        SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");local O=N.Options;local scale=O.body:GetEffectiveScale()
         local function label(value)
             for _,entry in ipairs(O.texts) do if entry.object:GetText()==value then return entry.object end end
             error("Missing options label: "..value)
@@ -285,7 +285,7 @@ test("search default rows keep nearby aligned numeric fields and consistent sect
 end)
 
 test("native slider clamping does not let direct input escape option bounds",function()
-    local N=fixture(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N=fixture(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     O.sliders.scale:SetValue(900); assert(N.Core.profile.scale==1.2 and O.edits.scale:GetText()=="120")
     O.sliders.scale:SetValue(-900); assert(N.Core.profile.scale==.8 and O.edits.scale:GetText()=="80")
 end)

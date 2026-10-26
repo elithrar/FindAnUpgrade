@@ -17,6 +17,7 @@ function Methods:Show() layout(self); if not self.shown then self.shown = true; 
 function Methods:Hide() layout(self); if self.shown then self.shown = false; self:Fire("OnHide") end end
 function Methods:SetShown(v) if v then self:Show() else self:Hide() end end
 function Methods:RegisterEvent(e) self.events[e] = true end
+function Methods:UnregisterEvent(event) self.events[event]=nil end
 function Methods:UnregisterAllEvents() self.events={} end
 function Methods:SetPoint(...)
     layout(self); self.point = {...}; self.points=self.points or {}; self.points[self.point[1]]=self.point
@@ -239,6 +240,7 @@ function W.Reset(config)
     GameTooltipHeaderText=W.Object(); GameTooltipHeaderText.font={STANDARD_TEXT_FONT,14,""}
     NumberFontNormalSmall=W.Object(); NumberFontNormalSmall.font={"Fonts\\ARIALN.TTF",12,"OUTLINE"}
     NORMAL_FONT_COLOR={r=1,g=.82,b=0,GetRGB=function(self)return self.r,self.g,self.b end}
+    for key in pairs(_G) do if type(key)=="string" and key:match("^SLASH_FINDANUPGRADE_SND_") then _G[key]=nil end end
     UISpecialFrames = {}; SlashCmdList = {}; LibStub = nil
     QuestTextContrast = {IsEnabled = function() return W.contrast end, GetDefaultBackgroundAtlas = function() return "QuestBG-Parchment" end}
     DEFAULT_CHAT_FRAME = {AddMessage = function(_, text) table.insert(W.messages, text) end}
@@ -277,7 +279,7 @@ function W.Reset(config)
     QuestFrameDetailPanel_OnShow = function() QuestInfo_Display(QUEST_TEMPLATE_DETAIL, QuestDetailScrollChildFrame) end
     QuestFrameDetailPanel.scripts.OnShow = QuestFrameDetailPanel_OnShow
     hooksecurefunc = function(name, fn, callback)
-        if type(name)=='table' then local object,key=name,fn; local original=object[key]; assert(type(original)=='function'); object[key]=function(...) local results={original(...)}; callback(...); return unpack(results) end; return end
+        if type(name)=='table' then local object,key=name,fn; if object==_G then W.hooks[key]=(W.hooks[key] or 0)+1 end; local original=object[key]; assert(type(original)=='function'); object[key]=function(...) local results={original(...)}; callback(...); return unpack(results) end; return end
         W.hooks[name] = (W.hooks[name] or 0) + 1
         local original = _G[name]
         _G[name] = function(...) local results = {original(...)}; fn(...); return unpack(results) end
@@ -288,12 +290,26 @@ function W.Reset(config)
     QuestBriefDB = config.previous
     QuestTintDB = config.legacy
     local N = {}
-    for _,file in ipairs({"Model.lua","Shortlist.lua","Data/Quests.lua","Data/Catalog.lua","Adapter.lua","ObservationData.lua","Recorder.lua","Character.lua","UI.lua","Copy.lua","Rewards.lua","Providers.lua","Chains.lua","Questie.lua","Sources.lua","Stack.lua","NativeTooltip.lua","Hover.lua","QuestState.lua","Catalog.lua","Ranking.lua","SearchModel.lua","Search.lua","SearchViews.lua","Launcher.lua","Options.lua","Core.lua"}) do assert(loadfile(ROOT .. "/FindAnUpgrade/" .. file))("FindAnUpgrade", N) end
+    for line in io.lines(ROOT .. "/FindAnUpgrade/" .. "FindAnUpgrade.toc") do
+        if line:match("%.lua$") then assert(loadfile(ROOT .. "/FindAnUpgrade/" .. line))("FindAnUpgrade", N) end
+    end
     W.N = N
     return N
 end
 function W.Event(event, ...)
     for _,frame in ipairs(W.frames) do if frame.events[event] then frame:Fire("OnEvent", event, ...) end end
+    if W.N and W.N.App then
+        for _,record in ipairs(W.N.App.log:Entries()) do assert(record.level~="Error",record.message) end
+    end
+end
+-- Expected UI failures are reported by SND, not thrown through native callbacks.
+function W.CallbackError(callback, ...)
+    W.N.App.log:Clear()
+    assert(pcall(callback, ...), "callback exception escaped SND")
+    local entries=W.N.App.log:Entries();local last=entries[#entries]
+    assert(last and last.level=="Error", "expected a reported callback error")
+    W.N.App.log:Clear()
+    return last.message
 end
 function W.Init(config) local N = W.Reset(config); W.Event("ADDON_LOADED", "FindAnUpgrade"); return N end
 function W.Offer(id)

@@ -1,6 +1,14 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.5" }; N.Core = C
+local C = { version = "0.1.6" }; N.Core = C
+-- SND owns ordinary subscriptions; gameplay and SavedVariables retain their existing owners.
+local app = N.SomethingNeedDoing:NewAddon(ADDON, {version=C.version})
+N.App = app
+local scope = app:Scope("core")
+local function required(ok, result)
+    if not ok then error(ADDON .. ": " .. result.message) end
+    return result
+end
 
 function C:Reset()
     self.questId = nil
@@ -62,12 +70,19 @@ function C:Attach()
     if A.Forbidden(QuestFrameDetailPanel) or A.Forbidden(QuestFrame) then return end
     -- XML can retain the original renderer function reference. An additive
     -- script hook observes that path as well as calls through the global name.
-    QuestFrameDetailPanel:HookScript("OnShow", function() self:Offer() end)
-    hooksecurefunc("QuestInfo_Display", function(template, parent)
+    local hooks = app:Scope()
+    local function attach(ok, err)
+        if ok then return true end
+        hooks:Cancel()
+        app.log:Warn("Quest renderer hook unavailable", {reason=err.message})
+        return false
+    end
+    if not attach(hooks:HookScript(QuestFrameDetailPanel, "OnShow", function() self:Offer() end)) then return end
+    if not attach(hooks:PostHook("QuestInfo_Display", function(template, parent)
         if parent == QuestDetailScrollChildFrame and template == QUEST_TEMPLATE_DETAIL then self:Offer() end
-    end)
-    QuestFrameDetailPanel:HookScript("OnHide", function() self:Reset() end)
-    QuestFrame:HookScript("OnHide", function() self:Reset() end)
+    end)) then return end
+    if not attach(hooks:HookScript(QuestFrameDetailPanel, "OnHide", function() self:Reset() end)) then return end
+    if not attach(hooks:HookScript(QuestFrame, "OnHide", function() self:Reset() end)) then return end
     self.hooked = true
     -- Covers a reload with an offer already visible without opening any UI.
     if A.Visible(QuestFrameDetailPanel) then self:Offer() end
@@ -100,9 +115,10 @@ function C:Initialize()
     FindAnUpgradeCharacterDB=N.Shortlist:Load(FindAnUpgradeCharacterDB)
     self.supported = A.Supported(); self.ready = true
     N.Recorder:Initialize()
-    SLASH_FINDANUPGRADE1 = "/findanupgrade"
-    SLASH_FINDANUPGRADE2 = "/fau"
-    SlashCmdList.FINDANUPGRADE = function(input) self:Slash(input) end
+    for _,command in ipairs({"/findanupgrade", "/fau"}) do
+        local ok, err = app:Slash(command, function(input) self:Slash(input) end)
+        if not ok then app.log:Warn("Slash command unavailable", {command=command, reason=err.message}) end
+    end
     self:Attach()
     N.Sources:Attach()
     if N.NativeTooltip then N.NativeTooltip:Attach() end
@@ -121,8 +137,7 @@ function C:StartHoverUpdate()
     end)
 end
 local events = CreateFrame("Frame"); C.events = events
-for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "CVAR_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED" }) do events:RegisterEvent(event) end
-events:SetScript("OnEvent", function(_, event, name)
+local function onEvent(_, event, name)
     if event == "ADDON_LOADED" then
         if name == ADDON then C:Initialize() elseif C.ready then
             C:Attach(); N.Sources:Attach(); U:WatchFonts()
@@ -167,4 +182,7 @@ events:SetScript("OnEvent", function(_, event, name)
             if N.QuestState and event~="PLAYER_ENTERING_WORLD" then N.QuestState:OfferChanged() end
         end
     end
-end)
+end
+for _, event in ipairs({ "ADDON_LOADED", "PLAYER_LOGIN", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED", "QUEST_FINISHED", "QUEST_GREETING", "QUEST_PROGRESS", "QUEST_COMPLETE", "GOSSIP_SHOW", "GOSSIP_CLOSED", "PLAYER_ENTERING_WORLD", "UPDATE_MOUSEOVER_UNIT", "MODIFIER_STATE_CHANGED", "QUEST_DATA_LOAD_RESULT", "ITEM_DATA_LOAD_RESULT", "GET_ITEM_INFO_RECEIVED", "TOOLTIP_DATA_UPDATE", "CVAR_UPDATE", "UI_SCALE_CHANGED", "DISPLAY_SIZE_CHANGED" }) do
+    required(scope:Event(event, function(...) onEvent(nil, event, ...) end))
+end

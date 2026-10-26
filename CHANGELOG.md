@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Use SomethingNeedDoing 0.3.0 for core events, hooks and slash commands; preserve existing settings and gameplay behavior.
+
 ## 0.1.5
 
 - Refresh saved quest titles and levels in Shortlist after player-level changes or metadata invalidation, using the same metadata cache as Quests.

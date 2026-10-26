@@ -82,7 +82,7 @@ test("unreadable and malformed quest IDs restore old tint", function()
     W.Init(); W.Offer(92124); W.Offer(W.secret); assert(normal()); W.Offer("92124"); assert(normal()); W.Offer(0); assert(normal())
 end)
 test("throwing quest API restores safely", function() W.Init(); W.Offer(92124); GetQuestID=function() error("unavailable") end; W.N.Core:Refresh(); assert(normal()) end)
-test("disable applies immediately and persists", function() W.Init(); W.Offer(92124); SlashCmdList.FINDANUPGRADE("off"); assert(normal() and not FindAnUpgradeDB.enabled); SlashCmdList.FINDANUPGRADE("on"); assert(tinted()) end)
+test("disable applies immediately and persists", function() W.Init(); W.Offer(92124); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("off"); assert(normal() and not FindAnUpgradeDB.enabled); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("on"); assert(tinted()) end)
 test("future SavedVariables are preserved and cannot be edited", function()
     local saved={version=9,enabled=false,preset="future"}; W.Init({saved=saved}); W.N.Core:Change("enabled",false); W.N.Core:Defaults(); W.Offer(92124)
     assert(FindAnUpgradeDB==saved and saved.preset=="future" and W.N.Core.readOnly and not tinted())
@@ -97,16 +97,16 @@ test("late native addon load attaches hooks once", function()
     QuestFrameDetailPanel=W.Object(true); QuestFrameDetailPanel.Bg=W.Object(true); W.Event("ADDON_LOADED","Blizzard_UIPanels_Game"); assert(W.N.Core.hooked); W.Event("PLAYER_LOGIN"); assert(W.hooks.QuestInfo_Display==1)
 end)
 test("settings match appearance and remain lazy/cached", function()
-    W.Init(); assert(not W.N.Options.frame); SlashCmdList.FINDANUPGRADE("opts"); local O=W.N.Options; assert(O.frame.template=="BackdropTemplate" and O.frame.width==620)
+    W.Init(); assert(not W.N.Options.frame); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=W.N.Options; assert(O.frame.template=="BackdropTemplate" and O.frame.width==620)
     O.modifier.menu.entries[2].callback(); assert(FindAnUpgradeDB.modifier=="CTRL"); O.sliders.strength:SetValue(80); assert(FindAnUpgradeDB.strength==.8)
-    local count=#W.frames; SlashCmdList.FINDANUPGRADE("opts"); SlashCmdList.FINDANUPGRADE("opts"); assert(#W.frames==count)
+    local count=#W.frames; SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); assert(#W.frames==count)
 end)
 test("settings fall back when the native tooltip family path is unavailable", function()
     W.Init(); W.missingFont="missing.ttf"; GameTooltipText.font={"missing.ttf",12,""}
-    SlashCmdList.FINDANUPGRADE("opts"); assert(W.N.Options.texts[1].object:GetFont()==STANDARD_TEXT_FONT)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); assert(W.N.Options.texts[1].object:GetFont()==STANDARD_TEXT_FONT)
 end)
 test("unprotected settings open in combat and fit small screens", function()
-    W.Init(); W.combat=true; SlashCmdList.FINDANUPGRADE("opts"); assert(W.N.Options.frame:IsShown() and W.nativeMutations==0)
+    W.Init(); W.combat=true; SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); assert(W.N.Options.frame:IsShown() and W.nativeMutations==0)
     UIParent.width=640; UIParent.height=360; W.Event("UI_SCALE_CHANGED")
     local O=W.N.Options
     assert(O.frame:GetWidth()*O.frame:GetScale()<=616+.01 and O.frame:GetHeight()*O.frame:GetScale()<=336+.01)
@@ -114,6 +114,35 @@ test("unprotected settings open in combat and fit small screens", function()
 end)
 test("native quest text font and native frame geometry are untouched", function()
     W.Init(); local path,size=QuestInfoDescriptionText:GetFont(); W.Offer(92124); assert(QuestInfoDescriptionText:GetFont()==path and W.nativeMutations==0 and not QuestInfoDescriptionText.fontWrites)
+end)
+
+-- An expected registration failure must not abort initialization or steal a command.
+test("SND slash collisions retain the other owner and still initialize the addon",function()
+    local N=W.Reset();local other=function()end
+    SLASH_OTHER1="/fau";SlashCmdList.OTHER=other
+    W.Event("ADDON_LOADED","FindAnUpgrade")
+    assert(N.Core.ready and N.Core.hooked and SlashCmdList.OTHER==other)
+    assert(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE and not SlashCmdList.FINDANUPGRADE_SND_FAU)
+    assert(N.App.log:Entries()[1].level=="Warn")
+    SLASH_OTHER1=nil;SlashCmdList.OTHER=nil
+end)
+
+-- A failed multi-hook attach must leave no live partial subscriber and retry once.
+test("SND quest hooks recover atomically and stop after logout",function()
+    local N=W.Reset();local nativeHook=hooksecurefunc
+    hooksecurefunc=function(target,method,callback)
+        if target==_G and method=="QuestInfo_Display" then error("renderer temporarily unavailable") end
+        return nativeHook(target,method,callback)
+    end
+    W.Event("ADDON_LOADED","FindAnUpgrade")
+    assert(not N.Core.hooked and N.App.log:Entries()[1].level=="Warn")
+    local offers=0;N.Core.Offer=function() offers=offers+1 end
+    QuestFrameDetailPanel:Fire("OnShow");assert(offers==0,"partial attachment is inert")
+    hooksecurefunc=nativeHook;W.Event("PLAYER_REGEN_ENABLED")
+    assert(N.Core.hooked and #QuestFrameDetailPanel.hooks.OnShow==1,"retry reuses the native dispatcher")
+    offers=0;QuestFrameDetailPanel:Fire("OnShow");assert(offers==2,"native renderer and additive script each deliver once")
+    W.Event("PLAYER_LOGOUT");QuestFrameDetailPanel:Fire("OnShow")
+    assert(offers==2 and not N.App:IsReady() and not SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE)
 end)
 
 local api=ROOT .. "/.work/blizzard/Interface/AddOns/Blizzard_UIPanels_Game/Mainline/QuestFrame.lua"

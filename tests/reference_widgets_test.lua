@@ -47,11 +47,11 @@ test("repeated early options failures reuse permanent content and text objects",
     N.Options.Build=function(self,owner,frame,parent)self:Label(parent,"Heading",20,-15,560,16);error("persistent early failure")end
     local frames,texts
     for i=1,30 do
-        assert(not pcall(SlashCmdList.FINDANUPGRADE,"opts"));assert(not N.Options.shell:IsShown() and not N.Options.frame)
+        W.CallbackError(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE,"opts");assert(not N.Options.shell:IsShown() and not N.Options.frame)
         frames,texts=frames or #W.frames,texts or #W.fontStrings;assert(#W.frames==frames and #W.fontStrings==texts)
     end
-    N.Options.Build=build;SlashCmdList.FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and N.Options.content:IsShown())
-    local total=#W.frames;for i=1,30 do SlashCmdList.FINDANUPGRADE("opts")end;assert(#W.frames==total)
+    N.Options.Build=build;SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and N.Options.content:IsShown())
+    local total=#W.frames;for i=1,30 do SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts")end;assert(#W.frames==total)
 end)
 test("repeated late options failures reuse controls and retain atomic retry",function()
     local N=W.Init();local original=CreateFrame
@@ -62,14 +62,14 @@ test("repeated late options failures reuse controls and retain atomic retry",fun
     end
     local frames,texts
     for i=1,30 do
-        assert(not pcall(SlashCmdList.FINDANUPGRADE,"opts"));frames,texts=frames or #W.frames,texts or #W.fontStrings
+        W.CallbackError(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE,"opts");frames,texts=frames or #W.frames,texts or #W.fontStrings
         assert(#W.frames==frames and #W.fontStrings==texts and not next(N.Options.shell.events))
         assert(not next(N.UI.fontSizes) and #UISpecialFrames==0)
     end
-    W.allowRecovery=true;SlashCmdList.FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and #UISpecialFrames==1)
+    W.allowRecovery=true;SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and #UISpecialFrames==1)
 end)
 test("finder copy and options reuse the same working dialog chrome",function()
-    local N=W.Init();SlashCmdList.FINDANUPGRADE("opts");N.Search:Toggle();N.Search:Copy("123")
+    local N=W.Init();SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");N.Search:Toggle();N.Search:Copy("123")
     for _,f in ipairs({N.Options.frame,N.Search.frame,N.Search.copyFrame})do
         assert(f.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and f.backdrop.edgeSize==16 and f.backdropColor[4]==.94 and f.border[4]==1)
     end

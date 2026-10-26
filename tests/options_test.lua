@@ -29,11 +29,11 @@ end)
 test("slash options constructs complete controls with native font preconditions",function()
     local N=W.Init(); local saved=FindAnUpgradeDB
     assert(not N.Options.frame)
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N)
     assert(FindAnUpgradeDB==saved)
     local frames=#W.frames
-    SlashCmdList.FINDANUPGRADE("options"); assert(not N.Options.frame:IsShown())
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N); assert(#W.frames==frames)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("options"); assert(not N.Options.frame:IsShown())
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N); assert(#W.frames==frames)
 end)
 
 test("first label failure leaves no blank options and retry reuses the named shell",function()
@@ -42,13 +42,13 @@ test("first label failure leaves no blank options and retry reuses the named she
         if object.isFontString and not failed then failed=true; error("Transient font failure") end
         return original(self,object,size)
     end
-    local ok,err=pcall(SlashCmdList.FINDANUPGRADE,"opts")
-    assert(not ok and err:find("Transient font failure",1,true))
+    local err=W.CallbackError(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE,"opts")
+    assert(err:find("Transient font failure",1,true))
     local shell=N.Options.shell
     assert(shell and not shell:IsShown() and not N.Options.frame and #UISpecialFrames==0)
     assert(#N.Options.texts==0 and not next(N.UI.fontSizes or {}))
     assert(FindAnUpgradeDB==saved and not next(shell.events))
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N)
     assert(N.Options.frame==shell and FindAnUpgradeDB==saved)
     local named=0; for _,f in ipairs(W.frames) do if f.name=="FindAnUpgradeOptions" then named=named+1 end end
     assert(named==1)
@@ -67,14 +67,14 @@ test("late construction failure removes handlers and font ownership before retry
         end
         return f
     end
-    local ok,err=pcall(SlashCmdList.FINDANUPGRADE,"opts")
-    assert(not ok and err:find("Transient event registration failure",1,true))
+    local err=W.CallbackError(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE,"opts")
+    assert(err:find("Transient event registration failure",1,true))
     assert(not N.Options.frame and not shell:IsShown() and not next(shell.events))
     assert(not shell:GetScript("OnShow") and not shell:GetScript("OnEvent"))
     assert(not next(N.UI.fontSizes) and not next(N.UI.fontApplications))
     for _,f in ipairs(W.frames) do if f.parent==shell then assert(not f:IsShown()) end end
     local frames=#W.frames
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N)
     assert(#W.frames==frames,"construction retry leaked a scrollbar or content subtree")
     assert(shell.events.UI_SCALE_CHANGED and shell.events.DISPLAY_SIZE_CHANGED)
 end)
@@ -94,18 +94,18 @@ test("repeated native scrollbar setup failures reuse the permanent slider",funct
         return frame
     end
     for i=1,2 do
-        local ok,err=pcall(SlashCmdList.FINDANUPGRADE,"opts")
-        assert(not ok and err:find("Transient native thumb failure",1,true))
+        local err=W.CallbackError(SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE,"opts")
+        assert(err:find("Transient native thumb failure",1,true))
         assert(N.Options.bar==scrollbar and not N.Options.shell:IsShown() and not N.Options.frame)
     end
-    SlashCmdList.FINDANUPGRADE("opts");complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");complete(N)
     assert(N.Options.bar==scrollbar and #W.frames==expected)
     assert(scrollbar.thumb.texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
 end)
 
 test("unavailable path fonts fall back to the native font object before text",function()
     local N=W.Init(); W.missingFont=STANDARD_TEXT_FONT
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N)
     for _,entry in ipairs(N.Options.texts) do
         assert(entry.object:GetFont()==STANDARD_TEXT_FONT)
         assert(entry.object.fontObject==GameFontNormal)
@@ -113,19 +113,19 @@ test("unavailable path fonts fall back to the native font object before text",fu
 end)
 
 test("programmatic refresh preserves settings and controls bind the current profile",function()
-    local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     local saved=FindAnUpgradeDB
     O:Refresh(); W.Event("UI_SCALE_CHANGED"); W.Event("DISPLAY_SIZE_CHANGED")
     assert(FindAnUpgradeDB==saved and not O.refreshing)
     O.modifier.menu.entries[2].callback(); assert(N.Core.profile~=saved and N.Core.profile.modifier=="CTRL")
     O.sliders.strength:SetValue(80); assert(N.Core.profile.strength==.8)
-    O.frame:Hide(); N.Core:Change("modifier","ALT"); SlashCmdList.FINDANUPGRADE("opts")
+    O.frame:Hide(); N.Core:Change("modifier","ALT"); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts")
     assert(O.modifier.Text:GetText()=="Alt" and O.sliders.strength.value==80)
 end)
 
 test("future settings remain read-only through the real options controls",function()
     local saved={version=99,enabled=false,future="preserve"}; local N=W.Init({saved=saved})
-    SlashCmdList.FINDANUPGRADE("opts"); complete(N)
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); complete(N)
     N.Options.modifier.menu.entries[3].callback(); N.Options.checks.enabled:SetChecked(true)
     N.Options.checks.enabled:Fire("OnClick"); N.Options.sliders.scale:SetValue(120)
     assert(FindAnUpgradeDB==saved and saved.future=="preserve" and saved.enabled==false)
@@ -134,7 +134,7 @@ test("future settings remain read-only through the real options controls",functi
 end)
 
 test("options use current XPIsland dialog sections and native radio dropdown",function()
-    local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==690)
     assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
     assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
@@ -151,7 +151,7 @@ test("options use current XPIsland dialog sections and native radio dropdown",fu
 end)
 
 test("native numeric fields clamp on Enter and restore without writes on Escape",function()
-    local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options; local e=O.edits.scale
+    local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options; local e=O.edits.scale
     assert(e.template=="InputBoxTemplate" and e:GetWidth()==58 and e:GetHeight()==22)
     assert(O.sliders.scale:GetWidth()==180 and O.sliders.scale:GetHeight()==16)
     e:SetFocus(); e:SetText("999"); e:Fire("OnEnterPressed")
@@ -164,16 +164,16 @@ test("native numeric fields clamp on Enter and restore without writes on Escape"
 end)
 
 test("closing options clears native menus and numeric field focus",function()
-    local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     O.modifier.menuOpen=true; O.edits.scale:SetFocus(); O.edits.strength:SetFocus()
     O.close:Fire("OnClick")
     assert(not O.frame:IsShown() and not O.modifier.menuOpen and not O.edits.scale.focused and not O.edits.strength.focused)
-    SlashCmdList.FINDANUPGRADE("opts"); O.modifier.menuOpen=true; O.edits.scale:SetFocus(); O.frame:Hide()
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); O.modifier.menuOpen=true; O.edits.scale:SetFocus(); O.frame:Hide()
     assert(not O.modifier.menuOpen and not O.edits.scale.focused)
 end)
 
 test("long native dropdown and checkbox text stays within allocated controls at fractional scale",function()
-    local N=W.Init(); SlashCmdList.FINDANUPGRADE("opts"); local O=N.Options
+    local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     UIParent.width=640; UIParent.height=360; UIParent:SetScale(.83)
     O.checks.worldmap.caption=string.rep("Long localized label ",5)
     local original=O.modifier.GenerateMenu

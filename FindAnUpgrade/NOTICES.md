@@ -54,3 +54,5 @@ QuestieDB Forever artifact plus its matching Forever-authored corrections.
 `data/catalog-chain-records.json` preserves per-field authority, source hashes,
 stronger optional-link overrides and rejected self references. Inherited facts
 remain nonblocking; no Questie code, raw database or runtime requirement is added.
+
+SomethingNeedDoing 0.3.0 by Matt Silverlock is bundled under Apache-2.0. See `Libs/SomethingNeedDoing/LICENSE` for the full license and `Libs/SomethingNeedDoing/UPSTREAM.json` for source provenance.
