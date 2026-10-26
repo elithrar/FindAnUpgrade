@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Update the bundled SomethingNeedDoing runtime to 0.4.0; retain existing settings and UI ownership.
+
 ## 0.1.6
 
 - Use SomethingNeedDoing 0.3.0 for core events, hooks and slash commands; preserve existing settings and gameplay behavior.
