@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.6
+
+- Bundle SomethingNeedDoing 0.2.0, pinned to its reviewed upstream commit with Apache-2.0 license and package integrity checks.
+- Use SND for core event subscriptions and slash registration, with bounded callback diagnostics and lifecycle cleanup.
+- Preserve existing SavedVariables, gameplay models, options, font behavior and domain-specific timers.
+- Offline tests cover the migrated runtime. In-game rendering, input, combat/taint and coexistence checks remain pending.
+
 ## 0.1.5
 
 - Refresh saved quest titles and levels in Shortlist after player-level changes or metadata invalidation, using the same metadata cache as Quests.

@@ -137,8 +137,8 @@ end)
 test("bare slash opens search while explicit aliases keep settings separate",function()
     local N=W.Init(); local search,options=0,0
     N.Search.Toggle=function() search=search+1 end; N.Options.Toggle=function() options=options+1 end
-    for _,command in ipairs({"","search","s"}) do SlashCmdList.FINDANUPGRADE(command) end
-    for _,command in ipairs({"opts","options"}) do SlashCmdList.FINDANUPGRADE(command) end
+    for _,command in ipairs({"","search","s"}) do SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE(command) end
+    for _,command in ipairs({"opts","options"}) do SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE(command) end
     assert(search==3 and options==2)
 end)
 test("completion events remove stale native quest rows through provider eligibility",function()

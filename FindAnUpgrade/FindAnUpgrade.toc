@@ -2,10 +2,17 @@
 ## Title: FindAnUpgrade
 ## Notes: Compact quest previews and subtle Forever quest classification cues.
 ## Author: Matt
-## Version: 0.1.5
+## Version: 0.1.6
 ## SavedVariables: FindAnUpgradeDB, QuestBriefDB, FindAnUpgradeObservations
 ## SavedVariablesPerCharacter: FindAnUpgradeCharacterDB
 ## OptionalDeps: LibSharedMedia-3.0, Questie, QuestieDB
+Libs/SomethingNeedDoing/Core.lua
+Libs/SomethingNeedDoing/Diagnostics.lua
+Libs/SomethingNeedDoing/Scope.lua
+Libs/SomethingNeedDoing/State.lua
+Libs/SomethingNeedDoing/Settings.lua
+Libs/SomethingNeedDoing/UI.lua
+Libs/SomethingNeedDoing/Options.lua
 Model.lua
 Shortlist.lua
 Data/Quests.lua

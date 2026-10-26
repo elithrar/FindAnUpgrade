@@ -1,3 +1,11 @@
+-- CallbackHandler accepts method names and multiple owners for each event.
+local function registerMedia(callbacks, owner, event, callback)
+    local previous = callbacks[event]
+    callbacks[event] = function(...)
+        if previous then previous(...) end
+        if type(callback)=="string" then owner[callback](owner, ...) else callback(...) end
+    end
+end
 local W=assert(loadfile(ROOT.."/tests/wow_mock.lua"))()
 PASSED=0
 local function test(name,fn)fn();PASSED=PASSED+1;print("PASS "..name)end
@@ -9,7 +17,7 @@ local function setup()
 end
 local function media()
     local callbacks={};local lib={IsValid=function()return true end,Fetch=function()return "Expressway.ttf"end}
-    lib.RegisterCallback=function(owner,event,fn)callbacks[event]=function()fn(nil,"font")end end
+    lib.RegisterCallback=function(owner,event,fn)registerMedia(callbacks,owner,event,fn)end
     LibStub=function()return lib end
     return callbacks,lib
 end
@@ -29,7 +37,7 @@ end)
 test("native family recovers after an explicit font registration signal",function()
     local N=setup();local callbacks=media();GameTooltipText.font={"locale-tooltip.ttf",12,""};W.missingFont="locale-tooltip.ttf";W.Event("ADDON_LOADED","SharedMedia")
     assert(N.Options.texts[1].object:GetFont()==STANDARD_TEXT_FONT)
-    W.missingFont=nil;callbacks.LibSharedMedia_Registered()
+    W.missingFont=nil;callbacks.LibSharedMedia_Registered(nil,"font")
     for object in pairs(N.UI.fontSizes) do assert(object:GetFont()=="locale-tooltip.ttf") end
 end)
 test("owned hover text uses the selected family and remeasures wrapped title on refresh",function()
@@ -62,7 +70,7 @@ end)
 test("missing selected media remains saved and recovers on its registration signal",function()
     local N=setup();local valid=false;local callbacks={};local fonts={}
     local lib={IsValid=function(_,kind,name)return valid and name=="Later face"end,Fetch=function()return "later.ttf"end,HashTable=function()return fonts end}
-    lib.RegisterCallback=function(owner,event,fn)callbacks[event]=fn end;LibStub=function()return lib end
+    lib.RegisterCallback=function(owner,event,fn)registerMedia(callbacks,owner,event,fn)end;LibStub=function()return lib end
     N.Core:Change("font","Later face");W.Event("ADDON_LOADED","Media")
     assert(N.Core.profile.font=="Later face" and N.Options.font.Text:GetText()=="Later face (unavailable)")
     for object in pairs(N.UI.fontSizes) do assert(object:GetFont()==GameTooltipText:GetFont()) end
@@ -103,7 +111,7 @@ test("warm font refresh and deferred open menus do not rescan media or wake sear
     local lib={IsValid=function(_,_,name)calls.valid=calls.valid+1;return names[name]~=nil end,
         Fetch=function(_,_,name)calls.fetch=calls.fetch+1;return names[name]end,
         HashTable=function()calls.hash=calls.hash+1;return names end}
-    lib.RegisterCallback=function(_,event,fn)callbacks[event]=fn end
+    lib.RegisterCallback=function(owner,event,fn)registerMedia(callbacks,owner,event,fn)end
     LibStub=function()calls.stub=calls.stub+1;return lib end
     W.Event("ADDON_LOADED","Media");N.Options:Toggle(N.Core);N.Core:Change("font","Selected");N.UI:RefreshFonts()
     local O=N.Options

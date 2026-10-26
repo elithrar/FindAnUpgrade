@@ -71,3 +71,9 @@ Pushing a `v*` tag starts [the release workflow](.github/workflows/release.yml),
 Respect branch protection/review requirements and verify main CI. Merge, credentials, tags, publication and installation require applicable user authorization; later explicit instructions can authorize them. Cleanup grants no release/install permission.
 
 After release approval, finish required live acceptance and checks; use an annotated matching stable `vX.Y.Z` tag reachable from `origin/main` on a clean tracked tree. Never move published tags/replace differing assets or expose secrets. CurseForge requires exact Forever **1.60.1/type 88568**. Unresolved upload-pending receipts block retries until dashboard reconciliation. Merge/build does not publish or verify API rights/moderation/public visibility.
+
+## SomethingNeedDoing dependency
+
+`FindAnUpgrade/Libs/SomethingNeedDoing/UPSTREAM.json` pins the bundled SND runtime and its file hashes. Keep its Lua files and Apache license byte-identical to that commit; fix framework issues upstream. Load order is explicit in the TOC. `Core.lua` creates the private app and core scope; SND owns ordinary core event subscriptions and slash commands. Check the `ok, valueOrError` tuple at registration boundaries. Native logout work must remain outside scoped events: SND 0.2.0 disposes scopes before logout delivery.
+
+SavedVariables and gameplay models retain their existing owners. Do not copy a live settings table into SND state and continue mutating both. A future settings/UI migration must cover every write path, including profile changes, previews, drag and dock callbacks, together. Use the pinned upstream `API.md` for API contracts; this file describes consumer boundaries rather than duplicating the API.

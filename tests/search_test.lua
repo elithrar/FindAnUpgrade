@@ -50,18 +50,18 @@ test("registered finder aliases open and reopen without taking edit focus",funct
     for _,command in ipairs({"","search","s"}) do
         local N=setup();local S=N.Search
         for attempt=1,2 do
-            SlashCmdList.FINDANUPGRADE(command)
+            SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE(command)
             assert(S:Visible() and not S.search:HasFocus(),"opening the finder took search focus")
             for _,e in ipairs({S.search,S.minimumInput,S.maximumInput}) do assert(e.autoFocus==false and not e:HasFocus()) end
             W.time=W.time+.3;S:Tick();assert(not S.search:HasFocus())
-            SlashCmdList.FINDANUPGRADE(command);assert(not S:Visible())
+            SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE(command);assert(not S:Visible())
         end
     end
 end)
 
 test("closing a deliberately focused search releases focus and reopening retains its query",function()
     for _,close in ipairs({
-        function(S)SlashCmdList.FINDANUPGRADE("")end,
+        function(S)SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("")end,
         function(S)S.close:Fire("OnClick")end,
         function(S)S.search:Fire("OnEscapePressed")end,
     }) do
@@ -70,7 +70,7 @@ test("closing a deliberately focused search releases focus and reopening retains
         S.search:SetFocus();S.search:SetText("Helmet");S.search:Fire("OnTextChanged",true)
         W.time=W.time+.3;S:Tick();assert(S.search:HasFocus() and #S.results==1 and S.results[1].id==9)
         close(S);assert(not S:Visible() and not S.search:HasFocus())
-        SlashCmdList.FINDANUPGRADE("");W.time=W.time+.3;S:Tick()
+        SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("");W.time=W.time+.3;S:Tick()
         assert(S:Visible() and not S.search:HasFocus() and S.search:GetText()=="Helmet" and #S.results==1)
     end
 end)
@@ -84,7 +84,7 @@ end)
 
 test("opening clears stale search focus even if it was focused while hidden",function()
     local N=setup();local S=N.Search;S.search:SetFocus()
-    SlashCmdList.FINDANUPGRADE("");assert(S:Visible() and not S.search:HasFocus())
+    SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("");assert(S:Visible() and not S.search:HasFocus())
 end)
 
 test("clear refreshes both views without taking focus or erasing the other query",function()
