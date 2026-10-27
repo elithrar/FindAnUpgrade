@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.6" }; N.Core = C
+local C = { version = "0.1.7" }; N.Core = C
 -- SND owns ordinary subscriptions; gameplay and SavedVariables retain their existing owners.
 local app = N.SomethingNeedDoing:NewAddon(ADDON, {version=C.version})
 N.App = app
