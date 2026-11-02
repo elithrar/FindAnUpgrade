@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.8
+
+- Sync the October 29 Quest website corrections: add Weevil K. Neevil to My Little Friends, resolve three placeholder reward names, and correct three minimum levels to 35.
+- Keep both Sign Me Up! item reward lists unconfirmed instead of claiming they are empty.
+- Retain the original source snapshot and hash-bound website update evidence; reject conflicting future imports.
+
 ## 0.1.7
 
 - Update the bundled SomethingNeedDoing runtime to 0.4.0; retain existing settings and UI ownership.

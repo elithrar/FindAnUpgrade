@@ -24,6 +24,28 @@ local function start()
     return N
 end
 
+test("website corrections reach bundled reward fallback without claiming unknown lists empty",function()
+    local N=W.Init();W.rewardReady=false
+    C_QuestLog.GetTitleForQuestID=function()return nil end
+    C_QuestLog.GetQuestDifficultyLevel=function()return nil end
+    C_Item={IsItemDataCachedByID=function()return false end}
+    assert(N.Catalog:Begin());while N.Catalog:Step() do end
+    local rewards=N.Rewards.Read(93176)
+    assert(rewards.recordedGroups and #rewards.items.items==1 and #rewards.choices.items==0)
+    local item=rewards.items.items[1]
+    assert(item.itemID==280456 and item.name=="Weevil K. Neevil" and item.quantity==1 and item.group=="guaranteed")
+    for _,id in ipairs({95816,95819}) do
+        local unknown=N.Rewards.Read(id)
+        assert(not unknown.recordedGroups and unknown.items.state=="unavailable")
+    end
+    for _,id in ipairs({92841,92844,92846}) do
+        assert(N.Providers.Source(id).minimum==35)
+    end
+    W.rewardReady=true;W.items={};W.choices={}
+    local native=N.Rewards.Read(93176)
+    assert(not native.recordedGroups and native.items.state=="ready" and #native.items.items==0)
+end)
+
 test("comprehensive identity retains published empty and unknown quests without Questie",function()
     local N=start();assert(#N.Catalog.order==3 and N.Catalog.records[292] and N.Catalog.records[999001])
     assert(N.Providers.Source(292).itemState=="published-empty" and N.Providers.Source(999001).itemState=="unknown")

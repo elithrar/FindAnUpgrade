@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-10-29",
   "quests": [
     {
       "id": 1,
@@ -134856,7 +134856,7 @@
       "items": [
         {
           "itemID": 15102,
-          "name": "Item #15102",
+          "name": "Un'Goro Tested Sample",
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
@@ -135513,7 +135513,7 @@
       "items": [
         {
           "itemID": 15103,
-          "name": "Item #15103",
+          "name": "Corrupt Tested Sample",
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
@@ -187050,7 +187050,7 @@
       "items": [
         {
           "itemID": 18951,
-          "name": "Item #18951",
+          "name": "Evonice's Landin' Pilla",
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
@@ -276546,7 +276546,7 @@
       "confirmation": "published",
       "title": "Valley of Bones",
       "level": 40,
-      "minimum": 30,
+      "minimum": 35,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 315,
@@ -276595,7 +276595,7 @@
       "confirmation": "published",
       "title": "Mountain of Bones",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 3450,
@@ -276655,7 +276655,7 @@
       "confirmation": "published",
       "title": "Outcast Necromancers",
       "level": 40,
-      "minimum": 30,
+      "minimum": 35,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2350,
@@ -278649,8 +278649,16 @@
     },
     {
       "id": 93176,
-      "items": [],
-      "itemState": "published-empty",
+      "items": [
+        {
+          "itemID": 280456,
+          "name": "Weevil K. Neevil",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
       "confirmation": "published",
       "title": "My Little Friends",
       "level": 35,
@@ -278666,7 +278674,7 @@
       ],
       "eligibilityUnknown": true,
       "fieldStates": {
-        "items": "published-empty",
+        "items": "published",
         "title": "published",
         "level": "published",
         "minimum": "published",
@@ -293464,7 +293472,7 @@
     {
       "id": 95816,
       "items": [],
-      "itemState": "published-empty",
+      "itemState": "unknown",
       "confirmation": "published",
       "title": "Sign Me Up!",
       "level": 60,
@@ -293488,7 +293496,7 @@
       ],
       "eligibilityUnknown": true,
       "fieldStates": {
-        "items": "published-empty",
+        "items": "unknown",
         "title": "published",
         "level": "published",
         "minimum": "published",
@@ -293605,7 +293613,7 @@
     {
       "id": 95819,
       "items": [],
-      "itemState": "published-empty",
+      "itemState": "unknown",
       "confirmation": "published",
       "title": "Sign Me Up!",
       "level": 60,
@@ -293629,7 +293637,7 @@
       ],
       "eligibilityUnknown": true,
       "fieldStates": {
-        "items": "published-empty",
+        "items": "unknown",
         "title": "published",
         "level": "published",
         "minimum": "published",

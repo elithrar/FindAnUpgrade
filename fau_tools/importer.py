@@ -797,7 +797,7 @@ def main(argv=None, *, prog=None):
         "path": "data/catalog-source.json",
         "sha256": digest((ROOT / "data/catalog-source.json").read_bytes()),
     }
-    for key in ("history", "gaps", "chains"):
+    for key in ("history", "gaps", "chains", "reviewed"):
         if key in prior_provenance["inputs"]:
             inputs[key] = prior_provenance["inputs"][key]
 
@@ -809,7 +809,7 @@ def main(argv=None, *, prog=None):
                 "targetBuild": BUILD,
                 "inputs": ordered_inputs(inputs, prior_provenance["inputs"]),
                 "classificationAuthority": "data/primary-statuses.json",
-                "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Missing fields stay unknown; native cache identity is not decoded reward proof.",
+                "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Separately receipted reviewed updates replace only approved exact fields and reject conflicting source values. Missing fields stay unknown; native cache identity is not decoded reward proof.",
             },
         )
 

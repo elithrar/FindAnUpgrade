@@ -28,6 +28,16 @@ URL/SHA-256 provenance in the source package. Raw HTML, quest prose, website
 scripts, artwork and client files are excluded. The repository's BSD license
 does not license underlying game content or third-party source evidence.
 
+The [Quest website's October 29 update](https://quests.questionable.services/data-update-2026-10-29.html)
+supplies nine reviewed, exact-quest corrections to rewards, item names, minimum
+levels and unknown reward states. `data/catalog-reviewed-updates.json` retains
+the website URL, byte-count and SHA-256 receipts, the previous values and each
+accepted field change. These corrections are separate from the October 15
+snapshot. The website cites saved build 70425 quest records and installed build
+70685 item records; those client files were not acquired or bundled by this
+update. Unconfirmed rewards remain unknown and current realm availability is
+not established.
+
 Published facts and current native player rewards are separate. Missing fields
 remain unknown; a published empty item list is explicit. Native data takes
 precedence when ready. Current availability and live behavior are not established

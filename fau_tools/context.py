@@ -71,6 +71,7 @@ SOURCE_FILES = (
     "data/catalog-metadata-records.json",
     "data/catalog-primary-records.json",
     "data/catalog-public-records.json",
+    "data/catalog-reviewed-updates.json",
     "data/catalog-source.json",
     "data/catalog-sources.json",
     "data/catalog-supplemental-metadata.json",

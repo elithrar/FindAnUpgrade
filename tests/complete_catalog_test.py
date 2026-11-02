@@ -6,9 +6,16 @@ import struct
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from fau_tools.att import merge, parse
-from fau_tools.catalog import build_complete, read_inputs, validate_complete
+from fau_tools.catalog import (
+    apply_reviewed_update,
+    build_complete,
+    read_inputs,
+    reviewed_updates,
+    validate_complete,
+)
 from fau_tools.html import quest_detail, quest_index
 from fau_tools.importer import native_ids
 
@@ -42,6 +49,134 @@ def item(group="You will receive:", domain="forever", quantity=""):
 
 
 class CompleteCatalogTests(unittest.TestCase):
+    def test_website_review_changes_only_nine_quests_and_preserves_original_sources(
+        self,
+    ):
+        provenance, inputs = read_inputs(ROOT)
+        original = copy.deepcopy(inputs)
+        source, report = build_complete(ROOT)
+        without_review = {
+            key: value for key, value in inputs.items() if key != "reviewed"
+        }
+        with mock.patch(
+            "fau_tools.catalog.read_inputs", return_value=(provenance, without_review)
+        ):
+            baseline, _ = build_complete(ROOT)
+        before = {row["id"]: row for row in baseline["quests"]}
+        after = {row["id"]: row for row in source["quests"]}
+        self.assertEqual(before.keys(), after.keys())
+        self.assertEqual(
+            {quest for quest in before if before[quest] != after[quest]},
+            {4561, 4661, 7704, 92841, 92844, 92846, 93176, 95816, 95819},
+        )
+        self.assertEqual(
+            after[93176]["items"],
+            [
+                {
+                    "itemID": 280456,
+                    "name": "Weevil K. Neevil",
+                    "quantity": 1,
+                    "group": "guaranteed",
+                    "slot": 1,
+                }
+            ],
+        )
+        for quest, name in (
+            (4561, "Un'Goro Tested Sample"),
+            (4661, "Corrupt Tested Sample"),
+            (7704, "Evonice's Landin' Pilla"),
+        ):
+            self.assertEqual(after[quest]["items"][0]["name"], name)
+        for quest in (92841, 92844, 92846):
+            self.assertEqual(after[quest]["minimum"], 35)
+        for quest in (95816, 95819):
+            self.assertEqual(after[quest]["items"], [])
+            self.assertEqual(after[quest]["itemState"], "unknown")
+            self.assertEqual(after[quest]["fieldStates"]["items"], "unknown")
+            self.assertEqual(
+                after[quest]["confirmation"], before[quest]["confirmation"]
+            )
+            self.assertEqual(
+                after[quest]["rewardValues"], before[quest]["rewardValues"]
+            )
+        self.assertEqual(inputs, original)
+        self.assertEqual(report["reviewedUpdates"], inputs["reviewed"])
+
+    def test_reviewed_updates_reject_missing_receipts_duplicate_ids_and_unsupported_fields(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        document = inputs["reviewed"]
+        for mutation in (
+            "receipt",
+            "duplicate",
+            "field",
+            "evidence",
+            "quantity",
+            "removal",
+        ):
+            with self.subTest(mutation=mutation):
+                changed = copy.deepcopy(document)
+                row = next(row for row in changed["records"] if row["id"] == 93176)
+                if mutation == "receipt":
+                    changed["sources"]["rewards"]["sha256"] = "broken"
+                elif mutation == "duplicate":
+                    changed["records"].append(copy.deepcopy(row))
+                elif mutation == "field":
+                    row["expected"]["confirmation"] = "unconfirmed"
+                    row["changes"]["confirmation"] = "published"
+                elif mutation == "evidence":
+                    row["evidence"] = ["missing"]
+                elif mutation == "quantity":
+                    row["changes"]["items"][0]["quantity"] = True
+                else:
+                    row["expected"], row["changes"] = row["changes"], row["expected"]
+                with self.assertRaises(ValueError):
+                    reviewed_updates(changed)
+
+    def test_reviewed_update_conflicts_abort_and_already_adopted_values_are_idempotent(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        updates = reviewed_updates(inputs["reviewed"])
+        update = updates[93176]
+        row = {
+            "id": 93176,
+            "title": update["title"],
+            **copy.deepcopy(update["expected"]),
+        }
+        apply_reviewed_update(row, update)
+        apply_reviewed_update(row, update)
+        self.assertEqual(row["items"], update["changes"]["items"])
+        row["items"][0]["quantity"] = 2
+        with self.assertRaisesRegex(ValueError, "source conflict"):
+            apply_reviewed_update(row, update)
+        row["title"] = "Different identity"
+        with self.assertRaisesRegex(ValueError, "identity"):
+            apply_reviewed_update(row, update)
+        for quest in (95816, 95819):
+            row = {
+                "id": quest,
+                "title": updates[quest]["title"],
+                "itemState": "published",
+                "items": [
+                    {"itemID": 123, "quantity": 1, "group": "guaranteed", "slot": 1}
+                ],
+            }
+            with self.assertRaisesRegex(ValueError, "source conflict"):
+                apply_reviewed_update(row, updates[quest])
+
+    def test_new_primary_minimum_cannot_be_hidden_by_reviewed_public_correction(self):
+        provenance, inputs = read_inputs(ROOT)
+        inputs["primary"]["records"].append(
+            {"id": 92841, "title": "Valley of Bones", "items": [], "minimum": 40}
+        )
+        with mock.patch(
+            "fau_tools.catalog.read_inputs", return_value=(provenance, inputs)
+        ):
+            with self.assertRaisesRegex(ValueError, "primary conflict"):
+                build_complete(ROOT)
+
     def test_output_reproduces_every_source_id_and_explicit_unknown(self):
         source, report = build_complete(ROOT)
         actual = json.loads((ROOT / "data/catalog-complete-source.json").read_bytes())
@@ -72,8 +207,16 @@ class CompleteCatalogTests(unittest.TestCase):
             self.assertEqual(output[quest]["questKind"], "hidden-trigger")
         for published in inputs["public"]["records"]:
             row = output[published["id"]]
-            self.assertEqual(row["items"], published["items"])
-            self.assertEqual(row["itemState"], published["itemState"])
+            reviewed = next(
+                (
+                    entry["changes"]
+                    for entry in inputs.get("reviewed", {}).get("records", [])
+                    if entry["id"] == published["id"]
+                ),
+                {},
+            )
+            for field in ("items", "itemState"):
+                self.assertEqual(row[field], reviewed.get(field, published[field]))
             for field in ("xp", "money", "reputation"):
                 if field in published:
                     self.assertEqual(row["rewardValues"][field], published[field])
