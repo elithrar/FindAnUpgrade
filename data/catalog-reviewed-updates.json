@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "revision": "quest-website-2026-10-29",
+  "reviewedAt": "2026-11-02",
+  "scope": "Exact-field corrections published by the Quest website. The older public snapshot and its receipts remain unchanged; all other fields retain their original sources.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported.",
+  "sources": {
+    "quests": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "9d3f98016292c90ffd0bc144faa2028ba1d49aeb3769bb60d7f61618d94a865f",
+      "bytes": 1595553,
+      "collectedAt": "2026-11-02T13:05:12.235119+00:00"
+    },
+    "rewards": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "1986d9053bb40005b63320de85fe9ad479a4dd084243321a775aa6f8bb0283c7",
+      "bytes": 275258,
+      "collectedAt": "2026-11-02T13:05:13.383126+00:00"
+    },
+    "notes": {
+      "url": "https://quests.questionable.services/data-update-2026-10-29.html",
+      "sha256": "32885749bf0eadfd7b87ce61b2854541bd921bbc9c4583c490ffdc478db53f92",
+      "bytes": 3919,
+      "collectedAt": "2026-11-02T13:05:12.634087+00:00"
+    }
+  },
+  "records": [
+    {
+      "id": 4561,
+      "title": "Testing for Impurities - Un'Goro Crater",
+      "expected": {
+        "items": [
+          {
+            "itemID": 15102,
+            "name": "Item #15102",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 15102,
+            "name": "Un'Goro Tested Sample",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "Published October 29 review replaces a placeholder item name using installed build 70685 data; reward identity, group, slot and quantity are unchanged."
+    },
+    {
+      "id": 4661,
+      "title": "Testing for Corruption - Felwood",
+      "expected": {
+        "items": [
+          {
+            "itemID": 15103,
+            "name": "Item #15103",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 15103,
+            "name": "Corrupt Tested Sample",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "Published October 29 review replaces a placeholder item name using installed build 70685 data; reward identity, group, slot and quantity are unchanged."
+    },
+    {
+      "id": 7704,
+      "title": "Look at the Size of It!",
+      "expected": {
+        "items": [
+          {
+            "itemID": 18951,
+            "name": "Item #18951",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 18951,
+            "name": "Evonice's Landin' Pilla",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "Published October 29 review replaces a placeholder item name using installed build 70685 data; reward identity, group, slot and quantity are unchanged."
+    },
+    {
+      "id": 92841,
+      "title": "Valley of Bones",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "quests",
+        "notes"
+      ],
+      "reason": "Published October 29 review corrects the minimum level using saved native records and the October 8 Blizzard chain requirement change."
+    },
+    {
+      "id": 92844,
+      "title": "Mountain of Bones",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "quests",
+        "notes"
+      ],
+      "reason": "Published October 29 review corrects the minimum level using saved native records and the October 8 Blizzard chain requirement change."
+    },
+    {
+      "id": 92846,
+      "title": "Outcast Necromancers",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "quests",
+        "notes"
+      ],
+      "reason": "Published October 29 review corrects the minimum level using saved native records and the October 8 Blizzard chain requirement change."
+    },
+    {
+      "id": 93176,
+      "title": "My Little Friends",
+      "expected": {
+        "items": [],
+        "itemState": "published-empty"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 280456,
+            "name": "Weevil K. Neevil",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "Published October 29 review adds the guaranteed item and quantity from a saved build 70425 quest record; its item name is from installed build 70685 data."
+    },
+    {
+      "id": 95816,
+      "title": "Sign Me Up!",
+      "expected": {
+        "items": [],
+        "itemState": "published-empty"
+      },
+      "changes": {
+        "items": [],
+        "itemState": "unknown"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "The website explicitly leaves complete item rewards unconfirmed. Empty direct rewards do not prove that no reward is granted through another mechanism."
+    },
+    {
+      "id": 95819,
+      "title": "Sign Me Up!",
+      "expected": {
+        "items": [],
+        "itemState": "published-empty"
+      },
+      "changes": {
+        "items": [],
+        "itemState": "unknown"
+      },
+      "evidence": [
+        "rewards",
+        "notes"
+      ],
+      "reason": "The website explicitly leaves complete item rewards unconfirmed. Empty direct rewards do not prove that no reward is granted through another mechanism."
+    }
+  ]
+}

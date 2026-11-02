@@ -41,8 +41,12 @@
     "chains": {
       "path": "data/catalog-chain-records.json",
       "sha256": "d6d5140c60b2d8e28dbb34c1ef8428403005e7b6ae41d36af48dd18ac92b0df6"
+    },
+    "reviewed": {
+      "path": "data/catalog-reviewed-updates.json",
+      "sha256": "5ea1660c05d55f69d9a42bee4a3eebf2d5b11f919d60b279b9e0fddaf607176f"
     }
   },
   "classificationAuthority": "data/primary-statuses.json",
-  "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Missing fields stay unknown; native cache identity is not decoded reward proof."
+  "rule": "Union of exact public, compiled, current-cache and approved-classification IDs. Public item groups own reward associations; pinned supplemental numeric facts add proved missing starters and positions without relaxing source restrictions. Primary exact pages challenge matching rows. Separately receipted reviewed updates replace only approved exact fields and reject conflicting source values. Missing fields stay unknown; native cache identity is not decoded reward proof."
 }

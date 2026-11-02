@@ -156,7 +156,8 @@ class PackageTest(unittest.TestCase):
             path.relative_to(self.root): path.read_bytes()
             for path in (self.root / "data").glob("*.json")
         }
-        self.assertEqual(len(facts), 18)
+        self.assertEqual(len(facts), 19)
+        self.assertIn(Path("data/catalog-reviewed-updates.json"), facts)
         self.assertFalse((self.root / "dist").exists())
         first = package.build(self.root)
         expected_source, expected_report = build_complete(self.root)

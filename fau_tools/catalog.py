@@ -1,6 +1,7 @@
 """Canonical catalog reconciliation, validation, and deterministic Lua projection."""
 
 import argparse
+import copy
 import hashlib
 import json
 import re
@@ -64,6 +65,92 @@ def read_inputs(root):
 
 def pairs(items):
     return sorted((item["group"], item["itemID"], item["quantity"]) for item in items)
+
+
+def reviewed_updates(document):
+    """Validate narrowly scoped, receipted corrections without rewriting sources."""
+    if document is None:
+        return {}
+    if document.get("schemaVersion") != 1 or not re.fullmatch(
+        r"quest-website-\d{4}-\d{2}-\d{2}", document.get("revision", "")
+    ):
+        raise ValueError("Unsupported reviewed catalog update")
+    sources = document.get("sources", {})
+    if not sources:
+        raise ValueError("Reviewed update requires source receipts")
+    for receipt in sources.values():
+        if (
+            not receipt.get("url", "").startswith(
+                "https://quests.questionable.services/"
+            )
+            or not re.fullmatch(r"[a-f0-9]{64}", receipt.get("sha256", ""))
+            or type(receipt.get("bytes")) is not int
+            or receipt["bytes"] <= 0
+            or not receipt.get("collectedAt")
+        ):
+            raise ValueError("Invalid reviewed update source receipt")
+    updates = {}
+    for update in document["records"]:
+        quest = update["id"]
+        before, after = update["expected"], update["changes"]
+        if (
+            type(quest) is not int
+            or not 0 < quest < 2**31
+            or quest in updates
+            or not update.get("title")
+            or not update.get("reason")
+            or not update.get("evidence")
+            or set(update["evidence"]) - sources.keys()
+            or not before
+            or before.keys() != after.keys()
+            or before.keys() - {"items", "itemState", "minimum"}
+        ):
+            raise ValueError("Invalid reviewed update identity, fields or evidence")
+        for fields in (before, after):
+            if "minimum" in fields and (
+                type(fields["minimum"]) is not int or not 1 <= fields["minimum"] <= 200
+            ):
+                raise ValueError("Invalid reviewed minimum level")
+            if "items" in fields or "itemState" in fields:
+                items, state = fields.get("items"), fields.get("itemState")
+                if (
+                    not isinstance(items, list)
+                    or state not in ("published", "published-empty", "unknown")
+                    or bool(items) != (state == "published")
+                ):
+                    raise ValueError("Invalid reviewed reward state")
+                slots = set()
+                for item in items:
+                    if (
+                        set(item) != {"itemID", "name", "quantity", "group", "slot"}
+                        or any(
+                            type(item[key]) is not int or not 0 < item[key] < 2**31
+                            for key in ("itemID", "quantity", "slot")
+                        )
+                        or item["group"] not in ("guaranteed", "choice")
+                        or not isinstance(item["name"], str)
+                        or not 0 < len(item["name"]) <= 100
+                        or any(ord(c) < 32 for c in item["name"])
+                        or (item["group"], item["slot"]) in slots
+                    ):
+                        raise ValueError("Invalid reviewed reward slot")
+                    slots.add((item["group"], item["slot"]))
+        if Counter(pairs(before.get("items", []))) - Counter(
+            pairs(after.get("items", []))
+        ):
+            raise ValueError("Reviewed update cannot remove recorded rewards")
+        updates[quest] = update
+    return updates
+
+
+def apply_reviewed_update(row, update):
+    """Abort on source drift; an already adopted correction is idempotent."""
+    if row.get("title") != update["title"] or row["id"] != update["id"]:
+        raise ValueError("Reviewed update quest identity changed")
+    current = {key: row.get(key) for key in update["expected"]}
+    if current not in (update["expected"], update["changes"]):
+        raise ValueError("Reviewed update source conflict: " + str(row["id"]))
+    row.update(copy.deepcopy(update["changes"]))
 
 
 def entity(location):
@@ -261,6 +348,7 @@ def merge_supplemental(row, incoming, disagreements):
 
 def build_complete(root, include_supplemental=True, include_chains=True):
     provenance, inputs = read_inputs(root)
+    updates = reviewed_updates(inputs.get("reviewed"))
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
         raise ValueError("Public index was truncated or deduplicated incorrectly")
@@ -302,6 +390,8 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     ):
         raise ValueError("Invalid monotonic identity history")
     universe = set(public) | compiled | native | classification | set(legacy) | history
+    if updates.keys() - universe:
+        raise ValueError("Reviewed update cannot introduce unverified quest identities")
     rows, gaps, disagreements, withheld_positions = [], [], [], []
     added_pairs, removed_pairs = [], []
     for quest in sorted(universe):
@@ -375,6 +465,13 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         # A retained current primary page challenges every corresponding exact
         # source group, rather than replacing an unexplained discrepancy.
         if checked:
+            update = updates.get(quest)
+            if update and "minimum" in update["changes"] and "minimum" in checked:
+                if checked["minimum"] not in (
+                    update["expected"]["minimum"],
+                    update["changes"]["minimum"],
+                ):
+                    raise ValueError("Reviewed update primary conflict: " + str(quest))
             if not published or pairs(checked["items"]) != pairs(published["items"]):
                 raise ValueError("Primary/public reward group conflict: " + str(quest))
             for key in ("xp", "money", "level", "minimum"):
@@ -481,6 +578,8 @@ def build_complete(root, include_supplemental=True, include_chains=True):
             type(row["minimum"]) is int and 1 <= row["minimum"] <= 200
         ):
             row.pop("minimum")
+        if quest in updates:
+            apply_reviewed_update(row, updates[quest])
         # Historical availability constraints are retained as recorded facts;
         # a source row never claims that the quest is currently offered.
         row["eligibilityUnknown"] = True
@@ -522,9 +621,12 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "sourceRevision": "public-forever-" + inputs["public"]["collectedAt"][:10],
         "quests": rows,
     }
+    if updates:
+        source["sourceRevision"] += "+" + inputs["reviewed"]["revision"]
     state_counts = Counter(row["itemState"] for row in rows)
     report = {
         "schemaVersion": 2,
+        "reviewedUpdates": inputs.get("reviewed", {}),
         "targetBuild": provenance["targetBuild"],
         "scope": "Every exact quest ID in the complete public index, historical compiled Forever catalog, current official quest cache, approved classifications and previous catalog. Identity is separate from current availability.",
         "counts": {
@@ -656,8 +758,13 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         causes = {}
         for field in gap["missing"]:
             if field == "items":
-                cause = evidence.get(row["id"], {}).get(
-                    "cause", "no-current-public-reward-record"
+                cause = (
+                    "reviewed-website-rewards-unconfirmed"
+                    if updates.get(row["id"], {}).get("changes", {}).get("itemState")
+                    == "unknown"
+                    else evidence.get(row["id"], {}).get(
+                        "cause", "no-current-public-reward-record"
+                    )
                 )
             elif field == "currencies":
                 cause = "complete-currency-list-not-exposed"
