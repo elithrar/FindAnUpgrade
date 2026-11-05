@@ -86,7 +86,7 @@ test("owned border none preserves geometry and background and restores native in
     local frames=#W.frames;N.Core:Change("border","dialog")
     assert(card.qBorderFrame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and not card.qBorderFrame.backdrop.bgFile and #W.frames==frames+1)
     N.Core:Change("border","default")
-    assert(card.NineSlice:IsShown() and card.border[4]==1 and not card.qBorderFrame:IsShown() and N.Options.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border")
+    assert(card.NineSlice:IsShown() and card.border[4]==1 and not card.qBorderFrame:IsShown() and N.Options.frame.backdrop.edgeFile=="Interface\\Buttons\\WHITE8X8")
 end)
 
 test("border restyling preserves all four native color channels and rejects incomplete reads",function()

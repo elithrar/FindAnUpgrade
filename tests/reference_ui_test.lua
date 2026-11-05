@@ -117,6 +117,7 @@ local function fixture(config)
     function methods:SetOrientation(value) self.referenceOrientation=value end
     function methods:GetOrientation() return self.referenceOrientation end
     function methods:SetThumbTexture(value)
+        if type(value)=="table" then self.thumb=value;return end
         if not self.thumb then self.thumb=self:CreateTexture(nil,"ARTWORK") end
         self.thumb:SetTexture(value)
     end
@@ -128,7 +129,7 @@ local function fixture(config)
         local frame=create(kind,name,owner,template); parent(frame,owner)
         if template=="UICheckButtonTemplate" then
             frame.Text:SetPoint("LEFT",frame,"RIGHT",-2,0)
-        elseif template=="WowStyle1DropdownTemplate" then
+        elseif template and template:find("WowStyle1DropdownTemplate",1,true) then
             frame.Arrow=W.Object(); parent(frame.Arrow,frame); frame.Arrow:SetSize(20,20)
             frame.Arrow:SetPoint("RIGHT",frame,"RIGHT",-1,0)
             frame.Text:SetSize(0,10)

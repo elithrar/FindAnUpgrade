@@ -84,7 +84,7 @@ test("repeated native scrollbar setup failures reuse the permanent slider",funct
     local N=W.Init();local original=CreateFrame;local remaining=2;local scrollbar
     CreateFrame=function(kind,name,parent,template)
         local frame=original(kind,name,parent,template)
-        if kind=="Slider" and template=="BackdropTemplate" then
+        if kind=="Slider" and template=="BackdropTemplate" and not scrollbar then
             scrollbar=frame;local setThumb=frame.SetThumbTexture
             frame.SetThumbTexture=function(self,value)
                 if remaining>0 then remaining=remaining-1;error("Transient native thumb failure") end
@@ -100,7 +100,7 @@ test("repeated native scrollbar setup failures reuse the permanent slider",funct
     end
     SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");complete(N)
     assert(N.Options.bar==scrollbar and #W.frames==expected)
-    assert(scrollbar.thumb.texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
+    assert(scrollbar.thumb.colorTexture and scrollbar.thumb.colorTexture[1]==1)
 end)
 
 test("unavailable path fonts fall back to the native font object before text",function()
@@ -133,14 +133,14 @@ test("future settings remain read-only through the real options controls",functi
     for _,control in ipairs(N.Options.controls) do if not control.recorder then assert(control.disabled==not control.navigation) end end
 end)
 
-test("options use current XPIsland dialog sections and native radio dropdown",function()
+test("options share framework chrome while preserving columns and native radio dropdown",function()
     local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options
     assert(O.frame:GetWidth()==620 and O.frame:GetHeight()==690)
-    assert(O.frame.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and O.frame.backdrop.edgeSize==16)
-    assert(O.frame.backdrop.insets.left==4 and O.frame.backdropColor[4]==.94)
+    assert(O.frame.backdrop.edgeFile=="Interface\\Buttons\\WHITE8X8" and O.frame.backdrop.edgeSize==1)
+    assert(O.frame.backdrop.insets.left==3 and O.frame.backdropColor[4]==.97)
     assert(#O.sections==6 and O.sections[1].point[2]==0 and O.sections[2].point[2]==292)
     assert(O.sections[1]:GetWidth()==280 and O.sections[2]:GetWidth()==280)
-    assert(O.modifier.template=="WowStyle1DropdownTemplate" and O.modifier:GetWidth()==260 and O.modifier:GetHeight()==24)
+    assert(O.modifier.template=="WowStyle1DropdownTemplate,BackdropTemplate" and O.modifier:GetWidth()==260 and O.modifier:GetHeight()==24)
     assert(O.modifier.Text.justifyV=="MIDDLE" and O.modifier.Text.point[1]=="LEFT")
     assert(O.modifier.Text.point[4]*O.modifier.Text:GetScale()==9 and O.modifier.Text.qOptionsWidth==229)
     assert(O.modifier.menu.scrollHeight==220 and #O.modifier.menu.entries==4)
@@ -148,11 +148,14 @@ test("options use current XPIsland dialog sections and native radio dropdown",fu
     for _,row in ipairs(O.modifier.menu.entries) do assert(row.fontObject==O.menuFont) end
     assert(O.reset:GetHeight()==22 and O.reset.text.point[1]=="CENTER")
     assert(O.status:GetText()=="")
+    assert(not O.modifier.Background:IsShown() and not O.modifier.Arrow:IsShown())
+    O.modifier:OnButtonStateChanged();assert(O.modifier.Text.textColor[1]==.93)
+    assert(O.checks.enabled.checkedTexture and O.checks.enabled.disabledCheckedTexture)
 end)
 
 test("native numeric fields clamp on Enter and restore without writes on Escape",function()
     local N=W.Init(); SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts"); local O=N.Options; local e=O.edits.scale
-    assert(e.template=="InputBoxTemplate" and e:GetWidth()==58 and e:GetHeight()==22)
+    assert(e.template=="InputBoxScriptTemplate,BackdropTemplate" and e:GetWidth()==58 and e:GetHeight()==22)
     assert(O.sliders.scale:GetWidth()==180 and O.sliders.scale:GetHeight()==16)
     e:SetFocus(); e:SetText("999"); e:Fire("OnEnterPressed")
     assert(N.Core.profile.scale==1.2 and e:GetText()=="120" and not e.focused)
@@ -196,7 +199,7 @@ test("single options canvas keeps every setting together without navigation tabs
         assert(control.parent==O.body or control==O.reset)
         assert(not control.navigation)
     end
-    assert(O.bar:GetThumbTexture().texture=="Interface\\Buttons\\UI-SliderBar-Button-Vertical")
+    assert(O.bar:GetThumbTexture().colorTexture[1]==1)
     assert(O.maximum==110 and O.bar:IsShown() and O.frame:GetScale()==1)
     for i=1,15 do O:Toggle(N.Core);O:Toggle(N.Core);O:Refresh() end
     assert(#W.frames==frames and O.font.menuGenerations==1)

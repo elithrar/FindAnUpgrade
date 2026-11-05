@@ -68,9 +68,10 @@ test("repeated late options failures reuse controls and retain atomic retry",fun
     end
     W.allowRecovery=true;SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");assert(N.Options.frame:IsShown() and #UISpecialFrames==1)
 end)
-test("finder copy and options reuse the same working dialog chrome",function()
+test("options use shared chrome while finder and copy retain their dialog chrome",function()
     local N=W.Init();SlashCmdList.FINDANUPGRADE_SND_FINDANUPGRADE("opts");N.Search:Toggle();N.Search:Copy("123")
-    for _,f in ipairs({N.Options.frame,N.Search.frame,N.Search.copyFrame})do
+    assert(N.Options.frame.backdrop.edgeSize==1 and N.Options.frame.backdropColor[4]==.97)
+    for _,f in ipairs({N.Search.frame,N.Search.copyFrame})do
         assert(f.backdrop.edgeFile=="Interface\\DialogFrame\\UI-DialogBox-Border" and f.backdrop.edgeSize==16 and f.backdropColor[4]==.94 and f.border[4]==1)
     end
 end)

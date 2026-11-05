@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.9
+
+- Share options control styling with SomethingNeedDoing 0.4.2: consistent dropdowns, checkboxes, numeric fields, sliders and scrollbars.
+- Preserve the two-column settings layout, native menus, existing saved settings and recovery after interrupted panel construction.
+
 ## 0.1.8
 
 - Sync the October 29 Quest website corrections: add Weevil K. Neevil to My Little Friends, resolve three placeholder reward names, and correct three minimum levels to 35.

@@ -4,9 +4,19 @@ local U, M = N.UI, N.Model
 local gold, ink, muted = {1,.82,.2}, {.93,.94,.97}, {.7,.7,.72}
 local panelWidth,panelHeight,bodyWidth,bodyHeight=620,690,572,710
 local rowStep,sectionGap,labelGap=28,24,20
-local backdrop={bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}}
 
--- Reuse current XPIsland's bounded native controls and scale-aware text fitting.
+-- Keep this addon's two-column layout and persistence owner; SND owns chrome.
+function O:Style(frame,role)
+    local ok,err=N.App.ui:Style(frame,role)
+    if not ok then error(err.message,0)end
+end
+function O:CheckFrame(parent)
+    local frame=self:Frame("CheckButton",parent,"BackdropTemplate")
+    if not frame.Text then frame.Text=frame:CreateFontString(nil,"OVERLAY","GameFontNormal")end
+    frame.Text:ClearAllPoints();frame.Text:SetPoint("LEFT",frame,"RIGHT",4,0)
+    self:Style(frame,"checkbox")
+    return frame
+end
 local function bounded(text,width,height)
     text.qOptionsWidth,text.qOptionsHeight=width,height; text:SetWordWrap(false)
 end
@@ -76,22 +86,20 @@ function O:Label(parent,value,x,y,width,size,color)
 end
 function O:Button(parent,value,x,y,width,callback)
     local b=self:Frame("Button",parent,"BackdropTemplate"); b:SetPoint("TOPLEFT",x,y); b:SetSize(width,22)
-    b:SetBackdrop(backdrop); b:SetBackdropColor(.06,.06,.065,.8); b:SetBackdropBorderColor(.45,.45,.45,.65)
+    self:Style(b,"button")
     b.text=self:Label(b,value,0,0,width-12,12); b.text:ClearAllPoints(); b.text:SetPoint("CENTER")
-    b:SetScript("OnEnter",function() b:SetBackdropBorderColor(.9,.8,.5,.9) end)
-    b:SetScript("OnLeave",function() b:SetBackdropBorderColor(.45,.45,.45,.65) end)
     b:SetScript("OnClick",callback); self.controls[#self.controls+1]=b; return b
 end
 function O:Section(parent,value,x,y,width,height)
     local box=self:Frame("Frame",parent,"BackdropTemplate")
     box:SetFrameLevel(parent:GetFrameLevel()-1); box:SetPoint("TOPLEFT",x,y-9); box:SetSize(width,height)
-    box:SetBackdrop(backdrop); box:SetBackdropColor(.035,.035,.04,.35); box:SetBackdropBorderColor(.35,.35,.35,.5)
+    self:Style(box,"section")
     self:Label(parent,value,x+10,y,width-20,12,gold)
     self.sections[#self.sections+1]=box; return box
 end
 function O:Dropdown(parent,x,y,width,entries,get,choose)
-    local d=self:Frame("DropdownButton",parent,"WowStyle1DropdownTemplate")
-    d:SetPoint("TOPLEFT",x,y); d:SetSize(width,24)
+    local d=self:Frame("DropdownButton",parent,"WowStyle1DropdownTemplate,BackdropTemplate")
+    d:SetPoint("TOPLEFT",x,y); d:SetSize(width,24);self:Style(d,"dropdown")
     self.texts[#self.texts+1]={object=d.Text,size=12}; U:Font(d.Text,12)
     d:SetDefaultText("Choose"); d.Text:ClearAllPoints(); d.Text:SetPoint("LEFT",d,"LEFT",9,0)
     d.Text.qOptionsAnchor={"LEFT",d,"LEFT",9,0}; bounded(d.Text,width-31,24)
@@ -113,7 +121,7 @@ function O:CloseMenu()
     for _,d in ipairs(self.dropdowns or {}) do d:CloseMenu() end
 end
 function O:Check(parent,key,value,x,y,searchDefault)
-    local b=self:Frame("CheckButton",parent,"UICheckButtonTemplate")
+    local b=self:CheckFrame(parent)
     b:SetPoint("TOPLEFT",x-4,y); b:SetSize(24,24); b.key,b.caption=key,value; b.text=b.Text
     self.texts[#self.texts+1]={object=b.Text,size=12}; U:Font(b.Text,12)
     b.Text:SetJustifyH("LEFT"); b.Text:SetTextColor(unpack(ink)); bounded(b.Text,240,24)
@@ -126,13 +134,13 @@ function O:Check(parent,key,value,x,y,searchDefault)
 end
 function O:Slider(parent,key,value,x,y,low,high,step)
     self:Label(parent,value,x,y,260,12)
-    local b=self:Frame("Slider",parent,"UISliderTemplate")
-    b:SetPoint("TOPLEFT",x,y-25); b:SetSize(180,16); b:SetOrientation("HORIZONTAL")
+    local b=self:Frame("Slider",parent,"BackdropTemplate")
+    b:SetPoint("TOPLEFT",x,y-25); b:SetSize(180,16); b:SetOrientation("HORIZONTAL");self:Style(b,"slider")
     b:SetMinMaxValues(low,high); b:SetValueStep(step); b:SetObeyStepOnDrag(true)
-    local e=self:Frame("EditBox",parent,"InputBoxTemplate")
+    local e=self:Frame("EditBox",parent,"InputBoxScriptTemplate,BackdropTemplate")
     self.texts[#self.texts+1]={object=e,size=12}
     e:SetPoint("TOPLEFT",x+202,y-20); e:SetSize(58,22); U:Font(e,12)
-    e:SetTextInsets(6,6,0,0); e:SetAutoFocus(false); e:SetMaxLetters(48)
+    self:Style(e,"input");e:SetTextInsets(6,6,0,0); e:SetAutoFocus(false); e:SetMaxLetters(48)
     self.edits[key]=e; b.edit=e
     b:SetScript("OnValueChanged",function(_,v)
         if not self.refreshing then self.owner:Change(key,math.floor(v+.5)/100) end
@@ -172,6 +180,7 @@ function O:Layout()
     self.scroll:SetSize(bodyWidth,viewport);self.body:SetSize(bodyWidth,bodyHeight)
     self.bar:SetHeight(math.max(22,viewport-4))
     self.maximum=math.max(0,bodyHeight-viewport)
+    self.bar:GetThumbTexture():SetHeight(math.max(22,self.bar:GetHeight()*math.min(1,viewport/bodyHeight)))
     self.scrolling=true;self.bar:SetMinMaxValues(0,self.maximum);self.bar:SetShown(self.maximum>0);self.scrolling=nil
     self:Scroll(self.offset or 0,true)
 end
@@ -179,8 +188,8 @@ function O:SearchNumber(parent,key,label,x,y)
     -- Short numeric rows keep their field near the label, centered in the same
     -- 24px row as the native checkboxes rather than at the slider value column.
     local caption=self:Label(parent,label,x,y,108,12);bounded(caption,108,24)
-    local e=self:Frame("EditBox",parent,"InputBoxTemplate")
-    e:SetPoint("TOPLEFT",x+120,y-1);e:SetSize(58,22);e:SetTextInsets(6,6,0,0);e:SetAutoFocus(false);e:SetMaxLetters(8);U:Font(e,12)
+    local e=self:Frame("EditBox",parent,"InputBoxScriptTemplate,BackdropTemplate")
+    e:SetPoint("TOPLEFT",x+120,y-1);e:SetSize(58,22);self:Style(e,"input");e:SetTextInsets(6,6,0,0);e:SetAutoFocus(false);e:SetMaxLetters(8);U:Font(e,12)
     self.texts[#self.texts+1]={object=e,size=12};self.edits[key]=e;self.controls[#self.controls+1]=e
     e.searchDefault=key
     e:SetScript("OnEnterPressed",function()
@@ -193,7 +202,7 @@ end
 function O:Build(owner,f,parent)
     parent:SetAllPoints(f)
     f:SetSize(panelWidth,panelHeight); f:SetPoint("CENTER"); f:SetFrameStrata("DIALOG")
-    U:Dialog(f)
+    self:Style(f,"dialog")
     f:EnableMouse(true); f:SetClampedToScreen(true); f:SetMovable(true); f:RegisterForDrag("LeftButton")
     f:SetScript("OnDragStart",function() f:StartMoving() end); f:SetScript("OnDragStop",function() f:StopMovingOrSizing() end)
     self.menuFont=self.menuFont or CreateFont("FindAnUpgradeMenuFont"); U:Font(self.menuFont,12)
@@ -204,7 +213,7 @@ function O:Build(owner,f,parent)
     scroll:SetPoint("TOPLEFT",16,-46);scroll:SetSize(bodyWidth,bodyHeight)
     scroll:EnableMouse(true);scroll:EnableMouseWheel(true)
     local page=self:Frame("Frame",scroll);self.body=page;page:SetSize(bodyWidth,bodyHeight);scroll:SetScrollChild(page)
-    self.bar=self:Frame("Slider",parent,"BackdropTemplate");U:VerticalBar(parent,self.bar)
+    self.bar=self:Frame("Slider",parent,"BackdropTemplate");self.bar:SetOrientation("VERTICAL");self.bar:SetWidth(8);self:Style(self.bar,"scrollbar")
     self.bar:SetPoint("TOPRIGHT",-14,-48);self.bar:SetHeight(bodyHeight-4);self.bar:SetValueStep(1)
     self.bar:SetScript("OnValueChanged",function(_,value)if not self.scrolling then self:Scroll(value)end end)
     scroll:SetScript("OnMouseWheel",function(_,delta)if M.Number(delta)then self:Scroll((self.offset or 0)-delta*40)end end)
@@ -255,7 +264,7 @@ function O:Build(owner,f,parent)
     self:Label(page,"Starts in the current zone.",304,searchY-165,260,11,muted)
     local contributeY=secondaryY-248-sectionGap
     self:Section(page,"Contribute quest data",0,contributeY,280,174)
-    local record=self:Frame("CheckButton",page,"UICheckButtonTemplate");self.record=record;record.recorder=true
+    local record=self:CheckFrame(page);self.record=record;record.recorder=true
     record:SetPoint("TOPLEFT",8,contributeY-25);record:SetSize(24,24)
     self.texts[#self.texts+1]={object=record.Text,size=12};U:Font(record.Text,12)
     record.Text:SetText("Record encountered quests");record.Text:SetTextColor(unpack(ink))

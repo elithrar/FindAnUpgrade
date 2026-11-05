@@ -77,4 +77,6 @@ After release approval, finish required live acceptance and checks; use an annot
 
 `FindAnUpgrade/Libs/SomethingNeedDoing/UPSTREAM.json` pins the bundled SND runtime and its file hashes. Keep its Lua files and Apache license byte-identical to that commit; fix framework issues upstream. Load order is explicit in the TOC. `Core.lua` creates the private app and core scope; SND owns ordinary core event subscriptions and slash commands. Check the `ok, valueOrError` tuple at registration boundaries. SND delivers scoped logout callbacks once before disposal; use scoped events for any future logout work. Preserve the separate hover frame, which owns its OnUpdate loop.
 
+Options retain their two-column layout and font owner while using SND `ui:Style` for dialog, section, button, input, dropdown, checkbox, slider and scrollbar chrome. Check styling Results and preserve pooled construction recovery.
+
 SavedVariables and gameplay models retain their existing owners. Do not copy a live settings table into SND state and continue mutating both. A future settings/UI migration must cover every write path, including profile changes, previews, drag and dock callbacks, together. Use the pinned upstream `API.md` for API contracts; this file describes consumer boundaries rather than duplicating the API.
