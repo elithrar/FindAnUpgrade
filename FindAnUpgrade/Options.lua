@@ -64,7 +64,12 @@ function O:Frame(kind,parent,template)
         self.framePool[self.frameSlot]=entry
     end
     assert(entry.kind==kind and entry.parent==parent and entry.template==template,"Options constructor order changed")
-    return entry.object
+    local control=entry.object
+    if kind=="Button" or kind=="CheckButton" or kind=="Slider" or kind=="EditBox" or kind=="DropdownButton" then
+        control:EnableMouse(true)
+        if kind=="Button" or kind=="CheckButton" then control:RegisterForClicks("LeftButtonUp")end
+    end
+    return control
 end
 function O:Text(parent)
     self.textSlot=self.textSlot+1
