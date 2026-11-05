@@ -69,10 +69,11 @@ function Methods:GetOwner() return self.owner end
 function Methods:ClearLines() self.lines={}; self:Fire("OnTooltipCleared") end
 function Methods:NumLines() return #(self.lines or {}) end
 function Methods:GetThumbTexture() return self.thumb end
-function Methods:SetThumbTexture(value) self.thumb=self.thumb or W.Object();self.thumb:SetTexture(value) end
+function Methods:SetThumbTexture(value) if type(value)=="table" then self.thumb=value else self.thumb=self.thumb or W.Object();self.thumb:SetTexture(value) end end
 function Methods:SetWidth(w) layout(self); self.width = w end
 function Methods:GetWidth() return self.width or 1920 end
 function Methods:GetHeight() return self.height or 1080 end
+function Methods:SetAlpha(value) self.alpha=value end
 function Methods:SetScale(s) layout(self); self.scale = s end
 function Methods:GetScale() return self.scale or 1 end
 function Methods:GetFrameLevel() return self.frameLevel or (self.parent and self.parent:GetFrameLevel()+1) or 1 end
@@ -122,12 +123,16 @@ function Methods:CloseMenu() self.menuOpen=false; self.menuClosures=(self.menuCl
 function Methods:SetFocus() self.focused=true end
 function Methods:ClearFocus() self.focused=false end
 function Methods:SetAutoFocus(value) self.autoFocus=value end
-function Methods:Disable() self.disabled=true end
-function Methods:Enable() self.disabled=false end
+function Methods:IsEnabled() return not self.disabled end
+function Methods:SetEnabled(value) if value then self:Enable() else self:Disable() end end
+function Methods:Disable() self.disabled=true; self:Fire("OnDisable") end
+function Methods:Enable() self.disabled=false; self:Fire("OnEnable") end
 function Methods:SetJustifyH(value) self.justifyH=value end
 function Methods:SetJustifyV(value) self.justifyV=value end
 function Methods:AddLine(value) self.lines=self.lines or {}; table.insert(self.lines,value) end
 function Methods:SetTextColor(...) self.textColor = {...} end
+function Methods:SetCheckedTexture(texture)self.checkedTexture=texture end
+function Methods:SetDisabledCheckedTexture(texture)self.disabledCheckedTexture=texture end
 function Methods:SetChecked(v) self.checked = v end
 function Methods:GetChecked() return self.checked end
 function Methods:SetValue(v) self.value = v; self:Fire("OnValueChanged", v) end
@@ -253,7 +258,8 @@ function W.Reset(config)
         end
         if template == "UISliderTemplate" then f.thumb=W.Object();f.thumb.width=32;f.thumb.height=32 end
         if kind == "CheckButton" or kind=="DropdownButton" and template then f.Text = f:CreateFontString(nil,"OVERLAY","GameFontNormal") end
-        if kind=="DropdownButton" and template=="WowStyle1DropdownTemplate" then
+        if kind=="DropdownButton" and template and template:find("WowStyle1DropdownTemplate",1,true) then
+            f.OnButtonStateChanged=function(self)self.Text:SetTextColor(1,1,1,1)end
             f.Background=W.Object(); f.Background.parent=f
             f.Background:SetPoint("TOPLEFT",f,"TOPLEFT",-9,8); f.Background:SetPoint("BOTTOMRIGHT",f,"BOTTOMRIGHT",8,-9)
             f.Arrow=W.Object(); f.Arrow.parent=f; f.Arrow:SetSize(24,24); f.Arrow:SetPoint("RIGHT",f,"RIGHT",-1,0)
