@@ -148,6 +148,9 @@ test("options share framework chrome while preserving columns and native radio d
     for _,row in ipairs(O.modifier.menu.entries) do assert(row.fontObject==O.menuFont) end
     assert(O.reset:GetHeight()==22 and O.reset.text.point[1]=="CENTER")
     assert(O.status:GetText()=="")
+    for _,control in ipairs(O.controls)do assert(control.mouseEnabled,'owned options controls explicitly accept mouse input')end
+    assert(O.close.mouseEnabled and O.close.clickButtons[1]=='LeftButtonUp')
+    assert(O.reset.mouseEnabled and O.reset.clickButtons[1]=='LeftButtonUp')
     assert(not O.modifier.Background:IsShown() and not O.modifier.Arrow:IsShown())
     O.modifier:OnButtonStateChanged();assert(O.modifier.Text.textColor[1]==.93)
     assert(O.checks.enabled.checkedTexture and O.checks.enabled.disabledCheckedTexture)

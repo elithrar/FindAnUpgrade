@@ -73,6 +73,8 @@ function Methods:SetThumbTexture(value) if type(value)=="table" then self.thumb=
 function Methods:SetWidth(w) layout(self); self.width = w end
 function Methods:GetWidth() return self.width or 1920 end
 function Methods:GetHeight() return self.height or 1080 end
+function Methods:EnableMouse(value)self.mouseEnabled=value end
+function Methods:RegisterForClicks(...)self.clickButtons={...}end
 function Methods:SetAlpha(value) self.alpha=value end
 function Methods:SetScale(s) layout(self); self.scale = s end
 function Methods:GetScale() return self.scale or 1 end
@@ -162,7 +164,7 @@ function Methods:SetBlendMode(value)self.blendMode=value end
 function Methods:SetResizeBounds(...)self.resizeBounds={...}end
 function Methods:SetHitRectInsets(...)self.hitInsets={...}end
 function Methods:SetTextInsets(...)self.textInsets={...}end
-for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouse","EnableMouseWheel","SetMovable","RegisterForDrag","RegisterForClicks","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetNumeric","SetMaxLetters","HighlightText","SetTexCoord","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
+for _,name in ipairs({"SetShadowColor","SetShadowOffset","SetFrameStrata","SetClampedToScreen","EnableMouseWheel","SetMovable","RegisterForDrag","StartMoving","StartSizing","StopMovingOrSizing","SetResizable","SetNumeric","SetMaxLetters","HighlightText","SetTexCoord","SetOrientation","SetMinMaxValues","SetValueStep","SetObeyStepOnDrag","SetAlphaGradient"}) do Methods[name] = function() end end
 -- Resolve declared anchors for layout assertions. Existing pointer fixtures
 -- keep explicit rects; native pixel rounding and font metrics remain unmodeled.
 local fractions={TOPLEFT={0,1},TOP={.5,1},TOPRIGHT={1,1},LEFT={0,.5},CENTER={.5,.5},RIGHT={1,.5},BOTTOMLEFT={0,0},BOTTOM={.5,0},BOTTOMRIGHT={1,0}}

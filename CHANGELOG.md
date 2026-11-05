@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.10
+
+- Explicitly enable mouse input on custom options controls, including close/action buttons, checkboxes, fields and sliders.
+- Update the bundled SomethingNeedDoing runtime to 0.4.3 for shared options input and aligned color swatches.
+
 ## 0.1.9
 
 - Share options control styling with SomethingNeedDoing 0.4.2: consistent dropdowns, checkboxes, numeric fields, sliders and scrollbars.
