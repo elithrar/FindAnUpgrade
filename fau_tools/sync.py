@@ -205,7 +205,7 @@ def main(argv=None, *, prog=None):
         if args.refresh_details:
             command.append("--refresh")
         run(ROOT, command)
-        from fau_tools.catalog import read_inputs
+        from fau_tools.catalog import read_inputs, reviewed_additions
         from fau_tools.importer import compiled_ids
 
         _, owned = read_inputs(ROOT)
@@ -215,6 +215,7 @@ def main(argv=None, *, prog=None):
             row["id"] for row in owned["public"]["records"] + owned["legacy"]["quests"]
         )
         ids.update(owned["client"]["questIDs"])
+        ids.update(reviewed_additions(owned.get("reviewed")))
         candidate_file = public / "candidate-ids.json"
         candidate_file.write_text(
             json.dumps({"questIDs": sorted(ids)}) + "\n", encoding="utf-8"

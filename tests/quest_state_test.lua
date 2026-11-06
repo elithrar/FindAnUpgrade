@@ -46,6 +46,33 @@ local function evidence(S,id)
     for _,row in ipairs(S.results)do if row.id==id then return row.evidence or "recorded" end end
 end
 
+test("turn-in hides immediately despite delayed native history and the option restores a completed row",function()
+    local N,S=setup();assert(evidence(S,9))
+    W.active[9]=true;W.log={{questID=9,isHeader=false}};W.Event("QUEST_ACCEPTED",9);settle(S)
+    W.Event("QUEST_TURNED_IN",9,450,100);settle(S)
+    assert(not evidence(S,9) and N.Character:Quest(9).completed==true and W.done[9]~=true)
+    N.Options:Toggle(N.Core);local check=N.Options.checks.hideCompleted
+    assert(check:GetChecked()==true);check:SetChecked(false);check:Fire("OnClick");settle(S)
+    assert(evidence(S,9)=="Completed" and FindAnUpgradeDB.hideCompleted==false)
+    check:SetChecked(true);check:Fire("OnClick");settle(S);assert(not evidence(S,9))
+    local profile=N.Model.Load({version=4,hideCompleted=false});assert(profile.hideCompleted==false)
+    profile=N.Model.Load({version=4});assert(profile.hideCompleted==true)
+end)
+
+test("turn-in while closed is retained for shortlist until completion history catches up",function()
+    local N,S=setup();assert(N.Shortlist:Toggle(9));S:View("shortlist");settle(S);assert(evidence(S,9))
+    S:Toggle();W.Event("QUEST_TURNED_IN",9,450,100);assert(N.QuestState.turnedIn[9])
+    S:Toggle();settle(S);assert(not evidence(S,9) and N.Shortlist:Contains(9))
+    N.Core:Change("hideCompleted",false);settle(S);assert(evidence(S,9)=="Completed")
+end)
+
+test("completed history hides with unknown repeatability but true repeatables can be offered again",function()
+    local N,S=setup();W.done[9]=true;C_QuestLog.IsRepeatableQuest=function()return nil end
+    N.Character:PrimeQuests({}, {},true);S:DataChanged();settle(S);assert(not evidence(S,9))
+    C_QuestLog.IsRepeatableQuest=function()return true end;N.Character:PrimeQuests({}, {},true)
+    S:DataChanged();settle(S);assert(evidence(S,9))
+end)
+
 test("a thousand unchanged log and objective updates do not query rebuild or clear metadata",function()
     local N,S,reads=setup()
     local metadata=N.Catalog.records[9].metadataReady;local native=N.SearchModel.currentItems

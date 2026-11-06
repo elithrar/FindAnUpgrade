@@ -266,9 +266,9 @@ test("search default rows keep nearby aligned numeric fields and consistent sect
             assert(close(w,58*scale) and close(h,22*scale),"native numeric field changed size")
         end
         local _,by,_,bh=rect(O.edits.levelsBelow);local _,ay,_,ah=rect(O.edits.levelsAbove)
-        local _,cy,_,ch=rect(O.checks.includeDungeons)
+        local _,cy,_,ch=rect(O.checks.hideCompleted)
         assert(close(by+bh/2-ay-ah/2,28*scale) and close(cy+ch/2-by-bh/2,28*scale),"search rows lost the shared cadence")
-        local _,hy,_,hh=rect(label("Applies next time search opens."))
+        local _,hy,_,hh=rect(label("Other defaults apply on next open."))
         local _,zy,_,zh=rect(label("Starts in the current zone."))
         assert(ay-hy-hh>=10*scale and ay-hy-hh<=14*scale,"search hint separated by unnecessary blank space")
         assert(close(hy-zy,20*scale) and close(hh,zh),"search hints overlap or have inconsistent leading")

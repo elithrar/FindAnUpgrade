@@ -9,7 +9,7 @@ M.defaults = { version = 4, enabled = true, preset = "blue", strength = .55,
     modifier = "SHIFT", npc = true, worldmap = true, minimap = true,
     accents = true, dialogTint = true, rewards = true, scale = 1,
     launcher = true, launcherAngle = 200, previewLayout = "tooltip", inspectionPosition = "right",
-    font = "Game tooltip", border = "default",
+    font = "Game tooltip", border = "default", hideCompleted = true,
     searchDefaults = {hideUnusable=true, levelsBelow=5, levelsAbove=3, includeDungeons=false} }
 M.borders = {default=true, none=true, tooltip=true, dialog=true, thin=true}
 
@@ -58,7 +58,7 @@ function M.Load(saved)
     if M.Readable(saved.enabled) and type(saved.enabled) == "boolean" then profile.enabled = saved.enabled end
     if M.Readable(saved.preset) and type(saved.preset) == "string" and M.presets[saved.preset] then profile.preset = saved.preset end
     if M.Number(saved.strength) then profile.strength = math.max(.1, math.min(1, saved.strength)) end
-    for _, key in ipairs({ "npc", "worldmap", "minimap", "accents", "dialogTint", "rewards", "launcher" }) do
+    for _, key in ipairs({ "npc", "worldmap", "minimap", "accents", "dialogTint", "rewards", "launcher", "hideCompleted" }) do
         if M.Readable(saved[key]) and type(saved[key]) == "boolean" then profile[key] = saved[key] end
     end
     if M.Readable(saved.modifier) and (saved.modifier == "SHIFT" or saved.modifier == "CTRL" or saved.modifier == "ALT" or saved.modifier == "NONE") then profile.modifier = saved.modifier end

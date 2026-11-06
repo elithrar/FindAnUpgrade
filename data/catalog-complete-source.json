@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-10-29",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-06",
   "quests": [
     {
       "id": 1,
@@ -536,6 +536,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 287059,
+          "name": "Footman's Pocketknife",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -13208,6 +13215,13 @@
           "quantity": 5,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 287061,
+          "name": "Cheese Knife",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -28151,6 +28165,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 287067,
+          "name": "Dragonmaw Skinflayer",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -33591,6 +33612,20 @@
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 2805,
+          "name": "Yeti Fur Cloak",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 287069,
+          "name": "Yeti Skinner",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -57459,7 +57494,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 20,
+      "level": 18,
       "rewardValues": {
         "xp": 1950,
         "reputation": [
@@ -145976,6 +146011,20 @@
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 15467,
+          "name": "Inventor's League Ring",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 287066,
+          "name": "Wizlo's Tuning Wrench",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -268559,7 +268608,7 @@
     },
     {
       "title": "Bring Back a Bang",
-      "minimum": 27,
+      "minimum": 25,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "locations": [
@@ -268583,7 +268632,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 32,
+      "level": 31,
       "rewardValues": {
         "xp": 2550,
         "money": 3000,
@@ -269073,7 +269122,7 @@
     },
     {
       "title": "Delicate Instruments",
-      "minimum": 7,
+      "minimum": 6,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "locations": [
@@ -269099,7 +269148,7 @@
           }
         ]
       },
-      "level": 10,
+      "level": 8,
       "rewardValues": {
         "xp": 630,
         "money": 250,
@@ -269125,7 +269174,7 @@
     },
     {
       "title": "Delicate Instruments",
-      "minimum": 7,
+      "minimum": 6,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -269224,7 +269273,7 @@
     },
     {
       "title": "Good Steel",
-      "minimum": 7,
+      "minimum": 6,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "locations": [
@@ -269240,7 +269289,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 10,
+      "level": 7,
       "rewardValues": {
         "xp": 630,
         "money": 250,
@@ -269410,7 +269459,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 10,
+      "level": 11,
       "rewardValues": {
         "xp": 840,
         "money": 350,
@@ -269639,7 +269688,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 10,
+      "level": 12,
       "rewardValues": {
         "xp": 840,
         "money": 350,
@@ -269681,7 +269730,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 7,
+      "level": 8,
       "rewardValues": {
         "xp": 475,
         "money": 125,
@@ -278462,6 +278511,35 @@
         "currencies": "unknown",
         "givers": "recorded",
         "coordinates": "recorded"
+      }
+    },
+    {
+      "id": 93161,
+      "items": [
+        {
+          "itemID": 282315,
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "published",
+      "title": "The Ancient Hilt",
+      "level": 60,
+      "minimum": 1,
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "published",
+        "level": "published",
+        "minimum": "published",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
       }
     },
     {

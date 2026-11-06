@@ -6,7 +6,7 @@ local function complete(N)
     local O=N.Options
     assert(O.frame and O.frame:IsShown() and O.content:IsShown())
     assert(O.texts[1].object:GetText()=="FindAnUpgrade" and O.status)
-    assert(count(O.checks)==10 and #O.dropdowns==5 and count(O.sliders)==2 and count(O.edits)==4)
+    assert(count(O.checks)==11 and #O.dropdowns==5 and count(O.sliders)==2 and count(O.edits)==4)
     for _,entry in ipairs(O.texts) do assert(entry.object:GetFont()) end
     assert(#UISpecialFrames==1 and UISpecialFrames[1]=="FindAnUpgradeOptions")
 end

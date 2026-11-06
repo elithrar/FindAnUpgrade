@@ -103,14 +103,15 @@ def reviewed_updates(document):
             or set(update["evidence"]) - sources.keys()
             or not before
             or before.keys() != after.keys()
-            or before.keys() - {"items", "itemState", "minimum"}
+            or before.keys() - {"items", "itemState", "minimum", "level"}
         ):
             raise ValueError("Invalid reviewed update identity, fields or evidence")
         for fields in (before, after):
-            if "minimum" in fields and (
-                type(fields["minimum"]) is not int or not 1 <= fields["minimum"] <= 200
-            ):
-                raise ValueError("Invalid reviewed minimum level")
+            for key in ("minimum", "level"):
+                if key in fields and (
+                    type(fields[key]) is not int or not 1 <= fields[key] <= 200
+                ):
+                    raise ValueError("Invalid reviewed level")
             if "items" in fields or "itemState" in fields:
                 items, state = fields.get("items"), fields.get("itemState")
                 if (
@@ -141,6 +142,84 @@ def reviewed_updates(document):
             raise ValueError("Reviewed update cannot remove recorded rewards")
         updates[quest] = update
     return updates
+
+
+def reviewed_additions(document):
+    """Accept only explicitly receipted website identities and known facts."""
+    updates = reviewed_updates(document)
+    additions = {}
+    for addition in (document or {}).get("additions", []):
+        row = addition.get("record", {})
+        quest = row.get("id")
+        if (
+            set(addition) != {"record", "evidence", "reason"}
+            or set(row) != {"id", "title", "level", "minimum", "items", "itemState"}
+            or type(quest) is not int
+            or not 0 < quest < 2**31
+            or quest in additions
+            or quest in updates
+            or not isinstance(row.get("title"), str)
+            or not 0 < len(row["title"]) <= 200
+            or any(ord(c) < 32 for c in row["title"])
+            or not addition.get("reason")
+            or not addition.get("evidence")
+            or set(addition["evidence"]) - document["sources"].keys()
+            or not isinstance(row.get("items"), list)
+            or any(not isinstance(item, dict) for item in row.get("items", []))
+        ):
+            raise ValueError("Invalid reviewed quest addition")
+        # Reuse correction validation, supplying a name only for validation.
+        # The retained record omits an item name when no name is known.
+        checked = copy.deepcopy(row)
+        for item in checked["items"]:
+            if "name" not in item:
+                item["name"] = "Unknown item"
+        fields = {
+            key: checked[key] for key in ("level", "minimum", "items", "itemState")
+        }
+        reviewed_updates(
+            {
+                **document,
+                "records": [
+                    {
+                        "id": quest,
+                        "title": row["title"],
+                        "expected": fields,
+                        "changes": fields,
+                        "reason": addition["reason"],
+                        "evidence": addition["evidence"],
+                    }
+                ],
+            }
+        )
+        additions[quest] = {**copy.deepcopy(row), "confirmation": "published"}
+    return additions
+
+
+def merge_reviewed_additions(public, additions):
+    for quest, row in additions.items():
+        existing = public.get(quest)
+        if existing:
+            for key, value in row.items():
+                if key == "items":
+                    if pairs(existing.get("items", [])) != pairs(value):
+                        raise ValueError(
+                            "Reviewed addition source conflict: " + str(quest)
+                        )
+                    known = {(i["group"], i["itemID"]): i for i in existing["items"]}
+                    for item in value:
+                        if (
+                            "name" in item
+                            and known[(item["group"], item["itemID"])].get("name")
+                            != item["name"]
+                        ):
+                            raise ValueError(
+                                "Reviewed addition source conflict: " + str(quest)
+                            )
+                elif existing.get(key) != value:
+                    raise ValueError("Reviewed addition source conflict: " + str(quest))
+        else:
+            public[quest] = copy.deepcopy(row)
 
 
 def apply_reviewed_update(row, update):
@@ -352,6 +431,8 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
         raise ValueError("Public index was truncated or deduplicated incorrectly")
+    additions = reviewed_additions(inputs.get("reviewed"))
+    merge_reviewed_additions(public, additions)
     metadata = {row["id"]: row for row in inputs["metadata"]["records"]}
     primary = {row["id"]: row for row in inputs["primary"]["records"]}
     supplemental = (
@@ -466,12 +547,31 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         # source group, rather than replacing an unexplained discrepancy.
         if checked:
             update = updates.get(quest)
-            if update and "minimum" in update["changes"] and "minimum" in checked:
-                if checked["minimum"] not in (
-                    update["expected"]["minimum"],
-                    update["changes"]["minimum"],
+            if (
+                quest in additions
+                and "title" in checked
+                and checked["title"] != additions[quest]["title"]
+            ):
+                raise ValueError(
+                    "Reviewed addition primary identity conflict: " + str(quest)
+                )
+            for key in ("minimum", "level"):
+                if update and key in update["changes"] and key in checked:
+                    if checked[key] not in (
+                        update["expected"][key],
+                        update["changes"][key],
+                    ):
+                        raise ValueError(
+                            "Reviewed update primary conflict: " + str(quest)
+                        )
+                if (
+                    quest in additions
+                    and key in checked
+                    and checked[key] != additions[quest][key]
                 ):
-                    raise ValueError("Reviewed update primary conflict: " + str(quest))
+                    raise ValueError(
+                        "Reviewed addition primary conflict: " + str(quest)
+                    )
             if not published or pairs(checked["items"]) != pairs(published["items"]):
                 raise ValueError("Primary/public reward group conflict: " + str(quest))
             for key in ("xp", "money", "level", "minimum"):
@@ -621,7 +721,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "sourceRevision": "public-forever-" + inputs["public"]["collectedAt"][:10],
         "quests": rows,
     }
-    if updates:
+    if updates or additions:
         source["sourceRevision"] += "+" + inputs["reviewed"]["revision"]
     state_counts = Counter(row["itemState"] for row in rows)
     report = {
@@ -631,7 +731,8 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "scope": "Every exact quest ID in the complete public index, historical compiled Forever catalog, current official quest cache, approved classifications and previous catalog. Identity is separate from current availability.",
         "counts": {
             "quests": len(rows),
-            "publicIndex": len(public),
+            "publicIndex": inputs["public"]["expected"],
+            "reviewedWebsiteIdentities": len(additions),
             "compiledIdentity": len(compiled),
             "currentClientCache": len(native),
             "classificationIds": len(classification),

@@ -1,6 +1,6 @@
 local _,N=...
 local M,A=N.Model,N.Adapter
-local Q={active={},offers={},revision=0,activeCount=0,signals={},signalSlots={},signalCursor=1};N.QuestState=Q
+local Q={active={},offers={},turnedIn={},turnedInCount=0,revision=0,activeCount=0,signals={},signalSlots={},signalCursor=1};N.QuestState=Q
 local nativeProof={['native-active']=true,['native-ready']=true,['native-available']=true,['native-map-available']=true}
 local function boolean(fn,id)
     local value=A.Call(fn,id);if type(value)=="boolean" then return value end
@@ -136,6 +136,13 @@ function Q:OfferChanged()
 end
 function Q:Signal(event,id)
     id=M.QuestId(id);if not id then return end
+    -- Keep the exact native turn-in even if the history API has not caught up
+    -- yet or the finder is closed. The game remains the durable history owner.
+    if event=="QUEST_TURNED_IN" and not self.turnedIn[id] and self.turnedInCount<12000 then
+        self.turnedIn[id]=true;self.turnedInCount=self.turnedInCount+1
+    elseif event=="QUEST_ACCEPTED" and self.turnedIn[id] then
+        self.turnedIn[id]=nil;self.turnedInCount=self.turnedInCount-1
+    end
     if not self:Interested() then self.stale=true;return end
     -- Track() may learn a just-accepted quest before its event is delivered.
     -- De-duplicate explicit events independently of that baseline seeding.
