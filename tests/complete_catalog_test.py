@@ -12,7 +12,9 @@ from fau_tools.att import merge, parse
 from fau_tools.catalog import (
     apply_reviewed_update,
     build_complete,
+    merge_reviewed_additions,
     read_inputs,
+    reviewed_additions,
     reviewed_updates,
     validate_complete,
 )
@@ -49,7 +51,7 @@ def item(group="You will receive:", domain="forever", quantity=""):
 
 
 class CompleteCatalogTests(unittest.TestCase):
-    def test_website_review_changes_only_nine_quests_and_preserves_original_sources(
+    def test_website_review_changes_only_receipted_quests_and_preserves_original_sources(
         self,
     ):
         provenance, inputs = read_inputs(ROOT)
@@ -64,10 +66,34 @@ class CompleteCatalogTests(unittest.TestCase):
             baseline, _ = build_complete(ROOT)
         before = {row["id"]: row for row in baseline["quests"]}
         after = {row["id"]: row for row in source["quests"]}
-        self.assertEqual(before.keys(), after.keys())
+        self.assertEqual(after.keys() - before.keys(), {93161})
+        self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
             {quest for quest in before if before[quest] != after[quest]},
-            {4561, 4661, 7704, 92841, 92844, 92846, 93176, 95816, 95819},
+            {
+                4561,
+                4661,
+                7704,
+                92841,
+                92844,
+                92846,
+                93176,
+                95816,
+                95819,
+                11,
+                224,
+                474,
+                565,
+                5151,
+                91751,
+                91740,
+                91723,
+                91724,
+                91746,
+                91732,
+                88756,
+                968,
+            },
         )
         self.assertEqual(
             after[93176]["items"],
@@ -101,6 +127,99 @@ class CompleteCatalogTests(unittest.TestCase):
             )
         self.assertEqual(inputs, original)
         self.assertEqual(report["reviewedUpdates"], inputs["reviewed"])
+        ancient = after[93161]
+        self.assertEqual(
+            (ancient["title"], ancient["level"], ancient["minimum"]),
+            ("The Ancient Hilt", 60, 1),
+        )
+        self.assertEqual(
+            ancient["items"],
+            [{"itemID": 282315, "quantity": 1, "group": "guaranteed", "slot": 1}],
+        )
+        self.assertTrue(ancient["eligibilityUnknown"])
+        for key in ("faction", "locations", "classTokens", "rewardValues"):
+            self.assertNotIn(key, ancient)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 1)
+
+    def test_additional_website_identity_rejects_unsupported_or_conflicting_evidence(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        document = inputs["reviewed"]
+        for mutation in (
+            "duplicate",
+            "overlap",
+            "evidence",
+            "field",
+            "boolean",
+            "item",
+            "name",
+        ):
+            changed = copy.deepcopy(document)
+            addition = changed["additions"][0]
+            row = addition["record"]
+            if mutation == "duplicate":
+                changed["additions"].append(copy.deepcopy(addition))
+            elif mutation == "overlap":
+                row["id"] = 11
+            elif mutation == "evidence":
+                addition["evidence"] = ["missing"]
+            elif mutation == "field":
+                row["faction"] = "Alliance"
+            elif mutation == "boolean":
+                row["level"] = True
+            elif mutation == "item":
+                row["items"][0]["quantity"] = 0
+            else:
+                row["items"][0]["name"] = ""
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_additions(changed)
+        additions = reviewed_additions(document)
+        public = {}
+        merge_reviewed_additions(public, additions)
+        merge_reviewed_additions(public, additions)
+        public[93161]["minimum"] = 20
+        with self.assertRaisesRegex(ValueError, "source conflict"):
+            merge_reviewed_additions(public, additions)
+
+    def test_new_primary_level_cannot_be_hidden_by_reviewed_website_correction(self):
+        provenance, inputs = read_inputs(ROOT)
+        inputs["primary"]["records"].append(
+            {"id": 91751, "title": "Rough Wolf Pelts", "items": [], "level": 12}
+        )
+        with mock.patch(
+            "fau_tools.catalog.read_inputs", return_value=(provenance, inputs)
+        ):
+            with self.assertRaisesRegex(ValueError, "primary conflict"):
+                build_complete(ROOT)
+
+    def test_additional_website_identity_rejects_primary_conflicts(self):
+        for field, value in (
+            ("title", "Another Quest"),
+            ("level", 10),
+            ("minimum", 5),
+            ("items", []),
+        ):
+            provenance, inputs = read_inputs(ROOT)
+            record = {
+                "id": 93161,
+                "title": "The Ancient Hilt",
+                "level": 60,
+                "minimum": 1,
+                "items": [
+                    {"itemID": 282315, "quantity": 1, "group": "guaranteed", "slot": 1}
+                ],
+            }
+            record[field] = value
+            inputs["primary"]["records"].append(record)
+            with (
+                self.subTest(field=field),
+                mock.patch(
+                    "fau_tools.catalog.read_inputs", return_value=(provenance, inputs)
+                ),
+            ):
+                with self.assertRaisesRegex(ValueError, "conflict"):
+                    build_complete(ROOT)
 
     def test_reviewed_updates_reject_missing_receipts_duplicate_ids_and_unsupported_fields(
         self,
@@ -201,6 +320,7 @@ class CompleteCatalogTests(unittest.TestCase):
             ]
         )
         identity.update(inputs.get("history", {}).get("questIDs", []))
+        identity.update(reviewed_additions(inputs.get("reviewed")))
         self.assertEqual({row["id"] for row in source["quests"]}, identity)
         output = {row["id"]: row for row in source["quests"]}
         for quest in inputs["compiled"].get("hiddenTriggerIDs", []):

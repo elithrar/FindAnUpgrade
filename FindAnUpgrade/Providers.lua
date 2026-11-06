@@ -79,6 +79,8 @@ function P.Availability(row,context)
         if N.QuestState then A.Call(N.QuestState.Track,N.QuestState,id) end
         return current.complete==true and state("ready","Ready to turn in","native-log") or state("active","In quest log","native-log")
     end
+    local complete,repeatable=current.completed,current.repeatable
+    if current.turnedIn==true and repeatable~=true then return state("completed","Completed","native-history") end
     local proof=row.availabilityProof
     if row.availabilityCheck then proof=A.Call(row.availabilityCheck) end
     if not proof and not row.availabilityCheck then
@@ -91,8 +93,7 @@ function P.Availability(row,context)
     end
     if current.disabled==true then return state("blocked",nil,"native-session","Quest disabled for this session") end
     if proof=="native-available" then return state("available","Available","native-gossip") end
-    local complete,repeatable=current.completed,current.repeatable
-    if complete==true and repeatable==false then return state("completed","Completed","native-history") end
+    if complete==true and repeatable~=true then return state("completed","Completed","native-history") end
     -- A fresh native log or gossip offer describes this player's actual quest.
     -- A map line or optional marker is less specific and must pass constraints.
     context=context or P.Context()

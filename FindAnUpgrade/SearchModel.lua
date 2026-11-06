@@ -18,6 +18,7 @@ end
 function S:Eligibility(row,context)
     local proof=context and context.nativeOffers and context.nativeOffers[row.id]
     local availability=N.Providers.Availability(proof and {id=row.id,source=row.source,availabilityProof=proof} or row,context)
+    if availability.state=="completed" then return not N.Core.profile.hideCompleted,availability.label,availability end
     local source=row.source or {}
     if N.Providers.RequiresNativeProof(source) then
         if not N.Providers.HasNativeProof(availability) then

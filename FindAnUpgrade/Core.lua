@@ -1,6 +1,6 @@
 local ADDON, N = ...
 local M, A, U = N.Model, N.Adapter, N.UI
-local C = { version = "0.1.10" }; N.Core = C
+local C = { version = "0.1.11" }; N.Core = C
 -- SND owns ordinary subscriptions; gameplay and SavedVariables retain their existing owners.
 local app = N.SomethingNeedDoing:NewAddon(ADDON, {version=C.version})
 N.App = app
@@ -42,6 +42,7 @@ function C:Change(key, value)
         if N.Stack.frame and M.Number(N.Stack.screenWidth) then N.Stack.frame:SetScale(math.min(self.profile.scale,(N.Stack.screenWidth-16)/320)) end
         N.Stack:Refresh()
     end
+    if key=="hideCompleted" and N.Search:Visible() then N.Search:DataChanged() end
     if N.Search:Visible() and appearance then
         if N.Search.AppearanceChanged then N.Search:AppearanceChanged() else N.Search:Fit(); N.Search:Changed(nil,true) end
     end

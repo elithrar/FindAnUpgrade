@@ -7,7 +7,7 @@ function S:CreateViews()
     for i,entry in ipairs({{"quests","Quests"},{"shortlist","Shortlist"}}) do
         local key=entry[1];local tab=U:Tab(CreateFrame("Button",nil,self.frame,"BackdropTemplate"),entry[2],116)
         tab:SetPoint("TOPLEFT",16+(i-1)*120,-42);tab:SetScript("OnClick",function()self:View(key)end)
-        tab.activeLine:SetShown(key==self.view);self.tabs[key]=tab
+        U:SelectTab(tab,key==self.view);self.tabs[key]=tab
     end
 end
 function S:CloseChain()
@@ -22,7 +22,7 @@ function S:View(key)
     self.view=key;local current=self.views[key];self.offset=current.offset;self.bottomTarget=nil
     self.search:SetText(current.query);self.placeholder:SetText(key=="shortlist" and "Search shortlist" or "Quest or reward")
     if key=="quests" then self.filter.query=current.query end
-    for name,tab in pairs(self.tabs) do tab.activeLine:SetShown(name==key) end
+    for name,tab in pairs(self.tabs) do U:SelectTab(tab,name==key) end
     self.heights={};self:LayoutControls();self:DataChanged()
 end
 function S:Save(row)
@@ -71,7 +71,7 @@ function S:ShortlistQuery()
         if record and not record.metadataReady then model.questNeeded[#model.questNeeded+1]=id end
         local availability=N.Providers.Availability(row,context);row.availability=availability
         if availability.state~="unknown" then row.evidence=availability.label or availability.reason or "Unavailable" end
-        if match then out[#out+1]=row end
+        if match and (availability.state~="completed" or not N.Core.profile.hideCompleted) then out[#out+1]=row end
     end
     return out
 end

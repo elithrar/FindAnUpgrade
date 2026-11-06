@@ -3,7 +3,7 @@ local M, A = N.Model, N.Adapter
 local U = { owned = {} }; N.UI = U
 
 -- Shared with Options: the XPIsland-style tab uses an ordinary owned button,
--- native tooltip edge and one restrained selected underline.
+-- native tooltip edge and a soft persistent selected glow.
 function U:Tab(frame,label,width)
     frame:SetSize(width,22)
     frame:SetBackdrop({bgFile="Interface\\Buttons\\WHITE8X8",edgeFile="Interface\\Tooltips\\UI-Tooltip-Border",tile=true,tileSize=8,edgeSize=10,insets={left=2,right=2,top=2,bottom=2}})
@@ -11,13 +11,21 @@ function U:Tab(frame,label,width)
     if not frame.text then frame.text=frame:CreateFontString(nil,"OVERLAY","GameFontNormal") end
     self:Font(frame.text,12);frame.text:ClearAllPoints();frame.text:SetPoint("CENTER");frame.text:SetWidth(width-12);frame.text:SetHeight(20)
     frame.text:SetJustifyH("CENTER");frame.text:SetJustifyV("MIDDLE");frame.text:SetWordWrap(false);frame.text:SetTextColor(.93,.94,.97);frame.text:SetText(label)
-    if not frame.activeLine then
-        frame.activeLine=frame:CreateTexture(nil,"OVERLAY");frame.activeLine:SetHeight(1);frame.activeLine:SetColorTexture(1,.82,.2,.8)
-        frame.activeLine:SetPoint("BOTTOMLEFT",4,0);frame.activeLine:SetPoint("BOTTOMRIGHT",-4,0)
+    if not frame.activeGlow then
+        frame.activeGlow=frame:CreateTexture(nil,"ARTWORK")
+        frame.activeGlow:SetTexture("Interface\\Buttons\\ButtonHilight-Square");frame.activeGlow:SetBlendMode("ADD")
+        frame.activeGlow:SetPoint("TOPLEFT",3,-3);frame.activeGlow:SetPoint("BOTTOMRIGHT",-3,3)
+        frame.activeGlow:SetVertexColor(1,.78,.28,.18)
     end
     frame:SetScript("OnEnter",function()frame:SetBackdropBorderColor(.9,.8,.5,.9)end)
-    frame:SetScript("OnLeave",function()frame:SetBackdropBorderColor(.45,.45,.45,.65)end)
+    frame:SetScript("OnLeave",function()self:SelectTab(frame,frame.selected)end)
+    self:SelectTab(frame,false)
     return frame
+end
+function U:SelectTab(frame,selected)
+    frame.selected=selected==true;frame.activeGlow:SetShown(frame.selected)
+    if frame.selected then frame:SetBackdropBorderColor(.75,.63,.35,.75)
+    else frame:SetBackdropBorderColor(.45,.45,.45,.65) end
 end
 
 -- Shared shell matches the installed XPIsland/ATCF dialog constructors.

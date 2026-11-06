@@ -292,10 +292,12 @@ function C:Quest(id)
     if (self.questFactCount or 0)>=self.questLimit then return {} end
     local log=C_QuestLog or {};local known=snapshot.quests.active[id]
     local active=known~=nil and true or boolean(log.IsOnQuest,id)
+    local turnedIn=N.QuestState and N.QuestState.turnedIn and N.QuestState.turnedIn[id]==true
+    if turnedIn then active=false end
     local complete
     if active==true then if known~=nil then complete=known else complete=boolean(log.IsComplete,id) end end
-    local entry={active=active,complete=complete,
-        completed=boolean(log.IsQuestFlaggedCompleted,id),repeatable=boolean(log.IsRepeatableQuest,id),disabled=boolean(log.IsQuestDisabledForSession,id)}
+    local entry={active=active,complete=complete,turnedIn=turnedIn,
+        completed=turnedIn or boolean(log.IsQuestFlaggedCompleted,id),repeatable=boolean(log.IsRepeatableQuest,id),disabled=boolean(log.IsQuestDisabledForSession,id)}
     facts[id]=entry;self.questFactCount=(self.questFactCount or 0)+1
     return entry
 end

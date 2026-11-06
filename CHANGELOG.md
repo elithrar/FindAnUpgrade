@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.11
+
+- Sync verified November 4–6 Quests updates: five new reward items, exact reward choices, eight quest level corrections, and The Ancient Hilt with its unnamed guaranteed item.
+- Mark quests completed on turn-in and hide completed quests by default in Quests and Shortlist; turn off Hide completed quests in Options to inspect them again.
+- Replace the selected tab underline with a gentle gold glow.
+
 ## 0.1.10
 
 - Explicitly enable mouse input on custom options controls, including close/action buttons, checkboxes, fields and sliders.

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-10-29",
-  "reviewedAt": "2026-11-02",
-  "scope": "Exact-field corrections published by the Quest website. The older public snapshot and its receipts remain unchanged; all other fields retain their original sources.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported.",
+  "revision": "quest-website-2026-11-06",
+  "reviewedAt": "2026-11-06",
+  "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter remain unknown.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -22,6 +22,24 @@
       "sha256": "32885749bf0eadfd7b87ce61b2854541bd921bbc9c4583c490ffdc478db53f92",
       "bytes": 3919,
       "collectedAt": "2026-11-02T13:05:12.634087+00:00"
+    },
+    "questsNovember6": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "fcc210b0d4d6bb8df3108595b3483565c8d37c96f34a84c697c12e6659703a66",
+      "bytes": 1595551,
+      "collectedAt": "2026-11-06T12:01:03.648934+00:00"
+    },
+    "rewardsNovember6": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "5df45c92fd467c8b0556d64387bcd5b9da11118e83ff094d766de50fc776bd57",
+      "bytes": 275634,
+      "collectedAt": "2026-11-06T12:01:04.596889+00:00"
+    },
+    "changelogNovember6": {
+      "url": "https://quests.questionable.services/changelog.html",
+      "sha256": "a3e2977f0677799e39d5daa3fbfdc1f29fdff8218d0e220a5c8925e80e65cde9",
+      "bytes": 10173,
+      "collectedAt": "2026-11-06T12:01:05.517178+00:00"
     }
   },
   "records": [
@@ -227,6 +245,397 @@
         "notes"
       ],
       "reason": "The website explicitly leaves complete item rewards unconfirmed. Empty direct rewards do not prove that no reward is granted through another mechanism."
+    },
+    {
+      "id": 11,
+      "title": "Riverpaw Gnoll Bounty",
+      "expected": {
+        "items": [
+          {
+            "itemID": 2249,
+            "name": "Militia Buckler",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 2238,
+            "name": "Urchin's Pants",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 2249,
+            "name": "Militia Buckler",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 2238,
+            "name": "Urchin's Pants",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 287059,
+            "name": "Footman's Pocketknife",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5–6 published build 70790 reward review: retain exact guaranteed and choice groups, including cross-group duplicate item IDs."
+    },
+    {
+      "id": 224,
+      "title": "In Defense of the King's Lands",
+      "expected": {
+        "items": [
+          {
+            "itemID": 414,
+            "name": "Dalaran Sharp",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 414,
+            "name": "Dalaran Sharp",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 287061,
+            "name": "Cheese Knife",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5–6 published build 70790 reward review: retain exact guaranteed and choice groups, including cross-group duplicate item IDs."
+    },
+    {
+      "id": 474,
+      "title": "Defeat Nek'rosh",
+      "expected": {
+        "items": [
+          {
+            "itemID": 3209,
+            "name": "Ancient War Sword",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 6194,
+            "name": "Barreling Reaper",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 3209,
+            "name": "Ancient War Sword",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 6194,
+            "name": "Barreling Reaper",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 287067,
+            "name": "Dragonmaw Skinflayer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5–6 published build 70790 reward review: retain exact guaranteed and choice groups, including cross-group duplicate item IDs."
+    },
+    {
+      "id": 565,
+      "title": "Bartolo's Yeti Fur Cloak",
+      "expected": {
+        "items": [
+          {
+            "itemID": 2805,
+            "name": "Yeti Fur Cloak",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 2805,
+            "name": "Yeti Fur Cloak",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 2805,
+            "name": "Yeti Fur Cloak",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 287069,
+            "name": "Yeti Skinner",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5–6 published build 70790 reward review: retain exact guaranteed and choice groups, including cross-group duplicate item IDs."
+    },
+    {
+      "id": 5151,
+      "title": "Hypercapacitor Gizmo",
+      "expected": {
+        "items": [
+          {
+            "itemID": 15467,
+            "name": "Inventor's League Ring",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 15467,
+            "name": "Inventor's League Ring",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 15467,
+            "name": "Inventor's League Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 287066,
+            "name": "Wizlo's Tuning Wrench",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5–6 published build 70790 reward review: retain exact guaranteed and choice groups, including cross-group duplicate item IDs."
+    },
+    {
+      "id": 91751,
+      "title": "Rough Wolf Pelts",
+      "expected": {
+        "level": 7
+      },
+      "changes": {
+        "level": 8
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 91740,
+      "title": "Croaky's Head",
+      "expected": {
+        "level": 10
+      },
+      "changes": {
+        "level": 11
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 91723,
+      "title": "Delicate Instruments",
+      "expected": {
+        "level": 10,
+        "minimum": 7
+      },
+      "changes": {
+        "level": 8,
+        "minimum": 6
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 91724,
+      "title": "Delicate Instruments",
+      "expected": {
+        "minimum": 7
+      },
+      "changes": {
+        "minimum": 6
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 91746,
+      "title": "Elmpaw's Head",
+      "expected": {
+        "level": 10
+      },
+      "changes": {
+        "level": 12
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 91732,
+      "title": "Good Steel",
+      "expected": {
+        "level": 10,
+        "minimum": 7
+      },
+      "changes": {
+        "level": 7,
+        "minimum": 6
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 88756,
+      "title": "Bring Back a Bang",
+      "expected": {
+        "level": 32,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 31,
+        "minimum": 25
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 968,
+      "title": "The Powers Below",
+      "expected": {
+        "level": 20
+      },
+      "changes": {
+        "level": 18
+      },
+      "evidence": [
+        "questsNovember6",
+        "changelogNovember6"
+      ],
+      "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    }
+  ],
+  "additions": [
+    {
+      "record": {
+        "id": 93161,
+        "title": "The Ancient Hilt",
+        "level": 60,
+        "minimum": 1,
+        "items": [
+          {
+            "itemID": 282315,
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "changelogNovember6"
+      ],
+      "reason": "November 4 separately cataloged exact quest and guaranteed reward. Item name, stats, faction, zone and starter are unconfirmed and omitted."
     }
   ]
 }

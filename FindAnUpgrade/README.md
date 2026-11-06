@@ -7,7 +7,7 @@ A compact quest and reward browser for World of Warcraft: Forever.
 - Find quests in your zone or level range. Search rewards and filter by equipment slot or usability.
 - Compare guaranteed and choose-one rewards with native item tooltips and equipped-item comparisons.
 - Spot new quests in orange and modified quests in green, with matching quest dialog colors.
-- Save quests to your character's Shortlist and inspect quest chains.
+- Save quests to your character's Shortlist and inspect quest chains. Completed quests are hidden by default; turn off **Hide completed quests** in Options to show them again.
 - Choose fonts, borders, scale and preview settings in one Options window.
 
 Open it with `/fau` or click the _FindAnUpgrade_ button on your minimap.

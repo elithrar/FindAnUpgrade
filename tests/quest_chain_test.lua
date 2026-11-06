@@ -76,9 +76,9 @@ test("native current active and gossip offer override every static chain gate",f
     assert(N.Providers.Availability({id=1,source=row}).state=="active")
     W.active[1]=false;assert(N.Providers.Availability({id=1,source=row,availabilityProof="native-available"}).state=="available")
 end)
-test("completed history with unknown repeatability remains inspectable",function()
+test("completed history is marked done even when repeatability is unknown",function()
     local N,row=setup();W.done[1]=true
-    assert(N.Providers.Availability({id=1,source=row}).state=="unknown")
+    assert(N.Providers.Availability({id=1,source=row}).state=="completed")
     W.repeatable[1]=false;assert(N.Providers.Availability({id=1,source=row}).state=="completed")
 end)
 test("detail traversal bounds cycles depth and total flat rows",function()

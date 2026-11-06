@@ -120,10 +120,10 @@ test("completed disabled and expired proof guards survive faction changes",funct
     local row={id=source.id,source=source,availabilityProof="native-available",availabilityCheck=function()return nil end}
     assert(N.Providers.Availability(row,context).reason=="Other faction")
 end)
-test("unknown repeatability cannot make completion history a final rejection",function()
+test("known completion remains completed when repeatability is unknown",function()
     local N,source,context=setup();C_QuestLog.IsQuestFlaggedCompleted=function()return true end
     C_QuestLog.IsRepeatableQuest=function()return nil end
-    assert(availability(N,source,"native-map-available",context).state=="available")
+    assert(availability(N,source,"native-map-available",context).state=="completed")
 end)
 
 test("unknown or secret player identity does not invent a faction or starter",function()

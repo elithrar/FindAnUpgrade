@@ -709,6 +709,9 @@ def main(argv=None, *, prog=None):
         raise ValueError("Unresolved candidate acquisition")
     history_path = ROOT / "data/catalog-identity-history.json"
     history_ids = set(prior_inputs.get("history", {}).get("questIDs", []))
+    from fau_tools.catalog import reviewed_additions
+
+    history_ids.update(reviewed_additions(prior_inputs.get("reviewed")))
     history_ids.update(
         row["id"]
         for row in prior_inputs["public"]["records"] + prior_inputs["legacy"]["quests"]
