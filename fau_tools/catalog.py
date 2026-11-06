@@ -103,10 +103,32 @@ def reviewed_updates(document):
             or set(update["evidence"]) - sources.keys()
             or not before
             or before.keys() != after.keys()
-            or before.keys() - {"items", "itemState", "minimum", "level"}
+            or before.keys() - {"items", "itemState", "minimum", "level", "title"}
+            or ("title" in before and before["title"] != update["title"])
         ):
             raise ValueError("Invalid reviewed update identity, fields or evidence")
+        observation = update.get("nativeObservation")
+        if observation is not None and (
+            not isinstance(observation, dict)
+            or set(observation) != {"source", "build", "observedAt", "payloadSha256"}
+            or not isinstance(observation["source"], str)
+            or observation["source"] not in update["evidence"]
+            or not sources[observation["source"]]["url"].endswith("/native-quests.json")
+            or type(observation["build"]) is not int
+            or observation["build"] <= 0
+            or not isinstance(observation["observedAt"], str)
+            or not observation["observedAt"]
+            or not isinstance(observation["payloadSha256"], str)
+            or not re.fullmatch(r"[a-f0-9]{64}", observation["payloadSha256"])
+        ):
+            raise ValueError("Invalid reviewed native observation")
         for fields in (before, after):
+            if "title" in fields and (
+                not isinstance(fields["title"], str)
+                or not 0 < len(fields["title"]) <= 200
+                or any(ord(c) < 32 for c in fields["title"])
+            ):
+                raise ValueError("Invalid reviewed quest title")
             for key in ("minimum", "level"):
                 if key in fields and (
                     type(fields[key]) is not int or not 1 <= fields[key] <= 200
@@ -224,7 +246,10 @@ def merge_reviewed_additions(public, additions):
 
 def apply_reviewed_update(row, update):
     """Abort on source drift; an already adopted correction is idempotent."""
-    if row.get("title") != update["title"] or row["id"] != update["id"]:
+    titles = {update["title"]}
+    if "title" in update["changes"]:
+        titles.add(update["changes"]["title"])
+    if row.get("title") not in titles or row["id"] != update["id"]:
         raise ValueError("Reviewed update quest identity changed")
     current = {key: row.get(key) for key in update["expected"]}
     if current not in (update["expected"], update["changes"]):
@@ -555,7 +580,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
                 raise ValueError(
                     "Reviewed addition primary identity conflict: " + str(quest)
                 )
-            for key in ("minimum", "level"):
+            for key in ("minimum", "level", "title"):
                 if update and key in update["changes"] and key in checked:
                     if checked[key] not in (
                         update["expected"][key],

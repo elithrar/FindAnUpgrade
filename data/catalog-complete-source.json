@@ -17929,7 +17929,7 @@
     },
     {
       "title": "The Dark Iron War",
-      "minimum": 25,
+      "minimum": 22,
       "faction": "Alliance",
       "locations": [
         {
@@ -24807,7 +24807,7 @@
     },
     {
       "title": "Prove Your Worth",
-      "minimum": 12,
+      "minimum": 9,
       "faction": "Horde",
       "locations": [
         {
@@ -24832,7 +24832,7 @@
           }
         ]
       },
-      "level": 10,
+      "level": 11,
       "rewardValues": {
         "xp": 840,
         "money": 350,
@@ -35715,6 +35715,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 287071,
+          "name": "Goblin Switchblade",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -37292,6 +37299,13 @@
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 252452,
+          "name": "Mystic Heavy Armor Kit",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -39960,6 +39974,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270073,
+          "name": "Stromgarde Cuffs",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -57633,7 +57654,7 @@
     },
     {
       "title": "Knowledge in the Deeps",
-      "minimum": 10,
+      "minimum": 18,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -265361,7 +265382,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Storm, Earth, and Fire",
-      "level": 38,
+      "level": 43,
       "minimum": 30,
       "faction": "Horde",
       "rewardValues": {
@@ -265477,7 +265498,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 26,
+      "level": 27,
       "rewardValues": {
         "xp": 2100
       },
@@ -268219,8 +268240,8 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Slowing the Orc Advance",
-      "level": 32,
-      "minimum": 27,
+      "level": 30,
+      "minimum": 25,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2550,
@@ -268506,7 +268527,7 @@
     },
     {
       "title": "Spark of Freedom",
-      "minimum": 27,
+      "minimum": 25,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "locations": [
@@ -268522,7 +268543,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 32,
+      "level": 30,
       "rewardValues": {
         "xp": 2550,
         "money": 3000,
@@ -273907,7 +273928,7 @@
       }
     },
     {
-      "title": "Reading the Ley Lines",
+      "title": "Reading the Leylines",
       "minimum": 2,
       "races": [
         95
@@ -278520,7 +278541,8 @@
           "itemID": 282315,
           "quantity": 1,
           "group": "guaranteed",
-          "slot": 1
+          "slot": 1,
+          "name": "Ancient Hilt"
         }
       ],
       "itemState": "published",
@@ -291572,7 +291594,7 @@
     },
     {
       "title": "Crest of Lordaeron",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Alliance",
       "locations": [
         {
@@ -291612,7 +291634,7 @@
     },
     {
       "title": "Bloodied Insignia",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Alliance",
       "locations": [
         {
@@ -291660,7 +291682,7 @@
     },
     {
       "title": "Crest of Lordaeron",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "locations": [
         {
@@ -291835,7 +291857,7 @@
     },
     {
       "title": "The New Plague",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "locations": [
         {
@@ -291947,7 +291969,7 @@
     },
     {
       "title": "Abominable Creatures",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Alliance",
       "locations": [
         {
@@ -295422,7 +295444,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 24,
+      "level": 25,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 1950
@@ -295472,7 +295494,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 28,
+      "level": 30,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2300
@@ -295516,7 +295538,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 22,
+      "level": 23,
       "rewardValues": {
         "xp": 1750
       },
@@ -295626,7 +295648,7 @@
       "confirmation": "published",
       "title": "Khan Hratha",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "faction": "Horde",
       "rewardValues": {
         "xp": 4300,
@@ -295677,7 +295699,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 30,
+      "level": 29,
       "rewardValues": {
         "xp": 2450,
         "money": 2500,
@@ -295711,8 +295733,8 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Call of Earth",
-      "level": 10,
-      "minimum": 10,
+      "level": 4,
+      "minimum": 4,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 420
@@ -295765,7 +295787,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 30,
+      "level": 29,
       "rewardValues": {
         "xp": 2450,
         "money": 2500,
@@ -295833,7 +295855,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 30,
+      "level": 29,
       "rewardValues": {
         "xp": 2450,
         "money": 2500,
@@ -295888,7 +295910,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 31,
+      "level": 30,
       "rewardValues": {
         "xp": 2500,
         "money": 3000
@@ -298350,7 +298372,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "A Way In",
-      "level": 34,
+      "level": 36,
       "minimum": 24,
       "rewardValues": {
         "xp": 2700,
@@ -298385,7 +298407,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Master of Disguise",
-      "level": 34,
+      "level": 36,
       "minimum": 24,
       "faction": "Horde",
       "rewardValues": {
@@ -298600,7 +298622,7 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "level": 6,
+      "level": 7,
       "rewardValues": {
         "xp": 405,
         "money": 100,
@@ -299805,7 +299827,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 8,
+      "level": 9,
       "rewardValues": {
         "xp": 700,
         "money": 225,
@@ -300426,7 +300448,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 14,
+      "level": 15,
       "faction": "Horde",
       "rewardValues": {
         "xp": 980,
@@ -300820,7 +300842,7 @@
     },
     {
       "title": "Stormy Potential",
-      "minimum": 7,
+      "minimum": 6,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -300859,7 +300881,7 @@
         ],
         "relations": []
       },
-      "level": 11,
+      "level": 10,
       "rewardValues": {
         "xp": 880,
         "money": 400,
@@ -301008,7 +301030,7 @@
     },
     {
       "title": "Unending Torment",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "locations": [
         {
@@ -301039,7 +301061,7 @@
     },
     {
       "title": "Unending Torment",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -301090,7 +301112,7 @@
     },
     {
       "title": "Unending Torment",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -301164,7 +301186,7 @@
     },
     {
       "title": "Unending Torment",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -301215,7 +301237,7 @@
     },
     {
       "title": "Unending Torment",
-      "minimum": 16,
+      "minimum": 15,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -307960,8 +307982,8 @@
       "itemState": "published",
       "confirmation": "published",
       "title": "Gleaming Crescent Necklace",
-      "level": 29,
-      "minimum": 25,
+      "level": 26,
+      "minimum": 22,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2350,
@@ -308311,8 +308333,8 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Stolen Freewind Supplies",
-      "level": 31,
-      "minimum": 27,
+      "level": 30,
+      "minimum": 25,
       "faction": "Horde",
       "rewardValues": {
         "xp": 2500,
@@ -308360,8 +308382,8 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Stop the Screeching",
-      "level": 31,
-      "minimum": 27,
+      "level": 30,
+      "minimum": 25,
       "faction": "Horde",
       "rewardValues": {
         "xp": 2500,
@@ -308672,8 +308694,8 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Pristine Pesterhide Pelts",
-      "level": 31,
-      "minimum": 27,
+      "level": 29,
+      "minimum": 24,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2500,
@@ -308726,8 +308748,8 @@
       "itemState": "published",
       "confirmation": "published",
       "title": "Packaged Pristine Pelts",
-      "level": 31,
-      "minimum": 27,
+      "level": 29,
+      "minimum": 24,
       "faction": "Alliance",
       "rewardValues": {
         "xp": 2500,
@@ -309559,7 +309581,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Never Coming Back",
-      "level": 22,
+      "level": 23,
       "minimum": 18,
       "faction": "Horde",
       "rewardValues": {
@@ -309605,7 +309627,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "A Void Path",
-      "level": 22,
+      "level": 23,
       "minimum": 18,
       "faction": "Horde",
       "rewardValues": {
@@ -311816,7 +311838,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Vengeful Trail",
-      "level": 30,
+      "level": 28,
       "minimum": 23,
       "faction": "Alliance",
       "rewardValues": {
@@ -314224,7 +314246,7 @@
     },
     {
       "title": "A Missing Hand",
-      "minimum": 9,
+      "minimum": 8,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "locations": [
@@ -314250,7 +314272,7 @@
           }
         ]
       },
-      "level": 11,
+      "level": 9,
       "rewardValues": {
         "xp": 90,
         "reputation": [
@@ -314279,7 +314301,7 @@
     },
     {
       "title": "Threat from Below",
-      "minimum": 9,
+      "minimum": 8,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -314316,7 +314338,7 @@
           }
         ]
       },
-      "level": 11,
+      "level": 9,
       "rewardValues": {
         "xp": 880,
         "reputation": [
@@ -314408,7 +314430,7 @@
     },
     {
       "title": "Threat from Below",
-      "minimum": 9,
+      "minimum": 8,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -314474,7 +314496,7 @@
     },
     {
       "title": "Threat from Below",
-      "minimum": 10,
+      "minimum": 8,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -314520,7 +314542,7 @@
         ],
         "relations": []
       },
-      "level": 12,
+      "level": 11,
       "rewardValues": {
         "xp": 910,
         "reputation": [
@@ -314581,7 +314603,7 @@
       ],
       "itemState": "published",
       "confirmation": "published",
-      "level": 9,
+      "level": 10,
       "clientIdentityRecorded": true,
       "fieldStates": {
         "items": "published",
@@ -314720,7 +314742,7 @@
         ],
         "relations": []
       },
-      "level": 9,
+      "level": 11,
       "rewardValues": {
         "xp": 780,
         "reputation": [
@@ -314847,7 +314869,7 @@
         ],
         "relations": []
       },
-      "level": 9,
+      "level": 11,
       "rewardValues": {
         "xp": 80,
         "reputation": [
@@ -315640,7 +315662,7 @@
     },
     {
       "title": "Rear Guard Patrol",
-      "minimum": 6,
+      "minimum": 10,
       "races": [
         2,
         5

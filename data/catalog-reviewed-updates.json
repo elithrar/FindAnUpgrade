@@ -3,7 +3,7 @@
   "revision": "quest-website-2026-11-06",
   "reviewedAt": "2026-11-06",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter remain unknown.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter remain unknown. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -40,6 +40,30 @@
       "sha256": "a3e2977f0677799e39d5daa3fbfdc1f29fdff8218d0e220a5c8925e80e65cde9",
       "bytes": 10173,
       "collectedAt": "2026-11-06T12:01:05.517178+00:00"
+    },
+    "questsNovember6Afternoon": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "cb340bd7d8efaf2df6bc21d88b71380dd2641c18a73d6b711b6785c1bcb999bd",
+      "bytes": 1595550,
+      "collectedAt": "2026-11-06T18:59:13.827556+00:00"
+    },
+    "rewardsNovember6Afternoon": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "60a5e6a284c0afff4d628da0da0f47488a9aa7e714a357469f2264ea1166d420",
+      "bytes": 275801,
+      "collectedAt": "2026-11-06T18:59:14.187540+00:00"
+    },
+    "changelogNovember6Afternoon": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "7eb2be6c5ac1606a9631926822393f3be397d762f294fa90243e5d815367204d",
+      "bytes": 16386,
+      "collectedAt": "2026-11-06T18:59:45.925597+00:00"
+    },
+    "nativeCatalogNovember6Afternoon": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "41461dd2fe94300f75bd330671dd4670d2ba00d34eef6c6a94536c202b375b4c",
+      "bytes": 799735,
+      "collectedAt": "2026-11-06T19:00:43.599441+00:00"
     }
   },
   "records": [
@@ -613,6 +637,1251 @@
         "changelogNovember6"
       ],
       "reason": "November 5 published build 70790 exact quest level/minimum correction."
+    },
+    {
+      "id": 303,
+      "title": "The Dark Iron War",
+      "expected": {
+        "minimum": 25
+      },
+      "changes": {
+        "minimum": 22
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "aca6886463aa5b3da9e4095e277f6d492b4a2d297e1f9397e2032b1ee6abd75d"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 421,
+      "title": "Prove Your Worth",
+      "expected": {
+        "level": 10,
+        "minimum": 12
+      },
+      "changes": {
+        "level": 11,
+        "minimum": 9
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "9ce3ad514013fcd91fc8f8e96b2a3c39709aefbd5f6d5ea50f4659f78287d2f9"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 971,
+      "title": "Knowledge in the Deeps",
+      "expected": {
+        "minimum": 10
+      },
+      "changes": {
+        "minimum": 18
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "7e7093c94497a9fe34542fc45940e86ebe578cae5f98d193f1a6d5a4b3c422ca"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 79361,
+      "title": "Storm, Earth, and Fire",
+      "expected": {
+        "level": 38
+      },
+      "changes": {
+        "level": 43
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "68ec72345b65566dcd6210b3ecb802f112233e0ec202deca3e7c91f11e433638"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 79363,
+      "title": "Silvia's Sword",
+      "expected": {
+        "level": 26
+      },
+      "changes": {
+        "level": 27
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "52bcec320ee0327448f1d994a0326d44e58ddc7e560bfd3d8a14dd652b0b6f5a"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 86757,
+      "title": "Slowing the Orc Advance",
+      "expected": {
+        "level": 32,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 30,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "6f4d0538d0fe0e6afecd1a9ae7d6a025a7e13fd273a4188fbe99f0b7eef27d9b"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 87491,
+      "title": "Spark of Freedom",
+      "expected": {
+        "level": 32,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 30,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "1cbe8ada6485660bf65c69797870ab62779646fec36cadd4b1b16cbbccfe0aa9"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 92597,
+      "title": "Reading the Ley Lines",
+      "expected": {
+        "title": "Reading the Ley Lines"
+      },
+      "changes": {
+        "title": "Reading the Leylines"
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "f4c823b7501752abb9c886261aacd6bc911fd01c532f78607488a7ace7d6880b"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 95189,
+      "title": "Crest of Lordaeron",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "9cfc838ec939cc2c9d14ba7f6a97a55e460db4d9ba585c979b32c7ea4b83c3f9"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 95195,
+      "title": "Bloodied Insignia",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "f93bf2421a4926bcdd2d8dbdf7a8536c3f8b0b7d0162c0103f7f3e5e907df0de"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 95204,
+      "title": "Crest of Lordaeron",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "a231067752692961c5857f537c58583070eba41b472152d335d609374341b221"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 95216,
+      "title": "The New Plague",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "087a7e9fc10b2607baf1311718a316c92415cd555f38d205842a91368f8e0b93"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 95250,
+      "title": "Abominable Creatures",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "4ae179cbf6348bb80a2780da06ef5735fbbdb62cbf5b47586ed8f511a115fec7"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96137,
+      "title": "Ira's Dagger",
+      "expected": {
+        "level": 24
+      },
+      "changes": {
+        "level": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "e84e456db1d15a661a8a809064adcd02d350c9e4c484a20404c8355b3cf1c87d"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96138,
+      "title": "Merrick's Bow",
+      "expected": {
+        "level": 28
+      },
+      "changes": {
+        "level": 30
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "019e56daa82423be5f50d24cff37f1e7232a9dc44b94c454e60b2efccce5d02a"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96139,
+      "title": "The Valor Family",
+      "expected": {
+        "level": 22
+      },
+      "changes": {
+        "level": 23
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "c2207c99a2c98e1bb8e3f35b37fbb928a275a5b733c39eb4e3fa8c075ec64a79"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96222,
+      "title": "Khan Hratha",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "630f7279e18015a7ad74dc08d5c6a576cf231253d5c5303450f19d4d6647b365"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96241,
+      "title": "Talkin' bout Toxins, Mon",
+      "expected": {
+        "level": 30
+      },
+      "changes": {
+        "level": 29
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "bbb1dff218980f1b571345c0a0a13ecb256b6d0a19ba1e329796ae0790dc0930"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96243,
+      "title": "Call of Earth",
+      "expected": {
+        "level": 10,
+        "minimum": 10
+      },
+      "changes": {
+        "level": 4,
+        "minimum": 4
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "67282fbfc86fbb7f9f459794c0fe66b2de4862608f639c2d676a880ec9cc6c5b"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96259,
+      "title": "Defending the Dead",
+      "expected": {
+        "level": 30
+      },
+      "changes": {
+        "level": 29
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "fd5767a91f07fcd8418fd68ca8cb4a39f05584d5177307b0916b34b4da85b65e"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96260,
+      "title": "Stronger than Steel",
+      "expected": {
+        "level": 30
+      },
+      "changes": {
+        "level": 29
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "506ba26b6d1a2f3f96437aaa8e539e114b0c923efb134a464692bb66661b5171"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96261,
+      "title": "The Broodmother",
+      "expected": {
+        "level": 31
+      },
+      "changes": {
+        "level": 30
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "98e48e504047328f4d2c52e82fe6242a2a6a0a82895bf0123d89bfac7f24c0c4"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96783,
+      "title": "A Way In",
+      "expected": {
+        "level": 34
+      },
+      "changes": {
+        "level": 36
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "1b388ce03bf57a262c3b4b88d7429e265bd9928a9168e2d74626a4ef81a646c6"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96784,
+      "title": "Master of Disguise",
+      "expected": {
+        "level": 34
+      },
+      "changes": {
+        "level": 36
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "53a93f844fd078c5135ca8672ffd7e7adcb894e4cfc3921dbc70e2830751106e"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 96822,
+      "title": "For Honor",
+      "expected": {
+        "level": 6
+      },
+      "changes": {
+        "level": 7
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "db5dff6a4d5e843fbb80283dc90a49f71963037dc3722cdc2e24a1ca9bfcc0c0"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97223,
+      "title": "Bloodtalon Matriarch",
+      "expected": {
+        "level": 8
+      },
+      "changes": {
+        "level": 9
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "1ba5cd0abdc17ad453b6228deef30d7309d76a9da365de9f8220c89708c5507f"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97253,
+      "title": "Parts and Pieces",
+      "expected": {
+        "level": 14
+      },
+      "changes": {
+        "level": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "2d8107d3b91a091d75ce875f4271f41c65549773041a1092e080db12053e0987"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97282,
+      "title": "Stormy Potential",
+      "expected": {
+        "level": 11,
+        "minimum": 7
+      },
+      "changes": {
+        "level": 10,
+        "minimum": 6
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "3c99ad5cf7c70d3b0efc098c3af3e4aa8ac9fc253c5c1f67de41f3989c774b08"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97288,
+      "title": "Unending Torment",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "4d72e726660b4de3a4c4cd92a3ec7252a6633760b01af6448c1caff8084a99f7"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97289,
+      "title": "Unending Torment",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "df703b9efb8d4468d946733d5dd86fe8582c0b46fb13cd6429e9d24ed59562e7"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97290,
+      "title": "Unending Torment",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "2d0f0ed23eaf5f8c097356f260ff9a3018d0d08c499344251ecc0919b8edf543"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97291,
+      "title": "Unending Torment",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "382cf42a73947f8e9c85818279de703672f3d0080f6d1dee22b32132d14d6adf"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 97292,
+      "title": "Unending Torment",
+      "expected": {
+        "minimum": 16
+      },
+      "changes": {
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "7c10ea7372d1c3d64dce00faba177b546ac38f8fa5cc5cf61c84688dc7a25984"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98027,
+      "title": "Gleaming Crescent Necklace",
+      "expected": {
+        "level": 29,
+        "minimum": 25
+      },
+      "changes": {
+        "level": 26,
+        "minimum": 22
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "bffa34818d052d1e83e4535b47786a7a38dc807890ef742ee9aba2a86dd32eba"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98069,
+      "title": "Stolen Freewind Supplies",
+      "expected": {
+        "level": 31,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 30,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "7fe8cd33d3bb65517131cceadfcdff772c965e25a34a522a58dc2377b03b335a"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98070,
+      "title": "Stop the Screeching",
+      "expected": {
+        "level": 31,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 30,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "96b1e19db43f0ba97802a1e50f3926408f75d090f7e8e112c3d405731887395c"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98155,
+      "title": "Pristine Pesterhide Pelts",
+      "expected": {
+        "level": 31,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 29,
+        "minimum": 24
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "8c132221b5a644b947afe17912a59582dfec15de958a879f17bd3e87581e9ed2"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98156,
+      "title": "Packaged Pristine Pelts",
+      "expected": {
+        "level": 31,
+        "minimum": 27
+      },
+      "changes": {
+        "level": 29,
+        "minimum": 24
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "08c6e6f100bd0bb6351f7ef2288fe64446742632443e7a7348c0beaa7b5d482a"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98251,
+      "title": "Never Coming Back",
+      "expected": {
+        "level": 22
+      },
+      "changes": {
+        "level": 23
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "ef94faed7b33633724231b4b0b334d4ce75cf4b4c7bdb513e48eac22a1aca0f4"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98252,
+      "title": "A Void Path",
+      "expected": {
+        "level": 22
+      },
+      "changes": {
+        "level": 23
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "a57b58892d1bafa17a5a82f42a42f2823179a4f3dc1d544cd53e9ba7ec8f8e40"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 98417,
+      "title": "Vengeful Trail",
+      "expected": {
+        "level": 30
+      },
+      "changes": {
+        "level": 28
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "82489e56a1ae715b32d5e1c00c9b4fc5754462170c50412cf5703b6aae389447"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99048,
+      "title": "A Missing Hand",
+      "expected": {
+        "level": 11,
+        "minimum": 9
+      },
+      "changes": {
+        "level": 9,
+        "minimum": 8
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "f5189677d8b1702c857d2b9d86b73fc4e6b1d8b7b9ffa7f97a684d54ba613a72"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99049,
+      "title": "Threat from Below",
+      "expected": {
+        "level": 11,
+        "minimum": 9
+      },
+      "changes": {
+        "level": 9,
+        "minimum": 8
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "436066e9df754af9744a051a999f9fd8ff0f5f135bfadfe355f4160f27930545"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99051,
+      "title": "Threat from Below",
+      "expected": {
+        "minimum": 9
+      },
+      "changes": {
+        "minimum": 8
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "a49c1fc0b5653c11c8f133e15ee5e575010f8fafb768344d989587524745b37c"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99052,
+      "title": "Threat from Below",
+      "expected": {
+        "level": 12,
+        "minimum": 10
+      },
+      "changes": {
+        "level": 11,
+        "minimum": 8
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "7be97576214c6f8de50908ba42566de87b187614b0d45da50b9384a6492ab4ed"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99053,
+      "title": "Escaping Ban'ethil",
+      "expected": {
+        "level": 9
+      },
+      "changes": {
+        "level": 10
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "d3dd42f181c03ada5f00a1562b37331c1ceef4f1ac66cd0dad38d043c2add948"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99080,
+      "title": "Drive Them Out",
+      "expected": {
+        "level": 9
+      },
+      "changes": {
+        "level": 11
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "6d1bfb1a7a767be7143716c17aad9f2badf657e3e9c236f1a9beb3aa684657fb"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99082,
+      "title": "The High Chieftain",
+      "expected": {
+        "level": 9
+      },
+      "changes": {
+        "level": 11
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "686d1d7485c6ed063174d8fcf1b346b46a59e368140cdf12a15156565761bcfe"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 99156,
+      "title": "Rear Guard Patrol",
+      "expected": {
+        "minimum": 6
+      },
+      "changes": {
+        "minimum": 10
+      },
+      "evidence": [
+        "nativeCatalogNovember6Afternoon",
+        "questsNovember6Afternoon",
+        "changelogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "fcf2b457e0f1b01e6bec3faba13a281ace0e460236a54f80737e9830947421ce"
+      },
+      "reason": "Exact cached-template name/level observation published in build 70790 catalog; only these named fields change. Cached presence does not establish availability, faction, classification or complete reward groups."
+    },
+    {
+      "id": 600,
+      "title": "Venture Company Mining",
+      "expected": {
+        "items": [
+          {
+            "itemID": 5253,
+            "name": "Goblin Igniter",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4128,
+            "name": "Silver Spade",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 5253,
+            "name": "Goblin Igniter",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4128,
+            "name": "Silver Spade",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 287071,
+            "name": "Goblin Switchblade",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6Afternoon",
+        "changelogNovember6Afternoon",
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "e670e3b34a34b4ec58dd5a9f9839f20b78deca38d4e968a4f9f283eb8f65fb2f"
+      },
+      "reason": "November 6 published review corroborates the added item in the exact guaranteed/choice group; preserve all prior rewards, quantities and source-array slot ordering."
+    },
+    {
+      "id": 628,
+      "title": "Excelsior",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4109,
+            "name": "Excelsior Boots",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4109,
+            "name": "Excelsior Boots",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 252452,
+            "name": "Mystic Heavy Armor Kit",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6Afternoon",
+        "changelogNovember6Afternoon",
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "da21d169c20a33969272bd0be62ff29614b370edfcc0938d69562bd3108b4f8c"
+      },
+      "reason": "November 6 published review corroborates the added item in the exact guaranteed/choice group; preserve all prior rewards, quantities and source-array slot ordering."
+    },
+    {
+      "id": 673,
+      "title": "Foul Magics",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4543,
+            "name": "White Drakeskin Cap",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4545,
+            "name": "Radiant Silver Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4543,
+            "name": "White Drakeskin Cap",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4545,
+            "name": "Radiant Silver Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270073,
+            "name": "Stromgarde Cuffs",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember6Afternoon",
+        "changelogNovember6Afternoon",
+        "nativeCatalogNovember6Afternoon"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember6Afternoon",
+        "build": 70790,
+        "observedAt": "2026-11-06T15:57:41.826006+00:00",
+        "payloadSha256": "b500137403ce9bd6e12ce24cf4a6f172b93d3a0a6865fe3ef4ebf9b1592ed6a6"
+      },
+      "reason": "November 6 published review corroborates the added item in the exact guaranteed/choice group; preserve all prior rewards, quantities and source-array slot ordering."
     }
   ],
   "additions": [
@@ -627,15 +1896,17 @@
             "itemID": 282315,
             "quantity": 1,
             "group": "guaranteed",
-            "slot": 1
+            "slot": 1,
+            "name": "Ancient Hilt"
           }
         ],
         "itemState": "published"
       },
       "evidence": [
-        "changelogNovember6"
+        "changelogNovember6",
+        "changelogNovember6Afternoon"
       ],
-      "reason": "November 4 separately cataloged exact quest and guaranteed reward. Item name, stats, faction, zone and starter are unconfirmed and omitted."
+      "reason": "November 4 separately cataloged exact quest and guaranteed reward. Item name, stats, faction, zone and starter are unconfirmed and omitted. The initial identity snapshot omitted the item name. The November 6 afternoon published review identifies item 282315 as Ancient Hilt; faction, zone and starter remain omitted, and item stats are resolved through native item APIs."
     }
   ]
 }

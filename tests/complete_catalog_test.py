@@ -93,6 +93,58 @@ class CompleteCatalogTests(unittest.TestCase):
                 91732,
                 88756,
                 968,
+                303,
+                421,
+                600,
+                628,
+                673,
+                971,
+                79361,
+                79363,
+                86757,
+                87491,
+                92597,
+                95189,
+                95195,
+                95204,
+                95216,
+                95250,
+                96137,
+                96138,
+                96139,
+                96222,
+                96241,
+                96243,
+                96259,
+                96260,
+                96261,
+                96783,
+                96784,
+                96822,
+                97223,
+                97253,
+                97282,
+                97288,
+                97289,
+                97290,
+                97291,
+                97292,
+                98027,
+                98069,
+                98070,
+                98155,
+                98156,
+                98251,
+                98252,
+                98417,
+                99048,
+                99049,
+                99051,
+                99052,
+                99053,
+                99080,
+                99082,
+                99156,
             },
         )
         self.assertEqual(
@@ -134,12 +186,90 @@ class CompleteCatalogTests(unittest.TestCase):
         )
         self.assertEqual(
             ancient["items"],
-            [{"itemID": 282315, "quantity": 1, "group": "guaranteed", "slot": 1}],
+            [
+                {
+                    "itemID": 282315,
+                    "name": "Ancient Hilt",
+                    "quantity": 1,
+                    "group": "guaranteed",
+                    "slot": 1,
+                }
+            ],
         )
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
         self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 1)
+
+    def test_reviewed_title_changes_are_exact_idempotent_and_reject_primary_conflicts(
+        self,
+    ):
+        provenance, inputs = read_inputs(ROOT)
+        update = reviewed_updates(inputs["reviewed"])[92597]
+        row = {"id": 92597, "title": "Reading the Ley Lines"}
+        apply_reviewed_update(row, update)
+        self.assertEqual(row["title"], "Reading the Leylines")
+        apply_reviewed_update(row, update)
+        for changed in ({"title": "A different quest"}, {"id": 92598}):
+            with (
+                self.subTest(changed=changed),
+                self.assertRaisesRegex(ValueError, "identity"),
+            ):
+                apply_reviewed_update({**row, **changed}, update)
+        for title in (
+            "Reading the Ley Lines",
+            "Reading the Leylines",
+            "Unreviewed spelling",
+        ):
+            changed = copy.deepcopy(inputs)
+            for record in changed["primary"]["records"]:
+                if record["id"] == 92597:
+                    record["title"] = title
+                    break
+            else:
+                original = next(
+                    r for r in changed["public"]["records"] if r["id"] == 92597
+                )
+                changed["primary"]["records"].append({**original, "title": title})
+            with mock.patch(
+                "fau_tools.catalog.read_inputs", return_value=(provenance, changed)
+            ):
+                if title == "Unreviewed spelling":
+                    with self.assertRaisesRegex(ValueError, "primary conflict"):
+                        build_complete(ROOT)
+                else:
+                    source, _ = build_complete(ROOT)
+                    self.assertEqual(
+                        next(q for q in source["quests"] if q["id"] == 92597)["title"],
+                        "Reading the Leylines",
+                    )
+
+    def test_reviewed_title_and_native_observation_validation(self):
+        _, inputs = read_inputs(ROOT)
+        for mutation in (
+            "unbound-title",
+            "blank-title",
+            "control-title",
+            "native-hash",
+            "native-source",
+            "native-build",
+        ):
+            document = copy.deepcopy(inputs["reviewed"])
+            row = next(r for r in document["records"] if r["id"] == 92597)
+            if mutation == "unbound-title":
+                row["expected"]["title"] = "Another identity"
+            elif mutation == "blank-title":
+                row["changes"]["title"] = ""
+            elif mutation == "control-title":
+                row["changes"]["title"] = "bad\nname"
+            elif mutation == "native-hash":
+                row["nativeObservation"]["payloadSha256"] = True
+            elif mutation == "native-source":
+                row["nativeObservation"]["source"] = "changelogNovember6Afternoon"
+            else:
+                row["nativeObservation"]["build"] = True
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_updates(document)
 
     def test_additional_website_identity_rejects_unsupported_or_conflicting_evidence(
         self,

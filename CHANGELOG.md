@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.12
+
+- Add Goblin Switchblade, Mystic Heavy Armor Kit and Stromgarde Cuffs to their verified quest reward groups.
+- Apply 49 exact quest name and level corrections from the published build 70790 cached catalog, including 14 outside the chart. Preserve unknown availability and unresolved reward groups.
+- Name item 282315 Ancient Hilt while preserving its guaranteed association with The Ancient Hilt. Item stats continue to come from the native client.
+- Retain original source receipts and per-record cached payload hashes; reject conflicting quest-title refreshes.
+
 ## 0.1.11
 
 - Sync verified November 4–6 Quests updates: five new reward items, exact reward choices, eight quest level corrections, and The Ancient Hilt with its unnamed guaranteed item.
