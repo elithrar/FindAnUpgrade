@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.15
+
+- Fix slash-command registration taint that could block Blizzard's `/pvp` command with an `ADDON_ACTION_FORBIDDEN` error.
+- Update the bundled SomethingNeedDoing runtime to 0.5.2 and preserve Blizzard's command registry during startup and cleanup.
+
 ## 0.1.14
 
 - Add five verified reward choices across Rescue OOX-17/TN!, Malin's Request, Rescue OOX-09/HL! and Gordunni Cobalt.
