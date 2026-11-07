@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.14
+
+- Add five verified reward choices across Rescue OOX-17/TN!, Malin's Request, Rescue OOX-09/HL! and Gordunni Cobalt.
+- Apply 19 exact cached quest metadata updates, including Deliver the First Shipment; keep recovered unconfirmed quests and unknown rewards unconfirmed.
+- Use separately recorded categories for Stout to Kadrell (Loch Modan) and The Ancient Hilt (Zephras Isle), preserving primary status labels and existing giver coordinates.
+- Retain original source receipts and reject conflicting metadata/category refreshes.
+
 ## 0.1.13
 
 - Rank usable one-handed quest rewards against an equipped two-handed weapon, while retaining equipment and uniqueness checks.

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-06",
-  "reviewedAt": "2026-11-06",
+  "revision": "quest-website-2026-11-07",
+  "reviewedAt": "2026-11-07",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter remain unknown. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -64,6 +64,30 @@
       "sha256": "41461dd2fe94300f75bd330671dd4670d2ba00d34eef6c6a94536c202b375b4c",
       "bytes": 799735,
       "collectedAt": "2026-11-06T19:00:43.599441+00:00"
+    },
+    "questsNovember7": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "179b0d21842adc93415388658241176f957a57f1d470f5c5bc95996ca919ef77",
+      "bytes": 1595556,
+      "collectedAt": "2026-11-07T18:57:11.868886+00:00"
+    },
+    "rewardsNovember7": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "24ec9d55be4bb564fee1039e4795a8cfafff2ad744552179868ed820600f14bc",
+      "bytes": 276080,
+      "collectedAt": "2026-11-07T18:57:12.588854+00:00"
+    },
+    "changelogNovember7": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "cc0e07efe5865dead6c6f832b221af4098bcbb3c521e0bd5ab7bde023cd3c3f1",
+      "bytes": 19506,
+      "collectedAt": "2026-11-07T18:57:13.680487+00:00"
+    },
+    "nativeCatalogNovember7": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "224f407cc5c7c7c3f1ee59b3e21633fc5c78addb07e671d62e7efb442bb18e82",
+      "bytes": 963378,
+      "collectedAt": "2026-11-07T18:57:14.260778+00:00"
     }
   },
   "records": [
@@ -1882,6 +1906,643 @@
         "payloadSha256": "b500137403ce9bd6e12ce24cf4a6f172b93d3a0a6865fe3ef4ebf9b1592ed6a6"
       },
       "reason": "November 6 published review corroborates the added item in the exact guaranteed/choice group; preserve all prior rewards, quantities and source-array slot ordering."
+    },
+    {
+      "id": 1156,
+      "title": "<NYI> <TXT> speak to alchemist pestlezugg",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> <TXT> speak to alchemist pestlezugg",
+        "level": 58,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "821edaf7a4bdcbcc2de01c007a4a26b9d0737b659a6b85dd2a41e13c4ffee6e0"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 1425,
+      "title": "Deliver the Shipment",
+      "expected": {
+        "title": "Deliver the Shipment"
+      },
+      "changes": {
+        "title": "Deliver the First Shipment"
+      },
+      "evidence": [
+        "nativeCatalogNovember7",
+        "questsNovember7",
+        "changelogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "7d14f5032f52c278f785df2b9632d60b1ddedc67cd9a1bd6589d042329a43018"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 79358,
+      "title": "Storm, Earth, and Fire",
+      "expected": {
+        "level": 38
+      },
+      "changes": {
+        "level": 43
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "99506b4354034cbeab8c63e4f2e98e8f79cf52cb33f6c0314ae9fb118b1dde20"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 82208,
+      "title": "Greater Friend of the Library",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "942acd54650423486e6329467442827a90e34b86043a1d83c6c43bf20df46139"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 92847,
+      "title": "Corrupting Tears",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "1e4a78d2894cd9f4d1e335d97b1826f2cfa230294b0e7e45ed6407d8bcceb5c1"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 92873,
+      "title": "Proof of Concept",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "0b7378f41c3f16214203b097ffd5cea1267992b837fd9bb4d312115e23668c70"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 92893,
+      "title": "No Mercy for the Weak",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "58bb55a8149d2dc208204cdc15e67aefe9a14bd96ad2ae8e9f41fec95c8914ea"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 92894,
+      "title": "Bone Raising",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "0a27a1a86ed4ba96fa9a54112cb69d757700eae1892f6f5405a9907973c04bcf"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93034,
+      "title": "Valley of Bones",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "50ebd2fe8915ac5d7165b734b79c328f325e873ae7cc3f53ee95b4a32dc28d57"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93035,
+      "title": "Ravaging Ravagers",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "c5d9a16e4895dee9873997200b1645dbeceac66f9e5766e96e5da0b34401ffa0"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93037,
+      "title": "Outing Outcasts",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "43b82fef05357ff2b8f2d87b8d73f5b40b5e2e8b2a4f330c7f3e49c0df2bfd23"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93041,
+      "title": "Facing the Truth",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "0a219ea65843cb1361187d5b1ffd2d426115e3cb95a5f89040253fb611a3db94"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93044,
+      "title": "A Cleansing Cry",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "a42d426ccc1437d0ced7ddefb9e77e45fd443c1db1d163ce7231aa54c2b29973"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93045,
+      "title": "Test Your Theory",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "43381285f9db52a0cc084a78087e8acbab9add16206038871e68f87e751bd786"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93058,
+      "title": "Saving Our Own",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "058b7b3769160c8ef663855aef3e5f84eb72db351cff4574e14c5c0e9bcf98b2"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93062,
+      "title": "Bone Burying",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "dac3a270640234f4925d11493839ad4fcf2f6a1737343560554b798f84f9d78f"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 93066,
+      "title": "Bristleback Retreat",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "359031018289500ef887a9de8f6f2bc18532d511ac585e41c6a4989807581ee7"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 96785,
+      "title": "Ain't No Telling",
+      "expected": {
+        "level": 34
+      },
+      "changes": {
+        "level": 36
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "a11e0fea27681245ada8938b2809453bb9967b95de850ab9d6e65e02ecf27670"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 96786,
+      "title": "The Syndicate Sting",
+      "expected": {
+        "level": 34
+      },
+      "changes": {
+        "level": 36
+      },
+      "evidence": [
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "4372eb6af1f24e4f82dac9f9efdce1464dc3ac01f6a56c17c03dcbb6461fd785"
+      },
+      "reason": "Exact cached-template metadata from build 70862; preserve unknown reward groups, confirmation, costs and availability. Recovered absent fields are recorded observations, not proof that an unconfirmed quest is playable."
+    },
+    {
+      "id": 648,
+      "title": "Rescue OOX-17/TN!",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9643,
+            "name": "Optomatic Deflector",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9644,
+            "name": "Thermotastic Egg Timer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9643,
+            "name": "Optomatic Deflector",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9644,
+            "name": "Thermotastic Egg Timer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270102,
+            "name": "Projectile Redirectors",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270103,
+            "name": "Reloading Assist Armbands",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember7",
+        "changelogNovember7",
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "b8d99c42b6b732901af23aef13f2e824fc3791f39da7f930d82c941c053a66eb"
+      },
+      "reason": "November 7 published reward review confirms these choice additions; retain every existing group and quantity and preserve source array ordering."
+    },
+    {
+      "id": 697,
+      "title": "Malin's Request",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4975,
+            "name": "Vigilant Buckler",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 15104,
+            "name": "Wingborne Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4975,
+            "name": "Vigilant Buckler",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 15104,
+            "name": "Wingborne Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270066,
+            "name": "Tower Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember7",
+        "changelogNovember7",
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "0f49b910f7a046519a8371af7e0bedd3910a98b3cadb029679a6cefbed0c61da"
+      },
+      "reason": "November 7 published reward review confirms these choice additions; retain every existing group and quantity and preserve source array ordering."
+    },
+    {
+      "id": 836,
+      "title": "Rescue OOX-09/HL!",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9645,
+            "name": "Gnomish Inventor Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9646,
+            "name": "Gnomish Water Sinking Device",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9645,
+            "name": "Gnomish Inventor Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9646,
+            "name": "Gnomish Water Sinking Device",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270101,
+            "name": "Gnomish Floatation Device",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember7",
+        "changelogNovember7",
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "84379e7f2199e7fc1c2d120722ca046e8b91137f86350110a0142e7b5bda454a"
+      },
+      "reason": "November 7 published reward review confirms these choice additions; retain every existing group and quantity and preserve source array ordering."
+    },
+    {
+      "id": 2987,
+      "title": "Gordunni Cobalt",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9658,
+            "name": "Boots of the Maharishi",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9660,
+            "name": "Stargazer Cloak",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9658,
+            "name": "Boots of the Maharishi",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9660,
+            "name": "Stargazer Cloak",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 287073,
+            "name": "Orwin's Axe",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember7",
+        "changelogNovember7",
+        "nativeCatalogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "f5b2e7cd1441fef3c72667ac6f77872d75aaf65d4432d71be578b1efac15dff2"
+      },
+      "reason": "November 7 published reward review confirms these choice additions; retain every existing group and quantity and preserve source array ordering."
     }
   ],
   "additions": [
@@ -1907,6 +2568,51 @@
         "changelogNovember6Afternoon"
       ],
       "reason": "November 4 separately cataloged exact quest and guaranteed reward. Item name, stats, faction, zone and starter are unconfirmed and omitted. The initial identity snapshot omitted the item name. The November 6 afternoon published review identifies item 282315 as Ancient Hilt; faction, zone and starter remain omitted, and item stats are resolved through native item APIs."
+    }
+  ],
+  "categoryUpdates": [
+    {
+      "id": 414,
+      "title": "Stout to Kadrell",
+      "expected": {
+        "sourceZoneID": 1,
+        "name": "Dun Morogh"
+      },
+      "changes": {
+        "sourceZoneID": 38,
+        "name": "Loch Modan"
+      },
+      "evidence": [
+        "nativeCatalogNovember7",
+        "changelogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "054cc676371463b6c19a158ae65aa56a53920fed757f50cd02f46b4916525f3d"
+      },
+      "reason": "Explicit recorded AreaID category in the cached catalog and November 7 published changelog. This updates effective category lookup while preserving primary classification membership, status, faction, starters and all UiMap coordinates."
+    },
+    {
+      "id": 93161,
+      "title": "The Ancient Hilt",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16593,
+        "name": "Zephras Isle"
+      },
+      "evidence": [
+        "nativeCatalogNovember7",
+        "changelogNovember7"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember7",
+        "build": 70862,
+        "observedAt": "2026-11-07T12:03:02.367501+00:00",
+        "payloadSha256": "7d291f372180e0738449aa253a4dade00a2831965a7a5db08628ccc2af7c1717"
+      },
+      "reason": "Explicit recorded AreaID category in the cached catalog and November 7 published changelog. This updates effective category lookup while preserving primary classification membership, status, faction, starters and all UiMap coordinates."
     }
   ]
 }

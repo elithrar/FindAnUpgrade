@@ -37,6 +37,19 @@ local function ids(rows)
     local set={};for _,row in ipairs(rows) do set[row.id]=true end;return set
 end
 
+test("recorded category changes affect same-zone lookup without changing primary labels or giver coordinates",function()
+    local N,source,filter=setup();local primary=N.Data.categoryById[91001]
+    local location=source[1].locations[1];location.mapID,location.x,location.y=77,.2,.3
+    source[1].recordedCategory={sourceZoneID=22,name="Beta"}
+    assert(N.Catalog:Category(91001)==N.Data.categories[2] and N.Data.categoryById[91001]==primary)
+    assert(not ids(N.SearchModel:Query(filter))[91001])
+    assert(location.mapID==77 and location.x==.2 and location.y==.3)
+    source[7].recordedCategory={sourceZoneID=11,name="Alpha"}
+    assert(N.Data.categoryById[91007]==nil and N.Catalog:Category(91007)==N.Data.categories[1])
+    assert(N.Model.Status(91007)==nil and N.Providers.Availability({id=91007,source=source[7]}).state=="unknown")
+    source[1].recordedCategory.name="Wrong category";assert(N.Catalog:Category(91001)==nil)
+end)
+
 test("Same zone is the default exact primary-category filter with known dungeons excluded",function()
     local N,_,filter=setup();local rows,status=N.SearchModel:Query(filter)
     assert(#rows==1 and rows[1].id==91001 and status==nil)
