@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.13
+
+- Rank usable one-handed quest rewards against an equipped two-handed weapon, while retaining equipment and uniqueness checks.
+
 ## 0.1.12
 
 - Add Goblin Switchblade, Mystic Heavy Armor Kit and Stromgarde Cuffs to their verified quest reward groups.
