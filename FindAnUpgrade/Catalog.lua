@@ -73,6 +73,14 @@ function C:Location(id)
     return rows[1],#rows
 end
 function C:Category(id)
+    local source=self.records[id] and self.records[id].source or N.Providers.Source(id)
+    local recorded=source and source.recordedCategory
+    if recorded then
+        for _,category in ipairs(N.Data and N.Data.categories or {}) do
+            if category.sourceZoneID==recorded.sourceZoneID and category.name==recorded.name then return category end
+        end
+        return nil
+    end
     local index=N.Data and N.Data.categoryById and N.Data.categoryById[id]
     return index and N.Data.categories and N.Data.categories[index] or nil
 end

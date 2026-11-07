@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-06",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-07",
   "quests": [
     {
       "id": 1,
@@ -24400,6 +24400,10 @@
           }
         ]
       },
+      "recordedCategory": {
+        "sourceZoneID": 38,
+        "name": "Loch Modan"
+      },
       "fieldStates": {
         "items": "published-empty",
         "title": "published",
@@ -38443,6 +38447,20 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270102,
+          "name": "Projectile Redirectors",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
+        },
+        {
+          "itemID": 270103,
+          "name": "Reloading Assist Armbands",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -41516,6 +41534,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270066,
+          "name": "Tower Boots",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -49654,6 +49679,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270101,
+          "name": "Gnomish Floatation Device",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -68483,12 +68515,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> <TXT> speak to alchemist pestlezugg",
+      "level": 58,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -77257,7 +77292,7 @@
       }
     },
     {
-      "title": "Deliver the Shipment",
+      "title": "Deliver the First Shipment",
       "minimum": 30,
       "faction": "Alliance",
       "eligibilityUnknown": true,
@@ -109660,6 +109695,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 287073,
+          "name": "Orwin's Axe",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -265301,7 +265343,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Storm, Earth, and Fire",
-      "level": 38,
+      "level": 43,
       "minimum": 30,
       "rewardValues": {
         "xp": 2850,
@@ -267547,7 +267589,7 @@
     },
     {
       "title": "Greater Friend of the Library",
-      "minimum": 30,
+      "minimum": 35,
       "eligibilityUnknown": true,
       "id": 82208,
       "items": [
@@ -276784,7 +276826,7 @@
       "confirmation": "published",
       "title": "Corrupting Tears",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3450,
         "reputation": [
@@ -277157,7 +277199,7 @@
       "confirmation": "published",
       "title": "Proof of Concept",
       "level": 41,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2450,
         "reputation": [
@@ -277347,7 +277389,7 @@
       "confirmation": "published",
       "title": "No Mercy for the Weak",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2550,
         "reputation": [
@@ -277382,7 +277424,7 @@
       "confirmation": "published",
       "title": "Bone Raising",
       "level": 40,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2350,
         "reputation": [
@@ -277635,7 +277677,7 @@
       "confirmation": "published",
       "title": "Valley of Bones",
       "level": 38,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 285,
         "reputation": [
@@ -277676,7 +277718,7 @@
       "confirmation": "published",
       "title": "Ravaging Ravagers",
       "level": 38,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 1450,
         "reputation": [
@@ -277785,7 +277827,7 @@
       "confirmation": "published",
       "title": "Outing Outcasts",
       "level": 40,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2350,
         "reputation": [
@@ -277829,7 +277871,7 @@
       "confirmation": "published",
       "title": "Facing the Truth",
       "level": 38,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 710,
         "reputation": [
@@ -277873,7 +277915,7 @@
       "confirmation": "published",
       "title": "A Cleansing Cry",
       "level": 38,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2150,
         "reputation": [
@@ -277930,7 +277972,7 @@
       "confirmation": "published",
       "title": "Test Your Theory",
       "level": 38,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 710,
         "reputation": [
@@ -277965,7 +278007,7 @@
       "confirmation": "published",
       "title": "Saving Our Own",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2550,
         "reputation": [
@@ -278000,7 +278042,7 @@
       "confirmation": "published",
       "title": "Bone Burying",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3450,
         "reputation": [
@@ -278090,7 +278132,7 @@
       "confirmation": "published",
       "title": "Bristleback Retreat",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3600,
         "money": 6000,
@@ -278550,6 +278592,10 @@
       "title": "The Ancient Hilt",
       "level": 60,
       "minimum": 1,
+      "recordedCategory": {
+        "sourceZoneID": 16593,
+        "name": "Zephras Isle"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
@@ -298449,7 +298495,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "Ain't No Telling",
-      "level": 34,
+      "level": 36,
       "minimum": 24,
       "rewardValues": {
         "xp": 2700,
@@ -298475,7 +298521,7 @@
       "itemState": "published-empty",
       "confirmation": "published",
       "title": "The Syndicate Sting",
-      "level": 34,
+      "level": 36,
       "minimum": 24,
       "rewardValues": {
         "xp": 3350,

@@ -24,6 +24,19 @@ local function start()
     return N
 end
 
+test("recovered unconfirmed cached metadata does not establish availability or empty rewards",function()
+    local N=W.Init();local source=N.Providers.Source(1156)
+    assert(source and source.title=="<NYI> <TXT> speak to alchemist pestlezugg" and source.level==58 and source.minimum==25)
+    assert(source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
+    assert(N.Providers.RequiresNativeProof(source) and N.Model.Status(1156)==nil)
+    C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end
+    N.Character:PrimeQuests({}, {},true)
+    local eligible=N.SearchModel:Eligibility({id=1156,source=source},N.Character:Get())
+    assert(not eligible)
+    local category=N.Catalog:Category(93161);assert(category and category.sourceZoneID==16593 and N.Model.Status(93161)==nil)
+    assert(N.Providers.Availability({id=93161,source=N.Providers.Source(93161)}).state=="unknown")
+end)
+
 test("website corrections reach bundled reward fallback without claiming unknown lists empty",function()
     local N=W.Init();W.rewardReady=false
     C_QuestLog.GetTitleForQuestID=function()return nil end

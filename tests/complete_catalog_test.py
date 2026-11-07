@@ -15,6 +15,7 @@ from fau_tools.catalog import (
     merge_reviewed_additions,
     read_inputs,
     reviewed_additions,
+    reviewed_categories,
     reviewed_updates,
     validate_complete,
 )
@@ -145,6 +146,30 @@ class CompleteCatalogTests(unittest.TestCase):
                 99080,
                 99082,
                 99156,
+                414,
+                648,
+                697,
+                836,
+                1156,
+                1425,
+                2987,
+                79358,
+                82208,
+                92847,
+                92873,
+                92893,
+                92894,
+                93034,
+                93035,
+                93037,
+                93041,
+                93044,
+                93045,
+                93058,
+                93062,
+                93066,
+                96785,
+                96786,
             },
         )
         self.assertEqual(
@@ -200,6 +225,114 @@ class CompleteCatalogTests(unittest.TestCase):
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
         self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 1)
+
+    def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
+        self,
+    ):
+        source, _ = build_complete(ROOT)
+        row = next(q for q in source["quests"] if q["id"] == 1156)
+        self.assertEqual(row["title"], "<NYI> <TXT> speak to alchemist pestlezugg")
+        self.assertEqual((row["level"], row["minimum"]), (58, 25))
+        self.assertEqual(row["confirmation"], "unconfirmed")
+        self.assertEqual((row["items"], row["itemState"]), ([], "unknown"))
+        for key in ("title", "level", "minimum"):
+            self.assertEqual(row["fieldStates"][key], "recorded")
+        for key in ("faction", "locations", "rewardValues", "recordedCategory"):
+            self.assertNotIn(key, row)
+        _, inputs = read_inputs(ROOT)
+        update = reviewed_updates(inputs["reviewed"])[1156]
+        current = {"id": 1156, **update["expected"]}
+        apply_reviewed_update(current, update)
+        apply_reviewed_update(current, update)
+        for fields in ({"title": "Different"}, {"minimum": 1}):
+            with self.subTest(fields=fields), self.assertRaises(ValueError):
+                apply_reviewed_update({**current, **fields}, update)
+        for mutation in ("no-native", "null-after", "bad-label"):
+            doc = copy.deepcopy(inputs["reviewed"])
+            record = next(q for q in doc["records"] if q["id"] == 1156)
+            if mutation == "no-native":
+                record.pop("nativeObservation")
+            elif mutation == "null-after":
+                record["changes"]["level"] = None
+            else:
+                record["title"] = "Different label"
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_updates(doc)
+
+    def test_recorded_categories_do_not_rewrite_primary_status_or_coordinates(self):
+        provenance, inputs = read_inputs(ROOT)
+        source, _ = build_complete(ROOT)
+        records = {q["id"]: q for q in source["quests"]}
+        self.assertEqual(
+            records[414]["recordedCategory"], {"sourceZoneID": 38, "name": "Loch Modan"}
+        )
+        self.assertEqual(
+            records[93161]["recordedCategory"],
+            {"sourceZoneID": 16593, "name": "Zephras Isle"},
+        )
+        doc = copy.deepcopy(inputs["reviewed"])
+        doc.pop("categoryUpdates")
+        with mock.patch(
+            "fau_tools.catalog.read_inputs",
+            return_value=(provenance, {**inputs, "reviewed": doc}),
+        ):
+            baseline, _ = build_complete(ROOT)
+        originals = {q["id"]: q for q in baseline["quests"]}
+        for qid in (414, 93161):
+            observed = dict(records[qid])
+            observed.pop("recordedCategory")
+            self.assertEqual(observed, originals[qid])
+        primary = json.loads((ROOT / "data/primary-statuses.json").read_bytes())
+        self.assertEqual(
+            next(q for q in primary["quests"] if q["id"] == 414)["zoneId"], 1
+        )
+        self.assertNotIn(93161, {q["id"] for q in primary["quests"]})
+
+    def test_recorded_categories_reject_conflicts_unmapped_areas_and_unbound_receipts(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        for mutation in (
+            "prior",
+            "target",
+            "name",
+            "duplicate",
+            "no-native",
+            "no-changelog",
+            "missing-prior",
+        ):
+            doc = copy.deepcopy(inputs["reviewed"])
+            update = doc["categoryUpdates"][0]
+            if mutation == "prior":
+                update["expected"] = {"sourceZoneID": 36, "name": "Alterac Mountains"}
+            elif mutation == "target":
+                update["changes"]["sourceZoneID"] = 999999
+            elif mutation == "name":
+                update["changes"]["name"] = "Wrong name"
+            elif mutation == "duplicate":
+                doc["categoryUpdates"].append(copy.deepcopy(update))
+            elif mutation == "no-native":
+                update.pop("nativeObservation")
+            elif mutation == "no-changelog":
+                update["evidence"] = ["nativeCatalogNovember7"]
+            else:
+                update.pop("expected")
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_categories(doc, ROOT)
+
+    def test_recorded_categories_accept_already_adopted_primary_and_reject_third_category(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        primary = json.loads((ROOT / "data/primary-statuses.json").read_bytes())
+        quest = next(q for q in primary["quests"] if q["id"] == 414)
+        quest["zoneId"], quest["zone"] = 38, "Loch Modan"
+        with mock.patch("fau_tools.catalog.json.loads", return_value=primary):
+            self.assertIn(414, reviewed_categories(inputs["reviewed"], ROOT))
+        quest["zoneId"], quest["zone"] = 36, "Alterac Mountains"
+        with mock.patch("fau_tools.catalog.json.loads", return_value=primary):
+            with self.assertRaisesRegex(ValueError, "primary conflict"):
+                reviewed_categories(inputs["reviewed"], ROOT)
 
     def test_reviewed_title_changes_are_exact_idempotent_and_reject_primary_conflicts(
         self,

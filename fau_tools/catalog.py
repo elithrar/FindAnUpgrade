@@ -67,6 +67,27 @@ def pairs(items):
     return sorted((item["group"], item["itemID"], item["quantity"]) for item in items)
 
 
+def validate_native_observation(update, sources, required=False):
+    observation = update.get("nativeObservation")
+    if observation is None and not required:
+        return
+    if (
+        not isinstance(observation, dict)
+        or set(observation) != {"source", "build", "observedAt", "payloadSha256"}
+        or not isinstance(observation["source"], str)
+        or observation["source"] not in update["evidence"]
+        or observation["source"] not in sources
+        or not sources[observation["source"]]["url"].endswith("/native-quests.json")
+        or type(observation["build"]) is not int
+        or observation["build"] <= 0
+        or not isinstance(observation["observedAt"], str)
+        or not observation["observedAt"]
+        or not isinstance(observation["payloadSha256"], str)
+        or not re.fullmatch(r"[a-f0-9]{64}", observation["payloadSha256"])
+    ):
+        raise ValueError("Invalid reviewed native observation")
+
+
 def reviewed_updates(document):
     """Validate narrowly scoped, receipted corrections without rewriting sources."""
     if document is None:
@@ -104,34 +125,43 @@ def reviewed_updates(document):
             or not before
             or before.keys() != after.keys()
             or before.keys() - {"items", "itemState", "minimum", "level", "title"}
-            or ("title" in before and before["title"] != update["title"])
+            or (
+                "title" in before
+                and (
+                    before["title"] != update["title"]
+                    if before["title"] is not None
+                    else update.get("nativeObservation") is None
+                    or after["title"] != update["title"]
+                )
+            )
         ):
             raise ValueError("Invalid reviewed update identity, fields or evidence")
         observation = update.get("nativeObservation")
-        if observation is not None and (
-            not isinstance(observation, dict)
-            or set(observation) != {"source", "build", "observedAt", "payloadSha256"}
-            or not isinstance(observation["source"], str)
-            or observation["source"] not in update["evidence"]
-            or not sources[observation["source"]]["url"].endswith("/native-quests.json")
-            or type(observation["build"]) is not int
-            or observation["build"] <= 0
-            or not isinstance(observation["observedAt"], str)
-            or not observation["observedAt"]
-            or not isinstance(observation["payloadSha256"], str)
-            or not re.fullmatch(r"[a-f0-9]{64}", observation["payloadSha256"])
-        ):
-            raise ValueError("Invalid reviewed native observation")
+        validate_native_observation(update, sources)
         for fields in (before, after):
-            if "title" in fields and (
-                not isinstance(fields["title"], str)
-                or not 0 < len(fields["title"]) <= 200
-                or any(ord(c) < 32 for c in fields["title"])
+            if (
+                "title" in fields
+                and not (
+                    fields is before
+                    and fields["title"] is None
+                    and observation is not None
+                )
+                and (
+                    not isinstance(fields["title"], str)
+                    or not 0 < len(fields["title"]) <= 200
+                    or any(ord(c) < 32 for c in fields["title"])
+                )
             ):
                 raise ValueError("Invalid reviewed quest title")
             for key in ("minimum", "level"):
-                if key in fields and (
-                    type(fields[key]) is not int or not 1 <= fields[key] <= 200
+                if (
+                    key in fields
+                    and not (
+                        fields is before
+                        and fields[key] is None
+                        and observation is not None
+                    )
+                    and (type(fields[key]) is not int or not 1 <= fields[key] <= 200)
                 ):
                     raise ValueError("Invalid reviewed level")
             if "items" in fields or "itemState" in fields:
@@ -164,6 +194,70 @@ def reviewed_updates(document):
             raise ValueError("Reviewed update cannot remove recorded rewards")
         updates[quest] = update
     return updates
+
+
+def reviewed_categories(document, root):
+    """Bind recorded AreaID corrections without changing primary classifications."""
+    if document is None:
+        return {}
+    reviewed_updates(document)
+    primary = json.loads((root / "data/primary-statuses.json").read_bytes())
+    registry = {(row["zoneId"], row["name"]) for row in primary["categories"]}
+    previous = {
+        row["id"]: {"sourceZoneID": row.get("zoneId"), "name": row.get("zone")}
+        for row in primary["quests"]
+    }
+    result = {}
+    for update in document.get("categoryUpdates", []):
+        quest = update.get("id")
+        target = update.get("changes")
+        if (
+            set(update)
+            != {
+                "id",
+                "title",
+                "expected",
+                "changes",
+                "evidence",
+                "reason",
+                "nativeObservation",
+            }
+            or type(quest) is not int
+            or not 0 < quest < 2**31
+            or quest in result
+            or not isinstance(update.get("title"), str)
+            or not update["title"]
+            or len(update["title"]) > 200
+            or any(ord(c) < 32 for c in update["title"])
+            or not update.get("reason")
+            or not update.get("evidence")
+            or set(update["evidence"]) - document["sources"].keys()
+            or not any(
+                document["sources"][key]["url"].rstrip("/").endswith("/changelog")
+                for key in update["evidence"]
+            )
+            or not isinstance(target, dict)
+            or set(target) != {"sourceZoneID", "name"}
+            or type(target["sourceZoneID"]) is not int
+            or target["sourceZoneID"] <= 0
+            or not isinstance(target["name"], str)
+            or (target["sourceZoneID"], target["name"]) not in registry
+        ):
+            raise ValueError("Invalid reviewed category correction")
+        expected = update.get("expected")
+        if expected is not None and (
+            not isinstance(expected, dict)
+            or set(expected) != {"sourceZoneID", "name"}
+            or type(expected["sourceZoneID"]) is not int
+            or not isinstance(expected["name"], str)
+            or (expected["sourceZoneID"], expected["name"]) not in registry
+        ):
+            raise ValueError("Invalid reviewed prior category")
+        if previous.get(quest) not in (expected, target):
+            raise ValueError("Reviewed category primary conflict: " + str(quest))
+        validate_native_observation(update, document["sources"], required=True)
+        result[quest] = update
+    return result
 
 
 def reviewed_additions(document):
@@ -246,7 +340,7 @@ def merge_reviewed_additions(public, additions):
 
 def apply_reviewed_update(row, update):
     """Abort on source drift; an already adopted correction is idempotent."""
-    titles = {update["title"]}
+    titles = {update["expected"].get("title", update["title"])}
     if "title" in update["changes"]:
         titles.add(update["changes"]["title"])
     if row.get("title") not in titles or row["id"] != update["id"]:
@@ -453,6 +547,7 @@ def merge_supplemental(row, incoming, disagreements):
 def build_complete(root, include_supplemental=True, include_chains=True):
     provenance, inputs = read_inputs(root)
     updates = reviewed_updates(inputs.get("reviewed"))
+    categories = reviewed_categories(inputs.get("reviewed"), root)
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
         raise ValueError("Public index was truncated or deduplicated incorrectly")
@@ -496,7 +591,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     ):
         raise ValueError("Invalid monotonic identity history")
     universe = set(public) | compiled | native | classification | set(legacy) | history
-    if updates.keys() - universe:
+    if (updates.keys() | categories.keys()) - universe:
         raise ValueError("Reviewed update cannot introduce unverified quest identities")
     rows, gaps, disagreements, withheld_positions = [], [], [], []
     added_pairs, removed_pairs = [], []
@@ -705,6 +800,11 @@ def build_complete(root, include_supplemental=True, include_chains=True):
             row.pop("minimum")
         if quest in updates:
             apply_reviewed_update(row, updates[quest])
+        if quest in categories:
+            update = categories[quest]
+            if row.get("title") != update["title"]:
+                raise ValueError("Reviewed category quest identity changed")
+            row["recordedCategory"] = copy.deepcopy(update["changes"])
         # Historical availability constraints are retained as recorded facts;
         # a source row never claims that the quest is currently offered.
         row["eligibilityUnknown"] = True
@@ -715,7 +815,12 @@ def build_complete(root, include_supplemental=True, include_chains=True):
                 "published" if published and published.get("title") else "recorded"
             )
         if "level" in row:
-            states["level"] = "published"
+            states["level"] = (
+                "recorded"
+                if quest in updates
+                and updates[quest]["expected"].get("level", 0) is None
+                else "published"
+            )
         if "minimum" in row:
             states["minimum"] = (
                 "published" if published and "minimum" in published else "recorded"
@@ -746,7 +851,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "sourceRevision": "public-forever-" + inputs["public"]["collectedAt"][:10],
         "quests": rows,
     }
-    if updates or additions:
+    if updates or additions or categories:
         source["sourceRevision"] += "+" + inputs["reviewed"]["revision"]
     state_counts = Counter(row["itemState"] for row in rows)
     report = {
