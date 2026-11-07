@@ -53,7 +53,7 @@ Keep Lua 5.1 and separate model/adapter/appearance/options/event owners. Preserv
 
 Current contracts: [1.60.1.70425](https://github.com/Gethe/wow-ui-source/tree/b401e0332adfbf0460d319b06d8ea29279a941f1). Baseline detail renderer: [70338](https://github.com/Gethe/wow-ui-source/tree/943764493e6b16d63ded3ab304150d1f05e58b57). `tests/native-source-fixtures.json` pins only sources exercised by optional integration tests. Test outputs identify executed/skipped cases. Before commit/push run the full check and inspect `dist/validation-evidence.json`, `dist/test-results.json` and package manifests. Preserve deterministic facts/projections.
 
-Source/mocks/CI/install hashes do **not** establish native rendering, input, API values, CPU, combat/taint or addon coexistence. Keep live checks pending until observed with actual build/payload.
+Source/mocks/CI/install hashes do **not** establish native rendering, input, API values, CPU, combat/taint or addon coexistence. Report live observations only when actually performed; in-game testing is not a release prerequisite.
 
 ## Versioning
 
@@ -71,7 +71,7 @@ Pushing a `v*` tag starts [the release workflow](.github/workflows/release.yml),
 
 Respect branch protection/review requirements and verify main CI. Merge, credentials, tags, publication and installation require applicable user authorization; later explicit instructions can authorize them. Cleanup grants no release/install permission.
 
-After release approval, finish required live acceptance and checks; use an annotated matching stable `vX.Y.Z` tag reachable from `origin/main` on a clean tracked tree. Never move published tags/replace differing assets or expose secrets. CurseForge requires exact Forever **1.60.1/type 88568**. Unresolved upload-pending receipts block retries until dashboard reconciliation. Merge/build does not publish or verify API rights/moderation/public visibility.
+After release approval, use an annotated matching stable `vX.Y.Z` tag reachable from `origin/main` on a clean tracked tree. Never move published tags/replace differing assets or expose secrets. CurseForge requires exact Forever **1.60.1/type 88568**. Unresolved upload-pending receipts block retries until dashboard reconciliation. Merge/build does not publish or verify API rights/moderation/public visibility.
 
 ## SomethingNeedDoing dependency
 
