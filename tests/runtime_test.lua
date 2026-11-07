@@ -116,6 +116,26 @@ test("native quest text font and native frame geometry are untouched", function(
     W.Init(); local path,size=QuestInfoDescriptionText:GetFont(); W.Offer(92124); assert(QuestInfoDescriptionText:GetFont()==path and W.nativeMutations==0 and not QuestInfoDescriptionText.fontWrites)
 end)
 
+-- A same-value SlashCmdList assignment taints Blizzard's chat dispatch. Trap
+-- global writes at the real registration entry point; this is not a taint emulator.
+test("SND startup and logout preserve Blizzard's slash registry",function()
+    local N=W.Reset();local registry=SlashCmdList;local native=function()end
+    registry.PVP=native
+    setfenv(N.App.Slash,setmetatable({}, {__index=_G,__newindex=function(_,key)
+        error("unexpected global write: "..key)
+    end}))
+    W.Event("ADDON_LOADED","FindAnUpgrade")
+    assert(N.Core.ready and N.App:IsReady() and SlashCmdList==registry and registry.PVP==native)
+    assert(SLASH_FINDANUPGRADE_SND_FINDANUPGRADE1=="/findanupgrade" and SLASH_FINDANUPGRADE_SND_FAU1=="/fau")
+    local messages=#W.messages
+    registry.FINDANUPGRADE_SND_FINDANUPGRADE("status");registry.FINDANUPGRADE_SND_FAU("status")
+    assert(#W.messages==messages+2)
+    W.Event("PLAYER_LOGOUT")
+    assert(SlashCmdList==registry and registry.PVP==native)
+    assert(not registry.FINDANUPGRADE_SND_FINDANUPGRADE and not registry.FINDANUPGRADE_SND_FAU)
+    assert(not SLASH_FINDANUPGRADE_SND_FINDANUPGRADE1 and not SLASH_FINDANUPGRADE_SND_FAU1)
+end)
+
 -- An expected registration failure must not abort initialization or steal a command.
 test("SND slash collisions retain the other owner and still initialize the addon",function()
     local N=W.Reset();local other=function()end
