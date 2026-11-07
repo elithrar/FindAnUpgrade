@@ -230,6 +230,10 @@ function R.Compare(candidate,gear,s)
         elseif slot==16 then
             local main,off=gear[16],gear[17]
             if not tab(main) or text(main.state)=="pending" or not tab(off) or text(off.state)=="pending" then allowed=nil
+            elseif text(main.slot)=="INVTYPE_2HWEAPON" then
+                -- Replacing a two-hander leaves its already-empty off hand empty.
+                -- Reject contradictory or unresolved equipment snapshots.
+                if text(off.state)~="empty" then allowed=nil end
             elseif text(main.state)~="empty" and not oneHand(text(main.slot)) then allowed=nil
             elseif text(off.state)~="empty" and not oneHand(text(off.slot)) and text(off.slot)~="INVTYPE_SHIELD" and text(off.slot)~="INVTYPE_HOLDABLE" then allowed=nil end
             before=level(main)
