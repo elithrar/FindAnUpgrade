@@ -124,7 +124,8 @@ def reviewed_updates(document):
             or set(update["evidence"]) - sources.keys()
             or not before
             or before.keys() != after.keys()
-            or before.keys() - {"items", "itemState", "minimum", "level", "title"}
+            or before.keys()
+            - {"items", "itemState", "itemGroupStates", "minimum", "level", "title"}
             or (
                 "title" in before
                 and (
@@ -138,6 +139,7 @@ def reviewed_updates(document):
             raise ValueError("Invalid reviewed update identity, fields or evidence")
         observation = update.get("nativeObservation")
         validate_native_observation(update, sources)
+        group_correction = "itemGroupStates" in after
         for fields in (before, after):
             if (
                 "title" in fields
@@ -188,10 +190,33 @@ def reviewed_updates(document):
                     ):
                         raise ValueError("Invalid reviewed reward slot")
                     slots.add((item["group"], item["slot"]))
+        if group_correction and (
+            before["itemGroupStates"] is not None
+            or after["itemGroupStates"]
+            != {"guaranteed": "unknown", "choice": "published"}
+            or not {"items", "itemState"} <= after.keys()
+            or after["itemState"] != "published"
+            or observation is None
+            or not any(
+                sources[key]["url"].rstrip("/").endswith("/changelog")
+                for key in update["evidence"]
+            )
+            or not after["items"]
+            or any(item.get("group") != "choice" for item in after["items"])
+        ):
+            raise ValueError("Invalid reviewed partial reward groups")
         if Counter(pairs(before.get("items", []))) - Counter(
             pairs(after.get("items", []))
         ):
-            raise ValueError("Reviewed update cannot remove recorded rewards")
+            # Only separately receipted partial-group corrections may move a
+            # retained reward between groups. Never discard an identity/quantity
+            # or interpret the unobserved guaranteed group as confirmed empty.
+            if not group_correction or Counter(
+                (item["itemID"], item["quantity"]) for item in before.get("items", [])
+            ) - Counter(
+                (item["itemID"], item["quantity"]) for item in after.get("items", [])
+            ):
+                raise ValueError("Reviewed update cannot remove recorded rewards")
         updates[quest] = update
     return updates
 
@@ -258,6 +283,19 @@ def reviewed_categories(document, root):
         validate_native_observation(update, document["sources"], required=True)
         result[quest] = update
     return result
+
+
+def reviewed_partial_rewards(document):
+    """Apply exact partial-group corrections after earlier metadata receipts."""
+    if document is None:
+        return {}
+    updates = reviewed_updates(
+        {**document, "records": document.get("partialRewardUpdates", [])}
+    )
+    for update in updates.values():
+        if set(update["changes"]) != {"items", "itemState", "itemGroupStates"}:
+            raise ValueError("Partial reward correction must state group uncertainty")
+    return updates
 
 
 def reviewed_additions(document):
@@ -346,7 +384,12 @@ def apply_reviewed_update(row, update):
     if row.get("title") not in titles or row["id"] != update["id"]:
         raise ValueError("Reviewed update quest identity changed")
     current = {key: row.get(key) for key in update["expected"]}
-    if current not in (update["expected"], update["changes"]):
+    accepted = [update["expected"], update["changes"]]
+    if "itemGroupStates" in update["changes"]:
+        # A refreshed public list may adopt the exact choices before it exposes
+        # group uncertainty. Carry the separately receipted unknown state forward.
+        accepted.append({**update["changes"], "itemGroupStates": None})
+    if current not in accepted:
         raise ValueError("Reviewed update source conflict: " + str(row["id"]))
     row.update(copy.deepcopy(update["changes"]))
 
@@ -547,6 +590,7 @@ def merge_supplemental(row, incoming, disagreements):
 def build_complete(root, include_supplemental=True, include_chains=True):
     provenance, inputs = read_inputs(root)
     updates = reviewed_updates(inputs.get("reviewed"))
+    partial_rewards = reviewed_partial_rewards(inputs.get("reviewed"))
     categories = reviewed_categories(inputs.get("reviewed"), root)
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
@@ -591,7 +635,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     ):
         raise ValueError("Invalid monotonic identity history")
     universe = set(public) | compiled | native | classification | set(legacy) | history
-    if (updates.keys() | categories.keys()) - universe:
+    if (updates.keys() | categories.keys() | partial_rewards.keys()) - universe:
         raise ValueError("Reviewed update cannot introduce unverified quest identities")
     rows, gaps, disagreements, withheld_positions = [], [], [], []
     added_pairs, removed_pairs = [], []
@@ -800,6 +844,12 @@ def build_complete(root, include_supplemental=True, include_chains=True):
             row.pop("minimum")
         if quest in updates:
             apply_reviewed_update(row, updates[quest])
+        if published and "itemGroupStates" in published:
+            if quest not in partial_rewards:
+                raise ValueError("Unreviewed public reward group states: " + str(quest))
+            row["itemGroupStates"] = copy.deepcopy(published["itemGroupStates"])
+        if quest in partial_rewards:
+            apply_reviewed_update(row, partial_rewards[quest])
         if quest in categories:
             update = categories[quest]
             if row.get("title") != update["title"]:
@@ -851,7 +901,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "sourceRevision": "public-forever-" + inputs["public"]["collectedAt"][:10],
         "quests": rows,
     }
-    if updates or additions or categories:
+    if updates or additions or categories or partial_rewards:
         source["sourceRevision"] += "+" + inputs["reviewed"]["revision"]
     state_counts = Counter(row["itemState"] for row in rows)
     report = {

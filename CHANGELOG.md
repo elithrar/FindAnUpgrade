@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.16
+
+- Add six verified reward choices across Trol'kalar, The Brood of Onyxia, Dark Heart and WANTED: Overseer Maltorius.
+- Correct 12 separately cataloged choice sets, adding 18 verified choices while retaining existing rewards and leaving unobserved guaranteed rewards unknown.
+- Apply 11 exact cached quest metadata corrections, retaining unconfirmed NYI quests and unknown availability.
+- Preserve original source receipts, reward quantities and costs; item stats continue to come from the native client.
+
 ## 0.1.15
 
 - Fix slash-command registration taint that could block Blizzard's `/pvp` command with an `ADDON_ACTION_FORBIDDEN` error.
