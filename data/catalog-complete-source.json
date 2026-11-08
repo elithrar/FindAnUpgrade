@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-07",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-08",
   "quests": [
     {
       "id": 1,
@@ -12043,8 +12043,22 @@
           "itemID": 4125,
           "name": "Tranquil Orb",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270096,
+          "name": "Rebel Breastplate",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270097,
+          "name": "Archer's Leggings",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -12071,6 +12085,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -36227,8 +36245,22 @@
           "itemID": 4138,
           "name": "Blackwater Tunic",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270092,
+          "name": "Blackwater Scimitar",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270093,
+          "name": "Blackwater Cap",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -36258,6 +36290,10 @@
             "amount": -750
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -36427,8 +36463,22 @@
           "itemID": 4120,
           "name": "Robe of Crystal Waters",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270076,
+          "name": "Tidal Bracers",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270077,
+          "name": "Undertow Legguards",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -36458,6 +36508,10 @@
             "amount": -750
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -37416,8 +37470,15 @@
           "itemID": 4118,
           "name": "Poobah's Nose Ring",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270226,
+          "name": "Golden Banana",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -37437,6 +37498,10 @@
       "level": 51,
       "rewardValues": {
         "xp": 7350
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -38335,6 +38400,20 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270082,
+          "name": "Ceremonial Gown",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
+        },
+        {
+          "itemID": 270083,
+          "name": "Blooded Pants",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -45511,8 +45590,22 @@
           "itemID": 4987,
           "name": "Dwarf Captain's Sword",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270088,
+          "name": "Thane's Hammer",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270089,
+          "name": "Ironforge Agent's Gloves",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -45545,6 +45638,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -67542,8 +67639,15 @@
           "itemID": 6723,
           "name": "Medal of Courage",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270095,
+          "name": "Medal of Valor",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -67570,6 +67674,10 @@
             "amount": 200
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -68861,8 +68969,22 @@
           "itemID": 10702,
           "name": "Enormous Ogre Boots",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270086,
+          "name": "Oversized Ogre's Mittens",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270087,
+          "name": "Thick Ogre's Belt",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -68870,6 +68992,10 @@
       "level": 43,
       "rewardValues": {
         "xp": 4450
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "eligibilityUnknown": true,
       "fieldStates": {
@@ -69201,6 +69327,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270094,
+          "name": "Black Whelp Boots",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -110780,6 +110913,20 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270104,
+          "name": "Stonewalker's Slippers",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
+        },
+        {
+          "itemID": 270105,
+          "name": "Protector's Armguards",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -158031,12 +158178,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Blessing of Light",
+      "level": 15,
+      "minimum": 15,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -158050,12 +158200,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Blessing of Light",
+      "level": 15,
+      "minimum": 15,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -158069,12 +158222,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Blessing of Light",
+      "level": 15,
+      "minimum": 15,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -158088,12 +158244,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Blessing of Light",
+      "level": 15,
+      "minimum": 15,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -187050,6 +187209,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270113,
+          "name": "Singed Cloth Robe",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -220205,8 +220371,15 @@
           "itemID": 11469,
           "name": "Bloodband Bracers",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270100,
+          "name": "Freebooter's Armband",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -220224,6 +220397,10 @@
             "amount": -375
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -220366,8 +220543,22 @@
           "itemID": 4130,
           "name": "Smotts' Compass",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270109,
+          "name": "Smotts' Pinky Ring",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270110,
+          "name": "First Mate's Armguards",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -220403,6 +220594,10 @@
             "amount": -1000
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -278168,7 +278363,7 @@
       "confirmation": "published",
       "title": "Long-Term Solutions",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3600,
         "money": 3000,
@@ -278328,7 +278523,7 @@
       "confirmation": "published",
       "title": "Checking Things Out",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 360,
         "reputation": [
@@ -278363,7 +278558,7 @@
       "confirmation": "published",
       "title": "Going Home",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 2700,
         "money": 4500,
@@ -278421,7 +278616,7 @@
       "confirmation": "published",
       "title": "Khan Jehn",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3450,
         "reputation": [
@@ -278465,7 +278660,7 @@
       "confirmation": "published",
       "title": "Threat of Starvation",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 1800,
         "reputation": [
@@ -278839,7 +279034,7 @@
       "confirmation": "published",
       "title": "Return to Orgrul",
       "level": 43,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 360,
         "reputation": [
@@ -278896,7 +279091,7 @@
       "confirmation": "published",
       "title": "Khan Jehn",
       "level": 42,
-      "minimum": 30,
+      "minimum": 35,
       "rewardValues": {
         "xp": 3450,
         "reputation": [
@@ -300909,8 +301104,15 @@
           "itemID": 281274,
           "name": "Makeshift Stormcaller",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 287060,
+          "name": "Rezlak's Spare Knife",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -300947,6 +301149,10 @@
         ]
       },
       "clientIdentityRecorded": true,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
       "fieldStates": {
         "items": "published",
         "title": "published",
@@ -307984,8 +308190,15 @@
           "itemID": 281289,
           "name": "Swordfeather Cloak",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 287062,
+          "name": "Darnassian Knife",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -308001,6 +308214,10 @@
         ]
       },
       "clientIdentityRecorded": true,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
       "fieldStates": {
         "items": "published",
         "title": "published",
@@ -308582,8 +308799,15 @@
           "itemID": 279391,
           "name": "Taurajo Headband",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 287064,
+          "name": "Beastculler's Knife",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -308614,6 +308838,10 @@
           "name": "Sulhasa"
         }
       ],
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",

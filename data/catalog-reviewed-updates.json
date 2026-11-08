@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-07",
-  "reviewedAt": "2026-11-07",
+  "revision": "quest-website-2026-11-08",
+  "reviewedAt": "2026-11-08T09:03:22.149230+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -88,6 +88,30 @@
       "sha256": "224f407cc5c7c7c3f1ee59b3e21633fc5c78addb07e671d62e7efb442bb18e82",
       "bytes": 963378,
       "collectedAt": "2026-11-07T18:57:14.260778+00:00"
+    },
+    "questsNovember8": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "bytes": 1595556,
+      "sha256": "179b0d21842adc93415388658241176f957a57f1d470f5c5bc95996ca919ef77",
+      "collectedAt": "2026-11-08T09:03:21.603058+00:00"
+    },
+    "rewardsNovember8": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "bytes": 276407,
+      "sha256": "4e22c2efeeb88c7e7071a9092db32f8275878b1ba99c7a889612a367b1d7dbda",
+      "collectedAt": "2026-11-08T09:03:21.794734+00:00"
+    },
+    "changelogNovember8": {
+      "url": "https://quests.questionable.services/changelog",
+      "bytes": 23351,
+      "sha256": "d3962b94c395fe860f737a4d22b04550e68c1003201096ec8433887c3f08a807",
+      "collectedAt": "2026-11-08T09:03:21.774932+00:00"
+    },
+    "nativeCatalogNovember8": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "bytes": 1045270,
+      "sha256": "575f83f52d60b50e2e88d6afc3bdd10bdcbf68ec2c39a3e5811c982eb89d0eae",
+      "collectedAt": "2026-11-08T09:03:22.149230+00:00"
     }
   },
   "records": [
@@ -2543,6 +2567,500 @@
         "payloadSha256": "f5b2e7cd1441fef3c72667ac6f77872d75aaf65d4432d71be578b1efac15dff2"
       },
       "reason": "November 7 published reward review confirms these choice additions; retain every existing group and quantity and preserve source array ordering."
+    },
+    {
+      "id": 646,
+      "title": "Trol'kalar",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4508,
+            "name": "Blood-tinged Armor",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4507,
+            "name": "Pit Fighter's Shield",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4508,
+            "name": "Blood-tinged Armor",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 4507,
+            "name": "Pit Fighter's Shield",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270082,
+            "name": "Ceremonial Gown",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270083,
+            "name": "Blooded Pants",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8",
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "b409d409af6a93793f57cfafb7bbdc2e2d59bab17b0a06887b73541435da5e9c"
+      },
+      "reason": "Published reward list and changelog confirm these additional choices; retain all original rewards, groups, quantities and source order."
+    },
+    {
+      "id": 1172,
+      "title": "The Brood of Onyxia",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10700,
+            "name": "Encarmine Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10701,
+            "name": "Boots of Zua'tec",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10700,
+            "name": "Encarmine Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10701,
+            "name": "Boots of Zua'tec",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270094,
+            "name": "Black Whelp Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8",
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "69405b781919e6845c733c54ede3ad4561487ef6e48080439915afbbf3f148ca"
+      },
+      "reason": "Published reward list and changelog confirm these additional choices; retain all original rewards, groups, quantities and source order."
+    },
+    {
+      "id": 3062,
+      "title": "Dark Heart",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9665,
+            "name": "Wingcrest Gloves",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9666,
+            "name": "Stronghorn Girdle",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9665,
+            "name": "Wingcrest Gloves",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9666,
+            "name": "Stronghorn Girdle",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270104,
+            "name": "Stonewalker's Slippers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270105,
+            "name": "Protector's Armguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8",
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "2d35f9cbea9c8ad4e4ababe3fd8d4015e143c838256fd73b7ba1dfeeff6ed442"
+      },
+      "reason": "Published reward list and changelog confirm these additional choices; retain all original rewards, groups, quantities and source order."
+    },
+    {
+      "id": 7701,
+      "title": "WANTED: Overseer Maltorius",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19128,
+            "name": "Seared Mail Vest",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 19127,
+            "name": "Charred Leather Tunic",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19128,
+            "name": "Seared Mail Vest",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 19127,
+            "name": "Charred Leather Tunic",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270113,
+            "name": "Singed Cloth Robe",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8",
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "1b501020a83dce0c4a4487034302fe30e9794b1923f1ed4858f5c714bc61136a"
+      },
+      "reason": "Published reward list and changelog confirm these additional choices; retain all original rewards, groups, quantities and source order."
+    },
+    {
+      "id": 5668,
+      "title": "<NYI> A Blessing of Light",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Blessing of Light",
+        "level": 15,
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "24e5aa6073a0fe441242c0c763a9f6c6bddf4ed47cdb309c9e7a807751049416"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 5669,
+      "title": "<NYI> A Blessing of Light",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Blessing of Light",
+        "level": 15,
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "2228e1da5d1d56f7447190e249d545afaa1ba430d27061831955b435012fee35"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 5670,
+      "title": "<NYI> A Blessing of Light",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Blessing of Light",
+        "level": 15,
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "aae02c9a125433d1fe47d2d4299cf5a7bdacab2f000aa00ff8439d4ca75d1978"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 5671,
+      "title": "<NYI> A Blessing of Light",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Blessing of Light",
+        "level": 15,
+        "minimum": 15
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "351492ba1d9aa65f9ecd1c1c92f755b2f6b9fb3da38de988f61595151fd4105b"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93072,
+      "title": "Long-Term Solutions",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "152729f6aa9583017494f1d949df412e676878c2492baa72b33448b90384b30a"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93122,
+      "title": "Checking Things Out",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "e2ce0e17cb271c5084d86cffab94e39d1fde78b0d330de1325ffe105acfdf9e8"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93125,
+      "title": "Going Home",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "a5ae5904b8b0e2745219067c9b42b2d7f9a53e778ac3e22fb1beafacf70cff25"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93128,
+      "title": "Khan Jehn",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "177d441f63fd66e64437294f3f7975cddfae72ea8f5829ac0cdef75326929644"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93129,
+      "title": "Threat of Starvation",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "f8c89602830516ab8defb9f81f1deb776fc352e903e944cde87a936ced8c7345"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93188,
+      "title": "Return to Orgrul",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "3e3ef53af67059883319ab4e043447a52907fcffa465601798a7c85c86a200c6"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 93196,
+      "title": "Khan Jehn",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "6db1019490c5fd4314488ea8c10ec43999d4d2e8adb24fcfedbd58818c26a662"
+      },
+      "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
     }
   ],
   "additions": [
@@ -2613,6 +3131,662 @@
         "payloadSha256": "7d291f372180e0738449aa253a4dade00a2831965a7a5db08628ccc2af7c1717"
       },
       "reason": "Explicit recorded AreaID category in the cached catalog and November 7 published changelog. This updates effective category lookup while preserving primary classification membership, status, faction, starters and all UiMap coordinates."
+    }
+  ],
+  "partialRewardUpdates": [
+    {
+      "id": 206,
+      "title": "Mai'Zoth",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4125,
+            "name": "Tranquil Orb",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4125,
+            "name": "Tranquil Orb",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270096,
+            "name": "Rebel Breastplate",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270097,
+            "name": "Archer's Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "e137fed56c9eeb605338765f66c3fd90a166373697307a104555542a8be121f0"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 608,
+      "title": "The Bloodsail Buccaneers",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4138,
+            "name": "Blackwater Tunic",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4138,
+            "name": "Blackwater Tunic",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270092,
+            "name": "Blackwater Scimitar",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270093,
+            "name": "Blackwater Cap",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "9cf77991ecdbb65bf82e1f4cc6dc4c38d3e704618eddea65b039880b3b6734e3"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 611,
+      "title": "The Curse of the Tides",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4120,
+            "name": "Robe of Crystal Waters",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4120,
+            "name": "Robe of Crystal Waters",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270076,
+            "name": "Tidal Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270077,
+            "name": "Undertow Legguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "f1f60f387834a4db3956670104c8096ee1f646eb1f4b6dd5ab5ffc26eac4018e"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 630,
+      "title": "Message in a Bottle",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4118,
+            "name": "Poobah's Nose Ring",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4118,
+            "name": "Poobah's Nose Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270226,
+            "name": "Golden Banana",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "6fb773655b9383ec60f09fe1cae0003e689131c64d3e65d3f737125c3002b7c1"
+      },
+      "reason": "The changelog explicitly identifies this choice group, corroborated by cached direct native slots. Correct the old guaranteed association to choice, retain its exact identity/quantity and original source receipt, and leave guaranteed rewards unknown rather than infer an empty group."
+    },
+    {
+      "id": 762,
+      "title": "An Ambassador of Evil",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4987,
+            "name": "Dwarf Captain's Sword",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4987,
+            "name": "Dwarf Captain's Sword",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270088,
+            "name": "Thane's Hammer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270089,
+            "name": "Ironforge Agent's Gloves",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "cccd6391e5d49e38c84c68c4dcd9ef9329e4d13eb08fa955e8c766a616a1a058"
+      },
+      "reason": "The changelog explicitly identifies this choice group, corroborated by cached direct native slots. Correct the old guaranteed association to choice, retain its exact identity/quantity and original source receipt, and leave guaranteed rewards unknown rather than infer an empty group."
+    },
+    {
+      "id": 1139,
+      "title": "The Lost Tablets of Will",
+      "expected": {
+        "items": [
+          {
+            "itemID": 6723,
+            "name": "Medal of Courage",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 6723,
+            "name": "Medal of Courage",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270095,
+            "name": "Medal of Valor",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "f415d7f30959b6f69cfe8b7e7008fbe4aed2b67676dd0a09afe5aee4116542de"
+      },
+      "reason": "The changelog explicitly identifies this choice group, corroborated by cached direct native slots. Correct the old guaranteed association to choice, retain its exact identity/quantity and original source receipt, and leave guaranteed rewards unknown rather than infer an empty group."
+    },
+    {
+      "id": 1166,
+      "title": "Overlord Mok'Morokk's Concern",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10702,
+            "name": "Enormous Ogre Boots",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10702,
+            "name": "Enormous Ogre Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270086,
+            "name": "Oversized Ogre's Mittens",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270087,
+            "name": "Thick Ogre's Belt",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "9f115cd3401edf834a535447c492cc94b7a03c1ca8ce8bdacda8b19fc24b0c89"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 8551,
+      "title": "The Captain's Chest",
+      "expected": {
+        "items": [
+          {
+            "itemID": 11469,
+            "name": "Bloodband Bracers",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 11469,
+            "name": "Bloodband Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270100,
+            "name": "Freebooter's Armband",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "7c7b47f5ed01e62d5dbe6f046f47b1115b75442108e04dd09c18e33280c7275f"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 8554,
+      "title": "Facing Negolash",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4130,
+            "name": "Smotts' Compass",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4130,
+            "name": "Smotts' Compass",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270109,
+            "name": "Smotts' Pinky Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270110,
+            "name": "First Mate's Armguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "c3c46649ff7e09282b96587ee487a7449d75ab80bb4a89ccea54840df65bfcb6"
+      },
+      "reason": "The changelog explicitly identifies this choice group, corroborated by cached direct native slots. Correct the old guaranteed association to choice, retain its exact identity/quantity and original source receipt, and leave guaranteed rewards unknown rather than infer an empty group."
+    },
+    {
+      "id": 97282,
+      "title": "Stormy Potential",
+      "expected": {
+        "items": [
+          {
+            "itemID": 281274,
+            "name": "Makeshift Stormcaller",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 281274,
+            "name": "Makeshift Stormcaller",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 287060,
+            "name": "Rezlak's Spare Knife",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "2dcd2431d757f0afff9c3f73b1053efead5ecdbeaba79f571d5d4bbdeb86bfa4"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 98025,
+      "title": "WANTED: Jai'vhanel",
+      "expected": {
+        "items": [
+          {
+            "itemID": 281289,
+            "name": "Swordfeather Cloak",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 281289,
+            "name": "Swordfeather Cloak",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 287062,
+            "name": "Darnassian Knife",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "ca7c41620a65a7907780647d59561136f865d3d48c8b9143064e70a70c66f5ad"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 98093,
+      "title": "Field to Clear",
+      "expected": {
+        "items": [
+          {
+            "itemID": 279391,
+            "name": "Taurajo Headband",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 279391,
+            "name": "Taurajo Headband",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 287064,
+            "name": "Beastculler's Knife",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember8",
+        "nativeCatalogNovember8"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8",
+        "build": 70862,
+        "observedAt": "2026-11-08T04:00:11.541812+00:00",
+        "payloadSha256": "5c83a4b257ded36a82f6c2e47fdf365919a157484182c0d348b8aa598e3f0e71"
+      },
+      "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
     }
   ]
 }

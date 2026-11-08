@@ -34,6 +34,8 @@ function R.Recorded(id,out)
     -- class-filtered/ambiguous choices. Published fallback has no native ordinal.
     if out.state=="pending" and (source.itemState=="published" or source.itemState=="published-empty") then
         out.items,out.choices={state="published",items={}},{state="published",items={}}
+        local states=source.itemGroupStates
+        if states and states.guaranteed=="unknown" then out.items.state="pending" end
         out.recordedGroups=true
         for _,meta in ipairs(source.items or {}) do
             local group=meta.group=="guaranteed" and out.items or meta.group=="choice" and out.choices

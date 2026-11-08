@@ -16,6 +16,7 @@ from fau_tools.catalog import (
     read_inputs,
     reviewed_additions,
     reviewed_categories,
+    reviewed_partial_rewards,
     reviewed_updates,
     validate_complete,
 )
@@ -170,6 +171,32 @@ class CompleteCatalogTests(unittest.TestCase):
                 93066,
                 96785,
                 96786,
+                630,
+                646,
+                762,
+                1139,
+                1172,
+                3062,
+                5668,
+                5669,
+                5670,
+                5671,
+                7701,
+                8554,
+                93072,
+                93122,
+                93125,
+                93128,
+                93129,
+                93188,
+                93196,
+                206,
+                608,
+                611,
+                1166,
+                8551,
+                98025,
+                98093,
             },
         )
         self.assertEqual(
@@ -516,6 +543,122 @@ class CompleteCatalogTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     reviewed_updates(changed)
 
+    def test_partial_reward_groups_require_receipts_and_never_remove_identity_or_quantity(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        document = inputs["reviewed"]
+        for mutation in (
+            "native",
+            "changelog",
+            "unknown",
+            "prior",
+            "removal",
+            "quantity",
+            "group",
+            "unmarked",
+        ):
+            with self.subTest(mutation=mutation):
+                changed = copy.deepcopy(document)
+                row = next(
+                    row for row in changed["partialRewardUpdates"] if row["id"] == 630
+                )
+                if mutation == "native":
+                    row.pop("nativeObservation")
+                elif mutation == "changelog":
+                    row["evidence"].remove("changelogNovember8")
+                elif mutation == "unknown":
+                    row["changes"]["itemGroupStates"]["guaranteed"] = "published-empty"
+                elif mutation == "prior":
+                    row["expected"]["itemGroupStates"] = {"guaranteed": "published"}
+                elif mutation == "removal":
+                    row["changes"]["items"].pop(0)
+                elif mutation == "quantity":
+                    row["changes"]["items"][0]["quantity"] = 2
+                elif mutation == "group":
+                    row["changes"]["items"][0]["group"] = "guaranteed"
+                else:
+                    for fields in (row["expected"], row["changes"]):
+                        fields.pop("itemGroupStates")
+                with self.assertRaises(ValueError):
+                    reviewed_partial_rewards(changed)
+
+    def test_partial_groups_are_idempotent_and_preserve_other_facts_and_unknowns(self):
+        _, inputs = read_inputs(ROOT)
+        updates = reviewed_partial_rewards(inputs["reviewed"])
+        source, _ = build_complete(ROOT)
+        rows = {row["id"]: row for row in source["quests"]}
+        for quest in (
+            206,
+            608,
+            611,
+            630,
+            762,
+            1139,
+            1166,
+            8551,
+            8554,
+            97282,
+            98025,
+            98093,
+        ):
+            update = updates[quest]
+            row = {
+                "id": quest,
+                "title": update["title"],
+                **copy.deepcopy(update["expected"]),
+                "moneyCost": 123,
+                "confirmation": "historical",
+            }
+            apply_reviewed_update(row, update)
+            apply_reviewed_update(row, update)
+            adopted = {
+                "id": quest,
+                "title": update["title"],
+                **copy.deepcopy(update["changes"]),
+            }
+            adopted.pop("itemGroupStates")
+            apply_reviewed_update(adopted, update)
+            self.assertEqual(
+                adopted["itemGroupStates"], update["changes"]["itemGroupStates"]
+            )
+            self.assertEqual(row["moneyCost"], 123)
+            self.assertEqual(row["confirmation"], "historical")
+            self.assertEqual(
+                rows[quest]["itemGroupStates"],
+                {"guaranteed": "unknown", "choice": "published"},
+            )
+            self.assertTrue(
+                all(item["group"] == "choice" for item in rows[quest]["items"])
+            )
+            row["itemGroupStates"]["guaranteed"] = "published-empty"
+            with self.assertRaisesRegex(ValueError, "source conflict"):
+                apply_reviewed_update(row, update)
+        for quest in (5668, 5669, 5670, 5671):
+            self.assertEqual(rows[quest]["confirmation"], "unconfirmed")
+            self.assertEqual(rows[quest]["itemState"], "unknown")
+            self.assertEqual(rows[quest]["items"], [])
+            self.assertEqual(rows[quest]["fieldStates"]["title"], "recorded")
+
+    def test_unreviewed_or_conflicting_public_group_authority_is_rejected(self):
+        for quest in (6, 630):
+            provenance, inputs = read_inputs(ROOT)
+            published = next(
+                row for row in inputs["public"]["records"] if row["id"] == quest
+            )
+            published["itemGroupStates"] = {
+                "guaranteed": "published-empty",
+                "choice": "published",
+            }
+            with (
+                self.subTest(quest=quest),
+                mock.patch(
+                    "fau_tools.catalog.read_inputs", return_value=(provenance, inputs)
+                ),
+            ):
+                with self.assertRaisesRegex(ValueError, "Unreviewed|source conflict"):
+                    build_complete(ROOT)
+
     def test_reviewed_update_conflicts_abort_and_already_adopted_values_are_idempotent(
         self,
     ):
@@ -590,14 +733,11 @@ class CompleteCatalogTests(unittest.TestCase):
             self.assertEqual(output[quest]["questKind"], "hidden-trigger")
         for published in inputs["public"]["records"]:
             row = output[published["id"]]
-            reviewed = next(
-                (
-                    entry["changes"]
-                    for entry in inputs.get("reviewed", {}).get("records", [])
-                    if entry["id"] == published["id"]
-                ),
-                {},
-            )
+            reviewed = {}
+            for key in ("records", "partialRewardUpdates"):
+                for entry in inputs.get("reviewed", {}).get(key, []):
+                    if entry["id"] == published["id"]:
+                        reviewed.update(entry["changes"])
             for field in ("items", "itemState"):
                 self.assertEqual(row[field], reviewed.get(field, published[field]))
             for field in ("xp", "money", "reputation"):

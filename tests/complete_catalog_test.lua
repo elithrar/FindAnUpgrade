@@ -65,6 +65,30 @@ test("comprehensive identity retains published empty and unknown quests without 
     assert(N.Model.Status(999001)==nil and LibQuestieDB==nil)
 end)
 
+test("receipted partial choices leave guaranteed rewards pending and native groups authoritative",function()
+    local N=W.Init();W.rewardReady=false
+    C_Item={IsItemDataCachedByID=function()return false end}
+    assert(N.Catalog:Begin());while N.Catalog:Step() do end
+    for _,case in ipairs({{206,4125,270096,270097},{608,4138,270092,270093},{611,4120,270076,270077},
+        {630,4118,270226},{762,4987,270088,270089},{1139,6723,270095},{1166,10702,270086,270087},
+        {8551,11469,270100},{8554,4130,270109,270110},{97282,281274,287060},{98025,281289,287062},{98093,279391,287064}}) do
+        local rewards=N.Rewards.Read(case[1])
+        assert(rewards.recordedGroups and rewards.items.state=="pending" and #rewards.items.items==0)
+        assert(rewards.choices.state=="published" and #rewards.choices.items==#case-1)
+        for index,item in ipairs(rewards.choices.items) do assert(item.itemID==case[index+1] and item.quantity==1 and item.group=="choice") end
+    end
+    W.rewardReady=true;W.items={};W.choices={}
+    local native=N.Rewards.Read(630)
+    assert(not native.recordedGroups and native.items.state=="ready" and native.choices.state=="ready")
+    GetNumQuestLogChoices=function()return nil end
+    local ambiguous=N.Rewards.Read(630)
+    assert(not ambiguous.recordedGroups and ambiguous.choices.state=="unavailable" and #ambiguous.choices.items==0)
+    for _,id in ipairs({5668,5669,5670,5671}) do
+        local source=N.Providers.Source(id)
+        assert(source.confirmation=="unconfirmed" and source.itemState=="unknown" and N.Providers.RequiresNativeProof(source))
+    end
+end)
+
 test("published quest difficulty survives cold native metadata without borrowing minimum level",function()
     local N=start();assert(N.Catalog.records[682].level==37)
     assert(N.Catalog.records[999001].level==nil)
