@@ -190,10 +190,18 @@ def reviewed_updates(document):
                     ):
                         raise ValueError("Invalid reviewed reward slot")
                     slots.add((item["group"], item["slot"]))
+        known_group = next(
+            (
+                group
+                for group, other in (("choice", "guaranteed"), ("guaranteed", "choice"))
+                if after.get("itemGroupStates")
+                == {group: "published", other: "unknown"}
+            ),
+            None,
+        )
         if group_correction and (
             before["itemGroupStates"] is not None
-            or after["itemGroupStates"]
-            != {"guaranteed": "unknown", "choice": "published"}
+            or known_group is None
             or not {"items", "itemState"} <= after.keys()
             or after["itemState"] != "published"
             or observation is None
@@ -202,7 +210,7 @@ def reviewed_updates(document):
                 for key in update["evidence"]
             )
             or not after["items"]
-            or any(item.get("group") != "choice" for item in after["items"])
+            or any(item.get("group") != known_group for item in after["items"])
         ):
             raise ValueError("Invalid reviewed partial reward groups")
         if Counter(pairs(before.get("items", []))) - Counter(
@@ -210,7 +218,7 @@ def reviewed_updates(document):
         ):
             # Only separately receipted partial-group corrections may move a
             # retained reward between groups. Never discard an identity/quantity
-            # or interpret the unobserved guaranteed group as confirmed empty.
+            # or interpret an unobserved reward group as confirmed empty.
             if not group_correction or Counter(
                 (item["itemID"], item["quantity"]) for item in before.get("items", [])
             ) - Counter(

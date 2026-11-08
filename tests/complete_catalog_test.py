@@ -68,7 +68,7 @@ class CompleteCatalogTests(unittest.TestCase):
             baseline, _ = build_complete(ROOT)
         before = {row["id"]: row for row in baseline["quests"]}
         after = {row["id"]: row for row in source["quests"]}
-        self.assertEqual(after.keys() - before.keys(), {93161})
+        self.assertEqual(after.keys() - before.keys(), {93161, 89013, 91608})
         self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
             {quest for quest in before if before[quest] != after[quest]},
@@ -197,6 +197,12 @@ class CompleteCatalogTests(unittest.TestCase):
                 8551,
                 98025,
                 98093,
+                614,
+                2994,
+                3463,
+                3518,
+                4491,
+                5214,
             },
         )
         self.assertEqual(
@@ -251,7 +257,7 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 1)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 3)
 
     def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
         self,
@@ -639,6 +645,75 @@ class CompleteCatalogTests(unittest.TestCase):
             self.assertEqual(rows[quest]["itemState"], "unknown")
             self.assertEqual(rows[quest]["items"], [])
             self.assertEqual(rows[quest]["fieldStates"]["title"], "recorded")
+
+    def test_guaranteed_only_additions_preserve_unknown_choices_and_separate_variants(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        updates = reviewed_partial_rewards(inputs["reviewed"])
+        source, _ = build_complete(ROOT)
+        rows = {row["id"]: row for row in source["quests"]}
+        for quest in (89013, 91608):
+            row = rows[quest]
+            self.assertEqual(
+                (row["title"], row["level"], row["minimum"]), ("Gettin' Buzzed", 48, 45)
+            )
+            self.assertEqual(
+                [(r["itemID"], r["quantity"], r["group"]) for r in row["items"]],
+                [
+                    (290333, 1, "guaranteed"),
+                    (250999, 1, "guaranteed"),
+                    (250955, 5, "guaranteed"),
+                ],
+            )
+            self.assertEqual(
+                row["itemGroupStates"], {"guaranteed": "published", "choice": "unknown"}
+            )
+            self.assertEqual(
+                row["recordedCategory"], {"sourceZoneID": 16, "name": "Azshara"}
+            )
+            self.assertTrue(row["eligibilityUnknown"])
+            for field in (
+                "locations",
+                "faction",
+                "classTokens",
+                "races",
+                "moneyCost",
+                "rewardValues",
+            ):
+                self.assertNotIn(field, row)
+            update = updates[quest]
+            adopted = {
+                "id": quest,
+                "title": row["title"],
+                **copy.deepcopy(update["changes"]),
+            }
+            adopted.pop("itemGroupStates")
+            apply_reviewed_update(adopted, update)
+            self.assertEqual(adopted["itemGroupStates"], row["itemGroupStates"])
+            for mutation in ("empty", "mixed", "quantity", "unbound"):
+                changed = copy.deepcopy(inputs["reviewed"])
+                entry = next(
+                    r for r in changed["partialRewardUpdates"] if r["id"] == quest
+                )
+                if mutation == "empty":
+                    entry["changes"]["itemGroupStates"]["choice"] = "published-empty"
+                elif mutation == "mixed":
+                    entry["changes"]["items"][0]["group"] = "choice"
+                elif mutation == "quantity":
+                    entry["changes"]["items"][-1]["quantity"] = 1
+                else:
+                    entry.pop("nativeObservation")
+                with (
+                    self.subTest(quest=quest, mutation=mutation),
+                    self.assertRaises(ValueError),
+                ):
+                    reviewed_partial_rewards(changed)
+        self.assertEqual(rows[614]["questKind"], "hidden-trigger")
+        self.assertEqual(
+            rows[614]["itemGroupStates"],
+            {"guaranteed": "unknown", "choice": "published"},
+        )
 
     def test_unreviewed_or_conflicting_public_group_authority_is_rejected(self):
         for quest in (6, 630):

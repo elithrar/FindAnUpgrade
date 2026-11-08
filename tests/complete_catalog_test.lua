@@ -65,6 +65,27 @@ test("comprehensive identity retains published empty and unknown quests without 
     assert(N.Model.Status(999001)==nil and LibQuestieDB==nil)
 end)
 
+test("new guaranteed-only variants retain five potions unknown choices and native authority",function()
+    local N=W.Init();W.rewardReady=false;C_Item={IsItemDataCachedByID=function()return false end}
+    assert(N.Catalog:Begin());while N.Catalog:Step() do end
+    for _,id in ipairs({89013,91608}) do
+        local source=N.Providers.Source(id);local rewards=N.Rewards.Read(id)
+        assert(source.title=="Gettin' Buzzed" and source.level==48 and source.minimum==45 and source.eligibilityUnknown)
+        assert(N.Model.Status(id)==nil and N.Providers.Availability({id=id,source=source},{level=60}).state=="unknown")
+        assert(rewards.recordedGroups and rewards.items.state=="published" and #rewards.items.items==3)
+        assert(rewards.items.items[1].itemID==290333 and rewards.items.items[2].itemID==250999 and rewards.items.items[3].itemID==250955)
+        assert(rewards.items.items[3].quantity==5 and rewards.choices.state=="pending" and #rewards.choices.items==0)
+        assert(N.Catalog:Category(id).sourceZoneID==16 and not source.locations and not source.faction)
+    end
+    local tracker=N.Providers.Source(614);assert(tracker.questKind=="hidden-trigger" and N.Providers.RequiresNativeProof(tracker))
+    local partial=N.Rewards.Read(614);assert(partial.items.state=="pending" and #partial.choices.items==2)
+    W.rewardReady=true;W.items={};W.choices={}
+    local native=N.Rewards.Read(89013)
+    assert(not native.recordedGroups and native.items.state=="ready" and native.choices.state=="ready" and #native.items.items==0)
+    GetNumQuestLogChoices=function()return nil end
+    local ambiguous=N.Rewards.Read(91608);assert(not ambiguous.recordedGroups and ambiguous.choices.state=="unavailable")
+end)
+
 test("receipted partial choices leave guaranteed rewards pending and native groups authoritative",function()
     local N=W.Init();W.rewardReady=false
     C_Item={IsItemDataCachedByID=function()return false end}
