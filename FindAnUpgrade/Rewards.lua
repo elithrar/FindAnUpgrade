@@ -36,6 +36,7 @@ function R.Recorded(id,out)
         out.items,out.choices={state="published",items={}},{state="published",items={}}
         local states=source.itemGroupStates
         if states and states.guaranteed=="unknown" then out.items.state="pending" end
+        if states and states.choice=="unknown" then out.choices.state="pending" end
         out.recordedGroups=true
         for _,meta in ipairs(source.items or {}) do
             local group=meta.group=="guaranteed" and out.items or meta.group=="choice" and out.choices

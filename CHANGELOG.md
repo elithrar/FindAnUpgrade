@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.17
+
+- Add both separately cataloged Gettin' Buzzed quests with their guaranteed rifle, recipe and five potions; keep unobserved choices and current availability unknown.
+- Add two guaranteed rewards and one choice to Saving Sharpbeak, plus new choices for Set Them Ablaze! and A Little Help From My Friends.
+- Correct The Captain's Chest (614) to its recorded choices while retaining its hidden-trigger status and unknown guaranteed rewards.
+- Correct Delivery to Magatha Grimtotem and The Great Ezra Grimm quest titles from exact cached observations.
+- Preserve original receipts, quantities, costs and restrictions; item stats continue to come from the native client.
+
 ## 0.1.16
 
 - Add six verified reward choices across Trol'kalar, The Brood of Onyxia, Dark Heart and WANTED: Overseer Maltorius.

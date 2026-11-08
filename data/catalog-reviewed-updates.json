@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "revision": "quest-website-2026-11-08",
-  "reviewedAt": "2026-11-08T09:03:22.149230+00:00",
+  "reviewedAt": "2026-11-08T22:11:38.682533+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -112,6 +112,30 @@
       "bytes": 1045270,
       "sha256": "575f83f52d60b50e2e88d6afc3bdd10bdcbf68ec2c39a3e5811c982eb89d0eae",
       "collectedAt": "2026-11-08T09:03:22.149230+00:00"
+    },
+    "questsNovember8Evening": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "bytes": 1595566,
+      "sha256": "0f684294a4bb29fcf1caa1b1b5299b0bb97a8d81e379afa22a200f18059fa51d",
+      "collectedAt": "2026-11-08T22:11:37.133869+00:00"
+    },
+    "rewardsNovember8Evening": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "bytes": 276698,
+      "sha256": "02f038045158c5d465683b0cc32a65571f0a29ce3239110a4c1a5ef3bd16a62d",
+      "collectedAt": "2026-11-08T22:11:37.971258+00:00"
+    },
+    "changelogNovember8Evening": {
+      "url": "https://quests.questionable.services/changelog",
+      "bytes": 26436,
+      "sha256": "3ac8d7a4731d8f2f2dfe3254ed99009c205d881f7f11bbe10718513cd94fe3a6",
+      "collectedAt": "2026-11-08T22:11:38.374679+00:00"
+    },
+    "nativeCatalogNovember8Evening": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "bytes": 1129207,
+      "sha256": "cd5c1f2e7223ecbb7aec00b96e8f7137647920a434a7264c28878fe13c1f3d43",
+      "collectedAt": "2026-11-08T22:11:38.682533+00:00"
     }
   },
   "records": [
@@ -3061,6 +3085,273 @@
         "payloadSha256": "6db1019490c5fd4314488ea8c10ec43999d4d2e8adb24fcfedbd58818c26a662"
       },
       "reason": "Exact cached native metadata correction. Preserve all other fields, unknown rewards and unconfirmed availability, including literal NYI titles."
+    },
+    {
+      "id": 2994,
+      "title": "Saving Sharpbeak",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9651,
+            "name": "Gryphon Rider's Stormhammer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9652,
+            "name": "Gryphon Rider's Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 270276,
+            "name": "Cleansed Vilebranch Icon",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 270275,
+            "name": "Cleansed Vilebranch Medallion",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 9651,
+            "name": "Gryphon Rider's Stormhammer",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9652,
+            "name": "Gryphon Rider's Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270112,
+            "name": "Gryphon Rider's Crop",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8Evening",
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "d06b04156be4d3033f9b2da892f4600250e52adfa78da4cc230e59da10a544c0"
+      },
+      "reason": "Canonical published reward list and changelog confirm these exact additions; retain all previous group memberships, quantities, costs and source order."
+    },
+    {
+      "id": 3463,
+      "title": "Set Them Ablaze!",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10742,
+            "name": "Dragonflight Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10743,
+            "name": "Drakefire Headguard",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 10744,
+            "name": "Axe of the Ebon Drake",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10742,
+            "name": "Dragonflight Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10743,
+            "name": "Drakefire Headguard",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 10744,
+            "name": "Axe of the Ebon Drake",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270114,
+            "name": "Dragonscale Pants",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8Evening",
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "69e5d60ae89789483fc4e47cdcea841d13b0511d544c626881ad7c509be5db32"
+      },
+      "reason": "Canonical published reward list and changelog confirm these exact additions; retain all previous group memberships, quantities, costs and source order."
+    },
+    {
+      "id": 4491,
+      "title": "A Little Help From My Friends",
+      "expected": {
+        "items": [
+          {
+            "itemID": 11910,
+            "name": "Bejeweled Legguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11911,
+            "name": "Treetop Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 11913,
+            "name": "Clayridge Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 11910,
+            "name": "Bejeweled Legguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11911,
+            "name": "Treetop Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 11913,
+            "name": "Clayridge Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270122,
+            "name": "Yesterday's Pants",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember8Evening",
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "ea5054f8f00cb194b1148debdc71fb1d1511347ce68e2aed278b33028e1b28ef"
+      },
+      "reason": "Canonical published reward list and changelog confirm these exact additions; retain all previous group memberships, quantities, costs and source order."
+    },
+    {
+      "id": 3518,
+      "title": "Delivery to Magatha",
+      "expected": {
+        "title": "Delivery to Magatha"
+      },
+      "changes": {
+        "title": "Delivery to Magatha Grimtotem"
+      },
+      "evidence": [
+        "nativeCatalogNovember8Evening",
+        "questsNovember8Evening",
+        "changelogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "04161409252b7b642a998c2660b0555b1a0a85a6d57e1e0d3152ded95a6ffae4"
+      },
+      "reason": "Exact cached native quest-title correction; preserve every other field and unknown current availability."
+    },
+    {
+      "id": 5214,
+      "title": "The Great Fras Siabi",
+      "expected": {
+        "title": "The Great Fras Siabi"
+      },
+      "changes": {
+        "title": "The Great Ezra Grimm"
+      },
+      "evidence": [
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "24ca81185b6647c17497106f9d33f5f60330f3ff88f08dbf59923a15a5f8b817"
+      },
+      "reason": "Exact cached native quest-title correction; preserve every other field and unknown current availability."
     }
   ],
   "additions": [
@@ -3086,6 +3377,80 @@
         "changelogNovember6Afternoon"
       ],
       "reason": "November 4 separately cataloged exact quest and guaranteed reward. Item name, stats, faction, zone and starter are unconfirmed and omitted. The initial identity snapshot omitted the item name. The November 6 afternoon published review identifies item 282315 as Ancient Hilt; faction, zone and starter remain omitted, and item stats are resolved through native item APIs."
+    },
+    {
+      "record": {
+        "id": 89013,
+        "title": "Gettin' Buzzed",
+        "level": 48,
+        "minimum": 45,
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "reason": "Canonical changelog names this exact variant and all three guaranteed rewards, corroborated by cached native metadata. No starter, faction, class, race, map position, item stats or current availability is inferred; the separate partial correction preserves unknown choices."
+    },
+    {
+      "record": {
+        "id": 91608,
+        "title": "Gettin' Buzzed",
+        "level": 48,
+        "minimum": 45,
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "reason": "Canonical changelog names this exact variant and all three guaranteed rewards, corroborated by cached native metadata. No starter, faction, class, race, map position, item stats or current availability is inferred; the separate partial correction preserves unknown choices."
     }
   ],
   "categoryUpdates": [
@@ -3131,6 +3496,46 @@
         "payloadSha256": "7d291f372180e0738449aa253a4dade00a2831965a7a5db08628ccc2af7c1717"
       },
       "reason": "Explicit recorded AreaID category in the cached catalog and November 7 published changelog. This updates effective category lookup while preserving primary classification membership, status, faction, starters and all UiMap coordinates."
+    },
+    {
+      "id": 89013,
+      "title": "Gettin' Buzzed",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "evidence": [
+        "nativeCatalogNovember8Evening",
+        "changelogNovember8Evening"
+      ],
+      "reason": "Exact native observation records Area16/Azshara. The changelog supplies identity/reward corroboration only. Record category without changing primary status or deriving a UiMap position.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "c630724c4cdcc62acb6df228afbb6d0e8a0ac153b2977391035811b4d9254d96"
+      }
+    },
+    {
+      "id": 91608,
+      "title": "Gettin' Buzzed",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "evidence": [
+        "nativeCatalogNovember8Evening",
+        "changelogNovember8Evening"
+      ],
+      "reason": "Exact native observation records Area16/Azshara. The changelog supplies identity/reward corroboration only. Record category without changing primary status or deriving a UiMap position.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "0eed72c9f34ad4adcf6400cfa5e5ae50337484721054733383a4bc17bb3f6e61"
+      }
     }
   ],
   "partialRewardUpdates": [
@@ -3787,6 +4192,201 @@
         "payloadSha256": "5c83a4b257ded36a82f6c2e47fdf365919a157484182c0d348b8aa598e3f0e71"
       },
       "reason": "Canonical changelog explicitly identifies this choice set and leaves guaranteed rewards unconfirmed, corroborated by current cached direct native slots. Retain the old item identity and exact quantity as a choice; preserve original source receipts and leave guaranteed rewards unknown."
+    },
+    {
+      "id": 614,
+      "title": "The Captain's Chest",
+      "expected": {
+        "items": [
+          {
+            "itemID": 11469,
+            "name": "Bloodband Bracers",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 11469,
+            "name": "Bloodband Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270100,
+            "name": "Freebooter's Armband",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "choice": "published",
+          "guaranteed": "unknown"
+        }
+      },
+      "evidence": [
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "a0ddad6ad8a6410f2f0074f071240c7aa719702fa2dd5dc64502ea3bf25b3649"
+      },
+      "reason": "Canonical changelog explicitly confirms the recorded reward group; exact native slots corroborate identity, quantity and ordering. Retain any prior item identity/quantity and leave the unobserved opposite group unknown, without inferring current availability."
+    },
+    {
+      "id": 89013,
+      "title": "Gettin' Buzzed",
+      "expected": {
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "c630724c4cdcc62acb6df228afbb6d0e8a0ac153b2977391035811b4d9254d96"
+      },
+      "reason": "Canonical changelog explicitly confirms the recorded reward group; exact native slots corroborate identity, quantity and ordering. Retain any prior item identity/quantity and leave the unobserved opposite group unknown, without inferring current availability."
+    },
+    {
+      "id": 91608,
+      "title": "Gettin' Buzzed",
+      "expected": {
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 290333,
+            "name": "Berdun's Trusty Rifle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 250999,
+            "name": "Recipe: Potion of Beast Slaying",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 250955,
+            "name": "Potion of Beast Slaying",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "changelogNovember8Evening",
+        "nativeCatalogNovember8Evening"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember8Evening",
+        "build": 70862,
+        "observedAt": "2026-11-08T19:58:12.341071+00:00",
+        "payloadSha256": "0eed72c9f34ad4adcf6400cfa5e5ae50337484721054733383a4bc17bb3f6e61"
+      },
+      "reason": "Canonical changelog explicitly confirms the recorded reward group; exact native slots corroborate identity, quantity and ordering. Retain any prior item identity/quantity and leave the unobserved opposite group unknown, without inferring current availability."
     }
   ]
 }

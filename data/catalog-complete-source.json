@@ -36634,8 +36634,15 @@
           "itemID": 11469,
           "name": "Bloodband Bracers",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270100,
+          "name": "Freebooter's Armband",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -36656,6 +36663,10 @@
             "amount": -375
           }
         ]
+      },
+      "itemGroupStates": {
+        "choice": "published",
+        "guaranteed": "unknown"
       },
       "eligibilityUnknown": true,
       "fieldStates": {
@@ -110261,6 +110272,20 @@
       "id": 2994,
       "items": [
         {
+          "itemID": 270276,
+          "name": "Cleansed Vilebranch Icon",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        },
+        {
+          "itemID": 270275,
+          "name": "Cleansed Vilebranch Medallion",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
+        },
+        {
           "itemID": 9651,
           "name": "Gryphon Rider's Stormhammer",
           "quantity": 1,
@@ -110273,6 +110298,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270112,
+          "name": "Gryphon Rider's Crop",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -117323,6 +117355,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 3
+        },
+        {
+          "itemID": 270114,
+          "name": "Dragonscale Pants",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -118388,7 +118427,7 @@
       }
     },
     {
-      "title": "Delivery to Magatha",
+      "title": "Delivery to Magatha Grimtotem",
       "minimum": 45,
       "faction": "Horde",
       "eligibilityUnknown": true,
@@ -133874,6 +133913,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 3
+        },
+        {
+          "itemID": 270122,
+          "name": "Yesterday's Pants",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -147828,7 +147874,7 @@
       }
     },
     {
-      "title": "The Great Fras Siabi",
+      "title": "The Great Ezra Grimm",
       "minimum": 55,
       "eligibilityUnknown": true,
       "locations": [
@@ -269002,6 +269048,58 @@
       }
     },
     {
+      "id": 89013,
+      "items": [
+        {
+          "itemID": 290333,
+          "name": "Berdun's Trusty Rifle",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        },
+        {
+          "itemID": 250999,
+          "name": "Recipe: Potion of Beast Slaying",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
+        },
+        {
+          "itemID": 250955,
+          "name": "Potion of Beast Slaying",
+          "quantity": 5,
+          "group": "guaranteed",
+          "slot": 3
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "published",
+      "title": "Gettin' Buzzed",
+      "level": 48,
+      "minimum": 45,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "published",
+        "level": "published",
+        "minimum": "published",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "title": "Rediscovering the Light",
       "minimum": 2,
       "classTokens": [
@@ -269375,6 +269473,58 @@
         "reputation": "published",
         "currencies": "unknown",
         "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 91608,
+      "items": [
+        {
+          "itemID": 290333,
+          "name": "Berdun's Trusty Rifle",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        },
+        {
+          "itemID": 250999,
+          "name": "Recipe: Potion of Beast Slaying",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
+        },
+        {
+          "itemID": 250955,
+          "name": "Potion of Beast Slaying",
+          "quantity": 5,
+          "group": "guaranteed",
+          "slot": 3
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "published",
+      "title": "Gettin' Buzzed",
+      "level": 48,
+      "minimum": 45,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "published",
+        "level": "published",
+        "minimum": "published",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
         "coordinates": "unknown"
       }
     },
