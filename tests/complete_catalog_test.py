@@ -68,7 +68,7 @@ class CompleteCatalogTests(unittest.TestCase):
             baseline, _ = build_complete(ROOT)
         before = {row["id"]: row for row in baseline["quests"]}
         after = {row["id"]: row for row in source["quests"]}
-        self.assertEqual(after.keys() - before.keys(), {93161, 89013, 91608})
+        self.assertEqual(after.keys() - before.keys(), {93161, 89013, 91608, 95951})
         self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
             {quest for quest in before if before[quest] != after[quest]},
@@ -203,6 +203,17 @@ class CompleteCatalogTests(unittest.TestCase):
                 3518,
                 4491,
                 5214,
+                2039,
+                7201,
+                7741,
+                7790,
+                7840,
+                7847,
+                7850,
+                7861,
+                7862,
+                8152,
+                8283,
             },
         )
         self.assertEqual(
@@ -257,7 +268,7 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 3)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 4)
 
     def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
         self,
@@ -714,6 +725,113 @@ class CompleteCatalogTests(unittest.TestCase):
             rows[614]["itemGroupStates"],
             {"guaranteed": "unknown", "choice": "published"},
         )
+
+    def test_cached_identity_requires_native_receipt_and_cannot_claim_rewards_or_availability(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        document = inputs["reviewed"]
+        for mutation in (
+            "no-observation",
+            "unbound",
+            "source",
+            "hash",
+            "published",
+            "historical",
+            "rewards",
+            "empty",
+            "restriction",
+            "minimum",
+        ):
+            changed = copy.deepcopy(document)
+            addition = next(
+                r for r in changed["additions"] if r["record"]["id"] == 95951
+            )
+            row = addition["record"]
+            if mutation == "no-observation":
+                addition.pop("nativeObservation")
+            elif mutation == "unbound":
+                addition["evidence"] = ["changelogNovember9"]
+            elif mutation == "source":
+                addition["nativeObservation"]["source"] = "rewardsNovember9"
+                addition["evidence"].append("rewardsNovember9")
+            elif mutation == "hash":
+                addition["nativeObservation"]["payloadSha256"] = True
+            elif mutation in ("published", "historical"):
+                row["confirmation"] = mutation
+            elif mutation == "rewards":
+                row["items"] = [
+                    {
+                        "itemID": 19065,
+                        "name": "Emerald Circle",
+                        "quantity": 1,
+                        "group": "guaranteed",
+                        "slot": 1,
+                    }
+                ]
+            elif mutation == "empty":
+                row["itemState"] = "published-empty"
+            elif mutation == "restriction":
+                row["faction"] = "Horde"
+            else:
+                row["minimum"] = True
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_additions(changed)
+
+    def test_cached_identity_and_recovered_metadata_preserve_unknowns_and_source_conflicts(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        additions = reviewed_additions(inputs["reviewed"])
+        public = {}
+        merge_reviewed_additions(public, additions)
+        merge_reviewed_additions(public, additions)
+        self.assertEqual(public[95951]["confirmation"], "unconfirmed")
+        public[95951]["confirmation"] = "published"
+        with self.assertRaisesRegex(ValueError, "source conflict"):
+            merge_reviewed_additions(public, additions)
+        source, _ = build_complete(ROOT)
+        rows = {r["id"]: r for r in source["quests"]}
+        row = rows[95951]
+        self.assertEqual(
+            (row["title"], row["level"], row["minimum"]), ("Fetch 'n' Fletch", 38, 36)
+        )
+        self.assertEqual(
+            (row["confirmation"], row["items"], row["itemState"]),
+            ("unconfirmed", [], "unknown"),
+        )
+        for field in ("title", "level", "minimum"):
+            self.assertEqual(row["fieldStates"][field], "recorded")
+        for field in (
+            "faction",
+            "classTokens",
+            "races",
+            "locations",
+            "recordedCategory",
+            "rewardValues",
+            "moneyCost",
+        ):
+            self.assertNotIn(field, row)
+        for quest in (7741, 8152):
+            self.assertEqual(
+                (
+                    rows[quest]["confirmation"],
+                    rows[quest]["items"],
+                    rows[quest]["itemState"],
+                ),
+                ("unconfirmed", [], "unknown"),
+            )
+        self.assertEqual(
+            (rows[7790]["confirmation"], rows[7790]["itemState"]),
+            ("published", "published-empty"),
+        )
+        self.assertEqual(rows[7341]["items"][0]["quantity"], 200)
+        self.assertEqual(rows[3911]["items"][0]["group"], "guaranteed")
+        self.assertEqual([r["itemID"] for r in rows[7201]["items"]], [12038, 270119])
+        self.assertEqual(
+            rows[2039]["recordedCategory"], {"sourceZoneID": 38, "name": "Loch Modan"}
+        )
+        self.assertEqual(rows[2039]["locations"][0]["mapID"], 1455)
 
     def test_unreviewed_or_conflicting_public_group_authority_is_rejected(self):
         for quest in (6, 630):

@@ -313,9 +313,14 @@ def reviewed_additions(document):
     for addition in (document or {}).get("additions", []):
         row = addition.get("record", {})
         quest = row.get("id")
+        recorded = row.get("confirmation") == "unconfirmed"
         if (
-            set(addition) != {"record", "evidence", "reason"}
-            or set(row) != {"id", "title", "level", "minimum", "items", "itemState"}
+            set(addition)
+            != {"record", "evidence", "reason"}
+            | ({"nativeObservation"} if recorded else set())
+            or set(row)
+            != {"id", "title", "level", "minimum", "items", "itemState"}
+            | ({"confirmation"} if recorded else set())
             or type(quest) is not int
             or not 0 < quest < 2**31
             or quest in additions
@@ -330,6 +335,10 @@ def reviewed_additions(document):
             or any(not isinstance(item, dict) for item in row.get("items", []))
         ):
             raise ValueError("Invalid reviewed quest addition")
+        if recorded:
+            validate_native_observation(addition, document["sources"], required=True)
+            if row["items"] or row["itemState"] != "unknown":
+                raise ValueError("Unconfirmed cached identity cannot claim rewards")
         # Reuse correction validation, supplying a name only for validation.
         # The retained record omits an item name when no name is known.
         checked = copy.deepcopy(row)
@@ -354,7 +363,10 @@ def reviewed_additions(document):
                 ],
             }
         )
-        additions[quest] = {**copy.deepcopy(row), "confirmation": "published"}
+        additions[quest] = {
+            **copy.deepcopy(row),
+            "confirmation": "unconfirmed" if recorded else "published",
+        }
     return additions
 
 
@@ -868,20 +880,28 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         row["eligibilityUnknown"] = True
         states = {field: "unknown" for field in FIELDS}
         states["items"] = row["itemState"]
+        recorded_identity = (
+            additions.get(quest, {}).get("confirmation") == "unconfirmed"
+        )
         if row.get("title"):
             states["title"] = (
-                "published" if published and published.get("title") else "recorded"
+                "published"
+                if not recorded_identity and published and published.get("title")
+                else "recorded"
             )
         if "level" in row:
             states["level"] = (
                 "recorded"
-                if quest in updates
+                if recorded_identity
+                or quest in updates
                 and updates[quest]["expected"].get("level", 0) is None
                 else "published"
             )
         if "minimum" in row:
             states["minimum"] = (
-                "published" if published and "minimum" in published else "recorded"
+                "published"
+                if not recorded_identity and published and "minimum" in published
+                else "recorded"
             )
         for key in ("xp", "money", "reputation"):
             if key in row.get("rewardValues", {}):
