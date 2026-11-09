@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.18
+
+- Add Lard's Lunch Slicer, Forest Troll Leggings and Jewel of the Guard Captain to their verified reward groups.
+- Correct The Last Element (7201) and Dark Vessels choice sets while keeping guaranteed rewards unknown and preserving other same-title variants.
+- Record Find Bingles under Loch Modan while retaining its Ironforge giver coordinates and original classification.
+- Apply five exact cached metadata corrections, including both WANTED titles; preserve unconfirmed identities and reward uncertainty.
+- Retain Fetch 'n' Fletch as an unconfirmed cached identity with unknown rewards and a native-proof requirement.
+
 ## 0.1.17
 
 - Add both separately cataloged Gettin' Buzzed quests with their guaranteed rifle, recipe and five potions; keep unobserved choices and current availability unknown.

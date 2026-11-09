@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-08",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-09",
   "quests": [
     {
       "id": 1,
@@ -94980,6 +94980,10 @@
           }
         ]
       },
+      "recordedCategory": {
+        "sourceZoneID": 38,
+        "name": "Loch Modan"
+      },
       "fieldStates": {
         "items": "published-empty",
         "title": "published",
@@ -179947,8 +179951,15 @@
           "itemID": 12038,
           "name": "Lagrave's Seal",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270119,
+          "name": "Dark Iron Signet",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -179975,6 +179986,10 @@
             "amount": 100
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -188418,12 +188433,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Praise from the Emerald Circle <NYI> <TXT>",
+      "level": 59,
+      "minimum": 52,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -189003,13 +189021,15 @@
       "items": [],
       "itemState": "published-empty",
       "confirmation": "published",
-      "title": "REUSE",
+      "title": "River Ends",
+      "level": 57,
+      "minimum": 53,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published-empty",
         "title": "published",
-        "level": "unknown",
-        "minimum": "unknown",
+        "level": "recorded",
+        "minimum": "published",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -191681,6 +191701,13 @@
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 287074,
+          "name": "Lard's Lunch Slicer",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -192075,6 +192102,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270111,
+          "name": "Forest Troll Leggings",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -192222,8 +192256,29 @@
           "itemID": 19118,
           "name": "Nature's Breath",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270106,
+          "name": "Vicious Throwing Stars",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270107,
+          "name": "Bloodstained Longbow",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
+        },
+        {
+          "itemID": 270108,
+          "name": "Bloodied Longmace",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -192237,6 +192292,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "eligibilityUnknown": true,
       "fieldStates": {
@@ -192253,7 +192312,7 @@
       }
     },
     {
-      "title": "Wanted: Vile Priestess Hexx and Her Minions",
+      "title": "WANTED: Vile Priestess Hexx and Her Minions",
       "minimum": 46,
       "faction": "Horde",
       "locations": [
@@ -192330,6 +192389,13 @@
           "quantity": 1,
           "group": "guaranteed",
           "slot": 1
+        },
+        {
+          "itemID": 270225,
+          "name": "Jewel of the Guard Captain",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -200207,12 +200273,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Rapid Escape",
+      "level": 57,
+      "minimum": 53,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -205007,7 +205076,7 @@
       }
     },
     {
-      "title": "Wanted - Deathclasp, Terror of the Sands",
+      "title": "WANTED: Deathclasp, Terror of the Sands",
       "minimum": 54,
       "locations": [
         {
@@ -294262,6 +294331,28 @@
         "reputation": "unknown",
         "currencies": "unknown",
         "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95951,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Fetch 'n' Fletch",
+      "level": 38,
+      "minimum": 36,
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
         "coordinates": "unknown"
       }
     },

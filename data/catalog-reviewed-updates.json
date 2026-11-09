@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-08",
-  "reviewedAt": "2026-11-08T22:11:38.682533+00:00",
+  "revision": "quest-website-2026-11-09",
+  "reviewedAt": "2026-11-09T09:32:16.451886+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -136,6 +136,30 @@
       "bytes": 1129207,
       "sha256": "cd5c1f2e7223ecbb7aec00b96e8f7137647920a434a7264c28878fe13c1f3d43",
       "collectedAt": "2026-11-08T22:11:38.682533+00:00"
+    },
+    "questsNovember9": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "bytes": 1595565,
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "collectedAt": "2026-11-09T09:32:15.130666+00:00"
+    },
+    "rewardsNovember9": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "bytes": 276875,
+      "sha256": "8a4ec5f73494b96576a692b653d18539aace61620b1a36ed647d9421e55b314a",
+      "collectedAt": "2026-11-09T09:32:15.655986+00:00"
+    },
+    "changelogNovember9": {
+      "url": "https://quests.questionable.services/changelog",
+      "bytes": 30204,
+      "sha256": "469e05a4a4ec13ffa508e1aaad452686d2393adfef4688acf4e22882055f099a",
+      "collectedAt": "2026-11-09T09:32:16.137443+00:00"
+    },
+    "nativeCatalogNovember9": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "bytes": 1195750,
+      "sha256": "e9e00b8c360fcccde52726709ac1781fa27fc9e95f06efca3c190b05f635e39a",
+      "collectedAt": "2026-11-09T09:32:16.451886+00:00"
     }
   },
   "records": [
@@ -3352,6 +3376,277 @@
         "payloadSha256": "24ca81185b6647c17497106f9d33f5f60330f3ff88f08dbf59923a15a5f8b817"
       },
       "reason": "Exact cached native quest-title correction; preserve every other field and unknown current availability."
+    },
+    {
+      "id": 7840,
+      "title": "Lard Lost His Lunch",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19035,
+            "name": "Lard's Special Picnic Basket",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19035,
+            "name": "Lard's Special Picnic Basket",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 287074,
+            "name": "Lard's Lunch Slicer",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember9",
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "c2e9fbe6bb28c063f4f9441a4d43c45c1a7771ed89f86fb7e10f5fab7d12509f"
+      },
+      "reason": "The confirmed chart reward list and canonical changelog explicitly add this exact reward; retain previous memberships, quantities, costs and source ordering."
+    },
+    {
+      "id": 7847,
+      "title": "Return to Primal Torntusk",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19114,
+            "name": "Highland Bow",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 19115,
+            "name": "Flask of Forest Mojo",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19114,
+            "name": "Highland Bow",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 19115,
+            "name": "Flask of Forest Mojo",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270111,
+            "name": "Forest Troll Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember9",
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "4c872dc6b5a413610e685d65c2cc804d923a1dc0a3c654f80df2f0155be7a2cc"
+      },
+      "reason": "The confirmed chart reward list and canonical changelog explicitly add this exact reward; retain previous memberships, quantities, costs and source ordering."
+    },
+    {
+      "id": 7862,
+      "title": "Job Opening: Guard Captain of Revantusk Village",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19120,
+            "name": "Rune of the Guard Captain",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published"
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19120,
+            "name": "Rune of the Guard Captain",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 270225,
+            "name": "Jewel of the Guard Captain",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published"
+      },
+      "evidence": [
+        "rewardsNovember9",
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "8fd4018c84be09d755115fa26484132dd461172def3c2e86575dffe3eccc82de"
+      },
+      "reason": "The confirmed chart reward list and canonical changelog explicitly add this exact reward; retain previous memberships, quantities, costs and source ordering."
+    },
+    {
+      "id": 7741,
+      "title": "Praise from the Emerald Circle <NYI> <TXT>",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Praise from the Emerald Circle <NYI> <TXT>",
+        "level": 59,
+        "minimum": 52
+      },
+      "evidence": [
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "f5872be357f00c61a7fecc2241f9c60efa6631558edcae627d0d2d2a9261f7f2"
+      },
+      "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
+    },
+    {
+      "id": 7790,
+      "title": "REUSE",
+      "expected": {
+        "title": "REUSE",
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "River Ends",
+        "level": 57,
+        "minimum": 53
+      },
+      "evidence": [
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "cfe8ab467fbf17509d2c098791f15f47c2aed2080f6b2d782f9997475e976868"
+      },
+      "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
+    },
+    {
+      "id": 7861,
+      "title": "Wanted: Vile Priestess Hexx and Her Minions",
+      "expected": {
+        "title": "Wanted: Vile Priestess Hexx and Her Minions"
+      },
+      "changes": {
+        "title": "WANTED: Vile Priestess Hexx and Her Minions"
+      },
+      "evidence": [
+        "nativeCatalogNovember9",
+        "questsNovember9",
+        "changelogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "e0da2df46884910eb8676b9433f31d9964921e86453e334c7d08b298826e0e83"
+      },
+      "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
+    },
+    {
+      "id": 8152,
+      "title": "Rapid Escape",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Rapid Escape",
+        "level": 57,
+        "minimum": 53
+      },
+      "evidence": [
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "f5cddd84ef93e82e6c481328f56894ab9f7442fecbea8178b6302a43843562f0"
+      },
+      "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
+    },
+    {
+      "id": 8283,
+      "title": "Wanted - Deathclasp, Terror of the Sands",
+      "expected": {
+        "title": "Wanted - Deathclasp, Terror of the Sands"
+      },
+      "changes": {
+        "title": "WANTED: Deathclasp, Terror of the Sands"
+      },
+      "evidence": [
+        "nativeCatalogNovember9",
+        "questsNovember9",
+        "changelogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "d2a4911df282a8b3600813f64375271cd68a92214f46200fc899b9ce40994ef4"
+      },
+      "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
     }
   ],
   "additions": [
@@ -3451,6 +3746,27 @@
         "nativeCatalogNovember8Evening"
       ],
       "reason": "Canonical changelog names this exact variant and all three guaranteed rewards, corroborated by cached native metadata. No starter, faction, class, race, map position, item stats or current availability is inferred; the separate partial correction preserves unknown choices."
+    },
+    {
+      "record": {
+        "id": 95951,
+        "title": "Fetch 'n' Fletch",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "1359864556f50d55d1cccfc05e008440c81a578e04ecc86cab51b20bb3deea1a"
+      },
+      "reason": "Record only this exact cached identity and positive name/levels. It is absent from the shipped universe and has no confirmed complete reward list or current availability. Keep both reward groups unknown, require native proof, and do not infer restrictions, givers, categories, coordinates, stats or costs."
     }
   ],
   "categoryUpdates": [
@@ -3536,6 +3852,29 @@
         "observedAt": "2026-11-08T19:58:12.341071+00:00",
         "payloadSha256": "0eed72c9f34ad4adcf6400cfa5e5ae50337484721054733383a4bc17bb3f6e61"
       }
+    },
+    {
+      "id": 2039,
+      "title": "Find Bingles",
+      "expected": {
+        "sourceZoneID": 1537,
+        "name": "Ironforge"
+      },
+      "changes": {
+        "sourceZoneID": 38,
+        "name": "Loch Modan"
+      },
+      "evidence": [
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "f3fa0eae5dc0c3dbd042ad019d2356f45749c510331e53cc6e2ff7ff665766f8"
+      },
+      "reason": "The canonical changelog and exact native row record Loch Modan Area38 instead of Ironforge Area1537. Preserve primary classification and the existing Ironforge giver coordinates; an AreaID is not a UiMapID."
     }
   ],
   "partialRewardUpdates": [
@@ -4387,6 +4726,122 @@
         "payloadSha256": "0eed72c9f34ad4adcf6400cfa5e5ae50337484721054733383a4bc17bb3f6e61"
       },
       "reason": "Canonical changelog explicitly confirms the recorded reward group; exact native slots corroborate identity, quantity and ordering. Retain any prior item identity/quantity and leave the unobserved opposite group unknown, without inferring current availability."
+    },
+    {
+      "id": 7201,
+      "title": "The Last Element",
+      "expected": {
+        "items": [
+          {
+            "itemID": 12038,
+            "name": "Lagrave's Seal",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 12038,
+            "name": "Lagrave's Seal",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270119,
+            "name": "Dark Iron Signet",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "e4a3afdc2006f3f79365b3feeac58e753f455a32e1c52d5a4cbdb677cbfb9f89"
+      },
+      "reason": "Canonical changelog identifies this exact variant and its choice set, corroborated by cached direct native slots. Correct the previous guaranteed association to choice while retaining identity/quantity; leave guaranteed rewards unknown and preserve other same-title variants."
+    },
+    {
+      "id": 7850,
+      "title": "Dark Vessels",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19118,
+            "name": "Nature's Breath",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19118,
+            "name": "Nature's Breath",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270106,
+            "name": "Vicious Throwing Stars",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270107,
+            "name": "Bloodstained Longbow",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270108,
+            "name": "Bloodied Longmace",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "changelogNovember9",
+        "nativeCatalogNovember9"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember9",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "57a52fc6391468dd09b48845efd5f0fa58306bee62c16bb2e955bd1807888c5a"
+      },
+      "reason": "Canonical changelog identifies this exact variant and its choice set, corroborated by cached direct native slots. Correct the previous guaranteed association to choice while retaining identity/quantity; leave guaranteed rewards unknown and preserve other same-title variants."
     }
   ]
 }

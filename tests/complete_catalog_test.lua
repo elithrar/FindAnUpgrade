@@ -65,6 +65,28 @@ test("comprehensive identity retains published empty and unknown quests without 
     assert(N.Model.Status(999001)==nil and LibQuestieDB==nil)
 end)
 
+test("cached-only identity and metadata require native proof without inventing reward completeness",function()
+    local N=W.Init();W.rewardReady=false;C_Item={IsItemDataCachedByID=function()return false end}
+    C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end
+    N.Character:PrimeQuests({}, {},true)
+    assert(N.Catalog:Begin());while N.Catalog:Step() do end
+    for _,id in ipairs({7741,8152,95951}) do
+        local source=N.Providers.Source(id)
+        assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
+        assert(N.Providers.RequiresNativeProof(source) and N.Model.Status(id)==nil)
+        local rewards=N.Rewards.Read(id);assert(not rewards.recordedGroups and rewards.items.state=="unavailable")
+        assert(not N.SearchModel:Eligibility({id=id,source=source},N.Character:Get()))
+    end
+    local cached=N.Providers.Source(95951);assert(cached.title=="Fetch 'n' Fletch" and cached.level==38 and cached.minimum==36)
+    local reused=N.Providers.Source(7790);assert(reused.title=="River Ends" and reused.confirmation=="published" and reused.itemState=="published-empty")
+    local a,b=N.Rewards.Read(7201),N.Rewards.Read(3911)
+    assert(a.recordedGroups and a.items.state=="pending" and #a.choices.items==2 and a.choices.items[2].itemID==270119)
+    assert(b.recordedGroups and #b.items.items==1 and b.items.items[1].itemID==12038 and #b.choices.items==0)
+    local dark=N.Rewards.Read(7850);assert(dark.items.state=="pending" and #dark.choices.items==4)
+    assert(N.Catalog:Category(2039).sourceZoneID==38 and N.Providers.Source(2039).locations[1].mapID==1455)
+    local arrows=N.Rewards.Read(7341);assert(arrows.items.items[1].quantity==200)
+end)
+
 test("new guaranteed-only variants retain five potions unknown choices and native authority",function()
     local N=W.Init();W.rewardReady=false;C_Item={IsItemDataCachedByID=function()return false end}
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
