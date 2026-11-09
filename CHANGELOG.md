@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.19
+
+- Record the verified starter links from Razza's Heart, Skarr's Broken Gauntlet and Mushgog's Crown of Thorns to their exact quest IDs.
+- Keep all three quest titles, levels, requirements, rewards and current availability unconfirmed; item names and item stats do not become quest facts.
+- Require native proof before these identities can appear as quest offers, and retain unknown rewards until native data is ready.
+- Preserve original receipts and reject conflicting starter or primary evidence during refreshes.
+
 ## 0.1.18
 
 - Add Lard's Lunch Slicer, Forest Troll Leggings and Jewel of the Guard Captain to their verified reward groups.

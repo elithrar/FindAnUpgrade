@@ -68,7 +68,10 @@ class CompleteCatalogTests(unittest.TestCase):
             baseline, _ = build_complete(ROOT)
         before = {row["id"]: row for row in baseline["quests"]}
         after = {row["id"]: row for row in source["quests"]}
-        self.assertEqual(after.keys() - before.keys(), {93161, 89013, 91608, 95951})
+        self.assertEqual(
+            after.keys() - before.keys(),
+            {93161, 89013, 91608, 95951, 97270, 99233, 99234},
+        )
         self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
             {quest for quest in before if before[quest] != after[quest]},
@@ -268,7 +271,7 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 4)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 7)
 
     def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
         self,
@@ -832,6 +835,166 @@ class CompleteCatalogTests(unittest.TestCase):
             rows[2039]["recordedCategory"], {"sourceZoneID": 38, "name": "Loch Modan"}
         )
         self.assertEqual(rows[2039]["locations"][0]["mapID"], 1455)
+
+    def test_starter_only_additions_reject_metadata_reward_and_authority_inference(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        document = inputs["reviewed"]
+        for mutation in (
+            "title",
+            "level",
+            "reward",
+            "empty",
+            "confirmation",
+            "map",
+            "npc",
+            "multiple",
+            "boolean",
+            "name",
+            "evidence",
+            "source",
+            "ordinary",
+            "named",
+            "partial",
+            "category",
+            "duplicate",
+        ):
+            changed = copy.deepcopy(document)
+            addition = changed["starterAdditions"][0]
+            row = addition["record"]
+            starter = row["locations"][0]
+            if mutation == "title":
+                row["title"] = starter["name"]
+            elif mutation == "level":
+                row.update({"level": 60, "minimum": 55})
+            elif mutation == "reward":
+                row.update(
+                    {
+                        "itemState": "published",
+                        "items": [
+                            {
+                                "itemID": starter["itemID"],
+                                "name": starter["name"],
+                                "quantity": 1,
+                                "group": "guaranteed",
+                                "slot": 1,
+                            }
+                        ],
+                    }
+                )
+            elif mutation == "empty":
+                row["itemState"] = "published-empty"
+            elif mutation == "confirmation":
+                row["confirmation"] = "published"
+            elif mutation == "map":
+                starter.update({"mapID": 1455, "x": 0.5, "y": 0.5})
+            elif mutation == "npc":
+                starter["npcID"] = starter.pop("itemID")
+            elif mutation == "multiple":
+                row["locations"].append(copy.deepcopy(starter))
+            elif mutation == "boolean":
+                starter["itemID"] = True
+            elif mutation == "name":
+                starter["name"] = "bad\nname"
+            elif mutation == "evidence":
+                addition["evidence"] = ["missing"]
+            elif mutation == "source":
+                addition["evidence"] = ["nativeCatalogNovember9Afternoon"]
+            elif mutation == "ordinary":
+                row["id"] = changed["records"][0]["id"]
+            elif mutation == "named":
+                row["id"] = changed["additions"][0]["record"]["id"]
+            elif mutation == "partial":
+                row["id"] = changed["partialRewardUpdates"][0]["id"]
+            elif mutation == "category":
+                row["id"] = changed["categoryUpdates"][0]["id"]
+            else:
+                changed["starterAdditions"].append(copy.deepcopy(addition))
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_additions(changed)
+
+    def test_starter_only_additions_preserve_unknowns_and_participate_in_identity_inventory(
+        self,
+    ):
+        _, inputs = read_inputs(ROOT)
+        additions = reviewed_additions(inputs["reviewed"])
+        expected = {
+            97270: (277556, "Razza's Heart"),
+            99233: (277557, "Skarr's Broken Gauntlet"),
+            99234: (277558, "Mushgog's Crown of Thorns"),
+        }
+        self.assertTrue(expected.keys() <= additions.keys())
+        public = {}
+        merge_reviewed_additions(public, additions)
+        merge_reviewed_additions(public, additions)
+        source, _ = build_complete(ROOT)
+        rows = {r["id"]: r for r in source["quests"]}
+        for quest, (item, name) in expected.items():
+            row = rows[quest]
+            self.assertEqual(row["locations"], [{"itemID": item, "name": name}])
+            self.assertEqual(
+                (row["confirmation"], row["itemState"], row["items"]),
+                ("unconfirmed", "unknown", []),
+            )
+            self.assertTrue(row["eligibilityUnknown"])
+            self.assertEqual(row["fieldStates"]["givers"], "recorded")
+            self.assertTrue(
+                all(
+                    value == "unknown"
+                    for key, value in row["fieldStates"].items()
+                    if key != "givers"
+                )
+            )
+            for field in (
+                "title",
+                "level",
+                "minimum",
+                "maximum",
+                "faction",
+                "classTokens",
+                "races",
+                "recordedCategory",
+                "rewardValues",
+                "moneyCost",
+            ):
+                self.assertNotIn(field, row)
+        public[97270]["locations"] = [{"itemID": 277558, "name": "Other item"}]
+        with self.assertRaisesRegex(ValueError, "source conflict"):
+            merge_reviewed_additions(public, additions)
+
+    def test_starter_only_additions_reject_competing_primary_and_typed_starter_facts(
+        self,
+    ):
+        for evidence in ("primary", "compiled"):
+            provenance, inputs = read_inputs(ROOT)
+            if evidence == "primary":
+                inputs["primary"]["records"].append(
+                    {
+                        "id": 97270,
+                        "title": "Primary quest title",
+                        "items": [],
+                        "level": 60,
+                        "minimum": 55,
+                    }
+                )
+            else:
+                inputs["compiled"]["metadata"].append(
+                    {
+                        "id": 97270,
+                        "locations": [{"npcID": 42, "name": "Another starter"}],
+                    }
+                )
+            with (
+                self.subTest(evidence=evidence),
+                mock.patch(
+                    "fau_tools.catalog.read_inputs", return_value=(provenance, inputs)
+                ),
+            ):
+                with self.assertRaisesRegex(
+                    ValueError, "primary conflict|starting item source conflict"
+                ):
+                    build_complete(ROOT)
 
     def test_unreviewed_or_conflicting_public_group_authority_is_rejected(self):
         for quest in (6, 630):

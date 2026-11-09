@@ -301121,6 +301121,31 @@
       }
     },
     {
+      "id": 97270,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "locations": [
+        {
+          "itemID": 277556,
+          "name": "Razza's Heart"
+        }
+      ],
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "unknown",
+        "level": "unknown",
+        "minimum": "unknown",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 97275,
       "items": [
         {
@@ -316688,6 +316713,56 @@
         "xp": "published",
         "money": "unknown",
         "reputation": "published",
+        "currencies": "unknown",
+        "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 99233,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "locations": [
+        {
+          "itemID": 277557,
+          "name": "Skarr's Broken Gauntlet"
+        }
+      ],
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "unknown",
+        "level": "unknown",
+        "minimum": "unknown",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 99234,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "locations": [
+        {
+          "itemID": 277558,
+          "name": "Mushgog's Crown of Thorns"
+        }
+      ],
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "unknown",
+        "level": "unknown",
+        "minimum": "unknown",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
         "currencies": "unknown",
         "givers": "recorded",
         "coordinates": "unknown"
