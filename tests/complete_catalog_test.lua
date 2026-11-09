@@ -65,6 +65,27 @@ test("comprehensive identity retains published empty and unknown quests without 
     assert(N.Model.Status(999001)==nil and LibQuestieDB==nil)
 end)
 
+test("item-start identities do not borrow item names levels rewards or current availability",function()
+    local N=W.Init();W.rewardReady=false;C_Item={IsItemDataCachedByID=function()return false end}
+    C_QuestLog.GetTitleForQuestID=function()return nil end;C_QuestLog.GetQuestDifficultyLevel=function()return nil end
+    C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end
+    N.Character:PrimeQuests({}, {},true)
+    assert(N.Catalog:Begin());while N.Catalog:Step() do end
+    N.Stack:Create();local card=N.Stack:Card(1)
+    for _,pair in ipairs({{97270,277556,"Razza's Heart"},{99233,277557,"Skarr's Broken Gauntlet"},{99234,277558,"Mushgog's Crown of Thorns"}}) do
+        local id,item,name=pair[1],pair[2],pair[3];local source=N.Providers.Source(id);local row=N.Catalog.records[id]
+        assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
+        assert(not source.title and not source.level and not source.minimum and not source.faction and not source.rewardValues)
+        assert(source.locations[1].itemID==item and source.locations[1].name==name and not source.locations[1].mapID)
+        assert(N.Model.Status(id)==nil and N.Providers.RequiresNativeProof(source) and not N.Catalog:Category(id))
+        assert(not N.SearchModel:Eligibility(row,N.Character:Get()))
+        local rewards=N.Rewards.Read(id);assert(not rewards.recordedGroups and rewards.items.state=="unavailable" and #rewards.items.items==0)
+        N.Stack:Fill(card,row,N.Core.profile);assert(card.title.text=="Quest "..id)
+        local offered={id=id,source=source,availabilityCheck=function()return "native-available" end}
+        assert(N.Providers.Resolve(offered,{level=60}) and offered.availability.state=="available")
+    end
+end)
+
 test("cached-only identity and metadata require native proof without inventing reward completeness",function()
     local N=W.Init();W.rewardReady=false;C_Item={IsItemDataCachedByID=function()return false end}
     C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end

@@ -306,7 +306,7 @@ def reviewed_partial_rewards(document):
     return updates
 
 
-def reviewed_additions(document):
+def reviewed_named_additions(document):
     """Accept only explicitly receipted website identities and known facts."""
     updates = reviewed_updates(document)
     additions = {}
@@ -368,6 +368,71 @@ def reviewed_additions(document):
             "confirmation": "unconfirmed" if recorded else "published",
         }
     return additions
+
+
+def reviewed_starter_additions(document):
+    """Retain exact item-start identities without inventing quest metadata."""
+    if document is None:
+        return {}
+    blocked = (
+        reviewed_updates(document).keys()
+        | reviewed_named_additions(document).keys()
+        | reviewed_partial_rewards(document).keys()
+    )
+    for update in document.get("categoryUpdates", []):
+        if not isinstance(update, dict) or type(update.get("id")) is not int:
+            raise ValueError("Invalid reviewed category identity")
+        blocked.add(update["id"])
+    additions = {}
+    for addition in document.get("starterAdditions", []):
+        row = addition.get("record", {})
+        quest = row.get("id")
+        evidence = addition.get("evidence")
+        if (
+            set(addition) != {"record", "evidence", "reason"}
+            or set(row) != {"id", "items", "itemState", "confirmation", "locations"}
+            or type(quest) is not int
+            or not 0 < quest < 2**31
+            or quest in blocked
+            or quest in additions
+            or row["confirmation"] != "unconfirmed"
+            or row["itemState"] != "unknown"
+            or row["items"] != []
+            or not isinstance(addition.get("reason"), str)
+            or not addition["reason"]
+            or not isinstance(evidence, list)
+            or not evidence
+            or any(not isinstance(key, str) for key in evidence)
+            or set(evidence) - document["sources"].keys()
+            or not any(
+                document["sources"][key]["url"].rstrip("/").endswith("/changelog")
+                for key in evidence
+            )
+            or not isinstance(row["locations"], list)
+            or len(row["locations"]) != 1
+        ):
+            raise ValueError("Invalid reviewed item-start identity")
+        starter = row["locations"][0]
+        if (
+            not isinstance(starter, dict)
+            or set(starter) != {"itemID", "name"}
+            or type(starter["itemID"]) is not int
+            or not 0 < starter["itemID"] < 2**31
+            or not isinstance(starter["name"], str)
+            or not 0 < len(starter["name"]) <= 100
+            or any(ord(c) < 32 for c in starter["name"])
+        ):
+            raise ValueError("Invalid reviewed starting item")
+        additions[quest] = copy.deepcopy(row)
+    return additions
+
+
+def reviewed_additions(document):
+    """Own every validated addition for reconciliation, refresh and ID history."""
+    return {
+        **reviewed_named_additions(document),
+        **reviewed_starter_additions(document),
+    }
 
 
 def merge_reviewed_additions(public, additions):
@@ -730,6 +795,10 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         # A retained current primary page challenges every corresponding exact
         # source group, rather than replacing an unexplained discrepancy.
         if checked:
+            if quest in additions and "locations" in additions[quest]:
+                raise ValueError(
+                    "Starter-only addition primary conflict: " + str(quest)
+                )
             update = updates.get(quest)
             if (
                 quest in additions
@@ -875,6 +944,13 @@ def build_complete(root, include_supplemental=True, include_chains=True):
             if row.get("title") != update["title"]:
                 raise ValueError("Reviewed category quest identity changed")
             row["recordedCategory"] = copy.deepcopy(update["changes"])
+        if quest in additions and "locations" in additions[quest]:
+            starters = additions[quest]["locations"]
+            if row.get("locations", starters) != starters:
+                raise ValueError(
+                    "Reviewed starting item source conflict: " + str(quest)
+                )
+            row["locations"] = copy.deepcopy(starters)
         # Historical availability constraints are retained as recorded facts;
         # a source row never claims that the quest is currently offered.
         row["eligibilityUnknown"] = True
