@@ -70,7 +70,7 @@ class CompleteCatalogTests(unittest.TestCase):
         after = {row["id"]: row for row in source["quests"]}
         self.assertEqual(
             after.keys() - before.keys(),
-            {93161, 89013, 91608, 95951, 97270, 99233, 99234},
+            {93161, 89013, 91608, 93521, 95951, 97270, 99233, 99234},
         )
         self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
@@ -271,7 +271,7 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 7)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 8)
 
     def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
         self,
@@ -920,6 +920,7 @@ class CompleteCatalogTests(unittest.TestCase):
         _, inputs = read_inputs(ROOT)
         additions = reviewed_additions(inputs["reviewed"])
         expected = {
+            93521: (270301, "Ve'han's Research Notes"),
             97270: (277556, "Razza's Heart"),
             99233: (277557, "Skarr's Broken Gauntlet"),
             99234: (277558, "Mushgog's Crown of Thorns"),

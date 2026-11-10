@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.20
+
+- Record the verified link from Ve'han's Research Notes to quest 93521.
+- Keep the quest title, levels, requirements, rewards and current availability unconfirmed; require native proof before treating it as an offer.
+- Preserve prior receipts and quest records. Item icons, stats, cooldowns and companion details continue to come from the native client.
+
 ## 0.1.19
 
 - Record the verified starter links from Razza's Heart, Skarr's Broken Gauntlet and Mushgog's Crown of Thorns to their exact quest IDs.
