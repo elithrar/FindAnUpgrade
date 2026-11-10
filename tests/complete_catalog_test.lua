@@ -72,7 +72,7 @@ test("item-start identities do not borrow item names levels rewards or current a
     N.Character:PrimeQuests({}, {},true)
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
     N.Stack:Create();local card=N.Stack:Card(1)
-    for _,pair in ipairs({{97270,277556,"Razza's Heart"},{99233,277557,"Skarr's Broken Gauntlet"},{99234,277558,"Mushgog's Crown of Thorns"}}) do
+    for _,pair in ipairs({{93521,270301,"Ve'han's Research Notes"},{97270,277556,"Razza's Heart"},{99233,277557,"Skarr's Broken Gauntlet"},{99234,277558,"Mushgog's Crown of Thorns"}}) do
         local id,item,name=pair[1],pair[2],pair[3];local source=N.Providers.Source(id);local row=N.Catalog.records[id]
         assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
         assert(not source.title and not source.level and not source.minimum and not source.faction and not source.rewardValues)

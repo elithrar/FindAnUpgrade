@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-09",
-  "reviewedAt": "2026-11-09T19:01:44.823353+00:00",
+  "revision": "quest-website-2026-11-10",
+  "reviewedAt": "2026-11-10T08:57:30.778248+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -184,6 +184,30 @@
       "bytes": 1195750,
       "sha256": "e9e00b8c360fcccde52726709ac1781fa27fc9e95f06efca3c190b05f635e39a",
       "collectedAt": "2026-11-09T19:01:44.823353+00:00"
+    },
+    "questsNovember10": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "bytes": 1595565,
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "collectedAt": "2026-11-10T08:57:29.529874+00:00"
+    },
+    "rewardsNovember10": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "bytes": 276875,
+      "sha256": "8a4ec5f73494b96576a692b653d18539aace61620b1a36ed647d9421e55b314a",
+      "collectedAt": "2026-11-10T08:57:30.072498+00:00"
+    },
+    "changelogNovember10": {
+      "url": "https://quests.questionable.services/changelog",
+      "bytes": 32020,
+      "sha256": "2665ad5edca4c9f973efefaf51e2764362928288a12b31b6c411ef089b6ef647",
+      "collectedAt": "2026-11-10T08:57:30.246416+00:00"
+    },
+    "nativeCatalogNovember10": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "bytes": 1203844,
+      "sha256": "9feb3f20db4530ba412eaf3950b79a39c7936857f50ea129eda367bca833b8dc",
+      "collectedAt": "2026-11-10T08:57:30.778248+00:00"
     }
   },
   "records": [
@@ -4922,6 +4946,24 @@
         "changelogNovember9Afternoon"
       ],
       "reason": "The canonical changelog explicitly states that this named item starts this exact quest ID and leaves quest titles/rewards unconfirmed. Record only the typed item-starter link; require native proof and leave all quest metadata, reward lists and current availability unknown. Item stats and required level do not become quest facts."
+    },
+    {
+      "record": {
+        "id": 93521,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed",
+        "locations": [
+          {
+            "itemID": 270301,
+            "name": "Ve'han's Research Notes"
+          }
+        ]
+      },
+      "evidence": [
+        "changelogNovember10"
+      ],
+      "reason": "The canonical changelog explicitly states that this named item starts exact quest93521 while the quest title and rewards are unconfirmed. Retain only the typed item-starter link, leave all quest metadata/rewards/current availability unknown, and require native proof. Do not derive quest facts from item names, stats or visual details."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-09",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-10",
   "quests": [
     {
       "id": 1,
@@ -279987,6 +279987,31 @@
         "reputation": "unknown",
         "currencies": "unknown",
         "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 93521,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "locations": [
+        {
+          "itemID": 270301,
+          "name": "Ve'han's Research Notes"
+        }
+      ],
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "unknown",
+        "level": "unknown",
+        "minimum": "unknown",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "recorded",
         "coordinates": "unknown"
       }
     },
