@@ -7,7 +7,9 @@ import json
 import re
 from collections import Counter
 
+from fau_tools import starter_roles
 from fau_tools.context import ROOT
+from fau_tools.native_rewards import reviewed_native_rewards
 
 # Complete catalog.
 
@@ -34,6 +36,7 @@ METADATA = (
     "prerequisites",
     "prerequisiteCount",
     "locations",
+    "relatedLocations",
     "locationConflict",
     "questKind",
 )
@@ -677,6 +680,8 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     updates = reviewed_updates(inputs.get("reviewed"))
     partial_rewards = reviewed_partial_rewards(inputs.get("reviewed"))
     categories = reviewed_categories(inputs.get("reviewed"), root)
+    native_rewards = reviewed_native_rewards(inputs.get("reviewed"), inputs["public"])
+    role_authority = starter_roles.reviewed(inputs.get("starterRoles"))
     public = {row["id"]: row for row in inputs["public"]["records"]}
     if len(public) != inputs["public"]["expected"]:
         raise ValueError("Public index was truncated or deduplicated incorrectly")
@@ -720,8 +725,15 @@ def build_complete(root, include_supplemental=True, include_chains=True):
     ):
         raise ValueError("Invalid monotonic identity history")
     universe = set(public) | compiled | native | classification | set(legacy) | history
-    if (updates.keys() | categories.keys() | partial_rewards.keys()) - universe:
+    if (
+        updates.keys()
+        | categories.keys()
+        | partial_rewards.keys()
+        | native_rewards.keys()
+    ) - universe:
         raise ValueError("Reviewed update cannot introduce unverified quest identities")
+    if role_authority and role_authority["records"].keys() - universe:
+        raise ValueError("Starter roles cannot introduce unverified quest identities")
     rows, gaps, disagreements, withheld_positions = [], [], [], []
     added_pairs, removed_pairs = [], []
     for quest in sorted(universe):
@@ -934,11 +946,13 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         if quest in updates:
             apply_reviewed_update(row, updates[quest])
         if published and "itemGroupStates" in published:
-            if quest not in partial_rewards:
+            if quest not in partial_rewards and quest not in native_rewards:
                 raise ValueError("Unreviewed public reward group states: " + str(quest))
             row["itemGroupStates"] = copy.deepcopy(published["itemGroupStates"])
         if quest in partial_rewards:
             apply_reviewed_update(row, partial_rewards[quest])
+        if quest in native_rewards:
+            apply_reviewed_update(row, native_rewards[quest])
         if quest in categories:
             update = categories[quest]
             if row.get("title") != update["title"]:
@@ -951,6 +965,7 @@ def build_complete(root, include_supplemental=True, include_chains=True):
                     "Reviewed starting item source conflict: " + str(quest)
                 )
             row["locations"] = copy.deepcopy(starters)
+        starter_roles.apply(row, role_authority, additions.get(quest))
         # Historical availability constraints are retained as recorded facts;
         # a source row never claims that the quest is currently offered.
         row["eligibilityUnknown"] = True
@@ -1005,12 +1020,13 @@ def build_complete(root, include_supplemental=True, include_chains=True):
         "sourceRevision": "public-forever-" + inputs["public"]["collectedAt"][:10],
         "quests": rows,
     }
-    if updates or additions or categories or partial_rewards:
+    if updates or additions or categories or partial_rewards or native_rewards:
         source["sourceRevision"] += "+" + inputs["reviewed"]["revision"]
     state_counts = Counter(row["itemState"] for row in rows)
     report = {
         "schemaVersion": 2,
         "reviewedUpdates": inputs.get("reviewed", {}),
+        "starterRoleAuthority": inputs.get("starterRoles", {}),
         "targetBuild": provenance["targetBuild"],
         "scope": "Every exact quest ID in the complete public index, historical compiled Forever catalog, current official quest cache, approved classifications and previous catalog. Identity is separate from current availability.",
         "counts": {

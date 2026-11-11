@@ -800,7 +800,7 @@ def main(argv=None, *, prog=None):
         "path": "data/catalog-source.json",
         "sha256": digest((ROOT / "data/catalog-source.json").read_bytes()),
     }
-    for key in ("history", "gaps", "chains", "reviewed"):
+    for key in ("history", "gaps", "chains", "reviewed", "starterRoles"):
         if key in prior_provenance["inputs"]:
             inputs[key] = prior_provenance["inputs"][key]
 

@@ -217,6 +217,27 @@ class CompleteCatalogTests(unittest.TestCase):
                 7862,
                 8152,
                 8283,
+                17,
+                1199,
+                1446,
+                2202,
+                2240,
+                2768,
+                2846,
+                3341,
+                3528,
+                3636,
+                4126,
+                4134,
+                4201,
+                5282,
+                7489,
+                8224,
+                8249,
+                8413,
+                8418,
+                8425,
+                79442,
             },
         )
         self.assertEqual(
@@ -815,7 +836,7 @@ class CompleteCatalogTests(unittest.TestCase):
             "moneyCost",
         ):
             self.assertNotIn(field, row)
-        for quest in (7741, 8152):
+        for quest in (8152,):
             self.assertEqual(
                 (
                     rows[quest]["confirmation"],
@@ -824,6 +845,23 @@ class CompleteCatalogTests(unittest.TestCase):
                 ),
                 ("unconfirmed", [], "unknown"),
             )
+        self.assertEqual(rows[7741]["confirmation"], "unconfirmed")
+        self.assertEqual(
+            rows[7741]["items"],
+            [
+                {
+                    "itemID": 19065,
+                    "name": "Emerald Circle",
+                    "quantity": 1,
+                    "group": "guaranteed",
+                    "slot": 1,
+                }
+            ],
+        )
+        self.assertEqual(
+            rows[7741]["itemGroupStates"],
+            {"guaranteed": "published", "choice": "unknown"},
+        )
         self.assertEqual(
             (rows[7790]["confirmation"], rows[7790]["itemState"]),
             ("published", "published-empty"),
@@ -1091,7 +1129,7 @@ class CompleteCatalogTests(unittest.TestCase):
         for published in inputs["public"]["records"]:
             row = output[published["id"]]
             reviewed = {}
-            for key in ("records", "partialRewardUpdates"):
+            for key in ("records", "partialRewardUpdates", "nativeRewardUpdates"):
                 for entry in inputs.get("reviewed", {}).get(key, []):
                     if entry["id"] == published["id"]:
                         reviewed.update(entry["changes"])
