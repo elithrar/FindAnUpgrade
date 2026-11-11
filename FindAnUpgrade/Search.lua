@@ -653,7 +653,8 @@ function S:Fill(card,row)
     local evidenceHeight=measured(card.evidence,bodyWidth,actionable and note or nil)
     y=y+evidenceHeight+(evidenceHeight>0 and 3 or 0); card.fullTitle=title
     local chain=not card.chainDetail and N.Chains and N.Chains:HasDetails(row.id)
-    card.chain.text:SetText(self.chainExpanded and self.chainExpanded[row.id] and "▾ Quest chain" or "▸ Quest chain")
+    card.chain.text:SetText("Quest chain")
+    card.chain.disclosure:SetAtlas(self.chainExpanded and self.chainExpanded[row.id] and "common-button-list-minus" or "common-button-list-plus")
     card.chain:SetShown(chain==true)
     -- Reserve the whole star target, even for a one-line title, so moving
     -- from the star to an item cannot activate overlapping controls.
