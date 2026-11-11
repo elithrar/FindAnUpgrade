@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.23
+
+- Use Blizzard’s chain-link icon and native expand/collapse textures for Quest chain, replacing unsupported font glyphs.
+
 ## 0.1.22
 
 - Expand Quest chain into compact nested rows inside the finder, showing earlier quests, the selected quest and follow-ups with levels and completion status.

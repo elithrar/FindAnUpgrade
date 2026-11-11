@@ -43,7 +43,11 @@ function S:Star(card)
     end)
     star:SetScript("OnLeave",function()star.icon:SetVertexColor(1,1,1);self.footerTooltip:Hide()end)
     card.chain=CreateFrame("Button",nil,card);card.chain:SetHeight(16)
-    card.chain.text=card.chain:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(card.chain.text,11);card.chain.text:SetAllPoints();card.chain.text:SetJustifyH("LEFT");card.chain.text:SetTextColor(.85,.75,.45);card.chain.text:SetText("Quest chain")
+    -- Native Professions link art and Reputation disclosure art (Forever 70425).
+    -- Keep icons out of the font string: the game font lacks triangle glyphs.
+    card.chain.icon=card.chain:CreateTexture(nil,"ARTWORK");card.chain.icon:SetSize(16,16);card.chain.icon:SetPoint("LEFT");card.chain.icon:SetAtlas("common-icon-chatlink")
+    card.chain.disclosure=card.chain:CreateTexture(nil,"ARTWORK");card.chain.disclosure:SetSize(16,16);card.chain.disclosure:SetPoint("RIGHT")
+    card.chain.text=card.chain:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(card.chain.text,11);card.chain.text:SetPoint("TOPLEFT",20,0);card.chain.text:SetPoint("BOTTOMRIGHT",-20,0);card.chain.text:SetJustifyH("LEFT");card.chain.text:SetTextColor(.85,.75,.45);card.chain.text:SetText("Quest chain")
     card.chain:SetScript("OnClick",function()if card.row and A.Over(self.scroll) then self:Chain(card.row.id) end end)
 end
 function S:ShortlistQuery()
@@ -118,7 +122,6 @@ function S:HideChainRows(card)
 end
 function S:ChainRows(card,y,width)
     local expanded=self.chainExpanded and self.chainExpanded[card.row.id]
-    card.chain.text:SetText(expanded and "▾ Quest chain" or "▸ Quest chain")
     if not expanded then return y end
     local info=N.Chains:Steps(card.row.id);local used=0;local inspectionShown=false;card.chainQuestIDs={}
     local unique,total={},0
@@ -126,7 +129,7 @@ function S:ChainRows(card,y,width)
         if not unique[entry.id] then unique[entry.id]=true;total=total+1 end
         for _,related in ipairs(entry.related) do if not unique[related.id] then unique[related.id]=true;total=total+1 end end
     end
-    card.chain.text:SetText("▾ Quest chain · "..total..(info.truncated and "+" or "")..(total==1 and " quest" or " quests"))
+    card.chain.text:SetText("Quest chain · "..total..(info.truncated and "+" or "")..(total==1 and " quest" or " quests"))
     local function line(title,detail,depth,selected,questID)
         used=used+1;card.chainRows=card.chainRows or {}
         local row=card.chainRows[used]
