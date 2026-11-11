@@ -887,6 +887,35 @@ def parse(text, path, maps, race_constants=None, include_empty=False):
                         "reason": "field omitted: unsupported typed quest starter",
                     }
                 )
+            # Generic provider tuples include supplied items and recipients.
+            # Preserve their typed association, but let reviewed reciprocal
+            # authority establish starter role in the final catalog.
+            declared_npcs = set(npc_ids) if isinstance(npc_ids, list) else set()
+            for starter in starters:
+                if starter.get("npcID") in declared_npcs:
+                    continue
+                if "npcID" not in starter and "itemID" not in starter:
+                    continue
+                role = "unknown"
+                name = starter.get("name", "").lower()
+                if "(provided)" in name or "not prov" in name:
+                    role = "provided" if "(provided)" in name else "unknown"
+                for location in row.get("locations", []):
+                    if any(
+                        starter.get(key) == location.get(key)
+                        for key in ("npcID", "itemID")
+                        if key in starter
+                    ):
+                        related = dict(location, role=role)
+                        if related not in row.setdefault("relatedLocations", []):
+                            row["relatedLocations"].append(related)
+            for location in row.get("locations", []):
+                if "npcID" in location and location.get("name", "").lower().endswith(
+                    "(quest recipient)"
+                ):
+                    related = dict(location, role="finisher")
+                    if related not in row.setdefault("relatedLocations", []):
+                        row["relatedLocations"].append(related)
         # Conditions, race restrictions and source snapshots never prove availability.
         if any(
             key in props
@@ -956,6 +985,12 @@ def merge(a, b):
     }
     if locations:
         result["locations"] = [locations[key] for key in sorted(locations)]
+    related = {
+        json.dumps(location, sort_keys=True): location
+        for location in a.get("relatedLocations", []) + b.get("relatedLocations", [])
+    }
+    if related:
+        result["relatedLocations"] = [related[key] for key in sorted(related)]
     if a.get("locations") and b.get("locations") and a["locations"] != b["locations"]:
         result["locationConflict"] = True
     return result

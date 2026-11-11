@@ -689,8 +689,8 @@ function S:Fill(card,row)
     if #items>4 then card.more:ClearAllPoints(); card.more:SetPoint("TOPRIGHT",-8,-rewardY); rewardY=rewardY+18 end
     local values={}
     local money=reward.money.state=="ready" and N.Rewards.Money(reward.money.value)
-    if money then values[#values+1]=money end
-    if reward.xp.state=="ready" and reward.xp.value>0 then values[#values+1]=reward.xp.value.." XP" end
+    if money then values[#values+1]=money..(reward.money.published and " (base)" or "") end
+    if reward.xp.state=="ready" and reward.xp.value>0 then values[#values+1]=reward.xp.value.." XP"..(reward.xp.published and " (base)" or "") end
     local hasChoices=#(reward.choices.items or {})>0
     for _,currency in ipairs(reward.currencies.items or {}) do if currency.isChoice then hasChoices=true end end
     for _,currency in ipairs(reward.currencies.items or {}) do
@@ -698,7 +698,7 @@ function S:Fill(card,row)
     end
     for _,entry in ipairs(reward.reputation.items or {}) do
         local amount=(entry.amount>0 and "+" or "")..entry.amount
-        values[#values+1]=(entry.name or "Faction "..entry.factionID).." "..amount
+        values[#values+1]=(entry.name or "Faction "..entry.factionID).." "..amount..(entry.published and " (base)" or "")
     end
     for i,label in ipairs(card.footer) do label:SetText("");label:Hide(); card.footerHits[i]:Hide(); card.footerHits[i].value=nil end
     local footerHeight=0

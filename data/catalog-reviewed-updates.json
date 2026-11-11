@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-10",
-  "reviewedAt": "2026-11-10T08:57:30.778248+00:00",
+  "revision": "quest-website-2026-11-11",
+  "reviewedAt": "2026-11-11T04:01:32.621422+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -208,6 +208,30 @@
       "bytes": 1203844,
       "sha256": "9feb3f20db4530ba412eaf3950b79a39c7936857f50ea129eda367bca833b8dc",
       "collectedAt": "2026-11-10T08:57:30.778248+00:00"
+    },
+    "questsNovember11": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-11T04:01:07.314539+00:00"
+    },
+    "rewardsNovember11": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "8a4ec5f73494b96576a692b653d18539aace61620b1a36ed647d9421e55b314a",
+      "bytes": 276875,
+      "collectedAt": "2026-11-11T04:01:15.871608+00:00"
+    },
+    "changelogNovember11": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "fbddf574a2fe83f8486ddaa6a98891fe9e6bdf82b1f5a849cda923fe5fcc6c66",
+      "bytes": 33250,
+      "collectedAt": "2026-11-11T04:01:26.848343+00:00"
+    },
+    "nativeCatalogNovember11": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "d4f53c7d0f570116e4642946b4e922ff0c77c4cac306d4960e6e57c7a1a0b171",
+      "bytes": 1363864,
+      "collectedAt": "2026-11-11T04:01:32.621422+00:00"
     }
   },
   "records": [
@@ -4964,6 +4988,2156 @@
         "changelogNovember10"
       ],
       "reason": "The canonical changelog explicitly states that this named item starts exact quest93521 while the quest title and rewards are unconfirmed. Retain only the typed item-starter link, leave all quest metadata/rewards/current availability unknown, and require native proof. Do not derive quest facts from item names, stats or visual details."
+    }
+  ],
+  "nativeRewardUpdates": [
+    {
+      "id": 17,
+      "title": "Uldaman Reagent Run",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9030,
+            "name": "Restorative Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "2a74e911ef066a036c680a0ca78aa58cd40129bed9f47a46e9b1c71ac54c06f2"
+      },
+      "nativeRecord": {
+        "id": 17,
+        "name": "Uldaman Reagent Run",
+        "level": 42,
+        "requiredLevel": 38,
+        "categoryId": 1517,
+        "categoryName": "Uldaman",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "2a74e911ef066a036c680a0ca78aa58cd40129bed9f47a46e9b1c71ac54c06f2",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [
+        {
+          "expected": {
+            "itemID": 9030,
+            "name": "Restorative Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          "observed": {
+            "itemID": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        }
+      ],
+      "priorSource": {
+        "url": "https://www.forevervsclassic.com/quests/17",
+        "sha256": "6e7a33ca27b3a5d786c9a9bb4a92746f6b4956c705f0bfb76866f7d771f85249",
+        "bytes": 65086
+      },
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Replace the October 15 public guaranteed potion slot with the exact November 9 native potion slot; preserve the observed quantity of five."
+    },
+    {
+      "id": 1199,
+      "title": "Twilight Falls",
+      "expected": {
+        "items": [
+          {
+            "itemID": 6998,
+            "name": "Nimbus Boots",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 7000,
+            "name": "Heartwood Girdle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 270025,
+            "name": "Silvered Gauntlets",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 6998,
+            "name": "Nimbus Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 7000,
+            "name": "Heartwood Girdle",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270025,
+            "name": "Silvered Gauntlets",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "55f5abfa8ac1471e5cd8bc8d985d75375d90e23dcd39cdfb95164e90a9f71528"
+      },
+      "nativeRecord": {
+        "id": 1199,
+        "name": "Twilight Falls",
+        "level": 25,
+        "requiredLevel": 20,
+        "categoryId": 719,
+        "categoryName": "Blackfathom Deeps",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 6998,
+            "name": "Nimbus Boots",
+            "quantity": 1
+          },
+          {
+            "id": 7000,
+            "name": "Heartwood Girdle",
+            "quantity": 1
+          },
+          {
+            "id": 270025,
+            "name": "Silvered Gauntlets",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "55f5abfa8ac1471e5cd8bc8d985d75375d90e23dcd39cdfb95164e90a9f71528",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 1446,
+      "title": "Jammal'an the Prophet",
+      "expected": {
+        "items": [
+          {
+            "itemID": 11123,
+            "name": "Rainstrider Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11124,
+            "name": "Helm of Exile",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 11123,
+            "name": "Rainstrider Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11124,
+            "name": "Helm of Exile",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270115,
+            "name": "Leggings of Freedom and Sorrow",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "94a729ba43e30e0267be5f3db4077c4aad5cf8dcca92a663aed19f7942f5681e"
+      },
+      "nativeRecord": {
+        "id": 1446,
+        "name": "Jammal'an the Prophet",
+        "level": 53,
+        "requiredLevel": 38,
+        "categoryId": 1417,
+        "categoryName": "Sunken Temple",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 11123,
+            "name": "Rainstrider Leggings",
+            "quantity": 1
+          },
+          {
+            "id": 11124,
+            "name": "Helm of Exile",
+            "quantity": 1
+          },
+          {
+            "id": 270115,
+            "name": "Leggings of Freedom and Sorrow",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "94a729ba43e30e0267be5f3db4077c4aad5cf8dcca92a663aed19f7942f5681e",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 2202,
+      "title": "Uldaman Reagent Run",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9030,
+            "name": "Restorative Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "d7e8b6dc645513962f16389d77952d160c37c61a090412ce3eb29b7391c38ffe"
+      },
+      "nativeRecord": {
+        "id": 2202,
+        "name": "Uldaman Reagent Run",
+        "level": 42,
+        "requiredLevel": 36,
+        "categoryId": 1517,
+        "categoryName": "Uldaman",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "d7e8b6dc645513962f16389d77952d160c37c61a090412ce3eb29b7391c38ffe",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [
+        {
+          "expected": {
+            "itemID": 9030,
+            "name": "Restorative Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          "observed": {
+            "itemID": 250947,
+            "name": "Greater Mender's Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        }
+      ],
+      "priorSource": {
+        "url": "https://www.forevervsclassic.com/quests/2202",
+        "sha256": "fa6e87a798638efbb4107ff4cbe8c5e1e4f07531e5c4f765331dcd451b9c671d",
+        "bytes": 65122
+      },
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Replace the October 15 public guaranteed potion slot with the exact November 9 native potion slot; preserve the observed quantity of five."
+    },
+    {
+      "id": 2240,
+      "title": "The Hidden Chamber",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9626,
+            "name": "Dwarven Charge",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9627,
+            "name": "Explorer's League Lodestar",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9626,
+            "name": "Dwarven Charge",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9627,
+            "name": "Explorer's League Lodestar",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270078,
+            "name": "Guardian Staff",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "e1ee360e4677eba781213c9759818968749c7e358695186dfa89eaa163ed8fc7"
+      },
+      "nativeRecord": {
+        "id": 2240,
+        "name": "The Hidden Chamber",
+        "level": 40,
+        "requiredLevel": 35,
+        "categoryId": 1517,
+        "categoryName": "Uldaman",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 9626,
+            "name": "Dwarven Charge",
+            "quantity": 1
+          },
+          {
+            "id": 9627,
+            "name": "Explorer's League Lodestar",
+            "quantity": 1
+          },
+          {
+            "id": 270078,
+            "name": "Guardian Staff",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "e1ee360e4677eba781213c9759818968749c7e358695186dfa89eaa163ed8fc7",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 2768,
+      "title": "Divino-matic Rod",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9533,
+            "name": "Masons Fraternity Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9534,
+            "name": "Engineer's Guild Headpiece",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9533,
+            "name": "Masons Fraternity Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 9534,
+            "name": "Engineer's Guild Headpiece",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270099,
+            "name": "Magister Cowl",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "096bb5e3b924b5d602d411cff0d1c4fbd2616b55a1483e6b99d53e60d2579c7c"
+      },
+      "nativeRecord": {
+        "id": 2768,
+        "name": "Divino-matic Rod",
+        "level": 47,
+        "requiredLevel": 40,
+        "categoryId": 978,
+        "categoryName": "Zul'Farrak",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 9533,
+            "name": "Masons Fraternity Ring",
+            "quantity": 1
+          },
+          {
+            "id": 9534,
+            "name": "Engineer's Guild Headpiece",
+            "quantity": 1
+          },
+          {
+            "id": 270099,
+            "name": "Magister Cowl",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "096bb5e3b924b5d602d411cff0d1c4fbd2616b55a1483e6b99d53e60d2579c7c",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 2846,
+      "title": "Tiara of the Deep",
+      "expected": {
+        "items": [
+          {
+            "itemID": 9527,
+            "name": "Spellshifter Rod",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 9531,
+            "name": "Gemshale Pauldrons",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 9527,
+            "name": "Spellshifter Rod",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 9531,
+            "name": "Gemshale Pauldrons",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270098,
+            "name": "Dank Shoulderpads",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "ce3113221dcf5b8fe55414517c245ac6d0638eef1140eca6eae4ad66b055e94f"
+      },
+      "nativeRecord": {
+        "id": 2846,
+        "name": "Tiara of the Deep",
+        "level": 46,
+        "requiredLevel": 40,
+        "categoryId": 978,
+        "categoryName": "Zul'Farrak",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 9527,
+            "name": "Spellshifter Rod",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 9531,
+            "name": "Gemshale Pauldrons",
+            "quantity": 1
+          },
+          {
+            "id": 270098,
+            "name": "Dank Shoulderpads",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "ce3113221dcf5b8fe55414517c245ac6d0638eef1140eca6eae4ad66b055e94f",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 3341,
+      "title": "Bring the End",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270081,
+            "name": "Purified Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "97d5943bcd3da961634520e6c600d41c20c6fa24761f300d0ede9d1be26d6e90"
+      },
+      "nativeRecord": {
+        "id": 3341,
+        "name": "Bring the End",
+        "level": 42,
+        "requiredLevel": 37,
+        "categoryId": 722,
+        "categoryName": "Razorfen Downs",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1
+          },
+          {
+            "id": 270081,
+            "name": "Purified Ring",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "97d5943bcd3da961634520e6c600d41c20c6fa24761f300d0ede9d1be26d6e90",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 3528,
+      "title": "The God Hakkar",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10749,
+            "name": "Avenguard Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10750,
+            "name": "Lifeforce Dirk",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 10751,
+            "name": "Gemburst Circlet",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10749,
+            "name": "Avenguard Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 10750,
+            "name": "Lifeforce Dirk",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 10751,
+            "name": "Gemburst Circlet",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270117,
+            "name": "Shapeshifter's Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "0a7b2edb604fd8aa005a9ceccbac32dac2c0e537791064cf1b90d45bce74bd9b"
+      },
+      "nativeRecord": {
+        "id": 3528,
+        "name": "The God Hakkar",
+        "level": 53,
+        "requiredLevel": 40,
+        "categoryId": 1417,
+        "categoryName": "Sunken Temple",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 10749,
+            "name": "Avenguard Helm",
+            "quantity": 1
+          },
+          {
+            "id": 10750,
+            "name": "Lifeforce Dirk",
+            "quantity": 1
+          },
+          {
+            "id": 10751,
+            "name": "Gemburst Circlet",
+            "quantity": 1
+          },
+          {
+            "id": 270117,
+            "name": "Shapeshifter's Helm",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "0a7b2edb604fd8aa005a9ceccbac32dac2c0e537791064cf1b90d45bce74bd9b",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 3636,
+      "title": "Bring the Light",
+      "expected": {
+        "items": [
+          {
+            "itemID": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270081,
+            "name": "Purified Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "71ad6a22b57125be9535da848c69b65daf9b870549a5732b8c8f45a526cdc825"
+      },
+      "nativeRecord": {
+        "id": 3636,
+        "name": "Bring the Light",
+        "level": 42,
+        "requiredLevel": 39,
+        "categoryId": 722,
+        "categoryName": "Razorfen Downs",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 10823,
+            "name": "Vanquisher's Sword",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 10824,
+            "name": "Amberglow Talisman",
+            "quantity": 1
+          },
+          {
+            "id": 270081,
+            "name": "Purified Ring",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "71ad6a22b57125be9535da848c69b65daf9b870549a5732b8c8f45a526cdc825",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 4126,
+      "title": "Hurley Blackbreath",
+      "expected": {
+        "items": [
+          {
+            "itemID": 12003,
+            "name": "Dark Dwarven Lager",
+            "quantity": 10,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 12003,
+            "name": "Dark Dwarven Lager",
+            "quantity": 10,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270123,
+            "name": "Ragnar's Favorite Hat",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "a5ed4279eb3df6fd85cd14f74e1bfa5b0623ddfb01c6b979d5546be5f18821c9"
+      },
+      "nativeRecord": {
+        "id": 4126,
+        "name": "Hurley Blackbreath",
+        "level": 55,
+        "requiredLevel": 50,
+        "categoryId": 1584,
+        "categoryName": "Blackrock Depths",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 12003,
+            "name": "Dark Dwarven Lager",
+            "quantity": 10
+          }
+        ],
+        "choice": [
+          {
+            "id": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1
+          },
+          {
+            "id": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1
+          },
+          {
+            "id": 270123,
+            "name": "Ragnar's Favorite Hat",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "a5ed4279eb3df6fd85cd14f74e1bfa5b0623ddfb01c6b979d5546be5f18821c9",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 4134,
+      "title": "Lost Thunderbrew Recipe",
+      "expected": {
+        "items": [
+          {
+            "itemID": 3928,
+            "name": "Superior Healing Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 6149,
+            "name": "Greater Mana Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 3928,
+            "name": "Superior Healing Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 6149,
+            "name": "Greater Mana Potion",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270123,
+            "name": "Ragnar's Favorite Hat",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "69a320bc5d2079dc63679c4ac94f1b2a6da945c5521190e5dbbd36d30e08f59f"
+      },
+      "nativeRecord": {
+        "id": 4134,
+        "name": "Lost Thunderbrew Recipe",
+        "level": 55,
+        "requiredLevel": 50,
+        "categoryId": 1584,
+        "categoryName": "Blackrock Depths",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 3928,
+            "name": "Superior Healing Potion",
+            "quantity": 5
+          },
+          {
+            "id": 6149,
+            "name": "Greater Mana Potion",
+            "quantity": 5
+          }
+        ],
+        "choice": [
+          {
+            "id": 11964,
+            "name": "Swiftstrike Cudgel",
+            "quantity": 1
+          },
+          {
+            "id": 12000,
+            "name": "Limb Cleaver",
+            "quantity": 1
+          },
+          {
+            "id": 270123,
+            "name": "Ragnar's Favorite Hat",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "69a320bc5d2079dc63679c4ac94f1b2a6da945c5521190e5dbbd36d30e08f59f",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 4201,
+      "title": "The Love Potion",
+      "expected": {
+        "items": [
+          {
+            "itemID": 11962,
+            "name": "Manacle Cuffs",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11866,
+            "name": "Nagmara's Whipping Belt",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 11962,
+            "name": "Manacle Cuffs",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 11866,
+            "name": "Nagmara's Whipping Belt",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270120,
+            "name": "Boots of Requite",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270121,
+            "name": "Private Rocknot's Spare Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "a4689ad758d7aa5bde3033bfc145159566217f50210e449add64aaee3c6a5eb8"
+      },
+      "nativeRecord": {
+        "id": 4201,
+        "name": "The Love Potion",
+        "level": 54,
+        "requiredLevel": 50,
+        "categoryId": 1584,
+        "categoryName": "Blackrock Depths",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 11962,
+            "name": "Manacle Cuffs",
+            "quantity": 1
+          },
+          {
+            "id": 11866,
+            "name": "Nagmara's Whipping Belt",
+            "quantity": 1
+          },
+          {
+            "id": 270120,
+            "name": "Boots of Requite",
+            "quantity": 1
+          },
+          {
+            "id": 270121,
+            "name": "Private Rocknot's Spare Bracers",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "a4689ad758d7aa5bde3033bfc145159566217f50210e449add64aaee3c6a5eb8",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 5282,
+      "title": "The Restless Souls",
+      "expected": {
+        "items": [
+          {
+            "itemID": 13315,
+            "name": "Item #13315",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 13315,
+            "name": "Testament of Hope",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "75da6d883773de0ac78f1f0c4a17443afbb3d20cd4eb5e01f00234aac02c9119"
+      },
+      "nativeRecord": {
+        "id": 5282,
+        "name": "The Restless Souls",
+        "level": 60,
+        "requiredLevel": 55,
+        "categoryId": 2017,
+        "categoryName": "Stratholme",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 13315,
+            "name": "Testament of Hope",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "75da6d883773de0ac78f1f0c4a17443afbb3d20cd4eb5e01f00234aac02c9119",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Replace only the old Item-number placeholder with the exact observed proper item name."
+    },
+    {
+      "id": 7489,
+      "title": "Lethtendris's Web",
+      "expected": {
+        "items": [
+          {
+            "itemID": 18491,
+            "name": "Lorespinner",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 18491,
+            "name": "Lorespinner",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270124,
+            "name": "Warpwood Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270125,
+            "name": "Satyrhide Armbands",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "1e3d727e75e1a3aff14ce360e3f95532461760db9744d411ffa090f870cda56d"
+      },
+      "nativeRecord": {
+        "id": 7489,
+        "name": "Lethtendris's Web",
+        "level": 57,
+        "requiredLevel": 54,
+        "categoryId": 2557,
+        "categoryName": "Dire Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 18491,
+            "name": "Lorespinner",
+            "quantity": 1
+          },
+          {
+            "id": 270124,
+            "name": "Warpwood Bracers",
+            "quantity": 1
+          },
+          {
+            "id": 270125,
+            "name": "Satyrhide Armbands",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "1e3d727e75e1a3aff14ce360e3f95532461760db9744d411ffa090f870cda56d",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 7741,
+      "title": "Praise from the Emerald Circle <NYI> <TXT>",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19065,
+            "name": "Emerald Circle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "f5872be357f00c61a7fecc2241f9c60efa6631558edcae627d0d2d2a9261f7f2"
+      },
+      "nativeRecord": {
+        "id": 7741,
+        "name": "Praise from the Emerald Circle <NYI> <TXT>",
+        "level": 59,
+        "requiredLevel": 52,
+        "categoryId": 361,
+        "categoryName": "Felwood",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 19065,
+            "name": "Emerald Circle",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "f5872be357f00c61a7fecc2241f9c60efa6631558edcae627d0d2d2a9261f7f2",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 8224,
+      "title": "Rare Fish - Dezian Queenfish",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19971,
+            "name": "Item #19971",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19971,
+            "name": "High Test Eternium Fishing Line",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "1d35fc849257af147b8e59a9838580878912a2b55a45675a030e9f3b756aea39"
+      },
+      "nativeRecord": {
+        "id": 8224,
+        "name": "Rare Fish - Dezian Queenfish",
+        "level": 60,
+        "requiredLevel": 1,
+        "categoryId": -101,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 19971,
+            "name": "High Test Eternium Fishing Line",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "1d35fc849257af147b8e59a9838580878912a2b55a45675a030e9f3b756aea39",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Replace only the old Item-number placeholder with the exact observed proper item name."
+    },
+    {
+      "id": 8249,
+      "title": "Junkboxes Needed",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20086,
+            "name": "Dusksteel Throwing Knife",
+            "quantity": 200,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20086,
+            "name": "Dusksteel Throwing Knife",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "eee3ef5f4e54fae3e6dd8759d0a8357a2d4edd3f6b47866afccb97f6cf85e91c"
+      },
+      "nativeRecord": {
+        "id": 8249,
+        "name": "Junkboxes Needed",
+        "level": 60,
+        "requiredLevel": 50,
+        "categoryId": -162,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20086,
+            "name": "Dusksteel Throwing Knife",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "eee3ef5f4e54fae3e6dd8759d0a8357a2d4edd3f6b47866afccb97f6cf85e91c",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [
+        {
+          "expected": {
+            "itemID": 20086,
+            "name": "Dusksteel Throwing Knife",
+            "quantity": 200,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          "observed": {
+            "itemID": 20086,
+            "name": "Dusksteel Throwing Knife",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        }
+      ],
+      "priorSource": {
+        "url": "https://www.forevervsclassic.com/quests/8249",
+        "sha256": "a0bfcff3a7441741062a9a73fa46838e3ae87e589936f9774277129ecc695771",
+        "bytes": 69178
+      },
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Correct the same guaranteed item slot from the old public quantity 200 to the explicitly observed native quantity one."
+    },
+    {
+      "id": 8413,
+      "title": "Da Voodoo",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20369,
+            "name": "Azurite Fists",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20503,
+            "name": "Enamored Water Spirit",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20556,
+            "name": "Wildstaff",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20369,
+            "name": "Azurite Fists",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20503,
+            "name": "Enamored Water Spirit",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20556,
+            "name": "Wildstaff",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "0747f619c394ae85b35ac8ec7913c890284a7a8e0aa010aa5979134f1adb28b8"
+      },
+      "nativeRecord": {
+        "id": 8413,
+        "name": "Da Voodoo",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -82,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20369,
+            "name": "Azurite Fists",
+            "quantity": 1
+          },
+          {
+            "id": 20503,
+            "name": "Enamored Water Spirit",
+            "quantity": 1
+          },
+          {
+            "id": 20556,
+            "name": "Wildstaff",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "0747f619c394ae85b35ac8ec7913c890284a7a8e0aa010aa5979134f1adb28b8",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 8418,
+      "title": "Forging the Mightstone",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20620,
+            "name": "Holy Mightstone",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20504,
+            "name": "Lightforged Blade",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20512,
+            "name": "Sanctified Orb",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20505,
+            "name": "Chivalrous Signet",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20620,
+            "name": "Holy Mightstone",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20504,
+            "name": "Lightforged Blade",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20512,
+            "name": "Sanctified Orb",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          },
+          {
+            "itemID": 20505,
+            "name": "Chivalrous Signet",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 4
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "a6c75854693733538dd3267f797885e87c463fe1cc85c51b81eed7b2d4f07635"
+      },
+      "nativeRecord": {
+        "id": 8418,
+        "name": "Forging the Mightstone",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -141,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20620,
+            "name": "Holy Mightstone",
+            "quantity": 1
+          },
+          {
+            "id": 20504,
+            "name": "Lightforged Blade",
+            "quantity": 1
+          },
+          {
+            "id": 20512,
+            "name": "Sanctified Orb",
+            "quantity": 1
+          },
+          {
+            "id": 20505,
+            "name": "Chivalrous Signet",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "a6c75854693733538dd3267f797885e87c463fe1cc85c51b81eed7b2d4f07635",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 8425,
+      "title": "Voodoo Feathers",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20521,
+            "name": "Fury Visor",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20130,
+            "name": "Diamond Flask",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20517,
+            "name": "Razorsteel Shoulders",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20521,
+            "name": "Fury Visor",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20130,
+            "name": "Diamond Flask",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20517,
+            "name": "Razorsteel Shoulders",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "a8516f3e59024304ebdfc76a47de707b0b3bae49e75aa8dcebb13e9c2b141ed2"
+      },
+      "nativeRecord": {
+        "id": 8425,
+        "name": "Voodoo Feathers",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -81,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20521,
+            "name": "Fury Visor",
+            "quantity": 1
+          },
+          {
+            "id": 20130,
+            "name": "Diamond Flask",
+            "quantity": 1
+          },
+          {
+            "id": 20517,
+            "name": "Razorsteel Shoulders",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "a8516f3e59024304ebdfc76a47de707b0b3bae49e75aa8dcebb13e9c2b141ed2",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability."
+    },
+    {
+      "id": 79442,
+      "title": "The Tempest's Weapons",
+      "expected": {
+        "items": [
+          {
+            "itemID": 213086,
+            "name": "Rune of the Storm",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 280604,
+            "name": "Rage of the Storm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 280605,
+            "name": "Tidebringer's Claw",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 280607,
+            "name": "Lightning's Grasp",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 280696,
+            "name": "Elementalist's Guard",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 213086,
+            "name": "Rune of the Storm",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 280607,
+            "name": "Lightning's Grasp",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 280605,
+            "name": "Tidebringer's Claw",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 280604,
+            "name": "Rage of the Storm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember11"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember11",
+        "build": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00",
+        "payloadSha256": "14d6bd4834d2df3649487c5ef3bf75a8c1b773b5708ded1e1d81e9b39e0c25f4"
+      },
+      "nativeRecord": {
+        "id": 79442,
+        "name": "The Tempest's Weapons",
+        "level": 40,
+        "requiredLevel": 30,
+        "categoryId": -82,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 280696,
+            "name": "Elementalist's Guard",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 280607,
+            "name": "Lightning's Grasp",
+            "quantity": 1
+          },
+          {
+            "id": 280605,
+            "name": "Tidebringer's Claw",
+            "quantity": 1
+          },
+          {
+            "id": 280604,
+            "name": "Rage of the Storm",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "14d6bd4834d2df3649487c5ef3bf75a8c1b773b5708ded1e1d81e9b39e0c25f4",
+        "sourceBuild": 70862,
+        "observedAt": "2026-11-09T03:59:29.684834+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Add guaranteed Elementalist's Guard while retaining the separately published Rune of the Storm; the direct-slot snapshot cannot exclude additional scripted rewards."
     }
   ]
 }

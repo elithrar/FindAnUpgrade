@@ -248,6 +248,27 @@ test("native rewards obey slot filters and partial reputation remains explicit",
     local c=N.Search.cards[1];assert(c.icons[1].row.itemID==123 and not (c.icons[2] and c.icons[2]:IsShown()) and c.footer[1].text:find("125",1,true) and c.footerHits[1].value:find("125",1,true) and not c.footer[3]:IsShown())
 end)
 
+test("finder distinguishes published base amounts from current native rewards",function()
+    local N=setup();local source=W.quests[9]
+    source.itemState="published"
+    for i,item in ipairs(source.items) do item.group,item.quantity,item.slot="guaranteed",1,i end
+    source.rewardValues={money=12345,xp=2750,reputation={{name="Stormwind",amount=100}}}
+    C_CurrencyInfo.GetCoinTextureString=function(value)return "COINS_"..value end
+    C_Reputation={GetFactionDataByID=function()return {name="Stormwind"}end}
+    N.Search.filter.query="Head quest";N.Search:Toggle();W.time=.3;N.Search:Tick()
+    local c=N.Search.cards[1]
+    assert(#N.Search.results==1 and c.row.id==9)
+    assert(c.footer[1]:GetText()=="COINS_12345 (base)  2750 XP (base)  Stormwind +100 (base)")
+    assert(c.footerHits[1].value=="COINS_12345 (base)\n2750 XP (base)\nStormwind +100 (base)")
+    W.rewardReady=true;W.items={};W.choices={}
+    GetQuestLogRewardMoney=function()return 23456 end
+    GetQuestLogRewardXP=function()return 3500 end
+    C_QuestLog.GetQuestLogMajorFactionReputationRewards=function()return {{factionID=72,rewardAmount=225}}end
+    W.Event("QUEST_DATA_LOAD_RESULT",9,true);W.time=.6;N.Search:Tick()
+    assert(c.row.id==9 and c.footer[1]:GetText()=="COINS_23456  3500 XP  Stormwind +225")
+    assert(c.footerHits[1].value=="COINS_23456\n3500 XP\nStormwind +225")
+end)
+
 test("cold quest difficulty cannot be inferred from its recorded minimum",function()
     local N=setup();W.quests[9].questLevel=nil;W.quests[9].minimum=20;N.Search:Toggle();W.time=.3;N.Search:Tick()
     assert(#N.Search.results==1 and N.SearchModel.unknownLevels==1 and W.metadataRequests[9]==1)

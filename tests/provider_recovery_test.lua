@@ -21,6 +21,26 @@ local function setup()
     return N,rows
 end
 
+test("recipient and supplied item observations cannot become bundled starters",function()
+    local N=W.Init()
+    N.Character.Get=function()return {faction="Horde",level=60,classToken="WARLOCK",raceID=2,mapID=1412}end
+    N.Character.Quest=function()return {active=false,completed=false,disabled=false}end
+    N.Character.Proof=function()return nil end
+    N.Chains=nil
+    local source=N.Providers.Source(96294)
+    assert(#source.locations==1 and source.locations[1].itemID==273658)
+    assert(source.relatedLocations[1].npcID==259118 and source.relatedLocations[1].role=="finisher")
+    for _,row in ipairs(N.Providers.ForNPC(259118))do assert(row.id~=96294)end
+    local supplied=N.Providers.Source(5252)
+    for _,location in ipairs(supplied.locations or {})do assert(location.itemID~=13347)end
+    assert(N.Providers.Source(93521).locations[1].itemID==270301)
+    local corrected=N.Providers.Source(65593)
+    assert(#corrected.locations==1 and corrected.locations[1].npcID==5693)
+    local found=false
+    for _,row in ipairs(N.Providers.ForNPC(5693))do if row.id==65593 then found=true;assert(row.availability.state=="unknown")end end
+    assert(found)
+end)
+
 test("historical unconfirmed and hidden NPC records require current native proof",function()
     local N=setup(); W.rewardReady=true
     local rows=N.Providers.ForNPC(54001)

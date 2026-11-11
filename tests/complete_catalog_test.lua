@@ -91,13 +91,18 @@ test("cached-only identity and metadata require native proof without inventing r
     C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end
     N.Character:PrimeQuests({}, {},true)
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
-    for _,id in ipairs({7741,8152,95951}) do
+    for _,id in ipairs({8152,95951}) do
         local source=N.Providers.Source(id)
         assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
         assert(N.Providers.RequiresNativeProof(source) and N.Model.Status(id)==nil)
         local rewards=N.Rewards.Read(id);assert(not rewards.recordedGroups and rewards.items.state=="unavailable")
         assert(not N.SearchModel:Eligibility({id=id,source=source},N.Character:Get()))
     end
+    local observed=N.Providers.Source(7741)
+    assert(observed.confirmation=="unconfirmed" and N.Providers.RequiresNativeProof(observed) and N.Model.Status(7741)==nil)
+    local known=N.Rewards.Read(7741)
+    assert(known.recordedGroups and #known.items.items==1 and known.items.items[1].itemID==19065 and known.choices.state=="pending")
+    assert(not N.SearchModel:Eligibility({id=7741,source=observed},N.Character:Get()))
     local cached=N.Providers.Source(95951);assert(cached.title=="Fetch 'n' Fletch" and cached.level==38 and cached.minimum==36)
     local reused=N.Providers.Source(7790);assert(reused.title=="River Ends" and reused.confirmation=="published" and reused.itemState=="published-empty")
     local a,b=N.Rewards.Read(7201),N.Rewards.Read(3911)

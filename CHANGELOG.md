@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.21
+
+- Correct quest starter attribution: distinguish supplied items and turn-in NPCs from verified quest starters, preserving the original source evidence.
+- Reconcile supported reward items, quantities and guaranteed/choice groups with exact native-client observations published by the Quests site.
+- Keep unobserved reward groups and current availability uncertain; preserve independently recorded rewards that may come from scripts.
+- Label published base money, XP and reputation consistently in the finder, while retaining current native reward values when available.
+
 ## 0.1.20
 
 - Record the verified link from Ve'han's Research Notes to quest 93521.

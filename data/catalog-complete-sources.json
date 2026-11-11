@@ -44,7 +44,11 @@
     },
     "reviewed": {
       "path": "data/catalog-reviewed-updates.json",
-      "sha256": "4e0f82b6cd9314a47aed4018ee4172c296cd1f8b111e2a2cb384fc5a0d951d73"
+      "sha256": "33f9b3a578bc9b4d74a2534e7ff861b97b65b386cf45a7a53e07230459f889c5"
+    },
+    "starterRoles": {
+      "path": "data/catalog-starter-roles.json",
+      "sha256": "e003348ee5bad8559648f0c3bea30164ae56f7553d0318e594ba4f4c10916605"
     }
   },
   "classificationAuthority": "data/primary-statuses.json",

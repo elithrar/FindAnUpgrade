@@ -570,7 +570,7 @@ class CoordinateBindingTests(unittest.TestCase):
         anchors = 'q(1,{coords=LEFT,groups={objective(1,{provider={"n",22}})}});q(2,{qg=11,coords=RIGHT});'
         self.assertEqual(self.recover(self.prefix + anchors + self.target), {})
 
-    def test_frozen_106_audit_and_two_quest_recovery_preserve_all_starter_identities(
+    def test_frozen_106_audit_and_two_quest_recovery_preserve_all_provider_identities(
         self,
     ):
         metadata = json.loads(
@@ -594,7 +594,10 @@ class CoordinateBindingTests(unittest.TestCase):
             }
             actual = {
                 (key, point[key])
-                for point in output[quest["id"]].get("locations", [])
+                for point in (
+                    output[quest["id"]].get("locations", [])
+                    + output[quest["id"]].get("relatedLocations", [])
+                )
                 for key in ("npcID", "objectID", "itemID")
                 if key in point
             }

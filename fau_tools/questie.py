@@ -35,9 +35,12 @@ SOURCE_BLOBS = {
     GENERATED + "Item.lua": "94dd13ba5852d8092c8b000befd805deee1f28e9",
     "docs/forever-delta-base.md": "2d6742bad244436495d74d5e45447b36020c1cb3",
 }
+STARTER_ROLE_BASELINE_SHA256 = (
+    "ef39f603d7ae75a4e7b52fe4a3ff0a927335c63e34b349d5ce9551bd2a054fb1"
+)
 ENTITY_KEYS = {"Npc": "npcID", "Object": "objectID", "Item": "itemID"}
 TABLE_FIELDS = {
-    "Quest": {2, 12, 13, 14, 15, 16, 26, 28},
+    "Quest": {2, 3, 12, 13, 14, 15, 16, 26, 28},
     "Npc": {7, 8, 10},
     "Object": {2, 4, 7},
     "Item": set(),
@@ -1073,6 +1076,217 @@ def import_metadata(root, quests, primary_cache=None, primary=None):
             "Existing starters, faction scopes and coordinates are preserved; conflicts are diagnostic",
             "No classification, XP, money, item rewards or reputation are inferred",
         ],
+    }
+
+
+def role_groups(value):
+    """Keep typed group positions, including nil holes, through JSON encoding."""
+    if value is None:
+        return None
+    if grouped_starters(value) is None:
+        raise ValueError("Unsupported recorded starter/finisher group")
+    result = (
+        [value.get(index) for index in (1, 2, 3)]
+        if isinstance(value, dict)
+        else copy.deepcopy(value)
+    )
+    while result and result[-1] is None:
+        result.pop()
+    return result
+
+
+def starter_role_records(quests, baked, website_starters, enums=None):
+    """Separate recorded roles without inventing starters, positions or availability.
+
+    A generic associated item needs positive reciprocal starter proof. Absent
+    proof withholds the claim, rather than asserting the association is false.
+    Existing explicit website item-start receipts have their own authority.
+    Only a positively recorded finisher absent from an explicit starter list
+    changes an NPC role; missing source rows never remove an NPC by inference.
+    """
+    records, verified = [], []
+    for row in sorted(quests, key=lambda quest: quest["id"]):
+        identity = row["id"]
+        started = role_groups(baked.field("Quest", identity, 2))
+        finished = role_groups(baked.field("Quest", identity, 3))
+        starters = grouped_starters(started)
+        finishers = grouped_starters(finished) or []
+        supplied = baked.field("Quest", identity, 11)
+        old = copy.deepcopy(row.get("locations", []))
+        kept, related, item_starts = [], [], {}
+        for location in old:
+            item = location.get("itemID")
+            role = None
+            if item:
+                reverse = baked.field("Item", item, 5)
+                item_starts[item] = reverse
+                if starters and ("Item", item) in starters and reverse == identity:
+                    verified.append(
+                        {
+                            "id": identity,
+                            "itemID": item,
+                            "evidence": ["questieToc"],
+                            "basis": "questie-reciprocal",
+                            "proof": {
+                                "startedBy": started,
+                                "reverseStartQuest": reverse,
+                            },
+                        }
+                    )
+                elif (identity, item) not in website_starters:
+                    role = "provided" if supplied == item else "unknown"
+            elif location.get("npcID"):
+                npc = ("Npc", location["npcID"])
+                if starters is not None and npc not in starters and npc in finishers:
+                    role = "finisher"
+            if role:
+                related.append(dict(location, role=role))
+            else:
+                kept.append(location)
+        starter_proofs = []
+        if (
+            not kept
+            and starters
+            and enums is not None
+            and any(location["role"] == "finisher" for location in related)
+        ):
+            constraints, constraint_evidence = restrictions(baked, identity, enums)
+            compatible = constraints is not None and not row.get("eligibilityConflict")
+            for key, values in (constraints or {}).items():
+                if key in row and not set(row[key]) & set(values):
+                    compatible = False
+            if compatible:
+                for entity, giver in starters:
+                    reverse = (
+                        baked.field("Item", giver, 5)
+                        if entity == "Item"
+                        else baked.field(entity, giver, 10 if entity == "Npc" else 2)
+                    )
+                    if not (
+                        reverse == identity
+                        if entity == "Item"
+                        else isinstance(reverse, list) and identity in reverse
+                    ):
+                        continue
+                    location = {ENTITY_KEYS[entity]: giver}
+                    name = baked.field(entity, giver, 1)
+                    if (
+                        isinstance(name, str)
+                        and 0 < len(name) <= 100
+                        and not any(ord(char) < 32 for char in name)
+                    ):
+                        location["name"] = name
+                    proof = {
+                        "startedBy": started,
+                        "name": location.get("name"),
+                        "restrictions": constraints,
+                        "restrictionEvidence": constraint_evidence,
+                        "retainedConstraints": {
+                            key: row[key]
+                            for key in ("classTokens", "races", "faction")
+                            if key in row
+                        },
+                    }
+                    proof[
+                        "reverseStartQuest" if entity == "Item" else "reverseStarts"
+                    ] = reverse
+                    starter_proofs.append(
+                        {
+                            "location": location,
+                            "evidence": ["questieToc"],
+                            "proof": proof,
+                        }
+                    )
+                    kept.append(location)
+                    if entity == "Item":
+                        verified.append(
+                            {
+                                "id": identity,
+                                "itemID": giver,
+                                "evidence": ["questieToc"],
+                                "basis": "questie-reciprocal",
+                                "proof": {
+                                    "startedBy": started,
+                                    "reverseStartQuest": reverse,
+                                },
+                            }
+                        )
+        if related:
+            records.append(
+                {
+                    "id": identity,
+                    "expectedLocations": old,
+                    "locations": kept,
+                    "relatedLocations": related,
+                    "evidence": ["questieToc", "priorCatalog"],
+                    "proof": {
+                        "startedBy": started,
+                        "finishedBy": finished,
+                        "sourceItemId": supplied,
+                        "itemStartQuest": [
+                            {"itemID": item, "questID": item_starts[item]}
+                            for item in sorted(item_starts)
+                        ],
+                    },
+                    "starterProofs": starter_proofs,
+                    "reason": "Retain the exact prior association and coordinates under its recorded role. A supplied item or finisher is not a starter; an unsupported generic item provider retains unknown role without claiming its absence from the current realm.",
+                }
+            )
+    # One identity can carry several fixed points for the same starter item.
+    unique = {(entry["id"], entry["itemID"]): entry for entry in verified}
+    return records, [unique[key] for key in sorted(unique)]
+
+
+def starter_role_ledger(cache, prior_raw, reviewed):
+    """Build a source-bound review input from a verified pinned cache and baseline.
+
+    This creates a candidate ledger only. It does not approve/apply data or
+    replace another source's receipts, and must be independently reviewed before
+    entering the catalog pipeline.
+    """
+    from fau_tools.catalog import reviewed_starter_additions
+
+    if sha(prior_raw) != STARTER_ROLE_BASELINE_SHA256:
+        raise ValueError("Unreviewed starter-role baseline; do not rewrite its receipt")
+    acquisition, files = owned_cache(cache)
+    prior = json.loads(prior_raw)
+    if prior.get("schemaVersion") != 2 or not isinstance(prior.get("quests"), list):
+        raise ValueError("Starter roles require an exact complete catalog baseline")
+    website = {
+        (identity, location["itemID"])
+        for identity, row in reviewed_starter_additions(reviewed).items()
+        for location in row["locations"]
+    }
+    enums = restriction_enums(files["src/corrections/enum/expansions.lua"])
+    records, verified = starter_role_records(
+        prior["quests"], Baked(files[TOC]), website, enums
+    )
+    toc = next(source for source in acquisition["files"] if source["path"] == TOC)
+    sources = {
+        "questieToc": {
+            "url": f"https://github.com/{REPOSITORY}/releases/download/{RELEASE}/{ARCHIVE}",
+            "sha256": toc["sha256"],
+            "bytes": toc["bytes"],
+            "member": "QuestieDB/" + TOC,
+            "repository": REPOSITORY,
+            "revision": REVISION,
+            "archiveSha256": ARCHIVE_SHA256,
+            "scope": "Exact typed startedBy/finishedBy/sourceItemId and reciprocal item startQuest facts. Recorded evidence only, not current availability or coordinate proof.",
+        },
+        "priorCatalog": {
+            "url": "https://github.com/elithrar/FindAnUpgrade/blob/v0.1.20/data/catalog-complete-source.json",
+            "sha256": sha(prior_raw),
+            "bytes": len(prior_raw),
+            "scope": "Exact previously shipped associations, labels, faction scopes and positions retained without loss; source facts are not reattributed to the newer role proof.",
+        },
+    }
+    return {
+        "schemaVersion": 1,
+        "revision": "starter-roles-2026-11-11",
+        "sources": sources,
+        "limitations": "Generic provider relationships do not establish starter role. Withheld item associations remain recorded with unknown role unless an explicit supplied-item field exists. Positive finisher proof separates turn-in locations from starters. Historical source rows and coordinates do not prove current realm availability; no replacement starter, NPC name, restriction or coordinate is inferred.",
+        "verifiedItemStarters": verified,
+        "records": records,
     }
 
 
