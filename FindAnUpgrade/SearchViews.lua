@@ -10,13 +10,9 @@ function S:CreateViews()
         U:SelectTab(tab,key==self.view);self.tabs[key]=tab
     end
 end
-function S:CloseChain()
-    if self.chainFrame then self.chainFrame:Hide() end
-    self.chainOwner=nil
-end
 function S:View(key)
     if not self.views or not self.views[key] or key==self.view then return end
-    self:CommitRange(true);self.search:ClearFocus();self:CancelRange();self:CloseMenu();self:CloseChain();self.inspector:ClearItem()
+    self:CommitRange(true);self.search:ClearFocus();self:CancelRange();self:CloseMenu();self.inspector:ClearItem()
     if N.Copy then N.Copy:Hide() end
     local previous=self.views[self.view];previous.query=self.search:GetText();previous.offset=self.offset
     self.view=key;local current=self.views[key];self.offset=current.offset;self.bottomTarget=nil
@@ -32,7 +28,7 @@ function S:Save(row)
         N.Core:Print(reason=="capacity" and "Shortlist is full (20 quests)." or "Shortlist is read-only.")
         return
     end
-    self:CloseChain();self.inspector:ClearItem();self:DataChanged()
+    self.inspector:ClearItem();self:DataChanged()
 end
 function S:Star(card)
     local star=CreateFrame("Button",nil,card);card.star=star;star:SetSize(24,24);star:SetPoint("TOPRIGHT",-4,-3)
@@ -48,7 +44,7 @@ function S:Star(card)
     star:SetScript("OnLeave",function()star.icon:SetVertexColor(1,1,1);self.footerTooltip:Hide()end)
     card.chain=CreateFrame("Button",nil,card);card.chain:SetHeight(16)
     card.chain.text=card.chain:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(card.chain.text,11);card.chain.text:SetAllPoints();card.chain.text:SetJustifyH("LEFT");card.chain.text:SetTextColor(.85,.75,.45);card.chain.text:SetText("Quest chain")
-    card.chain:SetScript("OnClick",function()if card.row and A.Over(self.scroll) then self:Chain(card.row.id,card.chain) end end)
+    card.chain:SetScript("OnClick",function()if card.row and A.Over(self.scroll) then self:Chain(card.row.id) end end)
 end
 function S:ShortlistQuery()
     local out={};local query=(self.search:GetText() or ""):lower();local model=N.SearchModel
@@ -75,51 +71,128 @@ function S:ShortlistQuery()
     end
     return out
 end
-function S:Chain(id,owner)
-    if self.chainOwner==owner and self.chainFrame and self.chainFrame:IsShown() then self:CloseChain();return end
-    self:CloseMenu();self.inspector:ClearItem();if N.Copy then N.Copy:Hide()end
-    local info=N.Chains and N.Chains:Describe(id);if not info or not info.hasDetails then return end
-    if not self.chainFrame then
-        local f=CreateFrame("Frame","FindAnUpgradeChain",self.frame,"BackdropTemplate");self.chainFrame=f;f:SetWidth(300);f:SetFrameStrata("FULLSCREEN_DIALOG");f:SetClampedToScreen(true);f:EnableMouse(true);U:Dialog(f)
-        local close=CreateFrame("Button",nil,f,"UIPanelCloseButton");close:SetSize(22,22);close:SetPoint("TOPRIGHT",-4,-4);close:SetScript("OnClick",function()self:CloseChain()end)
-        f.title=f:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(f.title,13);f.title:SetPoint("TOPLEFT",12,-12);f.title:SetTextColor(1,.82,.2);f.title:SetText("Quest chain")
-        f.scroll=CreateFrame("ScrollFrame",nil,f);f.scroll:SetPoint("TOPLEFT",12,-36);f.scroll:SetPoint("BOTTOMRIGHT",-18,12);f.scroll:EnableMouseWheel(true)
-        f.child=CreateFrame("Frame",nil,f.scroll);f.child:SetWidth(264);f.scroll:SetScrollChild(f.child)
-        f.text=f.child:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(f.text,11);f.text:SetPoint("TOPLEFT");f.text:SetWidth(264);f.text:SetJustifyH("LEFT");f.text:SetJustifyV("TOP");f.text:SetWordWrap(true)
-        f.scroll:SetScript("OnMouseWheel",function(_,delta)f.bar:SetValue(math.max(0,math.min(f.maximum or 0,(f.scroll:GetVerticalScroll() or 0)-delta*30)))end)
-        f.bar=U:VerticalBar(f);f.bar:SetPoint("TOPRIGHT",-3,-36);f.bar:SetPoint("BOTTOMRIGHT",-3,14);f.bar:SetValueStep(1)
-        f.bar:SetScript("OnValueChanged",function(_,value)f.scroll:SetVerticalScroll(value)end)
-        UISpecialFrames[#UISpecialFrames+1]="FindAnUpgradeChain"
+function S:Chain(id)
+    if not N.Chains or not N.Chains:HasDetails(id) then return end
+    self:CloseMenu();self.inspector:ClearItem();if N.Copy then N.Copy:Hide() end
+    self.chainExpanded=self.chainExpanded or {}
+    self.chainExpanded[id]=not self.chainExpanded[id]
+    self.bottomTarget=nil
+    self:Render()
+end
+function S:ChainQuestVisible(id)
+    for _,card in ipairs(self.cards) do
+        if card.row and card:IsShown() and card.chainQuestIDs and card.chainQuestIDs[id] then return true end
     end
-    local lines={};local labels={all="Complete all",any="Complete one",count="Complete required quests",breadcrumb="Optional",optionalPrerequisite="Optional",unlocks="Unlocks",exclusive="Alternative",supersededBy="Replaced by",requiresActive="Requires in log",untilCompleted="Before completion",startingWith="Starts with",disabledWhileActive="Unavailable while active",related="Related"}
-    local statuses={completed="Completed",active="In quest log",incomplete="Incomplete",unknown="",repeatable="Repeatable"}
-    local previousOwner,previousGroup
-    for _,entry in ipairs(info.entries or {}) do
-        local label=labels[entry.kind] or "Earlier quest";local suffix=statuses[entry.state] or ""
-        local group=entry.group and info.groups[entry.group]
-        local indent=string.rep("  ",math.min(8,entry.depth or 0))
-        if entry.ownerID~=previousOwner then
-            if entry.ownerID and entry.ownerID~=id then
-                local source=N.Providers.Source(entry.ownerID)
-                lines[#lines+1]=indent.."For "..(source and source.title or "Quest "..entry.ownerID).." (#"..entry.ownerID..")"
-            end
-            previousOwner,previousGroup=entry.ownerID,nil
+    return false
+end
+function S:ChainRecord(id)
+    local source=N.Providers.Source(id);local record=N.Catalog.records[id]
+    if not record and source then
+        record={id=id,title=source.title,level=source.level,items=source.items or {},source=source}
+        N.Catalog.records[id]=record;N.Catalog.order[#N.Catalog.order+1]=record
+    end
+    if record then N.Catalog:Metadata(record,N.Character:Get().level) end
+    local row={id=id,title=record and record.title or "Quest "..id,level=record and record.level,source=source,items={},missing=not source}
+    -- Read current reward membership before constructing the inspected row.
+    N.SearchModel:Reward(row)
+    for _,meta in ipairs(N.SearchModel.currentItems[id] or record and record.items or {}) do
+        local item=N.SearchModel:Item(meta);row.items[#row.items+1]=item
+        if item.state~="ready" then self:Enqueue("item",{item.itemID}) end
+    end
+    if record and not record.metadataReady then self:Enqueue("quest",{id}) end
+    row.location=N.Catalog:Location(id)
+    return row
+end
+function S:InspectChainQuest(ownerID,id)
+    self:CloseMenu();self.inspector:ClearItem()
+    self.chainInspect=self.chainInspect or {}
+    self.chainInspect[ownerID]=self.chainInspect[ownerID]~=id and id or nil
+    self.bottomTarget=nil;self:Render()
+end
+local chainLabels={breadcrumb="Optional lead-in",optionalPrerequisite="Optional prerequisite",unlocks="Unlocks",exclusive="Alternative quest",supersededBy="Replacement quest",requiresActive="Requires in log",untilCompleted="Before completion",startingWith="Starts with",disabledWhileActive="Unavailable while active",related="Related quest"}
+local chainStatuses={completed="Completed",active="In quest log",incomplete="Incomplete",unknown="Status unknown",repeatable="Repeatable"}
+function S:HideChainRows(card)
+    card.chainQuestIDs=nil
+    for _,row in ipairs(card.chainRows or {}) do row:Hide() end
+    if card.chainInspection then card.chainInspection.row=nil;card.chainInspection:Hide() end
+end
+function S:ChainRows(card,y,width)
+    local expanded=self.chainExpanded and self.chainExpanded[card.row.id]
+    card.chain.text:SetText(expanded and "▾ Quest chain" or "▸ Quest chain")
+    if not expanded then return y end
+    local info=N.Chains:Steps(card.row.id);local used=0;local inspectionShown=false;card.chainQuestIDs={}
+    local unique,total={},0
+    for _,entry in ipairs(info.rows) do
+        if not unique[entry.id] then unique[entry.id]=true;total=total+1 end
+        for _,related in ipairs(entry.related) do if not unique[related.id] then unique[related.id]=true;total=total+1 end end
+    end
+    card.chain.text:SetText("▾ Quest chain · "..total..(info.truncated and "+" or "")..(total==1 and " quest" or " quests"))
+    local function line(title,detail,depth,selected,questID)
+        used=used+1;card.chainRows=card.chainRows or {}
+        local row=card.chainRows[used]
+        if not row then
+            row=CreateFrame("Button",nil,card,"BackdropTemplate");card.chainRows[used]=row
+            row:RegisterForClicks("LeftButtonUp","RightButtonUp")
+            row:SetScript("OnClick",function(_,button)
+                if not row.questID or not card.row or not A.Over(self.scroll) then return end
+                if button=="RightButton" then self:ContextMenu(self:ChainRecord(row.questID),row)
+                else self:InspectChainQuest(card.row.id,row.questID) end
+            end)
+            row:SetScript("OnEnter",function()
+                if not row.questID or not A.Over(self.scroll) then return end
+                self.inspector:ClearItem();self.footerTooltip:SetOwner(row,"ANCHOR_LEFT");self.footerTooltip:SetText("Quest #"..row.questID.."\nClick to inspect rewards. Right-click for quest actions.");self.footerTooltip:Show()
+            end)
+            row:SetScript("OnLeave",function()self.footerTooltip:Hide()end)
+            row.connector=row:CreateTexture(nil,"ARTWORK");row.connector:SetTexture("Interface\\Buttons\\WHITE8X8");row.connector:SetVertexColor(.5,.45,.3);row.connector:SetSize(8,1);row.connector:SetPoint("TOPRIGHT",row,"TOPLEFT",0,-11)
+            row.save=CreateFrame("Button",nil,row);row.save:SetSize(24,24);row.save:SetPoint("TOPRIGHT",-2,-2)
+            row.save.icon=row.save:CreateTexture(nil,"ARTWORK");row.save.icon:SetSize(17,15.3);row.save.icon:SetPoint("CENTER")
+            row.save:SetScript("OnClick",function()if row.questID and A.Over(self.scroll) then self:Save({id=row.questID}) end end)
+            row.save:SetScript("OnEnter",function()
+                if not row.questID or not A.Over(self.scroll) then return end
+                self.inspector:ClearItem();self.footerTooltip:SetOwner(row.save,"ANCHOR_LEFT");self.footerTooltip:SetText(N.Shortlist:Contains(row.questID) and "Remove from shortlist" or "Save to shortlist");self.footerTooltip:Show()
+            end)
+            row.save:SetScript("OnLeave",function()self.footerTooltip:Hide()end)
+            row.title=row:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(row.title,11)
+            row.detail=row:CreateFontString(nil,"OVERLAY","GameTooltipText");U:Font(row.detail,10)
+            for _,label in ipairs({row.title,row.detail}) do label:SetJustifyH("LEFT");label:SetJustifyV("TOP");label:SetWordWrap(true) end
+            row.title:SetPoint("TOPLEFT",6,-5)
         end
-        if group then
-            if previousGroup~=entry.group then
-                local heading=group.kind=="any" and "Complete one of "..#group.ids or group.kind=="count" and "Complete "..group.count.." of "..#group.ids or "Complete all "..#group.ids
-                lines[#lines+1]=indent..heading..":";previousGroup=entry.group
-            end
-            label="-"
-        else previousGroup=nil end
-        lines[#lines+1]=indent..label..(group and " " or ": ")..(entry.title or "Quest "..entry.id).." (#"..entry.id..")"..(suffix~="" and " - "..suffix or "")
+        row.questID=questID;row.selected=selected;row.depth=depth
+        row.save:SetShown(questID~=nil);row.connector:SetShown((depth or 0)>0)
+        if questID then row.save.icon:SetAtlas(N.Shortlist:Contains(questID) and "auctionhouse-icon-favorite" or "auctionhouse-icon-favorite-off") end
+        if questID then card.chainQuestIDs[questID]=true end
+        local inset=14+math.min(6,depth or 0)*12;local rowWidth=math.max(40,width-inset-8)
+        row:ClearAllPoints();row:SetPoint("TOPLEFT",inset,-y);row:SetWidth(rowWidth)
+        U:Border(row,"tooltip");row:SetBackdropColor(selected and .13 or .055,selected and .11 or .055,.055,.95)
+        row:SetBackdropBorderColor(selected and .65 or .25,selected and .53 or .25,selected and .22 or .25,.8)
+        row.title:SetTextColor(selected and 1 or .9,selected and .82 or .9,selected and .2 or .9)
+        row.title:SetWidth(rowWidth-(questID and 36 or 12));row.title:SetText(title);row.title:SetHeight(0)
+        local titleHeight=math.max(12,A.Call(row.title.GetStringHeight,row.title) or 12);row.title:SetHeight(titleHeight)
+        row.detail:ClearAllPoints();row.detail:SetPoint("TOPLEFT",6,-(titleHeight+7));row.detail:SetWidth(rowWidth-12)
+        row.detail:SetTextColor(.7,.7,.72);row.detail:SetText(detail or "");row.detail:SetHeight(0)
+        local detailHeight=detail and math.max(12,A.Call(row.detail.GetStringHeight,row.detail) or 12) or 0
+        row.detail:SetHeight(detailHeight);row.detail:SetShown(detail~=nil)
+        local height=titleHeight+detailHeight+(detail and 12 or 10);row:SetHeight(height);row:Show();y=y+height+3
+        if questID and not inspectionShown and self.chainInspect and self.chainInspect[card.row.id]==questID then
+            inspectionShown=true
+            local detailCard=card.chainInspection
+            if not detailCard then detailCard=self:Card(nil,card);card.chainInspection=detailCard end
+            detailCard.detailWidth=width-22;detailCard:ClearAllPoints();detailCard:SetPoint("TOPLEFT",14,-y)
+            local detailHeight=self:Fill(detailCard,self:ChainRecord(questID));detailCard:Show();y=y+detailHeight+5
+        end
     end
-    if info.truncated then lines[#lines+1]="More quests in this chain." end
-    if info.uncertain then lines[#lines+1]="Some requirements unverified." end
-    local f=self.chainFrame;f.text:SetText(table.concat(lines,"\n"));f.text:SetHeight(0)
-    local height=math.max(16,A.Call(f.text.GetStringHeight,f.text) or 16);f.text:SetHeight(height);f.child:SetHeight(height)
-    f:SetHeight(math.min(320,height+48));f.maximum=math.max(0,height-(f:GetHeight()-48));f.scroll:SetVerticalScroll(0);f.bar:SetMinMaxValues(0,f.maximum);f.bar:SetValue(0);f.bar:SetShown(f.maximum>0)
-    U:Border(f,"dialog");f:ClearAllPoints();f:SetPoint("TOPRIGHT",self.frame,"TOPLEFT",-6,-42);f:Show();self.chainOwner=owner
+    for _,entry in ipairs(info.rows) do
+        local title=(entry.level and "["..entry.level.."] " or "")..entry.title
+        local detail=(entry.selected and "Selected · " or "")..(chainStatuses[entry.state] or "Status unknown")
+        for _,requirement in ipairs(entry.requirements) do detail=detail.." · "..requirement end
+        line(title,detail,entry.depth,entry.selected,entry.id)
+        for _,related in ipairs(entry.related) do
+            line((chainLabels[related.kind] or "Related quest")..": "..related.title,
+                (chainStatuses[related.state] or "Status unknown"),entry.depth+1,false,related.id)
+        end
+    end
+    if info.truncated then line("More quests in this chain are not shown.",nil,0,false) end
+    return y+3
 end
 function S:OpenSlot(value)
     local key=(value or ""):lower():gsub("[%s_-]","");local chosen,label

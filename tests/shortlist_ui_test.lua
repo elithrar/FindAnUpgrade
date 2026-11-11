@@ -98,16 +98,68 @@ test("slot command opens Quests without toggling closed or discarding scope quer
     N.Core:Slash("slot offhand");assert(S:Visible() and S.filter.slot=="OFFHAND")
     assert(not S:OpenSlot("inventedslot") and S.filter.slot=="OFFHAND")
 end)
-test("chain popup is bounded scrollable and closes on navigation and owner changes",function()
+test("quest chain expands inline and survives scrolling and view changes",function()
     local N,S,quests=setup({2});quests[2].chain={groups={{kind="all",ids={1},verified=false}},relations={}}
-    S:View("shortlist");tick(S);local card=S.cards[1];assert(card.chain:IsShown())
-    S:Chain(2,card.chain);assert(S.chainFrame:IsShown() and S.chainFrame:GetHeight()<=320)
-    assert(S.chainFrame.title:GetText()=="Quest chain" and not S.chainFrame.text:GetText():find("Recorded",1,true))
-    S:View("quests");assert(not S.chainFrame:IsShown())
-    S:Chain(2,card.chain);S:Scroll(0);assert(not S.chainFrame:IsShown())
+    N.Chains.data=nil;S:View("shortlist");tick(S);local card=S.cards[1];assert(card.chain:IsShown())
+    N.Adapter.Over=function()return true end
+    local collapsed=card:GetHeight();card.chain:Fire("OnClick")
+    assert(S.chainExpanded[2] and card:GetHeight()>collapsed and S.chainFrame==nil)
+    assert(card.chainRows[1].questID==1 and card.chainRows[2].questID==2 and card.chainRows[2].selected)
+    assert(card.chainRows[1].title:GetText()=="[20] Quest 1")
+    assert(card.chainRows[2].detail:GetText():find("Selected",1,true))
+    S:Scroll(0);assert(card.chainRows[1]:IsShown())
+    S:View("quests");tick(S);S:View("shortlist");tick(S);assert(card.chainRows[1]:IsShown())
+    card.chain:Fire("OnClick");assert(not S.chainExpanded[2] and card:GetHeight()==collapsed)
+    for _,row in ipairs(card.chainRows) do assert(not row:IsShown()) end
+end)
+test("inline chain rows wrap within the card and clear recycled and missing rows",function()
+    local N,S,quests=setup({2});quests[2].chain={groups={{kind="any",ids={1},verified=true}}}
+    quests[1].title=string.rep("Long prerequisite name ",12)
+    S:View("shortlist");tick(S);S:Chain(2)
+    local card=S.cards[1];local child=card.chainRows[1]
+    local box,nested=rect(card),rect(child)
+    assert(nested.x>box.x and nested.right<box.right and nested.y>box.y and nested.top<box.top)
+    assert(child.title:GetStringHeight()>22 and child:GetHeight()>child.title:GetStringHeight())
+    local frames=#W.frames
+    for i=1,10 do S:Chain(2);S:Chain(2) end
+    assert(#W.frames==frames)
+    S:Fill(card,{id=3,title="Other quest",items={}})
+    for _,row in ipairs(card.chainRows) do assert(not row:IsShown()) end
+    S:Fill(card,{id=999,title="Missing",items={},missing=true})
+    for _,row in ipairs(card.chainRows) do assert(not row:IsShown()) end
+end)
+test("nested rows clear reward icons and the footer at narrow and wide sizes",function()
+    local N,S,quests=setup({2});quests[2].chain={groups={{kind="all",ids={1},verified=true}}}
+    N.Chains.data=nil
+    N.SearchModel.Reward=function(_,row)
+        return {state="ready",items={items=row.items},choices={items={}},money={state="unavailable"},
+            xp={state="ready",value=875},currencies={items={}},reputation={items={{name="Darnassus",amount=75}}}},{},false
+    end
+    S:View("shortlist");tick(S)
+    for _,width in ipairs({420,680}) do
+        S.frame:SetSize(width,600);S:LayoutControls();S:Render();S:Chain(2)
+        local card=S.cards[1];local footer=rect(card.footer[1]);local child=rect(card.chainRows[1])
+        assert(child.top<footer.y and child.right<rect(card).right and card.footer[1].point[1]=="TOPLEFT")
+        for _,icon in ipairs(card.icons) do if icon:IsShown() then assert(separated(rect(icon),child)) end end
+        S:Chain(2)
+        assert(card.footer[1].point[1]=="TOPLEFT" and rect(card.footer[1]).y>rect(card.chain).top)
+    end
+end)
+test("expanded follow-ups refresh outside the selected quest filters",function()
+    local N,S,quests=setup({1})
+    quests[2].chain={groups={{kind="all",ids={1},verified=true}}}
+    quests[3].chain={groups={{kind="all",ids={2},verified=true}}};quests[3].level=80
+    N.Chains.data=nil;local done=false
+    N.Character.Quest=function(_,id)return {completed=id==3 and done or false,active=false,repeatable=false} end
+    S:View("shortlist");tick(S);S:Chain(1)
+    local card=S.cards[1];assert(card.chainRows[3].questID==3)
+    S.filter.minimum=10;S.filter.maximum=30;S.dirty=false;done=true
+    S:QuestChanged({ids={[3]=true}});assert(S.dirty);tick(S)
+    assert(card.chainRows[3].detail:GetText():find("Completed",1,true))
+    S:Chain(1);assert(card.chainQuestIDs==nil)
 end)
 test("new dependency changes invalidate saved rows outside level filters",function()
-    local N,S,quests=setup({2});quests[2].chain={groups={{kind="all",ids={1},verified=true}}};S:View("shortlist");tick(S)
+    local N,S,quests=setup({2});quests[2].chain={groups={{kind="all",ids={1},verified=true}}};N.Chains.data=nil;S:View("shortlist");tick(S)
     S.filter.minimum=70;S.filter.maximum=80;S.dirty=false;S:QuestChanged({ids={[1]=true}});assert(S.dirty)
 end)
 test("shortlist refreshes cached quest metadata when player level changes",function()
@@ -140,4 +192,26 @@ test("opening Options dismisses the old copy owner and native edit focus",functi
     local N,S=setup();S:Copy("123");assert(N.Copy.frame:IsShown() and S.copyEdit:HasFocus())
     S.options:Fire("OnClick");assert(N.Options.frame:IsShown() and not N.Copy.frame:IsShown() and not S.copyEdit:HasFocus())
     S:Copy("456");N.Core:Slash("opts");assert(not N.Copy.frame:IsShown() and not S.copyEdit:HasFocus())
+end)
+
+test("follow-up inspection ignores level and usability filters and owns its actions",function()
+    local N,S,quests=setup({1})
+    quests[2].chain={groups={{kind="all",ids={1},verified=true}}};quests[2].level=80
+    N.Chains.data=nil;N.Adapter.Over=function()return true end
+    S.filter.usable=true;S:View("shortlist");tick(S);S:Chain(1)
+    local card=S.cards[1];local child=card.chainRows[2]
+    assert(not child.detail:GetText():find("#",1,true))
+    child:Fire("OnEnter");assert(S.footerTooltip.text:find("#2",1,true));child:Fire("OnLeave")
+    child:Fire("OnClick","LeftButton")
+    local inspection=card.chainInspection
+    assert(inspection and inspection:IsShown() and inspection.row.id==2 and not inspection.chain:IsShown())
+    assert(not inspection.title:IsShown() and not inspection.star:IsShown(),"the mini row already owns the quest heading and save action")
+    assert(inspection.icons[1]:IsShown() and inspection.icons[1].row.itemID==1002)
+    assert(S.heights[2]==nil,"an inspection must not overwrite result height estimates")
+    assert(rect(inspection).right<=rect(card).right and rect(inspection).y>rect(card).y)
+    local clicked;S.ContextMenu=function(_,row)clicked=row.id end
+    child:Fire("OnClick","RightButton");assert(clicked==2)
+    child.save:Fire("OnClick");assert(N.Shortlist:Contains(2))
+    child:Fire("OnClick","LeftButton");assert(not inspection:IsShown() and inspection.row==nil)
+    S:Chain(1);assert(card.chainQuestIDs==nil and not child:IsShown())
 end)

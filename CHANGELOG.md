@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.22
+
+- Expand Quest chain into compact nested rows inside the finder, showing earlier quests, the selected quest and follow-ups with levels and completion status.
+- Find follow-ups from recorded prerequisites, preserve branching paths and shared requirements, and distinguish replacement and alternative quests from progression steps.
+- Inspect chain rewards and save individual steps without changing search filters; keep the disclosure next to its rows and quest IDs in hover/context actions.
+
 ## 0.1.21
 
 - Correct quest starter attribution: distinguish supplied items and turn-in NPCs from verified quest starters, preserving the original source evidence.

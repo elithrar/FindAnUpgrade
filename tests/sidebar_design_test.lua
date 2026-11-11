@@ -123,8 +123,14 @@ end)
 local function footerLayout(S,card)
     local box,footer=rect(card),rect(card.footer[1]);local inset=S.geometry.cardInset
     assert(math.abs(footer.x-box.x-inset)<.01,"reward text must share the row's left inset")
-    assert(math.abs(footer.y-box.y-inset)<.01,"reward text must stay at the row's bottom inset")
-    assert(card.footer[1].point[1]=="BOTTOMLEFT" and card.footer[1]:GetNumPoints()==1)
+    if card.chain:IsShown() then
+        assert(footer.y>rect(card.chain).top,"reward text must precede the chain disclosure")
+        assert(card.footer[1].point[1]=="TOPLEFT")
+    else
+        assert(math.abs(footer.y-box.y-inset)<.01,"reward text must stay at the row's bottom inset")
+        assert(card.footer[1].point[1]=="BOTTOMLEFT")
+    end
+    assert(card.footer[1]:GetNumPoints()==1)
     assert(card.footer[1].justifyH=="LEFT" and card.footer[1].justifyV=="TOP")
     assert(footer.right<=box.right-inset+.01 and footer.top<=box.top-inset+.01)
     for _,label in ipairs({card.title,card.location,card.evidence,card.chain})do

@@ -113,3 +113,52 @@ test("reverse dependency index reaches transitive chains cycles and relation own
     N.CatalogData={quests={{id=9,chain={groups={{kind="any",ids={8}}},relations={}}}}}
     d=N.Chains:Dependants({[8]=true});assert(d[9] and not d[1] and reverse~=N.Chains.reverse)
 end)
+
+test("Ormer's Revenge shows all three stages from first middle and final quest",function()
+    local N=W.Init()
+    for _,id in ipairs({294,295,296}) do
+        local d=N.Chains:Steps(id);assert(#d.rows==3 and d.uncertain and not d.truncated)
+        for i,row in ipairs(d.rows) do
+            assert(row.id==293+i and row.selected==(row.id==id) and #row.related==0)
+            assert(row.level==({24,27,29})[i])
+        end
+    end
+end)
+test("reverse prerequisites reveal a chain on its first quest without outgoing relations",function()
+    local N=setup();group(N.CatalogData.quests[2],"all",{1});group(N.CatalogData.quests[3],"all",{2})
+    assert(N.Chains:HasDetails(1))
+    local d=N.Chains:Steps(1);assert(#d.rows==3 and d.rows[1].selected and d.rows[3].role=="Follow-up")
+    assert(N.Chains:Steps(3).rows[1].role=="Earlier quest")
+end)
+test("chain branches preserve group meaning and shared prerequisites appear once",function()
+    local N,row=setup();group(row,"any",{2,3});group(N.CatalogData.quests[2],"all",{4});group(N.CatalogData.quests[3],"all",{4})
+    W.done[4]=true;W.repeatable[4]=false;W.active[2]=true
+    local d=N.Chains:Steps(1);assert(#d.rows==4 and d.rows[1].id==4 and d.rows[1].state=="completed")
+    assert(d.rows[2].id==2 and d.rows[2].state=="active" and d.rows[2].depth==1 and d.rows[3].depth==1)
+    assert(d.rows[4].id==1 and d.rows[4].requirements[1]=="Complete one of 2: Quest 2, Quest 3" and d.rows[4].depth==0)
+end)
+test("replacement and exclusive relations alone never become progression steps",function()
+    local N,row=setup();relation(row,"supersededBy",2);relation(row,"exclusive",3)
+    local d=N.Chains:Steps(1);assert(#d.rows==1 and #d.rows[1].related==2)
+    assert(d.rows[1].related[1].kind=="supersededBy" and d.rows[1].related[2].kind=="exclusive")
+end)
+test("follow-ups retain additional prerequisites and cycles remain bounded",function()
+    local N=setup();group(N.CatalogData.quests[2],"all",{1,3});group(N.CatalogData.quests[3],"all",{4})
+    local d=N.Chains:Steps(1);assert(#d.rows==4 and d.rows[1].id==1 and d.rows[2].id==4 and d.rows[3].id==3 and d.rows[4].id==2)
+    group(N.CatalogData.quests[4],"all",{2})
+    d=N.Chains:Steps(1);assert(#d.rows==4 and d.uncertain)
+end)
+test("step traversal limits deep and wide chains with explicit truncation",function()
+    local N,row=setup();for id=1,49 do group(N.CatalogData.quests[id],"all",{id+1}) end
+    local d=N.Chains:Steps(1);assert(#d.rows==9 and d.truncated)
+    group(row,"all",{});for id=2,50 do group(N.CatalogData.quests[id],"all",{1}) end
+    N.Chains.data=nil;d=N.Chains:Steps(1);assert(#d.rows==32 and d.truncated)
+end)
+
+test("forked paths remain contiguous and retain parent child indentation",function()
+    local N=setup()
+    for _,edge in ipairs({{1,2},{1,3},{2,4},{3,5}}) do group(N.CatalogData.quests[edge[2]],"all",{edge[1]}) end
+    local rows=N.Chains:Steps(1).rows
+    local ids,depths={1,2,4,3,5},{0,1,2,1,2}
+    for i,row in ipairs(rows) do assert(row.id==ids[i] and row.depth==depths[i]) end
+end)
