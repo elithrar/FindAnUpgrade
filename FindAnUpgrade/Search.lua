@@ -60,7 +60,6 @@ function S:CloseMenu()
     for _,dropdown in ipairs({self.slot,self.scope,self.sort}) do if type(dropdown.CloseMenu)=="function" then dropdown:CloseMenu() end end
     if self.footerTooltip then self.footerTooltip:Hide() end
     self:CloseTextTip()
-    if self.CloseChain then self:CloseChain() end
 end
 function S:CloseTextTip()
     if self.textTooltip then self.textTooltip:Hide() end
@@ -117,6 +116,9 @@ function S:Indexes()
 end
 function S:QuestRelevant(ids)
     if not self.filter then return false end
+    for _,card in ipairs(self.cards) do if card.row and card:IsShown() then
+        for id in pairs(ids or {}) do if card.chainQuestIDs and card.chainQuestIDs[id] then return true end end
+    end end
     self:Indexes()
     local candidates=N.Chains and N.Chains:Dependants(ids) or ids
     for id in pairs(candidates) do
@@ -174,7 +176,7 @@ function S:QuestData(id)
     local _,metadataChanged=N.Catalog:Metadata(row,self.contextLevel,true)
     local after=self:QuestRelevant({[id]=true})
     if not before and not after then return end
-    local direct=not M.Number(row.level) or row.level>=self.filter.minimum and row.level<=self.filter.maximum
+    local direct=self:ChainQuestVisible(id) or not M.Number(row.level) or row.level>=self.filter.minimum and row.level<=self.filter.maximum
     if not direct then if metadataChanged then self:DataChanged() end;return end
     local reward=N.SearchModel:Reward(row)
     local stamp=rewardStamp(reward);self.rewardStamps=self.rewardStamps or {}
@@ -537,9 +539,9 @@ function S:LayoutResults()
     self.maximum=math.max(0,y-self:ViewportHeight()); self.refreshing=true; self.bar:SetMinMaxValues(0,self.maximum); self.bar:SetShown(self.maximum>0); self.refreshing=false
     if self.bottomTarget or self.offset>self.maximum then self.offset=self.maximum; self.scroll:SetVerticalScroll(self.offset); self.refreshing=true; self.bar:SetValue(self.offset); self.refreshing=false end
 end
-function S:Card(index)
-    if self.cards[index] then return self.cards[index] end
-    local c=CreateFrame("Frame",nil,self.child,"BackdropTemplate"); self.cards[index]=c; surface(c); c:EnableMouse(true)
+function S:Card(index,parent)
+    if not parent and self.cards[index] then return self.cards[index] end
+    local c=CreateFrame("Frame",nil,parent or self.child,"BackdropTemplate"); if not parent then self.cards[index]=c else c.chainDetail=true end; surface(c); c:EnableMouse(true)
     c.title,c.tag,c.location,c.evidence=text(c,13,{1,.82,.2}),text(c,10,{.82,.73,.53}),text(c,11,{.75,.75,.77}),text(c,11,{.75,.75,.77})
     c.title:SetPoint("TOPLEFT",G.cardInset,-7); c.tag:SetPoint("TOPRIGHT",-G.cardInset,-9); c.tag:SetJustifyH("RIGHT"); c.location:SetPoint("TOPLEFT",G.cardInset,-27); c.evidence:SetPoint("TOPLEFT",G.cardInset,-42)
     self:Star(c);c.tag:ClearAllPoints();c.tag:SetPoint("TOPRIGHT",-34,-9)
@@ -575,15 +577,18 @@ local function measured(label,width,value)
     return visible and math.max(12,A.Call(label.GetStringHeight,label) or 12) or 0
 end
 function S:Fill(card,row)
-    card.row=row; local width=self.child:GetWidth(); card:SetWidth(width); U:Border(card,"tooltip")
+    self:HideChainRows(card)
+    card.row=row; local width=card.detailWidth or self.child:GetWidth(); card:SetWidth(width); U:Border(card,"tooltip")
     local title=(row.level and "["..row.level.."] " or "")..(row.title or ("Quest "..row.id))
     local status=M.Status(row.id); local accent=N.Core.profile.accents and status
     local badge=accent=="verifiedNew" and "New in Forever" or accent=="verifiedUpdated" and "Modified" or ""
     card.tag:SetText(badge); card.tag:SetShown(badge~="")
     local badgeWidth=badge~="" and (A.Call(card.tag.GetStringWidth,card.tag) or 80)+10 or 0
     local titleWidth=width-42-badgeWidth
-    card.star.icon:SetAtlas(N.Shortlist:Contains(row.id) and "auctionhouse-icon-favorite" or "auctionhouse-icon-favorite-off");card.star:Show()
+    card.star.icon:SetAtlas(N.Shortlist:Contains(row.id) and "auctionhouse-icon-favorite" or "auctionhouse-icon-favorite-off");card.star:SetShown(not card.chainDetail)
     card.title:SetWordWrap(true); local titleHeight=measured(card.title,titleWidth,title)
+    if card.chainDetail then titleHeight=0;card.title:Hide();card.tag:Hide() end
+    card.titleHit:SetShown(not card.chainDetail)
     card.titleHit:SetWidth(titleWidth); card.titleHit:SetHeight(titleHeight)
     local r,g,b=M.AccentFill(N.Core.profile,accent,.06,.06,.07); card:SetBackdropColor(r,g,b,.97)
     if row.missing then
@@ -591,7 +596,7 @@ function S:Fill(card,row)
         card.evidence:Hide();card.chain:Hide();card.giver:Hide();card.more:Hide();card.locationHit:Hide()
         for _,icon in ipairs(card.icons) do icon.row=nil;icon:Hide();icon.name:Hide();icon.group:Hide() end
         for i,footer in ipairs(card.footer) do footer:SetText("");footer:Hide();card.footerHits[i]:Hide();card.footerHits[i].value=nil end
-        local height=titleHeight+32;card:SetHeight(height);self.heights=self.heights or {};local resized=self.heights[row.id]~=height;self.heights[row.id]=height;return height,resized
+        local height=titleHeight+32;card:SetHeight(height);if card.chainDetail then return height,false end;self.heights=self.heights or {};local resized=self.heights[row.id]~=height;self.heights[row.id]=height;return height,resized
     end
     local reward,catalog,usabilityChanged=N.SearchModel:Reward(row); local items={}; local matching={}
     self.rewardStamps=self.rewardStamps or {};self.rewardStamps[row.id]=rewardStamp(reward)
@@ -599,7 +604,7 @@ function S:Fill(card,row)
     if usabilityChanged then self:DataChanged() end
     for _,group in ipairs({{reward.items,"Guaranteed"},{reward.choices,"Choose one"}}) do
         for _,item in ipairs(group[1].items or {}) do
-            if matching[item.itemID] and (self.view=="shortlist" or not self.filter.usable or item.usable~=false) then items[#items+1]={item=item,meta=matching[item.itemID],label=group[2]} end
+            if matching[item.itemID] and (card.chainDetail or self.view=="shortlist" or not self.filter.usable or item.usable~=false) then items[#items+1]={item=item,meta=matching[item.itemID],label=group[2]} end
         end
     end
     for _,item in ipairs(catalog) do items[#items+1]={item=item,meta=item,label="Reward"} end
@@ -647,13 +652,13 @@ function S:Fill(card,row)
     card.evidence:SetWordWrap(true); card.evidence:ClearAllPoints(); card.evidence:SetPoint("TOPLEFT",G.cardInset,-y)
     local evidenceHeight=measured(card.evidence,bodyWidth,actionable and note or nil)
     y=y+evidenceHeight+(evidenceHeight>0 and 3 or 0); card.fullTitle=title
-    local chain=N.Chains and N.Chains:HasDetails(row.id)
+    local chain=not card.chainDetail and N.Chains and N.Chains:HasDetails(row.id)
+    card.chain.text:SetText(self.chainExpanded and self.chainExpanded[row.id] and "▾ Quest chain" or "▸ Quest chain")
     card.chain:SetShown(chain==true)
-    if chain then card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",G.cardInset,-y);card.chain:SetWidth(math.min(100,bodyWidth));y=y+19 end
     -- Reserve the whole star target, even for a one-line title, so moving
     -- from the star to an item cannot activate overlapping controls.
     local badgeBottom=badge~="" and 9+(A.Call(card.tag.GetStringHeight,card.tag) or 10) or 0
-    local rewardY=math.max(top+4,3+card.star:GetHeight()+G.rewardHeaderGap,badgeBottom+G.rewardHeaderGap)
+    local rewardY=card.chainDetail and top+4 or math.max(top+4,3+card.star:GetHeight()+G.rewardHeaderGap,badgeBottom+G.rewardHeaderGap)
     card.giver:SetShown(#locations>1); card.giver.text:SetText(#locations.." locations")
     local iconIndex,groupCursor,groupMaximum=0,0,0; local rewardTop=rewardY
     for _,group in ipairs(groups) do
@@ -712,8 +717,19 @@ function S:Fill(card,row)
     -- right-side rewards make the row taller. Wrapped text must still clear it.
     local height=math.max(y,rewardY)+5
     if footerHeight>0 then height=math.max(height,y+footerHeight+G.cardInset) end
+    if chain then
+        -- Rewards finish before the disclosure and its nested contents.
+        if footerHeight>0 then
+            card.footer[1]:ClearAllPoints();card.footer[1]:SetPoint("TOPLEFT",G.cardInset,-(height-G.cardInset-footerHeight))
+            card.footerHits[1]:ClearAllPoints();card.footerHits[1]:SetPoint("TOPLEFT",G.cardInset,-(height-G.cardInset-footerHeight))
+        end
+        card.chain:ClearAllPoints();card.chain:SetPoint("TOPLEFT",G.cardInset,-height);card.chain:SetWidth(width-2*G.cardInset)
+        height=height+20
+        if self.chainExpanded and self.chainExpanded[row.id] then height=self:ChainRows(card,height+3,width) end
+    end
     card:SetHeight(height); self.heights=self.heights or {}
-    local resized=self.heights[row.id]~=height; self.heights[row.id]=height
+    local resized=not card.chainDetail and self.heights[row.id]~=height
+    if not card.chainDetail then self.heights[row.id]=height end
     if reward.state=="pending" and (A.Call(GetTime) or 0)<self.dataDeadline then self.pending=true end
     self:Enqueue("reward",{row.id})
     return height,resized
