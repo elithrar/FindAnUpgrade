@@ -155,6 +155,57 @@ def overlay(expected, record, replacements):
     }
 
 
+def validate_native_record(update, sources, title=None):
+    """Bind an exact native row and its explicit row or snapshot observation time."""
+    observation = update.get("nativeObservation")
+    record = update.get("nativeRecord")
+    if (
+        not isinstance(observation, dict)
+        or set(observation) != {"source", "build", "observedAt", "payloadSha256"}
+        or not text(observation.get("source"))
+    ):
+        raise ValueError("Invalid native reward observation binding")
+    receipt = sources.get(observation["source"], {})
+    if (
+        observation["source"] not in update["evidence"]
+        or not isinstance(receipt, dict)
+        or receipt.get("url") != SOURCE_URL
+        or not sha(receipt.get("sha256"))
+        or not positive(receipt.get("bytes"))
+        or not timestamp(receipt.get("collectedAt"))
+        or not positive(observation["build"])
+        or not timestamp(observation["observedAt"])
+        or not sha(observation["payloadSha256"])
+        or not isinstance(record, dict)
+        or not positive(record.get("id"))
+        or record["id"] != update["id"]
+        or record.get("name") != (update["title"] if title is None else title)
+        or not positive(record.get("sourceBuild"))
+        or record["sourceBuild"] != observation["build"]
+        or record.get("payloadSha256") != observation["payloadSha256"]
+    ):
+        raise ValueError("Native reward correction does not match its receipt/record")
+    if "observedAt" in record:
+        if (
+            record["observedAt"] != observation["observedAt"]
+            or "nativeSnapshot" in update
+        ):
+            raise ValueError("Native row observation time changed")
+    else:
+        snapshot = update.get("nativeSnapshot")
+        if (
+            not isinstance(snapshot, dict)
+            or set(snapshot) != {"schemaVersion", "build", "observedAt", "rewardScope"}
+            or type(snapshot["schemaVersion"]) is not int
+            or snapshot["schemaVersion"] != 1
+            or not positive(snapshot["build"])
+            or snapshot["build"] < record["sourceBuild"]
+            or snapshot["observedAt"] != observation["observedAt"]
+            or snapshot["rewardScope"] != SOURCE_SCOPE
+        ):
+            raise ValueError("Native row requires an exact observed snapshot envelope")
+
+
 def reviewed_native_rewards(document, public):
     """Validate a separate narrow authority, leaving older receipts untouched."""
     if document is None:
@@ -177,7 +228,7 @@ def reviewed_native_rewards(document, public):
         }
         if (
             not isinstance(update, dict)
-            or set(update) != required
+            or set(update) - {"nativeSnapshot"} != required
             or not positive(update["id"])
             or update["id"] in result
             or not text(update["title"])
@@ -189,35 +240,8 @@ def reviewed_native_rewards(document, public):
             or set(update["evidence"]) - sources.keys()
         ):
             raise ValueError("Invalid native reward correction identity/evidence")
-        observation = update["nativeObservation"]
+        validate_native_record(update, sources)
         record = update["nativeRecord"]
-        if (
-            not isinstance(observation, dict)
-            or set(observation) != {"source", "build", "observedAt", "payloadSha256"}
-            or not text(observation.get("source"))
-        ):
-            raise ValueError("Invalid native reward observation binding")
-        receipt = sources.get(observation["source"], {})
-        if (
-            observation["source"] not in update["evidence"]
-            or not isinstance(receipt, dict)
-            or receipt.get("url") != SOURCE_URL
-            or not sha(receipt.get("sha256"))
-            or not positive(receipt.get("bytes"))
-            or not timestamp(receipt.get("collectedAt"))
-            or not positive(observation["build"])
-            or not timestamp(observation["observedAt"])
-            or not sha(observation["payloadSha256"])
-            or not isinstance(record, dict)
-            or record.get("id") != update["id"]
-            or record.get("name") != update["title"]
-            or record.get("sourceBuild") != observation["build"]
-            or record.get("observedAt") != observation["observedAt"]
-            or record.get("payloadSha256") != observation["payloadSha256"]
-        ):
-            raise ValueError(
-                "Native reward correction does not match its receipt/record"
-            )
         before, after = update["expected"], update["changes"]
         for fields in (before, after):
             if not isinstance(fields, dict) or set(fields) != FIELDS:
@@ -289,9 +313,23 @@ def verify_native_source(document, source_key, raw):
     records = {record["id"]: record for record in source["quests"]}
     if len(records) != len(source["quests"]):
         raise ValueError("Duplicate native quest identity")
-    for update in document.get("nativeRewardUpdates", []):
+    for update in document.get("nativeRewardUpdates", []) + [
+        row for row in document.get("records", []) if "nativeRecord" in row
+    ]:
         if (
             update["nativeObservation"]["source"] == source_key
             and records.get(update["id"]) != update["nativeRecord"]
         ):
             raise ValueError("Native reward record differs from original source bytes")
+        if (
+            update["nativeObservation"]["source"] == source_key
+            and "nativeSnapshot" in update
+            and update["nativeSnapshot"]
+            != {
+                key: source.get(key)
+                for key in ("schemaVersion", "build", "observedAt", "rewardScope")
+            }
+        ):
+            raise ValueError(
+                "Native snapshot envelope differs from original source bytes"
+            )

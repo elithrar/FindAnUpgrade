@@ -72,15 +72,19 @@ test("item-start identities do not borrow item names levels rewards or current a
     N.Character:PrimeQuests({}, {},true)
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
     N.Stack:Create();local card=N.Stack:Card(1)
+    local metadata={[93521]={"Challenger of the Gods",60,57},[99233]={"Brawl at the Maul",60,55}}
     for _,pair in ipairs({{93521,270301,"Ve'han's Research Notes"},{97270,277556,"Razza's Heart"},{99233,277557,"Skarr's Broken Gauntlet"},{99234,277558,"Mushgog's Crown of Thorns"}}) do
         local id,item,name=pair[1],pair[2],pair[3];local source=N.Providers.Source(id);local row=N.Catalog.records[id]
         assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
-        assert(not source.title and not source.level and not source.minimum and not source.faction and not source.rewardValues)
+        local observed=metadata[id]
+        if observed then assert(source.title==observed[1] and source.level==observed[2] and source.minimum==observed[3])
+        else assert(not source.title and not source.level and not source.minimum) end
+        assert(not source.faction and not source.rewardValues)
         assert(source.locations[1].itemID==item and source.locations[1].name==name and not source.locations[1].mapID)
         assert(N.Model.Status(id)==nil and N.Providers.RequiresNativeProof(source) and not N.Catalog:Category(id))
         assert(not N.SearchModel:Eligibility(row,N.Character:Get()))
         local rewards=N.Rewards.Read(id);assert(not rewards.recordedGroups and rewards.items.state=="unavailable" and #rewards.items.items==0)
-        N.Stack:Fill(card,row,N.Core.profile);assert(card.title.text=="Quest "..id)
+        N.Stack:Fill(card,row,N.Core.profile);assert(card.title.text==(observed and observed[1] or "Quest "..id))
         local offered={id=id,source=source,availabilityCheck=function()return "native-available" end}
         assert(N.Providers.Resolve(offered,{level=60}) and offered.availability.state=="available")
     end

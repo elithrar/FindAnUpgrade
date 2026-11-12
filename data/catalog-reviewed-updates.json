@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-11",
-  "reviewedAt": "2026-11-11T04:01:32.621422+00:00",
+  "revision": "quest-website-2026-11-12",
+  "reviewedAt": "2026-11-12T09:02:37.731961+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -232,6 +232,30 @@
       "sha256": "d4f53c7d0f570116e4642946b4e922ff0c77c4cac306d4960e6e57c7a1a0b171",
       "bytes": 1363864,
       "collectedAt": "2026-11-11T04:01:32.621422+00:00"
+    },
+    "questsNovember12": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-12T09:02:36.232621+00:00"
+    },
+    "rewardsNovember12": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-12T09:02:36.919185+00:00"
+    },
+    "changelogNovember12": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "304af7791e649bea8a36d9124b9d53a850ebc748a67c69e623d3e9cbeb6b3058",
+      "bytes": 46011,
+      "collectedAt": "2026-11-12T09:02:37.159231+00:00"
+    },
+    "nativeCatalogNovember12": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "96d09c94162d0ce8db72c44a449c5add45309ff80ad8117b5d567c4b48ba7215",
+      "bytes": 1443210,
+      "collectedAt": "2026-11-12T09:02:37.731961+00:00"
     }
   },
   "records": [
@@ -3719,6 +3743,385 @@
         "payloadSha256": "d2a4911df282a8b3600813f64375271cd68a92214f46200fc899b9ce40994ef4"
       },
       "reason": "Exact cached native metadata correction. Preserve existing confirmation, item-list state and unknown availability; do not promote cached-only or NYI reward slots to complete published rewards."
+    },
+    {
+      "id": 2058,
+      "title": "<UNUSED>",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<UNUSED>",
+        "level": 1,
+        "minimum": 1
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "a6bcc4d8f9f6107f67c1e5d2eca79e08d5294dabd45de5f2661ad3e4f7994a4a"
+      },
+      "nativeRecord": {
+        "id": 2058,
+        "name": "<UNUSED>",
+        "level": 1,
+        "requiredLevel": 1,
+        "categoryId": -162,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "a6bcc4d8f9f6107f67c1e5d2eca79e08d5294dabd45de5f2661ad3e4f7994a4a",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 5047,
+      "title": "Finkle Einhorn, At Your Service!",
+      "expected": {
+        "title": "Finkle Einhorn, At Your Service!"
+      },
+      "changes": {
+        "title": "Pip Quickwit, At Your Service!"
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "d34817f870aaf82a4a12d06424373acaf4e8ad6bf83eda7704bb91cf20d3877c"
+      },
+      "nativeRecord": {
+        "id": 5047,
+        "name": "Pip Quickwit, At Your Service!",
+        "level": 60,
+        "requiredLevel": 57,
+        "categoryId": 1583,
+        "categoryName": "Blackrock Spire",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "d34817f870aaf82a4a12d06424373acaf4e8ad6bf83eda7704bb91cf20d3877c",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 5383,
+      "title": "Krastinov's Bag of Horrors",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Krastinov's Bag of Horrors",
+        "level": 60,
+        "minimum": 55
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "90f0ed0a301f82dab0d66a6b95e270e5d8d1467e8bad080e5b6f43c4fc34b850"
+      },
+      "nativeRecord": {
+        "id": 5383,
+        "name": "Krastinov's Bag of Horrors",
+        "level": 60,
+        "requiredLevel": 55,
+        "categoryId": 2057,
+        "categoryName": "Scholomance",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "90f0ed0a301f82dab0d66a6b95e270e5d8d1467e8bad080e5b6f43c4fc34b850",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 5685,
+      "title": "<NYI> <TXT> The Light Protects You",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> <TXT> The Light Protects You",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "34fe0532d47ca1645811562d31aaea3ed71e0a5461ffcc313beb5cdc8dcc7ba7"
+      },
+      "nativeRecord": {
+        "id": 5685,
+        "name": "<NYI> <TXT> The Light Protects You",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "34fe0532d47ca1645811562d31aaea3ed71e0a5461ffcc313beb5cdc8dcc7ba7",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 5686,
+      "title": "<NYI> The Light Protects You",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> The Light Protects You",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "02afca062cf488cf5dc7b5d9b4ba38cfa06f12ebff6be80de28f28a968cf4c8a"
+      },
+      "nativeRecord": {
+        "id": 5686,
+        "name": "<NYI> The Light Protects You",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "02afca062cf488cf5dc7b5d9b4ba38cfa06f12ebff6be80de28f28a968cf4c8a",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 5687,
+      "title": "<NYI> The Light Protects You",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> The Light Protects You",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "091e46bc95c8d3f75b821a5fc435ee12d76de1ec370ab62945030445cc1e076d"
+      },
+      "nativeRecord": {
+        "id": 5687,
+        "name": "<NYI> The Light Protects You",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "091e46bc95c8d3f75b821a5fc435ee12d76de1ec370ab62945030445cc1e076d",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 7507,
+      "title": "Foror's Compendium",
+      "expected": {
+        "title": "Foror's Compendium"
+      },
+      "changes": {
+        "title": "Nostro's Compendium"
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "807b20192bf8b0d9e786a9884263038b845c4ac4ec35f4d7adc8efbe4caca692"
+      },
+      "nativeRecord": {
+        "id": 7507,
+        "name": "Nostro's Compendium",
+        "level": 60,
+        "requiredLevel": 60,
+        "categoryId": 2557,
+        "categoryName": "Dire Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "807b20192bf8b0d9e786a9884263038b845c4ac4ec35f4d7adc8efbe4caca692",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 93521,
+      "title": "Challenger of the Gods",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Challenger of the Gods",
+        "level": 60,
+        "minimum": 57
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "e035ade3f704c02fa67f83ebd00a5ef6c695787e80612677fba1b54351cdc06d"
+      },
+      "nativeRecord": {
+        "id": 93521,
+        "name": "Challenger of the Gods",
+        "level": 60,
+        "requiredLevel": 57,
+        "categoryId": 616,
+        "categoryName": "Mount Hyjal",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "e035ade3f704c02fa67f83ebd00a5ef6c695787e80612677fba1b54351cdc06d",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 99233,
+      "title": "Brawl at the Maul",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Brawl at the Maul",
+        "level": 60,
+        "minimum": 55
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "9526bae7d3b0bf7e46430fe8019b78ea6cc1ec0240415c6bb87112e9df253070"
+      },
+      "nativeRecord": {
+        "id": 99233,
+        "name": "Brawl at the Maul",
+        "level": 60,
+        "requiredLevel": 55,
+        "categoryId": 3217,
+        "categoryName": "The Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "9526bae7d3b0bf7e46430fe8019b78ea6cc1ec0240415c6bb87112e9df253070",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
     }
   ],
   "additions": [
@@ -7138,6 +7541,1254 @@
       "replacements": [],
       "priorSource": null,
       "reason": "Exact direct native item-slot observation for this quest ID. Positive observed IDs own their recorded groups and quantities; unobserved rewards are retained and empty native groups do not establish absence. Preserve quest confirmation, restrictions, costs and unknown current availability. Add guaranteed Elementalist's Guard while retaining the separately published Rune of the Storm; the direct-slot snapshot cannot exclude additional scripted rewards."
+    },
+    {
+      "id": 618,
+      "title": "Facing Negolash",
+      "expected": {
+        "items": [
+          {
+            "itemID": 4130,
+            "name": "Smotts' Compass",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4130,
+            "name": "Smotts' Compass",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270109,
+            "name": "Smotts' Pinky Ring",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270110,
+            "name": "First Mate's Armguards",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "87b8bc1f382a403a99672a1fc09b968f6a8e3581e3c575828c23bc1527456150"
+      },
+      "nativeRecord": {
+        "id": 618,
+        "name": "Facing Negolash",
+        "level": 50,
+        "requiredLevel": 35,
+        "categoryId": 33,
+        "categoryName": "Stranglethorn Vale",
+        "inChart": true,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 4130,
+            "name": "Smotts' Compass",
+            "quantity": 1
+          },
+          {
+            "id": 270109,
+            "name": "Smotts' Pinky Ring",
+            "quantity": 1
+          },
+          {
+            "id": 270110,
+            "name": "First Mate's Armguards",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "87b8bc1f382a403a99672a1fc09b968f6a8e3581e3c575828c23bc1527456150",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 4242,
+      "title": "Abandoned Hope",
+      "expected": {
+        "items": [
+          {
+            "itemID": 12018,
+            "name": "Conservator Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12021,
+            "name": "Shieldplate Sabatons",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 12041,
+            "name": "Windshear Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 12018,
+            "name": "Conservator Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 12021,
+            "name": "Shieldplate Sabatons",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 12041,
+            "name": "Windshear Leggings",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          },
+          {
+            "itemID": 270118,
+            "name": "Cindercloth Gown",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 4
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "493ef15b116168105d7ba90efaf6d92453d766d89c999bd10f76ecbeb2fab4d4"
+      },
+      "nativeRecord": {
+        "id": 4242,
+        "name": "Abandoned Hope",
+        "level": 54,
+        "requiredLevel": 48,
+        "categoryId": 1584,
+        "categoryName": "Blackrock Depths",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 12018,
+            "name": "Conservator Helm",
+            "quantity": 1
+          },
+          {
+            "id": 12021,
+            "name": "Shieldplate Sabatons",
+            "quantity": 1
+          },
+          {
+            "id": 12041,
+            "name": "Windshear Leggings",
+            "quantity": 1
+          },
+          {
+            "id": 270118,
+            "name": "Cindercloth Gown",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "493ef15b116168105d7ba90efaf6d92453d766d89c999bd10f76ecbeb2fab4d4",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 6163,
+      "title": "Ramstein",
+      "expected": {
+        "items": [
+          {
+            "itemID": 18022,
+            "name": "Royal Seal of Alexis",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 17001,
+            "name": "Elemental Circle",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 18022,
+            "name": "Royal Seal of Alexis",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 17001,
+            "name": "Elemental Circle",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "cf0229a74e33964df94c28dbfcf8685c87a897efc16b001696a08ce5ce6ed60b"
+      },
+      "nativeRecord": {
+        "id": 6163,
+        "name": "Ramstein",
+        "level": 60,
+        "requiredLevel": 56,
+        "categoryId": 2017,
+        "categoryName": "Stratholme",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 18022,
+            "name": "Royal Seal of Alexis",
+            "quantity": 1
+          },
+          {
+            "id": 17001,
+            "name": "Elemental Circle",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "cf0229a74e33964df94c28dbfcf8685c87a897efc16b001696a08ce5ce6ed60b",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 7441,
+      "title": "Pusillin and the Elder Azj'Tordin",
+      "expected": {
+        "items": [
+          {
+            "itemID": 18411,
+            "name": "Spry Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 18410,
+            "name": "Sprinter's Sword",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 18411,
+            "name": "Spry Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 18410,
+            "name": "Sprinter's Sword",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270127,
+            "name": "Incanter's Pantaloons",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "69f7f9edeeba1770776d5a2cf3280b2c1b233138ef6dd0bec456c9e83c37dd78"
+      },
+      "nativeRecord": {
+        "id": 7441,
+        "name": "Pusillin and the Elder Azj'Tordin",
+        "level": 58,
+        "requiredLevel": 54,
+        "categoryId": 2557,
+        "categoryName": "Dire Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 18411,
+            "name": "Spry Boots",
+            "quantity": 1
+          },
+          {
+            "id": 18410,
+            "name": "Sprinter's Sword",
+            "quantity": 1
+          },
+          {
+            "id": 270127,
+            "name": "Incanter's Pantaloons",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "69f7f9edeeba1770776d5a2cf3280b2c1b233138ef6dd0bec456c9e83c37dd78",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 7488,
+      "title": "Lethtendris's Web",
+      "expected": {
+        "items": [
+          {
+            "itemID": 18491,
+            "name": "Lorespinner",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 18491,
+            "name": "Lorespinner",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270124,
+            "name": "Warpwood Bracers",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 270125,
+            "name": "Satyrhide Armbands",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "c0a931257a06ce58781aedaa4c3e7269b8e8f702f6e6c99fe7dcb1cd3a1f0422"
+      },
+      "nativeRecord": {
+        "id": 7488,
+        "name": "Lethtendris's Web",
+        "level": 57,
+        "requiredLevel": 54,
+        "categoryId": 2557,
+        "categoryName": "Dire Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 18491,
+            "name": "Lorespinner",
+            "quantity": 1
+          },
+          {
+            "id": 270124,
+            "name": "Warpwood Bracers",
+            "quantity": 1
+          },
+          {
+            "id": 270125,
+            "name": "Satyrhide Armbands",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "c0a931257a06ce58781aedaa4c3e7269b8e8f702f6e6c99fe7dcb1cd3a1f0422",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8232,
+      "title": "The Green Drake",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20083,
+            "name": "Hunting Spear",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 19991,
+            "name": "Devilsaur Eye",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 19992,
+            "name": "Devilsaur Tooth",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20083,
+            "name": "Hunting Spear",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 19991,
+            "name": "Devilsaur Eye",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 19992,
+            "name": "Devilsaur Tooth",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "c735c6f6249448775093794696e42062f7c39cfee0d98db5aaac9beb42ed2a14"
+      },
+      "nativeRecord": {
+        "id": 8232,
+        "name": "The Green Drake",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -261,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20083,
+            "name": "Hunting Spear",
+            "quantity": 1
+          },
+          {
+            "id": 19991,
+            "name": "Devilsaur Eye",
+            "quantity": 1
+          },
+          {
+            "id": 19992,
+            "name": "Devilsaur Tooth",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "c735c6f6249448775093794696e42062f7c39cfee0d98db5aaac9beb42ed2a14",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8236,
+      "title": "The Azure Key",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19984,
+            "name": "Ebon Mask",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20255,
+            "name": "Whisperwalk Boots",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 19982,
+            "name": "Duskbat Drape",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19984,
+            "name": "Ebon Mask",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20255,
+            "name": "Whisperwalk Boots",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 19982,
+            "name": "Duskbat Drape",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "2c04e90255e1b53ccdac36d49712311ce6b328e8e2fb4ff8ce1740c5b45e7124"
+      },
+      "nativeRecord": {
+        "id": 8236,
+        "name": "The Azure Key",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -162,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 19984,
+            "name": "Ebon Mask",
+            "quantity": 1
+          },
+          {
+            "id": 20255,
+            "name": "Whisperwalk Boots",
+            "quantity": 1
+          },
+          {
+            "id": 19982,
+            "name": "Duskbat Drape",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "2c04e90255e1b53ccdac36d49712311ce6b328e8e2fb4ff8ce1740c5b45e7124",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8253,
+      "title": "Destroy Morphaz",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20035,
+            "name": "Glacial Spike",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20037,
+            "name": "Arcane Crystal Pendant",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20036,
+            "name": "Fire Ruby",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20035,
+            "name": "Glacial Spike",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20037,
+            "name": "Arcane Crystal Pendant",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20036,
+            "name": "Fire Ruby",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "a6d72437b2b36212826a943a4250cb193b3553cc28566a0926e35c787c9f1b2e"
+      },
+      "nativeRecord": {
+        "id": 8253,
+        "name": "Destroy Morphaz",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -161,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20035,
+            "name": "Glacial Spike",
+            "quantity": 1
+          },
+          {
+            "id": 20037,
+            "name": "Arcane Crystal Pendant",
+            "quantity": 1
+          },
+          {
+            "id": 20036,
+            "name": "Fire Ruby",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "a6d72437b2b36212826a943a4250cb193b3553cc28566a0926e35c787c9f1b2e",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8257,
+      "title": "Blood of Morphaz",
+      "expected": {
+        "items": [
+          {
+            "itemID": 19990,
+            "name": "Blessed Prayer Beads",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20082,
+            "name": "Woestave",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20006,
+            "name": "Circle of Hope",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 19990,
+            "name": "Blessed Prayer Beads",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20082,
+            "name": "Woestave",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20006,
+            "name": "Circle of Hope",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "55d4a79dd48ff47369f9101d6b6c0d799bc34b787c124651133fe3ec48816c37"
+      },
+      "nativeRecord": {
+        "id": 8257,
+        "name": "Blood of Morphaz",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 19990,
+            "name": "Blessed Prayer Beads",
+            "quantity": 1
+          },
+          {
+            "id": 20082,
+            "name": "Woestave",
+            "quantity": 1
+          },
+          {
+            "id": 20006,
+            "name": "Circle of Hope",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "55d4a79dd48ff47369f9101d6b6c0d799bc34b787c124651133fe3ec48816c37",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8282,
+      "title": "Noggle's Lost Satchel",
+      "expected": {
+        "items": [
+          {
+            "itemID": 13452,
+            "name": "Elixir of the Mongoose",
+            "quantity": 2,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 13447,
+            "name": "Elixir of the Sages",
+            "quantity": 2,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 287076,
+            "name": "Noggle's Razorblade",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 13452,
+            "name": "Elixir of the Mongoose",
+            "quantity": 2,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 13447,
+            "name": "Elixir of the Sages",
+            "quantity": 2,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "1058a16b867cf5fdd7c5d4fe826af9dacf6cb4093344fee08f71ac696b028d4c"
+      },
+      "nativeRecord": {
+        "id": 8282,
+        "name": "Noggle's Lost Satchel",
+        "level": 58,
+        "requiredLevel": 54,
+        "categoryId": 1377,
+        "categoryName": "Silithus",
+        "inChart": true,
+        "guaranteed": [
+          {
+            "id": 287076,
+            "name": "Noggle's Razorblade",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 13452,
+            "name": "Elixir of the Mongoose",
+            "quantity": 2
+          },
+          {
+            "id": 13447,
+            "name": "Elixir of the Sages",
+            "quantity": 2
+          }
+        ],
+        "payloadSha256": "1058a16b867cf5fdd7c5d4fe826af9dacf6cb4093344fee08f71ac696b028d4c",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 8422,
+      "title": "Trolls of a Feather",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20536,
+            "name": "Soul Harvester",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20534,
+            "name": "Abyss Shard",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 20530,
+            "name": "Robes of Servitude",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20536,
+            "name": "Soul Harvester",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 20534,
+            "name": "Abyss Shard",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 20530,
+            "name": "Robes of Servitude",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "7b2318d618b8e2bae3af84064d27133bb170915a897893439f8dea2edfc2f96c"
+      },
+      "nativeRecord": {
+        "id": 8422,
+        "name": "Trolls of a Feather",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -61,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 20536,
+            "name": "Soul Harvester",
+            "quantity": 1
+          },
+          {
+            "id": 20534,
+            "name": "Abyss Shard",
+            "quantity": 1
+          },
+          {
+            "id": 20530,
+            "name": "Robes of Servitude",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "7b2318d618b8e2bae3af84064d27133bb170915a897893439f8dea2edfc2f96c",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 9053,
+      "title": "A Better Ingredient",
+      "expected": {
+        "items": [
+          {
+            "itemID": 22274,
+            "name": "Grizzled Pelt",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 22272,
+            "name": "Forest's Embrace",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 22458,
+            "name": "Moonshadow Stave",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 22274,
+            "name": "Grizzled Pelt",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 22272,
+            "name": "Forest's Embrace",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 2
+          },
+          {
+            "itemID": 22458,
+            "name": "Moonshadow Stave",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember12"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember12",
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "payloadSha256": "72e1871a661439cdd4c41147014a2b31f3c39841ec663d35df6d62511708ef4d"
+      },
+      "nativeRecord": {
+        "id": 9053,
+        "name": "A Better Ingredient",
+        "level": 52,
+        "requiredLevel": 50,
+        "categoryId": -263,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 22274,
+            "name": "Grizzled Pelt",
+            "quantity": 1
+          },
+          {
+            "id": 22272,
+            "name": "Forest's Embrace",
+            "quantity": 1
+          },
+          {
+            "id": 22458,
+            "name": "Moonshadow Stave",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "72e1871a661439cdd4c41147014a2b31f3c39841ec663d35df6d62511708ef4d",
+        "sourceBuild": 70888
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50.652920+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
     }
   ]
 }

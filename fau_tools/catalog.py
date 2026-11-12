@@ -9,7 +9,7 @@ from collections import Counter
 
 from fau_tools import starter_roles
 from fau_tools.context import ROOT
-from fau_tools.native_rewards import reviewed_native_rewards
+from fau_tools.native_rewards import reviewed_native_rewards, validate_native_record
 
 # Complete catalog.
 
@@ -91,6 +91,30 @@ def validate_native_observation(update, sources, required=False):
         raise ValueError("Invalid reviewed native observation")
 
 
+def validate_native_metadata(update, sources):
+    """Bind only named metadata fields to an entire receipted native record."""
+    if set(update) - {"nativeSnapshot"} != {
+        "id",
+        "title",
+        "expected",
+        "changes",
+        "evidence",
+        "reason",
+        "nativeObservation",
+        "nativeRecord",
+    } or set(update["changes"]) - {"title", "level", "minimum"}:
+        raise ValueError("Bound native metadata may change only title and levels")
+    validate_native_record(
+        update, sources, title=update["changes"].get("title", update["title"])
+    )
+    native = update["nativeRecord"]
+    fields = {"title": "name", "level": "level", "minimum": "requiredLevel"}
+    if any(
+        native.get(fields[key]) != value for key, value in update["changes"].items()
+    ):
+        raise ValueError("Native metadata change differs from the observed record")
+
+
 def reviewed_updates(document):
     """Validate narrowly scoped, receipted corrections without rewriting sources."""
     if document is None:
@@ -142,6 +166,8 @@ def reviewed_updates(document):
             raise ValueError("Invalid reviewed update identity, fields or evidence")
         observation = update.get("nativeObservation")
         validate_native_observation(update, sources)
+        if "nativeRecord" in update or "nativeSnapshot" in update:
+            validate_native_metadata(update, sources)
         group_correction = "itemGroupStates" in after
         for fields in (before, after):
             if (
@@ -374,17 +400,29 @@ def reviewed_named_additions(document):
 
 
 def reviewed_starter_additions(document):
-    """Retain exact item-start identities without inventing quest metadata."""
+    """Keep starter proofs while permitting separately bound missing metadata."""
     if document is None:
         return {}
+    updates = reviewed_updates(document)
+    metadata_only = {
+        quest
+        for quest, update in updates.items()
+        if "nativeRecord" in update
+        and set(update["expected"]) == {"title", "level", "minimum"}
+        and all(value is None for value in update["expected"].values())
+    }
     blocked = (
-        reviewed_updates(document).keys()
+        (updates.keys() - metadata_only)
         | reviewed_named_additions(document).keys()
         | reviewed_partial_rewards(document).keys()
     )
     for update in document.get("categoryUpdates", []):
         if not isinstance(update, dict) or type(update.get("id")) is not int:
             raise ValueError("Invalid reviewed category identity")
+        blocked.add(update["id"])
+    for update in document.get("nativeRewardUpdates", []):
+        if not isinstance(update, dict) or type(update.get("id")) is not int:
+            raise ValueError("Invalid reviewed native reward identity")
         blocked.add(update["id"])
     additions = {}
     for addition in document.get("starterAdditions", []):
