@@ -238,6 +238,25 @@ class CompleteCatalogTests(unittest.TestCase):
                 8418,
                 8425,
                 79442,
+                618,
+                2058,
+                4242,
+                5047,
+                5383,
+                5685,
+                5686,
+                5687,
+                6163,
+                7441,
+                7488,
+                7507,
+                8232,
+                8236,
+                8253,
+                8257,
+                8282,
+                8422,
+                9053,
             },
         )
         self.assertEqual(
@@ -969,6 +988,10 @@ class CompleteCatalogTests(unittest.TestCase):
         merge_reviewed_additions(public, additions)
         source, _ = build_complete(ROOT)
         rows = {r["id"]: r for r in source["quests"]}
+        observed_metadata = {
+            93521: {"title": "Challenger of the Gods", "level": 60, "minimum": 57},
+            99233: {"title": "Brawl at the Maul", "level": 60, "minimum": 55},
+        }
         for quest, (item, name) in expected.items():
             row = rows[quest]
             self.assertEqual(row["locations"], [{"itemID": item, "name": name}])
@@ -980,11 +1003,18 @@ class CompleteCatalogTests(unittest.TestCase):
             self.assertEqual(row["fieldStates"]["givers"], "recorded")
             self.assertTrue(
                 all(
-                    value == "unknown"
+                    value
+                    == (
+                        "recorded"
+                        if key in observed_metadata.get(quest, {})
+                        else "unknown"
+                    )
                     for key, value in row["fieldStates"].items()
                     if key != "givers"
                 )
             )
+            for field, value in observed_metadata.get(quest, {}).items():
+                self.assertEqual(row[field], value)
             for field in (
                 "title",
                 "level",
@@ -997,10 +1027,108 @@ class CompleteCatalogTests(unittest.TestCase):
                 "rewardValues",
                 "moneyCost",
             ):
-                self.assertNotIn(field, row)
+                if field not in observed_metadata.get(quest, {}):
+                    self.assertNotIn(field, row)
         public[97270]["locations"] = [{"itemID": 277558, "name": "Other item"}]
         with self.assertRaisesRegex(ValueError, "source conflict"):
             merge_reviewed_additions(public, additions)
+
+    def test_bound_native_metadata_refines_only_unknown_starter_identity_fields(self):
+        document = json.loads(
+            (ROOT / "data/catalog-reviewed-updates.json").read_bytes()
+        )
+        updates = reviewed_updates(document)
+        additions = reviewed_additions(document)
+        for quest, title, minimum in (
+            (93521, "Challenger of the Gods", 57),
+            (99233, "Brawl at the Maul", 55),
+        ):
+            row = copy.deepcopy(additions[quest])
+            starter = copy.deepcopy(row["locations"])
+            update = updates[quest]
+            self.assertEqual(
+                update["expected"], {"title": None, "level": None, "minimum": None}
+            )
+            self.assertNotIn("observedAt", update["nativeRecord"])
+            apply_reviewed_update(row, update)
+            apply_reviewed_update(row, update)
+            self.assertEqual(
+                (row["title"], row["level"], row["minimum"]), (title, 60, minimum)
+            )
+            self.assertEqual(row["locations"], starter)
+            self.assertEqual(
+                (row["confirmation"], row["itemState"], row["items"]),
+                ("unconfirmed", "unknown", []),
+            )
+            self.assertFalse(
+                {
+                    "faction",
+                    "classTokens",
+                    "recordedCategory",
+                    "moneyCost",
+                    "availability",
+                }
+                & row.keys()
+            )
+            drifted = copy.deepcopy(row)
+            drifted["minimum"] = minimum - 1
+            with self.assertRaises(ValueError):
+                apply_reviewed_update(drifted, update)
+
+    def test_starter_metadata_overlap_rejects_unbound_or_additional_authority(self):
+        original = json.loads(
+            (ROOT / "data/catalog-reviewed-updates.json").read_bytes()
+        )
+        mutations = (
+            "unbound",
+            "observation",
+            "record-name",
+            "record-payload",
+            "forged-time",
+            "reward",
+            "starter",
+            "confirmation",
+            "classification",
+            "extra",
+            "known-prior",
+            "native-reward-overlap",
+        )
+        for mutation in mutations:
+            changed = copy.deepcopy(original)
+            update = next(row for row in changed["records"] if row["id"] == 93521)
+            if mutation == "unbound":
+                update.pop("nativeRecord")
+                update.pop("nativeSnapshot")
+            elif mutation == "observation":
+                update.pop("nativeObservation")
+            elif mutation == "record-name":
+                update["nativeRecord"]["name"] = "Different quest"
+            elif mutation == "record-payload":
+                update["nativeRecord"]["payloadSha256"] = "a" * 64
+            elif mutation == "forged-time":
+                update["nativeSnapshot"]["observedAt"] = "2026-11-12T00:00:00+00:00"
+            elif mutation == "reward":
+                for fields in (update["expected"], update["changes"]):
+                    fields.update(items=[], itemState="published-empty")
+            elif mutation == "starter":
+                for fields in (update["expected"], update["changes"]):
+                    fields["locations"] = [{"itemID": 1, "name": "Other starter"}]
+            elif mutation == "confirmation":
+                update["expected"]["confirmation"] = "unconfirmed"
+                update["changes"]["confirmation"] = "published"
+            elif mutation == "classification":
+                update["expected"]["verifiedNew"] = None
+                update["changes"]["verifiedNew"] = True
+            elif mutation == "extra":
+                update["availability"] = "available"
+            elif mutation == "known-prior":
+                update["expected"]["title"] = update["title"] = "Previously known title"
+            else:
+                competing = copy.deepcopy(changed["nativeRewardUpdates"][0])
+                competing["id"] = 93521
+                changed["nativeRewardUpdates"].append(competing)
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                reviewed_additions(changed)
 
     def test_starter_only_additions_reject_competing_primary_and_typed_starter_facts(
         self,

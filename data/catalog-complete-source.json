@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-11",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-12",
   "quests": [
     {
       "id": 1,
@@ -37020,8 +37020,22 @@
           "itemID": 4130,
           "name": "Smotts' Compass",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270109,
+          "name": "Smotts' Pinky Ring",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270110,
+          "name": "First Mate's Armguards",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -37042,6 +37056,10 @@
             "amount": -1000
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "eligibilityUnknown": true,
       "fieldStates": {
@@ -95621,12 +95639,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<UNUSED>",
+      "level": 1,
+      "minimum": 1,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -130628,6 +130649,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 3
+        },
+        {
+          "itemID": 270118,
+          "name": "Cindercloth Gown",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 4
         }
       ],
       "itemState": "published",
@@ -130660,6 +130688,10 @@
             "amount": 100
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -143502,7 +143534,7 @@
       }
     },
     {
-      "title": "Finkle Einhorn, At Your Service!",
+      "title": "Pip Quickwit, At Your Service!",
       "minimum": 57,
       "eligibilityUnknown": true,
       "locations": [
@@ -152521,12 +152553,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Krastinov's Bag of Horrors",
+      "level": 60,
+      "minimum": 55,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -159904,12 +159939,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> <TXT> The Light Protects You",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -159923,12 +159961,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> The Light Protects You",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -159942,12 +159983,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> The Light Protects You",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -168955,14 +168999,14 @@
           "itemID": 18022,
           "name": "Royal Seal of Alexis",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 17001,
           "name": "Elemental Circle",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         }
       ],
@@ -168991,6 +169035,10 @@
             "amount": 100
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -182441,6 +182489,13 @@
           "quantity": 1,
           "group": "choice",
           "slot": 2
+        },
+        {
+          "itemID": 270127,
+          "name": "Incanter's Pantaloons",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -182455,6 +182510,10 @@
             "amount": 200
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "eligibilityUnknown": true,
       "fieldStates": {
@@ -182998,8 +183057,22 @@
           "itemID": 18491,
           "name": "Lorespinner",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270124,
+          "name": "Warpwood Bracers",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 270125,
+          "name": "Satyrhide Armbands",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
         }
       ],
       "itemState": "published",
@@ -183032,6 +183105,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -184111,7 +184188,7 @@
       }
     },
     {
-      "title": "Foror's Compendium",
+      "title": "Nostro's Compendium",
       "minimum": 60,
       "classTokens": [
         "PALADIN",
@@ -203512,21 +203589,21 @@
           "itemID": 20083,
           "name": "Hunting Spear",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 19991,
           "name": "Devilsaur Eye",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 19992,
           "name": "Devilsaur Tooth",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -203547,6 +203624,10 @@
       "level": 52,
       "rewardValues": {
         "xp": 6350
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -203795,21 +203876,21 @@
           "itemID": 19984,
           "name": "Ebon Mask",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 20255,
           "name": "Whisperwalk Boots",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 19982,
           "name": "Duskbat Drape",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -203837,6 +203918,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -204557,21 +204642,21 @@
           "itemID": 20035,
           "name": "Glacial Spike",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 20037,
           "name": "Arcane Crystal Pendant",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 20036,
           "name": "Fire Ruby",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -204593,6 +204678,10 @@
       "rewardValues": {
         "xp": 6350,
         "money": 15500
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -204802,21 +204891,21 @@
           "itemID": 19990,
           "name": "Blessed Prayer Beads",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 20082,
           "name": "Woestave",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 20006,
           "name": "Circle of Hope",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -204838,6 +204927,10 @@
       "rewardValues": {
         "xp": 6350,
         "money": 15500
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -206214,6 +206307,13 @@
       "id": 8282,
       "items": [
         {
+          "itemID": 287076,
+          "name": "Noggle's Razorblade",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        },
+        {
           "itemID": 13452,
           "name": "Elixir of the Mongoose",
           "quantity": 2,
@@ -206251,6 +206351,10 @@
             "amount": 100
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -214842,21 +214946,21 @@
           "itemID": 20536,
           "name": "Soul Harvester",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 20534,
           "name": "Abyss Shard",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 20530,
           "name": "Robes of Servitude",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -214878,6 +214982,10 @@
       "rewardValues": {
         "xp": 6350,
         "money": 15500
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -250685,21 +250793,21 @@
           "itemID": 22274,
           "name": "Grizzled Pelt",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 1
         },
         {
           "itemID": 22272,
           "name": "Forest's Embrace",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 2
         },
         {
           "itemID": 22458,
           "name": "Moonshadow Stave",
           "quantity": 1,
-          "group": "choice",
+          "group": "guaranteed",
           "slot": 3
         }
       ],
@@ -250720,6 +250828,10 @@
       "level": 52,
       "rewardValues": {
         "xp": 6350
+      },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
       },
       "fieldStates": {
         "items": "published",
@@ -281313,6 +281425,9 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Challenger of the Gods",
+      "level": 60,
+      "minimum": 57,
       "locations": [
         {
           "itemID": 270301,
@@ -281322,9 +281437,9 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -318081,6 +318196,9 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Brawl at the Maul",
+      "level": 60,
+      "minimum": 55,
       "locations": [
         {
           "itemID": 277557,
@@ -318090,9 +318208,9 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.24
+
+- Add Noggle's Razorblade as a guaranteed reward from Noggle's Lost Satchel, retaining the two elixir choices and their quantities.
+- Correct additional recorded guaranteed and choice groups from exact native quest observations, including Facing Negolash and Lethtendris's Web.
+- Record verified quest titles and levels, including Challenger of the Gods and Brawl at the Maul, while keeping unconfirmed quests and rewards dependent on native proof.
+- Preserve original source receipts, supplementary rewards, starter links, restrictions and recorded costs. Item stats and use details remain supplied by the native client.
+
 ## 0.1.23
 
 - Use Blizzard’s chain-link icon and native expand/collapse textures for Quest chain, replacing unsupported font glyphs.

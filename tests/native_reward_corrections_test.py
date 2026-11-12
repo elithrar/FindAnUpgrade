@@ -6,7 +6,7 @@ import json
 import unittest
 from pathlib import Path
 
-from fau_tools.catalog import apply_reviewed_update
+from fau_tools.catalog import apply_reviewed_update, reviewed_updates
 from fau_tools.native_rewards import (
     SOURCE_SCOPE,
     overlay,
@@ -95,7 +95,115 @@ def fixture():
     return document, public, raw
 
 
+def snapshot_fixture(metadata=False):
+    document, public, _ = fixture()
+    update = document["nativeRewardUpdates"][0]
+    record = update["nativeRecord"]
+    record.pop("observedAt")
+    snapshot = {
+        "schemaVersion": 1,
+        "build": 70888,
+        "observedAt": "2026-11-12T04:06:50+00:00",
+        "rewardScope": SOURCE_SCOPE,
+    }
+    update["nativeSnapshot"] = snapshot
+    update["nativeObservation"]["observedAt"] = snapshot["observedAt"]
+    if metadata:
+        record.update(level=60, requiredLevel=57)
+        update["expected"] = {"title": None, "level": None, "minimum": None}
+        update["changes"] = {"title": "Exact quest", "level": 60, "minimum": 57}
+        update.pop("replacements")
+        update.pop("priorSource")
+        document.update(
+            schemaVersion=1,
+            revision="quest-website-2026-11-12",
+            records=[update],
+            nativeRewardUpdates=[],
+        )
+    raw = json.dumps({**snapshot, "quests": [record]}).encode()
+    document["sources"]["native"].update(
+        sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw)
+    )
+    return document, public, raw, update
+
+
 class NativeRewardCorrectionsTests(unittest.TestCase):
+    def test_absent_row_time_uses_only_the_bound_source_snapshot(self):
+        document, public, raw, update = snapshot_fixture()
+        self.assertNotIn("observedAt", update["nativeRecord"])
+        self.assertIn(101, reviewed_native_rewards(document, public))
+        verify_native_source(document, "native", raw)
+        changed = copy.deepcopy(document)
+        changed["nativeRewardUpdates"][0].pop("nativeSnapshot")
+        with self.assertRaises(ValueError):
+            reviewed_native_rewards(changed, public)
+        for value in (None, "", "bad-time", "2026-11-08T00:00:00+00:00"):
+            changed = copy.deepcopy(document)
+            changed["nativeRewardUpdates"][0]["nativeRecord"]["observedAt"] = value
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                reviewed_native_rewards(changed, public)
+        existing, _, _ = fixture()
+        existing["nativeRewardUpdates"][0]["nativeSnapshot"] = copy.deepcopy(
+            update["nativeSnapshot"]
+        )
+        with self.assertRaises(ValueError):
+            reviewed_native_rewards(existing, public)
+
+    def test_snapshot_envelope_forgery_is_rejected_against_original_bytes(self):
+        document, public, raw, _ = snapshot_fixture()
+        for key, value in (
+            ("build", 70999),
+            ("observedAt", "2026-11-13T00:00:00+00:00"),
+            ("schemaVersion", 2),
+            ("rewardScope", "A different reward contract"),
+        ):
+            changed = copy.deepcopy(document)
+            update = changed["nativeRewardUpdates"][0]
+            update["nativeSnapshot"][key] = value
+            if key == "observedAt":
+                update["nativeObservation"]["observedAt"] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                verify_native_source(changed, "native", raw)
+        for key, value in (
+            ("build", 0),
+            ("schemaVersion", True),
+            ("rewardScope", "Different contract"),
+        ):
+            changed = copy.deepcopy(document)
+            changed["nativeRewardUpdates"][0]["nativeSnapshot"][key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                reviewed_native_rewards(changed, public)
+
+    def test_metadata_rows_share_full_record_and_snapshot_acquisition_binding(self):
+        document, _, raw, update = snapshot_fixture(metadata=True)
+        verify_native_source(document, "native", raw)
+        self.assertIn(101, reviewed_updates(document))
+        for mutation in ("name", "level", "requiredLevel", "unknownSourceField"):
+            changed = copy.deepcopy(document)
+            row = changed["records"][0]["nativeRecord"]
+            row[mutation] = (
+                {}
+                if mutation == "unknownSourceField"
+                else "Different"
+                if mutation == "name"
+                else 58
+            )
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                verify_native_source(changed, "native", raw)
+        changed = copy.deepcopy(document)
+        changed["records"][0]["nativeSnapshot"]["build"] += 1
+        with self.assertRaises(ValueError):
+            verify_native_source(changed, "native", raw)
+        changed = copy.deepcopy(document)
+        changed["records"][0]["changes"]["minimum"] = 58
+        with self.assertRaises(ValueError):
+            reviewed_updates(changed)
+        renamed = copy.deepcopy(document)
+        renamed["records"][0]["expected"] = {"title": "Old exact quest name"}
+        renamed["records"][0]["changes"] = {"title": "Exact quest"}
+        renamed["records"][0]["title"] = "Old exact quest name"
+        self.assertIn(101, reviewed_updates(renamed))
+
     def test_positive_groups_preserve_unknown_source_fields_and_other_facts(self):
         document, public, raw = fixture()
         verify_native_source(document, "native", raw)
