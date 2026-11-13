@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-12",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-13",
   "quests": [
     {
       "id": 1,
@@ -129091,8 +129091,15 @@
           "itemID": 12059,
           "name": "Conqueror's Medallion",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 270126,
+          "name": "Conqueror's Pendant",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -129119,6 +129126,10 @@
             "amount": 150
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -164760,12 +164771,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<nyi> <txt> Green With Envy",
+      "level": 39,
+      "minimum": 30,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -204971,8 +204985,15 @@
           "itemID": 20134,
           "name": "Skyfury Helm",
           "quantity": 1,
-          "group": "guaranteed",
+          "group": "choice",
           "slot": 1
+        },
+        {
+          "itemID": 20133,
+          "name": "Skyfury Gauntlets",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
         }
       ],
       "itemState": "published",
@@ -205004,6 +205025,10 @@
             "amount": 200
           }
         ]
+      },
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
       },
       "fieldStates": {
         "items": "published",
@@ -293497,6 +293522,10 @@
         "xp": 175
       },
       "clientIdentityRecorded": true,
+      "recordedCategory": {
+        "sourceZoneID": 10,
+        "name": "Duskwood"
+      },
       "fieldStates": {
         "items": "published",
         "title": "published",
@@ -302592,6 +302621,9 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Brawl at the Maul",
+      "level": 60,
+      "minimum": 55,
       "locations": [
         {
           "itemID": 277556,
@@ -302601,9 +302633,9 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -318224,6 +318256,9 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Brawl at the Maul",
+      "level": 60,
+      "minimum": 55,
       "locations": [
         {
           "itemID": 277558,
@@ -318233,9 +318268,9 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",

@@ -444,6 +444,27 @@ class NativeRewardCorrectionsTests(unittest.TestCase):
         )
         self.assertNotIn(78307, updates)
         self.assertNotIn(78699, updates)
+        for quest, expected in (
+            (
+                4132,
+                [
+                    item(12059, "Conqueror's Medallion", "choice"),
+                    item(270126, "Conqueror's Pendant", "choice", 2),
+                ],
+            ),
+            (
+                8258,
+                [
+                    item(20134, "Skyfury Helm", "choice"),
+                    item(20133, "Skyfury Gauntlets", "choice", 2),
+                ],
+            ),
+        ):
+            self.assertEqual(updates[quest]["changes"]["items"], expected)
+            self.assertEqual(
+                updates[quest]["changes"]["itemGroupStates"],
+                {"guaranteed": "unknown", "choice": "published"},
+            )
 
 
 if __name__ == "__main__":
