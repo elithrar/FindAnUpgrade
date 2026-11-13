@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.25
+
+- Correct Operation: Death to Angerforge to offer Conqueror's Medallion or Conqueror's Pendant, and The Darkreaver Menace to offer Skyfury Helm or Skyfury Gauntlets. Keep unobserved guaranteed rewards unknown.
+- Record cached titles and levels for the remaining two Brawl at the Maul item-started quests and Green With Envy, preserving unconfirmed availability and unknown rewards.
+- Record Remember That I Love You under Duskwood while preserving its original classification and starter coordinates.
+- Preserve original source receipts, reward quantities, restrictions and recorded costs. Item stats continue to come from the native client.
+
 ## 0.1.24
 
 - Add Noggle's Razorblade as a guaranteed reward from Noggle's Lost Satchel, retaining the two elixir choices and their quantities.

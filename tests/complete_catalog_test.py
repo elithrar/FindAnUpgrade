@@ -257,6 +257,10 @@ class CompleteCatalogTests(unittest.TestCase):
                 8282,
                 8422,
                 9053,
+                4132,
+                6003,
+                8258,
+                95161,
             },
         )
         self.assertEqual(
@@ -357,6 +361,10 @@ class CompleteCatalogTests(unittest.TestCase):
             records[93161]["recordedCategory"],
             {"sourceZoneID": 16593, "name": "Zephras Isle"},
         )
+        self.assertEqual(
+            records[95161]["recordedCategory"], {"sourceZoneID": 10, "name": "Duskwood"}
+        )
+        self.assertEqual(records[95161]["locations"][0]["mapID"], 1453)
         doc = copy.deepcopy(inputs["reviewed"])
         doc.pop("categoryUpdates")
         with mock.patch(
@@ -365,7 +373,7 @@ class CompleteCatalogTests(unittest.TestCase):
         ):
             baseline, _ = build_complete(ROOT)
         originals = {q["id"]: q for q in baseline["quests"]}
-        for qid in (414, 93161):
+        for qid in (414, 93161, 95161):
             observed = dict(records[qid])
             observed.pop("recordedCategory")
             self.assertEqual(observed, originals[qid])
@@ -374,6 +382,9 @@ class CompleteCatalogTests(unittest.TestCase):
             next(q for q in primary["quests"] if q["id"] == 414)["zoneId"], 1
         )
         self.assertNotIn(93161, {q["id"] for q in primary["quests"]})
+        self.assertEqual(
+            next(q for q in primary["quests"] if q["id"] == 95161)["zoneId"], 16591
+        )
 
     def test_recorded_categories_reject_conflicts_unmapped_areas_and_unbound_receipts(
         self,
@@ -835,6 +846,15 @@ class CompleteCatalogTests(unittest.TestCase):
             merge_reviewed_additions(public, additions)
         source, _ = build_complete(ROOT)
         rows = {r["id"]: r for r in source["quests"]}
+        self.assertEqual(
+            (rows[6003]["title"], rows[6003]["level"], rows[6003]["minimum"]),
+            ("<nyi> <txt> Green With Envy", 39, 30),
+        )
+        self.assertEqual(
+            (rows[6003]["confirmation"], rows[6003]["items"], rows[6003]["itemState"]),
+            ("unconfirmed", [], "unknown"),
+        )
+        self.assertTrue(rows[6003]["eligibilityUnknown"])
         row = rows[95951]
         self.assertEqual(
             (row["title"], row["level"], row["minimum"]), ("Fetch 'n' Fletch", 38, 36)
@@ -990,7 +1010,9 @@ class CompleteCatalogTests(unittest.TestCase):
         rows = {r["id"]: r for r in source["quests"]}
         observed_metadata = {
             93521: {"title": "Challenger of the Gods", "level": 60, "minimum": 57},
+            97270: {"title": "Brawl at the Maul", "level": 60, "minimum": 55},
             99233: {"title": "Brawl at the Maul", "level": 60, "minimum": 55},
+            99234: {"title": "Brawl at the Maul", "level": 60, "minimum": 55},
         }
         for quest, (item, name) in expected.items():
             row = rows[quest]
@@ -1041,7 +1063,9 @@ class CompleteCatalogTests(unittest.TestCase):
         additions = reviewed_additions(document)
         for quest, title, minimum in (
             (93521, "Challenger of the Gods", 57),
+            (97270, "Brawl at the Maul", 55),
             (99233, "Brawl at the Maul", 55),
+            (99234, "Brawl at the Maul", 55),
         ):
             row = copy.deepcopy(additions[quest])
             starter = copy.deepcopy(row["locations"])

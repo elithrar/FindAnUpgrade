@@ -72,7 +72,7 @@ test("item-start identities do not borrow item names levels rewards or current a
     N.Character:PrimeQuests({}, {},true)
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
     N.Stack:Create();local card=N.Stack:Card(1)
-    local metadata={[93521]={"Challenger of the Gods",60,57},[99233]={"Brawl at the Maul",60,55}}
+    local metadata={[93521]={"Challenger of the Gods",60,57},[97270]={"Brawl at the Maul",60,55},[99233]={"Brawl at the Maul",60,55},[99234]={"Brawl at the Maul",60,55}}
     for _,pair in ipairs({{93521,270301,"Ve'han's Research Notes"},{97270,277556,"Razza's Heart"},{99233,277557,"Skarr's Broken Gauntlet"},{99234,277558,"Mushgog's Crown of Thorns"}}) do
         local id,item,name=pair[1],pair[2],pair[3];local source=N.Providers.Source(id);local row=N.Catalog.records[id]
         assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
@@ -95,7 +95,7 @@ test("cached-only identity and metadata require native proof without inventing r
     C_QuestLog.IsOnQuest=function()return false end;C_QuestLog.IsQuestFlaggedCompleted=function()return false end
     N.Character:PrimeQuests({}, {},true)
     assert(N.Catalog:Begin());while N.Catalog:Step() do end
-    for _,id in ipairs({8152,95951}) do
+    for _,id in ipairs({6003,8152,95951}) do
         local source=N.Providers.Source(id)
         assert(source and source.confirmation=="unconfirmed" and source.itemState=="unknown" and #source.items==0)
         assert(N.Providers.RequiresNativeProof(source) and N.Model.Status(id)==nil)
@@ -108,12 +108,19 @@ test("cached-only identity and metadata require native proof without inventing r
     assert(known.recordedGroups and #known.items.items==1 and known.items.items[1].itemID==19065 and known.choices.state=="pending")
     assert(not N.SearchModel:Eligibility({id=7741,source=observed},N.Character:Get()))
     local cached=N.Providers.Source(95951);assert(cached.title=="Fetch 'n' Fletch" and cached.level==38 and cached.minimum==36)
+    local unused=N.Providers.Source(6003);assert(unused.title=="<nyi> <txt> Green With Envy" and unused.level==39 and unused.minimum==30)
     local reused=N.Providers.Source(7790);assert(reused.title=="River Ends" and reused.confirmation=="published" and reused.itemState=="published-empty")
     local a,b=N.Rewards.Read(7201),N.Rewards.Read(3911)
     assert(a.recordedGroups and a.items.state=="pending" and #a.choices.items==2 and a.choices.items[2].itemID==270119)
     assert(b.recordedGroups and #b.items.items==1 and b.items.items[1].itemID==12038 and #b.choices.items==0)
     local dark=N.Rewards.Read(7850);assert(dark.items.state=="pending" and #dark.choices.items==4)
+    for _,pair in ipairs({{4132,12059,270126},{8258,20134,20133}}) do
+        local rewards=N.Rewards.Read(pair[1]);assert(rewards.items.state=="pending" and #rewards.items.items==0 and #rewards.choices.items==2)
+        assert(rewards.choices.items[1].itemID==pair[2] and rewards.choices.items[2].itemID==pair[3])
+        assert(rewards.choices.items[1].quantity==1 and rewards.choices.items[2].quantity==1)
+    end
     assert(N.Catalog:Category(2039).sourceZoneID==38 and N.Providers.Source(2039).locations[1].mapID==1455)
+    assert(N.Catalog:Category(95161).sourceZoneID==10 and N.Providers.Source(95161).locations[1].mapID==1453)
     local arrows=N.Rewards.Read(7341);assert(arrows.items.items[1].quantity==200)
 end)
 

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-12",
-  "reviewedAt": "2026-11-12T09:02:37.731961+00:00",
+  "revision": "quest-website-2026-11-13",
+  "reviewedAt": "2026-11-13T18:57:59.567952+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -256,6 +256,30 @@
       "sha256": "96d09c94162d0ce8db72c44a449c5add45309ff80ad8117b5d567c4b48ba7215",
       "bytes": 1443210,
       "collectedAt": "2026-11-12T09:02:37.731961+00:00"
+    },
+    "questsNovember13": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-13T18:57:57.845520+00:00"
+    },
+    "rewardsNovember13": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-13T18:57:58.613529+00:00"
+    },
+    "changelogNovember13": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "577a029e55f7bd65430b696182bcdd12feb51dc4bf94b87f2f42c00cd837b1e1",
+      "bytes": 57572,
+      "collectedAt": "2026-11-13T18:57:59.355409+00:00"
+    },
+    "nativeCatalogNovember13": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "326ef66520f737742037150cfe95571e3189b03e03c3dfee8179a7913a29d641",
+      "bytes": 1539189,
+      "collectedAt": "2026-11-13T18:57:59.567952+00:00"
     }
   },
   "records": [
@@ -4122,6 +4146,135 @@
         "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
       },
       "reason": "Exact cached native quest metadata observation: retain the recorded title and positive quest levels only. Preserve quest confirmation, rewards and current availability as previously recorded or unknown; a cached row and empty direct groups do not establish playability or no rewards."
+    },
+    {
+      "id": 6003,
+      "title": "<nyi> <txt> Green With Envy",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<nyi> <txt> Green With Envy",
+        "level": 39,
+        "minimum": 30
+      },
+      "evidence": [
+        "nativeCatalogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "c242b4748783d098078a8554a9c4d1108f1a533986af0ca397447f7c98a28bb7"
+      },
+      "nativeRecord": {
+        "id": 6003,
+        "name": "<nyi> <txt> Green With Envy",
+        "level": 39,
+        "requiredLevel": 30,
+        "categoryId": 1497,
+        "categoryName": "Undercity",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "c242b4748783d098078a8554a9c4d1108f1a533986af0ca397447f7c98a28bb7",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest title and positive level observation only. Preserve original starter evidence where present, unconfirmed availability, unknown complete rewards, restrictions and costs. The literal NYI/TXT title, if present, is not proof of current playability."
+    },
+    {
+      "id": 97270,
+      "title": "Brawl at the Maul",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Brawl at the Maul",
+        "level": 60,
+        "minimum": 55
+      },
+      "evidence": [
+        "nativeCatalogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "46d5f2828c180bbdeff680e430579d1b337b0e665db702002aa8adfddf1ae644"
+      },
+      "nativeRecord": {
+        "id": 97270,
+        "name": "Brawl at the Maul",
+        "level": 60,
+        "requiredLevel": 55,
+        "categoryId": 3217,
+        "categoryName": "The Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "46d5f2828c180bbdeff680e430579d1b337b0e665db702002aa8adfddf1ae644",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest title and positive level observation only. Preserve original starter evidence where present, unconfirmed availability, unknown complete rewards, restrictions and costs. The literal NYI/TXT title, if present, is not proof of current playability."
+    },
+    {
+      "id": 99234,
+      "title": "Brawl at the Maul",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Brawl at the Maul",
+        "level": 60,
+        "minimum": 55
+      },
+      "evidence": [
+        "nativeCatalogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "32a737ff12e3b2ed3c13c91c88968d0f9c05c49a0aad0cb84a22ac367ca1a17e"
+      },
+      "nativeRecord": {
+        "id": 99234,
+        "name": "Brawl at the Maul",
+        "level": 60,
+        "requiredLevel": 55,
+        "categoryId": 3217,
+        "categoryName": "The Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "32a737ff12e3b2ed3c13c91c88968d0f9c05c49a0aad0cb84a22ac367ca1a17e",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact cached native quest title and positive level observation only. Preserve original starter evidence where present, unconfirmed availability, unknown complete rewards, restrictions and costs. The literal NYI/TXT title, if present, is not proof of current playability."
     }
   ],
   "additions": [
@@ -4350,6 +4503,29 @@
         "payloadSha256": "f3fa0eae5dc0c3dbd042ad019d2356f45749c510331e53cc6e2ff7ff665766f8"
       },
       "reason": "The canonical changelog and exact native row record Loch Modan Area38 instead of Ironforge Area1537. Preserve primary classification and the existing Ironforge giver coordinates; an AreaID is not a UiMapID."
+    },
+    {
+      "id": 95161,
+      "title": "Remember That I Love You",
+      "expected": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "changes": {
+        "sourceZoneID": 10,
+        "name": "Duskwood"
+      },
+      "evidence": [
+        "changelogNovember13",
+        "nativeCatalogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "98826cf0aca1c5b48767941d460d735884a920531c88ae093fbc97b3bbd57b15"
+      },
+      "reason": "The canonical changelog and exact native row correct the recorded catalog category from Riverglades Area16591 to Duskwood Area10. Preserve primary classification, restrictions and the existing Stormwind giver coordinates; an AreaID is not a UiMapID. The observation time is the explicit source snapshot time; no per-row time or current availability is inferred."
     }
   ],
   "partialRewardUpdates": [
@@ -8789,6 +8965,172 @@
       "replacements": [],
       "priorSource": null,
       "reason": "Exact positive direct native reward observations for this quest ID. Preserve literal guaranteed and choice groups, quantities and unobserved prior rewards; empty native groups do not establish absence. The native row has no individual observation timestamp, so its unchanged bytes are bound to the explicitly recorded snapshot time. Preserve quest confirmation, restrictions, exchange costs and unknown current availability."
+    },
+    {
+      "id": 4132,
+      "title": "Operation: Death to Angerforge",
+      "expected": {
+        "items": [
+          {
+            "itemID": 12059,
+            "name": "Conqueror's Medallion",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 12059,
+            "name": "Conqueror's Medallion",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 270126,
+            "name": "Conqueror's Pendant",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember13",
+        "changelogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "767f2472f1c4c0c6d2668597c3ced99a4e3525d6d23954b1d0de7c8c9e4a45ac"
+      },
+      "nativeRecord": {
+        "id": 4132,
+        "name": "Operation: Death to Angerforge",
+        "level": 58,
+        "requiredLevel": 52,
+        "categoryId": 1584,
+        "categoryName": "Blackrock Depths",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 12059,
+            "name": "Conqueror's Medallion",
+            "quantity": 1
+          },
+          {
+            "id": 270126,
+            "name": "Conqueror's Pendant",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "767f2472f1c4c0c6d2668597c3ced99a4e3525d6d23954b1d0de7c8c9e4a45ac",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact native direct choice-group correction, independently stated in the canonical changelog. Move the existing item from guaranteed to its explicitly observed choice group and retain both literal choice slots at quantity one. The empty guaranteed group does not establish absence. Preserve restrictions, costs, confirmation and unknown current availability."
+    },
+    {
+      "id": 8258,
+      "title": "The Darkreaver Menace",
+      "expected": {
+        "items": [
+          {
+            "itemID": 20134,
+            "name": "Skyfury Helm",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 20134,
+            "name": "Skyfury Helm",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 20133,
+            "name": "Skyfury Gauntlets",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember13",
+        "changelogNovember13"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember13",
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "payloadSha256": "065c43b95f5d5fcdf502c9682f6aac21d8925780e5536b01e6addd635c0335d0"
+      },
+      "nativeRecord": {
+        "id": 8258,
+        "name": "The Darkreaver Menace",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": -82,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 20134,
+            "name": "Skyfury Helm",
+            "quantity": 1
+          },
+          {
+            "id": 20133,
+            "name": "Skyfury Gauntlets",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "065c43b95f5d5fcdf502c9682f6aac21d8925780e5536b01e6addd635c0335d0",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-13T12:03:39.521641+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Exact native direct choice-group correction, independently stated in the canonical changelog. Move the existing item from guaranteed to its explicitly observed choice group and retain both literal choice slots at quantity one. The empty guaranteed group does not establish absence. Preserve restrictions, costs, confirmation and unknown current availability."
     }
   ]
 }
