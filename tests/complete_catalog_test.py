@@ -261,8 +261,14 @@ class CompleteCatalogTests(unittest.TestCase):
                 6003,
                 8258,
                 95161,
+                8121,
             },
         )
+        self.assertEqual(before[8121]["minimum"], 60)
+        self.assertEqual(after[8121]["minimum"], 50)
+        unchanged_metadata = copy.deepcopy(after[8121])
+        unchanged_metadata["minimum"] = before[8121]["minimum"]
+        self.assertEqual(unchanged_metadata, before[8121])
         self.assertEqual(
             after[93176]["items"],
             [

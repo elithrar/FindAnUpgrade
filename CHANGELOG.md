@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.26
+
+- Correct Take Four Bases (8121) to its recorded minimum level of 50; its quest level remains 60.
+
 ## 0.1.25
 
 - Correct Operation: Death to Angerforge to offer Conqueror's Medallion or Conqueror's Pendant, and The Darkreaver Menace to offer Skyfury Helm or Skyfury Gauntlets. Keep unobserved guaranteed rewards unknown.

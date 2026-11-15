@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-13",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-15",
   "quests": [
     {
       "id": 1,
@@ -200675,7 +200675,7 @@
     },
     {
       "title": "Take Four Bases",
-      "minimum": 60,
+      "minimum": 50,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "prerequisites": [
