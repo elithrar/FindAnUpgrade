@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-13",
-  "reviewedAt": "2026-11-13T18:57:59.567952+00:00",
+  "revision": "quest-website-2026-11-15",
+  "reviewedAt": "2026-11-15T08:56:41.242252+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -280,6 +280,30 @@
       "sha256": "326ef66520f737742037150cfe95571e3189b03e03c3dfee8179a7913a29d641",
       "bytes": 1539189,
       "collectedAt": "2026-11-13T18:57:59.567952+00:00"
+    },
+    "questsNovember15": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-15T08:56:40.541392+00:00"
+    },
+    "rewardsNovember15": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-15T08:56:41.016111+00:00"
+    },
+    "changelogNovember15": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "f563ee4dc227c027fb3b9f382f60f7cec10108043e3e24a2611e1a20b0bc2dac",
+      "bytes": 71079,
+      "collectedAt": "2026-11-15T08:56:41.129619+00:00"
+    },
+    "nativeCatalogNovember15": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "64afea3a793772522d29ff75a95394e4ae95fe386eab37f6ac63399a444b2a63",
+      "bytes": 1639098,
+      "collectedAt": "2026-11-15T08:56:41.242252+00:00"
     }
   },
   "records": [
@@ -4275,6 +4299,45 @@
         "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
       },
       "reason": "Exact cached native quest title and positive level observation only. Preserve original starter evidence where present, unconfirmed availability, unknown complete rewards, restrictions and costs. The literal NYI/TXT title, if present, is not proof of current playability."
+    },
+    {
+      "id": 8121,
+      "title": "Take Four Bases",
+      "expected": {
+        "minimum": 60
+      },
+      "changes": {
+        "minimum": 50
+      },
+      "evidence": [
+        "nativeCatalogNovember15"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember15",
+        "build": 70938,
+        "observedAt": "2026-11-15T03:56:37.706317+00:00",
+        "payloadSha256": "2cf7bb52770afd93da7a1ad4cff31c2fd4e084e22b84d2221ddddc145071e022"
+      },
+      "nativeRecord": {
+        "id": 8121,
+        "name": "Take Four Bases",
+        "level": 60,
+        "requiredLevel": 50,
+        "categoryId": 3358,
+        "categoryName": "Arathi Basin",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "2cf7bb52770afd93da7a1ad4cff31c2fd4e084e22b84d2221ddddc145071e022",
+        "sourceBuild": 70938
+      },
+      "nativeSnapshot": {
+        "schemaVersion": 1,
+        "build": 70938,
+        "observedAt": "2026-11-15T03:56:37.706317+00:00",
+        "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
+      },
+      "reason": "Exact native requiredLevel observation corrects only the recorded minimum level from 60 to 50. Preserve the quest title, level, all rewards and reward-state distinctions, faction, prerequisites, giver coordinates, costs, classification and unknown current availability. The unchanged native row omits an individual observedAt and binds separately to the explicit source snapshot time."
     }
   ],
   "additions": [

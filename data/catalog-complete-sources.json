@@ -44,7 +44,7 @@
     },
     "reviewed": {
       "path": "data/catalog-reviewed-updates.json",
-      "sha256": "84f58f9d4ca12c0a8f6a00c477a2c2ffab00bf78d99a988d1edd3a68b1d53f76"
+      "sha256": "616df25944ecd2f8d0686a1b0c04246ec2fd6f04f30629f16de0e799ead56b64"
     },
     "starterRoles": {
       "path": "data/catalog-starter-roles.json",
