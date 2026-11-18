@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.27
+
+- Bundle SomethingNeedDoing 0.5.3 with stricter native event registration checks and settings/layout lifecycle fixes.
+- Retain FindAnUpgrade's existing settings, gameplay data and UI owners; this dependency update does not migrate saved data or change quest facts.
+
 ## 0.1.26
 
 - Correct Take Four Bases (8121) to its recorded minimum level of 50; its quest level remains 60.
