@@ -107,9 +107,9 @@ def validate(root=ROOT):
     upstream = addon / "Libs/SomethingNeedDoing"
     pin = json.loads((upstream / "UPSTREAM.json").read_text())
     assert (
-        pin["tag"] == "v0.5.3"
-        and pin["version"] == "0.5.3"
-        and pin["commit"] == "fb39c7989397226e0a29c7e1fece8d6e982da909"
+        pin["tag"] == "v0.5.4"
+        and pin["version"] == "0.5.4"
+        and pin["commit"] == "c4510dedd22d0c68f090c525357d422b32dac815"
     )
     assert set(pin["sha256"]) == {
         "Core.lua",
