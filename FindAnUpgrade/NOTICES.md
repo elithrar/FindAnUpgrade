@@ -65,4 +65,4 @@ QuestieDB Forever artifact plus its matching Forever-authored corrections.
 stronger optional-link overrides and rejected self references. Inherited facts
 remain nonblocking; no Questie code, raw database or runtime requirement is added.
 
-SomethingNeedDoing 0.5.3 by Matt Silverlock is bundled under Apache-2.0. See `Libs/SomethingNeedDoing/LICENSE` for the full license and `Libs/SomethingNeedDoing/UPSTREAM.json` for source provenance.
+SomethingNeedDoing 0.5.4 by Matt Silverlock is bundled under Apache-2.0. See `Libs/SomethingNeedDoing/LICENSE` for the full license and `Libs/SomethingNeedDoing/UPSTREAM.json` for source provenance.

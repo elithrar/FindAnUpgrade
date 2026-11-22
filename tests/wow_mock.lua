@@ -16,7 +16,12 @@ function Methods:Fire(name, ...) if self.scripts[name] then self.scripts[name](s
 function Methods:Show() layout(self); if not self.shown then self.shown = true; self:Fire("OnShow") end end
 function Methods:Hide() layout(self); if self.shown then self.shown = false; self:Fire("OnHide") end end
 function Methods:SetShown(v) if v then self:Show() else self:Hide() end end
-function Methods:RegisterEvent(e) self.events[e] = true end
+function Methods:IsEventRegistered(e) return self.events[e] == true end
+function Methods:RegisterEvent(e)
+    if self:IsEventRegistered(e) then return false end
+    self.events[e] = true
+    return true
+end
 function Methods:UnregisterEvent(event) self.events[event]=nil end
 function Methods:UnregisterAllEvents() self.events={} end
 function Methods:SetPoint(...)

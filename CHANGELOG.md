@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.28
+
+- Fix addon initialization when the client declines duplicate registration of the addon-loaded event. Bundle SomethingNeedDoing 0.5.4.
+
 ## 0.1.27
 
 - Bundle SomethingNeedDoing 0.5.3 with stricter native event registration checks and settings/layout lifecycle fixes.
