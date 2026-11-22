@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-15",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-22",
   "quests": [
     {
       "id": 1,
@@ -303470,6 +303470,58 @@
         "minimum": "published",
         "xp": "published",
         "money": "published",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 97405,
+      "items": [
+        {
+          "itemID": 277979,
+          "name": "Mauler's Mutton",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 277980,
+          "name": "Ogre Bone",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        },
+        {
+          "itemID": 277981,
+          "name": "Souvenir Ogre Tooth",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 3
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Noise Complaints",
+      "level": 44,
+      "minimum": 38,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 33,
+        "name": "Stranglethorn Vale"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
         "reputation": "unknown",
         "currencies": "unknown",
         "givers": "unknown",
