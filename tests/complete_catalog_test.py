@@ -70,7 +70,7 @@ class CompleteCatalogTests(unittest.TestCase):
         after = {row["id"]: row for row in source["quests"]}
         self.assertEqual(
             after.keys() - before.keys(),
-            {93161, 89013, 91608, 93521, 95951, 97270, 99233, 99234},
+            {93161, 89013, 91608, 93521, 95951, 97270, 99233, 99234, 97405},
         )
         self.assertEqual(before.keys() - after.keys(), set())
         self.assertEqual(
@@ -321,7 +321,58 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 8)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 9)
+        self.assertEqual(len(after), 5681)
+        noise = after[97405]
+        self.assertEqual(
+            (noise["title"], noise["level"], noise["minimum"], noise["confirmation"]),
+            ("Noise Complaints", 44, 38, "unconfirmed"),
+        )
+        self.assertEqual(
+            noise["itemGroupStates"], {"guaranteed": "unknown", "choice": "published"}
+        )
+        self.assertEqual(
+            [
+                (item["itemID"], item["quantity"], item["group"])
+                for item in noise["items"]
+            ],
+            [(277979, 1, "choice"), (277980, 1, "choice"), (277981, 1, "choice")],
+        )
+        self.assertEqual(
+            noise["recordedCategory"],
+            {"sourceZoneID": 33, "name": "Stranglethorn Vale"},
+        )
+        self.assertTrue(noise["eligibilityUnknown"])
+        for field in (
+            "faction",
+            "classTokens",
+            "races",
+            "prerequisites",
+            "chain",
+            "locations",
+            "relatedLocations",
+            "maximum",
+            "moneyCost",
+            "rewardValues",
+        ):
+            self.assertNotIn(field, noise)
+        without_noise = copy.deepcopy(inputs["reviewed"])
+        for collection in ("additions", "nativeRewardUpdates", "categoryUpdates"):
+            without_noise[collection] = [
+                entry
+                for entry in without_noise[collection]
+                if entry.get("id", entry.get("record", {}).get("id")) != 97405
+            ]
+        with mock.patch(
+            "fau_tools.catalog.read_inputs",
+            return_value=(provenance, {**inputs, "reviewed": without_noise}),
+        ):
+            prior, _ = build_complete(ROOT)
+        previous_rows = {q["id"]: q for q in prior["quests"] if q["id"] != 97405}
+        self.assertEqual(len(previous_rows), 5680)
+        self.assertEqual(
+            {qid: row for qid, row in after.items() if qid != 97405}, previous_rows
+        )
 
     def test_recovered_cached_metadata_preserves_unconfirmed_identity_and_unknown_rewards(
         self,

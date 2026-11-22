@@ -442,7 +442,7 @@ class SyncTests(unittest.TestCase):
                         json.loads(
                             (directory / "catalog-reconciliation.json").read_bytes()
                         )["counts"]["quests"],
-                        5680,
+                        5681,
                     )
                     self.assertFalse(
                         json.loads((directory / "catalog-coverage.json").read_bytes())[

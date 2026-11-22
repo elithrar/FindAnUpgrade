@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.29
+
+- Record Noise Complaints (97405), level 44/minimum 38, with Mauler's Mutton, Ogre Bone and Souvenir Ogre Tooth as choose-one rewards.
+- Record its Stranglethorn Vale category while keeping guaranteed rewards, current availability, starter and map location unconfirmed.
+
 ## 0.1.28
 
 - Fix addon initialization when the client declines duplicate registration of the addon-loaded event. Bundle SomethingNeedDoing 0.5.4.

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-15",
-  "reviewedAt": "2026-11-15T08:56:41.242252+00:00",
+  "revision": "quest-website-2026-11-22",
+  "reviewedAt": "2026-11-22T09:01:33.484741+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -304,6 +304,30 @@
       "sha256": "64afea3a793772522d29ff75a95394e4ae95fe386eab37f6ac63399a444b2a63",
       "bytes": 1639098,
       "collectedAt": "2026-11-15T08:56:41.242252+00:00"
+    },
+    "questsNovember22": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-22T09:01:32.651959+00:00"
+    },
+    "rewardsNovember22": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-22T09:01:32.753457+00:00"
+    },
+    "changelogNovember22": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "4400ed2953d0057b6bafdb37b134ca97882667bd641f9081bd52e95eadf197b5",
+      "bytes": 72364,
+      "collectedAt": "2026-11-22T09:01:33.351715+00:00"
+    },
+    "nativeCatalogNovember22": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "4c925549cbf5ae3694d3f34799170a9c771045a7a38a84bbea8a1255a15c6ee0",
+      "bytes": 1872187,
+      "collectedAt": "2026-11-22T09:01:33.484741+00:00"
     }
   },
   "records": [
@@ -4458,6 +4482,27 @@
         "payloadSha256": "1359864556f50d55d1cccfc05e008440c81a578e04ecc86cab51b20bb3deea1a"
       },
       "reason": "Record only this exact cached identity and positive name/levels. It is absent from the shipped universe and has no confirmed complete reward list or current availability. Keep both reward groups unknown, require native proof, and do not infer restrictions, givers, categories, coordinates, stats or costs."
+    },
+    {
+      "record": {
+        "id": 97405,
+        "title": "Noise Complaints",
+        "level": 44,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember22"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember22",
+        "build": 71037,
+        "observedAt": "2026-11-22T00:01:37.223052+00:00",
+        "payloadSha256": "5d7f9dc20c379556f3b8b621492bf9189f05ed678e498ccbf3860aba9990f494"
+      },
+      "reason": "Record this exact cached quest identity with its literal title and positive quest levels only. Keep current availability unconfirmed and require native proof. Positive direct choice rewards and the recorded AreaID category are separately receipted; no faction, classes, races, prerequisites, starters, coordinates, costs or stats are inferred."
     }
   ],
   "categoryUpdates": [
@@ -4589,6 +4634,26 @@
         "payloadSha256": "98826cf0aca1c5b48767941d460d735884a920531c88ae093fbc97b3bbd57b15"
       },
       "reason": "The canonical changelog and exact native row correct the recorded catalog category from Riverglades Area16591 to Duskwood Area10. Preserve primary classification, restrictions and the existing Stormwind giver coordinates; an AreaID is not a UiMapID. The observation time is the explicit source snapshot time; no per-row time or current availability is inferred."
+    },
+    {
+      "id": 97405,
+      "title": "Noise Complaints",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 33,
+        "name": "Stranglethorn Vale"
+      },
+      "evidence": [
+        "changelogNovember22",
+        "nativeCatalogNovember22"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember22",
+        "build": 71037,
+        "observedAt": "2026-11-22T00:01:37.223052+00:00",
+        "payloadSha256": "5d7f9dc20c379556f3b8b621492bf9189f05ed678e498ccbf3860aba9990f494"
+      },
+      "reason": "The canonical changelog and exact native row record Stranglethorn Vale Area33 for this unconfirmed quest. Preserve the lack of primary classification membership, unknown restrictions and unknown starter/coordinates. The recorded AreaID does not supply a UiMapID or point, and cached presence does not establish availability."
     }
   ],
   "partialRewardUpdates": [
@@ -9194,6 +9259,87 @@
       "replacements": [],
       "priorSource": null,
       "reason": "Exact native direct choice-group correction, independently stated in the canonical changelog. Move the existing item from guaranteed to its explicitly observed choice group and retain both literal choice slots at quantity one. The empty guaranteed group does not establish absence. Preserve restrictions, costs, confirmation and unknown current availability."
+    },
+    {
+      "id": 97405,
+      "title": "Noise Complaints",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 277979,
+            "name": "Mauler's Mutton",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 277980,
+            "name": "Ogre Bone",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          },
+          {
+            "itemID": 277981,
+            "name": "Souvenir Ogre Tooth",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 3
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember22"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember22",
+        "build": 71037,
+        "observedAt": "2026-11-22T00:01:37.223052+00:00",
+        "payloadSha256": "5d7f9dc20c379556f3b8b621492bf9189f05ed678e498ccbf3860aba9990f494"
+      },
+      "nativeRecord": {
+        "id": 97405,
+        "name": "Noise Complaints",
+        "level": 44,
+        "requiredLevel": 38,
+        "categoryId": 33,
+        "categoryName": "Stranglethorn Vale",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 277979,
+            "name": "Mauler's Mutton",
+            "quantity": 1
+          },
+          {
+            "id": 277980,
+            "name": "Ogre Bone",
+            "quantity": 1
+          },
+          {
+            "id": 277981,
+            "name": "Souvenir Ogre Tooth",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "5d7f9dc20c379556f3b8b621492bf9189f05ed678e498ccbf3860aba9990f494",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-22T00:01:37.223052+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Bind the exact three nonempty direct native choice slots, each quantity one, to this recorded unconfirmed quest identity. The empty guaranteed group does not establish absence and remains unknown. Retain the explicit per-row observation time without a snapshot fallback; no current availability or restrictions are inferred."
     }
   ]
 }
