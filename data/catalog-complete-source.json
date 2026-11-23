@@ -23812,12 +23812,19 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Sirra is Busy",
+      "level": 30,
+      "minimum": 20,
+      "recordedCategory": {
+        "sourceZoneID": 10,
+        "name": "Duskwood"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -102612,8 +102619,16 @@
         }
       ],
       "id": 2756,
-      "items": [],
-      "itemState": "published-empty",
+      "items": [
+        {
+          "itemID": 7994,
+          "name": "Plans: Orcish War Leggings",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
       "confirmation": "published",
       "chain": {
         "groups": [],
@@ -102629,8 +102644,12 @@
       "rewardValues": {
         "xp": 3150
       },
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
       "fieldStates": {
-        "items": "published-empty",
+        "items": "published",
         "title": "published",
         "level": "published",
         "minimum": "published",
@@ -116728,6 +116747,10 @@
       "rewardValues": {
         "xp": 560
       },
+      "recordedCategory": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published-empty",
@@ -117063,6 +117086,10 @@
       "title": "<UNUSED>",
       "level": 48,
       "minimum": 48,
+      "recordedCategory": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published-empty",
@@ -155568,6 +155595,10 @@
       "level": 58,
       "minimum": 53,
       "moneyCost": 200000,
+      "recordedCategory": {
+        "sourceZoneID": 139,
+        "name": "Eastern Plaguelands"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
@@ -160224,12 +160255,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> <TXT> A Small Amount of Hope",
+      "level": 35,
+      "minimum": 35,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -160243,12 +160277,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Small Amount of Hope",
+      "level": 35,
+      "minimum": 35,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -160262,12 +160299,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> A Small Amount of Hope",
+      "level": 35,
+      "minimum": 35,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -160281,12 +160321,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> <TXT> The Rites of Old",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -160300,12 +160343,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> The Rites of Old",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -160319,12 +160365,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<NYI> The Rites of Old",
+      "level": 25,
+      "minimum": 25,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -176936,6 +176985,10 @@
       "title": "<UNUSED>",
       "level": 58,
       "minimum": 54,
+      "recordedCategory": {
+        "sourceZoneID": 1377,
+        "name": "Silithus"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published-empty",
@@ -180037,7 +180090,7 @@
         ]
       },
       "level": 60,
-      "minimum": 51,
+      "minimum": 58,
       "rewardValues": {
         "xp": 9950,
         "money": 27000,
@@ -180093,7 +180146,7 @@
         ]
       },
       "level": 60,
-      "minimum": 51,
+      "minimum": 58,
       "rewardValues": {
         "xp": 9950,
         "money": 27000,
@@ -200210,7 +200263,7 @@
     },
     {
       "title": "Control Four Bases",
-      "minimum": 60,
+      "minimum": 50,
       "faction": "Alliance",
       "eligibilityUnknown": true,
       "prerequisites": [
@@ -205671,7 +205724,7 @@
         "relations": []
       },
       "level": 60,
-      "minimum": 51,
+      "minimum": 58,
       "rewardValues": {
         "xp": 660,
         "reputation": [
@@ -205760,7 +205813,7 @@
         "relations": []
       },
       "level": 60,
-      "minimum": 51,
+      "minimum": 58,
       "rewardValues": {
         "xp": 660,
         "reputation": [
@@ -249499,12 +249552,15 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "Anthion's Parting Words",
+      "level": 60,
+      "minimum": 58,
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -249518,12 +249574,19 @@
       "items": [],
       "itemState": "unknown",
       "confirmation": "unconfirmed",
+      "title": "<TXT>Anthion's Parting Words",
+      "level": 60,
+      "minimum": 58,
+      "recordedCategory": {
+        "sourceZoneID": 139,
+        "name": "Eastern Plaguelands"
+      },
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
-        "title": "unknown",
-        "level": "unknown",
-        "minimum": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
         "xp": "unknown",
         "money": "unknown",
         "reputation": "unknown",
@@ -267363,7 +267426,7 @@
       "confirmation": "published",
       "title": "With Wind Beneath Your Wings",
       "level": 40,
-      "minimum": 30,
+      "minimum": 100,
       "faction": "Horde",
       "eligibilityUnknown": true,
       "fieldStates": {

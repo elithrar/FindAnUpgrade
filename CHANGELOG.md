@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.31
+
+- Record Plans: Orcish War Leggings as a guaranteed reward from The Old Ways (2756).
+- Correct the recorded minimum level for six quests. The Battle of Alterac, The Battle for Alterac, Hero of the Stormpike and Hero of the Frostwolf now list 58. Control Four Bases now lists 50, and With Wind Beneath Your Wings lists the recorded template minimum of 100.
+- Record titles and levels for nine existing quest IDs and categories for six quests. Cached template records do not establish current quest availability.
+
 ## 0.1.30
 
 - Record 22 quests observed in Forever build 71037, including quests in Riverglades and The Drowned City.

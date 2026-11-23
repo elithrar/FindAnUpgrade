@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "revision": "quest-website-2026-11-23",
-  "reviewedAt": "2026-11-23T00:37:46.682065+00:00",
+  "reviewedAt": "2026-11-23T09:01:35.778927+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred. The later build 71037 snapshot records additional facts for existing quest IDs: six minimum level changes, nine previously unknown titles/levels, six registered categories with no prior classification category and one exact guaranteed reward. Unknown direct groups, current availability, all original receipts, currency costs, starter associations and map coordinates are preserved. The native cache supplies no class, race, faction, component output or other inferred facts.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -352,6 +352,30 @@
       "sha256": "49d5c85105301ae04e5e662efcabeb95fb150ff7f0c9cec232796e9902f34160",
       "bytes": 1905715,
       "collectedAt": "2026-11-23T00:37:46.682065+00:00"
+    },
+    "questsNovember23": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-23T09:01:35.713467+00:00"
+    },
+    "rewardsNovember23": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-23T09:01:35.944338+00:00"
+    },
+    "changelogNovember23": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "04642e92dc82c5aa969f225c489f4fb0189dce8b8fc02ba6b322ff0fcea27953",
+      "bytes": 119211,
+      "collectedAt": "2026-11-23T09:01:35.743633+00:00"
+    },
+    "nativeCatalogNovember23": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "b69216a6f58f3c2cfc2722635da854fa49147748d6eee04b89f821d72738e80a",
+      "bytes": 2124046,
+      "collectedAt": "2026-11-23T09:01:35.778927+00:00"
     }
   },
   "records": [
@@ -4386,6 +4410,609 @@
         "rewardScope": "Direct native reward slots only. Empty groups do not rule out scripted/spell rewards. Faction and playability are not inferred."
       },
       "reason": "Exact native requiredLevel observation corrects only the recorded minimum level from 60 to 50. Preserve the quest title, level, all rewards and reward-state distinctions, faction, prerequisites, giver coordinates, costs, classification and unknown current availability. The unchanged native row omits an individual observedAt and binds separately to the explicit source snapshot time."
+    },
+    {
+      "id": 402,
+      "title": "Sirra is Busy",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Sirra is Busy",
+        "level": 30,
+        "minimum": 20
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "d01c6c95c3698dd7b3687479103168faf1aeebec5710d4eaaf7975439880ec9d"
+      },
+      "nativeRecord": {
+        "id": 402,
+        "name": "Sirra is Busy",
+        "level": 30,
+        "requiredLevel": 20,
+        "categoryId": 10,
+        "categoryName": "Duskwood",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "d01c6c95c3698dd7b3687479103168faf1aeebec5710d4eaaf7975439880ec9d",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5698,
+      "title": "<NYI> <TXT> A Small Amount of Hope",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> <TXT> A Small Amount of Hope",
+        "level": 35,
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "3482c545f4b6f39500d8c0f842de09f2dfd39ab3035a5ece29464f44b3a3d520"
+      },
+      "nativeRecord": {
+        "id": 5698,
+        "name": "<NYI> <TXT> A Small Amount of Hope",
+        "level": 35,
+        "requiredLevel": 35,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "3482c545f4b6f39500d8c0f842de09f2dfd39ab3035a5ece29464f44b3a3d520",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5699,
+      "title": "<NYI> A Small Amount of Hope",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Small Amount of Hope",
+        "level": 35,
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "b3cf5098aea7adc3e8695b3c57b987fcc8f38f4f12f1eba7f2e1b3e131a1bad4"
+      },
+      "nativeRecord": {
+        "id": 5699,
+        "name": "<NYI> A Small Amount of Hope",
+        "level": 35,
+        "requiredLevel": 35,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "b3cf5098aea7adc3e8695b3c57b987fcc8f38f4f12f1eba7f2e1b3e131a1bad4",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5700,
+      "title": "<NYI> A Small Amount of Hope",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> A Small Amount of Hope",
+        "level": 35,
+        "minimum": 35
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "7939f9c9c55cc1e405e5b00bff4647fa81766262e32335ff92b8c7a5955cc967"
+      },
+      "nativeRecord": {
+        "id": 5700,
+        "name": "<NYI> A Small Amount of Hope",
+        "level": 35,
+        "requiredLevel": 35,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "7939f9c9c55cc1e405e5b00bff4647fa81766262e32335ff92b8c7a5955cc967",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5701,
+      "title": "<NYI> <TXT> The Rites of Old",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> <TXT> The Rites of Old",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "b40752ce2440bfaa87e7164f9abe4ac79a5b57db5c78518dfec1941a91042161"
+      },
+      "nativeRecord": {
+        "id": 5701,
+        "name": "<NYI> <TXT> The Rites of Old",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "b40752ce2440bfaa87e7164f9abe4ac79a5b57db5c78518dfec1941a91042161",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5702,
+      "title": "<NYI> The Rites of Old",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> The Rites of Old",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "16f287240e15b42dcbef1793ad08dce47090fffcd2a31c4aff4fc7a0e1b2db57"
+      },
+      "nativeRecord": {
+        "id": 5702,
+        "name": "<NYI> The Rites of Old",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "16f287240e15b42dcbef1793ad08dce47090fffcd2a31c4aff4fc7a0e1b2db57",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 5703,
+      "title": "<NYI> The Rites of Old",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<NYI> The Rites of Old",
+        "level": 25,
+        "minimum": 25
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "cca28d0fc2510e991a574b8e7a47d558ebd77635892b87d04f79441326a6ca07"
+      },
+      "nativeRecord": {
+        "id": 5703,
+        "name": "<NYI> The Rites of Old",
+        "level": 25,
+        "requiredLevel": 25,
+        "categoryId": -262,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "cca28d0fc2510e991a574b8e7a47d558ebd77635892b87d04f79441326a6ca07",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 7141,
+      "title": "The Battle of Alterac",
+      "expected": {
+        "minimum": 51
+      },
+      "changes": {
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "a1e0c429ae14e7bd58e0b1d89c78c3d74b642b1ec66b7608369b598b7773299c"
+      },
+      "nativeRecord": {
+        "id": 7141,
+        "name": "The Battle of Alterac",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 2597,
+        "categoryName": "Alterac Valley",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "a1e0c429ae14e7bd58e0b1d89c78c3d74b642b1ec66b7608369b598b7773299c",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 7142,
+      "title": "The Battle for Alterac",
+      "expected": {
+        "minimum": 51
+      },
+      "changes": {
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "eeb706f5a053de198c1878f29946d8ba2712601c0a89b02174cb0219b8113299"
+      },
+      "nativeRecord": {
+        "id": 7142,
+        "name": "The Battle for Alterac",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 2597,
+        "categoryName": "Alterac Valley",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "eeb706f5a053de198c1878f29946d8ba2712601c0a89b02174cb0219b8113299",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 8114,
+      "title": "Control Four Bases",
+      "expected": {
+        "minimum": 60
+      },
+      "changes": {
+        "minimum": 50
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "6c0e4876432540f444426948a947d60ae74f9d7b85a56dc64b33c8cb83d4e73b"
+      },
+      "nativeRecord": {
+        "id": 8114,
+        "name": "Control Four Bases",
+        "level": 60,
+        "requiredLevel": 50,
+        "categoryId": 3358,
+        "categoryName": "Arathi Basin",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "6c0e4876432540f444426948a947d60ae74f9d7b85a56dc64b33c8cb83d4e73b",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 8271,
+      "title": "Hero of the Stormpike",
+      "expected": {
+        "minimum": 51
+      },
+      "changes": {
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "a4ed26b3db264fb906f184f71f04be1b3646eb39941278553d64f27a2e1015a8"
+      },
+      "nativeRecord": {
+        "id": 8271,
+        "name": "Hero of the Stormpike",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 2597,
+        "categoryName": "Alterac Valley",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 19107,
+            "name": "Bloodseeker",
+            "quantity": 1
+          },
+          {
+            "id": 19106,
+            "name": "Ice Barbed Spear",
+            "quantity": 1
+          },
+          {
+            "id": 19108,
+            "name": "Wand of Biting Cold",
+            "quantity": 1
+          },
+          {
+            "id": 20648,
+            "name": "Cold Forged Hammer",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "a4ed26b3db264fb906f184f71f04be1b3646eb39941278553d64f27a2e1015a8",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 8272,
+      "title": "Hero of the Frostwolf",
+      "expected": {
+        "minimum": 51
+      },
+      "changes": {
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "05d8c3eb091aa819b7305fec62580922ee34f2c638df0a424be12c231ae4fa0d"
+      },
+      "nativeRecord": {
+        "id": 8272,
+        "name": "Hero of the Frostwolf",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 2597,
+        "categoryName": "Alterac Valley",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 19107,
+            "name": "Bloodseeker",
+            "quantity": 1
+          },
+          {
+            "id": 19106,
+            "name": "Ice Barbed Spear",
+            "quantity": 1
+          },
+          {
+            "id": 19108,
+            "name": "Wand of Biting Cold",
+            "quantity": 1
+          },
+          {
+            "id": 20648,
+            "name": "Cold Forged Hammer",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "05d8c3eb091aa819b7305fec62580922ee34f2c638df0a424be12c231ae4fa0d",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 9030,
+      "title": "Anthion's Parting Words",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "Anthion's Parting Words",
+        "level": 60,
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "ed75a65d16ebb8d26de0cd04e4ba5f7be5af5feaf8ab8024c85c4ea85ff390e2"
+      },
+      "nativeRecord": {
+        "id": 9030,
+        "name": "Anthion's Parting Words",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 2557,
+        "categoryName": "Dire Maul",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "ed75a65d16ebb8d26de0cd04e4ba5f7be5af5feaf8ab8024c85c4ea85ff390e2",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 9031,
+      "title": "<TXT>Anthion's Parting Words",
+      "expected": {
+        "title": null,
+        "level": null,
+        "minimum": null
+      },
+      "changes": {
+        "title": "<TXT>Anthion's Parting Words",
+        "level": 60,
+        "minimum": 58
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "ea974721a68139962dff49df398f2c2a0aac8733b7810a556e3d7a7aa8a020fa"
+      },
+      "nativeRecord": {
+        "id": 9031,
+        "name": "<TXT>Anthion's Parting Words",
+        "level": 60,
+        "requiredLevel": 58,
+        "categoryId": 139,
+        "categoryName": "Eastern Plaguelands",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "ea974721a68139962dff49df398f2c2a0aac8733b7810a556e3d7a7aa8a020fa",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
+    },
+    {
+      "id": 79365,
+      "title": "With Wind Beneath Your Wings",
+      "expected": {
+        "minimum": 30
+      },
+      "changes": {
+        "minimum": 100
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "Record the exact native template title and positive levels where supported by the retained source. Keep existing identity confirmation, rewards, restrictions, costs and current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "d9670993e58fb87af381a880c6b8bc6e5747526f1ada4accea48261740523cf9"
+      },
+      "nativeRecord": {
+        "id": 79365,
+        "name": "With Wind Beneath Your Wings",
+        "level": 40,
+        "requiredLevel": 100,
+        "categoryId": -82,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [],
+        "payloadSha256": "d9670993e58fb87af381a880c6b8bc6e5747526f1ada4accea48261740523cf9",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      }
     }
   ],
   "additions": [
@@ -5500,6 +6127,126 @@
         "payloadSha256": "cd036b5e376d126f53aa90f3060895d1c673ad91d299662f2a07ac73ebdfd256"
       },
       "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 402,
+      "title": "Sirra is Busy",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 10,
+        "name": "Duskwood"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "d01c6c95c3698dd7b3687479103168faf1aeebec5710d4eaaf7975439880ec9d"
+      }
+    },
+    {
+      "id": 3384,
+      "title": "<UNUSED>",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "925821ecd14e40797205dcf3913a4ca1e62401cf52fa29ef8c2f5c7078615101"
+      }
+    },
+    {
+      "id": 3425,
+      "title": "<UNUSED>",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16,
+        "name": "Azshara"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "9faee6fcf953de8246c0c8a808ccb87c813069b990b146085d604b07cb713fbe"
+      }
+    },
+    {
+      "id": 5532,
+      "title": "<NYI> <TXT> Ring of the Dawn",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 139,
+        "name": "Eastern Plaguelands"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "3094e5c406d7ba2f03a1d3c8005c709bf4ce13b606ac5c288e38c74206dc165c"
+      }
+    },
+    {
+      "id": 6842,
+      "title": "<UNUSED>",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 1377,
+        "name": "Silithus"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "5aced85d48e89e1488acd61d8bb5f12b7eb901499a0465793456a4b6a3553136"
+      }
+    },
+    {
+      "id": 9031,
+      "title": "<TXT>Anthion's Parting Words",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 139,
+        "name": "Eastern Plaguelands"
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "reason": "The exact cached row and changelog record this registered AreaID category. A category does not establish a starter, a UiMap position or current availability.",
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "ea974721a68139962dff49df398f2c2a0aac8733b7810a556e3d7a7aa8a020fa"
+      }
     }
   ],
   "partialRewardUpdates": [
@@ -10714,6 +11461,64 @@
       "replacements": [],
       "priorSource": null,
       "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 2756,
+      "title": "The Old Ways",
+      "expected": {
+        "items": [],
+        "itemState": "published-empty",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 7994,
+            "name": "Plans: Orcish War Leggings",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember23",
+        "changelogNovember23"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember23",
+        "build": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00",
+        "payloadSha256": "a399da9080bfb3db616e339940ed997282743491c292b2c6fff23aee02aec5c5"
+      },
+      "nativeRecord": {
+        "id": 2756,
+        "name": "The Old Ways",
+        "level": 40,
+        "requiredLevel": 40,
+        "categoryId": -121,
+        "categoryName": null,
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 7994,
+            "name": "Plans: Orcish War Leggings",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "a399da9080bfb3db616e339940ed997282743491c292b2c6fff23aee02aec5c5",
+        "sourceBuild": 71037,
+        "observedAt": "2026-11-23T04:05:50.378567+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Record Plans: Orcish War Leggings ×1 in the verified guaranteed slot for The Old Ways. The empty native choice group leaves complete choice rewards unknown."
     }
   ]
 }
