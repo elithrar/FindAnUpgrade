@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.30
+
+- Record 22 quests observed in Forever build 71037, including quests in Riverglades and The Drowned City.
+- Add 14 direct reward items across eight quests. Keep choose-one alternatives and exact quantities, including five Undermine Clam Chowder from WANTED: Trapclaw.
+- Keep unobserved rewards and current quest availability unconfirmed.
+
 ## 0.1.29
 
 - Record Noise Complaints (97405), level 44/minimum 38, with Mauler's Mutton, Ogre Bone and Souvenir Ogre Tooth as choose-one rewards.
