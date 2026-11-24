@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.32
+
+- Record 33 quests observed in Forever build 71037, including Riverglades quests and the Desolace variant of Lost Shipping Crate.
+- Record 12 direct item rewards across six quests. Findings for the Explorer's League and Twice Misplaced Trust each list a guaranteed item and a choice group. Gaseous Gold lists five Riverglades Marsh Gas.
+- Keep unobserved reward groups and current quest availability unconfirmed.
+
 ## 0.1.31
 
 - Record Plans: Orcish War Leggings as a guaranteed reward from The Old Ways (2756).
