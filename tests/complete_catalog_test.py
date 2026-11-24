@@ -71,35 +71,68 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertEqual(
             after.keys() - before.keys(),
             {
+                79677,
                 89013,
                 91608,
+                92914,
                 93161,
                 93443,
                 93521,
                 93644,
+                94614,
+                94615,
+                94617,
                 94618,
                 94678,
                 94679,
+                94841,
+                94842,
                 94857,
                 94877,
                 94879,
                 94881,
+                94886,
                 94887,
+                94907,
+                94923,
+                94924,
+                94925,
+                94931,
+                95059,
                 95118,
                 95120,
                 95121,
+                95123,
+                95156,
                 95184,
+                95219,
                 95254,
+                95293,
                 95315,
+                95603,
                 95789,
                 95791,
+                95799,
+                95912,
+                95934,
+                95943,
                 95951,
+                95975,
                 95982,
+                95984,
+                95991,
                 96009,
+                96063,
+                96125,
+                96438,
+                96770,
+                96771,
                 96773,
                 97130,
                 97270,
+                97332,
                 97405,
+                98233,
                 99233,
                 99234,
             },
@@ -373,8 +406,8 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 31)
-        self.assertEqual(len(after), 5703)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 64)
+        self.assertEqual(len(after), 5736)
         noise = after[97405]
         self.assertEqual(
             (noise["title"], noise["level"], noise["minimum"], noise["confirmation"]),
@@ -421,7 +454,7 @@ class CompleteCatalogTests(unittest.TestCase):
         ):
             prior, _ = build_complete(ROOT)
         previous_rows = {q["id"]: q for q in prior["quests"] if q["id"] != 97405}
-        self.assertEqual(len(previous_rows), 5702)
+        self.assertEqual(len(previous_rows), 5735)
         self.assertEqual(
             {qid: row for qid, row in after.items() if qid != 97405}, previous_rows
         )
