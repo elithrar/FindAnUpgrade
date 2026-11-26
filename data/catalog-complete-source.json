@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-24",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-26",
   "quests": [
     {
       "id": 1,
@@ -293043,6 +293043,32 @@
       }
     },
     {
+      "id": 94885,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Field Marshal's Log",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 94886,
       "items": [],
       "itemState": "unknown",
@@ -293758,6 +293784,40 @@
         "currencies": "unknown",
         "givers": "recorded",
         "coordinates": "recorded"
+      }
+    },
+    {
+      "id": 94981,
+      "items": [
+        {
+          "itemID": 267089,
+          "name": "Krol'dok Compound Key",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Key Ingredients",
+      "level": 41,
+      "minimum": 38,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
       }
     },
     {
@@ -294941,6 +295001,32 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95261,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "It Takes Guts",
+      "level": 42,
+      "minimum": 38,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
         "title": "recorded",
         "level": "recorded",
         "minimum": "recorded",
@@ -298545,6 +298631,44 @@
       "confirmation": "unconfirmed",
       "title": "Gaseous Gold",
       "level": 38,
+      "minimum": 36,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 96085,
+      "items": [
+        {
+          "itemID": 3928,
+          "name": "Superior Healing Potion",
+          "quantity": 3,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Upstream Contamination",
+      "level": 42,
       "minimum": 36,
       "itemGroupStates": {
         "guaranteed": "published",
@@ -303103,6 +303227,32 @@
       }
     },
     {
+      "id": 97018,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Learning to Ride",
+      "level": 40,
+      "minimum": 40,
+      "recordedCategory": {
+        "sourceZoneID": 1,
+        "name": "Dun Morogh"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 97047,
       "items": [],
       "itemState": "published-empty",
@@ -305522,6 +305672,32 @@
         "currencies": "unknown",
         "givers": "recorded",
         "coordinates": "recorded"
+      }
+    },
+    {
+      "id": 97617,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Safety Checks",
+      "level": 40,
+      "minimum": 35,
+      "recordedCategory": {
+        "sourceZoneID": 3,
+        "name": "Badlands"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
       }
     },
     {

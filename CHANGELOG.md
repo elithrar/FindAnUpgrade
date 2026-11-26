@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.33
+
+- Record six quests observed in Forever build 71139, including Field Marshal's Log, Learning to Ride and Safety Checks.
+- Record the guaranteed rewards for Key Ingredients and Upstream Contamination. Upstream Contamination lists three Superior Healing Potions.
+- Keep unobserved rewards and current quest availability unconfirmed.
+
 ## 0.1.32
 
 - Record 33 quests observed in Forever build 71037, including Riverglades quests and the Desolace variant of Lost Shipping Crate.

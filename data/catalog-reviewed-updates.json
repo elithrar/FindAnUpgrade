@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-24",
-  "reviewedAt": "2026-11-24T09:03:07.756120+00:00",
+  "revision": "quest-website-2026-11-26",
+  "reviewedAt": "2026-11-26T18:58:46.698720+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred. The later build 71037 snapshot records additional facts for existing quest IDs: six minimum level changes, nine previously unknown titles/levels, six registered categories with no prior classification category and one exact guaranteed reward. Unknown direct groups, current availability, all original receipts, currency costs, starter associations and map coordinates are preserved. The native cache supplies no class, race, faction, component output or other inferred facts. The November 24 source adds 33 exact cached quest identities and 12 direct item slots across six quests. Empty groups remain unknown. Categories without a matching registered AreaID remain in the original receipt. Exact quest IDs are kept separate even when titles match. No current availability, class restrictions, starter attribution, coordinates, stats or costs are inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred. The later build 71037 snapshot records additional facts for existing quest IDs: six minimum level changes, nine previously unknown titles/levels, six registered categories with no prior classification category and one exact guaranteed reward. Unknown direct groups, current availability, all original receipts, currency costs, starter associations and map coordinates are preserved. The native cache supplies no class, race, faction, component output or other inferred facts. The November 24 source adds 33 exact cached quest identities and 12 direct item slots across six quests. Empty groups remain unknown. Categories without a matching registered AreaID remain in the original receipt. Exact quest IDs are kept separate even when titles match. No current availability, class restrictions, starter attribution, coordinates, stats or costs are inferred. The November 26 native observation adds six exact cached quest IDs. Key Ingredients records Krol’dok Compound Key ×1 and Upstream Contamination records Superior Healing Potion ×3. Unobserved groups remain unknown. Krol’dok Stronghold is recorded in the original source receipt without a registered category projection. No current availability, starter, faction, class, position, cost or item stat is inferred.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -400,6 +400,30 @@
       "sha256": "3612c133a96c3603ba12473f77fa88b45c4e0ab9f4e52a01e34007452f940798",
       "bytes": 2154338,
       "collectedAt": "2026-11-24T09:03:07.756120+00:00"
+    },
+    "questsNovember26": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-26T18:58:46.477187+00:00"
+    },
+    "rewardsNovember26": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-26T18:58:46.667238+00:00"
+    },
+    "changelogNovember26": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "2e18b4408ad5c5edadee04c7a52c4b2fbc2050564fdf6be3aa997fec2332b6f4",
+      "bytes": 128705,
+      "collectedAt": "2026-11-26T18:58:46.447755+00:00"
+    },
+    "nativeCatalogNovember26": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "44d340bee1ce21c45df4a4d7fe503c89631fe6f982b8ce2758f03513fd5dfe65",
+      "bytes": 2170875,
+      "collectedAt": "2026-11-26T18:58:46.698720+00:00"
     }
   },
   "records": [
@@ -6333,6 +6357,132 @@
         "payloadSha256": "7d889cb148d8c3fad868f3123764869b3e865306d15745e21cfb931f497e4acf"
       },
       "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94885,
+        "title": "Field Marshal's Log",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "2fdcfd1bedd275ca806c2ef6604e2eb3ed70d2f3511ce9ff3dfd4085eefdafe7"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94981,
+        "title": "Key Ingredients",
+        "level": 41,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "3bfc3a64a7ec4ee7c58dd032720871455c3fa896448458142448581112965c82"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95261,
+        "title": "It Takes Guts",
+        "level": 42,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "3cc6c38573830b5d6d02ae23096c672c67340ebebfa6dc99e5707d5d6c8f3460"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 96085,
+        "title": "Upstream Contamination",
+        "level": 42,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "9895a77ff32de2a414d3cf61f18f30b922d476a29970610b4f0734b9c102f899"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 97018,
+        "title": "Learning to Ride",
+        "level": 40,
+        "minimum": 40,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "6a2ffc6f74793b0d5fbdf0a253bcc500eada63924f8c81aef8c97054aae74ce9"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 97617,
+        "title": "Safety Checks",
+        "level": 40,
+        "minimum": 35,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "ea2c34b394ab07d9f480b077184917e5347096ba43788a98bfd2bd47a42ac3d1"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
     }
   ],
   "categoryUpdates": [
@@ -7562,6 +7712,106 @@
         "build": 71037,
         "observedAt": "2026-11-24T07:57:28.742015+00:00",
         "payloadSha256": "7d889cb148d8c3fad868f3123764869b3e865306d15745e21cfb931f497e4acf"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94885,
+      "title": "Field Marshal's Log",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember26",
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "2fdcfd1bedd275ca806c2ef6604e2eb3ed70d2f3511ce9ff3dfd4085eefdafe7"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95261,
+      "title": "It Takes Guts",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember26",
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "3cc6c38573830b5d6d02ae23096c672c67340ebebfa6dc99e5707d5d6c8f3460"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 96085,
+      "title": "Upstream Contamination",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember26",
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "9895a77ff32de2a414d3cf61f18f30b922d476a29970610b4f0734b9c102f899"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 97018,
+      "title": "Learning to Ride",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 1,
+        "name": "Dun Morogh"
+      },
+      "evidence": [
+        "changelogNovember26",
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "6a2ffc6f74793b0d5fbdf0a253bcc500eada63924f8c81aef8c97054aae74ce9"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 97617,
+      "title": "Safety Checks",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 3,
+        "name": "Badlands"
+      },
+      "evidence": [
+        "changelogNovember26",
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "ea2c34b394ab07d9f480b077184917e5347096ba43788a98bfd2bd47a42ac3d1"
       },
       "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
     }
@@ -13248,6 +13498,120 @@
         "payloadSha256": "7d889cb148d8c3fad868f3123764869b3e865306d15745e21cfb931f497e4acf",
         "sourceBuild": 71037,
         "observedAt": "2026-11-24T07:57:28.742015+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 94981,
+      "title": "Key Ingredients",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 267089,
+            "name": "Krol'dok Compound Key",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "3bfc3a64a7ec4ee7c58dd032720871455c3fa896448458142448581112965c82"
+      },
+      "nativeRecord": {
+        "id": 94981,
+        "name": "Key Ingredients",
+        "level": 41,
+        "requiredLevel": 38,
+        "categoryId": 16842,
+        "categoryName": "Krol'dok Stronghold",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 267089,
+            "name": "Krol'dok Compound Key",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "3bfc3a64a7ec4ee7c58dd032720871455c3fa896448458142448581112965c82",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 96085,
+      "title": "Upstream Contamination",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 3928,
+            "name": "Superior Healing Potion",
+            "quantity": 3,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember26"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember26",
+        "build": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00",
+        "payloadSha256": "9895a77ff32de2a414d3cf61f18f30b922d476a29970610b4f0734b9c102f899"
+      },
+      "nativeRecord": {
+        "id": 96085,
+        "name": "Upstream Contamination",
+        "level": 42,
+        "requiredLevel": 36,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 3928,
+            "name": "Superior Healing Potion",
+            "quantity": 3
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "9895a77ff32de2a414d3cf61f18f30b922d476a29970610b4f0734b9c102f899",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-26T09:04:10.116359+00:00"
       },
       "replacements": [],
       "priorSource": null,

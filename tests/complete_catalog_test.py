@@ -91,6 +91,7 @@ class CompleteCatalogTests(unittest.TestCase):
                 94877,
                 94879,
                 94881,
+                94885,
                 94886,
                 94887,
                 94907,
@@ -98,6 +99,7 @@ class CompleteCatalogTests(unittest.TestCase):
                 94924,
                 94925,
                 94931,
+                94981,
                 95059,
                 95118,
                 95120,
@@ -107,6 +109,7 @@ class CompleteCatalogTests(unittest.TestCase):
                 95184,
                 95219,
                 95254,
+                95261,
                 95293,
                 95315,
                 95603,
@@ -123,15 +126,18 @@ class CompleteCatalogTests(unittest.TestCase):
                 95991,
                 96009,
                 96063,
+                96085,
                 96125,
                 96438,
                 96770,
                 96771,
                 96773,
+                97018,
                 97130,
                 97270,
                 97332,
                 97405,
+                97617,
                 98233,
                 99233,
                 99234,
@@ -406,8 +412,8 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 64)
-        self.assertEqual(len(after), 5736)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 70)
+        self.assertEqual(len(after), 5742)
         noise = after[97405]
         self.assertEqual(
             (noise["title"], noise["level"], noise["minimum"], noise["confirmation"]),
@@ -454,7 +460,7 @@ class CompleteCatalogTests(unittest.TestCase):
         ):
             prior, _ = build_complete(ROOT)
         previous_rows = {q["id"]: q for q in prior["quests"] if q["id"] != 97405}
-        self.assertEqual(len(previous_rows), 5735)
+        self.assertEqual(len(previous_rows), 5741)
         self.assertEqual(
             {qid: row for qid, row in after.items() if qid != 97405}, previous_rows
         )
