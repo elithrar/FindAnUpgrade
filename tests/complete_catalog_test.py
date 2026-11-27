@@ -72,19 +72,23 @@ class CompleteCatalogTests(unittest.TestCase):
             after.keys() - before.keys(),
             {
                 79677,
+                79946,
                 89013,
                 91608,
                 92914,
                 93161,
+                93404,
                 93443,
                 93521,
                 93644,
+                94613,
                 94614,
                 94615,
                 94617,
                 94618,
                 94678,
                 94679,
+                94829,
                 94841,
                 94842,
                 94857,
@@ -94,25 +98,42 @@ class CompleteCatalogTests(unittest.TestCase):
                 94885,
                 94886,
                 94887,
+                94890,
                 94907,
                 94923,
                 94924,
                 94925,
+                94926,
                 94931,
+                94961,
                 94981,
+                94999,
                 95059,
+                95064,
                 95118,
+                95119,
                 95120,
                 95121,
                 95123,
+                95144,
                 95156,
                 95184,
                 95219,
                 95254,
                 95261,
+                95288,
                 95293,
                 95315,
+                95321,
+                95325,
+                95326,
+                95329,
+                95330,
+                95426,
+                95561,
                 95603,
+                95642,
+                95643,
                 95789,
                 95791,
                 95799,
@@ -122,13 +143,19 @@ class CompleteCatalogTests(unittest.TestCase):
                 95951,
                 95975,
                 95982,
+                95983,
                 95984,
+                95986,
+                95988,
                 95991,
                 96009,
+                96010,
                 96063,
+                96081,
                 96085,
                 96125,
                 96438,
+                96609,
                 96770,
                 96771,
                 96773,
@@ -412,8 +439,8 @@ class CompleteCatalogTests(unittest.TestCase):
         self.assertTrue(ancient["eligibilityUnknown"])
         for key in ("faction", "locations", "classTokens", "rewardValues"):
             self.assertNotIn(key, ancient)
-        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 70)
-        self.assertEqual(len(after), 5742)
+        self.assertEqual(report["counts"]["reviewedWebsiteIdentities"], 97)
+        self.assertEqual(len(after), 5769)
         noise = after[97405]
         self.assertEqual(
             (noise["title"], noise["level"], noise["minimum"], noise["confirmation"]),
@@ -460,7 +487,7 @@ class CompleteCatalogTests(unittest.TestCase):
         ):
             prior, _ = build_complete(ROOT)
         previous_rows = {q["id"]: q for q in prior["quests"] if q["id"] != 97405}
-        self.assertEqual(len(previous_rows), 5741)
+        self.assertEqual(len(previous_rows), 5768)
         self.assertEqual(
             {qid: row for qid, row in after.items() if qid != 97405}, previous_rows
         )

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "targetBuild": "1.60.1.70374",
-  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-26",
+  "sourceRevision": "public-forever-2026-10-15+quest-website-2026-11-27",
   "quests": [
     {
       "id": 1,
@@ -267925,6 +267925,28 @@
       }
     },
     {
+      "id": 79946,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "A Brother In Need",
+      "level": 40,
+      "minimum": 35,
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 79947,
       "items": [
         {
@@ -281348,6 +281370,47 @@
       }
     },
     {
+      "id": 93404,
+      "items": [
+        {
+          "itemID": 272186,
+          "name": "Overgrown Cuffs",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 272187,
+          "name": "Thornplated Cord",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Rot and Regret",
+      "level": 49,
+      "minimum": 35,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 93429,
       "items": [],
       "itemState": "published-empty",
@@ -291707,6 +291770,32 @@
       }
     },
     {
+      "id": 94613,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "My Kingdom for a Horse",
+      "level": 38,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 94614,
       "items": [],
       "itemState": "unknown",
@@ -292651,6 +292740,32 @@
       }
     },
     {
+      "id": 94829,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "What We Lost",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 94841,
       "items": [],
       "itemState": "unknown",
@@ -293121,6 +293236,51 @@
       }
     },
     {
+      "id": 94890,
+      "items": [
+        {
+          "itemID": 275046,
+          "name": "Twilight Overlord Drape",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 275049,
+          "name": "Farholde Bastion",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Bring Me His Head",
+      "level": 46,
+      "minimum": 38,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "title": "Aid For The Refugees",
       "minimum": 8,
       "locations": [
@@ -293541,6 +293701,44 @@
       }
     },
     {
+      "id": 94926,
+      "items": [
+        {
+          "itemID": 275036,
+          "name": "Pauldron of Order",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Drop the Hammer",
+      "level": 45,
+      "minimum": 38,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 94931,
       "items": [],
       "itemState": "unknown",
@@ -293677,6 +293875,32 @@
       }
     },
     {
+      "id": 94961,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Biting the Hand",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "title": "Taming the Beast",
       "minimum": 10,
       "classTokens": [
@@ -293809,6 +294033,32 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 94999,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Eyes for the Watchman",
+      "level": 36,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
         "title": "recorded",
         "level": "recorded",
         "minimum": "recorded",
@@ -294030,6 +294280,51 @@
       }
     },
     {
+      "id": 95064,
+      "items": [
+        {
+          "itemID": 274959,
+          "name": "Farholde Horns",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 274961,
+          "name": "Brute Slayer Band",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Preventative Measures",
+      "level": 39,
+      "minimum": 36,
+      "itemGroupStates": {
+        "guaranteed": "unknown",
+        "choice": "published"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "title": "Fishin' Time",
       "minimum": 7,
       "faction": "Alliance",
@@ -294127,6 +294422,32 @@
       "title": "Saltwater Savages",
       "level": 41,
       "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95119,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Unfriendly Competition",
+      "level": 43,
+      "minimum": 38,
       "recordedCategory": {
         "sourceZoneID": 16591,
         "name": "Riverglades"
@@ -294400,6 +294721,32 @@
         "reputation": "published",
         "currencies": "unknown",
         "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95144,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Overseas Delivery",
+      "level": 38,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 440,
+        "name": "Tanaris"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
         "coordinates": "unknown"
       }
     },
@@ -295039,6 +295386,32 @@
       }
     },
     {
+      "id": 95288,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Smuggler's Paradise",
+      "level": 43,
+      "minimum": 38,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 95293,
       "items": [],
       "itemState": "unknown",
@@ -295133,6 +295506,84 @@
       }
     },
     {
+      "id": 95321,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Tazzik's Dues",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95325,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "We've Been Robbed!",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95326,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "The Big Payback",
+      "level": 39,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "title": "Whispering Horror Residue",
       "minimum": 7,
       "faction": "Horde",
@@ -295168,6 +295619,58 @@
         "reputation": "published",
         "currencies": "unknown",
         "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95329,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Out in the Field",
+      "level": 38,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95330,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Love Thy Neighbor",
+      "level": 37,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
         "coordinates": "unknown"
       }
     },
@@ -295327,6 +295830,32 @@
         "xp": "published",
         "money": "published",
         "reputation": "published",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95426,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Rog'mar Supplies",
+      "level": 39,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
         "currencies": "unknown",
         "givers": "unknown",
         "coordinates": "unknown"
@@ -295581,6 +296110,44 @@
       }
     },
     {
+      "id": 95561,
+      "items": [
+        {
+          "itemID": 4539,
+          "name": "Goldenbark Apple",
+          "quantity": 5,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Apple of My Eye",
+      "level": 38,
+      "minimum": 36,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 95603,
       "items": [],
       "itemState": "unknown",
@@ -295648,6 +296215,58 @@
         "reputation": "published",
         "currencies": "unknown",
         "givers": "recorded",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95642,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Abominable Magics",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95643,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Indiscriminate Purge",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
         "coordinates": "unknown"
       }
     },
@@ -297328,6 +297947,32 @@
       }
     },
     {
+      "id": 95983,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "A Feast for Buzzards",
+      "level": 38,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
       "id": 95984,
       "items": [],
       "itemState": "unknown",
@@ -297342,6 +297987,70 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95986,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "King of the Wild Plains",
+      "level": 41,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 95988,
+      "items": [
+        {
+          "itemID": 274935,
+          "name": "Tessa's Tonic",
+          "quantity": 5,
+          "group": "guaranteed",
+          "slot": 1
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "Goes Down Smooth",
+      "level": 38,
+      "minimum": 36,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "unknown"
+      },
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
         "title": "recorded",
         "level": "recorded",
         "minimum": "recorded",
@@ -297561,6 +298270,32 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 96010,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Fragments of the Pylons",
+      "level": 41,
+      "minimum": 35,
+      "recordedCategory": {
+        "sourceZoneID": 16651,
+        "name": "Shen'dralas"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
         "title": "recorded",
         "level": "recorded",
         "minimum": "recorded",
@@ -298643,6 +299378,32 @@
       "eligibilityUnknown": true,
       "fieldStates": {
         "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
+      }
+    },
+    {
+      "id": 96081,
+      "items": [],
+      "itemState": "unknown",
+      "confirmation": "unconfirmed",
+      "title": "Wound Dressings",
+      "level": 40,
+      "minimum": 36,
+      "recordedCategory": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "unknown",
         "title": "recorded",
         "level": "recorded",
         "minimum": "recorded",
@@ -300598,6 +301359,54 @@
         "currencies": "unknown",
         "givers": "recorded",
         "coordinates": "recorded"
+      }
+    },
+    {
+      "id": 96609,
+      "items": [
+        {
+          "itemID": 276896,
+          "name": "Everlasting Silvermoon Shimmerwine",
+          "quantity": 1,
+          "group": "guaranteed",
+          "slot": 1
+        },
+        {
+          "itemID": 276903,
+          "name": "Shimmerwine Shanker",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 1
+        },
+        {
+          "itemID": 276904,
+          "name": "Shimmerwine Spirits",
+          "quantity": 1,
+          "group": "choice",
+          "slot": 2
+        }
+      ],
+      "itemState": "published",
+      "confirmation": "unconfirmed",
+      "title": "A Taste of Home",
+      "level": 52,
+      "minimum": 44,
+      "itemGroupStates": {
+        "guaranteed": "published",
+        "choice": "published"
+      },
+      "eligibilityUnknown": true,
+      "fieldStates": {
+        "items": "published",
+        "title": "recorded",
+        "level": "recorded",
+        "minimum": "recorded",
+        "xp": "unknown",
+        "money": "unknown",
+        "reputation": "unknown",
+        "currencies": "unknown",
+        "givers": "unknown",
+        "coordinates": "unknown"
       }
     },
     {
