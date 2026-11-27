@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": "quest-website-2026-11-26",
-  "reviewedAt": "2026-11-26T18:58:46.698720+00:00",
+  "revision": "quest-website-2026-11-27",
+  "reviewedAt": "2026-11-27T18:56:43.580322+00:00",
   "scope": "Cumulative exact-field website corrections and explicitly receipted additional identities. Original source receipts remain unchanged; each record names its own supporting receipts.",
-  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred. The later build 71037 snapshot records additional facts for existing quest IDs: six minimum level changes, nine previously unknown titles/levels, six registered categories with no prior classification category and one exact guaranteed reward. Unknown direct groups, current availability, all original receipts, currency costs, starter associations and map coordinates are preserved. The native cache supplies no class, race, faction, component output or other inferred facts. The November 24 source adds 33 exact cached quest identities and 12 direct item slots across six quests. Empty groups remain unknown. Categories without a matching registered AreaID remain in the original receipt. Exact quest IDs are kept separate even when titles match. No current availability, class restrictions, starter attribution, coordinates, stats or costs are inferred. The November 26 native observation adds six exact cached quest IDs. Key Ingredients records Krol’dok Compound Key ×1 and Upstream Contamination records Superior Healing Potion ×3. Unobserved groups remain unknown. Krol’dok Stronghold is recorded in the original source receipt without a registered category projection. No current availability, starter, faction, class, position, cost or item stat is inferred.",
+  "limitations": "Website-published evidence only: no native client files were read for this update. Source notes cite build 70425 saved records and build 70685 installed data; they do not establish current realm availability. Unapplied website candidates and absence-only discrepancies are not imported. November 4–6 published updates cite build 70790; The Ancient Hilt item name, stats, faction, zone and starter were unconfirmed in the initial snapshot. November 6 afternoon review identifies the Ancient Hilt item name and adds cached-template metadata observations. Direct native reward omissions or unresolved groups are not applied to complete published reward lists. November 7 observations cite build 70862. Recorded category corrections do not rewrite primary classifications or supply UiMap positions; record 1156 remains unconfirmed with unknown complete rewards. November 8 partial reward corrections record the choice group without asserting that unobserved guaranteed groups are empty. Native item stats remain client-owned. November 8 evening additions retain unknown choice groups alongside explicitly recorded guaranteed rewards; recorded Azshara categories come only from exact native rows, without coordinates, restrictions or availability inference. November 9 cached-only identity95951 remains unconfirmed with unknown rewards and recorded name/levels; cached empty slots do not establish empty rewards. Existing confirmation, restrictions, costs, primary categories and giver coordinates are retained. Crafted recipe outputs are not imported as quest reward associations. November 9 afternoon records three literal item-to-quest starter links only. Item names and item level/required level are not quest titles, quest levels or requirements. All three quest identities, rewards and current availability remain unconfirmed; no coordinates, restrictions, categories, stats or costs are inferred. November 10 adds only the literal starting-item association from item270301 to quest93521. Quest title, levels, requirements, rewards and current availability remain unknown. Companion, cooldown and icon details stay native-client-owned; their complete published source bytes are retained in the new source receipt without importing them as quest facts. November 11 reconciles explicitly observed native reward slots against retained older public records. Only separately guarded replacements change a previously published item identity or quantity; empty native groups do not remove rewards. Unobserved supplementary rune rewards remain recorded. Quest confirmation, current availability, restrictions and exchange costs are unchanged. November 12 records twelve explicit native reward-group refinements and nine exact cached quest metadata observations. Rows without individual observedAt remain byte-equivalent to the source and bind separately to its explicit snapshot envelope. Two earlier item-starter identities receive only independently observed quest titles and positive quest levels; their original starter receipts, unconfirmed availability and unknown rewards remain unchanged. No item-placeholder labels, costs, stats, restrictions, giver positions or availability are inferred. November 13 records two exact native choice-group corrections, three literal cached quest title/level observations and the separately receipted Duskwood category correction for quest95161. All original starter proofs, receipts, primary classifications, giver coordinates, costs, restrictions and availability uncertainty are preserved. A literal NYI/TXT title is recorded without promotion to a playable quest; empty native groups never establish complete empty rewards. November 15 corrects only quest8121 recorded minimum level from 60 to the exact native requiredLevel50. The full native row and separate snapshot envelope are retained unchanged; no per-row observation time, additional reward facts, restrictions, costs or current availability are inferred. November 22 records only the new exact cached identity97405 Noise Complaints, literal level44/minimum38, three separately receipted quantity-one choice items and Stranglethorn Vale Area33. Guaranteed rewards and current availability remain unknown; the original native row includes its own explicit observation time. No starter, faction, classes, races, prerequisites, UiMap point, costs or stats are inferred, and all previous quest rows and source receipts are retained. The November 22 evening native snapshot supplies 22 exact cached identities and eight nonempty groups with 14 direct item slots. Empty groups remain unknown. AreaIDs outside the registered category catalog remain in the original source receipt. Recipe outputs, item stats, costs, starter positions, restrictions and current availability are not inferred. The later build 71037 snapshot records additional facts for existing quest IDs: six minimum level changes, nine previously unknown titles/levels, six registered categories with no prior classification category and one exact guaranteed reward. Unknown direct groups, current availability, all original receipts, currency costs, starter associations and map coordinates are preserved. The native cache supplies no class, race, faction, component output or other inferred facts. The November 24 source adds 33 exact cached quest identities and 12 direct item slots across six quests. Empty groups remain unknown. Categories without a matching registered AreaID remain in the original receipt. Exact quest IDs are kept separate even when titles match. No current availability, class restrictions, starter attribution, coordinates, stats or costs are inferred. The November 26 native observation adds six exact cached quest IDs. Key Ingredients records Krol’dok Compound Key ×1 and Upstream Contamination records Superior Healing Potion ×3. Unobserved groups remain unknown. Krol’dok Stronghold is recorded in the original source receipt without a registered category projection. No current availability, starter, faction, class, position, cost or item stat is inferred. The November 27 native snapshot adds 27 exact cached quest IDs and 12 direct item slots across seven quests. Guaranteed and choice groups retain their exact quantities, with empty groups left unknown. Unregistered categories remain in the original receipt. No faction, class, current availability, starter, position, cost or item stat is inferred.",
   "sources": {
     "quests": {
       "url": "https://quests.questionable.services/quests-data.js",
@@ -424,6 +424,30 @@
       "sha256": "44d340bee1ce21c45df4a4d7fe503c89631fe6f982b8ce2758f03513fd5dfe65",
       "bytes": 2170875,
       "collectedAt": "2026-11-26T18:58:46.698720+00:00"
+    },
+    "questsNovember27": {
+      "url": "https://quests.questionable.services/quests-data.js",
+      "sha256": "f89985838f2e36bc8246c1d297b988e72b7ec44fb8f32b0e3134982fedbe89b4",
+      "bytes": 1595565,
+      "collectedAt": "2026-11-27T18:56:43.573591+00:00"
+    },
+    "rewardsNovember27": {
+      "url": "https://quests.questionable.services/quest-rewards.js",
+      "sha256": "b052daf00e94daf60adec10ae7bd6734d47c58628933c4294589c3b6081ac3e8",
+      "bytes": 276930,
+      "collectedAt": "2026-11-27T18:56:43.433739+00:00"
+    },
+    "changelogNovember27": {
+      "url": "https://quests.questionable.services/changelog",
+      "sha256": "7c4ab1cf9053de1d103eb03517d3784a33b5cb2a440bba8bde10949e59d1fd42",
+      "bytes": 133991,
+      "collectedAt": "2026-11-27T18:56:43.442746+00:00"
+    },
+    "nativeCatalogNovember27": {
+      "url": "https://quests.questionable.services/native-quests.json",
+      "sha256": "45e11f56a6e43524e84d3a5c9850644e3f9784cd2405108672714ed360f3f9a1",
+      "bytes": 2198259,
+      "collectedAt": "2026-11-27T18:56:43.580322+00:00"
     }
   },
   "records": [
@@ -6483,6 +6507,573 @@
         "payloadSha256": "ea2c34b394ab07d9f480b077184917e5347096ba43788a98bfd2bd47a42ac3d1"
       },
       "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 79946,
+        "title": "A Brother In Need",
+        "level": 40,
+        "minimum": 35,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "8e6f278d0941c253b300283a326a27f2d1c8f228a026bc127725562e8fb78b66"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 93404,
+        "title": "Rot and Regret",
+        "level": 49,
+        "minimum": 35,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "911cceb0e0a435708870068db276510c5813de9f40b629523f5adbf8cfbe9c3b"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94613,
+        "title": "My Kingdom for a Horse",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e97cd655a4245fb16075a34f2e4ffa613bd8539605909d787f2120b6412f5787"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94829,
+        "title": "What We Lost",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "3eb24b2a2dc86d09286b454d27ef841ffa9af5d90d138f2dcca776f9177c1b0e"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94890,
+        "title": "Bring Me His Head",
+        "level": 46,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "9857abccbb46075da8f767882f826c10069edbdf5d41ac06aee21b780c389d36"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94926,
+        "title": "Drop the Hammer",
+        "level": 45,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "0db4d08456f89e2c0e7b87f793ad20801c8f26f4a799c6c8cca8b0537813aac5"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94961,
+        "title": "Biting the Hand",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "f4947bff999972b4e2cfcf37e91cf7161e0fedabdc3bc6b388f3a123b42eea1b"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 94999,
+        "title": "Eyes for the Watchman",
+        "level": 36,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "c75d61121a35a996293ee9f4519139734439f8d2c35812d655c0cb48d311c269"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95064,
+        "title": "Preventative Measures",
+        "level": 39,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "533fae7f74704ab5c992395bfd0db0495c8bf392e9d86b84b3d2d3dc1b465ed3"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95119,
+        "title": "Unfriendly Competition",
+        "level": 43,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "f85a5beb01ee14fc54dbcc6636c26c41c52e13310e40f3e408b05a8008ba132b"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95144,
+        "title": "Overseas Delivery",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "674540e6df92d395ae420298d5ee72fe8b1359f7f45b89a21cf79217be619e02"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95288,
+        "title": "Smuggler's Paradise",
+        "level": 43,
+        "minimum": 38,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "4be476258262eb957922286615f435e7c19a110244b8412e3d5bacf80dcf8b9c"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95321,
+        "title": "Tazzik's Dues",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "173d6199e12749a522a010bd37ce587bb91090d35a06d00d1cddc41ff52ce737"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95325,
+        "title": "We've Been Robbed!",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "faa802518a8c8b72769156e63f66cead1bb636e013391c313a4d7eb5d88894d4"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95326,
+        "title": "The Big Payback",
+        "level": 39,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "4e59218d2cfa7e6b5a0cfd3f5a585293a5a874c6d5be08412d8a2a246a10a94f"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95329,
+        "title": "Out in the Field",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "5fa6ebbcd29641bff4038b953326ab172fe7874aaaa6f6d98c93e7fb71ca1beb"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95330,
+        "title": "Love Thy Neighbor",
+        "level": 37,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "21a6a60f6163e91169eb8197a35eec5d7c63eb3b1079c1878b13b035c3ddc2fb"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95426,
+        "title": "Rog'mar Supplies",
+        "level": 39,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e83877d36f09df59078415222402ab75ebd8ea9ecc47c10eddf461917b970fee"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95561,
+        "title": "Apple of My Eye",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "ecddf8fc922684ba11b021407d3112d311a355c756fcccf6722db2d50314e6fd"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95642,
+        "title": "Abominable Magics",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "631bca4520ce6f94fbf7b96a89fd546ada8767014c9ac02ff4ec8687f5e410cb"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95643,
+        "title": "Indiscriminate Purge",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "a13ad8294ff9e61ad42206308b1cacf3bb81961445449e5adea22f879256fdba"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95983,
+        "title": "A Feast for Buzzards",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "7bc04c805c413dd1f6a5161cb6e211a8d3b0b439aad9cc7da6544ae36dae68cc"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95986,
+        "title": "King of the Wild Plains",
+        "level": 41,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "ca899f6f59f4b4329ba25b527979e2f5d029b041d8f3a9e2c43194d1baac1e1d"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 95988,
+        "title": "Goes Down Smooth",
+        "level": 38,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "21b75784f99b32cc3564509bf9217d43832e730a7ecaa2aceee5d82857add0a0"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 96010,
+        "title": "Fragments of the Pylons",
+        "level": 41,
+        "minimum": 35,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "bb04a552448cf89c847f0fc251c964880013f7d5721ba4a547af26fa8f45f85d"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 96081,
+        "title": "Wound Dressings",
+        "level": 40,
+        "minimum": 36,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "75fbfcea5b4cee12f2037acdbe771227c4051b6a57c3dcbc0b2b7d6f3fd93020"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
+    },
+    {
+      "record": {
+        "id": 96609,
+        "title": "A Taste of Home",
+        "level": 52,
+        "minimum": 44,
+        "items": [],
+        "itemState": "unknown",
+        "confirmation": "unconfirmed"
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e98086e808b17fdca94e91a6ae429d294cf756f98ee78bf1c63b107dbe670ba1"
+      },
+      "reason": "Record the exact cached quest identity, title and levels. Availability and complete rewards require native proof."
     }
   ],
   "categoryUpdates": [
@@ -7812,6 +8403,486 @@
         "build": 71139,
         "observedAt": "2026-11-26T09:04:10.116359+00:00",
         "payloadSha256": "ea2c34b394ab07d9f480b077184917e5347096ba43788a98bfd2bd47a42ac3d1"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94613,
+      "title": "My Kingdom for a Horse",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e97cd655a4245fb16075a34f2e4ffa613bd8539605909d787f2120b6412f5787"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94829,
+      "title": "What We Lost",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "3eb24b2a2dc86d09286b454d27ef841ffa9af5d90d138f2dcca776f9177c1b0e"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94890,
+      "title": "Bring Me His Head",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "9857abccbb46075da8f767882f826c10069edbdf5d41ac06aee21b780c389d36"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94926,
+      "title": "Drop the Hammer",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "0db4d08456f89e2c0e7b87f793ad20801c8f26f4a799c6c8cca8b0537813aac5"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94961,
+      "title": "Biting the Hand",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "f4947bff999972b4e2cfcf37e91cf7161e0fedabdc3bc6b388f3a123b42eea1b"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 94999,
+      "title": "Eyes for the Watchman",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "c75d61121a35a996293ee9f4519139734439f8d2c35812d655c0cb48d311c269"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95064,
+      "title": "Preventative Measures",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "533fae7f74704ab5c992395bfd0db0495c8bf392e9d86b84b3d2d3dc1b465ed3"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95119,
+      "title": "Unfriendly Competition",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "f85a5beb01ee14fc54dbcc6636c26c41c52e13310e40f3e408b05a8008ba132b"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95144,
+      "title": "Overseas Delivery",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 440,
+        "name": "Tanaris"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "674540e6df92d395ae420298d5ee72fe8b1359f7f45b89a21cf79217be619e02"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95288,
+      "title": "Smuggler's Paradise",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "4be476258262eb957922286615f435e7c19a110244b8412e3d5bacf80dcf8b9c"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95321,
+      "title": "Tazzik's Dues",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "173d6199e12749a522a010bd37ce587bb91090d35a06d00d1cddc41ff52ce737"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95325,
+      "title": "We've Been Robbed!",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "faa802518a8c8b72769156e63f66cead1bb636e013391c313a4d7eb5d88894d4"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95326,
+      "title": "The Big Payback",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "4e59218d2cfa7e6b5a0cfd3f5a585293a5a874c6d5be08412d8a2a246a10a94f"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95329,
+      "title": "Out in the Field",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "5fa6ebbcd29641bff4038b953326ab172fe7874aaaa6f6d98c93e7fb71ca1beb"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95330,
+      "title": "Love Thy Neighbor",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "21a6a60f6163e91169eb8197a35eec5d7c63eb3b1079c1878b13b035c3ddc2fb"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95426,
+      "title": "Rog'mar Supplies",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e83877d36f09df59078415222402ab75ebd8ea9ecc47c10eddf461917b970fee"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95561,
+      "title": "Apple of My Eye",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "ecddf8fc922684ba11b021407d3112d311a355c756fcccf6722db2d50314e6fd"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95642,
+      "title": "Abominable Magics",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "631bca4520ce6f94fbf7b96a89fd546ada8767014c9ac02ff4ec8687f5e410cb"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95643,
+      "title": "Indiscriminate Purge",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "a13ad8294ff9e61ad42206308b1cacf3bb81961445449e5adea22f879256fdba"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95983,
+      "title": "A Feast for Buzzards",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "7bc04c805c413dd1f6a5161cb6e211a8d3b0b439aad9cc7da6544ae36dae68cc"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95986,
+      "title": "King of the Wild Plains",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "ca899f6f59f4b4329ba25b527979e2f5d029b041d8f3a9e2c43194d1baac1e1d"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 95988,
+      "title": "Goes Down Smooth",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "21b75784f99b32cc3564509bf9217d43832e730a7ecaa2aceee5d82857add0a0"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 96010,
+      "title": "Fragments of the Pylons",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16651,
+        "name": "Shen'dralas"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "bb04a552448cf89c847f0fc251c964880013f7d5721ba4a547af26fa8f45f85d"
+      },
+      "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
+    },
+    {
+      "id": 96081,
+      "title": "Wound Dressings",
+      "expected": null,
+      "changes": {
+        "sourceZoneID": 16591,
+        "name": "Riverglades"
+      },
+      "evidence": [
+        "changelogNovember27",
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "75fbfcea5b4cee12f2037acdbe771227c4051b6a57c3dcbc0b2b7d6f3fd93020"
       },
       "reason": "Record the exact AreaID and category named by the native row and changelog. This category does not provide a map position."
     }
@@ -13612,6 +14683,466 @@
         "payloadSha256": "9895a77ff32de2a414d3cf61f18f30b922d476a29970610b4f0734b9c102f899",
         "sourceBuild": 71139,
         "observedAt": "2026-11-26T09:04:10.116359+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 93404,
+      "title": "Rot and Regret",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 272186,
+            "name": "Overgrown Cuffs",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 272187,
+            "name": "Thornplated Cord",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "911cceb0e0a435708870068db276510c5813de9f40b629523f5adbf8cfbe9c3b"
+      },
+      "nativeRecord": {
+        "id": 93404,
+        "name": "Rot and Regret",
+        "level": 49,
+        "requiredLevel": 35,
+        "categoryId": 2100,
+        "categoryName": "Maraudon",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 272186,
+            "name": "Overgrown Cuffs",
+            "quantity": 1
+          },
+          {
+            "id": 272187,
+            "name": "Thornplated Cord",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "911cceb0e0a435708870068db276510c5813de9f40b629523f5adbf8cfbe9c3b",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 94890,
+      "title": "Bring Me His Head",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 275046,
+            "name": "Twilight Overlord Drape",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 275049,
+            "name": "Farholde Bastion",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "9857abccbb46075da8f767882f826c10069edbdf5d41ac06aee21b780c389d36"
+      },
+      "nativeRecord": {
+        "id": 94890,
+        "name": "Bring Me His Head",
+        "level": 46,
+        "requiredLevel": 38,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 275046,
+            "name": "Twilight Overlord Drape",
+            "quantity": 1
+          },
+          {
+            "id": 275049,
+            "name": "Farholde Bastion",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "9857abccbb46075da8f767882f826c10069edbdf5d41ac06aee21b780c389d36",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 94926,
+      "title": "Drop the Hammer",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 275036,
+            "name": "Pauldron of Order",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "0db4d08456f89e2c0e7b87f793ad20801c8f26f4a799c6c8cca8b0537813aac5"
+      },
+      "nativeRecord": {
+        "id": 94926,
+        "name": "Drop the Hammer",
+        "level": 45,
+        "requiredLevel": 38,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 275036,
+            "name": "Pauldron of Order",
+            "quantity": 1
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "0db4d08456f89e2c0e7b87f793ad20801c8f26f4a799c6c8cca8b0537813aac5",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 95064,
+      "title": "Preventative Measures",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 274959,
+            "name": "Farholde Horns",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 274961,
+            "name": "Brute Slayer Band",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "unknown",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "533fae7f74704ab5c992395bfd0db0495c8bf392e9d86b84b3d2d3dc1b465ed3"
+      },
+      "nativeRecord": {
+        "id": 95064,
+        "name": "Preventative Measures",
+        "level": 39,
+        "requiredLevel": 36,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [],
+        "choice": [
+          {
+            "id": 274959,
+            "name": "Farholde Horns",
+            "quantity": 1
+          },
+          {
+            "id": 274961,
+            "name": "Brute Slayer Band",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "533fae7f74704ab5c992395bfd0db0495c8bf392e9d86b84b3d2d3dc1b465ed3",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 95561,
+      "title": "Apple of My Eye",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 4539,
+            "name": "Goldenbark Apple",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "ecddf8fc922684ba11b021407d3112d311a355c756fcccf6722db2d50314e6fd"
+      },
+      "nativeRecord": {
+        "id": 95561,
+        "name": "Apple of My Eye",
+        "level": 38,
+        "requiredLevel": 36,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 4539,
+            "name": "Goldenbark Apple",
+            "quantity": 5
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "ecddf8fc922684ba11b021407d3112d311a355c756fcccf6722db2d50314e6fd",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 95988,
+      "title": "Goes Down Smooth",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 274935,
+            "name": "Tessa's Tonic",
+            "quantity": 5,
+            "group": "guaranteed",
+            "slot": 1
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "unknown"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "21b75784f99b32cc3564509bf9217d43832e730a7ecaa2aceee5d82857add0a0"
+      },
+      "nativeRecord": {
+        "id": 95988,
+        "name": "Goes Down Smooth",
+        "level": 38,
+        "requiredLevel": 36,
+        "categoryId": 16591,
+        "categoryName": "Riverglades",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 274935,
+            "name": "Tessa's Tonic",
+            "quantity": 5
+          }
+        ],
+        "choice": [],
+        "payloadSha256": "21b75784f99b32cc3564509bf9217d43832e730a7ecaa2aceee5d82857add0a0",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
+      },
+      "replacements": [],
+      "priorSource": null,
+      "reason": "Copy the exact observed direct reward slots. An empty group leaves its complete rewards unknown."
+    },
+    {
+      "id": 96609,
+      "title": "A Taste of Home",
+      "expected": {
+        "items": [],
+        "itemState": "unknown",
+        "itemGroupStates": null
+      },
+      "changes": {
+        "items": [
+          {
+            "itemID": 276896,
+            "name": "Everlasting Silvermoon Shimmerwine",
+            "quantity": 1,
+            "group": "guaranteed",
+            "slot": 1
+          },
+          {
+            "itemID": 276903,
+            "name": "Shimmerwine Shanker",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 1
+          },
+          {
+            "itemID": 276904,
+            "name": "Shimmerwine Spirits",
+            "quantity": 1,
+            "group": "choice",
+            "slot": 2
+          }
+        ],
+        "itemState": "published",
+        "itemGroupStates": {
+          "guaranteed": "published",
+          "choice": "published"
+        }
+      },
+      "evidence": [
+        "nativeCatalogNovember27"
+      ],
+      "nativeObservation": {
+        "source": "nativeCatalogNovember27",
+        "build": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00",
+        "payloadSha256": "e98086e808b17fdca94e91a6ae429d294cf756f98ee78bf1c63b107dbe670ba1"
+      },
+      "nativeRecord": {
+        "id": 96609,
+        "name": "A Taste of Home",
+        "level": 52,
+        "requiredLevel": 44,
+        "categoryId": 16560,
+        "categoryName": "City of Dalaran",
+        "inChart": false,
+        "guaranteed": [
+          {
+            "id": 276896,
+            "name": "Everlasting Silvermoon Shimmerwine",
+            "quantity": 1
+          }
+        ],
+        "choice": [
+          {
+            "id": 276903,
+            "name": "Shimmerwine Shanker",
+            "quantity": 1
+          },
+          {
+            "id": 276904,
+            "name": "Shimmerwine Spirits",
+            "quantity": 1
+          }
+        ],
+        "payloadSha256": "e98086e808b17fdca94e91a6ae429d294cf756f98ee78bf1c63b107dbe670ba1",
+        "sourceBuild": 71139,
+        "observedAt": "2026-11-27T09:01:41.541688+00:00"
       },
       "replacements": [],
       "priorSource": null,

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.34
+
+- Record 27 quests observed in Forever build 71139, including 22 Riverglades quests.
+- Record 12 item rewards across seven quests. A Taste of Home lists a guaranteed item and two choices. Apple of My Eye and Goes Down Smooth each list a stack of five.
+- Keep unobserved reward groups and current quest availability unconfirmed.
+
 ## 0.1.33
 
 - Record six quests observed in Forever build 71139, including Field Marshal's Log, Learning to Ride and Safety Checks.
